@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">בטל והפעל</string>
+    <string name="power_off">בטל וכבה</string>
+
+    <string name="voice_ui_title">שליטה קולית</string>
+    <string name="voice_ui_content_text">"השליטה הקולית זמינה עבור צלצול השכמה"</string>
+    <string name="alarm_command_summary_format">תוכל לומר <xliff:g id="first">%1$s</xliff:g> או <xliff:g id="second">%2$s</xliff:g> "\n"כדי להשהות או להפסיק את צלצול ההשכמה.</string>
+    <string name="alarm_command_summary_format_land">אמור <xliff:g id="first">%1$s</xliff:g> או <xliff:g id="second">%2$s</xliff:g> כדי להשהות את צלצול השכמה או כדי להפסיקו.</string>
+</resources>

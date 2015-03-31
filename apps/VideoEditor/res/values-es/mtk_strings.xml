@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Gris</string>  
+    <string name="not_enough_space" product="nosdcard">"El almacenamiento USB está lleno."</string>  
+    <string name="not_enough_space" product="default">"La tarjeta SD está llena."</string>
+    <string name="add_audio_track_failed">No se pudo agregar la pista de audio.</string>
+    <string name="insert_transition_failed">No se pudo insertar la transición.</string>
+<string name="save_emoticons_failed">Los iconos gestuales no se pueden guardar.</string>
+    <string name="save_xml_failed">Los caracteres especiales no se pueden guardar.</string>
+    </resources>

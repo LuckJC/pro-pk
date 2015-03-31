@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="editor_gray_effect">Grå</string>
+    
+    <string name="not_enough_space" product="nosdcard">USB-hukommelse er fuldt.</string>
+    
+    <string name="not_enough_space" product="default">Dit SD-kort er fuldt.</string>
+    <string name="add_audio_track_failed">Kunne ikke tilføje lydspor.</string>
+    <string name="insert_transition_failed">Kan ikke indsætte overgang.</string>
+
+    
+    <string name="save_emoticons_failed">Humørikoner kan ikke gemmes.</string>
+    <string name="save_xml_failed">Specielle tegn kan ikke gemmes.</string>
+</resources>

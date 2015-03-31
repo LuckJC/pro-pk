@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">বাতিল ও পাওয়ার চালু</string>
+
+    <string name="power_off">বাতিল ও পাওয়ার বন্ধ</string>
+    <string name="voice_ui_title">শব্দ নিয়ন্ত্রণ</string>
+    <string name="voice_ui_content_text">"অ্যালার্মের জন্য ভয়েস নিয়ন্ত্রন সক্রিয়" </string>
+    <string name="alarm_command_summary_format">অ্যালার্ম স্নুজ বা বন্ধ করতে আপনি বলতে পারেন <xliff:g id="first">%1$s</xliff:g> বা <xliff:g id="second">%2$s</xliff:g> "\n"।</string>
+    <string name="alarm_command_summary_format_land">স্নুজ করতে আপনি বলতে পারেন <xliff:g id="first">%1$s</xliff:g> বা <xliff:g id="second">%2$s</xliff:g> অথবা অ্যালার্ম বন্ধ করুন।</string>
+</resources>

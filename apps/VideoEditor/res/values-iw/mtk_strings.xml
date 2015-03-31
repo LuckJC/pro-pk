@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">אפור</string>  
+    <string name="not_enough_space" product="nosdcard">אחסון ה-USB מלא.</string>  
+    <string name="not_enough_space" product="default">"כרטיס SD מלא."</string> 
+    <string name="add_audio_track_failed">לא ניתן להוסיף רצועת שמע.</string>
+    <string name="insert_transition_failed">לא ניתן להכניס מעבר.</string>
+<string name="save_emoticons_failed">לא ניתן לשמור סמלי הבעה.</string>
+    <string name="save_xml_failed">לא ניתן לשמור תווים מיוחדים.</string>
+    </resources>

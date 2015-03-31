@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Verwerfen und einschalten</string>
+    <string name="power_off">Verwerfen und ausschalten</string>
+    <string name="voice_ui_title">Sprachsteuerung</string>
+    <string name="voice_ui_content_text">"Sprachsteuerung für Alarm aktiv"</string>
+    <string name="alarm_command_summary_format">Sie können den Alarm mit den Sprachbefehlen <xliff:g id="first">%1$s</xliff:g> und <xliff:g id="second">%2$s</xliff:g> "\n"vorübergehend oder ganz abschalten.</string>
+    <string name="alarm_command_summary_format_land">Sie können zum Schlummern oder Beenden des Alarms <xliff:g id="first">%1$s</xliff:g> oder <xliff:g id="second">%2$s</xliff:g> sagen.</string>
+</resources>

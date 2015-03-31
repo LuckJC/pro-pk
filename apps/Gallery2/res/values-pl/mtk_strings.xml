@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Nie można odtworzyć dźwięku.</string>
+    <string name="VideoView_info_text_network_interrupt">Błąd sieci; przesyłanie strumieniowe klipu wideo zostało zatrzymane.</string>
+    <string name="VideoView_error_text_connection_failed">Połączenie sieciowe nie powiodło się; sprawdź połączenie sieciowe.</string>
+    
+    <string name="can_not_trim">Wystąpił błąd; nie można przyciąć klipu wideo.</string>
+	
+	<string name="setp_option_name">Krok</string>
+	<string name="step_option_desc">Dostosuj krok szybkiego przewijania do przodu/do tyłu</string>
+	<string name="setp_option_three_second">"3 sekundy"</string>
+	<string name="setp_option_six_second">"6 sek."</string>
+    
+    <string name="camera_print">"Drukuj"</string>
+    <string name="no_way_to_print">Brak aplikacji do wydrukowania plików.</string>
+    <string name="printFile">Drukuj plik za pomocą</string>
+    
+    
+    <string name="no_storage_title">"Brak pamięci"</string>
+    
+    
+    <string name="no_storage_message">Włóż kartę SD</string>
+    
+    
+    <string name="load_image_fail">Nie można załadować obrazu</string>
+    
+    
+    <string name="proxy_host">Host</string>
+    <string name="proxy_port">"Port"</string>
+    <string name="apn_settings">"Punkty dostępowe"</string>
+    <string name="rtsp_proxy_settings">"Ustawienia proxy RTSP"</string>
+    <string name="rtsp_proxy_settings_summary">"Skonfiguruj i zarządzaj ustawieniami serwera proxy RTSP"</string>
+    <string name="enable_rtsp_proxy">"Włącz serwer proxy RTSP"</string>
+    <string name="enable_rtsp_proxy_summary">"Włącz/wyłącz serwer proxy RTSP"</string>
+    <string name="http_proxy_settings">"Ustawienia serwera proxy HTTP"</string>
+    <string name="http_proxy_settings_summary">"Skonfiguruj i zarządzaj ustawieniami serwera proxy HTTP"</string>
+    <string name="enable_http_proxy">"Włącz serwer proxy HTTP"</string>
+    <string name="enable_http_proxy_summary">"Włącz/wyłącz serwer proxy HTTP"</string>
+    <string name="apn_settings_summary">"Bieżąca karta SIM: %1$s\nBieżąca nazwa punktu dostępu (APN): %2$s"</string>
+    <string name="apn_settings_not_valid">"Łączność danych karty SIM jest niedostępna; nie można ustawić nazwy punktu dostępu (APN)"</string>
+    <string name="udp_port_settings">"Zakres portu RTP/RTCP"</string>
+    <string name="udp_port_settings_summary">"Ustaw maksymalny i minimalny numer portu"</string>
+    <string name="max_udp_port">"Maksymalny numer portu"</string>
+    <string name="min_udp_port">"Minimalny numer portu"</string>
+    <string name="server_timeout_title">"Limit czasu serwera"</string>
+    <string name="server_timeout_message">"Połączyć ponownie z serwerem w celu odtworzenia klipu wideo?"</string>
+    <string name="input_url">"Wpisz adres URL"</string>
+    <string name="streaming_settings">"Ustawienia przesyłania strumieniowego"</string>
+    <string name="VideoView_info_text_video_not_supported">"To wideo nie jest obsługiwane."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Połączenie nie powiodło się; spróbuj ponownie połączyć %1$d..."</string>
+	<string name="VideoView_info_buffering">"Trwa buforowanie..."</string>
+    <string name="stop">"Stop"</string>
+    <string name="loop">"Pętla"</string>
+    <string name="single">"Pojedyncze"</string>
+    <string name="clear_motion">"PłynnyRuch"</string>
+    
+    
+    <string name="SubtitleSetting">"Napisy"</string>
+    <string name="SubtitleSetting_text">"TEKST"</string>
+    <string name="SubtitleSetting_layout">"UKŁAD"</string>
+    <string name="subtitle_layout_alignment">"Wyrównanie"</string>
+    <string name="subtitle_layout_bottom_margins">"Margines dolny"</string>
+    <string name="subtitle_layout_alignment_left">"Lewy"</string>
+    <string name="subtitle_layout_alignment_center">"Center"</string>
+    <string name="subtitle_layout_alignment_right">"Prawy"</string>
+    <string name="subtitle_text_font">Czcionka</string>
+    <string name="subtitle_text_color">"Kolor"</string>
+    <string name="subtitle_text_size">"Rozmiar"</string>
+    <string name="subtitle_text_encoding">"Kodowanie znaków"</string>
+    <string name="subtitle_text_color_black">"Czarny"</string>
+    <string name="subtitle_text_color_dkgray">"Ciemnoszary"</string>
+    <string name="subtitle_text_color_gray">"Szary"</string>
+    <string name="subtitle_text_color_ltgray">"Jasnoszary"</string>
+    <string name="subtitle_text_color_white">"Biały"</string>
+    <string name="subtitle_text_color_red">"Czerwony"</string>
+    <string name="subtitle_text_color_green">"Zielony"</string>
+    <string name="subtitle_text_color_blue">"Niebieski"</string>
+    <string name="subtitle_text_color_yellow">"Żółty"</string>
+    <string name="subtitle_text_color_cyan">"Cyjan"</string>
+    <string name="subtitle_text_color_magenta">"Amarantowy"</string>
+    <string name="subtitle_text_color_translucent">"Półprzezroczysty"</string>
+    <string name="subtitle_text_encoding_default">"Wartość domyślna"</string>
+    <string name="closeSubtitle">"Zamknij napisy"</string>
+    <string name="subTitleChange">"ZmianaNapisów"</string>
+    <string name="subtitleTrackChange">"ZmianaNapisów"</string>
+    
+    <string name="audioTrackChange">"ZmianaŚcieżkiAudio"</string>
+    <string name="audioTrack">"ŚcieżkaDźwiękowa"</string>
+    <string name="noAvailableeTrack">"Brak informacji o dostępnej ścieżce"</string>
+    <string name="noAvailableeAudioTrack">"Brak dostępnej ścieżki audio"</string>
+    <string name="audioChange">"ZmianaAudio"</string>
+    
+    
+
+    <string name="bookmark_add">"Dodaj zakładkę"</string>
+    <string name="bookmark_display">"Pokaż zakładki"</string>
+    <string name="bookmark_empty">"Brak zakładek"</string>
+    <string name="bookmark_exist">"Taka sama zakładka w historii"</string>
+    <string name="bookmark_add_success">"Zakładka została pomyślnie dodana"</string>
+    <string name="bookmark_list">"Zakładki"</string>
+    <string name="bookmark_title">"Tytuł"</string>
+    <string name="bookmark_location">"Lokalizacja"</string>
+    <string name="http_buffer_size">"Rozmiar buforu HTTP"</string>
+    <string name="http_buffer_size_summary">"Ustaw rozmiar buforu HTTP dla przesyłania strumieniowego"</string>
+    <string name="http_buffer_size_text">"Bieżący rozmiar buforu HTTP: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"Rozmiar buforu RTSP"</string>
+    <string name="rtsp_buffer_size_summary">"Ustaw rozmiar buforu RTSP dla przesyłania strumieniowego"</string>
+    <string name="rtsp_buffer_size_text">"Bieżący rozmiar buforu RTSP: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Prawidłowy zakres wartości: %1$d - %2$d s"</string>
+    <string name="media_detail">"Szczegóły multimediów"</string>
+    <string name="detail_title">"Tytuł: %1$s"</string>
+    <string name="detail_copyright">"Prawa autorskie: %1$s"</string>
+    <string name="detail_session">"Informacje o sesji: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"Pojedyncza ścieżka"</string>
+    <string name="delete_all">"Usuń wszystko"</string>
+    <string name="default_title">"Tytuł domyślny"</string>
+    <string name="next">"Dalej"</string>
+    <string name="previous">"Poprzedni"</string>
+    
+    
+    <string name="mav_firstRunTitle">Jak wyświetlić obraz zarejestrowany pod wieloma kątami</string>
+    <string name="mav_firstRunText">Przesuń palcem w lewo lub w prawo, aby wyświetlić obraz zarejestrowany pod wieloma kątami</string>
+    
+    
+    <string name="stereo3d_album_name">Multimedia 3D</string>
+    <string name="stereo3d_mode_switchto_2d">Przełącz na tryb 2D</string>
+    <string name="stereo3d_mode_switchto_3d">Przełącz na tryb 3D</string>
+    <string name="stereo3d_convert2d_dialog_title">Konwertuj na obraz 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">Brak obsługi \"<xliff:g id="operation">%s</xliff:g>\" w przypadku obrazów 3D. Nastąpi konwersja na obraz 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Trwa konwertowanie na obraz 2D...</string>
+    <string name="stereo3d_pan_firstrun_title">Jak wyświetlić obraz panoramiczny 3D</string>
+    <string name="stereo3d_pan_firstrun_text">Przesuń palcem w lewo lub w prawo, aby wyświetlić obraz panoramiczny 3D.</string>
+    <string name="stereo3d_share_convert_text_single">To jest obraz 3D. W celu kontynuacji udostępniania zostanie on przekonwertowany na obraz 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">Wśród wybranych obrazów znajdują się obrazy 3D. W celu kontynuacji udostępniania zostaną one przekonwertowane na obrazy 2D.</string>
+    <string name="stereo3d_share_dialog_title">Udostępnij jako obraz 3D lub 2D</string>
+    <string name="stereo3d_share_dialog_text_single">To jest obraz 3D. Odbiorca może nie móc wyświetlić go w prawidłowy sposób.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Wśród wybranych obrazów znajdują się obrazy 3D. Odbiorca może nie móc wyświetlić ich w prawidłowy sposób.</string>
+    <string name="stereo3d_share_dialog_button_2d">Udostępnij jako obraz 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Udostępnij jako obraz 3D</string>
+    <string name="stereo3d_attach_dialog_title">Dołącz jako obraz 3D lub 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Dołącz jako obraz 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Dołącz jako obraz 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Podgląd obrazu</string>
+    <string name="stereo3d_preview_button_set">"Ustaw"</string>
+    <string name="stereo3d_set_wallpaper_fail">Ustawienie tapety 3D nie powiodło się.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Regulacja głębi</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">W przypadku odczuwania dyskomfortu podczas oglądania można ręcznie dostosować głębię w menu</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automatyczna regulacja głębi</string>
+
+    
+    <string name="stereo3d_video_layout">Dostosuj układ wideo</string>
+    <string name="stereo3d_video_layout_normal">Normalny</string>
+    <string name="stereo3d_video_layout_sidebyside">Obok siebie</string>
+    <string name="stereo3d_video_layout_toptobottom">Góra-dół</string>
+    <string name="stereo3d_video_layout_leftrightswap">Zamiana lewego/prawego obrazu</string>
+    <string name="stereo3d_video_layout_topbottomswap">Zamiana górnego/dolnego obrazu</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Automatycznie przekonwertowany na tryb 3D</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Automatycznie przekonwertowany na tryb 2D</string>
+    <string name="stereo3d_save">"Zapisz"</string>
+
+    
+    <string name="widget_load_failed">Nie można załadować widżetu</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Demo wyłączone</string>
+    <string name="vertical_demo">Demo w pionie</string>
+    <string name="horizontal_demo">Demo w poziomie</string>
+                  
+    
+    <string name="conshots_title">"Zdjęcia seryjne"</string>
+    <string name="best_shots">Wyodrębnij najlepsze zdjęcia</string>
+    <string name="best_shots_confirm">Usuń wszystkie nieoznaczone zdjęcia.</string>
+    <string name="empty_conshots">Brak zdjęć seryjnych.</string>
+    <string name="make_motion">"Gotowe"</string>
+    <string name="motion_at_least">"Minimalna liczba zdjęć wymaganych do stworzenia efektu: %1$s."</string>
+    <string name="motion_at_most">"Maksymalna liczba zdjęć do wybrania: %1$s."</string>
+    <string name="generate_animation">"Trwa generowanie animacji..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Ostrzeżenie"</string>
+    <string name="Text_WFD_Dialog">"Po podłączeniu urządzenia wyświetlającego Wi-Fi cała zawartość zabezpieczona przed kopiowaniem zostanie ukryta."</string>
+    <string name="Disconnecd_WFD">"Wyłącz urządzenie wyświetlające Wi-Fi"</string>
+    <string name="Hind_DRMImage_WFD">"Dalej"</string>
+    <string name="wfd_finishGallery_Warning">"Nie można otworzyć, gdy bezprzewodowe urządzenie wyświetlające jest włączone."</string>
+    <string name="wfd_protected_warning1">"Zawartość jest zabezpieczona przed kopiowaniem,"</string>
+    <string name="wfd_protected_warning2">"Aby wyświetlić za pomocą telefonu,"</string>
+    <string name="wfd_protected_warning3">"odłącz bezprzewodowe urządzenie wyświetlające."</string>
+    <string name="wfd_disconnected">"Rozłączyć wyświetlacz bezprzewodowy."</string>
+    <string name="smb_protected_warning">"odłącz telefon od smartbooka."</string>
+    <string name="hdmi_protected_warning">"rozłącz połączenie HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Nie obsługuje wideo 4K, kiedy podłączony jest wyświetlacz bezprzewodowy. Odłączyć go i włączyć odtwarzanie wideo 4K?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Słuchawki Bluetooth nie mogą odtwarzać dźwięku wideo 4K. Odłączyć je i włączyć odtwarzanie wideo 4K?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL nie może odtwarzać wideo 4K. Odłączyć go i włączyć odtwarzanie wideo 4K?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI nie może odtwarzać wideo 4K. Odłączyć go i włączyć odtwarzanie wideo 4K?"</string>	
+    <string name="Not_supported_4k_video">"Wyjście zewnętrzne nie może odtwarzać wideo 4K. Odłączyć je i włączyć odtwarzanie wideo 4K?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Po podłączeniu urządzenia wyświetlającego HDMI cała zawartość zabezpieczona przed kopiowaniem zostanie ukryta."</string>
+    
+    
+    <string name="share_format_choose_title">"Wybierz format"</string>
+    <string name="share_format_image">"Obraz"</string>
+    <string name="share_format_video">"Wideo"</string>
+    <string name="generating_tip">"Trwa generowanie wideo..."</string>
+    <string name="generate_video_fail">"Nie można wygenerować wideo"</string>
+
+    <string name="save_fail">Karta pamięci jest zapełniona lub brak karty pamięci.</string>
+    <string name="appwidget_error_text">Błąd widżetu Galeria.</string>
+    <string name="share_limit">Nie można udostępnić więcej niż 300 plików.</string>
+
+    <string name="file_deleted">Plik został usunięty.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot jest wyłączony. Włącz HotKnot w opcji Ustawienia"</string>
+    <string name="hotknot_toast">"Użyj ekranu, aby dotknąć inne urządzenie."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

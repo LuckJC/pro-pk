@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+--><resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="app_name">آواز ریکارڈز</string>
+
+    
+    <string name="record_your_message">اپنا پیغام ریکارڈ کریں</string>
+    
+    <string name="message_recorded">پیغام ریکارڈ ہوگیا</string>
+    
+    <string name="review_message">پیغام کا جائزہ لیں</string>
+    
+    <string name="recording">ریکارڈ کررہا ہے</string>
+    
+    <string name="recording_stopped">ریکارڈنگ رک گئی</string>
+    
+    <string name="storage_is_full">ذخیرہ بھر گیا</string>
+    
+    <string name="max_length_reached">زيادہ سے زيادہ لمبائی پہنچ گئی</string>
+    
+    <string name="insert_sd_card" product="nosdcard">USB اسٹوریج استعمال نہیں کرپا رہے ہیں۔</string>
+    
+    <string name="min_available"><xliff:g id="minutes">%d</xliff:g> منٹ دستیاب ہے</string>
+    
+    <string name="sec_available">  <xliff:g id="seconds">%d</xliff:g> سیکنڈ دستیاب ہيں </string>
+
+    
+    <string name="accept">ہوگیا</string>
+    
+    <string name="discard">رد کریں</string>
+    
+    <string name="button_ok">ٹھیک ہے</string>
+    
+    
+   
+     
+    <string name="audio_db_title_format">  <xliff:g id="format">سال- ماہ - دن گھنٹہ: منٹ: سیکنڈ</xliff:g>  </string>
+    
+    <string name="audio_db_artist_name">آپ کی ریکارڈنگ</string>
+    
+    <string name="audio_db_album_name">آڈیو ریکارڈنگ</string>
+    
+    <string name="audio_db_playlist_name">میری ریکارڈنگ</string>
+   
+    
+    <string name="error_sdcard_access" product="nosdcard">USB اسٹوریج تک رسائی نہیں ہوسکتی۔</string>
+    
+    <string name="error_sdcard_access" product="default">SD کارڈ تک رسائی نہیں ہوسکتی۔</string>
+    
+    <string name="error_app_internal">اندرونی اپلیکیشن کی خرابی۔</string>
+    
+    <string name="error_mediadb_new_record">ریکارڈ کردہ آڈیو محفوظ نہیں کرسکا۔</string>
+</resources>

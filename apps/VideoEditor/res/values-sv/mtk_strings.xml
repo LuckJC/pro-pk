@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="editor_gray_effect">Grå</string>
+    
+    <string name="not_enough_space" product="nosdcard">Din USB-lagring är full.</string>
+    
+    <string name="not_enough_space" product="default">Ditt SD-kort är fullt.</string>
+    <string name="add_audio_track_failed">Kunde inte lägga till ljudspår.</string>
+    <string name="insert_transition_failed">Kunde inte infoga övergång.</string>
+
+    
+    <string name="save_emoticons_failed">Uttryckssymboler kunde inte sparas.</string>
+    <string name="save_xml_failed">Särskilda tecken kunde inte sparas.</string>
+</resources>

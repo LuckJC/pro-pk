@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Balewalain at i-on</string>
+    <string name="power_off">Balewalain at i-off</string>
+
+    <string name="voice_ui_title">Boses na kontrol</string>
+    <string name="voice_ui_content_text">"Pinagagana ang boses na kontrol para sa Alarma"</string>
+    <string name="alarm_command_summary_format">Maaari mong sabihin ang <xliff:g id="first">%1$s</xliff:g> o <xliff:g id="second">%2$s</xliff:g> "\n"para i-snooze o ihinto ang alarma.</string>
+    <string name="alarm_command_summary_format_land">Masasabi mo ang <xliff:g id="first">%1$s</xliff:g> o <xliff:g id="second">%2$s</xliff:g> upang i-snooze o ihinto ang alarma.</string>
+</resources>

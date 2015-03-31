@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Γκρι</string>  
+    <string name="not_enough_space" product="nosdcard">"Ο χώρος αποθήκευσης USB είναι πλήρης."</string>  
+    <string name="not_enough_space" product="default">"Η κάρτα SD είναι πλήρης."</string>
+    <string name="add_audio_track_failed">Η προσθήκη κομματιού ήχου απέτυχε.</string>
+    <string name="insert_transition_failed">Η εισαγωγή μετάβασης απέτυχε.</string>
+<string name="save_emoticons_failed">Δεν είναι δυνατή η αποθήκευση emoticon.</string>
+    <string name="save_xml_failed">Δεν είναι δυνατή η αποθήκευση ειδικών χαρακτήρων.</string>
+    </resources>

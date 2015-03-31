@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Nepavyko atkurti garso.</string>
+    <string name="VideoView_info_text_network_interrupt">Tinklo klaida; vaizdo transliacija nutraukta.</string>
+    <string name="VideoView_error_text_connection_failed">Nutrūko tinklo ryšys; patikrinkite savo tinklo ryšį.</string>
+    
+    <string name="can_not_trim">Įvyko klaida; šio vaizdo įrašo negalima apkarpyti.</string>
+	
+	<string name="setp_option_name">Padala</string>
+	<string name="step_option_desc">Suasmeninti greitojo sukimo pirmyn/atsukimo atgal padalą</string>
+	<string name="setp_option_three_second">"3 sek."</string>
+	<string name="setp_option_six_second">"6 sek."</string>
+    
+    <string name="camera_print">"Spausdinti"</string>
+    <string name="no_way_to_print">Nėra programos, skirtos spausdinti šį failą(-us).</string>
+    <string name="printFile">Spausdinti failą naudojant</string>
+    
+    
+    <string name="no_storage_title">"Nėra atmintinės"</string>
+    
+    
+    <string name="no_storage_message">Įdėkite SD kortelę</string>
+    
+    
+    <string name="load_image_fail">Nepavyko įkelti vaizdo</string>
+    
+    
+    <string name="proxy_host">Pagrindinis kompiuteris</string>
+    <string name="proxy_port">"Prievadas"</string>
+    <string name="apn_settings">"Prieigos taškų pavadinimai"</string>
+    <string name="rtsp_proxy_settings">"RTSP tarpinio serverio parametrai"</string>
+    <string name="rtsp_proxy_settings_summary">"Nustatyti ir tvarkyti RTSP tarpinio serverio parametrus"</string>
+    <string name="enable_rtsp_proxy">"Įjungti RTSP tarpinį serverį"</string>
+    <string name="enable_rtsp_proxy_summary">"Įjungti/išjungti RTSP tarpinį serverį"</string>
+    <string name="http_proxy_settings">"HTTP tarpinio serverio parametrai"</string>
+    <string name="http_proxy_settings_summary">"Nustatyti ir tvarkyti HTTP tarpinio serverio parametrus"</string>
+    <string name="enable_http_proxy">"Įjungti HTTP tarpinį serverį"</string>
+    <string name="enable_http_proxy_summary">"Įjungti/išjungti HTTP tarpinį serverį"</string>
+    <string name="apn_settings_summary">"Dabartinė SIM: %1$s\nDabartinis APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"SIM Duomenų junglumas uždarytas; negalima nustatyti APN"</string>
+    <string name="udp_port_settings">"RTP/RTCP prievado diapazonas"</string>
+    <string name="udp_port_settings_summary">"Nustatyti maks. ir min. prievadų skaičių"</string>
+    <string name="max_udp_port">"Maks. prievadų skaičius"</string>
+    <string name="min_udp_port">"Min. prievadų skaičius"</string>
+    <string name="server_timeout_title">"Baigėsi serverio naudojimui skirtas laikas"</string>
+    <string name="server_timeout_message">"Ar vėl prisijungti prie serverio, kad būtų leidžiamas vaizdo įrašas, ar ne?"</string>
+    <string name="input_url">"Įveskite URL"</string>
+    <string name="streaming_settings">"Transliavimo parametrai"</string>
+    <string name="VideoView_info_text_video_not_supported">"Šis vaizdo įrašas nepalaikomas."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Prisijungti nepavyko; bandykite dar kartą prijungti %1$d..."</string>
+	<string name="VideoView_info_buffering">"Įrašoma į laikinąją atmintį..."</string>
+    <string name="stop">"Sustabdyti"</string>
+    <string name="loop">"Leisti nepertraukiamai"</string>
+    <string name="single">"Vienas"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Subtitrai"</string>
+    <string name="SubtitleSetting_text">"TEKSTAS"</string>
+    <string name="SubtitleSetting_layout">"IŠDĖSTYMAS"</string>
+    <string name="subtitle_layout_alignment">"Išlyginimas"</string>
+    <string name="subtitle_layout_bottom_margins">"Apatinės paraštės"</string>
+    <string name="subtitle_layout_alignment_left">"Kairė"</string>
+    <string name="subtitle_layout_alignment_center">"Senteris"</string>
+    <string name="subtitle_layout_alignment_right">"Dešinė"</string>
+    <string name="subtitle_text_font">Šriftas</string>
+    <string name="subtitle_text_color">"Spalva"</string>
+    <string name="subtitle_text_size">"Dydis"</string>
+    <string name="subtitle_text_encoding">"Simbolių užšifravimas"</string>
+    <string name="subtitle_text_color_black">"Juoda"</string>
+    <string name="subtitle_text_color_dkgray">"Tamsiai pilka"</string>
+    <string name="subtitle_text_color_gray">"Pilka"</string>
+    <string name="subtitle_text_color_ltgray">"Šviesiai pilka"</string>
+    <string name="subtitle_text_color_white">"Balta"</string>
+    <string name="subtitle_text_color_red">"Raudona"</string>
+    <string name="subtitle_text_color_green">"Žalia"</string>
+    <string name="subtitle_text_color_blue">"Mėlyna"</string>
+    <string name="subtitle_text_color_yellow">"Geltona"</string>
+    <string name="subtitle_text_color_cyan">"Žalsvai mėlyna"</string>
+    <string name="subtitle_text_color_magenta">"Purpurinė"</string>
+    <string name="subtitle_text_color_translucent">"Skaidri"</string>
+    <string name="subtitle_text_encoding_default">"Numatytasis"</string>
+    <string name="closeSubtitle">"Išjungti titrus"</string>
+    <string name="subTitleChange">"titrų keitimas"</string>
+    <string name="subtitleTrackChange">"titrų keitimas"</string>
+    
+    <string name="audioTrackChange">"Garso takelio keitimas"</string>
+    <string name="audioTrack">"Garso takelis"</string>
+    <string name="noAvailableeTrack">"Nėra informacijos apie garso takelį"</string>
+    <string name="noAvailableeAudioTrack">"Nėra garso takelio"</string>
+    <string name="audioChange">"audioChange"</string>
+    
+    
+
+    <string name="bookmark_add">"Pridėti žymeklį"</string>
+    <string name="bookmark_display">"Rodyti žymeklius"</string>
+    <string name="bookmark_empty">"Žymeklių nėra"</string>
+    <string name="bookmark_exist">"Tas pats žymeklis žurnale"</string>
+    <string name="bookmark_add_success">"Žymeklis sėkmingai pridėtas"</string>
+    <string name="bookmark_list">"Žymekliai"</string>
+    <string name="bookmark_title">"Pareigos"</string>
+    <string name="bookmark_location">"Vietovė"</string>
+    <string name="http_buffer_size">"HTTP buferio dydis"</string>
+    <string name="http_buffer_size_summary">"Nustatyti transliacijos HTTP buferio dydį"</string>
+    <string name="http_buffer_size_text">"Dabartinis HTTP buferio dydis: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"RTSP buferio dydis"</string>
+    <string name="rtsp_buffer_size_summary">"Nustatyti transliacijos RTSP buferio dydį"</string>
+    <string name="rtsp_buffer_size_text">"Dabartinis RTSP buferio dydis: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Tinkamų verčių ribos: %1$d–%2$d sek."</string>
+    <string name="media_detail">"Medijos detalės"</string>
+    <string name="detail_title">"Pavadinimas: %1$s"</string>
+    <string name="detail_copyright">"Autorių teisės: %1$s"</string>
+    <string name="detail_session">"Informacija apie seansą: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"Vienas takelis"</string>
+    <string name="delete_all">"Trinti viską"</string>
+    <string name="default_title">"Numatytasis pavadinimas"</string>
+    <string name="next">"Toliau"</string>
+    <string name="previous">"Atgal"</string>
+    
+    
+    <string name="mav_firstRunTitle">Kaip peržiūrėti keliais kampais fotografuotą vaizdą</string>
+    <string name="mav_firstRunText">Braukite ekranu kairėn arba dešinėn, kad peržiūrėtumėte keliai kampais fotografuotą vaizdą</string>
+    
+    
+    <string name="stereo3d_album_name">3D medija</string>
+    <string name="stereo3d_mode_switchto_2d">Perjungti į 2D režimą</string>
+    <string name="stereo3d_mode_switchto_3d">Perjungti į 3D režimą</string>
+    <string name="stereo3d_convert2d_dialog_title">Konvertuoti į 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">3D vaizdo \"<xliff:g id="operation">%s</xliff:g>\" nepalaikomas. Jis bus konvertuotas į 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Konvertuojama į 2D...</string>
+    <string name="stereo3d_pan_firstrun_title">Kaip peržiūrėti 3D panoraminį vaizdą</string>
+    <string name="stereo3d_pan_firstrun_text">Braukite ekranu kairėn arba dešinėn, kad peržiūrėtumėte 3D panoraminį vaizdą.</string>
+    <string name="stereo3d_share_convert_text_single">Tai 3D vaizdas. Jis bus konvertuotas į 2D, kad galima būtų tęsti bendrinimą.</string>
+    <string name="stereo3d_share_convert_text_multiple">Pasirinktuose vaizduose yra 3D vaizdų. Jie bus konvertuoti į 2D, kad galima būtų tęsti bendrinimą.</string>
+    <string name="stereo3d_share_dialog_title">Bendrinti kaip 3D arba 2D</string>
+    <string name="stereo3d_share_dialog_text_single">Tai 3D vaizdas. Gavėjas gali jo tinkamai nematyti.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Pasirinktuose vaizduose yra 3D vaizdų. Gavėjas gali jų tinkamai nematyti.</string>
+    <string name="stereo3d_share_dialog_button_2d">Bendrinti kaip 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Bendrinti kaip 3D</string>
+    <string name="stereo3d_attach_dialog_title">Pridėti kaip 3D arba 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Pridėti kaip 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Pridėti kaip 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Nuotraukos peržiūra</string>
+    <string name="stereo3d_preview_button_set">"Nustatyti"</string>
+    <string name="stereo3d_set_wallpaper_fail">3D ekrano fono nustatyti nepavyko.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Gylio nustatymas</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Galite rankiniu būdu pareguliuoti gylį meniu, kad būtų patogu žiūrėti</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automatinis gylio nustatymas</string>
+
+    
+    <string name="stereo3d_video_layout">Pareguliuoti vaizdo įrašų išdėstymą</string>
+    <string name="stereo3d_video_layout_normal">Normalus</string>
+    <string name="stereo3d_video_layout_sidebyside">Vienas prie kito</string>
+    <string name="stereo3d_video_layout_toptobottom">Vienas po kito</string>
+    <string name="stereo3d_video_layout_leftrightswap">Braukti ekranu iš kairės/dešinės</string>
+    <string name="stereo3d_video_layout_topbottomswap">Braukti ekranu iš viršaus/apačios</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Automatiškai konvertuota į 3D režimą</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Automatiškai konvertuota į 2D režimą</string>
+    <string name="stereo3d_save">"Išsaugoti"</string>
+
+    
+    <string name="widget_load_failed">Nepavyko įkelti programėlės</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Ekrano sukimas išjungtas</string>
+    <string name="vertical_demo">Vertikalus ekranas</string>
+    <string name="horizontal_demo">Horizontalus ekranas</string>
+                  
+    
+    <string name="conshots_title">"Nepertraukiamas fotografavimas"</string>
+    <string name="best_shots">Išrinkti geriausius kadrus</string>
+    <string name="best_shots_confirm">Ištrinti visas nepažymėtas nuotraukas.</string>
+    <string name="empty_conshots">Nėra nepertraukiamo fotografavimo nuotraukų serijų.</string>
+    <string name="make_motion">"Atlikta"</string>
+    <string name="motion_at_least">"Efektui sukurti reikia bent %1$s nuotraukų."</string>
+    <string name="motion_at_most">"Daugiausiai galima pasirinkti %1$s nuotraukų."</string>
+    <string name="generate_animation">"Kuriama animacija..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Įspėjimas"</string>
+    <string name="Text_WFD_Dialog">"Prijungus Wi-Fi ekraną, visas nuo kopijavimo apsaugotas turinys bus paslėptas."</string>
+    <string name="Disconnecd_WFD">"Išjunkite rodymo naudojant Wi-Fi režimą"</string>
+    <string name="Hind_DRMImage_WFD">"Tęsti"</string>
+    <string name="wfd_finishGallery_Warning">"Negalima atidaryti, kol rodomas belaidžio ryšio ekranas."</string>
+    <string name="wfd_protected_warning1">"Turinys yra apsaugotas nuo kopijavimo,"</string>
+    <string name="wfd_protected_warning2">"Norėdami matyti jį telefone,"</string>
+    <string name="wfd_protected_warning3">"atjunkite belaidžio ryšio ekraną."</string>
+    <string name="wfd_disconnected">"Belaidžio ryšio rodinys atjungtas."</string>
+    <string name="smb_protected_warning">"atjunkite telefoną nuo Smartbook."</string>
+    <string name="hdmi_protected_warning">"atjunkite nuo HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Kai belaidžio ryšio rodinys prijungtas, 4K vaizdo įrašas neveikia. Atjungti jį ir paleisti 4K vaizdo įrašą?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Bluetooth ausinės negali atkurti 4K vaizdo įrašo garso. Atjungti jas ir paleisti 4K vaizdo įrašą?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL negali atkurti 4K vaizdo įrašo. Atjungti jį ir paleisti 4K vaizdo įrašą?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI negali atkurti 4K vaizdo įrašo. Atjungti jį ir paleisti 4K vaizdo įrašą?"</string>	
+    <string name="Not_supported_4k_video">"Išorinė išvestis negali atkurti 4K vaizdo įrašo. Atjungti jį ir paleisti 4K vaizdo įrašą?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Prijungus HDMI ekraną, visas nuo kopijavimo apsaugotas turinys bus paslėptas."</string>
+    
+    
+    <string name="share_format_choose_title">"Pasirinkite formatą"</string>
+    <string name="share_format_image">"Vaizdas"</string>
+    <string name="share_format_video">Video</string>
+    <string name="generating_tip">"Kuriamas vaizdo įrašas..."</string>
+    <string name="generate_video_fail">"Nepavyko sukurti vaizdo įrašo"</string>
+
+    <string name="save_fail">Atminties kortelė pilna arba neįdėta.</string>
+    <string name="appwidget_error_text">Galerijos grafinė klaida.</string>
+    <string name="share_limit">Galima bendrinti ne daugiau nei 300 failų.</string>
+
+    <string name="file_deleted">Failas ištrintas.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot yra išjungtas. Parametruose įjunkite HotKnot"</string>
+    <string name="hotknot_toast">"Kitam prietaisui paliesti naudokite ekraną."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

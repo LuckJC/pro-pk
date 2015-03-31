@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2011 Google Inc.
+     Licensed to The Android Open Source Project.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="to">To</string>
+    <string name="cc">Cc</string>
+    <string name="bcc">Bcc</string>
+    <string name="subject_hint">Subject</string>
+    <string name="body_hint">Compose email</string>
+    <string name="add_file_attachment">Attach file</string>
+    <string name="add_photo_attachment">Attach picture</string>
+    <string name="add_video_attachment">Attach video</string>
+    <string name="save_draft">Save draft</string>
+    <string name="discard">Discard</string>
+    <string name="compose">Compose</string>
+    <string-array name="compose_modes">
+        <item>Reply</item>
+        <item>Reply all</item>
+        <item>Forward</item>
+    </string-array>
+    <string name="reply_attribution">On <xliff:g id="date">%s</xliff:g>, <xliff:g id="person">%s</xliff:g> wrote:</string>
+    <string name="forward_attribution">---------- Forwarded message ----------<br />From: <xliff:g id="from">%1$s</xliff:g><br />Date: <xliff:g id="date">%2$s</xliff:g><br />Subject: <xliff:g id="subject">%3$s</xliff:g><br />To: <xliff:g id="to">%4$s</xliff:g>&lt;br&gt;</string>
+    <string name="forward_attribution_no_headers">---------- Forwarded message ----------</string>
+    <string name="cc_attribution">Cc: <xliff:g id="cc">%1$s</xliff:g>&lt;br&gt;</string>
+    <string name="select_attachment_type">Choose type of attachment</string>
+    <string name="too_large_to_attach_single">Can\'t attach file over <xliff:g id="maxSize">%1$s</xliff:g>.</string>
+    <string name="too_large_to_attach_multiple">One or more files not attached. Limit <xliff:g id="maxSize">%1$s</xliff:g>.</string>
+    <string name="too_large_to_attach_additional">File not attached. <xliff:g id="maxSize">%1$s</xliff:g> limit reached.</string>
+    <string name="generic_attachment_problem">Couldn\'t attach file.</string>
+    <string name="recipient_needed">Add at least one recipient.</string>
+    <string name="recipient_error_dialog_title">Recipient error</string>
+    <string name="confirm_send_title">Send message?</string>
+    <string name="confirm_send_message_with_no_subject">There\'s no text in the message subject.</string>
+    <string name="confirm_send_message_with_no_body">There\'s no text in the message body.</string>
+    <string name="confirm_send_message">Send this message?</string>
+    <string name="message_discarded">Message discarded.</string>
+    <string name="signature">\n\n<xliff:g id="signature">%s</xliff:g></string>
+    <string name="custom_from_account_label">Send mail as:</string>
+    <string name="send">Send</string>
+    <string name="mark_read">Mark read</string>
+    <string name="mark_unread">Mark unread</string>
+    <string name="mute">Mute</string>
+    <string name="add_star">Add star</string>
+    <string name="remove_star">Remove star</string>
+    <string name="remove_folder">Remove from <xliff:g id="folderName">%1$s</xliff:g></string>
+    <string name="archive">Archive</string>
+    <string name="report_spam">Report spam</string>
+    <string name="mark_not_spam">Report not spam</string>
+    <string name="report_phishing">Report phishing</string>
+    <string name="delete">Delete</string>
+    <string name="discard_drafts">Discard drafts</string>
+    <string name="refresh">Refresh</string>
+    <string name="reply">Reply</string>
+    <string name="reply_all">Reply all</string>
+    <string name="resume_draft">Edit</string>
+    <string name="forward">Forward</string>
+    <string name="menu_compose">Compose</string>
+    <string name="menu_change_folders">Change folders</string>
+    <string name="menu_move_to">Move to</string>
+    <string name="menu_move_to_inbox">Move to Inbox</string>
+    <string name="menu_manage_folders">Folder settings</string>
+    <string name="menu_show_original">Revert auto-sizing</string>
+    <string name="menu_folder_options">Folder settings</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_search">Search</string>
+    <string name="mark_important">Mark important</string>
+    <string name="mark_not_important">Mark not important</string>
+    <string name="add_cc_label">Add Cc/Bcc</string>
+    <string name="add_bcc_label">Add Bcc</string>
+    <string name="feedback">Send feedback</string>
+    <string name="help_and_info">Help</string>
+    <string name="quoted_text">Include quoted text</string>
+    <string name="quoted_text_label">Quote text</string>
+    <string name="respond_inline">Respond inline</string>
+    <string name="bytes"><xliff:g id="count">%s</xliff:g> B</string>
+    <string name="kilobytes"><xliff:g id="count">%s</xliff:g> KB</string>
+    <string name="megabytes"><xliff:g id="count">%s</xliff:g> MB</string>
+    <string name="attachment_image">Image</string>
+    <string name="attachment_video">Video</string>
+    <string name="attachment_audio">Audio</string>
+    <string name="attachment_text">Text</string>
+    <string name="attachment_application_msword">Document</string>
+    <string name="attachment_application_vnd_ms_powerpoint">Presentation</string>
+    <string name="attachment_application_vnd_ms_excel">Spreadsheet</string>
+    <string name="attachment_application_pdf">PDF</string>
+    <string name="attachment_unknown"><xliff:g id="attachmentExtension">%s</xliff:g> File</string>
+    <string name="preview_attachment">Preview</string>
+    <string name="save_attachment">Save</string>
+    <string name="cancel_attachment">Cancel</string>
+    <string name="download_again">Download again</string>
+    <string name="more_info_attachment">Info</string>
+    <string name="attachment_type_blocked">Unfortunately, you can\'t save or open this type of attachment.</string>
+    <string name="no_application_found">No app can open this attachment for viewing.</string>
+    <string name="fetching_attachment">Fetching attachment</string>
+    <string name="please_wait">Please wait\u2026</string>
+    <string name="saved">Saved, <xliff:g id="size">%s</xliff:g></string>
+    <string name="download_failed">Couldn\'t download. Touch to retry.</string>
+    <string name="attachments_header">Attachments</string>
+    <string name="menu_photo_save_all">Save all</string>
+    <string name="menu_photo_share">Share</string>
+    <string name="menu_photo_share_all">Share all</string>
+    <string name="saving">Saving…</string>
+    <string name="choosertitle_sharevia">Share via</string>
+    <string name="contextmenu_openlink">Open in Browser</string>
+    <string name="contextmenu_copy">Copy</string>
+    <string name="contextmenu_copylink">Copy link URL</string>
+    <string name="contextmenu_dial_dot">Dial\u2026</string>
+    <string name="contextmenu_sms_dot">SMS\u2026</string>
+    <string name="contextmenu_add_contact">Add contact</string>
+    <string name="contextmenu_send_mail">Send email</string>
+    <string name="contextmenu_map">Map</string>
+    <string name="contextmenu_sharelink">Share link</string>
+    <string name="contextmenu_help">Help</string>
+    <string name="contextmenu_feedback">Send feedback</string>
+    <string name="num_selected"><xliff:g id="number" example="7">%d</xliff:g></string>
+    <plurals name="move_conversation">
+        <item quantity="one">Move conversation</item>
+        <item quantity="other">Move <xliff:g>%1$d</xliff:g> conversations</item>
+    </plurals>
+    <string name="content_description"><xliff:g id="sender">%1$s</xliff:g> about <xliff:g id="subject">%2$s</xliff:g>, <xliff:g id="snippet">%3$s</xliff:g> on <xliff:g id="date">%4$s</xliff:g>, <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="content_description_today"><xliff:g id="sender">%1$s</xliff:g> about <xliff:g id="subject">%2$s</xliff:g>, <xliff:g id="snippet">%3$s</xliff:g> at <xliff:g id="time">%4$s</xliff:g>, <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="read_string">conversation read</string>
+    <string name="unread_string">conversation unread</string>
+    <string name="filtered_tag">[<xliff:g id="tag">%1$s</xliff:g>]<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="subject_and_snippet"><xliff:g>%s</xliff:g> \u2014 <xliff:g>%s</xliff:g></string>
+    <plurals name="draft">
+        <item quantity="one">Draft</item>
+        <item quantity="other">Drafts</item>
+    </plurals>
+    <string name="sending">Sending\u2026</string>
+    <string name="send_failed">Message wasn\'t sent.</string>
+    <string name="me_object_pronun">me</string>
+    <string name="me_subject_pronun">me</string>
+    <string name="inbox_folders_heading">Inbox</string>
+    <plurals name="confirm_delete_conversation">
+        <item quantity="one">Delete this conversation?</item>
+        <item quantity="other">Delete these <xliff:g id="count">%1$d</xliff:g> conversations?</item>
+    </plurals>
+    <plurals name="confirm_archive_conversation">
+        <item quantity="one">Archive this conversation?</item>
+        <item quantity="other">Archive these <xliff:g id="count">%1$d</xliff:g> conversations?</item>
+    </plurals>
+    <plurals name="confirm_discard_drafts_conversation">
+        <item quantity="one">Discard drafts from this conversation?</item>
+        <item quantity="other">Discard drafts from these <xliff:g id="count">%1$d</xliff:g> conversations?</item>
+    </plurals>
+    <string name="confirm_discard_text">Discard this message?</string>
+    <string name="loading_conversations">Loading\u2026</string>
+    <string name="no_conversations">No conversations.</string>
+    <string name="undo">Undo</string>
+    <plurals name="conversation_unstarred">
+        <item quantity="one">Unstarring <xliff:g id="count">%1$d</xliff:g> conversation.</item>
+        <item quantity="other">Unstarring <xliff:g id="count">%1$d</xliff:g> conversations.</item>
+    </plurals>
+    <plurals name="conversation_muted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> muted.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> muted.</item>
+    </plurals>
+    <plurals name="conversation_spammed">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> reported as spam.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> reported as spam.</item>
+    </plurals>
+    <plurals name="conversation_not_spam">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> reported as not spam.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> reported as not spam.</item>
+    </plurals>
+    <plurals name="conversation_not_important">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> marked not important.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> marked not important.</item>
+    </plurals>
+    <plurals name="conversation_phished">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> reported as phishing.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> reported as phishing.</item>
+    </plurals>
+    <plurals name="conversation_archived">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> archived.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> archived.</item>
+    </plurals>
+    <plurals name="conversation_deleted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> deleted.</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> deleted.</item>
+    </plurals>
+    <string name="deleted">Deleted</string>
+    <string name="archived">Archived</string>
+    <string name="folder_removed">Removed from <xliff:g id="folderName">%1$s</xliff:g></string>
+    <plurals name="conversation_folder_changed">
+        <item quantity="one">Changed folder.</item>
+        <item quantity="other">Changed folders.</item>
+    </plurals>
+    <string name="conversation_folder_moved">Moved to <xliff:g id="folderName">%1$s</xliff:g></string>
+    <string name="search_results_header">Results</string>
+    <string name="search_unsupported">Search is not supported on this account.</string>
+    <string name="search_results_searching_header">Searching\u2026</string>
+    <string name="add_label">Add folder</string>
+    <string name="new_incoming_messages_one">New message from <xliff:g id="sender">%s</xliff:g>. Show.</string>
+    <plurals name="new_incoming_messages_many">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> new messages. Show.</item>
+    </plurals>
+    <string name="expand_recipient_details">Expand recipient details</string>
+    <string name="collapse_recipient_details">Collapse recipient details</string>
+    <string name="contact_info_string">Show contact information for <xliff:g id="name">%1$s</xliff:g></string>
+    <string name="contact_info_string_default">Show contact information</string>
+
+    <plurals name="show_messages_read">
+        <item quantity="other"><xliff:g id="count" example="4">%1$d</xliff:g> older messages</item>
+    </plurals>
+    <string name="from_heading">From:\u0020</string>
+    <string name="replyto_heading">Reply-to:\u0020</string>
+    <string name="to_heading">To:\u0020</string>
+    <string name="cc_heading">Cc:\u0020</string>
+    <string name="bcc_heading">Bcc:\u0020</string>
+    <string name="date_heading">Date:\u0020</string>
+    <string name="show_images">Show pictures</string>
+    <string name="always_show_images">Always show pictures from this sender</string>
+    <string name="always_show_images_toast">Pictures from this sender will be shown automatically.</string>
+    <string name="address_display_format"><xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g></string>
+    <string name="address_display_format_with_via_domain"><xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g> via <xliff:g id="via_domain">%3$s</xliff:g></string>
+    <string name="message_saved">Message saved as draft.</string>
+    <string name="sending_message">Sending message\u2026</string>
+    <string name="invalid_recipient">The address <xliff:g id="wrongemail" example="foo@@gmail..com">%s</xliff:g> is invalid.</string>
+    <string name="show_elided">\u25B6 Show quoted text</string>
+    <string name="hide_elided">\u25BC Hide quoted text</string>
+    <string name="message_invite_title">Calendar invite</string>
+    <string name="message_invite_calendar_view">View in Calendar</string>
+    <string name="message_invite_label_attending">Going?</string>
+    <string name="message_invite_accept">Yes</string>
+    <string name="message_invite_tentative">Maybe</string>
+    <string name="message_invite_decline">No</string>
+    <string name="enumeration_comma">,\u0020</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string-array name="sync_status">
+        <item>Success</item>
+        <item>No connection.</item>
+        <item>Couldn\'t sign in.</item>
+        <item>Security error.</item>
+        <item>Couldn\'t sync.</item>
+        <item>Internal Error</item>
+    </string-array>
+    <string name="tap_to_configure">Touch to set up</string>
+    <string name="non_synced_folder_description">To view conversations, sync this folder.</string>
+    <string name="tap_to_configure_folder_sync">Sync Folder</string>
+    <string name="widget_large_unread_count">%d+</string>
+    <plurals name="actionbar_unread_messages">
+        <item quantity="other"><xliff:g id="count" example="4">%1$d</xliff:g> unread</item>
+    </plurals>
+    <string name="actionbar_large_unread_count"><xliff:g id="count">%1$d</xliff:g>+ unread</string>
+    <string name="view_more_conversations">View more conversations</string>
+    <string name="loading_conversation">Loading\u2026</string>
+    <string name="activity_mailbox_selection">Choose account</string>
+    <string name="activity_folder_selection">Choose folder</string>
+    <string name="folder_shortcut_widget_label">Email folder</string>
+    <string name="change_folders_selection_dialog_title">Change folders</string>
+    <string name="move_to_selection_dialog_title">Move to</string>
+    <string name="search_hint">Search mail</string>
+    <string name="search_results_loaded"><xliff:g id="searchCount">%1$d</xliff:g></string>
+    <string name="network_error">No connection</string>
+    <string name="retry">Retry</string>
+    <string name="load_more">Load more</string>
+    <string name="shortcut_name_title">Name folder shortcut</string>
+    <string name="wait_for_sync_title">Waiting for sync</string>
+    <string name="wait_for_sync_body">Your email will appear shortly.</string>
+    <string name="not_synced_title">Account not synced</string>
+    <string name="wait_for_manual_sync_body">This account isn\'t set up to sync automatically.\nTouch <b>Sync Now</b> to sync mail once, or <b>Change Sync Settings</b> to set up this account to sync mail automatically.</string>
+    <string name="manual_sync">Sync now</string>
+    <string name="change_sync_settings">Change sync settings</string>
+    <string name="photo_load_failed">Couldn\'t load image</string>
+    <string name="cant_move_or_change_labels">Can\'t move because selection contains multiple accounts.</string>
+    <string name="multiple_new_message_notification_item"><b><xliff:g id="sender">%1$s</xliff:g></b>\u0020\u0020\u0020<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="single_new_message_notification_big_text"><xliff:g id="subject">%1$s</xliff:g>\n<xliff:g id="snippet">%2$s</xliff:g></string>
+    <string name="ignore_spam_warning">Ignore, I trust this message</string>
+    <string name="via_domain">via <xliff:g id="viaDomain">%1$s</xliff:g></string>
+    <string-array name="moveto_folder_sections">
+        <item>System</item>
+        <item>Frequently Used</item>
+        <item>All Folders</item>
+    </string-array>
+    <string name="signin">Sign-in</string>
+    <string name="info">Info</string>
+    <string name="report">Report</string>
+    <string name="sync_error">Couldn\'t sync.</string>
+    <string name="sync_error_message">Your device doesn\'t have enough storage space to sync.</string>
+    <string name="storage">Storage</string>
+    <string name="senders_split_token">,\u00A0</string>
+    <string name="draft_count_format">\u00A0(<xliff:g id="count">%1$s</xliff:g>)</string>
+    <string name="all_folders_heading">All folders</string>
+    <string name="recent_folders_heading">Recent folders</string>
+    <string name="message_details_title">Message details</string>
+    <string name="auto_advance_label">Auto-advance</string>
+    <string name="auto_advance_summary">Choose which screen to show after you delete a message</string>
+    <string name="auto_advance_help_title">Set auto-advance preference\n(after you delete, etc.)</string>
+    <string-array name="prefEntries_autoAdvance">
+        <item>Newer</item>
+        <item>Older</item>
+        <item>Conversation list</item>
+    </string-array>
+    <string-array name="prefSummaries_autoAdvance">
+        <item>Show newer conversation after you delete</item>
+        <item>Show older conversation after you delete</item>
+        <item>Show conversation list after you delete</item>
+    </string-array>
+    <string name="clear_display_images_whitelist_title">Clear picture approvals</string>
+    <string name="clear_display_images_whitelist_dialog_title">Clear picture approvals?</string>
+    <string name="clear_display_images_whitelist_dialog_message">Stop displaying inline images from senders you previously allowed.</string>
+    <string name="sender_whitelist_cleared">Pictures won\'t be shown automatically.</string>
+    <string name="preferences_signature_title">Signature</string>
+    <string name="preferences_signature_dialog_title">Signature</string>
+    <string name="preferences_signature_summary_not_set">Not set</string>
+    <string name="notification_action_reply">Reply</string>
+    <string name="notification_action_reply_all">Reply all</string>
+    <string name="notification_action_archive">Archive</string>
+    <string name="notification_action_remove_label">Remove label</string>
+    <string name="notification_action_delete">Delete</string>
+    <string name="notification_action_undo_archive">Archived</string>
+    <string name="notification_action_undo_remove_label">Label Removed</string>
+    <string name="notification_action_undo_delete">Deleted</string>
+    <string name="veiled_address" />
+    <string name="veiled_alternate_text" />
+    <string name="veiled_alternate_text_unknown_person" />
+    <string name="veiled_summary_unknown_person" />
+    <string name="label_notification_ticker">"<xliff:g id="label">%s</xliff:g>: <xliff:g id="notification">%s</xliff:g>"</string>
+    <string name="new_messages"><xliff:g id="count">%1$d</xliff:g> new messages</string>
+    <string name="single_new_message_notification_title"><xliff:g id="sender">%1$s</xliff:g>: <xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="silent_ringtone">Silent</string>
+    <string name="preference_removal_action_title">Archive &amp; delete actions</string>
+    <string-array name="prefEntries_removal_action">
+        <item>Show archive only</item>
+        <item>Show delete only</item>
+        <item>Show archive &amp; delete</item>
+    </string-array>
+    <string-array name="prefSummaries_removal_action_summary">
+        <item>Show archive only</item>
+        <item>Show delete only</item>
+        <item>Show archive &amp; delete</item>
+    </string-array>
+    <string name="prefDialogTitle_removal_action">Archive &amp; delete actions</string>
+    <string name="preferences_default_reply_all_title">Reply all</string>
+    <string name="preferences_default_reply_all_summary">Use as default for message replies</string>
+    <string name="preference_swipe_title_archive">Swipe to archive</string>
+    <string name="preference_swipe_title_delete">Swipe to delete</string>
+    <string name="preference_swipe_description">In conversation list</string>
+    <string name="preference_sender_image_title">Sender image</string>
+    <string name="preference_sender_image_description">Show beside name in conversation list</string>
+    <string name="swipe_down_to_refresh">Swipe down to refresh</string>
+    <string name="checking_for_mail">Checking for mail</string>
+    <string name="empty_trash">Empty Trash</string>
+    <string name="empty_spam">Empty Spam</string>
+    <string name="empty_trash_dialog_title">Empty Trash?</string>
+    <string name="empty_spam_dialog_title">Empty Spam?</string>
+    <plurals name="empty_folder_dialog_message">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> message will be permanently deleted.</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> messages will be permanently deleted.</item>
+    </plurals>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="conversation_photo_welcome_text">Touch a sender image to select that conversation.</string>
+    <string name="long_press_to_select_tip">Touch &amp; hold to select one conversation, then touch to select more.</string>
+    <string name="folder_icon_desc">Folder icon</string>
+    <string name="add_account">Add account</string>
+    <string name="attached_message">Attached message</string>
+    <string name="date_message_received"><xliff:g id="day_and_date">%1$s</xliff:g>, <xliff:g id="time">%2$s</xliff:g></string>
+    <string name="date_message_received_today">Today, <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="date_message_received_yesterday">Yesterday, <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="dismiss_tip_hover_text">Dismiss tip</string>
+    <string name="auto_sync_off">Auto-sync is off.</string>
+    <string name="tap_to_enable_sync">Touch to turn on.</string>
+    <string name="account_sync_off">Account sync is off.</string>
+    <string name="enable_sync_in_account_settings">Turn on in <xliff:g id="account_settings">%1$s</xliff:g>.</string>
+    <string name="account_settings_param">Account settings</string>
+    <string name="unsent_messages_in_outbox"><xliff:g id="number">%1$s</xliff:g> unsent in <xliff:g id="outbox">%2$s</xliff:g></string>
+    <string name="turn_auto_sync_on_dialog_title">Turn auto-sync on?</string>
+    <string name="turn_auto_sync_on_dialog_body">Changes you make to all apps and accounts, not just Gmail, will be synchronized between the web, your other devices, and your <xliff:g id="phone_or_tablet">%1$s</xliff:g>.</string>
+    <string name="phone">phone</string>
+    <string name="tablet">tablet</string>
+    <string name="turn_auto_sync_on_dialog_confirm_btn">Turn on</string>
+    <string name="show_n_more_folders">Show <xliff:g id="number">%1$s</xliff:g> more folders</string>
+    <string name="hide_folders">Hide folders</string>
+</resources>

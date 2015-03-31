@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Неуспешно пускане на аудио.</string>
+    <string name="VideoView_info_text_network_interrupt">Мрежова грешка и потоковото видео спряно.</string>
+    <string name="VideoView_error_text_connection_failed">Разпадане на мрежовата връзка. Проверете връзката с мрежата.</string>
+    
+    <string name="can_not_trim">Възникване на грешка. Видеото не може да се обработва.</string>
+	
+	<string name="setp_option_name">Стъпка</string>
+	<string name="step_option_desc">Персонализиране на стъпка пренавиване напред/назад</string>
+	<string name="setp_option_three_second">"3 секунди"</string>
+	<string name="setp_option_six_second">"6 секунди"</string>
+    
+    <string name="camera_print">"Печат"</string>
+    <string name="no_way_to_print">Няма приложение за печат на файловете.</string>
+    <string name="printFile">Печат на файла през</string>
+    
+    
+    <string name="no_storage_title">"Няма хранилище"</string>
+    
+    
+    <string name="no_storage_message">Вкарайте SD карта</string>
+    
+    
+    <string name="load_image_fail">Неуспешно сваляне на картина</string>
+    
+    
+    <string name="proxy_host">Приемащ</string>
+    <string name="proxy_port">"Порт"</string>
+    <string name="apn_settings">"Имена на точки за достъп"</string>
+    <string name="rtsp_proxy_settings">"Настройки на RTSP прокси"</string>
+    <string name="rtsp_proxy_settings_summary">"Задаване и управление на настройки прокси RTSP"</string>
+    <string name="enable_rtsp_proxy">"Разрешаване RTSP прокси"</string>
+    <string name="enable_rtsp_proxy_summary">"Разрешаване/забрана на RTSP прокси"</string>
+    <string name="http_proxy_settings">"Настройки прокси HTTP"</string>
+    <string name="http_proxy_settings_summary">"Задаване и управление на настройки прокси HTTP"</string>
+    <string name="enable_http_proxy">"Разрешаване HTTP прокси"</string>
+    <string name="enable_http_proxy_summary">"Разрешаване/забрана на HTTP прокси"</string>
+    <string name="apn_settings_summary">"Текуща SIM: %1$s\nТок APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"Връзката за данни на SIM е затворена. Не мога да задам APN"</string>
+    <string name="udp_port_settings">"Диапазон на порт RTP/RTCP"</string>
+    <string name="udp_port_settings_summary">"Задаване на макс. и мин. номер на порт"</string>
+    <string name="max_udp_port">"Макс. номер на порт"</string>
+    <string name="min_udp_port">"Мин. номер на порт"</string>
+    <string name="server_timeout_title">"Интервал на таймер"</string>
+    <string name="server_timeout_message">"Повторно свързване със сървъра за показване на видео или не?"</string>
+    <string name="input_url">"Въвеждане на URL"</string>
+    <string name="streaming_settings">"Настройки потоково видео"</string>
+    <string name="VideoView_info_text_video_not_supported">"Видеото не се поддържа."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Неуспешна връзка. Опитайте ново свързване с %1$d…"</string>
+	<string name="VideoView_info_buffering">"Буфериране…"</string>
+    <string name="stop">"Стоп"</string>
+    <string name="loop">"Цикъл"</string>
+    <string name="single">"Единично"</string>
+    <string name="clear_motion">"ЧистоДвижение"</string>
+    
+    
+    <string name="SubtitleSetting">"Субтитри"</string>
+    <string name="SubtitleSetting_text">"ТЕКСТ"</string>
+    <string name="SubtitleSetting_layout">"ПОЛОЖЕНИЕ"</string>
+    <string name="subtitle_layout_alignment">"Изравняване"</string>
+    <string name="subtitle_layout_bottom_margins">"Долни полета"</string>
+    <string name="subtitle_layout_alignment_left">"Наляво"</string>
+    <string name="subtitle_layout_alignment_center">"Сентър"</string>
+    <string name="subtitle_layout_alignment_right">"Надясно"</string>
+    <string name="subtitle_text_font">Шрифт</string>
+    <string name="subtitle_text_color">"Цвят"</string>
+    <string name="subtitle_text_size">"Размер"</string>
+    <string name="subtitle_text_encoding">"Кодиране символи"</string>
+    <string name="subtitle_text_color_black">"Черен"</string>
+    <string name="subtitle_text_color_dkgray">"Тъмносиво"</string>
+    <string name="subtitle_text_color_gray">"Сив"</string>
+    <string name="subtitle_text_color_ltgray">"Светлосиво"</string>
+    <string name="subtitle_text_color_white">"Бял"</string>
+    <string name="subtitle_text_color_red">"червено"</string>
+    <string name="subtitle_text_color_green">"зелено"</string>
+    <string name="subtitle_text_color_blue">"синьо"</string>
+    <string name="subtitle_text_color_yellow">"Жълто"</string>
+    <string name="subtitle_text_color_cyan">"Синьозелено"</string>
+    <string name="subtitle_text_color_magenta">"Пурпурно"</string>
+    <string name="subtitle_text_color_translucent">"Прозрачно"</string>
+    <string name="subtitle_text_encoding_default">"По подразбиране"</string>
+    <string name="closeSubtitle">"Избор на субтитри"</string>
+    <string name="subTitleChange">"субТитриСмяна"</string>
+    <string name="subtitleTrackChange">"субТитриСмяна"</string>
+    
+    <string name="audioTrackChange">"аудиоПътекаПромяна"</string>
+    <string name="audioTrack">"Аудио пътека"</string>
+    <string name="noAvailableeTrack">"Няма информация за пътеката"</string>
+    <string name="noAvailableeAudioTrack">"Няма достъпна аудио пътека"</string>
+    <string name="audioChange">"аудиоПромяна"</string>
+    
+    
+
+    <string name="bookmark_add">"Добавяне маркери"</string>
+    <string name="bookmark_display">"Показване маркери"</string>
+    <string name="bookmark_empty">"Няма маркери"</string>
+    <string name="bookmark_exist">"Същият маркер е в хронологията"</string>
+    <string name="bookmark_add_success">"Успешно добавяне маркери"</string>
+    <string name="bookmark_list">"Маркери"</string>
+    <string name="bookmark_title">"Заглавие"</string>
+    <string name="bookmark_location">"Място"</string>
+    <string name="http_buffer_size">Размер на буфера на HTTP"</string>
+    <string name="http_buffer_size_summary">"Задайте размер на буфера на HTTP за поток"</string>
+    <string name="http_buffer_size_text">"Текущ размер на буфера на HTTP: %1$d"</string>
+    <string name="rtsp_buffer_size">"Размер на буфера на RTSP"</string>
+    <string name="rtsp_buffer_size_summary">"Задайте размер на буфера на RTSP за поток"</string>
+    <string name="rtsp_buffer_size_text">"Текущ размер на буфера на RTSP: %1$d"</string>
+    <string name="buffer_size_tip">"Допустими стойности: %1$d - %2$d секунди" </string>
+    <string name="media_detail">"Подробности за медията"</string>
+    <string name="detail_title">"Заглавие: %1$s"</string>
+    <string name="detail_copyright">"Авторско право: %1$s"</string>
+    <string name="detail_session">"Информация за сесията: %1$s"</string>
+    <string name="stereo">"Стерео"</string>
+    <string name="single_track">"Единична пътечка"</string>
+    <string name="delete_all">"Изтриване всички"</string>
+    <string name="default_title">"Заглавие по подразбиране"</string>
+    <string name="next">"Следващ"</string>
+    <string name="previous">"Предишен"</string>
+    
+    
+    <string name="mav_firstRunTitle">Как да гледаме многоъгълен образ</string>
+    <string name="mav_firstRunText">Чукнете отляво или отдясно за многоъгълен образ</string>
+    
+    
+    <string name="stereo3d_album_name">3D медия</string>
+    <string name="stereo3d_mode_switchto_2d">Превключване на режим 2D</string>
+    <string name="stereo3d_mode_switchto_3d">Превключване на режим 3D</string>
+    <string name="stereo3d_convert2d_dialog_title">Преобразуване в 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" не се поддържа за 3D картина, ще бъде преобразувана в 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Преобразуване в 2D…</string>
+    <string name="stereo3d_pan_firstrun_title">Как да панорамен 3D образ</string>
+    <string name="stereo3d_pan_firstrun_text">Чукнете отляво или отдясно за 3D панорамен образ.</string>
+    <string name="stereo3d_share_convert_text_single">Това е 3D картина. За да продължи споделянето, тя ще бъде преобразувана в 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">Избраните кадри включват 3D картини. За да продължи споделянето, те ще бъдат преобразувани в 2D.</string>
+    <string name="stereo3d_share_dialog_title">Споделяне като 3D или 2D</string>
+    <string name="stereo3d_share_dialog_text_single">Това е 3D картина. Може получателят да не я вижда нормално.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Избраните кадри включват 3D картини. Може получателят да не ги вижда нормално.</string>
+    <string name="stereo3d_share_dialog_button_2d">Споделяне като 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Споделяне като 3D</string>
+    <string name="stereo3d_attach_dialog_title">Прикачване като 3D или 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Прикачване 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Прикачване като 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Преглед на картината</string>
+    <string name="stereo3d_preview_button_set">"Задаване"</string>
+    <string name="stereo3d_set_wallpaper_fail">Неуспешно задавана на 3D тапет.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Настройка дълбочина</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Можете да настроите ръчно долбочината от менюто, ако очите ви се изморяват</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Автом. настройка на дълбочина</string>
+
+    
+    <string name="stereo3d_video_layout">Настройка на изгледа на видеото</string>
+    <string name="stereo3d_video_layout_normal">Нормално</string>
+    <string name="stereo3d_video_layout_sidebyside">Страна до страна</string>
+    <string name="stereo3d_video_layout_toptobottom">Отгоре и отдолу</string>
+    <string name="stereo3d_video_layout_leftrightswap">Смяна ляво/дясно</string>
+    <string name="stereo3d_video_layout_topbottomswap">Смяна горе/долу</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Автоматично преобразуване в 3D режим</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Автоматично преобразуване в 2D режим</string>
+    <string name="stereo3d_save">"Запазване"</string>
+
+    
+    <string name="widget_load_failed">Неуспешно сваляне на иконка</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Демо изключено</string>
+    <string name="vertical_demo">Вертикално Демо</string>
+    <string name="horizontal_demo">Хоризонтално Демо</string>
+                  
+    
+    <string name="conshots_title">"Продължително снимане"</string>
+    <string name="best_shots">Извличане на най-добрите кадри</string>
+    <string name="best_shots_confirm">Изтриване на всички немаркирани снимки.</string>
+    <string name="empty_conshots">Налични О непрекъснати снимки.</string>
+    <string name="make_motion">"Готово"</string>
+    <string name="motion_at_least">"Нужни са най-малко %1$s снимки за създаване на ефекта."</string>
+    <string name="motion_at_most">"Можете да изберете най-много %1$s снимки."</string>
+    <string name="generate_animation">"Генериране на анимация…"</string>
+    
+    <string name="Warning_WFD_Dialog">"Предупреждение"</string>
+    <string name="Text_WFD_Dialog">"Всички защитени срещу копиране снимки ще бъдат изтрити, когато бъде свързан Wi-Fi дисплей."</string>
+    <string name="Disconnecd_WFD">"Изключване на Wi-Fi дисплей"</string>
+    <string name="Hind_DRMImage_WFD">"Продължаване"</string>
+    <string name="wfd_finishGallery_Warning">"Не може да се отвори, докато безжичният дисплей е включен."</string>
+    <string name="wfd_protected_warning1">"Съдържанието е защитено срещу копиране,"</string>
+    <string name="wfd_protected_warning2">"Да се покаже на телефона,"</string>
+    <string name="wfd_protected_warning3">"откачете безжичния дисплей."</string>
+    <string name="wfd_disconnected">"Безжичният дисплей откачен."</string>
+    <string name="smb_protected_warning">"Откачете телефона от Smartbook."</string>
+    <string name="hdmi_protected_warning">"откачете HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Не се поддържа 4К видео при свързан безжичен дисплей. Да го откачим и да пуснем 4К видео?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Слушалките блутут не могат да възпроизвеждат звука на 4К видео. Да ги откачим и да пуснем 4К видео?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL не може да възпроизвежда 4К видео. Да го откачим и да пуснем 4К видео?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI не може да възпроизвежда 4К видео. Да го откачим и да пуснем 4К видео?"</string>	
+    <string name="Not_supported_4k_video">"Външният изход не може да възпроизвежда 4К видео. Да го откачим и да пуснем 4К видео?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Защитеното срещу копиране съдържание ще бъде скрито при свързване на HDMI дисплей."</string>
+    
+    
+    <string name="share_format_choose_title">"Избор на формат"</string>
+    <string name="share_format_image">"Картина"</string>
+    <string name="share_format_video">"Видео"</string>
+    <string name="generating_tip">"Генериране на видео…"</string>
+    <string name="generate_video_fail">"Неуспешно генериране на видео"</string>
+
+    <string name="save_fail">Картата памет е пълна или няма карта.</string>
+    <string name="appwidget_error_text">Грешка в галерията на иконки.</string>
+    <string name="share_limit">Не мога да споделя повече от 300 файла.</string>
+
+    <string name="file_deleted">Файлът е изтрит.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot е изкл. Включете HotKnot от настройките"</string>
+    <string name="hotknot_toast">"Използвайте екрана и пипнете друго устройство."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">خاکستری</string>  
+    <string name="not_enough_space" product="nosdcard">"حافظه USB پر است."</string>  
+    <string name="not_enough_space" product="default">"کارت SD شما پر است."</string>
+    <string name="add_audio_track_failed">افزودن صدا ناموفق بود.</string>
+    <string name="insert_transition_failed">وارد کردن جلوه متحرک ناموفق بود.</string>
+<string name="save_emoticons_failed">ذخیره صورتک ها امکان‌پذیر نیست.</string>
+    <string name="save_xml_failed">ذخیره نویسه های خاصل امکان‌پذیر نیست.</string>
+    </resources>

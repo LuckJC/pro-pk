@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="permission_read_attachment_label">ای میل منسلکات پڑھیں</string>
+    <string name="permission_read_attachment_desc">اطلاق کو آپ کے ای میل انسلاکات پڑھنے دیتا ہے۔</string>
+    <string name="permission_access_provider_label">ای میل فراہم کنندہ کے ڈیٹا تک رسائی کریں</string>
+    <string name="permission_access_provider_desc">اطلاق کو آپ کے ای میل ڈیٹابیس، بشمول موصولہ پیغامات، مرسلہ پیغامات، صارف ناموں اور پاس ورڈز تک رسائی حاصل کرنے دیتا ہے۔</string>
+    <string name="app_name">ای میل</string>
+    <string name="debug_title">مسائل حل کریں</string>
+    <string name="next_action">اگلا</string>
+    <string name="okay_action">ٹھیک ہے</string>
+    <string name="cancel_action">منسوخ</string>
+    <string name="previous_action">سابقہ</string>
+    <string name="done_action">ہوگيا</string>
+    <string name="create_action">نیا بنائيں</string>
+    <string name="quick_responses_empty_view">کوئی فوری جوابات نہیں ہیں۔</string>
+    <string name="account_settings_action">اکاؤنٹ ترتیبات</string>
+    <string name="menu_folder_options">سنک کے اختیارات</string>
+    <string name="status_network_error">کنکشن میں مسئلہ۔</string>
+    <plurals name="move_messages">
+        <item quantity="one">پیغام ہٹائيں</item>
+        <item quantity="other">پیغامات ہٹائيں</item>
+    </plurals>
+    <string name="cannot_move_protocol_not_supported_toast">POP3 اکاؤنٹس پر منتقلی تعاون یافتہ نہیں ہے۔</string>
+    <string name="cannot_move_multiple_accounts_toast">منتقل نہیں کرسکتا کیونکہ انتخاب متعدد اکاؤنٹس پر مشتمل ہے۔</string>
+    <string name="cannot_move_special_mailboxes_toast">مسودے، آؤٹ باکس، اور مرسلہ میں موجود پیغامات منتقل نہیں کیے جاسکتے۔</string>
+    <string name="mailbox_name_display_inbox">ان باکس</string>
+    <string name="mailbox_name_display_outbox">آؤٹ باکس</string>
+    <string name="mailbox_name_display_drafts">مسودات</string>
+    <string name="mailbox_name_display_trash">کچرا</string>
+    <string name="mailbox_name_display_sent">بھیجا گیا</string>
+    <string name="mailbox_name_display_junk">کچرا</string>
+    <string name="mailbox_name_display_starred">ستارہ زد</string>
+    <string name="mailbox_name_display_unread">بغیر پڑھا ہوا</string>
+    <string name="account_folder_list_summary_inbox">ان باکس</string>
+    <string name="account_folder_list_summary_starred">ستارہ زد</string>
+    <string name="account_folder_list_summary_drafts">مسودات</string>
+    <string name="account_folder_list_summary_outbox">آؤٹ باکس</string>
+    <string name="mailbox_list_account_selector_combined_view">مشترکہ ویو</string>
+    <string name="message_compose_fwd_header_fmt">\n\n-------- اصلی پیغام --------\nموضوع:  <xliff:g id="subject">%1$s</xliff:g>\nمنجانب:  <xliff:g id="sender">%2$s</xliff:g>\nبطرف:  <xliff:g id="to">%3$s</xliff:g>\nسی سی:  <xliff:g id="cc">%4$s</xliff:g>\n\n </string>
+    <string name="message_compose_insert_quick_response_list_title">فوری جواب ڈالیں</string>
+    <string name="message_compose_insert_quick_response_menu_title">فوری جواب ڈالیں</string>
+    <string name="message_view_attachment_background_load">آپ کے آگے بھیجے ہوئے پیغام میں ایک یا مزید انسلاکات ترسیل سے پہلے ڈاؤن لوڈ ہوں گے۔</string>
+    <string name="attachment_not_found">انسلاک کو ڈاؤن لوڈ نہیں کرسکا۔</string>
+    <string name="message_decode_error">پیغام غیرخفیہ کرنے کے دوران غلطی۔</string>
+    <string name="forward_download_failed_ticker">ایک یا مزید انسلاکات آگے نہیں بھیج سکا۔</string>
+    <string name="forward_download_failed_title">منسلکہ کو آگے نہیں بڑھایا گیا</string>
+    <string name="login_failed_ticker"><xliff:g id="account_name">%s</xliff:g> سائن ان ناکام۔</string>
+    <string name="login_failed_title">سائن ان نہیں کرسکا</string>
+    <plurals name="message_view_attachment_bytes">
+        <item quantity="one"><xliff:g id="size_in_bytes" example="1">%d</xliff:g>B </item>
+        <item quantity="other"><xliff:g id="size_in_bytes" example="279">%d</xliff:g>B </item>
+    </plurals>
+    <plurals name="message_view_attachment_kilobytes">
+        <item quantity="one"><xliff:g id="size_in_kilobytes" example="1">%d</xliff:g>KB </item>
+        <item quantity="other"><xliff:g id="size_in_kilobytes" example="279">%d</xliff:g>KB </item>
+    </plurals>
+    <plurals name="message_view_attachment_megabytes">
+        <item quantity="one"><xliff:g id="size_in_megabytes" example="1">%d</xliff:g>MB </item>
+        <item quantity="other"><xliff:g id="size_in_megabytes" example="279">%d</xliff:g>MB </item>
+    </plurals>
+    <plurals name="message_view_attachment_gigabytes">
+        <item quantity="one"><xliff:g id="size_in_gigabytes" example="1">%d</xliff:g>GB </item>
+        <item quantity="other"><xliff:g id="size_in_gigabytes" example="279">%d</xliff:g>GB </item>
+    </plurals>
+    <string name="account_setup_basics_title">اکاؤنٹ سیٹ اپ</string>
+    <string name="account_setup_basics_headline">ای میل اکاؤنٹ</string>
+    <string name="accounts_welcome">آپ اپنا اکاؤنٹ محض چند اقدامات میں تشکیل دے سکتے ہیں۔</string>
+    <string name="account_setup_basics_email_label">ای میل پتہ</string>
+    <string name="account_setup_basics_password_label">پاس ورڈ</string>
+    <string name="account_setup_basics_manual_setup_action">دستی سیٹ اپ</string>
+    <string name="account_setup_username_password_toast">جائز ای میل اور پاس ورڈ ٹائپ کریں۔</string>
+    <string name="account_duplicate_dlg_title">دہرا اکاؤنٹ</string>
+    <string name="account_duplicate_dlg_message_fmt">آپ یہ صارف نام اکاؤنٹ \"<xliff:g id="duplicate">%s</xliff:g>\" کیلئے پہلے سے ہی استعمال کر رہے ہیں۔</string>
+    <string name="account_password_spaces_error">یہ پاس ورڈ ایک یا زیادہ خالی جگہ والے حروف کے ساتھ شروع یا ختم ہوتا ہے۔ بہت سارے سرورز خالی جگہوں والے پاس ورڈز کا تعاون نہیں کرتے ہیں۔</string>
+    <string name="account_setup_check_settings_retr_info_msg">اکاؤنٹ کی معلومات بازیافت کررہا ہے\u2026</string>
+    <string name="account_setup_check_settings_check_incoming_msg">سرور کی ترتیبات کی توثیق کر رہا ہے\u2026</string>
+    <string name="account_setup_check_settings_check_outgoing_msg">smtp کی ترتیبات کی توثیق کر رہا ہے\u2026</string>
+    <string name="account_setup_creating_account_msg">اکاؤنٹ بنا رہا ہے\u2026</string>
+    <string name="account_setup_names_title">اکاؤنٹ سیٹ اپ</string>
+    <string name="account_setup_names_headline">آپ کے اکاؤنٹ کی تشکیل ہوگئی ہے اور ای میل کی تشکیل ہو رہی ہے!</string>
+    <string name="account_setup_names_account_name_label">اس اکاؤنٹ کو نام دیں (اختیاری)</string>
+    <string name="account_setup_names_user_name_label">آپ کا نام (جو تمام جانے والے پیغامات پر دکھایا جائے گا)</string>
+    <string name="account_setup_names_user_name_empty_error">یہ فیلڈ خالی نہیں رہ سکتی۔</string>
+    <string name="account_setup_account_type_title">اکاؤنٹ سیٹ اپ</string>
+    <string name="account_setup_account_type_headline">اکاؤنٹ کی قسم</string>
+    <string name="account_setup_account_type_instructions">یہ کس قسم کا اکاؤنٹ ہے؟</string>
+    <string name="account_setup_incoming_title">اکاؤنٹ سیٹ اپ</string>
+    <string name="account_setup_incoming_headline">آنے والے سرور کی ترتیبات</string>
+    <string name="account_setup_incoming_username_label">صارف کا نام</string>
+    <string name="account_setup_incoming_password_label">پاس ورڈ</string>
+    <string name="account_setup_incoming_server_label">سرور</string>
+    <string name="account_setup_incoming_port_label">پورٹ</string>
+    <string name="account_setup_incoming_security_label">حفاظت کی قسم</string>
+    <string name="account_setup_incoming_security_none_label">کوئی نہیں</string>
+    <string name="account_setup_incoming_security_ssl_trust_certificates_label">SSL/TLS (تمام اسناد قبول کریں)</string>
+    <string name="account_setup_incoming_security_ssl_label">SSL/TLS</string>
+    <string name="account_setup_incoming_security_tls_trust_certificates_label">STARTTLS (تمام اسناد قبول کریں)</string>
+    <string name="account_setup_incoming_security_tls_label">STARTTLS</string>
+    <string name="account_setup_incoming_delete_policy_label">سرور سے ای میل مٹائيں</string>
+    <string name="account_setup_incoming_delete_policy_never_label">کبھی نہيں</string>
+    <string name="account_setup_incoming_delete_policy_delete_label">جب میں ان باکس سے مٹاؤں</string>
+    <string name="account_setup_incoming_imap_path_prefix_label">IMAP پاتھ کا سابقہ</string>
+    <string name="account_setup_incoming_imap_path_prefix_hint">اختیاری</string>
+    <string name="account_setup_outgoing_title">اکاؤنٹ سیٹ اپ</string>
+    <string name="account_setup_outgoing_headline">جانے والے سرور کی ترتیبات</string>
+    <string name="account_setup_outgoing_smtp_server_label">SMTP سرور</string>
+    <string name="account_setup_outgoing_port_label">پورٹ</string>
+    <string name="account_setup_outgoing_security_label">حفاظت کی قسم</string>
+    <string name="account_setup_outgoing_require_login_label">سائن ان طلب کریں</string>
+    <string name="account_setup_outgoing_username_label">صارف کا نام</string>
+    <string name="account_setup_outgoing_password_label">پاس ورڈ</string>
+    <string name="account_setup_exchange_certificate_title">کلائنٹ سند</string>
+    <string name="account_setup_exchange_select_certificate">منتخب کریں</string>
+    <string name="account_setup_exchange_use_certificate">کلائنٹ سند استعمال کریں</string>
+    <string name="account_setup_exchange_remove_certificate">ہٹائيں</string>
+    <string name="account_setup_exchange_no_certificate">کوئی نہیں</string>
+    <string name="account_setup_exchange_device_id_label">موبائل آلے کی ID</string>
+    <string name="account_setup_options_title">اکاؤنٹ ترتیبات</string>
+    <string name="account_setup_options_headline">اکاؤنٹ کے اختیارات</string>
+    <string name="account_setup_options_mail_check_frequency_label">ان باکس چیک کرنے کا تعدد</string>
+    <string name="account_setup_options_mail_check_frequency_never">کبھی نہيں</string>
+    <string name="account_setup_options_mail_check_frequency_push">خودکار (پش)</string>
+    <string name="account_setup_options_mail_check_frequency_5min">ہر 5 منٹ بعد</string>
+    <string name="account_setup_options_mail_check_frequency_10min">ہر 10 منٹ بعد</string>
+    <string name="account_setup_options_mail_check_frequency_15min">ہر 15 منٹ بعد</string>
+    <string name="account_setup_options_mail_check_frequency_30min">ہر 30 منٹ بعد</string>
+    <string name="account_setup_options_mail_check_frequency_1hour">ہر گھنٹے بعد</string>
+    <string name="account_setup_options_notify_label">ای میل پہنچنے پر مجھے مطلع کریں</string>
+    <string name="account_setup_options_sync_contacts_label">اس اکاؤنٹ سے رابطے مطابقت پذیر بنائیں</string>
+    <string name="account_setup_options_sync_calendar_label">اس اکاؤنٹ سے کیلنڈر مطابقت پذیر بنائیں</string>
+    <string name="account_setup_options_sync_email_label">اس اکاؤنٹ سے ای میل مطابقت پذیر بنائیں</string>
+    <string name="account_setup_options_background_attachments_label">جب Wi-Fi سے متصل ہوں تو خودکار طور پر منسلکات ڈاؤن لوڈ کریں</string>
+    <string name="account_setup_failed_dlg_title">پورا نہیں کرسکا</string>
+    <string name="account_setup_options_mail_window_label">سنک کرنے کے لئے دن</string>
+    <string name="account_setup_options_mail_window_auto">خودکار</string>
+    <string name="account_setup_options_mail_window_1day">آخری دن</string>
+    <string name="account_setup_options_mail_window_3days">آخری تین دن</string>
+    <string name="account_setup_options_mail_window_1week">آخری ہفتہ</string>
+    <string name="account_setup_options_mail_window_2weeks">آخری دو ہفتے</string>
+    <string name="account_setup_options_mail_window_1month">گذشتہ مہینے</string>
+    <string name="account_setup_options_mail_window_all">تمام</string>
+    <string name="account_setup_options_mail_window_default">اکاؤنٹ کا ڈیفالٹ استعمال کریں</string>
+    <string name="account_setup_failed_dlg_auth_message">صارف نام یا پاس ورڈ غلط ہے۔</string>
+    <string name="account_setup_failed_dlg_auth_message_fmt">لاگ ان ناکام ہوگیا۔\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_dlg_certificate_message">سرور سے بحفاظت مربوط نہیں کرسکتا۔</string>
+    <string name="account_setup_failed_dlg_certificate_message_fmt">سرور سے بحفاظت مربوط نہیں کرسکتا۔\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_certificate_required">ایک کلائنٹ کی سند درکار ہے۔ کیا آپ ایک کلائنٹ کی سند کے ساتھ سرور سے مربوط ہونا چاہتے ہیں؟</string>
+    <string name="account_setup_failed_certificate_inaccessible">سند غلط یا ناقابل رسائی ہے۔</string>
+    <string name="account_setup_failed_check_credentials_message">سرور نے ایک خرابی کے ساتھ جواب دیا۔ اپنا صارف نام اور پاس ورڈ چیک کریں، پھر دوبارہ کوشش کریں۔</string>
+    <string name="account_setup_failed_dlg_server_message">سرور سے مربوط نہیں کرسکتا۔</string>
+    <string name="account_setup_failed_dlg_server_message_fmt">سرور سے مربوط نہیں کرسکتا۔\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_tls_required">TLS ضروری نہیں ہے لیکن سرور میں اس کی سہولت ہے۔</string>
+    <string name="account_setup_failed_auth_required">تصدیق کے طریقے سرور کے ذریعہ تعاون یافتہ نہیں ہیں۔</string>
+    <string name="account_setup_failed_security">سیکیورٹی کی خامی کے سبب سرور سے کنکشن نہیں کھول سکا۔</string>
+    <string name="account_setup_failed_ioerror">سرور سے کنکشن نہیں کھول سکا۔</string>
+    <string name="account_setup_failed_protocol_unsupported">آپ نے ایک غلط سرور کا پتہ ٹائپ کیا یا سرور کو پروٹوکول کا ایسا ورژن درکار ہے جس کا تعاون یہ ای میل نہیں کرتا ہے۔</string>
+    <string name="account_setup_failed_access_denied">آپ کو اس سرور کے ساتھ مطابقت پذیر بنانے کی اجازت نہیں ہے۔ مزید معلومات کیلئے اپنے سرور کے منتظم سے رابطہ کریں۔</string>
+    <string name="account_setup_security_required_title">ریموٹ سلامتی کا انتظام</string>
+    <string name="account_setup_security_policies_required_fmt">سرور <xliff:g id="server">%s</xliff:g> کا تقاضہ ہے کہ آپ اسے اپنے Android آلے کی کچھ سیکیورٹی والی خصوصیات کو دور دراز سے کنٹرول کرنے دیں۔ کیا آپ اس اکاؤنٹ کی تشکیل پورا کرنا چاہتے ہیں؟</string>
+    <string name="account_setup_failed_security_policies_unsupported">اس سرور کو سیکیورٹی کی ایسی خصوصیات درکار ہیں جن کا تعاون آپ کا Android آلہ نہیں کرتا ہے، بشمول: <xliff:g id="error">%s</xliff:g></string>
+    <string name="account_setup_username_uneditable_error">آپ اکاؤنٹ کا صارف نام تبدیل نہیں کرسکتے ہیں۔ ایک مختلف صارف نام کے ساتھ ایک اکاؤنٹ شامل کرنے کیلئے، اکاؤنٹ شامل کریں کو مس کریں۔</string>
+    <string name="disable_admin_warning">تنبیہ: اپنے آلے کا نظم و نسق کرنے کیلئے ای میل اطلاق کے اختیار کو غیر فعال کرنے سے اس کے طالب سبھی ای میل اکاؤنٹس نیز ان کا ای میل، رابطے، کیلنڈر ایونٹس، اور دیگر ڈیٹا حذف ہوجائے گا۔</string>
+    <string name="account_security_dialog_title">حفاظتی تجدید</string>
+    <string name="account_security_dialog_content_fmt"><xliff:g id="account">%s</xliff:g> کے لئے ضروری ہے کہ آپ اپنے حفاظتی ترتیبات کی تجدید کریں۔ </string>
+    <string name="security_unsupported_ticker_fmt">سیکیورٹی کے مطلوبات کے سبب اکاؤنٹ \"<xliff:g id="account">%s</xliff:g>\" مطابقت پذیر نہیں بنایا جاسکتا۔</string>
+    <string name="security_needed_ticker_fmt">اکاؤنٹ \"  <xliff:g id="account">%s</xliff:g>\" کے لئے حفاظتی ترتیبات کی تجدید کی ضرورت ہے۔ </string>
+    <string name="security_changed_ticker_fmt">اکاؤنٹ \"<xliff:g id="account">%s</xliff:g>\" نے اس کی سیکیورٹی کی ترتیبات تبدیل کردیں؛ صارف کی کوئی کارروائی درکار نہیں ہے۔</string>
+    <string name="security_notification_content_update_title">حفاظتی تجدید درکار ہے</string>
+    <string name="security_notification_content_change_title">سیکیورٹی کی پالیسیاں تبدیل ہوگئی ہیں</string>
+    <string name="security_notification_content_unsupported_title">سیکیورٹی کی پالیساں پوری نہیں ہوسکتیں</string>
+    <string name="account_security_title">آلے کی حفاظت</string>
+    <string name="account_security_policy_explanation_fmt">سرور  <xliff:g id="server">%s</xliff:g> کے لئے ضروری ہے کہ آپ اسے اپنے Android آلے کی کچھ حفاظتی خصوصیات کو بعید طور پر کنٹرول کرنے کی اجازت دیں۔ </string>
+    <string name="account_setup_failed_dlg_edit_details_action">تفصیلات ترمیم کریں</string>
+    <string name="password_expire_warning_ticker_fmt">\"  <xliff:g id="account">%s</xliff:g>\" کے لئے ضروری ہے کہ آپ اپنی لاک اسکرین کا PIN یا پاس ورڈ تبدیل کریں۔ </string>
+    <string name="password_expire_warning_content_title">لاک اسکرین کا پاس ورڈ ختم ہورہا ہے</string>
+    <string name="password_expired_ticker">آپ کی لاک اسکرین کا PIN یا پاس ورڈ ختم ہوگیا ہے۔</string>
+    <string name="password_expired_content_title">لاک اسکرین کا پاس ورڈ ختم ہوگیا ہے</string>
+    <string name="password_expire_warning_dialog_title">لاک اسکرین کا پاس ورڈ ختم ہورہا ہے</string>
+    <string name="password_expire_warning_dialog_content_fmt">آپ کو اپنے مقفل اسکرین کا PIN یا پاس ورڈ جلدی تبدیل کرنے کی ضرورت نہیں ہے، ورنہ <xliff:g id="account">%s</xliff:g> کا ڈیٹا مٹ جائے گا۔ کیا آپ اسے ابھی تبدیل کرنا چاہتے ہیں؟</string>
+    <string name="password_expired_dialog_title">لاک اسکرین کا پاس ورڈ ختم ہوگیا ہے</string>
+    <string name="password_expired_dialog_content_fmt"><xliff:g id="account">%s</xliff:g> کیلئے ڈیٹا آپ کے آلے سے مٹایا جا رہا ہے۔ آپ اپنے مقفل اسکرین کے PIN یا پاس ورڈ کو تبدیل کرکے اسے بحال کرسکتے ہیں۔ کیا آپ اسے ابھی تبدیل کرنا چاہتے ہیں؟</string>
+    <string name="account_settings_exit_server_settings">غیرمحفوظ تبدیلیاں رد کریں؟</string>
+    <string name="account_settings_login_dialog_title">سائن ان نہیں کرسکا</string>
+    <string name="account_settings_login_dialog_content_fmt"><xliff:g id="account">%s</xliff:g> کیلئے صارف نام یا پاس ورڈ غلط ہے۔ کیا آپ انہیں ابھی اپ ڈیٹ کرنا چاہتے ہیں؟</string>
+    <string name="account_settings_login_dialog_reason_fmt"><xliff:g id="account">%s</xliff:g> میں آپ کا لاگ ان ناکام ہوگیا؛ سرور کا کہنا ہے: <xliff:g id="reason">%s</xliff:g> کیا آپ اپنے صارف نام اور/یا پاس ورڈ کو اپ ڈیٹ کرنا چاہتے ہیں؟</string>
+    <string name="account_settings_background_attachments_label">منسلکات ڈاؤن لوڈ کریں</string>
+    <string name="account_settings_background_attachments_summary">Wi-Fi کے ذریعے حالیہ پیغامات میں خودکار طور پر منسلکات ڈاؤن لوڈ کریں</string>
+    <string name="account_settings_notify_label">ای میل اطلاعات</string>
+    <string name="account_settings_summary">سنک کا تعدد، اطلاعات، وغیرہ</string>
+    <string name="account_settings_notify_summary">ای میل پہنچنے پر اطلاع بھیجیں</string>
+    <string name="account_settings_mail_check_frequency_label">سنک فریکوینسی</string>
+    <string name="account_settings_incoming_label">آنے والی ترتیبات</string>
+    <string name="account_settings_incoming_summary">صارف کا نام، پاس ورڈ اور دوسری آنے والے سرور کی ترتیبات</string>
+    <string name="account_settings_outgoing_label">باہر جانے والی ترتیبات</string>
+    <string name="account_settings_outgoing_summary">صارف کا نام، پاس ورڈ اور دوسری جانے والے سرور کی ترتیبات</string>
+    <string name="account_settings_enforced_label">پالیسیاں لاگو کردی گئیں</string>
+    <string name="account_settings_enforced_summary">کوئی نہیں</string>
+    <string name="account_settings_unsupported_label">غیر تعاون یافتہ پالیسیاں</string>
+    <string name="account_settings_unsupported_summary">کوئی نہیں</string>
+    <string name="account_settings_retry_label">مطابقت پذیری کی کوشش کریں</string>
+    <string name="account_settings_retry_summary">یہ اکاؤنٹ مطابقت پذیر بنانے کیلئے یہاں مس کریں</string>
+    <string name="account_settings_description_label">اکاؤنٹ کا نام</string>
+    <string name="account_settings_name_label">آپ کا نام</string>
+    <string name="account_settings_edit_quick_responses_label">فوری جوابات</string>
+    <string name="account_settings_edit_quick_responses_summary">اس متن میں ترمیم کریں جو ای میل تحریر کرتے وقت آپ بکثرت داخل کرتے ہیں</string>
+    <string name="account_settings_notifications">اطلاعی ترتیبات</string>
+    <string name="account_settings_data_usage">ڈیٹا کا استعمال</string>
+    <string name="account_settings_policies">سیکیورٹی کی پالیسیاں</string>
+    <string name="system_folders_title">سسٹم فولڈرز</string>
+    <string name="system_folders_trash_title">ردی والا فولڈر</string>
+    <string name="system_folders_trash_summary">اپنے سرور کا ردی والا فولڈر منتخب کریں</string>
+    <string name="system_folders_trash_dlg">اپنے سرور کا ردی والا فولڈر منتخب کریں</string>
+    <string name="system_folders_sent_title">مرسلہ آئٹمز کا فولڈر</string>
+    <string name="system_folders_sent_summary">اپنے سرور کا مرسلہ آئٹمز کا فولڈر منتخب کریں</string>
+    <string name="system_folders_sent_dlg">اپنے سرور کا مرسلہ آئٹمز کا فولڈر منتخب کریں</string>
+    <string name="edit_quick_response_dialog">فوری جواب</string>
+    <string name="save_action">محفوظ کریں</string>
+    <string name="account_settings_sync_contacts_enable">روابط سن کریں</string>
+    <string name="account_settings_sync_contacts_summary">اس اکاؤنٹ کے لئے روابط سدک کریں</string>
+    <string name="account_settings_sync_calendar_enable">کیلنڈر سنک کریں</string>
+    <string name="account_settings_sync_calendar_summary">اس اکاؤنٹ کیلئے کیلنڈر ایونٹس مطابقت پذیر بنائیں</string>
+    <string name="account_settings_sync_email_enable">ای میل سنک کریں</string>
+    <string name="account_settings_sync_email_summary">ای اکاؤنٹ کے لئے ای میل سنک کریں</string>
+    <string name="account_settings_vibrate_when_label">تھرتھراہٹ</string>
+    <string name="account_settings_ringtone">رنگ ٹون منتخب کريں</string>
+    <string name="account_settings_servers">سرور کی ترتیبات</string>
+    <string name="mailbox_settings_activity_title">سنک کے اختیارات</string>
+    <string name="mailbox_settings_activity_title_with_mailbox">سنک کے اختیارات (  <xliff:g id="mailboxx_name" example="Family">%s</xliff:g>) </string>
+    <string name="mailbox_settings_sync_enabled_label">یہ فولڈر مطابقت پذیر بنائیں</string>
+    <string name="mailbox_settings_sync_enabled_summary">مربوط ہونے پر پیغامات ڈاؤن لوڈ ہوں گے</string>
+    <string name="mailbox_settings_mailbox_sync_window_label">مطابقت پذیری کیلئے میل کے دن</string>
+    <string name="prefDialogTitle_conversationListIcon">مرسل کی تصویر</string>
+    <string name="provider_note_live">صرف کچھ \"مزید\" اکاؤنٹس میں POP رسائی ہوتی ہے جو اس پروگرام کو مربوط ہونے دیتے ہیں۔ اگر آپ اپنے درست ای میل پتہ اور پاس ورڈ کے ساتھ سائن ان کرنے سے قاصر ہیں تو، ہوسکتا ہے آپ کے پاس بامعاوضہ \"مزید\" اکاؤنٹ نہ ہو۔ ان ای میل اکاؤنٹس تک رسائی حاصل کرنے کیلئے ویب براؤزر لانچ کریں۔</string>
+    <string name="provider_note_t_online">یہ ای میل اکاؤنٹ سیٹ اپ کرنے سے پہلے، T-Online کی ویب سائٹ پر تشریف لے جائيں اور POP3 ای میل رسائی کے لئے پاس ورڈ بنائيں</string>
+    <string name="exchange_name">کارپوریٹ</string>
+    <string name="exchange_name_alternate">Microsoft Exchange ActiveSync</string>
+    <string name="system_account_create_failed">اکاؤنٹ نہیں بنا سکا۔ دوبارہ کوشش کریں۔</string>
+    <string name="device_admin_label">ای میل</string>
+    <string name="device_admin_description">سرور کی واضح کردہ حفاظتی پالیساں فعال کرتا ہے</string>
+    <string name="settings_activity_title">ترتیبات</string>
+    <string name="header_label_general_preferences">عام ترتیبات</string>
+    <string name="general_preference_confirm_delete_label">حذف کرنے سے پہلے تصدیق کریں</string>
+    <string name="general_preference_confirm_delete_summary">پیغامات</string>
+    <string name="general_preference_confirm_send_label">بھیجنے سے پہلے تصدیق کریں</string>
+    <string name="general_preference_confirm_send_summary">پیغامات</string>
+    <string name="general_preference_text_zoom_label">پیغام کے ٹیکسٹ کا سائز</string>
+    <string-array name="general_preference_text_zoom_summary_array">
+        <item>چھوٹا ٹیکسٹ</item>
+        <item>چھوٹا ٹیکسٹ</item>
+        <item>عام سائز کا ٹیکسٹ</item>
+        <item>بڑا ٹیکسٹ</item>
+        <item>بہت بڑا ٹیکسٹ</item>
+    </string-array>
+    <string name="general_preference_text_zoom_dialog_title">پیغام کے ٹیکسٹ کا سائز</string>
+    <string name="general_preference_text_zoom_tiny">بہت چھوٹا</string>
+    <string name="general_preference_text_zoom_small">چھوٹا</string>
+    <string name="general_preference_text_zoom_normal">عام</string>
+    <string name="general_preference_text_zoom_large">بڑا</string>
+    <string name="general_preference_text_zoom_huge">بڑا</string>
+    <string name="more_than_999">999+</string>
+    <string name="search_hint">ای میل تلاش کریں</string>
+    <string name="policy_dont_allow_camera">آلے کے کیمرے کے استعمال کی اجازت نہ دیں</string>
+    <string name="policy_require_password">آلے کا پاس ورڈ طلب کریں</string>
+    <string name="policy_password_history">حالیہ پاس ورڈز کے دوبارہ استعمال کو ممنوع قرار دیں</string>
+    <string name="policy_password_expiration">ختم ہونے کیلئے پاس ورڈز طلب کریں</string>
+    <string name="policy_screen_timeout">اس کا اسکرین مقفل کرنے کیلئے ایک باطل آلہ طلب کریں</string>
+    <string name="policy_calendar_age">مطابقت پذیر بنائے ہوئے کیلنڈر ایونٹس کی تعداد محدود کریں</string>
+    <string name="policy_email_age">مطابقت پذیر بنائے ہوئے ای میلز کی تعداد محدود کریں</string>
+    <string name="quick_1">شکریہ!</string>
+    <string name="quick_2">مجھے اچھا لگتا ہے!</string>
+    <string name="quick_3">میں اسے بعد میں پڑھوں گا اور آپ سے ملوں گا۔</string>
+    <string name="quick_4">اس پر گفتگو کرنے کیلئے ایک میٹنگ متعین کرتے ہیں۔</string>
+    <string name="require_manual_sync_message">گشت کے دوران اس اکاؤنٹ کے لئے پس منظر کا سنک غیرفعال ہے۔</string>
+    <string name="confirm_response">Sending response…</string>
+    <string name="no_conversations">کوئی پیغامات نہیں ہیں۔</string>
+    <string name="imap_name">IMAP</string>
+    <string name="pop3_name">POP3</string>
+    <string name="folder_picker_title">فولڈر کا انتخاب کار</string>
+    <string name="trash_folder_selection_title"><xliff:g id="account">%s</xliff:g> کیلئے سرور کا ردی والا فولڈر منتخب کریں</string>
+    <string name="sent_folder_selection_title"><xliff:g id="account">%s</xliff:g> کیلئے سرور کا مرسلہ آئٹمز والا فولڈر منتخب کریں</string>
+    <string name="account_waiting_for_folders_msg">Loading folder list…</string>
+</resources>

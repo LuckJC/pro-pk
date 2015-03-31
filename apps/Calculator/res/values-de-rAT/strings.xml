@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="app_name">Rechner</string>
+    <string name="error">Fehler</string>
+    <string name="digit0">0</string>
+    <string name="digit1">1</string>
+    <string name="digit2">2</string>
+    <string name="digit3">3</string>
+    <string name="digit4">4</string>
+    <string name="digit5">5</string>
+    <string name="digit6">6</string>
+    <string name="digit7">7</string>
+    <string name="digit8">8</string>
+    <string name="digit9">9</string>
+    <string name="del">LÖSCHEN</string>
+    <string name="clear">CLR</string>
+    <string name="sin">sin</string>
+    <string name="sin_mathematical_value" translate="false">sin</string>
+    <string name="cos">cos</string>
+    <string name="cos_mathematical_value" translate="false">cos</string>
+    <string name="tan">tan</string>
+    <string name="tan_mathematical_value" translate="false">tan</string>
+    <string name="e">e</string>
+    <string name="e_mathematical_value" translate="false">e</string>
+    <string name="ln">ln</string>
+    <string name="ln_mathematical_value" translate="false">ln</string>
+    <string name="lg">log</string>
+    <string name="lg_mathematical_value" translate="false">lg</string>
+    <string name="leftParen">(</string>
+    <string name="rightParen">)</string>
+    <string name="basic">Basisausführung</string>
+    <string name="advanced">Erweiterte Ausführung</string>
+    <string name="clear_history">Verlauf löschen</string>
+    <string name="text_copied_toast">Text kopiert</string>
+    <string name="leftParenDesc">Einschub links</string>
+    <string name="rightParenDesc">Einschub rechts</string>
+    <string name="factorialDesc">Fakultät</string>
+    <string name="lnDesc">Natürlicher Logarithmus</string>
+    <string name="lgDesc">Logarithmus</string>
+    <string name="sqrtDesc">Quadratwurzel</string>
+    <string name="divDesc">Dividieren</string>
+    <string name="mulDesc">Multiplizieren</string>
+    <string name="plusDesc">Plus</string>
+    <string name="minusDesc">Minus</string>
+    <string name="dotDesc">Punkt</string>
+    <string name="powerDesc">Potenz</string>
+    <string name="delDesc">Löschen</string>
+    <string name="clearDesc">Löschen</string>
+    <string name="tanDesc">Tangens</string>
+    <string name="sinDesc">Sinus</string>
+    <string name="cosDesc">Cosinus</string>
+    <string name="eDesc">Eulersche Zahl</string>
+    <string name="piDesc">Pi</string>
+    <string name="equalDesc">Entspricht</string>
+
+    <string-array name="operatorDescs">
+        <item>Einschub links</item>
+        <item>Einschub rechts</item>
+        <item>Fakultät</item>
+        <item>Natürlicher Logarithmus</item>
+        <item>Logarithmus</item>
+        <item>Quadratwurzel</item>
+        <item>Dividiert durch</item>
+        <item>Multipliziert mit</item>
+        <item>Plus</item>
+        <item>Minus</item>
+        <item>Punkt</item>
+        <item>Potenz</item>
+        <item>Tangens</item>
+        <item>Sinus</item>
+        <item>Cosinus</item>
+        <item>Pi</item>
+        <item>Entspricht</item>
+    </string-array>
+</resources>

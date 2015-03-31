@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">بھورا</string>  
+    <string name="not_enough_space" product="nosdcard">آپ کا US‎B ذخیرہ بھر گیا ہے۔</string>  
+    <string name="not_enough_space" product="default">آپ کا SD کارڈ بھر گيا ہے۔</string>
+<string name="add_audio_track_failed">آڈیو ٹریک شامل کرنے میں ناکام۔</string>
+    <string name="insert_transition_failed">تبدیلی درج کرنے میں ناکام۔</string>
+    <string name="save_emoticons_failed">علامات جذبات محفوظ نہیں ہوسکتے ہیں۔</string>
+    <string name="save_xml_failed">خصوصی حروف محفوظ نہیں ہوسکتے ہیں۔</string>
+    </resources>

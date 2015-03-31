@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Afvis og tænd</string>
+    <string name="power_off">Afvis og sluk</string>
+    <string name="voice_ui_title">"Stemmestyring"</string>
+    <string name="voice_ui_content_text">"Stemmestyring er aktiveret for Alarm"</string>
+    <string name="alarm_command_summary_format">Du kan sige <xliff:g id="first">%1$s</xliff:g> eller <xliff:g id="second">%2$s</xliff:g> "\n"for at udsætte eller stoppe alarmen.</string>
+    <string name="alarm_command_summary_format_land">Du kan sige <xliff:g id="first">%1$s</xliff:g> eller <xliff:g id="second">%2$s</xliff:g> for at udsætte eller stoppe alarmen.</string>
+</resources>

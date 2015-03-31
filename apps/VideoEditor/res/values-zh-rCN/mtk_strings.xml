@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">灰阶</string>  
+    <string name="not_enough_space" product="nosdcard" msgid="6452370395538050134">"您的 USB 存储设备空间已满。"</string>  
+    <string name="not_enough_space" product="default" msgid="6655334407957844653">"SD 卡已满。"</string> 
+    <string name="add_audio_track_failed">"添加音频失败。"</string>
+    <string name="insert_transition_failed">"插入切换效果失败。"</string>
+    <string name="save_emoticons_failed">"表情符不能被保存。"</string>
+    <string name="save_xml_failed">"特殊符号不能被保存。"</string>
+</resources>

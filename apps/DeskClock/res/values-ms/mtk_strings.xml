@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Tolak dan hidupkan</string>
+    <string name="power_off">Tolak dan matikan</string>
+
+    <string name="voice_ui_title">Kawalan suara</string>
+    <string name="voice_ui_content_text">"Kawalan suara didayakan untuk Penggera"</string>
+    <string name="alarm_command_summary_format">Anda boleh menyebut <xliff:g id="first">%1$s</xliff:g> atau <xliff:g id="second">%2$s</xliff:g> "\n"untuk menjadikan penggera tidur sekejap atau menghentikannya.</string>
+    <string name="alarm_command_summary_format_land">Anda boleh menyebut <xliff:g id="first">%1$s</xliff:g> atau <xliff:g id="second">%2$s</xliff:g> untuk tidur sekejap atau menghentikan penggera.</string>
+</resources>

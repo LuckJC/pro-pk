@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">xuntongwatch</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <drawable name="clr_normal">#49c0fa</drawable>
+    <drawable name="clr_pressed">#1444d6</drawable>
+
+</resources>

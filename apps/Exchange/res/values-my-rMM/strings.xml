@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="exchange_name">ပေါင်းစည်းထားသော</string>
+    <string name="exchange_name_alternate">မိုက်ခရိုဆော့(ဖ်)ကို သက်ဝင်လှုပ်ရှားမှုရှိသော တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း လဲလှယ်သည်</string>
+    <string name="meeting_accepted">လက်ခံရရှိခဲ့သည် - <xliff:g id="subject">%s</xliff:g></string>
+    <string name="meeting_declined">ငြင်းဆန်ခဲ့သည် - <xliff:g id="subject">%s</xliff:g></string>
+    <string name="meeting_tentative">အစမ်း - <xliff:g id="subject">%s</xliff:g></string>
+    <string name="meeting_canceled">ဖျက်သိမ်းခဲ့သည် - <xliff:g id="subject">%s</xliff:g></string>
+    <string name="meeting_updated">အသစ်ပြင်ဆင်ခဲ့သည် - <xliff:g id="subject">%s</xliff:g></string>
+    <string name="meeting_when">မည်သည့်အချိန် - <xliff:g id="when">%s</xliff:g></string>
+    <string name="meeting_where">မည်သည့်နေရာ - <xliff:g id="where">%s</xliff:g></string>
+    <string name="meeting_recurring">မည်သည့်အချိန် -<xliff:g id="eventdate" example="Tue,Mar10,2010at2:30pm">%s</xliff:g> (ထပ်တလည်းလည်းပြန်ဖြစ်သည်)</string>
+    <string name="meeting_allday">မည်သည့်အချိန် -<xliff:g id="eventdate" example="Tue,Mar10,2010">%s</xliff:g> (တစ်နေ့လုံး)</string>
+    <string name="meeting_allday_recurring">မည်သည့်အချိန် -<xliff:g id="eventdate" example="Tue,Mar10,2010">%s</xliff:g> (တစ်နေ့လုံး၊ထပ်တလည်းလည်းပြန်ဖြစ်သည်)</string>
+    <string name="notification_exchange_calendar_added">လဲလှယ်ခြင်း ပြက္ခဒိန် ပေါင်းထည့်ခဲ့သည်</string>
+    <string name="app_name">လဲလှယ်ခြင်း ဝန်ဆောင်မှုများ</string>
+    <string name="exception_cancel"><xliff:g id="date">%s</xliff:g> အတွက် ဤဖြစ်ရပ် ဖျက်သိမ်းခဲ့ပြီးပြီ </string>
+    <string name="exception_updated"><xliff:g id="date">%s</xliff:g> အတွက် ဤဖြစ်ရပ်၏ အသေးစိတ်များကို ပြောင်းခဲ့ပြီးပြီ</string>
+    <string name="policy_dont_allow_storage_cards">သိမ်းဆည်းနေရာကဒ်များကို ခွင့်မပြုပါ။</string>
+    <string name="policy_dont_allow_unsigned_apps">စာမချုပ်ထားသော ပရိုဂရမ်များကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_unsigned_installers">စာမချုပ်ထားသော တပ်ဆင်သည့် ပရိုဂရမ်ကို ခွင့်မပြု</string>
+    <string name="policy_dont_allow_wifi">ဝိုင်-ဖိုင်ကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_text_messaging">စာသားမက်ဆေ့ခ်ျပို့ခြင်း ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_pop_imap">POP3 သို့မဟုတ် IMAP အကောင့်များကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_irda">အနီအောက်ရောင်ခြည်သုံးဆက်သွယ်မှုများကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_html">HTML အီးမေးလ်ကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_browser">ဘရောက်ဆာများကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_consumer_email">သုံးစွဲသူအီးမေးလ်ကို ခွင့်မပြုပါ</string>
+    <string name="policy_dont_allow_internet_sharing">အင်တာနက် ဝေမျှခြင်းကို ခွင့်မပြုပါ</string>
+    <string name="policy_require_smime">SMIME မက်ဆေ့(ခ်ျ)များ လိုအပ်သည်</string>
+    <string name="policy_bluetooth_restricted">ဘလူးတု(ရ်) အသုံးပြုခြင်းကို ကန့်သတ်ထားသည်</string>
+    <string name="policy_app_blacklist">တိကျသော လုပ်ငန်းသုံး ပရိုဂရမ်များ ခွင့်မပြုပါ</string>
+    <string name="policy_app_whitelist">တိကျသော လုပ်ငန်းသုံး ပရိုဂရမ်များသာ ခွင့်ပြုသည်</string>
+    <string name="policy_text_truncation">စာသား အီးမေး(လ်) အရွယ်အစား ကန့်သတ်ထားသည်</string>
+    <string name="policy_html_truncation">HTML အီးမေး(လ်) အရွယ်အစား ကန့်သတ်ထားသည်</string>
+    <string name="policy_require_sd_encryption">SD ကဒ် သတင်းအချက်အလက်ကို ကုဒ်အဖြစ်ဖော်ပြသည့်စနစ် လိုအပ်သည်</string>
+    <string name="policy_dont_allow_attachments">ပူးတွဲများကို ခွင့်မပြုပါ</string>
+    <string name="policy_max_attachment_size">ပူးတွဲ အရွယ်အစား ကန့်သတ်ထားသည်</string>
+    <string name="policy_require_manual_sync_roaming">အခြားနိုင်ငံများတွင်လည်း သုံးနိုင်သော ဖုန်းလိုင်းစနစ်လုပ်နေစဥ်တွင် လက်ဖြင့်/ပုံမှန် တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်းသာ ခွင့်ပြုသည်</string>
+    <string name="policy_require_encryption">သတင်းအချက်အလက်ကို ကုဒ်ဖြင့်ဖော်ပြသည့်စနစ် စက် လိုအပ်သည်</string>
+    <string name="account_setup_options_mail_window_auto">အလိုအလျောက်</string>
+    <string name="account_setup_options_mail_window_1day">တစ်ရက်</string>
+    <string name="account_setup_options_mail_window_3days">သုံးရက်</string>
+    <string name="account_setup_options_mail_window_1week">တစ်ပတ်</string>
+    <string name="account_setup_options_mail_window_2weeks">နှစ်ပတ်</string>
+    <string name="account_setup_options_mail_window_1month">တစ်လ</string>
+    <string name="account_setup_options_mail_window_all">အားလုံး</string>
+    <string name="auth_error_notification_title">စစ်မှန်ကြောင်း အထောက်အထားအမှား</string>
+    <string name="auth_error_notification_text"><xliff:g id="account">%s</xliff:g> အတွက် အကောင့် အဆင်အပြင်များကို တည်းဖြတ်ရန် ထိပါ</string>
+</resources>

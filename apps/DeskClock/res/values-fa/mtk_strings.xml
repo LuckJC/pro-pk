@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">لغو و روشن کردن</string>
+    <string name="power_off">لغو و خاموش کردن</string>
+
+    <string name="voice_ui_title">کنترل صدا</string>
+    <string name="voice_ui_content_text">"کنترل صدا برای زنگ هشدار فعال است"</string>
+    <string name="alarm_command_summary_format">برای به تعویق انداختن و یا غیر فعال کردن زنگ هشدار می توانید <xliff:g id="first">%1$s</xliff:g> یا <xliff:g id="second">%2$s</xliff:g> "\n"را بگویید.</string>
+    <string name="alarm_command_summary_format_land">می توانید <xliff:g id="first">%1$s</xliff:g> یا <xliff:g id="second">%2$s</xliff:g> را برای عقب انداختن یا توقف هشدار بگویید.</string>
+</resources>

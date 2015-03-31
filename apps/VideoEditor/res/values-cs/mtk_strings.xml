@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Šedá</string>  
+    <string name="not_enough_space" product="nosdcard">"Úložiště USB je plné."</string>  
+    <string name="not_enough_space" product="default">"Vaše karta SD je plná."</string>
+    <string name="add_audio_track_failed">Přidání zvukové stopy se nezdařilo.</string>
+    <string name="insert_transition_failed">Vložení přechodu se nezdařilo.</string>
+<string name="save_emoticons_failed">Emotikony nelze uložit.</string>
+    <string name="save_xml_failed">Zvláštní znaky nelze uložit.</string>
+    </resources>

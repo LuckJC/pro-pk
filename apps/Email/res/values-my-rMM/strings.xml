@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="permission_read_attachment_label">အီးမေး(လ်) ပါ ပူးတွဲများ ဖတ်သည်</string>
+    <string name="permission_read_attachment_desc">ပရိုဂရမ်အား သင့်အီးမေးလ်ပါ ပူးတွဲများကို ဖတ်ခွင့်ပြုပါ။</string>
+    <string name="permission_access_provider_label">အချက်အလက် အထောက်အပံ့ပေးသူ အီးမေး(လ်) ဆက်သွယ်ရယူမှု </string>
+    <string name="permission_access_provider_desc">ပရိုဂရမ်အား လက်ခံခဲ့သော မက်ဆေ့ခ်ျများ၊ ပို့ခဲ့သောမက်ဆေ့ခ်ျများ၊ အသုံးပြုသူ အမည်များနှင့် စကားဝှက်များအပါအဝင် သင်၏ အီးမေးလ်ဒေတာဘေ့စ်ကို အသုံးပြုခွင့်ပြုပါ။</string>
+    <string name="app_name">အီးမေး(လ်)</string>
+    <string name="debug_title">ချို့ယွင်းချက်ဖယ်ရှားပါ</string>
+    <string name="next_action">ရှေ့သို့</string>
+    <string name="okay_action">လုပ်မည်</string>
+    <string name="cancel_action">ပယ်ဖျက်ရန်</string>
+    <string name="previous_action">ပြီးခဲ့သော</string>
+    <string name="done_action">ပြုလုပ်ပြီးပြီ</string>
+    <string name="create_action">အသစ် ဖန်တီးသည်</string>
+    <string name="quick_responses_empty_view">အမြန်တုံ့ပြန်မှုများမရှိ။</string>
+    <string name="account_settings_action">အကောင့်အဆင်အပြင်များ</string>
+    <string name="menu_folder_options">တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း ရွေးချယ်စရာများ</string>
+    <string name="status_network_error">ချိတ်ဆက်ခြင်း ပြဿနာဖြစ်သည်။</string>
+    <plurals name="move_messages">
+        <item quantity="one">မက်ဆေ့(ခ်ျ) ရွှေ့သည်</item>
+        <item quantity="other">မက်ဆေ့(ခ်ျ)များ ရွှေ့သည်</item>
+    </plurals>
+    <string name="cannot_move_protocol_not_supported_toast">ရွှေ့ခြင်းကို POP3 အကောင့်များပေါ်တွင် မထောက်ပံ့ပါ။</string>
+    <string name="cannot_move_multiple_accounts_toast">ရွေးချယ်ချက်တွင် အကောင့်များစွာ ပါသောကြောင့် မရွှေ့နိုင်ပါ။</string>
+    <string name="cannot_move_special_mailboxes_toast">အကြမ်း၊ ထွက်စာပုံးနှင့် ပို့ပြီးစာများရှိ မက်ဆေ့ခ်ျများကို မရွှေ့နိုင်ပါ။</string>
+    <string name="mailbox_name_display_inbox">စာဝင်ပုံး</string>
+    <string name="mailbox_name_display_outbox">စာထွက်ပုံး</string>
+    <string name="mailbox_name_display_drafts">အကြမ်း</string>
+    <string name="mailbox_name_display_trash">အမှိုက်</string>
+    <string name="mailbox_name_display_sent">ပေးပို့သည်</string>
+    <string name="mailbox_name_display_junk">ပေးပို့လာသော မလိုသည့် ကြော်ငြာများ</string>
+    <string name="mailbox_name_display_starred">ကြယ်ပြုလုပ်သည်</string>
+    <string name="mailbox_name_display_unread">မဖတ်ရသေးသော</string>
+    <string name="account_folder_list_summary_inbox">စာဝင်ပုံး</string>
+    <string name="account_folder_list_summary_starred">ကြယ်ပြုလုပ်သည်</string>
+    <string name="account_folder_list_summary_drafts">အကြမ်း</string>
+    <string name="account_folder_list_summary_outbox">စာထွက်ပုံး</string>
+    <string name="mailbox_list_account_selector_combined_view">တွဲပြီး ကြည့်သည် </string>
+    <string name="message_compose_fwd_header_fmt">\n\n-------- မူရင်း မက်ဆေ့(ခ်ျ)--------\nSubject-<xliff:g id="subject">%1$s</xliff:g>\nFrom: <xliff:g id="sender">%2$s</xliff:g>\nTo: <xliff:g id="to">%3$s</xliff:g>\nCC: <xliff:g id="cc">%4$s</xliff:g>\n\n</string>
+    <string name="message_compose_insert_quick_response_list_title">အမြန် တုံ့ပြန်မှု ထည့်သွင်းသည်</string>
+    <string name="message_compose_insert_quick_response_menu_title">အမြန် တုံ့ပြန်မှု ထည့်သွင်းသည်</string>
+    <string name="message_view_attachment_background_load">စာပို့သောအခါ သင်၏လက်ဆင့်ကမ်း ပို့ပြီးသည့် မက်ဆေ့ခ်ျရှိ ပူးတွဲများကို ဒေါင်းလုဒ်လုပ်လိမ့်မည်။</string>
+    <string name="attachment_not_found">ပူးတွဲကို ဒေါင်းလုဒ်မလုပ်နိုင်ခဲ့ပါ။</string>
+    <string name="message_decode_error">မက်ဆေ့(ခ်ျ)ကို အနက်အဓိပ္ပာယ်ဖော်  နေစဥ် အမှား ဖြစ်ပေါ်ခဲ့သည်။</string>
+    <string name="forward_download_failed_ticker">ပူးတွဲများကို လက်ဆင့်ကမ်းမပို့နိုင်ခဲ့ပါ။</string>
+    <string name="forward_download_failed_title">ပူးတွဲကို တစ်ဆင့် မပေးပို့နိုင်ခဲ့ပါ</string>
+    <string name="login_failed_ticker"><xliff:g id="account_name">%s</xliff:g> ဝင်ရန် မအောင်မြင်ပါ။</string>
+    <string name="login_failed_title">မဝင်နိုင်ခဲ့ပါ</string>
+    <plurals name="message_view_attachment_bytes">
+        <item quantity="one"><xliff:g id="size_in_bytes" example="1">%d</xliff:g>ဘီ</item>
+        <item quantity="other"><xliff:g id="size_in_bytes" example="279">%d</xliff:g>ဘီ</item>
+    </plurals>
+    <plurals name="message_view_attachment_kilobytes">
+        <item quantity="one"><xliff:g id="size_in_kilobytes" example="1">%d</xliff:g>ကေဘီ</item>
+        <item quantity="other"><xliff:g id="size_in_kilobytes" example="279">%d</xliff:g>ကေဘီ</item>
+    </plurals>
+    <plurals name="message_view_attachment_megabytes">
+        <item quantity="one"><xliff:g id="size_in_megabytes" example="1">%d</xliff:g>အမ်ဘီ</item>
+        <item quantity="other"><xliff:g id="size_in_megabytes" example="279">%d</xliff:g>အမ်ဘီ</item>
+    </plurals>
+    <plurals name="message_view_attachment_gigabytes">
+        <item quantity="one"><xliff:g id="size_in_gigabytes" example="1">%d</xliff:g>ဂျီဘီ</item>
+        <item quantity="other"><xliff:g id="size_in_gigabytes" example="279">%d</xliff:g>ဂျီဘီ</item>
+    </plurals>
+    <string name="account_setup_basics_title">အကောင့် ဖွဲ့စည်းပုံ</string>
+    <string name="account_setup_basics_headline">အီးမေး(လ်) အကောင့် </string>
+    <string name="accounts_welcome">သင်၏အကောင့်ကို အဆင့်အနည်းငယ် ပြုလုပ်ပြီး တည်ဆောက်နိုင်သည်။</string>
+    <string name="account_setup_basics_email_label">အီးမေး(လ်) လိပ်စာ</string>
+    <string name="account_setup_basics_password_label">စကားဝှက်</string>
+    <string name="account_setup_basics_manual_setup_action">လက်ဖြင့် တပ်ဆင်သည်</string>
+    <string name="account_setup_username_password_toast">အကျုံးဝင်သော အီးမေး(လ်)လိပ်စာ နှင့် စကားဝှက်ကို ရိုက်ထည့်သည်။</string>
+    <string name="account_duplicate_dlg_title">မူပွားထားခဲ့သော အကောင့်</string>
+    <string name="account_duplicate_dlg_message_fmt">ဤအသုံးပြုသူအမည်ကို အကောင့် \"<xliff:g id="duplicate">%s</xliff:g>\" အတွက် အသုံးပြုနေပြီးဖြစ်သည်။</string>
+    <string name="account_password_spaces_error">ဤစကားဝှက်၏ အစနှင့်အဆုံးတွင် စပေ့စ်စာလုံးများ ရှိနေသည်။ ဆာဗာများသည် စပေ့စ်များပါသော စကားဝှက်များကို မထောက်ပံ့ပါ။</string>
+    <string name="account_setup_check_settings_retr_info_msg">အကောင့် သတင်းအချက်အလက်ကို ပြန်လည်ရရှိနေသည် \u2026</string>
+    <string name="account_setup_check_settings_check_incoming_msg">ဆာဗာအဆင်အပြင်များကို မှန်မမှန် စစ်ဆေးနေသည်\u2026</string>
+    <string name="account_setup_check_settings_check_outgoing_msg">smtp အဆင်အပြင်များကို မှန်မမှန် စစ်ဆေးနေသည်\u2026</string>
+    <string name="account_setup_creating_account_msg">အကောင့်ဖန်တီးနေသည်\u2026</string>
+    <string name="account_setup_names_title">အကောင့် ဖွဲ့စည်းပုံ</string>
+    <string name="account_setup_names_headline">သင့်အကောင့်ကို တည်ဆောက်ပြီးဖြစ်၍ အီးမေးလ်ကို သုံးနိုင်ပြီ။</string>
+    <string name="account_setup_names_account_name_label">ဤအကောင့်ကို အမည်တစ်ခု ပေးသည် (ရွေးချယ်စရာ)</string>
+    <string name="account_setup_names_user_name_label">သင့် အမည် (အထွက် မက်ဆေ့(ခ်ျ)များ တွင် ဖော်ပြခဲ့သည်)</string>
+    <string name="account_setup_names_user_name_empty_error">ဤအကွက်ကို ကွက်လပ်ချန်ထား၍ မရပါ။</string>
+    <string name="account_setup_account_type_title">အကောင့် ဖွဲ့စည်းပုံ</string>
+    <string name="account_setup_account_type_headline">အကောင့် အမျိုးအစား</string>
+    <string name="account_setup_account_type_instructions">ထိုအရာသည် မည်သည့်အကောင့်အမျိုးအစားနည်း။ </string>
+    <string name="account_setup_incoming_title">အကောင့် ဖွဲ့စည်းပုံ</string>
+    <string name="account_setup_incoming_headline">အဝင် ဆာဗာ အပြင်အဆင်များ </string>
+    <string name="account_setup_incoming_username_label">အသုံးပြုသူအမည်</string>
+    <string name="account_setup_incoming_password_label">စကားဝှက်</string>
+    <string name="account_setup_incoming_server_label">ဆာဗာ</string>
+    <string name="account_setup_incoming_port_label">ဆက်သွယ်ရေးအပေါက်</string>
+    <string name="account_setup_incoming_security_label">လုံခြုံရေး အမျိုးအစား</string>
+    <string name="account_setup_incoming_security_none_label">ဘာမှ</string>
+    <string name="account_setup_incoming_security_ssl_trust_certificates_label">SSL/TLS (သက်သေခံလက်မှတ်များအားလုံး လက်ခံသည်)</string>
+    <string name="account_setup_incoming_security_ssl_label">SSL/TLS</string>
+    <string name="account_setup_incoming_security_tls_trust_certificates_label">STARTTLS (သက်သေခံလက်မှတ်များအားလုံး လက်ခံသည်)</string>
+    <string name="account_setup_incoming_security_tls_label">STARTTLS</string>
+    <string name="account_setup_incoming_delete_policy_label">ဆာဗာ မှ အီးမေး(လ်)ကို ဖျက်ပစ်သည်</string>
+    <string name="account_setup_incoming_delete_policy_never_label">ဘယ်တော့မှ</string>
+    <string name="account_setup_incoming_delete_policy_delete_label">အဝင်စာပုံးမှ ကျွန်ုပ် ဖျက်ပစ်သောအခါ</string>
+    <string name="account_setup_incoming_imap_path_prefix_label">IMAP လမ်းကြောင်း ရှေ့ဆက်စာလုံး </string>
+    <string name="account_setup_incoming_imap_path_prefix_hint">ရွေးချယ်စရာ</string>
+    <string name="account_setup_outgoing_title">အကောင့် ဖွဲ့စည်းပုံ</string>
+    <string name="account_setup_outgoing_headline">အထွက် ဆာဗာ အပြင်အဆင်များ </string>
+    <string name="account_setup_outgoing_smtp_server_label">SMTP ဆာဗာ</string>
+    <string name="account_setup_outgoing_port_label">ဆက်သွယ်ရေးအပေါက်</string>
+    <string name="account_setup_outgoing_security_label">လုံခြုံရေး အမျိုးအစား</string>
+    <string name="account_setup_outgoing_require_login_label">ဝင်ရန်လိုအပ်သည်</string>
+    <string name="account_setup_outgoing_username_label">အသုံးပြုသူအမည်</string>
+    <string name="account_setup_outgoing_password_label">စကားဝှက်</string>
+    <string name="account_setup_exchange_certificate_title">သုံးစွဲသူ သက်သေခံလက်မှတ် </string>
+    <string name="account_setup_exchange_select_certificate">ရွေးချယ်သည်</string>
+    <string name="account_setup_exchange_use_certificate">သုံးစွဲသူ သက်သေခံလက်မှတ် သုံးသည်</string>
+    <string name="account_setup_exchange_remove_certificate">ဖယ်ရှားရန်</string>
+    <string name="account_setup_exchange_no_certificate">ဘာမှ</string>
+    <string name="account_setup_exchange_device_id_label">မိုဘိုင်း စက် ID</string>
+    <string name="account_setup_options_title">အကောင့်အဆင်အပြင်များ</string>
+    <string name="account_setup_options_headline">အကောင့် ရွေးချယ်စရာများ</string>
+    <string name="account_setup_options_mail_check_frequency_label">အဝင်စာပုံး ကြိမ်နှုန်း စစ်ဆေးသည်</string>
+    <string name="account_setup_options_mail_check_frequency_never">ဘယ်သောအခါမှ</string>
+    <string name="account_setup_options_mail_check_frequency_push">အလိုအလျောက် (တွန်းသည်)</string>
+    <string name="account_setup_options_mail_check_frequency_5min">၅ မိနစ်တိုင်း</string>
+    <string name="account_setup_options_mail_check_frequency_10min">၁၀ မိနစ်တိုင်း</string>
+    <string name="account_setup_options_mail_check_frequency_15min">၁၅ မိနစ်တိုင်း</string>
+    <string name="account_setup_options_mail_check_frequency_30min">၃၀ မိနစ်တိုင်း</string>
+    <string name="account_setup_options_mail_check_frequency_1hour">နာရီတိုင်း</string>
+    <string name="account_setup_options_notify_label">အီးမေးလ် ရောက်သောအခါ အကြောင်းကြားပါ</string>
+    <string name="account_setup_options_sync_contacts_label">ဤအကောင့်အတွက် အဆက်အသွယ်များ တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_setup_options_sync_calendar_label">ဤအကောင့်အတွက် ပြက္ခဒိန် တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_setup_options_sync_email_label">ဤအကောင့်အတွက် အီးမေး(လ်) တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_setup_options_background_attachments_label">ဝိုင်-ဖိုင် သို့ ချိတ်ဆက်သောအခါ ပူးတွဲများကို အလိုအလျောက် ဒေါင်းလုပ်(ခ်) လုပ်သည်</string>
+    <string name="account_setup_failed_dlg_title">မပြီးဆုံးနိုင်ခဲ့ပါ</string>
+    <string name="account_setup_options_mail_window_label">တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ရန် ရက်များ</string>
+    <string name="account_setup_options_mail_window_auto">အလိုအလျောက်</string>
+    <string name="account_setup_options_mail_window_1day">ယမန်နေ့</string>
+    <string name="account_setup_options_mail_window_3days">လွန်ခဲ့သောသုံးရက်</string>
+    <string name="account_setup_options_mail_window_1week">လွန်ခဲ့သောတစ်ပတ်</string>
+    <string name="account_setup_options_mail_window_2weeks">လွန်ခဲ့သောနှစ်ပတ်</string>
+    <string name="account_setup_options_mail_window_1month">ယခင်လ</string>
+    <string name="account_setup_options_mail_window_all">အားလုံး</string>
+    <string name="account_setup_options_mail_window_default">အကောင့်ကို ပုံသေသုံးပါ</string>
+    <string name="account_setup_failed_dlg_auth_message">အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် မမှန်ပါ။</string>
+    <string name="account_setup_failed_dlg_auth_message_fmt">ဝင်ရန် မအောင်မြင်ပါ။\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_dlg_certificate_message">ဆာဗာသို့ စိတ်ချလုံခြုံစွာ မချိတ်ဆက်နိုင်ပါ။</string>
+    <string name="account_setup_failed_dlg_certificate_message_fmt">ဆာဗာသို့ စိတ်ချလုံခြုံစွာ မချိတ်ဆက်နိုင်ပါ။\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_certificate_required">သုံးစွဲသူအထောက်အထားလိုအပ်သည်။ ဆာဗာသို့ သုံးစွဲသူအထောက်အထားတစ်ခုနှင့် ချိတ်ဆက်လိုပါသလား။</string>
+    <string name="account_setup_failed_certificate_inaccessible">အထောက်အထားမမှန်ပါ သို့မဟုတ် အသုံးမပြုနိုင်ပါ။</string>
+    <string name="account_setup_failed_check_credentials_message">ဆာဗာသည် အမှားနှင့်တုံ့ပြန်ခဲ့သည်။ သင်၏ အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို စစ်ဆေးပြီး ထပ်ကြိုးစားကြည့်ပါ။</string>
+    <string name="account_setup_failed_dlg_server_message">ဆာဗာကို မချိတ်ဆက်နိုင်ပါ။</string>
+    <string name="account_setup_failed_dlg_server_message_fmt">ဆာဗာကို မချိတ်ဆက်နိုင်ပါ။\n(<xliff:g id="error">%s</xliff:g>)</string>
+    <string name="account_setup_failed_tls_required">TLS လိုအပ်သော်လည်း ဆာဗာမှ အထောက်အပံ့ မပေးခဲ့ပါ။</string>
+    <string name="account_setup_failed_auth_required">စစ်မှန်ကြောင်း အထောက်အထားပြ နည်းလမ်းများကို ဆာဗာမှ မထောက်ပံ့ပါ။</string>
+    <string name="account_setup_failed_security">လုံခြုံရေးအမှားကြောင့် ဆာဗာသို့ ချိတ်ဆက်မှုကို မဖွင့်နိုင်ခဲ့ပါ။</string>
+    <string name="account_setup_failed_ioerror">ဆာဗာသို့ ချိတ်ဆက်မှုကို မဖွင့်နိုင်ခဲ့ပါ။</string>
+    <string name="account_setup_failed_protocol_unsupported">သင် မမှန်သော ဆာဗာလိပ်စာကို ရိုက်ထည့်ခဲ့သည် သို့မဟုတ် ဆာဗာသည် အီးမေးလ်ကို မထောက်ပံ့သော ပရိုတိုကော ဗားရှင်းတစ်ခု လိုအပ်သည်။</string>
+    <string name="account_setup_failed_access_denied">သင့်တွင် ဤဆာဗာနှင့် တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ခွင့် မရှိပါ။ နောက်ထပ် အချက်အလက်များ သိလိုပါက သင့်ဆာဗာ၏ စီမံအုပ်ချုပ်သူနှင့် ဆက်သွယ်ပါ။</string>
+    <string name="account_setup_security_required_title">တသီးတခြားဖြစ်သော လုံခြုံရေး စီမံခန့်ခွဲခြင်း</string>
+    <string name="account_setup_security_policies_required_fmt">ဆာဗာ <xliff:g id="server">%s</xliff:g> မှ သင့် အန်းဒရိုက် စက်၏ လုံခြုံရေး အသွင်အပြင်အချို့ကို ၎င်းအား အဝေးမှထိန်းချုပ်ခြင်းကို သင် ခွင့်ပြုရန် တောင်းဆိုသည်။ ဤအကောင့်ကို တည်ဆောက်ခြင်းပြီးစီးလိုပါသလား။</string>
+    <string name="account_setup_failed_security_policies_unsupported">ဤဆာဗာသည် <xliff:g id="error">%s</xliff:g> အပါအဝင် အန်းဒရိုက်စက်မှ မထောက်ပံ့သော လုံခြုံရေး အသွင်အပြင်များကို လိုအပ်သည်။</string>
+    <string name="account_setup_username_uneditable_error">အကောင့်၏အသုံးပြုသူအမည်ကို မပြောင်းနိုင်ပါ။ ကွဲပြားသော အသုံးပြုသူအမည်တစ်ခု ထပ်ထည့်ရန် အကောင့်ထည့်ပါ ကို ထိပါ။</string>
+    <string name="disable_admin_warning">သတိပေးချက် - အီးမေးလ်ပရိုဂရမ်၏ သင့်စက်ကို စီမံအုပ်ချုပ်ပိုင်ခွင့်ကို ရုပ်သိမ်းခြင်းသည် ၎င်းကိုလိုအပ်သော သူတို့၏အီမေးလ်၊ အဆက်အသွယ်မျာ ပြက္ခဒိန်ဖြစ်ရပ်များနှင့် အခြားအချက်အလက်များနှင့်အတူ အီးမေးအကောင့်များ အားလုံးကို ဖျက်လိမ့်မည်။</string>
+    <string name="account_security_dialog_title">လုံခြုံရေး အသစ်ပြင်ဆင်မှု</string>
+    <string name="account_security_dialog_content_fmt">သင်၏ လုံခြုံရေး အပြင်အဆင်များကို အသစ်ပြင်ဆင်မှုပြုလုပ်ရန် <xliff:g id="account">%s</xliff:g> မှ လိုအပ်သည်။</string>
+    <string name="security_unsupported_ticker_fmt">လုံခြုံရေးလိုအပ်ချက်များကြောင့် အကောင့် \"<xliff:g id="account">%s</xliff:g>\"ကို တစ်မျိုးတည်းဖြစ်အောင် မလုပ်နိုင်ပါ။</string>
+    <string name="security_needed_ticker_fmt">အကောင့် \"<xliff:g id="account">%s</xliff:g>\" မှ လုံခြုံရေး အပြင်အဆင်များကို အသစ်ပြင်ဆင်မှုပြုလုပ်ရန် လိုအပ်သည်။</string>
+    <string name="security_changed_ticker_fmt">အကောင့် \"<xliff:g id="account">%s</xliff:g>\" သည့် ၎င်း၏လုံခြုံရေးအဆင်အပြင်များကို ပြောင်းခဲ့သည်၊ အသုံးပြုသူ လုပ်ဆောင်ချက် မလိုအပ်ပါ။</string>
+    <string name="security_notification_content_update_title">လုံခြုံရေး အသစ်ပြင်ဆင်မှု လိုအပ်ခဲ့သည်</string>
+    <string name="security_notification_content_change_title">လုံခြုံရေးမူဝါဒများ ပြောင်းပြီးပြီ။</string>
+    <string name="security_notification_content_unsupported_title">လုံခြုံရေးမူဝါဒများ မကိုက်ပါ </string>
+    <string name="account_security_title">စက် လုံခြုံရေး</string>
+    <string name="account_security_policy_explanation_fmt">ဆာဗာ <xliff:g id="server">%s</xliff:g> မှ သင့် အန်းဒရိုက် စက်၏ လုံခြုံရေး အသွင်အပြင်အချို့ကို ၎င်းအား အဝေးမှထိန်းချုပ်ခြင်းကို သင် ခွင့်ပြုရန် တောင်းဆိုသည်။ </string>
+    <string name="account_setup_failed_dlg_edit_details_action">အသေးစိတ် ပြင်ဆင်သည်</string>
+    <string name="password_expire_warning_ticker_fmt">သင်၏ လော့(ခ်)ချထားသော ဖန်သားပြင် PIN သို့မဟုတ် စကားဝှက်ကို ပြောင်းလဲရန် \"<xliff:g id="account">%s</xliff:g>\" မှ တောင်းဆိုသည်။</string>
+    <string name="password_expire_warning_content_title">လော့(ခ်)ချထားသောဖန်သားပြင် စကားဝှက် သက်တမ်းကုန်နေသည်</string>
+    <string name="password_expired_ticker">သင်၏ လော့(ခ်)ချထားသော ဖန်သားပြင် PIN သို့မဟုတ် စကားဝှက် သက်တမ်းကုန်ပြီ။</string>
+    <string name="password_expired_content_title">လော့(ခ်)ချထားသော ဖန်သားပြင် စကားဝှက် သက်တမ်းကုန်ခဲ့သည်</string>
+    <string name="password_expire_warning_dialog_title">လော့(ခ်)ချထားသောဖန်သားပြင် စကားဝှက် သက်တမ်းကုန်နေသည်</string>
+    <string name="password_expire_warning_dialog_content_fmt">လော့(ခ်)ချထားသော ဖန်သားပြင် PIN သို့မဟုတ် စကားဝှက်ကို မကြာမီ ပြောင်းရန်လိုအပ်သည်၊ သို့မဟုတ်ပါက <xliff:g id="account">%s</xliff:g> အတွက် အချက်အလက်ကို ဖျက်ပစ်လိုက်လိမ့်မည် ယခု ၎င်းကို ပြောင်းလိုပါသလား။</string>
+    <string name="password_expired_dialog_title">လော့(ခ်)ချထားသော ဖန်သားပြင် စကားဝှက် သက်တမ်းကုန်ခဲ့သည်</string>
+    <string name="password_expired_dialog_content_fmt"><xliff:g id="account">%s</xliff:g> အတွက် အချက်အလက်ကို သင့်စက်မှ ဖျက်ပစ်နေသည်။ သင်၏လော့(ခ်)ချထားသော ဖန်သားပြင် PIN သို့မဟုတ် စကားဝှက်ကို ပြောင်းခြင်းဖြင့် ၎င်းကို ပြန်ရယူနိုင်သည်။ ယခု ၎င်းကို ပြောင်းလိုပါသလား။</string>
+    <string name="account_settings_exit_server_settings">သိမ်းဆည်းမထားသော ပြောင်းလဲမှုများကို ပယ်ဖျက်မည်လား။</string>
+    <string name="account_settings_login_dialog_title">မဝင်နိုင်ခဲ့ပါ</string>
+    <string name="account_settings_login_dialog_content_fmt"><xliff:g id="account">%s</xliff:g> အတွက် အသုံးပြုသူအမည် သို့မဟုတ် စကားဝှက် မမှန်ပါ။ ယခု သူတို့ကို အသစ်ပြင်ဆင် လိုပါသလား။</string>
+    <string name="account_settings_login_dialog_reason_fmt">သင်၏<xliff:g id="account">%s</xliff:g> သို့ ဝင်ရောက်ခြင်း မအောင်မြင်ပါ၊ ဆာဗာမှ ပြောဆိုသည်မှာ - <xliff:g id="reason">%s</xliff:g> သင်၏ အသုံးပြုသူအမည် နှင့်/သို့မဟုတ် စကားဝှက်ကို အသစ်ပြင်ဆင် လိုပါသလား။</string>
+    <string name="account_settings_background_attachments_label">ပူးတွဲများ ဒေါင်းလုပ်(ခ်) လုပ်သည်</string>
+    <string name="account_settings_background_attachments_summary">ဝိုင်-ဖိုင်မှတဆင့် လတ်တလော မက်ဆေ့ခ်ျများသို့ အလိုအလျောက်ဒေါင်းလုဒ်လုပ်ထားသော ပူးတွဲများ</string>
+    <string name="account_settings_notify_label">အီးမေး(လ်) အကြောင်းကြားချက်များ</string>
+    <string name="account_settings_summary">ကြိမ်နှုန်း တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း၊ အကြောင်းကြားချက်များ စသည်။</string>
+    <string name="account_settings_notify_summary">အီးမေးလ် ရောက်သောအခါ အကြောင်းကြားချက် ပို့ပါ</string>
+    <string name="account_settings_mail_check_frequency_label">တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ခြင်းကြိမ်နှုန်း</string>
+    <string name="account_settings_incoming_label">အဝင် အပြင်အဆင်များ</string>
+    <string name="account_settings_incoming_summary">အသုံးပြုသူ အမည်၊ စကားဝှက် နှင့် အခြား အဝင် ဆာဗာ အပြင်အဆင်များ</string>
+    <string name="account_settings_outgoing_label">အထွက် အပြင်အဆင်များ</string>
+    <string name="account_settings_outgoing_summary">အသုံးပြုသူ အမည်၊ စကားဝှက် နှင့် အခြား အထွက် ဆာဗာ အပြင်အဆင်များ</string>
+    <string name="account_settings_enforced_label">ပြဌာန်းထားသော မူဝါဒများ</string>
+    <string name="account_settings_enforced_summary">ဘာမှ</string>
+    <string name="account_settings_unsupported_label">မထောက်ပံ့သော မူဝါဒများ</string>
+    <string name="account_settings_unsupported_summary">ဘာမှ</string>
+    <string name="account_settings_retry_label">တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ပါ</string>
+    <string name="account_settings_retry_summary">ဤအကောင့်ကို တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ရန် ဤနေရာကို ထိပါ</string>
+    <string name="account_settings_description_label">အကောင့် အမည်</string>
+    <string name="account_settings_name_label">သင်၏ အမည်</string>
+    <string name="account_settings_edit_quick_responses_label">အမြန်ပြန်ကြားချက်များ</string>
+    <string name="account_settings_edit_quick_responses_summary">အီးမေးလ်ရေးသောအခါ မကြာခဏရေးသွင်းသောစာသားကို တည်းဖြတ်ပါ</string>
+    <string name="account_settings_notifications">အချက်ပေးချက်အဆင်အပြင်များ</string>
+    <string name="account_settings_data_usage">အချက်အလက်အသုံးချမှု</string>
+    <string name="account_settings_policies">လုံခြုံရေး မူဝါဒများ</string>
+    <string name="system_folders_title">စနစ်ဖိုဒါများ</string>
+    <string name="system_folders_trash_title">အမှိုက်ဖိုဒါ</string>
+    <string name="system_folders_trash_summary">သင့်ဆာဗာ၏ အမှိုက်ဖိုဒါကို ရွေးပါ</string>
+    <string name="system_folders_trash_dlg">သင့်ဆာဗာ၏ အမှိုက်ဖိုဒါကို ရွေးပါ</string>
+    <string name="system_folders_sent_title">ပို့ပြီးပစ္စည်းများဖိုဒါ</string>
+    <string name="system_folders_sent_summary">သင့်ဆာဗာ၏ ပို့ပြီးပစ္စည်းများဖိုဒါကို ရွေးပါ</string>
+    <string name="system_folders_sent_dlg">သင့်ဆာဗာ၏ ပို့ပြီးပစ္စည်းများဖိုဒါကို ရွေးပါ</string>
+    <string name="edit_quick_response_dialog">အမြန်ပြန်ကြားချက်များ</string>
+    <string name="save_action">သိမ်းဆည်းပါ</string>
+    <string name="account_settings_sync_contacts_enable">အဆက်အသွယ်များ တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_settings_sync_contacts_summary">ဤအကောင့်အတွက် အဆက်အသွယ်များ တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_settings_sync_calendar_enable">ပြက္ခဒိန်ကိုအချိန်ကိုက်ရန်</string>
+    <string name="account_settings_sync_calendar_summary">ပြက္ခဒိန်ဖြစ်ရပ်ကို ဤအကောင့်အတွက် တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ပါ</string>
+    <string name="account_settings_sync_email_enable">အီးမေး(လ်) တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_settings_sync_email_summary">ဤအကောင့်အတွက် အီးမေး(လ်) တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်သည်</string>
+    <string name="account_settings_vibrate_when_label">တုန်ခါသည်</string>
+    <string name="account_settings_ringtone">ဖုန်းခေါ်ဆိုမှုတီးလုံးရွေးချယ်ပါ</string>
+    <string name="account_settings_servers">ဆာဗာ အပြင်အဆင်များ</string>
+    <string name="mailbox_settings_activity_title">တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း ရွေးချယ်စရာများ</string>
+    <string name="mailbox_settings_activity_title_with_mailbox">တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း ရွေးချယ်စရာများ (<xliff:g id="mailboxx_name" example="Family">%s</xliff:g>)</string>
+    <string name="mailbox_settings_sync_enabled_label">ဤဖိုဒါကို တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ပါ</string>
+    <string name="mailbox_settings_sync_enabled_summary">ချိတ်ဆက်ပြီးသောအခါ မက်ဆေ့ခ်ျများကို ဒေါင်းလုဒ်လုပ်လိမ့်မည်</string>
+    <string name="mailbox_settings_mailbox_sync_window_label">တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ရန် မေးလ်၏ရက်များ</string>
+    <string name="prefDialogTitle_conversationListIcon">ပို့သူ၏ပုံ</string>
+    <string name="provider_note_live">အချို့ \"အပေါင်း\" အကောင့်များတွင်သာ ချိတ်ဆက်ရန် ဤပရိုဂရမ်ကို ခွင့်ပြုသော POP အသုံးပြုမှု ပါဝင်သည်။ သင်၏ အီးမေးလ်လိပ်စာနှင့် စကားဝှက်သုံးပြီး မဝင်နိုင်ပါက သင်ပိုက်ဆံပေးရသော \"အပေါင်း\" အကောင့်တစ်ခု မရနိုင်ပါ။ ထိုအီးမေးလ် အကောင့်များကို အသုံးပြုခွင့်ရရှိရန် ဝက်ဘ်ဘရောက်ဆာကို ဖွင့်ပါ။</string>
+    <string name="provider_note_t_online">ဤအီးမေး(လ်) အကောင့်ကို အပြင်အဆင်များ မပြုလုပ်မီ၊ T-အွန်လိုင်း ဝက်(ဘ်)ဆိုဒ် ကို သွားရောက်ပြီး POP3 အီးမေး(လ်) ဝင်ရောက်မှုအတွက် စကားဝှက် ဖန်တီးပါ။ </string>
+    <string name="exchange_name">ပေါင်းစည်းထားသော</string>
+    <string name="exchange_name_alternate">မိုက်ခရိုဆော့(ဖ်)ကို သက်ဝင်လှုပ်ရှားမှုရှိသော တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း လဲလှယ်သည်</string>
+    <string name="system_account_create_failed">အကောင့်မဖန်တီးနိုင်ခဲ့ပါ။ ထပ်ကြိုးစားပါ</string>
+    <string name="device_admin_label">အီးမေး(လ်)</string>
+    <string name="device_admin_description">ဆာဗာ- တိကျသော လုံခြုံရေး မူဝါဒ စတင်လုပ်ဆောင်သည်</string>
+    <string name="settings_activity_title">အဆင်အပြင်များ</string>
+    <string name="header_label_general_preferences">အထွေထွေဆက်တင်များ</string>
+    <string name="general_preference_confirm_delete_label">မဖျက်မီ အတည်ပြုပါ</string>
+    <string name="general_preference_confirm_delete_summary">မက်ဆေ့(ချ်)များ</string>
+    <string name="general_preference_confirm_send_label">မပို့မီ အတည်ပြုပါ</string>
+    <string name="general_preference_confirm_send_summary">မက်ဆေ့(ချ်)များ</string>
+    <string name="general_preference_text_zoom_label">မက်ဆေ့(ခ်ျ) စာသား အရွယ်အစား</string>
+    <string-array name="general_preference_text_zoom_summary_array">
+        <item>အလွန်သေးကွေးသော စာသား</item>
+        <item>သေးငယ်သော စာသား</item>
+        <item>ပုံမှန်-အရွယ်အစား စာသား</item>
+        <item>စာသားအကြီး</item>
+        <item>ကြီးသော စာသား</item>
+    </string-array>
+    <string name="general_preference_text_zoom_dialog_title">မက်ဆေ့(ခ်ျ) စာသား အရွယ်အစား</string>
+    <string name="general_preference_text_zoom_tiny">အလွန်သေး</string>
+    <string name="general_preference_text_zoom_small">ငယ်</string>
+    <string name="general_preference_text_zoom_normal">ပုံမှန်</string>
+    <string name="general_preference_text_zoom_large">ကြီး</string>
+    <string name="general_preference_text_zoom_huge">အလွန်ကြီး</string>
+    <string name="more_than_999">999+</string>
+    <string name="search_hint">အီးမေး(လ်) ရှာဖွေသည်</string>
+    <string name="policy_dont_allow_camera">သင့်စက်၏ ကင်မရာအသုံးပြုမှုကို ခွင့်မပြုပါ</string>
+    <string name="policy_require_password">စက်၏စကားဝှက် လိုအပ်သည်</string>
+    <string name="policy_password_history">လတ်တလော စကားဝှက်များ ပြန်သုံးမှုကို ကန့်သတ်ထားသည်</string>
+    <string name="policy_password_expiration">သက်တမ်းကုန်ရန် စကားဝှက်များ လိုအပ်သည်</string>
+    <string name="policy_screen_timeout">စက်၏ဖန်သားပြင်ကို လော့(ခ်)ချရန် စက်အားနေရန် လိုအပ်သည်</string>
+    <string name="policy_calendar_age">တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်မည့် ပြက္ခဒိန်ဖြစ်ရပ် အရေအတွက်ကို ကန့်သတ်ထားသည်</string>
+    <string name="policy_email_age">ချိန်ညှိမည့် အီးမေးလ် အရေအတွက်ကို ကန့်သတ်ထားသည်</string>
+    <string name="quick_1">ကျေးဇူးတင်ပါသည်။</string>
+    <string name="quick_2">ကောင်းသောတုံ့ပြန်မှုများ</string>
+    <string name="quick_3">ဤအရာကို နောက်မှ ဖတ်ပြီး သင့်ထံသို့ ပြန်ပို့လိုက်မည်။</string>
+    <string name="quick_4">ဤအရာကို ဆွေးနွေးရန် အစည်းအဝေးတစ်ခု ပြုလုပ်ကြစို့။</string>
+    <string name="require_manual_sync_message">ဤအကောင့်အတွက် နောက်ခံ တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်းသည် အခြားနိုင်ငံများ တွင်လည်း သုံးနိုင်သော ဖုန်းလိုင်းစနစ်လုပ်နေစဥ်တွင် စတင်မလုပ်ဆောင်နိုင်ပါ။ </string>
+    <string name="confirm_response">Sending response…</string>
+    <string name="no_conversations">မက်ဆေ့ခ်ျများမရှိ</string>
+    <string name="imap_name">IMAP</string>
+    <string name="pop3_name">POP3</string>
+    <string name="folder_picker_title">ဖိုဒါ ရွေးသည့်အရာ</string>
+    <string name="trash_folder_selection_title"><xliff:g id="account">%s</xliff:g> အတွက် ဆာဗာအမှိုက်ဖိုဒါကို ရွေး</string>
+    <string name="sent_folder_selection_title"><xliff:g id="account">%s</xliff:g>အတွက် ဆာဗာပို့ပြီးပစ္စည်းများဖိုဒါရွေး</string>
+    <string name="account_waiting_for_folders_msg">Loading folder list…</string>
+</resources>

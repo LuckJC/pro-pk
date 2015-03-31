@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Copyright (C) 2011 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <!-- The name of the Cell Broadcast Receiver app. [CHAR LIMIT=NONE] -->  
+    <string name="app_label">সেল সম্প্রচার</string>  
+    <!-- Label for settings screen. [CHAR LIMIT=NONE] -->  
+    <string name="sms_cb_settings">সেল সম্প্রচার সেটিং</string>  
+    <!-- Text for dismiss button in broadcast message view dialog. [CHAR LIMIT=25] -->  
+    <string name="button_dismiss">ঠিক আছে</string>  
+    <!-- Menu item for accessing application settings. [CHAR LIMIT=30] -->  
+    <string name="menu_preferences">"সেটিং"</string>  
+    <!-- Menu item for deleting all broadcasts. [CHAR LIMIT=30] -->  
+    <string name="menu_delete_all">সম্প্রচার মুছুন</string>  
+    <!-- Context menu item to view a previously received broadcast. [CHAR LIMIT=30] -->  
+    <string name="menu_view">সম্প্রচার দেখুন</string>  
+    <!-- Context menu item to delete a previously received broadcast. [CHAR LIMIT=30] -->  
+    <string name="menu_delete">সম্প্রচার মুছুন</string>  
+    <!-- Confirm Delete -->  
+    <!-- Delete confirmation dialog title. [CHAR LIMIT=30] -->  
+    <string name="confirm_dialog_title">মুছে ফেলুন</string>  
+    <!-- Delete broadcast confirmation dialog message. [CHAR LIMIT=NONE] -->  
+    <string name="confirm_delete_broadcast">সম্প্রচার বার্তা মুছে ফেলা হবে।</string>  
+    <!-- Delete all broadcasts confirmation dialog message. [CHAR LIMIT=NONE] -->  
+    <string name="confirm_delete_all_broadcasts">প্রাপ্ত সব সম্প্রচার বার্তা মুছে ফেলা হবে।</string>  
+    <!-- Delete button text for delete broadcast dialog. [CHAR LIMIT=25] -->  
+    <string name="button_delete">মুছুন</string>  
+    <!-- Cancel button text for delete broadcast dialog. [CHAR LIMIT=25] -->  
+    <string name="button_cancel">"বাতিল করুন"</string>  
+    <!-- ETWS dialog title for Earthquake Warning. [CHAR LIMIT=50] -->  
+    <string name="etws_earthquake_warning">ভূমিকম্পের সতর্কীকরণ</string>  
+    <!-- ETWS dialog title for Tsunami Warning. [CHAR LIMIT=50] -->  
+    <string name="etws_tsunami_warning">সুনামির সতর্কীকরণ</string>  
+    <!-- ETWS dialog title for Earthquake and Tsunami Warning. [CHAR LIMIT=50] -->  
+    <string name="etws_earthquake_and_tsunami_warning">ভূমিকম্প ও সুনামির সতর্কীকরণ</string>  
+    <!-- ETWS dialog title for test message. [CHAR LIMIT=50] -->  
+    <string name="etws_test_message">ইটিডাব্লিউএস পরীক্ষামূলক বার্তা</string>  
+    <!-- ETWS dialog title for other emergency type. [CHAR LIMIT=50] -->  
+    <string name="etws_other_emergency_type">জরুরি অবস্থার সতর্কীকরণ</string>  
+    <!-- CMAS dialog title for presidential level alert. [CHAR LIMIT=50] -->  
+    <string name="cmas_presidential_level_alert">প্রেসিডেন্সিয়াল এলার্ট</string>  
+    <!-- CMAS dialog title for extreme alert. [CHAR LIMIT=50] -->  
+    <string name="cmas_extreme_alert">জরুরি অবস্থার এলার্ট: ভীষণ</string>  
+    <!-- CMAS dialog title for severe alert. [CHAR LIMIT=50] -->  
+    <string name="cmas_severe_alert">জরুরি অবস্থার এলার্ট: গুরুত্বর</string>  
+    <!-- CMAS dialog title for child abduction emergency (Amber Alert). [CHAR LIMIT=50] -->  
+    <string name="cmas_amber_alert">শিশু অপহরণ (অ্যামবার এলার্ট)</string>  
+    <!-- CMAS dialog title for required monthly test. [CHAR LIMIT=50] -->  
+    <string name="cmas_required_monthly_test">জরুরি অবস্থার এলার্ট মাসিক পরীক্ষণ</string>  
+    <!-- CMAS dialog title for CMAS Exercise. [CHAR LIMIT=50] -->  
+    <string name="cmas_exercise_alert">জরুরি অবস্থার এলার্ট (অনুশীলন)</string>  
+    <!-- CMAS dialog title for operator defined use. [CHAR LIMIT=50] -->  
+    <string name="cmas_operator_defined_alert">জরুরি অবস্থার এলার্ট (অপারেটর)</string>  
+    <!-- Dialog title for all other message identifiers in the PWS range. [CHAR LIMIT=50] -->  
+    <string name="pws_other_message_identifiers">জরুরি অবস্থার এলার্ট</string>  
+    <!-- Dialog title for all non-emergency cell broadcasts. [CHAR LIMIT=50] -->  
+    <string name="cb_other_message_identifiers">সেল সম্প্রচার</string>  
+    <!-- Preference category title for emergency alert settings. [CHAR LIMIT=50] -->  
+    <string name="emergency_alert_settings_title">জরুরি অবস্থার এলার্টের সেটিং</string>  
+    <!-- Preference title for enable emergency alerts checkbox. [CHAR LIMIT=30] -->  
+    <string name="enable_emergency_alerts_title">নোটিফিকেশন সক্রিয় করুন</string>  
+    <!-- Preference summary for enable notifications checkbox. [CHAR LIMIT=50] -->  
+    <string name="enable_emergency_alerts_summary">জরুরি অবস্থার এলার্ট সম্প্রচার প্রদর্শন করুন</string>  
+    <!-- Preference title for alert sound duration list. [CHAR LIMIT=30] -->  
+    <string name="alert_sound_duration_title">এলার্টের শব্দের ব্যপ্তিকাল</string>  
+    <!-- Preference title for enable text-to-speech checkbox. [CHAR LIMIT=30] -->  
+    <string name="enable_alert_speech_title">এলার্টের বার্তা বলুন</string>  
+    <!-- Preference summary for enable text-to-speech checkbox. [CHAR LIMIT=100] -->  
+    <string name="enable_alert_speech_summary">জরুরি অবস্থার সতর্ক বার্তা বলার জন্য লেখা-থেকে-বলা ব্যবহার করুন</string>  
+    <!-- Preference category title for ETWS settings. [CHAR LIMIT=50] -->  
+    <string name="category_etws_settings_title">ইটিডাব্লিউএস সেটিং</string>  
+    <!-- Preference title for enable ETWS test alerts checkbox. [CHAR LIMIT=30] -->  
+    <string name="enable_etws_test_alerts_title">পরীক্ষামূলক সম্প্রচার দেখান</string>  
+    <!-- Preference summary for enable ETWS test alerts checkbox. [CHAR LIMIT=100] -->  
+    <string name="enable_etws_test_alerts_summary">ভূমিকম্প সুনামি সতর্কীকরণ ব্যবস্থার পরীক্ষামূলক সম্প্রচার প্রদর্শন করুন</string>  
+    <!-- Preference category title for CMAS settings. [CHAR LIMIT=50] -->  
+    <string name="category_cmas_settings_title">সিএমএএস সেটিং</string>  
+    <!-- Preference title for enable CMAS imminent threat alerts checkbox. [CHAR LIMIT=30] -->  
+    <string name="enable_cmas_imminent_threat_alerts_title">আসন্ন ঝুঁকিগুলো দেখান</string>  
+    <!-- Preference summary for enable CMAS imminent threat alerts checkbox. [CHAR LIMIT=100] -->  
+    <string name="enable_cmas_imminent_threat_alerts_summary">সিএমএএস আসন্ন ঝুঁকির সতর্কীকরণের নোটিশ প্রদর্শন করুন</string>  
+    <!-- Preference title for enable CMAS amber alerts checkbox. [CHAR LIMIT=50] -->  
+    <string name="enable_cmas_amber_alerts_title">অ্যামবার এলার্ট দেখান</string>  
+    <!-- Preference summary for enable CMAS amber alerts checkbox. [CHAR LIMIT=100] -->  
+    <string name="enable_cmas_amber_alerts_summary">অ্যামবার এলার্ট সংবাদ দেখান ( শিশু অপহরণ সংক্রান্ত জরুরি অবস্থা)</string>  
+    <!-- Preference title for enable CMAS test alerts checkbox. [CHAR LIMIT=30] -->  
+    <string name="enable_cmas_test_alerts_title">পরীক্ষামূলক সম্প্রচার দেখান</string>  
+    <!-- Preference summary for enable CMAS test alerts checkbox. [CHAR LIMIT=100] -->  
+    <string name="enable_cmas_test_alerts_summary">সিএমএএস মাসিক পরীক্ষামূলক সম্প্রচার দেখান</string>  
+    <!-- Preference category title for Brazil settings. [CHAR LIMIT=50] -->  
+    <string name="category_brazil_settings_title">ব্রাজিলের জন্য সেটিং</string>  
+    <!-- Preference title for enable channel 50 alerts (Brazil only). [CHAR LIMIT=30] -->  
+    <string name="enable_channel_50_alerts_title">"চ্যানেল ৫০'র সম্প্রচার দেখান"</string>  
+    <!-- Preference summary for enable channel 50 alerts (Brazil only). [CHAR LIMIT=100] -->  
+    <string name="enable_channel_50_alerts_summary">এলাকার হালনাগাদকৃত তথ্যের জন্য ব্রাজিলে চ্যানেল ৫০ ব্যবহৃত হয়</string>  
+    <!-- Entries listed in the ListPreference for allowed alert durations. [CHAR LIMIT=30] -->  
+    <string-array name="alert_sound_duration_entries"> 
+        <item>২ সেকেন্ড</item>  
+        <item>৪ সেকেন্ড</item>  
+        <item>৬ সেকেন্ড</item>  
+        <item>৮ সেকেন্ড</item>  
+        <item>১০ সেকেন্ড</item> 
+    </string-array>  
+    <!-- Do not translate. Values that are retrieved from the ListPreference.
+         These must match the alert_sound_duration_entries above. -->  
+    <string-array name="alert_sound_duration_values"> 
+        <item>2</item>  
+        <item>4</item>  
+        <item>6</item>  
+        <item>8</item>  
+        <item>10</item> 
+    </string-array>  
+    <!-- MTK added string, put them in the tail-->  
+    <!-- Title of SIM selection dialog -->  
+    <string name="sim_selected_dialog_title">সিম নির্বাচন করুন</string>  
+    <!-- Cell broadcast SMS strings -->  
+    <string name="cell_broadcast">সেল সম্প্রচার</string>  
+    <string name="cell_broadcast_title">সেল সম্প্রচার সেটিং</string>  
+    <string name="cell_broadcast_settings">সিম কার্ড সেল ব্রডকাস্ট সেটিং</string> 
+</resources>

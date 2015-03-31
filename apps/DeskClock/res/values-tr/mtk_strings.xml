@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Bırak gücü aç</string>
+    <string name="power_off">Bırak ve gücü kapat</string>
+
+    <string name="voice_ui_title">Sesli komut</string>
+    <string name="voice_ui_content_text">"Alarm için sesli kontrol etkinleştirildi"</string>
+    <string name="alarm_command_summary_format">Alarmı ertelemek ya da durdurmak için <xliff:g id="first">%1$s</xliff:g> ya da <xliff:g id="second">%2$s</xliff:g> "\n"diyebilirsiniz.</string>
+    <string name="alarm_command_summary_format_land">Alarmı ertelemek veya durdurmak için <xliff:g id="first">%1$s</xliff:g> ya da <xliff:g id="second">%2$s</xliff:g> diyebilirsiniz.</string>
+</resources>

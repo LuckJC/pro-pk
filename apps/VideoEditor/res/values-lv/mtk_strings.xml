@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="editor_gray_effect">Pelēks</string>
+    
+    <string name="not_enough_space" product="nosdcard">USB atmiņas ierīce ir pilna.</string>
+    
+    <string name="not_enough_space" product="default">SD karte ir pilna.</string>
+    <string name="add_audio_track_failed">Neizdevās pievienot audio ierakstu.</string>
+    <string name="insert_transition_failed">Neizdevās ievietot pāreju.</string>
+
+    
+    <string name="save_emoticons_failed">Emocijikonas nevar saglabāt.</string>
+    <string name="save_xml_failed">Īpašās rakstzīmes nevar saglabāt.</string>
+</resources>

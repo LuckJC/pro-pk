@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2011 Google Inc.
+     Licensed to The Android Open Source Project.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="to">သို့</string>
+    <string name="cc">တဆင့်ပို့ခြင်းသို့</string>
+    <string name="bcc">ဖုန်းကွယ်တဆင့်ပို့ခြင်းသို့</string>
+    <string name="subject_hint">အကြောင်းအရာ</string>
+    <string name="body_hint">အီးမေး(လ်) ရေးသားသည်</string>
+    <string name="add_file_attachment">ဖိုင် ပူးတွဲသည်</string>
+    <string name="add_photo_attachment">ပုံကို တွဲပါ</string>
+    <string name="add_video_attachment">ဗွီဒီယိုကို တွဲပါ</string>
+    <string name="save_draft">အကြမ်းကို သိမ်းသည်</string>
+    <string name="discard">လွှင့်ပစ်ပါ</string>
+    <string name="compose">စာရေးမည်</string>
+    <string-array name="compose_modes">
+        <item>အကြောင်းပြန်ပါ</item>
+        <item>အားလုံးကို စာပြန်သည်</item>
+        <item>လက်ဆင့်ကမ်းပါ</item>
+    </string-array>
+    <string name="reply_attribution"><xliff:g id="date">%s</xliff:g> ရက်နေ့တွင် <xliff:g id="person">%s</xliff:g> ရေးထားသည် -</string>
+    <string name="forward_attribution"> ---------- လက်ဆင့်ကမ်းပို့ပြီး မက်ဆေ့ခ်ျ----------<br />မှ - <xliff:g id="from">%1$s</xliff:g><br />ရက်စွဲ - <xliff:g id="date">%2$s</xliff:g><br />အကြောင်းအရာ - <xliff:g id="subject">%3$s</xliff:g><br />သို့ - <xliff:g id="to">%4$s</xliff:g>&lt;br&gt;</string>
+    <string name="forward_attribution_no_headers"> ---------- လက်ဆင့်ကမ်းပို့ပြီး မက်ဆေ့ခ်ျ----------</string>
+    <string name="cc_attribution">တဆင့်ပို့ခြင်းသို့ - <xliff:g id="cc">%1$s</xliff:g>&lt;br&gt;</string>
+    <string name="select_attachment_type">ပူးတွဲအမျိုးအစားကို ရွေးပါ</string>
+    <string name="too_large_to_attach_single"><xliff:g id="maxSize">%1$s</xliff:g> ကျော်သော ဖိုင်ကို မပူးတွဲနိုင်ပါ။</string>
+    <string name="too_large_to_attach_multiple">ဖိုင်များမပူးတွဲထားပါ။ <xliff:g id="maxSize">%1$s</xliff:g> ကန့်သတ်ထားသည်။</string>
+    <string name="too_large_to_attach_additional">ဖိုင်မပူးတွဲထားပါ။ <xliff:g id="maxSize">%1$s</xliff:g> ကန့်သတ်ချက်သို့ ရောက်နေသည်။</string>
+    <string name="generic_attachment_problem">ဖိုင် မပူးတွဲနိုင်ခဲ့ပါ။</string>
+    <string name="recipient_needed">အနည်းဆုံး လက်ခံသူတစ်ဦး ထည့်ပါ။</string>
+    <string name="recipient_error_dialog_title">လက်ခံသူအမှား</string>
+    <string name="confirm_send_title">မက်ဆေ့ခ်ျပို့မလား။</string>
+    <string name="confirm_send_message_with_no_subject">မက်ဆေ့ခ်ျ၏ အကြောင်းအရာတွင် စာသားမရှိပါ။</string>
+    <string name="confirm_send_message_with_no_body">မက်ဆေ့ခ်ျ၏ စာကိုယ်တွင် စာသားမရှိပါ။</string>
+    <string name="confirm_send_message">ဤမက်ဆေ့ခ်ျကို ပို့မလား။</string>
+    <string name="message_discarded">မက်ဆေ့(ခ်ျ) ကို ပယ်ဖျက်ခဲ့သည်။</string>
+    <string name="signature">\n\n<xliff:g id="signature">%s</xliff:g></string>
+    <string name="custom_from_account_label">အဖြစ်မေးလ်ပို့ပါ-</string>
+    <string name="send">ပို့ပါ</string>
+    <string name="mark_read">ဖတ်ပြီးသည်ကို မှတ်သားထားသည်</string>
+    <string name="mark_unread">မဖတ်ရသေးသည်ကို မှတ်သားထားသည်</string>
+    <string name="mute">အသံဖျောက်ပါ</string>
+    <string name="add_star">ကြယ်ကို ပေါင်းထည့်သည်</string>
+    <string name="remove_star">ကြယ်ကို ဖယ်ရှားသည်</string>
+    <string name="remove_folder"><xliff:g id="folderName">%1$s</xliff:g> မှ ဖယ်ရှားပါ</string>
+    <string name="archive">မော်ကွန်းတင်ခြင်း</string>
+    <string name="report_spam">အသုံးမဝင်ဟု တင်ပြပါ</string>
+    <string name="mark_not_spam">အသုံးမဝင်မဟုတ်ဟု တင်ပြပါ</string>
+    <string name="report_phishing">ကာကွယ်ထားမှု တင်ပြပါ</string>
+    <string name="delete">ဖျက်ရန်</string>
+    <string name="discard_drafts">အကြမ်းများ ဖျက်ချပါ</string>
+    <string name="refresh">ပြန်လည်လန်းဆန်းစေမည်</string>
+    <string name="reply">အကြောင်းပြန်ပါ</string>
+    <string name="reply_all">အားလုံးကို စာပြန်သည်</string>
+    <string name="resume_draft">တည်းဖြတ်ပါ</string>
+    <string name="forward">လက်ဆင့်ကမ်းပါ</string>
+    <string name="menu_compose">စာရေးမည်</string>
+    <string name="menu_change_folders">ဖိုဒါများပြောင်းပါ</string>
+    <string name="menu_move_to">သို့ ရွှေ့သည်</string>
+    <string name="menu_move_to_inbox">စာဝင်ပုံးသို့ ရွှေ့ပါ</string>
+    <string name="menu_manage_folders">ဖိုဒါအဆင်အပြင်များ</string>
+    <string name="menu_show_original">မူလ အရွယ်ညှိခြင်း သို့ပြန်ထား</string>
+    <string name="menu_folder_options">ဖိုဒါအဆင်အပြင်များ</string>
+    <string name="menu_settings">အဆင်အပြင်များ</string>
+    <string name="menu_search">ရှာဖွေပါ</string>
+    <string name="mark_important">အရေးကြီးဟု မှတ်သားထားပါ</string>
+    <string name="mark_not_important">အရေးမကြီးဟု မှတ်သားထားပါ</string>
+    <string name="add_cc_label">တဆင့်ပို့ခြင်းသို့/ဖုန်းကွယ်တဆင့်ပို့ခြင်းသို့ ပေါင်းထည့်သည်</string>
+    <string name="add_bcc_label">Bcc ထပ်ထည့်ပါ</string>
+    <string name="feedback">တုံ့ပြန်ချက်ပို့ပါ</string>
+    <string name="help_and_info">အကူအညီ</string>
+    <string name="quoted_text">ကိုးကားခဲ့သည့် စာသား ပါဝင်သည်</string>
+    <string name="quoted_text_label">စာသားကို ကိုးကားပါ</string>
+    <string name="respond_inline">လိုက်လျောညီစွာ တုံ့ပြန်သည်</string>
+    <string name="bytes"><xliff:g id="count">%s</xliff:g> B</string>
+    <string name="kilobytes"><xliff:g id="count">%s</xliff:g> KB</string>
+    <string name="megabytes"><xliff:g id="count">%s</xliff:g> MB</string>
+    <string name="attachment_image">ပုံ</string>
+    <string name="attachment_video">ဗီဒီယို</string>
+    <string name="attachment_audio">အသံ</string>
+    <string name="attachment_text">စာသား ပေးပို့သည်</string>
+    <string name="attachment_application_msword">စာရွက်စာတမ်း</string>
+    <string name="attachment_application_vnd_ms_powerpoint">စီစဉ်တင်ပြမှု</string>
+    <string name="attachment_application_vnd_ms_excel">စာရင်းဇယား</string>
+    <string name="attachment_application_pdf">PDF</string>
+    <string name="attachment_unknown"><xliff:g id="attachmentExtension">%s</xliff:g> ဖိုင်</string>
+    <string name="preview_attachment">ပြန်လည်ကြည့်ရှုချက်</string>
+    <string name="save_attachment">သိမ်းဆည်းပါ</string>
+    <string name="cancel_attachment">ပယ်ဖျက်ရန်</string>
+    <string name="download_again">ဒေါင်းလုဒ် ထပ်လုပ်ပါ</string>
+    <string name="more_info_attachment">သတင်းအချက်အလက်</string>
+    <string name="attachment_type_blocked">ကံမကောင်းစွာ ဤပူးတွဲအမျိုးအစားကို မသိမ်းနိုင်ပါ သို့မဟုတ် မဖွင့်နိုင်ပါ။</string>
+    <string name="no_application_found">ဤပူးတွဲကို ကြည့်ရန် ဖွင့်နိုင်သည့် ပရိုဂရမ်မရှိပါ။</string>
+    <string name="fetching_attachment">ပူးတွဲရယူခြင်း</string>
+    <string name="please_wait">စောင့်ဆိုင်းပါ\u2026</string>
+    <string name="saved"><xliff:g id="size">%s</xliff:g> သိမ်းပြီး</string>
+    <string name="download_failed">ဒေါင်းလုဒ်မလုပ်နိုင်ခဲ့ပါ။ ပြန်ကြိုးစားရန် ထိပါ။</string>
+    <string name="attachments_header">ပူးတွဲများ</string>
+    <string name="menu_photo_save_all">အားလုံးကို သိမ်းပါ</string>
+    <string name="menu_photo_share">ဝေမျှပါ</string>
+    <string name="menu_photo_share_all">အားလုံးကို ဝေမျှပါ</string>
+    <string name="saving">Saving…</string>
+    <string name="choosertitle_sharevia">မှတစ်ဆင့်ဝေမျှပါ</string>
+    <string name="contextmenu_openlink">ဘရောက်ဆာတွင် ဖွင့်ပါ</string>
+    <string name="contextmenu_copy">ကူးသည်</string>
+    <string name="contextmenu_copylink">ဝက်ဘ်ဆိုဒ်လိပ်စာလင့်ခ်ကို ကူးယူပါ</string>
+    <string name="contextmenu_dial_dot">ခေါ်ဆိုပါ\u2026</string>
+    <string name="contextmenu_sms_dot">SMS\u2026</string>
+    <string name="contextmenu_add_contact">လိပ်စာထည့်ပါ</string>
+    <string name="contextmenu_send_mail">အီးမေးလ်ပေးပို့ပါ</string>
+    <string name="contextmenu_map">မြေပုံ</string>
+    <string name="contextmenu_sharelink">လင့်ခ်ကို ဝေမျှပါ</string>
+    <string name="contextmenu_help">အကူအညီ</string>
+    <string name="contextmenu_feedback">တုံ့ပြန်ချက်ပို့ပါ</string>
+    <string name="num_selected"><xliff:g id="number" example="27">%d</xliff:g> သီချင်းစာရင်းထဲသို့ သီချင်းများ ထည့်ခဲ့သည်။</string>
+    <plurals name="move_conversation">
+        <item quantity="one">စကားပြောချက်ကို ရွှေ့ပါ</item>
+        <item quantity="other">စကားပြောချက် <xliff:g>%1$d</xliff:g> ခုကို ရွှေ့ပါ</item>
+    </plurals>
+    <string name="content_description"><xliff:g id="subject">%2$s</xliff:g> အကြောင်း ပေးပို့သူ <xliff:g id="sender">%1$s</xliff:g> ၊ <xliff:g id="date">%4$s</xliff:g>ရက်နေ့တွင် <xliff:g id="snippet">%3$s</xliff:g> ၊ <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="content_description_today"><xliff:g id="subject">%2$s</xliff:g> အကြောင်း ပေးပို့သူ <xliff:g id="sender">%1$s</xliff:g> ၊ <xliff:g id="time">%4$s</xliff:g> တွင် <xliff:g id="snippet">%3$s</xliff:g> ၊ <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="read_string">ဖတ်ပြီးသော စကားပြောဆိုချက်</string>
+    <string name="unread_string">မဖတ်ရသေးသော စကားပြောဆိုချက်</string>
+    <string name="filtered_tag">[<xliff:g id="tag">%1$s</xliff:g>]<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="subject_and_snippet"><xliff:g>%s</xliff:g> \u2014 <xliff:g>%s</xliff:g></string>
+    <plurals name="draft">
+        <item quantity="one">ပုံကြမ်း</item>
+        <item quantity="other">အကြမ်း</item>
+    </plurals>
+    <string name="sending">ပို့နေသည်\u2026</string>
+    <string name="send_failed">မက်ဆေ့ခ်ျကို မပို့ခဲ့ပါ။</string>
+    <string name="me_object_pronun">ကိုယ်</string>
+    <string name="me_subject_pronun">ကိုယ်</string>
+    <string name="inbox_folders_heading">စာဝင်ပုံး</string>
+    <plurals name="confirm_delete_conversation">
+        <item quantity="one">ဤစကားပြောချက်ကို ဖျက်မလား။</item>
+        <item quantity="other">ဤစကားပြောချက် <xliff:g id="count">%1$d</xliff:g> ခုကို ဖျက်မလား။</item>
+    </plurals>
+    <plurals name="confirm_archive_conversation">
+        <item quantity="one">ဤစကားပြောချက်ကို မော်ကွန်းတင်မလား။</item>
+        <item quantity="other">ဤစကားပြောချက် <xliff:g id="count">%1$d</xliff:g> ခုကို မော်ကွန်းတင်မလား။</item>
+    </plurals>
+    <plurals name="confirm_discard_drafts_conversation">
+        <item quantity="one">ဤစကားပြောချက်မှ အကြမ်းများကို ဖျက်ချမလား။</item>
+        <item quantity="other">ဤစကားပြောချက် <xliff:g id="count">%1$d</xliff:g> ခုမှ အကြမ်းများကို ဖျက်ချမလား။</item>
+    </plurals>
+    <string name="confirm_discard_text">ဤမက်ဆေ့ခ်ျကို ဖျက်ချမလား။</string>
+    <string name="loading_conversations">တင်နေသည်\u2026</string>
+    <string name="no_conversations">စကားပြောချက်များ မရှိပါ။</string>
+    <string name="undo">ယခင်အတိုင်းပြန်လုပ်ရန်</string>
+    <plurals name="conversation_unstarred">
+        <item quantity="one">ကြယ်မပြထားသော စကားပြောချက် <xliff:g id="count">%1$d</xliff:g> ခု</item>
+        <item quantity="other">ကြယ်မပြထားသော စကားပြောချက် <xliff:g id="count">%1$d</xliff:g> ခု</item>
+    </plurals>
+    <plurals name="conversation_muted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု အသံပိတ်ထား။</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု အသံပိတ်ထား။</item>
+    </plurals>
+    <plurals name="conversation_spammed">
+        <item quantity="one">အသုံးမဝင်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု</item>
+        <item quantity="other">အသုံးမဝင်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု</item>
+    </plurals>
+    <plurals name="conversation_not_spam">
+        <item quantity="one">အသုံးမဝင်မဟုတ်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု</item>
+        <item quantity="other">အသုံးမဝင်မဟုတ်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု</item>
+    </plurals>
+    <plurals name="conversation_not_important">
+        <item quantity="one">အရေးမကြီးဟု မှတ်သားထားသည့် <b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု</item>
+        <item quantity="other">အရေးမကြီးဟု မှတ်သားထားသည့် <b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု</item>
+    </plurals>
+    <plurals name="conversation_phished">
+        <item quantity="one">ကာကွယ်ထားသည်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု</item>
+        <item quantity="other">ကာကွယ်ထားသည်ဟု တင်ပြထားသည့် <b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု</item>
+    </plurals>
+    <plurals name="conversation_archived">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခု ပြီး။</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခု ပြီး။</item>
+    </plurals>
+    <plurals name="conversation_deleted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> ခုဖျက်ပြီး။</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> ခုဖျက်ပြီး။</item>
+    </plurals>
+    <string name="deleted">ဖျက်ပြီး</string>
+    <string name="archived">မော်ကွန်းတင်ပြီး</string>
+    <string name="folder_removed"><xliff:g id="folderName">%1$s</xliff:g> မှ ဖယ်ရှားခဲ့သည်</string>
+    <plurals name="conversation_folder_changed">
+        <item quantity="one">ဖိုဒါပြောင်းခဲ့သည်။</item>
+        <item quantity="other">ဖိုဒါများပြောင်းခဲ့သည်။</item>
+    </plurals>
+    <string name="conversation_folder_moved"><xliff:g id="folderName">%1$s</xliff:g> သို့ ရွှေ့ခဲ့သည်။</string>
+    <string name="search_results_header">ရလဒ်များ</string>
+    <string name="search_unsupported">ရှာဖွေခြင်းကို ဤအကောင့်တွင် မထောက်ပံ့ပါ။</string>
+    <string name="search_results_searching_header">ရှာဖွေနေဆဲ\u2026</string>
+    <string name="add_label">ဖိုဒါ ထပ်ထည့်ပါ</string>
+    <string name="new_incoming_messages_one"><xliff:g id="sender">%s</xliff:g> မှ မက်ဆေ့ခ်ျအသစ်များ။ ပြပါ။</string>
+    <plurals name="new_incoming_messages_many">
+        <item quantity="other">မက်ဆေ့ခ်ျအသစ် <xliff:g id="count">%1$d</xliff:g> ခု။ ပြပါ။</item>
+    </plurals>
+    <string name="expand_recipient_details">လက်ခံသူအသေးစိတ်ကို ဖြန့်ကြည့်ပါ။</string>
+    <string name="collapse_recipient_details">လက်ခံသူ အသေးစိတ်ကို ပြန်ခေါက်သိမ်းပါ။</string>
+    <string name="contact_info_string"><xliff:g id="name">%1$s</xliff:g> အတွက် အဆက်အသွယ်သတင်းအချက်အလက်ကို ပြပါ</string>
+    <string name="contact_info_string_default">အဆက်အသွယ် သတင်းအချက်အလက်ကို ပြပါ</string>
+    <plurals name="show_messages_read">
+        <item quantity="other">မက်ဆေ့ခ်ျအဟောင်း <xliff:g id="count" example="4">%1$d</xliff:g> ခု</item>
+    </plurals>
+    <string name="from_heading">မှ :\u0020</string>
+    <string name="replyto_heading">သို့ ပြန်ကြားချက် - \u0020</string>
+    <string name="to_heading">သို့ :\u0020</string>
+    <string name="cc_heading">တဆင့်ပို့ခြင်းသို့ - \u0020</string>
+    <string name="bcc_heading">Bcc :\u0020</string>
+    <string name="date_heading">ရက်စွဲ:\u0020</string>
+    <string name="show_images">ရုပ်ပုံများ ပြသည်</string>
+    <string name="always_show_images">ဤပေးပို့သူမှ ရုပ်ပုံများကို အမြဲတမ်း ပြသည်</string>
+    <string name="always_show_images_toast">ဤပေးပို့သူမှ ရုပ်ပုံများကို အလိုအလျောက် ပြလိမ့်မည်။</string>
+    <string name="address_display_format"><xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g></string>
+    <string name="address_display_format_with_via_domain"><xliff:g id="via_domain">%3$s</xliff:g> မှတဆင့် <xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g></string>
+    <string name="message_saved">အကြမ်းအဖြစ် သိမ်းထားသော မက်ဆေ့ခ်ျ</string>
+    <string name="sending_message">မက်ဆေ့ခ်ျပို့နေသည်\u2026</string>
+    <string name="invalid_recipient">လိပ်စာ <xliff:g id="wrongemail" example="foo@@gmail..com">%s</xliff:g> သည် မမှန်ပါ။</string>
+    <string name="show_elided">\u25B6 ကိုးကားစာသားကို ပြပါ</string>
+    <string name="hide_elided">\u25BC ကိုးကားစာသားကို ဝှက်ပါ</string>
+    <string name="message_invite_title">ပြက္ခဒိန်ကို ထည့်သွင်းသည်</string>
+    <string name="message_invite_calendar_view">ပြက္ခဒိန် တွင် ကြည့်သည်</string>
+    <string name="message_invite_label_attending">သွားမည်လား။</string>
+    <string name="message_invite_accept">လုပ်မည်</string>
+    <string name="message_invite_tentative">တက်ချင်တက်မည်</string>
+    <string name="message_invite_decline">မလုပ်ပါ</string>
+    <string name="enumeration_comma">,\u0020</string>
+    <string name="yes">မှန်</string>
+    <string name="no">မလုပ်ပါ</string>
+    <string name="ok">အဆင်ပြေပါသည်</string>
+    <string name="done">ပြီးပြီ</string>
+    <string name="cancel">မလုပ်ပါ</string>
+    <string name="clear">ရှင်းလင်းပါ</string>
+    <string-array name="sync_status">
+        <item>အောင်မြင်သည်</item>
+        <item>ချိတ်ဆက်မှုမရှိပါ။</item>
+        <item>မဝင်နိုင်ခဲ့ပါ။</item>
+        <item>လုံခြုံရေးအမှား</item>
+        <item>တစ်မျိုးတည်းဖြစ်အောင် မလုပ်နိုင်ခဲ့ပါ</item>
+        <item>အတွင်း အမှား</item>
+    </string-array>
+    <string name="tap_to_configure">တည်ဆောက်ရန် ထိပါ</string>
+    <string name="non_synced_folder_description">စကားပြောချက်များကို ကြည့်ရန် ဤဖိုဒါကို ချိန်ညှိပါ</string>
+    <string name="tap_to_configure_folder_sync">ဖိုဒါကို ချိန်ညှိပါ</string>
+    <string name="widget_large_unread_count">%d+</string>
+    <plurals name="actionbar_unread_messages">
+        <item quantity="other"><xliff:g id="count" example="4">%1$d</xliff:g> ခု မဖတ်ရသေး</item>
+    </plurals>
+    <string name="actionbar_large_unread_count"><xliff:g id="count">%1$d</xliff:g>+ ခု မဖတ်ရသေး</string>
+    <string name="view_more_conversations">နောက်ထပ်စကားပြောချက်များကို ကြည့်ပါ</string>
+    <string name="loading_conversation">ဖွင့်နေဆဲ\u2026</string>
+    <string name="activity_mailbox_selection">အကောင့်ကို ရွေးချယ်ပါ</string>
+    <string name="activity_folder_selection">ဖိုဒါကို ရွေးပါ</string>
+    <string name="folder_shortcut_widget_label">အီးမေးလ်ဖိုဒါ</string>
+    <string name="change_folders_selection_dialog_title">ဖိုဒါများပြောင်းပါ</string>
+    <string name="move_to_selection_dialog_title">သို့ ရွှေ့သည်</string>
+    <string name="search_hint">မေးလ်ကို ရှာပါ</string>
+    <string name="search_results_loaded"><xliff:g id="searchCount">%1$d</xliff:g></string>
+    <string name="network_error">ချိတ်ဆက်မှုမရှိပါ</string>
+    <string name="retry">ပြန်ကြိုးစားသည်</string>
+    <string name="load_more">နောက်ထပ် တင်ပါ</string>
+    <string name="shortcut_name_title">ဖိုဒါအတိုနည်းကို အမည်ပေးခြင်း</string>
+    <string name="wait_for_sync_title">တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်း အတွက် စောင့်ဆိုင်းနေသည်</string>
+    <string name="wait_for_sync_body">သင့်အီးမေးလ် အချိန်တိုအတွင်း ပေါ်လာမည်။</string>
+    <string name="not_synced_title">တစ်မျိုးတည်းဖြစ်အောင် မလုပ်ရသေးသော အကောင့်</string>
+    <string name="wait_for_manual_sync_body">ဤအကောင့်ကို အလိုအလျောက် ချိန်ညှိရန် မတည်ဆောက်ထားပါ။\nမေးလ်ကို ချိန်ညှိရန်<b>ယခုတစ်မျိုးတည်း ဖြစ်အောင်ပြုလုပ်ပါ</b> ကို တစ်ကြိမ်ထိပါ သို့မဟုတ် မေးလ်နှင့် အလိုအလျောက် ချိန်ညှိရန် ဤအကောင့်ကို တည်ဆောက်ရန် <b>တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ခြင်း အဆင်အပြင်များကို ပြောင်းပါ</b> ကို ထိပါ။</string>
+    <string name="manual_sync">ယခု ချိန်ညှိပါ</string>
+    <string name="change_sync_settings">ချိန်ညှိခြင်း ဆက်တင်ကိုပြောင်း</string>
+    <string name="photo_load_failed">ပုံကို မတင်နိုင်ခဲ့ပါ</string>
+    <string name="cant_move_or_change_labels">ရွေးချယ်ချက်တွင် အကောင့်များစွာ ပါသောကြောင့် မရွှေ့နိုင်ပါ။</string>
+    <string name="multiple_new_message_notification_item"><b><xliff:g id="sender">%1$s</xliff:g></b>\u0020\u0020\u0020<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="single_new_message_notification_big_text"><xliff:g id="subject">%1$s</xliff:g>\n<xliff:g id="snippet">%2$s</xliff:g></string>
+    <string name="ignore_spam_warning">လစ်လျူရှုပါ၊ မက်ဆေ့ခ်ျကိုယုံသည်</string>
+    <string name="via_domain"><xliff:g id="viaDomain">%1$s</xliff:g> မှ တဆင့်</string>
+    <string-array name="moveto_folder_sections">
+        <item>စနစ်</item>
+        <item>မကြာခဏသုံးထားသော</item>
+        <item>ဖို(လ်)ဒါများ အားလုံး </item>
+    </string-array>
+    <string name="signin">ဝင်ရန်</string>
+    <string name="info">သတင်းအချက်အလက်</string>
+    <string name="report">သတင်းပေးပို့ချက်</string>
+    <string name="sync_error">တစ်မျိုးတည်းဖြစ်အောင် မလုပ်နိုင်ခဲ့ပါ</string>
+    <string name="sync_error_message">သင့်စက်တွင် တစ်မျိုးတည်းဖြစ်အောင်လုပ်ရန် နေရာအလုံအလောက် မရှိပါ။</string>
+    <string name="storage">သိမ်းဆည်းမှု</string>
+    <string name="senders_split_token">၊\u00A0</string>
+    <string name="draft_count_format">\u00A0(<xliff:g id="count">%1$s</xliff:g>)</string>
+    <string name="all_folders_heading">ဖို(လ်)ဒါများ အားလုံး </string>
+    <string name="recent_folders_heading">မကြာသေးမီက သွားခဲ့သော ဖို(လ်)ဒါများ</string>
+    <string name="message_details_title">မက်ဆေ့(ခ်ျ) အသေးစိတ်</string>
+    <string name="auto_advance_label">အလိုအလျောက်-တိုးတက်မှု</string>
+    <string name="auto_advance_summary">သင် မက်ဆေ့(ခ်ျ)တစ်ခုကို ဖျက်ပြီးနောက် မည်သည့်ဖန်သားပြင်ကို ပြရန် ရွေးချယ်သည်</string>
+    <string name="auto_advance_help_title">အလိုအလျောက်- အဆင့်မြင့် ပိုမိုနှစ်သက်မှုများကို သတ်မှတ်ပါ\n(သင်ဖျက်ပြီး သောအခါ၊ စသည်)</string>
+    <string-array name="prefEntries_autoAdvance">
+        <item>ပို၍သစ်သော </item>
+        <item>ပိုဟောင်းသော</item>
+        <item>စကားပြောဆိုမှုစာရင်း</item>
+    </string-array>
+    <string-array name="prefSummaries_autoAdvance">
+        <item>သင်ဖျက်ပြီးသောအခါ ပိုသစ်သော စကားပြောဆိုချက်ကို ပြပါ</item>
+        <item>သင်ဖျက်ပြီးသောအခါ ပိုဟောင်းသော စကားပြောဆိုချက်ကို ပြပါ</item>
+        <item>သင်ဖျက်ပြီးသောအခါ စကားပြောဆိုမှုစာရင်းကို ပြပါ</item>
+    </string-array>
+    <string name="clear_display_images_whitelist_title">ပုံဖြင့် သဘောတူညီမှုများကို ရှင်းမလား။</string>
+    <string name="clear_display_images_whitelist_dialog_title">ပုံဖြင့်သဘောတူညီမှုများကို ရှင်းမလား။</string>
+    <string name="clear_display_images_whitelist_dialog_message">သင်ယခင်ကခွင့်ပြုခဲ့သော ပေးပို့သူများမှ အတွင်းပုံများ ဖော်ပြခြင်းကို ရပ်ပါ။</string>
+    <string name="sender_whitelist_cleared">ပုံများအလိုအလျောက် ပြလိမ့်မည်မဟုတ်ပါ။</string>
+    <string name="preferences_signature_title">လက်မှတ်</string>
+    <string name="preferences_signature_dialog_title">လက်မှတ်</string>
+    <string name="preferences_signature_summary_not_set">မထားပါ</string>
+    <string name="notification_action_reply">အကြောင်းပြန်ပါ</string>
+    <string name="notification_action_reply_all">အားလုံးကို စာပြန်သည်</string>
+    <string name="notification_action_archive">မော်ကွန်းတင်ပါ</string>
+    <string name="notification_action_remove_label">အညွှန်းကို ဖယ်ရှားပါ</string>
+    <string name="notification_action_delete">ဖျက်ပါ</string>
+    <string name="notification_action_undo_archive">မော်ကွန်းတင်ပြီး</string>
+    <string name="notification_action_undo_remove_label">အညွှန်းဖယ်ရှားပြီး</string>
+    <string name="notification_action_undo_delete">ဖျက်ပြီး</string>
+    <string name="veiled_address" />
+    <string name="veiled_alternate_text" />
+    <string name="veiled_alternate_text_unknown_person" />
+    <string name="veiled_summary_unknown_person" />
+    <string name="label_notification_ticker">"<xliff:g id="label">%s</xliff:g>- <xliff:g id="notification">%s</xliff:g>"</string>
+    <string name="new_messages">မက်ဆေ့ခ်ျအသစ် <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="single_new_message_notification_title"><xliff:g id="sender">%1$s</xliff:g>- <xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="silent_ringtone">အသံတိတ်သည်</string>
+    <string name="preference_removal_action_title">လုပ်ဆောင်ချက်များကို မော်ကွန်းတင်ပြီး ဖျက်ပါ</string>
+    <string-array name="prefEntries_removal_action">
+        <item>မော်ကွန်းတင်ထားသည်ကိုသာ ပြပါ</item>
+        <item>ဖျက်ထားသည်ကိုသာ ပြပါ</item>
+        <item>မော်ကွန်းတင် ထားသည်များနှင့် ဖျက်ထားသည်များကိုပြပါ</item>
+    </string-array>
+    <string-array name="prefSummaries_removal_action_summary">
+        <item>မော်ကွန်းတင်ထားသည်ကိုသာ ပြပါ</item>
+        <item>ဖျက်ထားသည်ကိုသာ ပြပါ</item>
+        <item>မော်ကွန်းတင် ထားသည်များနှင့် ဖျက်ထားသည်များကို ပြပါ</item>
+    </string-array>
+    <string name="prefDialogTitle_removal_action">လုပ်ဆောင်ချက်များကို မော်ကွန်းတင်ပါ နှင့် ဖျက်ပါ</string>
+    <string name="preferences_default_reply_all_title">အားလုံးကို စာပြန်သည်</string>
+    <string name="preferences_default_reply_all_summary">မက်ဆေ့ခ်ျပြန်ကြားချက်များအတွက် ပုံသေအဖြစ် သုံးပါ</string>
+    <string name="preference_swipe_title_archive">မော်ကွန်းတင်ရန် ပွတ်ဆွဲပါ</string>
+    <string name="preference_swipe_title_delete">ဖျက်ရန် ပွတ်ဆွဲပါ</string>
+    <string name="preference_swipe_description">စကားပြောမှုစာရင်းတွင်</string>
+    <string name="preference_sender_image_title">ပေးပို့သူပုံ</string>
+    <string name="preference_sender_image_description">စကားပြောမှုစာရင်းတွင်အမည်ဘေးတွင် ပြပါ</string>
+    <string name="swipe_down_to_refresh">ပြန်လည်ဆန်းသစ်ရန် အောက်သို့ ပွတ်ဆွဲပါ</string>
+    <string name="checking_for_mail">မေးလ်စစ်ဆေးခြင်း</string>
+    <string name="empty_trash">အမှိုက်ပုံးကိုရှင်းပါ</string>
+    <string name="empty_spam">အသုံးမဝင်သည်များကို ရှင်းပါ</string>
+    <string name="empty_trash_dialog_title">အမှိုက်ပုံးကို ရှင်းမလား။</string>
+    <string name="empty_spam_dialog_title">အသုံးမဝင်သည်များကို ရှင်းမလား။</string>
+    <plurals name="empty_folder_dialog_message">
+        <item quantity="one">မက်ဆေ့ခ်ျ <xliff:g id="count">%1$d</xliff:g> ခုကို အပြီး ဖျက်ပစ်လိမ့်မည်။</item>
+        <item quantity="other">မက်ဆေ့ခ်ျ <xliff:g id="count">%1$d</xliff:g> ခုကို အပြီး ဖျက်ပစ်လိမ့်မည်။</item>
+    </plurals>
+    <string name="drawer_open">လမ်းညွှန်ရေးဆွဲသည့် အရာကို ဖွင့်ပါ</string>
+    <string name="drawer_close">လမ်းညွှန်ရေးဆွဲသည့် အရာကို ပိတ်ပါ</string>
+    <string name="conversation_photo_welcome_text">ထိုစကားပြောချက်ကို ရွေးရန် ပေးပို့သူပုံကို ထိပါ။</string>
+    <string name="long_press_to_select_tip">စကားပြောချက် တစ်ခုကို ရွေးရန် ထိကိုင်ထားပြီး နောက်ထပ်ရွေးရန် ထိပါ။</string>
+    <string name="folder_icon_desc">ဖိုဒါအိုက်ကွန်</string>
+    <string name="add_account">အကောင့်ကို ပေါင်းထည့်သည်</string>
+    <string name="attached_message">ပူးတွဲထားသော မက်ဆေ့ခ်ျ</string>
+    <string name="date_message_received"><xliff:g id="day_and_date">%1$s</xliff:g>၊ <xliff:g id="time">%2$s</xliff:g></string>
+    <string name="date_message_received_today">ယနေ့၊ <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="date_message_received_yesterday">မနေ့က <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="dismiss_tip_hover_text">အကြံပြုချက်ကို ဖယ်ထုတ်ပါ</string>
+    <string name="auto_sync_off">အလိုအလျောက်-တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်းကို ပိတ်ထားသည်</string>
+    <string name="tap_to_enable_sync">ဖွင့်ရန် ထိပါ။</string>
+    <string name="account_sync_off">အကောင့်တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်ခြင်းကို ပိတ်ထားသည်။</string>
+    <string name="enable_sync_in_account_settings"><xliff:g id="account_settings">%1$s</xliff:g> တွင် ဖွင့်ပါ။</string>
+    <string name="account_settings_param">အကောင့်အဆင်အပြင်များ</string>
+    <string name="unsent_messages_in_outbox"><xliff:g id="outbox">%2$s</xliff:g> တွင် မပို့ရသေးသော မက်ဆေ့ခ်ျ <xliff:g id="number">%1$s</xliff:g> ခု</string>
+    <string name="turn_auto_sync_on_dialog_title">အလိုအလျောက်- တစ်မျိုးတည်းဖြစ်အောင်ပြုလုပ်ခြင်းကို ဖွင့်မလား။</string>
+    <string name="turn_auto_sync_on_dialog_body">Gmail မှမဟုတ်ပဲ ပရိုဂရမ်များနှင့် အကောင့်များ အားလုံးတွင် ပြုလုပ်ထားသော ပြောင်းလဲမှုများသည် ဝက်ဘ်၊ သင်၏စက်များနှင့် သင်၏ <xliff:g id="phone_or_tablet">%1$s</xliff:g>အကြား ချိန်ကိုက်လှုပ်ရှား လိမ့်မည်။ </string>
+    <string name="phone">ဖုန်း</string>
+    <string name="tablet">တက်ဘလက်</string>
+    <string name="turn_auto_sync_on_dialog_confirm_btn">ဖွင့်ပါ</string>
+    <string name="show_n_more_folders">နောက်ထပ်ဖိုဒါ <xliff:g id="number">%1$s</xliff:g>ခု ပြပါ</string>
+    <string name="hide_folders">ဖိုဒါများကို ဝှက်ပါ</string>
+</resources>

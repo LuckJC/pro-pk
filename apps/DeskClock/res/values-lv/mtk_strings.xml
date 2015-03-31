@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Atmest un ieslēgt</string>
+    <string name="power_off">Atmest un izslēgt</string>
+    <string name="voice_ui_title">"Balss vadība"</string>
+    <string name="voice_ui_content_text">"Modinātājam iespējota balss vadība"</string>
+    <string name="alarm_command_summary_format">Lai atliktu vai apturētu modinātāju, varat izrunāt <xliff:g id="first">%1$s</xliff:g> vai <xliff:g id="second">%2$s</xliff:g> "\n".</string>
+    <string name="alarm_command_summary_format_land">Lai atliktu vai apturētu modinātāju, varat izrunāt <xliff:g id="first">%1$s</xliff:g> vai <xliff:g id="second">%2$s</xliff:g>.</string>
+</resources>

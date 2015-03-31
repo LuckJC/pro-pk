@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Zrušit a zapnout</string>
+    <string name="power_off">Zrušit a vypnout</string>
+
+    <string name="voice_ui_title">Hlasové ovládání</string>
+    <string name="voice_ui_content_text">"Hlasové ovládání pro budík je aktivováno"</string>
+    <string name="alarm_command_summary_format">Vyslovením <xliff:g id="first">%1$s</xliff:g> nebo <xliff:g id="second">%2$s</xliff:g> "\n"můžete odložit nebo zastavit budík.</string>
+    <string name="alarm_command_summary_format_land">Vyslovením <xliff:g id="first">%1$s</xliff:g> nebo <xliff:g id="second">%2$s</xliff:g> můžete prodloužit nebo zastavit budík.</string>
+</resources>

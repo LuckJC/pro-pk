@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Ignorer et allumer</string>
+    <string name="power_off">Ignorer et éteindre</string>
+
+    <string name="voice_ui_title">Contrôle vocal</string>
+    <string name="voice_ui_content_text">"Le contrôle vocal est activé pour l'Alarme"</string>
+    <string name="alarm_command_summary_format">"Vous pouvez dire <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> "\n"pour suspendre momentanément ou arrêter l'alarme."</string>
+    <string name="alarm_command_summary_format_land">"Vous pouvez dire <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> pour désactiver temporairement ou arrêter l'alarme."</string>
+</resources>

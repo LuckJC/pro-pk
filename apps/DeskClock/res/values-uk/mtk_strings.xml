@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Відхилити і подати живлення</string>
+    <string name="power_off">Відхилити і вимкнути живлення</string>
+    <string name="voice_ui_title">"Голосовий контроль"</string>
+    <string name="voice_ui_content_text">"Активовано Голосовий контроль для Сигналізації"</string>
+    <string name="alarm_command_summary_format">Можна сказати <xliff:g id="first">%1$s</xliff:g> або <xliff:g id="second">%2$s</xliff:g> "\n", щоб відкласти або зупинити сигналізацію.</string>
+    <string name="alarm_command_summary_format_land">Можна сказати <xliff:g id="first">%1$s</xliff:g> або <xliff:g id="second">%2$s</xliff:g> "\n", щоб відкласти або зупинити сигналізацію.</string>
+</resources>

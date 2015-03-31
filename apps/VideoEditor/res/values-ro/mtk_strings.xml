@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Gri</string>  
+    <string name="not_enough_space" product="nosdcard">"Spaţiul de stocare USB s-a terminat."</string>  
+    <string name="not_enough_space" product="default">"Cardul SD este plin."</string>
+    <string name="add_audio_track_failed">Imposibil de adăugat pista audio.</string>
+    <string name="insert_transition_failed">Imposibil de inserat tranziţia.</string>
+<string name="save_emoticons_failed">Emoticonurile nu pot fi salvate.</string>
+    <string name="save_xml_failed">Caracterele speciale nu pot fi salvate.</string>
+    </resources>

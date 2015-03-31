@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="editor_gray_effect">Pilkas</string>
+    
+    <string name="not_enough_space" product="nosdcard">USB atminties įrenginys yra pilnas.</string>
+    
+    <string name="not_enough_space" product="default">SD kortelė pilna.</string>
+    <string name="add_audio_track_failed">Nepavyko pridėti garso takelio.</string>
+    <string name="insert_transition_failed">Nepavyko įterpti moduliacijos.</string>
+
+    
+    <string name="save_emoticons_failed">Nepavyko išsaugoti emocijų veidukų.</string>
+    <string name="save_xml_failed">Nepavyko išsaugoti specialių simbolių.</string>
+</resources>

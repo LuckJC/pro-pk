@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    <TextView
+        android:id="@+id/tv_conv_firstrun_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="@string/stereo3d_convergence_firstrun_hint" />
+    
+    <Button 
+        android:id="@+id/btn_conv_firstrun_dismiss"
+        android:text="@android:string/ok"
+        android:layout_width="100dip"
+        android:layout_height="50dip"
+        android:layout_below="@id/tv_conv_firstrun_hint"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/s3d_conv_btn_bg" />
+    
+</com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch>

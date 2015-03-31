@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+	<string-array name="CommonTestStrings">
+		<item>The speaker and the memory card</item>
+		<item>Detect UIM</item>
+		<item>Rear camera Test</item>
+		<item>Charging Test</item>
+		<item>Sleep/Wake</item>
+		<item>Vibration,LED Test(Red,Green)</item>
+		<item>Mic Loop Test</item>
+		<item>Headset Test</item>
+		<item>Keyboard Test</item>
+		<item>Gravity Sensor</item>
+		<item>Magnetic field Sensor</item>
+		<item>WLAN Test</item>
+		<item>Bluetooth Test</item>
+		<item>LCD</item>
+		<item>LED Test</item>
+		<item>Temperature</item>
+		<item>GPS Test</item>
+		<item>Radio</item>
+		<item>Factory data reset</item>
+		<item>Version</item>		
+		<item>Light Sensor</item>
+		<item>Proximity Sensor</item>		
+		<item>SIM card,Memory card,Vibration,Speaker</item>
+		<item>Front camera Test</item>
+		<item>Electronic compass</item>
+		<item>Compass</item>
+		<item>TP Test</item>
+		<item>Keyboard light Test</item>
+		<item>Touch</item>
+		<item>Backlit Test</item>
+		<item>REC Test</item>
+		<item>Compass Test</item>
+		<item>Vibration Test</item>
+		<item>Speaker Test</item>
+		<item>Hall Devices</item>
+		<item>Incoming flash Test</item>
+		<item>Dual Mic Test</item>
+		<item>Dual Speaker Test</item>
+		<item>Barometer Test</item>
+		<item>OTG Test</item>
+		<item>HDMI Test</item>
+		<item>Gyro Test</item>
+	</string-array>
+
+	<string-array name="MainTest">
+		<item>PCBA Test</item>
+		<item>Machine Test</item>
+		<item>Version</item>
+		<item>Battery Information</item>
+	</string-array>
+
+	<string-array name="PCBATest">
+		<item>PCBA Auto Test</item>
+		<item>PCBA Sensor Auto Test</item>
+		<item>PCBA Single Test</item>
+
+	</string-array>
+
+	<string-array name="MachineTest">
+		<item>Machine Auto Test</item>
+		<item>Machine Sensor Auto Test</item>
+		<item>Machine Single Auto Test</item>
+		<item>WBG Test</item>
+		<item>Run In Test</item>
+
+	</string-array>
+	<string-array name="PCBAAutoTestStrings">
+		<item>Version</item>
+		<item>SIM card,Memory card,Vibration,Speaker</item>
+		<item>LCD</item>
+		<item>Sleep/Wake</item>
+		<item>Backlit Test</item>
+		<item>Rear camera Test</item>
+		<item>LED Test</item>
+		<item>Mic Loop Test</item>
+		<item>Headset Test</item>
+		<item>Keyboard Test</item>
+		<item>Charging Test</item>
+		<!-- <item>Front camera Test</item> <item>Radio</item> <item>WLAN Test</item> <item>Bluetooth Test</item>  
+			<item>TP Test</item> <item>Touch</item> -->
+	</string-array>
+	<string-array name="PCBAItemStrings">
+		<item>Gravity Sensor</item>
+		<item>Proximity Sensor</item>
+		<item>Light Sensor</item>
+		<item>Version</item>
+		<item>LCD</item>
+		<item>LED Test</item>
+		<item>Radio</item>
+		<item>WLAN Test</item>
+		<item>Bluetooth Test</item>
+		<item>GPS Test</item>
+		<item>The speaker and the memory card</item>
+		<item>Detect UIM</item>
+		<item>Rear camera Test</item>
+		<item>Front camera Test</item>
+		<item>Backlit Test</item>
+		<item>Charging Test</item>
+		<item>Sleep/Wake</item>
+		<item>Vibration Test</item>
+		<item>Mic Loop Test</item>
+		<item>Headset Test</item>
+		<item>Keyboard Test</item>
+		<item>Factory data reset</item>
+		<item>Touch</item>
+		<item>TP Test</item>
+		<!--item>Keyboard light Test</item-->
+	</string-array>
+	
+	<string-array name="MachineItemStrings">
+		<item>Gravity Sensor</item>
+		<item>Proximity Sensor</item>
+		<item>Light Sensor</item>
+		<!-- <item>Magnetic field Sensor</item> 
+		<item>Compass Test</item> -->
+		<item>Version</item>
+		<item>LCD</item>
+		<item>LED Test</item>
+		<item>REC Test</item>
+		<item>Radio</item>
+		<item>WLAN Test</item>
+		<item>Bluetooth Test</item>
+		<item>GPS Test</item>
+		<item>The speaker and the memory card</item>
+		<item>Detect UIM</item>
+		<item>Rear camera Test</item>
+		<item>Front camera Test</item>
+		<item>Charging Test</item>
+		<item>Sleep/Wake</item>
+		<item>Vibration Test</item>
+		<item>Mic Loop Test</item>
+		<item>Headset Test</item>
+		<item>Keyboard Test</item>
+		<item>Factory data reset</item>
+		<item>TP Test</item>
+		<item>Touch</item>
+		<!--item>Keyboard light Test</item-->
+		<item>Backlit Test</item>
+	</string-array>
+
+
+	<string-array name="MachineAutoTestStrings">
+		<item>Version</item>
+		<item>SIM card,Memory card,Vibration,Speaker</item>
+		<item>Rear camera Test</item>
+		<item>LED Test</item>
+		<item>Vibration Test</item>
+		<item>Charging Test</item>
+		<item>Mic Loop Test</item>
+		<item>Headset Test</item>
+		<item>Sleep/Wake</item>
+		<item>LCD</item>
+		<item>Backlit Test</item>
+		<item>Keyboard Test</item>
+		<!--item>Keyboard light Test</item-->
+		<item>WLAN Test</item>
+		<item>Bluetooth Test</item>		
+		<item>GPS Test</item>
+		<item>Radio</item>
+		<item>REC Test</item>
+		<item>Front camera Test</item>
+		<item>Gravity Sensor</item>
+		<item>Light Sensor</item>
+		<item>Proximity Sensor</item>
+		<item>Touch</item>
+		<item>TP Test</item>
+	</string-array>
+
+
+
+
+	<string-array name="MachineSensorTestStrings">
+		<item>Gravity Sensor</item>
+		<!-- <item>Compass Test</item> -->
+		<item>Proximity Sensor</item>
+		<item>Light Sensor</item>
+
+
+	</string-array>
+	<string-array name="PCBASensorTestStrings">
+		<item>Gravity Sensor</item>
+		<!-- <item>Magnetic field Sensor</item> -->
+		<item>Proximity Sensor</item>
+		<item>Light Sensor</item>
+	</string-array>
+
+
+
+	<string-array name="WBGTestStrings">
+		<item>WLAN Test</item>
+		<item>Bluetooth Test</item>
+		<item>GPS Test</item>
+	</string-array>
+	<string-array name="DeputyTestString">
+		<item>Mic Loop Test</item>
+		<item>Speaker Test</item>
+		<item>Vibration Test</item>
+	</string-array>
+	<string-array name="TestKeys">
+	    <!--item>power</item-->
+		<item>volume up</item>
+		<item>volume down</item>
+		<item>home</item>
+		<item>menu</item>
+		<item>back</item>
+	</string-array>
+
+	<string-array name="AllKeys">
+	    <item>power</item>
+		<item>camera</item>
+		<item>volume up</item>
+		<item>volume down</item>
+		<item>menu</item>
+		<item>back</item>
+		<item>home</item>
+		<item>search</item>
+		<item>earPhone</item>
+
+	</string-array>
+	<string-array name="runin_diruction">
+		<item>4</item>
+		<item>8</item>
+		<item>12</item>
+		<item>16</item>
+		<item>24</item>
+		<item>48</item>
+	</string-array>
+
+
+</resources>

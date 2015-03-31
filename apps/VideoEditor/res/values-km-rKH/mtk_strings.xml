@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">ពណ៌ប្រផេះ</string>  
+    <string name="not_enough_space" product="nosdcard">ឧបករណ៍ USB របស់អ្នកពេញហើយ ។</string>  
+    <string name="not_enough_space" product="default">កាត SD របស់អ្នកពេញហើយ ។</string> 
+    <string name="add_audio_track_failed">ការថែម​កាលណាល់​អូឌីយោ​មិន​សម្រេច។</string>
+    <string name="insert_transition_failed">ការបញ្ចូល​ដំណើរប្ដូរ​មិន​សម្រេច។</string>
+<string name="save_emoticons_failed">មិនអាចរក្សាទុកសញ្ញាអារម្មណ៍​បាន។</string>
+    <string name="save_xml_failed">មិនអាចរក្សាទុក​តួអក្សរបាន។</string>
+    </resources>

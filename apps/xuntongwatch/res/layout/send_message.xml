@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout 
+        android:id="@+id/send_message_top_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#eeeeee"
+        android:orientation="horizontal">
+        <EditText 
+            android:id="@+id/send_message_person_et"
+            android:layout_width="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="收件人："
+            android:textColor="#000000"
+            android:singleLine="true"
+            android:background="@drawable/message_chat_input_box"
+            />
+        
+        <RelativeLayout 
+            android:id="@+id/send_message_add_person"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:background="#eeeeee"
+            android:paddingRight="10dp"
+            android:layout_height="match_parent">
+              <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/edit_head_title_add"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ListView 
+        android:id="@+id/send_message_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_below="@+id/send_message_top_ll"
+        android:layout_above="@+id/send_message_bottom_ll"
+        />
+    
+     <LinearLayout 
+         android:id="@+id/send_message_bottom_ll"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:background="#eeeeee"
+         android:layout_alignParentBottom="true"
+         android:orientation="horizontal">
+        <EditText 
+            android:id="@+id/send_message_content_et"
+            android:layout_width="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:singleLine="true"
+            android:background="@drawable/message_chat_input_box"/>
+        
+        <RelativeLayout 
+            android:id="@+id/send_message_send"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:background="#eeeeee"
+            android:paddingRight="10dp"
+            android:layout_height="match_parent">
+              <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/message_chat_send" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>Поле хоста не может быть пустым</item>  
+        <item>Поле порта не может быть пустым</item>  
+        <item>Неверный хост</item>  
+        <item>Неверный порт</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"По умолчанию"</item>
+        <item>"Монохром"</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array></resources>

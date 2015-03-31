@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Nije uspjela reprodukcija zvuka.</string>
+    <string name="VideoView_info_text_network_interrupt">Greška mreže, prekinut je prijenos videozapisa.</string>
+    <string name="VideoView_error_text_connection_failed">Mrežna veza nije uspjela, provjerite svoju mrežnu vezu.</string>
+    
+    <string name="can_not_trim">Dogodila se greška, videozapis se ne može obrezati.</string>
+	
+	<string name="setp_option_name">Korak</string>
+	<string name="step_option_desc">Prilagodi korak za brzo naprijed/natrag</string>
+	<string name="setp_option_three_second">"3 sekunde"</string>
+	<string name="setp_option_six_second">"6 sekundi"</string>
+    
+    <string name="camera_print">"Ispis"</string>
+    <string name="no_way_to_print">Nema dostupne aplikacije za ispis datoteke/a.</string>
+    <string name="printFile">Ispiši datoteku putem</string>
+    
+    
+    <string name="no_storage_title">"Nema pohrane"</string>
+    
+    
+    <string name="no_storage_message">Umetnite SD karticu</string>
+    
+    
+    <string name="load_image_fail">Nije uspjelo učitavanje slike</string>
+    
+    
+    <string name="proxy_host">Host</string>
+    <string name="proxy_port">"Port"</string>
+    <string name="apn_settings">"Nazivi pristupnih točaka"</string>
+    <string name="rtsp_proxy_settings">"Postavke za RTSP proxy"</string>
+    <string name="rtsp_proxy_settings_summary">"Priprema i upravljanje postavkama za RTSP proxy"</string>
+    <string name="enable_rtsp_proxy">"Aktiviraj RTSP proxy"</string>
+    <string name="enable_rtsp_proxy_summary">"Aktiviraj/deaktiviraj RTSP proxy"</string>
+    <string name="http_proxy_settings">"Postavke za HTTP proxy"</string>
+    <string name="http_proxy_settings_summary">"Priprema i upravljanje postavkama za HTTP proxy"</string>
+    <string name="enable_http_proxy">"Aktiviraj HTTP proxy"</string>
+    <string name="enable_http_proxy_summary">"Aktiviraj/deaktiviraj HTTP proxy"</string>
+    <string name="apn_settings_summary">"Trenutna SIM: %1$s\nTrenutni APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"Podatkovna povezivost SIM kartice je zatvorena, ne može se postaviti APN"</string>
+    <string name="udp_port_settings">"Raspon RTP/RTCP priključka"</string>
+    <string name="udp_port_settings_summary">"Postavi najveći i najmanji broj priključka"</string>
+    <string name="max_udp_port">"Najveći broj priključka"</string>
+    <string name="min_udp_port">"Najmanji broj priključka"</string>
+    <string name="server_timeout_title">"Istek vremena poslužitelja"</string>
+    <string name="server_timeout_message">"Želite li se ponovno spojiti na poslužitelj radi reprodukcije videozapisa?"</string>
+    <string name="input_url">"Unesi URL"</string>
+    <string name="streaming_settings">"Postavke prijenosa"</string>
+    <string name="VideoView_info_text_video_not_supported">"Ovaj videozapis nije podržan."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Povezivanje nije uspjelo, pokušajte se ponovno spojiti %1$d..."</string>
+	<string name="VideoView_info_buffering">"Spremanje u međuspremnik..."</string>
+    <string name="stop">"Zaustavi"</string>
+    <string name="loop">"Kružno"</string>
+    <string name="single">"Jedan"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Titl"</string>
+    <string name="SubtitleSetting_text">"TEKST"</string>
+    <string name="SubtitleSetting_layout">"IZGLED"</string>
+    <string name="subtitle_layout_alignment">"Poravnanje"</string>
+    <string name="subtitle_layout_bottom_margins">"Donje margine"</string>
+    <string name="subtitle_layout_alignment_left">"Lijevo"</string>
+    <string name="subtitle_layout_alignment_center">"Sredina"</string>
+    <string name="subtitle_layout_alignment_right">"Desno"</string>
+    <string name="subtitle_text_font">Font</string>
+    <string name="subtitle_text_color">"Boja"</string>
+    <string name="subtitle_text_size">"Veličina"</string>
+    <string name="subtitle_text_encoding">"Kodiranje znakova"</string>
+    <string name="subtitle_text_color_black">"Crna"</string>
+    <string name="subtitle_text_color_dkgray">"Tamnosivo"</string>
+    <string name="subtitle_text_color_gray">"Siva"</string>
+    <string name="subtitle_text_color_ltgray">"Svijetlosivo"</string>
+    <string name="subtitle_text_color_white">"Bijela"</string>
+    <string name="subtitle_text_color_red">"Crveno"</string>
+    <string name="subtitle_text_color_green">"Zeleno"</string>
+    <string name="subtitle_text_color_blue">"Plavo"</string>
+    <string name="subtitle_text_color_yellow">"Žuto"</string>
+    <string name="subtitle_text_color_cyan">"Cijan"</string>
+    <string name="subtitle_text_color_magenta">"Grimizno"</string>
+    <string name="subtitle_text_color_translucent">"Prozirno"</string>
+    <string name="subtitle_text_encoding_default">"Zadano"</string>
+    <string name="closeSubtitle">"Zatvori ponaslov"</string>
+    <string name="subTitleChange">"subTitleChange"</string>
+    <string name="subtitleTrackChange">"subTitleChange"</string>
+    
+    <string name="audioTrackChange">"AudioTrackChange"</string>
+    <string name="audioTrack">"AudioTrack"</string>
+    <string name="noAvailableeTrack">"Nema dostupnih podataka o zapisu"</string>
+    <string name="noAvailableeAudioTrack">"Nema dostupnih audiozapisa"</string>
+    <string name="audioChange">"audioChange"</string>
+    
+    
+
+    <string name="bookmark_add">"Dodaj zabilješku"</string>
+    <string name="bookmark_display">"Prikaži zabilješke"</string>
+    <string name="bookmark_empty">"Nema zabilješki"</string>
+    <string name="bookmark_exist">"Ista zabilješka u povijesti"</string>
+    <string name="bookmark_add_success">"Dodavanje zabilješke je uspjelo"</string>
+    <string name="bookmark_list">"Zabilješke"</string>
+    <string name="bookmark_title">"Naslov"</string>
+    <string name="bookmark_location">"Lokacija"</string>
+    <string name="http_buffer_size">"Veličina HTTP međuspremnika"</string>
+    <string name="http_buffer_size_summary">"Postavi veličinu HTTP međuspremnika za prijenos"</string>
+    <string name="http_buffer_size_text">"Trenutna veličina HTTP međuspremnika: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"Veličina RTSP međuspremnika"</string>
+    <string name="rtsp_buffer_size_summary">"Postavi veličinu RTSP međuspremnika za prijenos"</string>
+    <string name="rtsp_buffer_size_text">"Trenutna veličina RTSP međuspremnika: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Valjani raspon vrijednosti: %1$d - %2$d sekundi"</string>
+    <string name="media_detail">"Podaci o mediju"</string>
+    <string name="detail_title">"Naslov: %1$s"</string>
+    <string name="detail_copyright">"Autorska prava: %1$s"</string>
+    <string name="detail_session">"Podaci o sesiji: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"Jedan zapis"</string>
+    <string name="delete_all">"Izbriši sve"</string>
+    <string name="default_title">"Zadani naslov"</string>
+    <string name="next">"Sljedeće"</string>
+    <string name="previous">"Prethodno"</string>
+    
+    
+    <string name="mav_firstRunTitle">Kako pregledati sliku u više kutova</string>
+    <string name="mav_firstRunText">Prijeđite prstom lijevo ili desno za pregled slike u više kutova</string>
+    
+    
+    <string name="stereo3d_album_name">3D medij</string>
+    <string name="stereo3d_mode_switchto_2d">Prijelaz u 2D način</string>
+    <string name="stereo3d_mode_switchto_3d">Prijelaz u 3D način</string>
+    <string name="stereo3d_convert2d_dialog_title">Pretvori u 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" nije podržan za 3D sliku. Pretvorit će se u 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Pretvaranje u 2D...</string>
+    <string name="stereo3d_pan_firstrun_title">Kako pregledati 3D panoramsku sliku</string>
+    <string name="stereo3d_pan_firstrun_text">Prijeđite prstom lijevo ili desno za pregled 3D panoramske slike.</string>
+    <string name="stereo3d_share_convert_text_single">Ovo je 3D slika. Za nastavak dijeljenja ona će se pretvoriti u 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">U odabrane slike uključene su 3D slike. Za nastavak dijeljenja one će se pretvoriti u 2D.</string>
+    <string name="stereo3d_share_dialog_title">Podijeli kao 3D ili 2D</string>
+    <string name="stereo3d_share_dialog_text_single">Ovo je 3D slika. Primatelj je neće moći pravilno vidjeti.</string>
+    <string name="stereo3d_share_dialog_text_multiple">U odabrane slike uključene su 3D slike. Primatelj ih neće moći pravilno vidjeti.</string>
+    <string name="stereo3d_share_dialog_button_2d">Dijeli kao 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Dijeli kao 3D</string>
+    <string name="stereo3d_attach_dialog_title">Priloži kao 3D ili 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Priloži kao 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Priloži kao 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Pregled slike</string>
+    <string name="stereo3d_preview_button_set">"Postavi"</string>
+    <string name="stereo3d_set_wallpaper_fail">Postavljanje 3D pozadine nije uspjelo.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Podešavanje dubine</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Dubinu možete prilagoditi ručno u izborniku, ako osjećate nelagodu u očima</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automatsko podešavanje dubine</string>
+
+    
+    <string name="stereo3d_video_layout">Prilagodi izgled video zapisa</string>
+    <string name="stereo3d_video_layout_normal">Uobičajen</string>
+    <string name="stereo3d_video_layout_sidebyside">Usporedan</string>
+    <string name="stereo3d_video_layout_toptobottom">Gore i dolje</string>
+    <string name="stereo3d_video_layout_leftrightswap">Zamjena lijevo/desno</string>
+    <string name="stereo3d_video_layout_topbottomswap">Zamjena gore/dolje</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Automatski pretvoreno u 3D način</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Automatski pretvoreno u 2D način</string>
+    <string name="stereo3d_save">"Spremi"</string>
+
+    
+    <string name="widget_load_failed">Nije uspjelo učitavanje widgeta</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Pokazni rad isključen</string>
+    <string name="vertical_demo">Vertikalni pokazni rad</string>
+    <string name="horizontal_demo">Horizontalni pokazni rad</string>
+                  
+    
+    <string name="conshots_title">"Kontinuirani snimak"</string>
+    <string name="best_shots">Izdvoji najbolje snimke</string>
+    <string name="best_shots_confirm">Izbriši sve neoznačene slike.</string>
+    <string name="empty_conshots">O dostupnih kontinuirano snimljenih slika.</string>
+    <string name="make_motion">"Gotovo"</string>
+    <string name="motion_at_least">"Za sastavljanje efekta potrebno je barem %1$s fotografija."</string>
+    <string name="motion_at_most">"Odabrati se može najviše %1$s fotografija."</string>
+    <string name="generate_animation">"Generira se animacija..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Upozorenje"</string>
+    <string name="Text_WFD_Dialog">"Sav sadržaj zaštićen od kopiranja bit će skriven nakon priključivanja Wi-Fi zaslona."</string>
+    <string name="Disconnecd_WFD">"Isključi Wi-Fi zaslon"</string>
+    <string name="Hind_DRMImage_WFD">"Nastavi"</string>
+    <string name="wfd_finishGallery_Warning">"Ne može se otvoriti kada je bežični zaslon uključen."</string>
+    <string name="wfd_protected_warning1">"Sadržaj je zaštićen od kopiranja,"</string>
+    <string name="wfd_protected_warning2">"Za njegov prikaz na telefonu,"</string>
+    <string name="wfd_protected_warning3">"odspojite bežični zaslon."</string>
+    <string name="wfd_disconnected">"Odspajanje bežičnog zaslona."</string>
+    <string name="smb_protected_warning">"odspojite telefon iz uređaja Smartbook."</string>
+    <string name="hdmi_protected_warning">"odspojite sa HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Ne podržava video od 4 k kada je spojen bežični zaslon. Želite li ga odvojiti i uživati u prikazu 4 k videozapisa?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Bluetooth slušalice ne mogu izvoditi zvuk u okviru 4k videozapisa. Želite li ga odvojiti i uživati u prikazu 4 k videozapisa?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL ne može prikazivati 4 k videozapis. Želite li ga odvojiti i uživati u prikazu 4 k videozapisa?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI ne može prikazivati 4 k videozapis. Želite li ga odvojiti i uživati u prikazu 4 k videozapisa?"</string>	
+    <string name="Not_supported_4k_video">"Vanjski izlaz ne može prikazivati 4 k videozapis. Želite li ga odvojiti i uživati u prikazu 4 k videozapisa?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Sav sadržaj zaštićen od kopiranja bit će skriven nakon priključivanja HDMI zaslona."</string>
+    
+    
+    <string name="share_format_choose_title">"Odaberi format"</string>
+    <string name="share_format_image">"Slika"</string>
+    <string name="share_format_video">"Videozapis"</string>
+    <string name="generating_tip">"Generira se video zapis..."</string>
+    <string name="generate_video_fail">"Nije uspjelo generiranje video zapisa"</string>
+
+    <string name="save_fail">Memorijska kartica je puna ili nema memorijske kartice.</string>
+    <string name="appwidget_error_text">Greška widgeta galerije.</string>
+    <string name="share_limit">Ne može se dijeliti više od 300 datoteka.</string>
+
+    <string name="file_deleted">Datoteka je izbrisana.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot je isključen. Uključite HotKnot u postavkama."</string>
+    <string name="hotknot_toast">"Koristite zaslon za kontakt s drugim uređajem."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

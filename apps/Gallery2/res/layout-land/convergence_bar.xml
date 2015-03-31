@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_conv_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="gone" >
+
+    <LinearLayout
+        android:id="@+id/ll_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@id/btn_conv_cancel" 
+        android:layout_toLeftOf="@id/btn_conv_ok" 
+        android:paddingLeft="6dip" 
+        android:paddingRight="6dip">
+
+        <ImageView
+            android:id="@+id/iv_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_depth_near" 
+            android:layout_gravity="center_vertical"/>
+
+        <com.mediatek.gallery3d.ui.SeekBarExt
+            android:id="@+id/seekbar_conv"
+            android:progressDrawable="@drawable/seekbar_line"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:paddingLeft="16dip"
+            android:paddingRight="16dip"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_depth_far" 
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    
+    <Button
+        android:id="@+id/btn_conv_cancel"
+        android:layout_width="94dip"
+        android:layout_height="48dip"
+        android:layout_marginLeft="6dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="@android:string/cancel"
+        android:background="@drawable/s3d_conv_btn_bg"
+        android:textSize="18sp"
+        android:textColor="#FF393939" />
+
+    <Button
+        android:id="@+id/btn_conv_ok"
+        android:layout_width="94dip"
+        android:layout_height="48dip"
+        android:layout_marginRight="6dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="@string/stereo3d_save"
+        android:background="@drawable/s3d_conv_btn_bg"
+        android:textSize="18sp"
+        android:textColor="#FF393939" />
+
+</com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch>

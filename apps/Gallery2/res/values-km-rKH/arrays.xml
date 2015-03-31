@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <string-array name="proxy_error"> 
+        <item>ប្រឡោះម្ចាស់មិនអាចទទេឡើយ</item>  
+        <item>ប្រឡោះរន្ធមិនអាចទទេឡើយ</item>  
+        <item>ម្ចាស់មិនមានសុពលភាព</item>  
+        <item>រន្ធមិនមានសុពលភាព</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>សិតពីរោងចក្រ</item>
+        <item>ម៉ូណូ</item>
+        <item>Sans Serif</item>
+        <item>"Serif"</item>
+    </string-array></resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">회색</string>  
+    <string name="not_enough_space" product="nosdcard">USB 저장소가 가득 찼습니다.</string>  
+    <string name="not_enough_space" product="default">"SD 카드가 꽉 찼습니다."</string> 
+    <string name="add_audio_track_failed">오디오 추적을 추가하는 데 실패했습니다.</string>
+    <string name="insert_transition_failed">전환을 삽입하는 데 실패했습니다.</string>
+<string name="save_emoticons_failed">이모티콘을 저장할 수 없습니다.</string>
+    <string name="save_xml_failed">특수 문자를 저장할 수 없습니다.</string>
+    </resources>

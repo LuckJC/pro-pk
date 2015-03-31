@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="editor_gray_effect">Siva</string>
+    
+    <string name="not_enough_space" product="nosdcard">USB pohrana je puna.</string>
+    
+    <string name="not_enough_space" product="default">SD kartica je puna.</string>
+    <string name="add_audio_track_failed">Nije uspjelo dodavanje audiozapisa.</string>
+    <string name="insert_transition_failed">Nije uspjelo umetanje prijelaza.</string>
+
+    
+    <string name="save_emoticons_failed">Emotikoni se ne mogu spremati.</string>
+    <string name="save_xml_failed">Posebni znakovi se ne mogu spremati.</string>
+</resources>

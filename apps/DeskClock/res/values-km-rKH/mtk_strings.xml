@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">តាត់ចោល និងបើកថាមពល</string>
+    <string name="power_off">ទាត់ចោល និងបិទថាមពល</string>
+    <string name="voice_ui_title">ការគ្រប់គ្រងសម្លេង</string>
+    <string name="voice_ui_content_text">"មានការបើកលទ្ធភាពបញ្ជាប្រើសម្លេងសម្រាប់ឲ្យសញ្ញាប្រាប់ ឬ សម្លេងរោទិ៍"</string>
+    <string name="alarm_command_summary_format">អ្នកអាចនិយាយ <xliff:g id="first">%1$s</xliff:g> ឬ <xliff:g id="second">%2$s</xliff:g> "\n"ដើម្បីដាក់ឲ្យអសកម្ម ឬ បញ្ឈប់សម្លេងរោទិ៍បាន។</string>
+    <string name="alarm_command_summary_format_land">អ្នកអាចនិយាយ <xliff:g id="first">%1$s</xliff:g> ខ្ទង់ <xliff:g id="second">%2$s</xliff:g> ដើម្បីធ្វើឲ្យការពញ្ញាក់អារម្មណ៍ដេកបន្តិច ឬបញ្ឈប់វា ។</string>
+</resources>

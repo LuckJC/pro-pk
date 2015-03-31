@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">မီးခိုးရောင်</string>  
+    <string name="not_enough_space" product="nosdcard">သင်၏ USB သိုလှောင်ခြင်း ပြည့်နေသည်။</string>  
+    <string name="not_enough_space" product="default">သင်၏ SD ကဒ် သိုလှောင်ခြင်း ပြည့်နေသည်။</string> 
+    <string name="add_audio_track_failed">သီချင်းထပ်ထည့်ရန် မအောင်မြင်ပါ။</string>
+    <string name="insert_transition_failed">ကူးပြောင်းခြင်းထည့်ရန် မအောင်မြင်ပါ။</string>
+<string name="save_emoticons_failed">ခံစားမှုပြ အိုက်ကွန်များကို မသိမ်းနိုင်ပါ။</string>
+    <string name="save_xml_failed">သီးသန့်အက္ခရာများကို မသိမ်းနိုင်ပါ။</string>
+    </resources>

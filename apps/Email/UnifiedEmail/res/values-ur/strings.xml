@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2011 Google Inc.
+     Licensed to The Android Open Source Project.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="to">بطرف</string>
+    <string name="cc">سی سی</string>
+    <string name="bcc">بی سی سی</string>
+    <string name="subject_hint">موضوع</string>
+    <string name="body_hint">ای میل لکھیں</string>
+    <string name="add_file_attachment">فائل منسلک کریں</string>
+    <string name="add_photo_attachment">تصویر شامل کریں</string>
+    <string name="add_video_attachment">ویڈیو منسلک کریں</string>
+    <string name="save_draft">مسودہ محفوظ کریں</string>
+    <string name="discard">رد کریں</string>
+    <string name="compose">لکھیں</string>
+    <string-array name="compose_modes">
+        <item>جواب دیں</item>
+        <item>تمام کو جواب دیں</item>
+        <item>آگے بڑھائيں</item>
+    </string-array>
+    <string name="reply_attribution"><xliff:g id="date">%s</xliff:g> پر <xliff:g id="person">%s</xliff:g> نے لکھا:</string>
+    <string name="forward_attribution">---------- آگے بھیجا ہوا پیغام ----------<br />منجانب: <xliff:g id="from">%1$s</xliff:g><br />تاریخ: <xliff:g id="date">%2$s</xliff:g><br />موضوع: <xliff:g id="subject">%3$s</xliff:g><br />بنام: <xliff:g id="to">%4$s</xliff:g>&lt;br&gt;</string>
+    <string name="forward_attribution_no_headers">---------- آگے بھیجا ہوا پیغام ----------</string>
+    <string name="cc_attribution">نقل: <xliff:g id="cc">%1$s</xliff:g>&lt;br&gt;</string>
+    <string name="select_attachment_type">انسلاک کی قسم منتخب کریں</string>
+    <string name="too_large_to_attach_single"><xliff:g id="maxSize">%1$s</xliff:g> پر فائل کو منسلک نہیں کرسکتا۔</string>
+    <string name="too_large_to_attach_multiple">ایک یا زیادہ فائلیں منسلک نہیں ہیں۔ <xliff:g id="maxSize">%1$s</xliff:g> کو محدود کریں۔</string>
+    <string name="too_large_to_attach_additional">فائل منسلک نہیں ہے۔ <xliff:g id="maxSize">%1$s</xliff:g> کی حد کو پہنچ گیا۔</string>
+    <string name="generic_attachment_problem">فائل منسلک نہیں کرسکا۔</string>
+    <string name="recipient_needed">کم از کم ایک وصول کنندہ شامل کریں۔</string>
+    <string name="recipient_error_dialog_title">وصول کنندہ کی خرابی</string>
+    <string name="confirm_send_title">پیغام بھیجیں؟</string>
+    <string name="confirm_send_message_with_no_subject">پیغام کے موضوع میں کوئی متن نہیں ہے۔</string>
+    <string name="confirm_send_message_with_no_body">پیغام کے نفس مضمون میں کوئی متن نہیں ہے۔</string>
+    <string name="confirm_send_message">یہ پیغام بھیجیں؟</string>
+    <string name="message_discarded">پیغام رد کیا گيا۔</string>
+    <string name="signature">\n\n<xliff:g id="signature">%s</xliff:g></string>
+    <string name="custom_from_account_label">میل بھیجیں بطور:</string>
+    <string name="send">بھیجیں</string>
+    <string name="mark_read">بطور پڑھاگیا نشان زد کریں</string>
+    <string name="mark_unread">بطور غیرخواندہ نشان زد کريں</string>
+    <string name="mute">خاموش</string>
+    <string name="add_star">ستارہ لگائيں</string>
+    <string name="remove_star">ستارہ ہٹائيں</string>
+    <string name="remove_folder"><xliff:g id="folderName">%1$s</xliff:g> سے ہٹائیں</string>
+    <string name="archive">آرکائیو کریں</string>
+    <string name="report_spam">اسپام کی اطلاع دیں</string>
+    <string name="mark_not_spam">اسپام نہیں ہونے کی اطلاع دیں</string>
+    <string name="report_phishing">جعل سازی کی اطلاع دیں</string>
+    <string name="delete">حذف کرنا</string>
+    <string name="discard_drafts">مسودے ضائع کریں</string>
+    <string name="refresh">ریفریش کرنا</string>
+    <string name="reply">جواب دیں</string>
+    <string name="reply_all">تمام کو جواب دیں</string>
+    <string name="resume_draft">تدوین کریں</string>
+    <string name="forward">آگے بڑھائيں</string>
+    <string name="menu_compose">لکھیں</string>
+    <string name="menu_change_folders">فولڈرز تبدیل کریں</string>
+    <string name="menu_move_to">یہاں لے جائيں</string>
+    <string name="menu_move_to_inbox">ان باکس میں منتقل کریں</string>
+    <string name="menu_manage_folders">فولڈر کی ترتیبات</string>
+    <string name="menu_show_original">خودکار سائز میں بدلیں</string>
+    <string name="menu_folder_options">فولڈر کی ترتیبات</string>
+    <string name="menu_settings">ترتیبات</string>
+    <string name="menu_search">تلاش کریں</string>
+    <string name="mark_important">اہم کا نشان لگائیں</string>
+    <string name="mark_not_important">اہم نہیں ہونے کا نشان لگائیں</string>
+    <string name="add_cc_label">سی سی/بی سی سی شامل کریں</string>
+    <string name="add_bcc_label">نقل ثانی شامل کریں</string>
+    <string name="feedback">تاثرات بھیجیں</string>
+    <string name="help_and_info">مدد</string>
+    <string name="quoted_text">کہا گيا ٹیکسٹ شامل کریں</string>
+    <string name="quoted_text_label">متن کا حوالہ دیں</string>
+    <string name="respond_inline">اِن لائن جواب دیں</string>
+    <string name="bytes"><xliff:g id="count">%s</xliff:g> B</string>
+    <string name="kilobytes"><xliff:g id="count">%s</xliff:g> KB</string>
+    <string name="megabytes"><xliff:g id="count">%s</xliff:g> MB</string>
+    <string name="attachment_image">تصویر</string>
+    <string name="attachment_video">ویڈیو</string>
+    <string name="attachment_audio">آڈیو</string>
+    <string name="attachment_text">ٹیکسٹ</string>
+    <string name="attachment_application_msword">دستاویز</string>
+    <string name="attachment_application_vnd_ms_powerpoint">پیشکش</string>
+    <string name="attachment_application_vnd_ms_excel">اسپریڈشیٹ</string>
+    <string name="attachment_application_pdf">PDF</string>
+    <string name="attachment_unknown"><xliff:g id="attachmentExtension">%s</xliff:g> فائل</string>
+    <string name="preview_attachment">پیش منظر</string>
+    <string name="save_attachment">محفوظ کریں</string>
+    <string name="cancel_attachment">منسوخ کریں</string>
+    <string name="download_again">دوبارہ ڈاؤن لوڈ کریں</string>
+    <string name="more_info_attachment">معلومات</string>
+    <string name="attachment_type_blocked">بدقسمتی سے، آپ اس قسم کے انسلاک کو محفوظ نہیں کرسکتے یا کھول نہیں سکتے۔</string>
+    <string name="no_application_found">کوئی بھی اطلاق اس انسلاک کو دیکھنے کیلئے نہیں کھول سکتا۔</string>
+    <string name="fetching_attachment">انسلاک کو بازیافت کر رہا ہے</string>
+    <string name="please_wait">برائے مہربانی انتظار کریں/u2026</string>
+    <string name="saved">محفوظ ہوگیا، <xliff:g id="size">%s</xliff:g></string>
+    <string name="download_failed">ڈاؤن لوڈ نہیں کرسکا۔ دوبارہ کوشش کرنے کیلئے مس کریں۔</string>
+    <string name="attachments_header">انسلاکات</string>
+    <string name="menu_photo_save_all">سبھی کو محفوظ کریں</string>
+    <string name="menu_photo_share">شئیر کرنا</string>
+    <string name="menu_photo_share_all">سبھی کا اشتراک کریں</string>
+    <string name="saving">Saving…</string>
+    <string name="choosertitle_sharevia">بذریعہ تقسیم کریں</string>
+    <string name="contextmenu_openlink">براؤزر میں کھولیں</string>
+    <string name="contextmenu_copy">کاپی کرنا</string>
+    <string name="contextmenu_copylink">لنک کا URL نقل کریں</string>
+    <string name="contextmenu_dial_dot">ڈائل کريں/u2026</string>
+    <string name="contextmenu_sms_dot">SMS\u2026</string>
+    <string name="contextmenu_add_contact">رابطے کا اضافہ کریں</string>
+    <string name="contextmenu_send_mail">ای میل بھیجیں</string>
+    <string name="contextmenu_map">نقشہ</string>
+    <string name="contextmenu_sharelink">لنک تقسیم کریں</string>
+    <string name="contextmenu_help">مدد</string>
+    <string name="contextmenu_feedback">تاثرات بھیجیں</string>
+    <string name="num_selected"><xliff:g id="number" example="27">%d</xliff:g> گانے پلے لسٹ میںشامل کئے گئے۔</string>
+    <plurals name="move_conversation">
+        <item quantity="one">گفتگو کو منتقل کریں</item>
+        <item quantity="other"><xliff:g>%1$d</xliff:g> گفتگو کو منتقل کریں</item>
+    </plurals>
+    <string name="content_description"><xliff:g id="sender">%1$s</xliff:g> بابت <xliff:g id="subject">%2$s</xliff:g>، <xliff:g id="snippet">%3$s</xliff:g> بتاریخ <xliff:g id="date">%4$s</xliff:g>، <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="content_description_today"><xliff:g id="sender">%1$s</xliff:g> بابت <xliff:g id="subject">%2$s</xliff:g>، <xliff:g id="snippet">%3$s</xliff:g> بوقت <xliff:g id="time">%4$s</xliff:g>، <xliff:g id="readstate">%5$s</xliff:g></string>
+    <string name="read_string">گفتگو پڑھ لی گئی</string>
+    <string name="unread_string">گفتگو نہیں پڑھی گئی</string>
+    <string name="filtered_tag">[<xliff:g id="tag">%1$s</xliff:g>]<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="subject_and_snippet"><xliff:g>%s</xliff:g> \u2014 <xliff:g>%s</xliff:g></string>
+    <plurals name="draft">
+        <item quantity="one">مسودہ</item>
+        <item quantity="other">مسودات</item>
+    </plurals>
+    <string name="sending">بھیج رہا ہے\u2026</string>
+    <string name="send_failed">پیغام نہیں بھیجا گیا۔</string>
+    <string name="me_object_pronun">میں</string>
+    <string name="me_subject_pronun">میں</string>
+    <string name="inbox_folders_heading">ان باکس</string>
+    <plurals name="confirm_delete_conversation">
+        <item quantity="one">یہ گفتگو حذف کریں؟</item>
+        <item quantity="other">یہ <xliff:g id="count">%1$d</xliff:g> گفتگو حذف کریں؟</item>
+    </plurals>
+    <plurals name="confirm_archive_conversation">
+        <item quantity="one">یہ گفتگو آرکائیو کریں؟</item>
+        <item quantity="other">یہ <xliff:g id="count">%1$d</xliff:g> گفتکو آرکائیو کریں؟</item>
+    </plurals>
+    <plurals name="confirm_discard_drafts_conversation">
+        <item quantity="one">اس گفتگو سے مسودوں کو ضائع کریں؟</item>
+        <item quantity="other">ان <xliff:g id="count">%1$d</xliff:g> گفتگو سے مسودوں کو ضائع کریں؟</item>
+    </plurals>
+    <string name="confirm_discard_text">یہ پیغام ضائع کریں؟</string>
+    <string name="loading_conversations">لوڈنگ\u2026</string>
+    <string name="no_conversations">کوئی گفتگو نہیں ہیں۔</string>
+    <string name="undo">کالعدم کرنا</string>
+
+    <plurals name="conversation_unstarred">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> گفتگو سے ستارے کا نشان ہٹا رہا ہے۔</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> گفتگو سے ستارے کا نشان ہٹا رہا ہے۔</item>
+    </plurals>
+    <skip />
+    <plurals name="conversation_muted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کو خاموش کردیا گیا۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کو خاموش کردیا گیا۔</item>
+    </plurals>
+    <plurals name="conversation_spammed">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کی اطلاع اسپام کے بطور دی گئی۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کی اطلاع اسپام کے بطور دی گئی۔</item>
+    </plurals>
+    <plurals name="conversation_not_spam">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کی اطلاع اسپام نہیں کے بطور دی گئی۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کی اطلاع اسپام نہیں کے بطور دی گئی۔</item>
+    </plurals>
+    <plurals name="conversation_not_important">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کو اہم نہیں کے بطور نشان زد کیا گیا۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کو اہم نہیں کے بطور نشان زد کیا گیا۔</item>
+    </plurals>
+    <plurals name="conversation_phished">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کی اطلاع جعل سازی نہیں کے بطور دی گئی۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کی اطلاع جعل سازی نہیں کے بطور دی گئی۔</item>
+    </plurals>
+    <plurals name="conversation_archived">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کو آرکائیو کیا گیا۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کو آرکائیو کیا گیا۔</item>
+    </plurals>
+    <plurals name="conversation_deleted">
+        <item quantity="one"><b>
+                <xliff:g id="count">%1$d</xliff:g>
+            </b> کو حذف کیا گیا۔</item>
+        <item quantity="other"><b>
+                <xliff:g id="count">%2$d</xliff:g>
+            </b> کو حذف کیا گیا۔</item>
+    </plurals>
+    <string name="deleted">حذف کردہ</string>
+    <string name="archived">آرکائیو کیا گیا</string>
+    <string name="folder_removed"><xliff:g id="folderName">%1$s</xliff:g> سے ہٹا دیا گیا</string>
+    <plurals name="conversation_folder_changed">
+        <item quantity="one">فولڈر تبدیل کردیا گیا۔</item>
+        <item quantity="other">فولڈرز تبدیل کردیئے گئے۔</item>
+    </plurals>
+    <string name="conversation_folder_moved"><xliff:g id="folderName">%1$s</xliff:g> میں منتقل کریں</string>
+    <string name="search_results_header">\"  <xliff:g example="search query">%1$s</xliff:g>\" کے لئے تلاش کے نتائج </string>
+    <string name="search_unsupported">اس اکاؤنٹ تلاش تعاون یافتہ نہیں ہے۔</string>
+    <string name="search_results_searching_header">تلاش کررہا ہے\u2026</string>
+    <string name="add_label">فولڈر شامل کریں</string>
+    <string name="new_incoming_messages_one"><xliff:g id="sender">%s</xliff:g> سے نیا پیغام۔ دکھائیں۔</string>
+    <plurals name="new_incoming_messages_many">
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> نئے پیغامات۔ دکھائیں۔</item>
+    </plurals>
+    <string name="expand_recipient_details">وصول کنندہ کی تفصیلات پھیلائیں</string>
+    <string name="collapse_recipient_details">وصول کنندہ کی تفصیلات زائل کریں</string>
+    <string name="contact_info_string"><xliff:g id="name">%1$s</xliff:g> کیلئے رابطہ کی معلومات دکھائیں</string>
+    <string name="contact_info_string_default">رابطہ کی معلومات دکھائیں</string>
+    <plurals name="show_messages_read">
+        <item quantity="other"><xliff:g id="count" example="4">%1$d</xliff:g> پرانے پیغامات۔</item>
+    </plurals>
+    <string name="from_heading">منجانب:\u0020</string>
+    <string name="replyto_heading">جواب دیں بنام:\u0020</string>
+    <string name="to_heading">منجانب:\u0020</string>
+    <string name="cc_heading">نقل:\u0020</string>
+    <string name="bcc_heading">نقل ثانی:\u0020</string>
+    <string name="date_heading">تاریخ:\u0020</string>
+    <string name="show_images">تصویریں دکھائيں</string>
+    <string name="always_show_images">ہمیشہ اس بھیجنے والے سے تصویریں دکھائيں</string>
+    <string name="always_show_images_toast">اس بھیجنے والے کی تصویروں کو خودکار طور پر دکھایا جائے گا۔</string>
+    <string name="address_display_format"><xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g></string>
+    <string name="address_display_format_with_via_domain"><xliff:g id="name">%1$s</xliff:g><xliff:g id="email">%2$s</xliff:g> معرفت <xliff:g id="via_domain">%3$s</xliff:g></string>
+    <string name="message_saved">پیغام کو بطور مسودہ محفوظ کیا گيا ہے۔</string>
+    <string name="sending_message">پیغام بھیج رہا ہے\u2026</string>
+    <string name="invalid_recipient">پتہ <xliff:g id="wrongemail" example="foo@@gmail..com">%s</xliff:g> غلط ہے۔</string>
+    <string name="show_elided">\u25B6 حوالہ دیا گیا متن دکھائیں</string>
+    <string name="hide_elided">\u25BC حوالہ دیا گیا متن چھپائیں</string>
+    <string name="message_invite_title">کیلنڈر کی دعوت</string>
+    <string name="message_invite_calendar_view">کیلنڈر میں دیکھیں</string>
+    <string name="message_invite_label_attending">جارہے ہيں؟</string>
+    <string name="message_invite_accept">ہاں</string>
+    <string name="message_invite_tentative">شاید</string>
+    <string name="message_invite_decline">نہيں</string>
+    <string name="enumeration_comma">,\u0020</string>
+    <string name="yes">"ہاں"</string>
+    <string name="no">نہيں</string>
+    <string name="ok">ٹھیک ہے</string>
+    <string name="done">ہوگیا</string>
+    <string name="cancel">منسوخ</string>
+    <string name="clear">صاف کریں</string>
+    <string-array name="sync_status">
+        <item>کامیاب</item>
+        <item>کوئی کنکشن نہیں ہے۔</item>
+        <item>سائن ان نہیں کرسکا۔</item>
+        <item>سیکیورٹی کی خرابی۔</item>
+        <item>مطابقت پذیر نہیں بنا سکا۔</item>
+        <item>داخلی خرابی</item>
+    </string-array>
+    <string name="tap_to_configure">تشکیل دینے کیلئے مس کریں</string>
+    <string name="non_synced_folder_description">گفتگو دیکھنے کیلئے، یہ فولڈر مطابقت پذیر بنائیں۔</string>
+    <string name="tap_to_configure_folder_sync">فولڈر مطابقت پذیر بنائیں</string>
+    <string name="widget_large_unread_count">%d+</string>
+    <plurals name="actionbar_unread_messages">
+        <item quantity="other"><xliff:g id="count" example="4">%1$d</xliff:g> بغیر پڑھا ہوا</item>
+    </plurals>
+    <string name="actionbar_large_unread_count"><xliff:g id="count">%1$d</xliff:g>+ بغیر پڑھا ہوا</string>
+    <string name="view_more_conversations">مزید بات چیت دیکھیں</string>
+    <string name="loading_conversation">لوڈنگ\u2026</string>
+    <string name="activity_mailbox_selection">اکاؤنٹ منتخب کریں</string>
+    <string name="activity_folder_selection">فولڈر منتخب کریں</string>
+    <string name="folder_shortcut_widget_label">فولڈر ای میل کریں</string>
+    <string name="change_folders_selection_dialog_title">فولڈرز تبدیل کریں</string>
+    <string name="move_to_selection_dialog_title">یہاں لے جائيں</string>
+    <string name="search_hint">میل تلاش کریں</string>
+    <string name="search_results_loaded"><xliff:g id="searchCount">%1$d</xliff:g></string>
+    <string name="network_error">کوئی رابطہ موجود نہیں</string>
+    <string name="retry">دوبارہ کوشش کریں</string>
+    <string name="load_more">مزید لوڈ کریں</string>
+    <string name="shortcut_name_title">فولڈر کے شارٹ کٹ کا نام دیں</string>
+    <string name="wait_for_sync_title">سنک کا منتظر</string>
+    <string name="wait_for_sync_body">آپ کا ای میل جلد ہی ظاہر ہوگا۔</string>
+    <string name="not_synced_title">اکاؤنٹ مطابقت پذیر نہیں ہوا</string>
+    <string name="wait_for_manual_sync_body">یہ ا کاؤنٹ خود بخود مطابقت پذیر ہونے کیلئے تشکیل نہیں دیا گیا ہے۔\nایک بار میل کو مطابقت پذیر بنانے کیلئے <b>ہم آہنگی اب</b> کو مس کریں، یا میل کو خود بخود مطابقت پذیر بنانے کے واسطے تشکیل دینے کیلئے <b>مطابقت پذیری کی ترتیبات تبدیل کریں</b>۔</string>
+    <string name="manual_sync">ابھی ہم وقت کریں</string>
+    <string name="change_sync_settings">مطابقت پذیری کی ترتیبات تبدیل کریں۔</string>
+    <string name="photo_load_failed">تصویر لوڈ نہیں کرسکا</string>
+    <string name="cant_move_or_change_labels">منتقل نہیں کرسکتا کیونکہ انتخاب متعدد اکاؤنٹس پر مشتمل ہے۔</string>
+    <string name="multiple_new_message_notification_item"><b><xliff:g id="sender">%1$s</xliff:g></b>\u0020\u0020\u0020<xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="single_new_message_notification_big_text"><xliff:g id="subject">%1$s</xliff:g>\n<xliff:g id="snippet">%2$s</xliff:g></string>
+    <string name="ignore_spam_warning">نظر انداز کریں، مجھے اس پیغام پر بھروسہ ہے</string>
+    <string name="via_domain"> معرفت <xliff:g id="viaDomain">%1$s</xliff:g></string>
+    <string-array name="moveto_folder_sections">
+        <item>فیڈ بیک</item>
+        <item>اکثر استعمال کردہ</item>
+        <item>تمام فولڈر</item>
+    </string-array>
+    <string name="signin">سائن ان کریں</string>
+    <string name="info">معلومات</string>
+    <string name="report">رپورٹ</string>
+    <string name="sync_error">مطابقت پذیر نہیں بنا سکا۔</string>
+    <string name="sync_error_message">مطابقت پذیر بنانے کیلئے آپ کے آلے میں کافی اسٹوریج نہیں ہے۔</string>
+    <string name="storage">ذخیرہ</string>
+    <string name="senders_split_token">,\u00A0</string>
+    <string name="draft_count_format">\u00A0(<xliff:g id="count">%1$s</xliff:g>)</string>
+    <string name="all_folders_heading">تمام فولڈر</string>
+    <string name="recent_folders_heading">حالیہ فولڈر</string>
+    <string name="message_details_title">پیغام کی تفصیلات</string>
+    <string name="auto_advance_label">خودکار طور پر آگے بڑھنا</string>
+    <string name="auto_advance_summary">منتخب کریں کہ پیغام مٹانے کے بعد کونسی اسکرین دکھائی دے</string>
+    <string name="auto_advance_help_title">آٹو ایڈوانسڈ ترجیح متعین کریں\n(آپ کے حذف کرنے، وغیرہ کے بعد۔)</string>
+    <string-array name="prefEntries_autoAdvance">
+        <item>نئے</item>
+        <item>پرانے</item>
+        <item>گفتگو کی فہرست</item>
+    </string-array>
+    <string-array name="prefSummaries_autoAdvance">
+        <item>آپ کے حذف کرنے کے بعد جدید تر گفتگو دکھائیں</item>
+        <item>آپ کے حذف کرنے کے بعد قدیم تر گفتگو دکھائیں</item>
+        <item>آپ کے حذف کرنے کے بعد گفتگو کی فہرست دکھائیں</item>
+    </string-array>
+    <string name="clear_display_images_whitelist_title">تصویر کی منظوریاں صاف کریں</string>
+    <string name="clear_display_images_whitelist_dialog_title">تصویر کی منظوریاں صاف کریں؟</string>
+    <string name="clear_display_images_whitelist_dialog_message">آپ نے پہلے جن مرسلین کو اجازت دی ہے ان کی جانب سے درون سطر تصویر ڈسپلے کرنا بند کریں۔</string>
+    <string name="sender_whitelist_cleared">تصویریں خود بخود نہیں دکھائی جائیں گی۔</string>
+    <string name="preferences_signature_title">دستخط</string>
+    <string name="preferences_signature_dialog_title">دستخط</string>
+    <string name="preferences_signature_summary_not_set">مرتب نہيں</string>
+    <string name="notification_action_reply">جواب دیں</string>
+    <string name="notification_action_reply_all">تمام کو جواب دیں</string>
+    <string name="notification_action_archive">آرکائیو کریں</string>
+    <string name="notification_action_remove_label">لیبل ہٹائیں</string>
+    <string name="notification_action_delete">مٹائيں</string>
+    <string name="notification_action_undo_archive">آرکائیو کردہ</string>
+    <string name="notification_action_undo_remove_label">لیبل ہٹا دیا گیا</string>
+    <string name="notification_action_undo_delete">حذف کردہ</string>
+    <string name="veiled_address" />
+    <string name="veiled_alternate_text" />
+    <string name="veiled_alternate_text_unknown_person" />
+    <string name="veiled_summary_unknown_person" />
+    <string name="label_notification_ticker">"<xliff:g id="label">%s</xliff:g>: <xliff:g id="notification">%s</xliff:g>"</string>
+    <string name="new_messages"><xliff:g id="count">%1$d</xliff:g> نئے پیغامات</string>
+    <string name="single_new_message_notification_title"><xliff:g id="sender">%1$s</xliff:g>: <xliff:g id="subject">%2$s</xliff:g></string>
+    <string name="silent_ringtone">خاموش</string>
+    <string name="preference_removal_action_title">کارروائیاں آرکائیو اور حذف کریں</string>
+    <string-array name="prefEntries_removal_action">
+        <item>صرف آرکائیو دکھائیں</item>
+        <item>صرف تنسیخ دکھائیں</item>
+        <item>آرکائیو اور تنسیخ دکھائیں</item>
+    </string-array>
+    <string-array name="prefSummaries_removal_action_summary">
+        <item>صرف آرکائیو دکھائیں</item>
+        <item>صرف تنسیخ دکھائیں</item>
+        <item>آرکائیو اور تنسیخ دکھائیں</item>
+    </string-array>
+    <string name="prefDialogTitle_removal_action">آرکائیو اور تنسیخ دکھائیں</string>
+    <string name="preferences_default_reply_all_title">تمام کو جواب دیں</string>
+    <string name="preferences_default_reply_all_summary">پیغام کے جوابات کیلئے بطور ڈیفالٹ استعمال کریں</string>
+    <string name="preference_swipe_title_archive">آرکائیو میں سوائپ کریں</string>
+    <string name="preference_swipe_title_delete">تنسیخ میں سوائپ کریں</string>
+    <string name="preference_swipe_description">گفتگو کی فہرست میں</string>
+    <string name="preference_sender_image_title">مرسل کی تصویر</string>
+    <string name="preference_sender_image_description">گفتگو کی فہرست میں نام کے بغل میں دکھائیں</string>
+    <string name="swipe_down_to_refresh">تازہ کاری کیلئے نیچے سوائپ کریں</string>
+    <string name="checking_for_mail">میل چیک کر رہا ہے</string>
+    <string name="empty_trash">ردی کی ٹوکری کو خالی کریں</string>
+    <string name="empty_spam">اسپام کو خالی کریں</string>
+    <string name="empty_trash_dialog_title">ردی کی ٹوکری کو خالی کریں؟</string>
+    <string name="empty_spam_dialog_title">اسپام کو خالی کریں؟</string>
+    <plurals name="empty_folder_dialog_message">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> پیغام مستقل طور پر حذف کردیا جائے گا۔</item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> پیغامات مستقل طور پر حذف کردیئے جائیں گے۔</item>
+    </plurals>
+    <string name="drawer_open">نیویگیشن ڈراور کھولیں</string>
+    <string name="drawer_close">نیویگیشن ڈراور بند کریں</string>
+    <string name="conversation_photo_welcome_text">مرسل کی تصویر مس کرکے وہ گفتگو منتخب کریں۔</string>
+    <string name="long_press_to_select_tip">ایک گفتگو منتخب کرنے کیلئے اسے مس کریں اور پکڑے رہیں، پھر مزید کو منتخب کرنے کیلئے مس کریں۔</string>
+    <string name="folder_icon_desc">فولڈر کا آئیکن</string>
+    <string name="add_account">اکاؤنٹ شامل کریں</string>
+    <string name="attached_message">منسلکہ پیغام</string>
+    <string name="date_message_received"><xliff:g id="day_and_date">%1$s</xliff:g>, <xliff:g id="time">%2$s</xliff:g></string>
+    <string name="date_message_received_today">آج، <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="date_message_received_yesterday">گزشتہ کل، <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="dismiss_tip_hover_text">نکتہ ضائع کریں</string>
+    <string name="auto_sync_off">از خود مطابقت پذیری آف ہے۔</string>
+    <string name="tap_to_enable_sync">آن کرنے کیلئے مس کریں۔</string>
+    <string name="account_sync_off">اکاؤنٹ کی مطابقت پذیری آف ہے۔</string>
+    <string name="enable_sync_in_account_settings"><xliff:g id="account_settings">%1$s</xliff:g> میں آن کریں۔</string>
+    <string name="account_settings_param">اکاؤنٹ ترتیبات</string>
+    <string name="unsent_messages_in_outbox"><xliff:g id="outbox">%2$s</xliff:g> میں غیر مرسلہ <xliff:g id="number">%1$s</xliff:g></string>
+    <string name="turn_auto_sync_on_dialog_title">از خود مطابقت پذیری آن کریں؟</string>
+    <string name="turn_auto_sync_on_dialog_body">صرف Gmail نہیں، بلکہ سبھی اطلاقات اور اکاؤنٹس میں آپ جو تبدیلیاں کرتے ہیں وہ ویب، آپ کے دوسرے آلات، اور آپ کے <xliff:g id="phone_or_tablet">%1$s</xliff:g> کے بیچ مطابقت پذیر بنائیں جائیں گی۔</string>
+    <string name="phone">فون</string>
+    <string name="tablet">ٹیبلیٹ</string>
+    <string name="turn_auto_sync_on_dialog_confirm_btn">چالو کرنا</string>
+    <string name="show_n_more_folders"><xliff:g id="number">%1$s</xliff:g> مزید فولڈرز دکھائیں</string>
+    <string name="hide_folders">فولڈرز چھپائیں</string>
+</resources>

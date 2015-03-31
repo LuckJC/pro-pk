@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Ignorera och slå på</string>
+    <string name="power_off">Ignorera och stäng av</string>
+    <string name="voice_ui_title">"Röststyrning"</string>
+    <string name="voice_ui_content_text">"Röststyrning är aktiverat för alarmet"</string>
+    <string name="alarm_command_summary_format">Du kan säga <xliff:g id="first">%1$s</xliff:g> eller <xliff:g id="second">%2$s</xliff:g> "\n"för att snooza eller stoppa alarmet.</string>
+    <string name="alarm_command_summary_format_land">Du kan säga <xliff:g id="first">%1$s</xliff:g> eller <xliff:g id="second">%2$s</xliff:g> för att snooza eller stoppa alarmet.</string>
+</resources>

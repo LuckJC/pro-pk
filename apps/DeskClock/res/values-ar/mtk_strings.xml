@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">رفض وتشغيل الطاقة</string>
+    <string name="power_off">رفض وإيقاف تشغيل الطاقة</string>
+    <string name="voice_ui_title">التحكم بالصوت</string>
+    <string name="voice_ui_content_text">"تم تمكين التحكم الصوتي في المنبه"</string>
+    <string name="alarm_command_summary_format">يمكنك قول <xliff:g id="first">%1$s</xliff:g> أو <xliff:g id="second">%2$s</xliff:g> "\n"لعمل غفوة أو إيقاف المنبه.</string>
+    <string name="alarm_command_summary_format_land">يمكنك قول <xliff:g id="first">%1$s</xliff:g> أو <xliff:g id="second">%2$s</xliff:g> لعمل غفوة أو إيقاف المنبه.</string>
+</resources>

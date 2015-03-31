@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+--><resources>
+    
+    <string name="title_activity_filter_show">ဓာတ်ပုံတည်းဖြတ်သူ</string>
+
+    
+    <string name="cannot_load_image">ရုပ်ပုံမဖွင့်နိုင်ပါ!</string>
+    
+    <string name="cannot_edit_original">မူလပုံကို မတည်းဖြတ်နိုင်ပါ</string>
+    
+    
+    
+    <string name="setting_wallpaper">ဝေါလ်ပေပါ ထားရှိနေသည်</string>
+
+    
+
+
+    
+    <string name="download_failure">ဓါတ်ပုံကို ဒေါင်းလုဒ်မလုပ်နိုင်ခဲ့ပါ။ကွန်ရက် မရနိုင်ပါ။</string>
+    
+    <string name="original">မူရင်း</string>
+    
+    <string name="borders" msgid="4461692156695893616">ဘောင်များ</string>
+    
+    <string name="custom_border">ဓလေ့</string>
+
+    
+
+    
+    <string name="filtershow_undo">မလုပ်ပါ</string>
+    
+    <string name="filtershow_redo">ပြန်ပြင်ရန်</string>
+    
+    <string name="show_imagestate_panel">အသုံးချသည့် သက်ရောက်မှုကိုပြ</string>
+    
+    <string name="hide_imagestate_panel">အသုံးချသည့် သက်ရောက်မှုကိုဝှက်</string>
+    
+    <string name="export_image">တင်ပို့သည်</string>
+    
+    <string name="print_image">ပရင့်ထုတ်ပါ</string>
+
+    
+
+    
+    <string name="export_flattened">အလွှာတစ်ခုတည်းပါပုံတင်ပို့ပါ</string>
+    
+    <string name="select_output_settings">တင်ပို့ထားသောပုံသည် ရာဇဝင်မရှိသော မိတ္တူတစ်ခု ဖြစ်လိမ့်မည်</string>
+    
+    <string name="quality">အရည်အသွေး</string>
+    
+    <string name="size">အရွယ်အစား</string>
+    
+    <string name="x">x</string>
+
+    
+    <string name="menu_settings">အဆင်အပြင်များ</string>
+
+    
+
+    
+    <string name="unsaved">ဤပုံအတွက် မသိမ်းရသေးသည့် ပြောင်းလဲမှုများရှိသည်။</string>
+    
+    <string name="save_before_exit">မထွက်မီ သိမ်းလိုပါသလား။</string>
+    
+    <string name="save_and_exit">သိမ်းပြီးထွက်ပါ</string>
+    
+    <string name="save_and_processing">ပုံရိပ်ပြတ်သားမှုအပြည့်ရှိသည့်ပုံကို လုပ်ဆောင်နေသည်…</string>
+    
+    <string name="exit">ထွက်ရန်</string>
+
+    
+
+    
+    <string name="history">မှတ်တမ်း</string>
+    
+    <string name="reset">ပြန်လည်သတ်မှတ်ရန်</string>
+    
+    
+
+    
+
+    
+    <string name="imageState">ထည့်ထားသောသက်ရောက်မှုများ</string>
+
+    
+
+    
+    <string name="compare_original">နှိုင်းယှဉ်ပါ</string>
+    
+    <string name="apply_effect">ထားရှိပါ</string>
+    
+    <string name="reset_effect">ပြန်လည်သတ်မှတ်ရန်</string>
+    
+    <string name="aspect">ပုံပန်းသွင်ပြင်</string>
+    
+    <string name="aspect1to1_effect">1:1</string>
+    
+    <string name="aspect4to3_effect">4:3</string>
+    
+    <string name="aspect3to4_effect">3:4</string>
+    
+    <string name="aspect4to6_effect">4:6</string>
+    
+    <string name="aspect5to7_effect">5:7</string>
+    
+    <string name="aspect7to5_effect">7:5</string>
+    
+    <string name="aspect9to16_effect">16:9</string>
+    
+    <string name="aspectNone_effect">ဘာမှမရှိပါ</string>
+    
+    
+    
+    <string name="Fixed">ပုံသေ</string>
+    
+    <string name="tinyplanet">ဂြိုဟ်သေး</string>
+
+    
+
+    
+    <string name="exposure" msgid="1229093066434614811">အလင်းဝင်သည့်ပမာဏ</string>
+    
+    <string name="sharpness">ပြတ်သားမှု</string>
+    
+    <string name="contrast">အရောင်တောက်ပမှုခြားနားချက်</string>
+    
+    <string name="vibrance">စွမ်းအင်အပြည့်ဖြစ်စေခြင်း</string>
+    
+    <string name="saturation">အရောင်အသွေးပြည့်ဝမှု</string>
+    
+    <string name="bwfilter">BW ရွေးထုတ်စက်</string>
+    
+    <string name="wbalance">အလိုအလျောက်အရောင်</string>
+    
+    <string name="hue">အလင်းအရည်အသွေး</string>
+    
+    <string name="shadow_recovery">အရိပ်များ</string>
+    
+    <string name="highlight_recovery">ပို၍တောက်ပအောင်လုပ်ထားချက်</string>
+    
+    <string name="curvesRGB">မျဉ်းကွေးများ</string>
+    
+    <string name="vignette">အလင်းအမှောင်မှုန်း၍ဘောင်ခတ်ထားခြင်း</string>
+    
+    <string name="vignette_main">အလင်းအမှောင်မှုန်း၍ဘောင်ခတ်ထားခြင်း</string>
+    
+    <string name="vignette_exposure">အလင်းဝင်သည့်ပမာဏ</string>
+    
+    <string name="vignette_saturation">အရောင်အသွေးပြည့်ဝမှု</string>
+    
+    <string name="vignette_contrast">အရောင်တောက်ပမှုခြားနားချက်</string>
+    
+    <string name="vignette_falloff">အရောင်ကျဆင်း</string>
+
+    
+    <string name="redeye">မျက်လုံးနီစေခြင်း</string>
+    
+    <string name="imageDraw">ဆွဲပါ</string>
+    
+    <string name="straighten" msgid="5217801513491493491">ဖြောင့်တန်းစေခြင်း</string>
+    
+    <string name="crop" msgid="5584000454518174632">ဖြတ်တောက်ပါ</string>
+    
+    <string name="rotate" msgid="460017689320955494">လှည့်ပါ</string>
+    
+    <string name="mirror">မှန်</string>
+    
+    <string name="negative">လျှော့ချချက်</string>
+    
+    <string name="none" msgid="3601545724573307541">ဘာမှမရှိပါ</string>
+    
+    <string name="edge">အနားစွန်း</string>
+    
+    <string name="kmeans">အရောင်အဆင့်ဆင့်ပြောင်းစေမည်</string>
+    
+    <string name="downsample">ပုံအရွယ်လျှော့</string>
+    
+    <string name="grad">ကြည်လင်ပြတ်သားမှု</string>
+    
+    <string name="editor_grad_brightness">တောက်ပမှု</string>
+    
+    <string name="editor_grad_contrast">အရောင်တောက်ပမှုခြားနားချက်</string>
+    
+    <string name="editor_grad_saturation">အရောင်အသွေးပြည့်ဝမှု</string>
+    
+    <string name="editor_chan_sat_main">ပင်မ</string>
+    
+    <string name="editor_chan_sat_red">အနီရောင်</string>
+    
+    <string name="editor_chan_sat_yellow">အဝါရောင်</string>
+    
+    <string name="editor_chan_sat_green">အစိမ်းရောင်</string>
+    
+    <string name="editor_chan_sat_cyan">စိမ်းပြာရောင်</string>
+    
+    <string name="editor_chan_sat_blue">အပြာ</string>
+    
+    <string name="editor_chan_sat_magenta">ပန်းခရမ်းရောင်</string>
+    
+    <string name="editor_grad_style">စတိုင်</string>
+    
+    <string name="editor_grad_new">အသစ်</string>
+
+
+    
+
+    
+    <string name="curves_channel_rgb">RGB</string>
+    
+    <string name="curves_channel_red">အနီရောင်</string>
+    
+    <string name="curves_channel_green">အစိမ်းရောင်</string>
+    
+    <string name="curves_channel_blue">အပြာ</string>
+
+    
+    <string name="draw_style">စတိုင်</string>
+    
+    <string name="draw_size">အရွယ်အစား</string>
+    
+    <string name="draw_hue">အလင်းအရည်အသွေး</string>
+    
+    <string name="draw_saturation">အရောင်အသွေးပြည့်ဝမှု</string>
+    
+    <string name="draw_value">တောက်ပမှု</string>
+    
+    <string name="draw_color">အရောင်</string>
+    
+    <string name="draw_style_line">လိုင်းများ</string>
+    
+    <string name="draw_style_brush_spatter">မှတ်သည့်အရာ</string>
+    
+    <string name="draw_style_brush_marker">အပြောက်အပြောက်</string>
+    
+    <string name="draw_clear">ရှင်းလင်းပါ</string>
+
+
+    
+    <string name="color_border_size">အထူ</string>
+    
+    <string name="color_border_corner_size">ထောင့်အရွယ်</string>
+    
+    <string name="color_border_color">အရောင်</string>
+     
+    <string name="color_border_clear">ရှင်းလင်းပါ</string>
+
+    
+    <string name="color_pick_select">စိတ်ကြိုက်အရောင် ရွေးပါ</string>
+    
+    <string name="color_pick_title">အရောင်ရွေးပါ</string>
+    
+    <string name="draw_size_title">အရွယ်အစားရွေးပါ</string>
+    
+    <string name="draw_size_accept">လုပ်မည်</string>
+
+    
+    <string name="state_panel_original">မူရင်း</string>
+
+    
+    <string name="state_panel_result">ရလဒ်</string>
+
+    
+    <string name="filtershow_notification_label">ပုံသိမ်းနေသည်</string>
+    
+    <string name="filtershow_notification_message">လုပ်ဆောင်နေဆဲ…</string>
+
+    
+    <string name="filtershow_save_preset">လက်ရှိ ကြိုတင် သတ်မှတ်မှုသိမ်း</string>
+    
+    <string name="filtershow_manage_preset">အသုံးပြုသူ ကြိုတင် သတ်မှတ်မှုစီမံပါ</string>
+    
+    <string name="filtershow_new_preset">ကြိုတင် သတ်မှတ်မှုအသစ်</string>
+    
+    <string name="filtershow_preset_name">ကြိုတင် သတ်မှတ်မှုအမည်</string>
+
+    
+    <string name="filtershow_show_info_panel">သတင်းအချက်အလက်</string>
+    
+    <string name="filtershow_show_info_panel_name">ပုံအမည်</string>
+    
+    <string name="filtershow_show_info_panel_size">ပုံအရွယ်အစား</string>
+    
+    <string name="filtershow_show_info_panel_histogram">ဟစ်စတိုဂရမ်</string>
+    
+    <string name="filtershow_show_info_panel_exif">EXIF အချက်အလက်</string>
+
+    
+    <string name="filtershow_add_button_looks">ကြိုတင်ချိန်ကိုက်ခြင်း</string>
+    
+    <string name="filtershow_add_button_versions">ဗားရှင်း</string>
+    
+    <string name="filtershow_version_original">မူရင်း</string>
+    
+    <string name="filtershow_version_current">လက်ရှိ</string>
+
+    
+    <string name="filtershow_exif_model">မော်ဒယ်</string>
+    
+    <string name="filtershow_exif_aperture">အလင်းဝင်ပေါက်</string>
+    
+    <string name="filtershow_exif_focal_length">ဆုံချက်အလျား</string>
+    
+    <string name="filtershow_exif_iso">ISO</string>
+    
+    <string name="filtershow_exif_subject_distance">အကြောင်းအရာ အကွာအဝေး</string>
+    
+    <string name="filtershow_exif_date">ရိုက်ယူခဲ့သောရက်စွဲ</string>
+    
+    <string name="filtershow_exif_f_stop">F Stop</string>
+    
+    <string name="filtershow_exif_exposure_time">အလင်းရောင်နှင့်ထိတွေ့ချိန်</string>
+    
+    <string name="filtershow_exif_copyright">မူပိုင်ခွင့်</string>
+
+</resources>

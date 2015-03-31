@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Rejeitar e ligar o dispositivo</string>
+    <string name="power_off">Rejeitar e desligar o dispositivo</string>
+
+    <string name="voice_ui_title">Controlo por voz</string>
+    <string name="voice_ui_content_text">"O Controlo por Voz está ativado para o Alarme"</string>
+    <string name="alarm_command_summary_format">Pode dizer <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> "\n"para suspender ou parar o alarme.</string>
+    <string name="alarm_command_summary_format_land">Pode dizer <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> para suspender ou parar o alarme.</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Kelabu</string>  
+    <string name="not_enough_space" product="nosdcard">"Storan USB anda penuh."</string>  
+    <string name="not_enough_space" product="default">"Kad SD anda penuh."</string>
+    <string name="add_audio_track_failed">Gagal menambah trek audio.</string>
+    <string name="insert_transition_failed">Gagal memasukkan peralihan.</string>
+<string name="save_emoticons_failed">Emotikon tidak boleh disimpan.</string>
+    <string name="save_xml_failed">Aksara khas tidak boleh disimpan.</string>
+    </resources>

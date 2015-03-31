@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2012 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License
+  --><resources>
+    <string-array name="cities_names"><item>အာဘီဂျန်</item>
+        <item>အက်ကရာ</item>
+        <item>အက်ဒီးစ် အဘာဘာ</item>
+        <item>အယ်လ်ဂျီးယားစ်</item>
+        <item>ဘလန်တာရီ</item>
+        <item>ဘရာဇာဗီလ်</item>
+        <item>ကိုင်ရို</item>
+        <item>ကာဆာဘလန်ကာ</item>
+        <item>ကွန်နကရီ</item>
+        <item>ဒါကာ</item>
+        <item>ဒါ အီးစ် စလာမ်</item>
+        <item>ဂျီဘိုတီ</item>
+        <item>ဖရီးတောင်း</item>
+        <item>ဂါဘိုရုန်း</item>
+        <item>ဟာရာရီ</item>
+        <item>ဂျိုဟန်စ်ဘက်</item>
+        <item>ကန်ပါလာ</item>
+        <item>ခါတွမ်</item>
+        <item>ကီဂါလီ</item>
+        <item>ကင်ရှာဆာ</item>
+        <item>လာဂိုစ်</item>
+        <item>မယ်စရူ</item>
+        <item>မွန်ဂါဒစ်ရှူ</item>
+        <item>နိုင်ရိုဘီ</item>
+        <item>ဆာ တိုမီ</item>
+        <item>တင်ဘက်ထု</item>
+        <item>ထရီပိုလိ</item>
+        <item>တူးနစ်</item>
+        <item>အန်းကောရေ့</item>
+        <item>မန်ဒိုဇာ</item>
+        <item>အရူဘာ</item>
+        <item>အစန်စီယွန်</item>
+        <item>ဘာဘာဒိုစ်</item>
+        <item>ဘလိဇ်</item>
+        <item>ဘိုဂိုတာ</item>
+        <item>ဗျူနိုအေရီးစ်</item>
+        <item>ခန်ခွန်</item>
+        <item>ကာရာကက်စ်</item>
+        <item>ကေမန်</item>
+        <item>ချီကာဂို</item>
+        <item>ကော်စတာရီကာ</item>
+        <item>ကူရာဆာအို</item>
+        <item>ဒေါ်ဆန်ခရိ</item>
+        <item>ဒန်ဗာ</item>
+        <item>ဒိထရစ်</item>
+        <item>ဒိုမနီကာ</item>
+        <item>အက်မွန်တွန်</item>
+        <item>အယ် ဆယ်ဗာဒို</item>
+        <item>ဖော်တာလီဇာ</item>
+        <item>ဂရန်းတာ့ခ်</item>
+        <item>ဂရီနာဒါ</item>
+        <item>ဂွာတီမာလာ</item>
+        <item>ဂိုင်ရာနာ</item>
+        <item>ဟာလီဖက်စ်</item>
+        <item>ဟာဗာနာ</item>
+        <item>အင်ဒီးယားနားပိုလစ်</item>
+        <item>နော့စ်ခ်</item>
+        <item>မာရင်ဂို</item>
+        <item>ပီတာစဘက်</item>
+        <item>တဲလ်မြို့တော်</item>
+        <item>ဗီဗေ</item>
+        <item>ဗင်းဆင့်စ်</item>
+        <item>ဝင်းနားမက်</item>
+        <item>ကင်းစတွန်း</item>
+        <item>နူစထရာ စီနိုရာ ဒီလာပက်ဇ်</item>
+        <item>လီမာ</item>
+        <item>လော့စ် အင်ဂျလိစ်</item>
+        <item>လူဝီအေဗယ်</item>
+        <item>မနာဂွာ</item>
+        <item>မာတိနစ်</item>
+        <item>မန်ဒိုဇာ</item>
+        <item>မက်တလာကတ်တလာ</item>
+        <item>မက္ကစီကိုမြို့တော်</item>
+        <item>မွန်တာရီ</item>
+        <item>မွန်တီဗီဒီယို</item>
+        <item>မွန်ထရီရယ်</item>
+        <item>နာဆော</item>
+        <item>နယူးယောက်</item>
+        <item>ဘူလာ</item>
+        <item>အလယ်</item>
+        <item>နယူးစလာမ်</item>
+        <item>ပနားမား</item>
+        <item>ဖီးနစ်</item>
+        <item>စပိန်ဆိပ်ကမ်း</item>
+        <item>အူပရင့်ဆိပ်ကမ်း</item>
+        <item>ဖွမ်တာရီကို</item>
+        <item>ဆန်တို ဒိုမင်ဂို</item>
+        <item>ဆာအို ပေါ်လို</item>
+        <item>စိန့် ဂျွန်</item>
+        <item>စိန့် ကစ်စ်</item>
+        <item>စိန့် လူစီယာ</item>
+        <item>စိန့် သောမတ်</item>
+        <item>တီဂွမ်နာ</item>
+        <item>တိုရွန်တို</item>
+        <item>ဗန်ကူဗာ</item>
+        <item>ဝင်းနားပက်</item>
+        <item>တောင်ဝင်ရိုးစွန်း</item>
+        <item>လုံဂီယာဘရန်</item>
+        <item>အယ်မက်တီ</item>
+        <item>အာမန်</item>
+        <item>အက်နာဒီယာ</item>
+        <item>အက်ထော်</item>
+        <item>ဘက်ဂဒက်</item>
+        <item>ဘာရိန်း</item>
+        <item>ဘာကု</item>
+        <item>ဘန်ကောက်</item>
+        <item>ဘေရု</item>
+        <item>ကလကတ္တား</item>
+        <item>ဒမားစကက်စ်</item>
+        <item>ဒါကာ</item>
+        <item>ဒူဘိုင်း</item>
+        <item>ဂါဇာ</item>
+        <item>ဟေဘရွန်</item>
+        <item>ဟိုချီမင်း</item>
+        <item>ဟောင်ကောင်</item>
+        <item>အစ္စတန်ဘူလ်</item>
+        <item>ဂျကာတာ</item>
+        <item>ဂျေရုစလာမ်</item>
+        <item>ကဘူးလ်</item>
+        <item>ကရာချီ</item>
+        <item>ကတ်မန်ဒူ</item>
+        <item>ကွာလာလန်ပူ</item>
+        <item>ကူဝိတ်</item>
+        <item>မကာအို</item>
+        <item>မနီလာ</item>
+        <item>မက်စကတ်</item>
+        <item>ဖနွမ်ပင်</item>
+        <item>ပြုံယမ်း</item>
+        <item>ကာတာ</item>
+        <item>ရန်ကုန်</item>
+        <item>ရီရက်</item>
+        <item>ဆေဂွန်</item>
+        <item>ဆိုးလ်</item>
+        <item>ရှန်ဟိုင်း</item>
+        <item>စင်ကာပူ</item>
+        <item>တိုင်ပေ</item>
+        <item>ထယ်ရန်</item>
+        <item>တယ် အဗီ</item>
+        <item>တိုကျို</item>
+        <item>အူလန်ဘတ္တာ</item>
+        <item>ဘာမြူဒါ</item>
+        <item>ကနေရီ</item>
+        <item>ကိတ် ဗာ့ဒ်</item>
+        <item>ရေးကဗိတ်ခ်</item>
+        <item>စတန်လေ</item>
+        <item>အာဒလိတ်</item>
+        <item>ဘရစ်ဘာ့</item>
+        <item>ကန်ဘာရာ</item>
+        <item>ဒါဝင်</item>
+        <item>မဲလ်ဘုန်း</item>
+        <item>တောင်ဝေလနိုင်ငံသစ်</item>
+        <item>ပါ့သ်</item>
+        <item>ကွင်းစလန်း</item>
+        <item>ဆစ်ဒနီ</item>
+        <item>ဗစ်တိုးရီးယား</item>
+        <item>နယူးဖောင်လန်</item>
+        <item>စက်စကတ်ချွန်ဝမ်</item>
+        <item>အီစတာကျွန်း</item>
+        <item>အမ်စတာဒမ်</item>
+        <item>အမ်ဒိုရာ</item>
+        <item>အေသင်စ်</item>
+        <item>ဘဲလ်ဖက်စ်</item>
+        <item>ဘဲလ်ဂရိတ်</item>
+        <item>ဘာလင်</item>
+        <item>ဘရာတစ်စလာဗာ</item>
+        <item>ဘရာဆဲလ်စ်</item>
+        <item>ဘျူကရက်</item>
+        <item>ဘူဒါပတ်စ်</item>
+        <item>ချီရှီနူ</item>
+        <item>ကိုပင်ဟေဂင်</item>
+        <item>ဒဗ္ဗလင်</item>
+        <item>ဂျီဘရောတာ</item>
+        <item>ဟယ်စင်ကီ</item>
+        <item>အိုင်လီမန်</item>
+        <item>အစ္စတန်ဘူလ်</item>
+        <item>ကိဗ်</item>
+        <item>လစ္စဘွန်း</item>
+        <item>လန်ဒန်</item>
+        <item>လူဇင်ဘတ်</item>
+        <item>မက်ဒရစ်</item>
+        <item>မော်တာ</item>
+        <item>မင့်စ်က်</item>
+        <item>မိုနာကို</item>
+        <item>မော်စကို</item>
+        <item>အော်စလို</item>
+        <item>ပဲရစ်</item>
+        <item>ပရာ့ဂ်</item>
+        <item>ရီဂါ</item>
+        <item>ရောမ</item>
+        <item>ဆန်မရီနို</item>
+        <item>ဆာရာဂျေဗို</item>
+        <item>စင်ဖာရိုပို</item>
+        <item>စကော့ပ်ဂျေ</item>
+        <item>ဆိုဖီယာ</item>
+        <item>စတော့က်ဟုမ်း</item>
+        <item>တာလင်</item>
+        <item>ဗက်ဒီကန်</item>
+        <item>ဗီယင်နာ</item>
+        <item>ဗေးနီးယပ်စ်</item>
+        <item>ဝါဆော</item>
+        <item>ဇာဂရဘ်</item>
+        <item>ဇူးရစ်</item>
+        <item>အန်တာနာနာရီဗို</item>
+        <item>မော်ဒိုက်</item>
+        <item>မော်ရစ်ရှက်စ်</item>
+        <item>အောက်ကလန်</item>
+        <item>ဖီဂျီ</item>
+        <item>ဂူအမ်</item>
+        <item>ဟိုနိုလူလူ</item>
+        <item>ကီရီတီမက်တီ</item>
+        <item>နူမေရာ</item>
+        <item>ဆမိုရာ</item>
+        <item>တာဟီတီ</item>
+        <item>အန်တီဂါ</item>
+        <item>အော်စတင်</item>
+        <item>ဘော်စတွန်</item>
+        <item>ကယ်ဂရီ</item>
+        <item>ကိုလန်ဘတ်စ်</item>
+        <item>ဒဲလ်လက်စ်</item>
+        <item>နော့စ်ဗေလ်</item>
+        <item>မမ်းဖစ်စ်</item>
+        <item>မီယာမီ</item>
+        <item>မီနီယာပိုလစ်</item>
+        <item>အော်တစ်ဂွာ</item>
+        <item>ဖစ်လဒယ်ဖီယာ</item>
+        <item>ဆိပ်ကမ်းမြို့</item>
+        <item>ဆန်ဒီရေဂို</item>
+        <item>ဆန်ဖရန်စစ္စကို</item>
+        <item>ဆားကန်မြို့တော်</item>
+        <item>ဆန်ဂျို့စ်</item>
+        <item>ဆန် ဆောဗဒေါ</item>
+        <item>ဆီရာတယ်</item>
+        <item>စိန့် လူးဝစ်</item>
+        <item>ဝါရှင်တန် ဒီစီ</item>
+        <item>ဟူစတွန်</item>
+        <item>ဆန် အန်တိုနီယို</item>
+        <item>ဂျက်ဆန်ဗယ်လ်</item>
+        <item>ဘောတီလ်မို</item>
+        <item>နာ့ရှ်ဗယ်လ်</item>
+        <item>မယ်ဝါ့ကီ</item>
+        <item>အော်ကလိုဟားမားမြို့တော်</item>
+        <item>လက်စ် ဗီးဂက်စ်</item>
+        <item>အဲလ်ဘကာကီ</item>
+        <item>တွတ်ဆန်</item>
+        <item>ဆာကရီမန်တို</item>
+        <item>အတ္တလတာ</item>
+        <item>ကလီဗလန်</item>
+        <item>နယူး အော်လင်းစ်</item>
+        <item>တန်ပါ</item>
+        <item>ပစ်စ်ဘဂ်</item>
+        <item>စင်စနာတီ</item>
+        <item>တောင်မြင်ကွင်း</item>
+        <item>ရီနို</item>
+        <item>အနက်ရောင်ကျောက်ဆောင်မြို့တော်</item>
+        <item>ဒိုဟာ</item>
+        <item>ဘေဂျင်း</item>
+        <item>မွန်ဘိုင်း</item>
+        <item>ဒေလီ</item>
+        <item>အော်စကာ</item>
+        <item>လဟို</item>
+        <item>ဆန်နာအာ</item>
+        <item>ဘာစီလိုနာ</item>
+        <item>မြူးနစ်</item>
+        <item>မီလန်</item>
+        <item>ဖရန့်က်ဖက်တ်</item>
+        <item>ဟနွိုင်း</item>
+        <item>အန်ကရာ</item>
+        <item>ဘန်ဂလို</item>
+        <item>ဘရာဇီးလီးယား</item>
+        <item>ကိပ်တောင်း</item>
+        <item>အစ္စလာမ်ဘတ်</item>
+        <item>ရီယိုဒီဂျနေရိုး</item>
+        <item>အန်အာဘာ</item>
+        <item>ဘိုလ်ဒါ</item>
+        <item>ကိန်းဘရစ်ဂျ်</item>
+        <item>ကတ်တလန်</item>
+        <item>မက်ဒီစန်</item>
+        <item>ဂွမ်ဂျိုး</item>
+        <item>ဟိုက်ဒရာဘတ်</item>
+        <item>ရက်စတွန်</item>
+        <item>ဘယ်လော်ရီဇွန်တီ</item>
+        <item>ဆန်တီရေးဂိုး</item>
+        <item>မွန်ရိုးဗီးရား</item>
+        <item>ကိုလံဘို</item>
+        <item>ချီဝါ့ဝါ</item>
+        <item>ဆဲလ်ဗါဒါ</item>
+        <item>ဂါဂအွန်</item>
+        <item>မန်ချက်စတာ</item>
+        <item>ကိဗ်</item>
+        <item>စိန့်ပီတာဘတ်</item>
+        <item>ခရက်ကိုဖ်</item>
+        <item>ဗရော့စ်ဝပ်ဖ်</item>
+        <item>ဟမ်းဘတ်</item>
+        <item>အယ်လူ</item>
+        <item>ဟန်ဖာ</item>
+        <item>ဆန်ဂျူအမ်</item>
+        <item>တယ်ဂူစီဂယ်လ်ပါ</item>
+        <item>ပါရမာရီဘို</item>
+        <item>ကီတို</item>
+
+        <item>အက်လာဗစ်ခ်</item>
+        <item>မောင့်ဂိုမာရီ</item>
+        <item>ဂျီနီဗာ</item>
+        <item>အော်ဒက်စ်ဆာ</item>
+        <item>အေဒင်</item>
+        <item>အဘူဒါဘီ</item>
+        <item>တရှကင့်</item>
+        <item>ဗလက်ဒီဗက်စတော့ခ်</item>
+        <item>ကမ်ချတ်ကာ</item>
+        <item>စူဗာ</item>
+        <item>ဝယ်လင်တန်</item>
+        <item>ချေသမ်ကျွန်းစု</item>
+        <item>စိန့်ပေါ(အမေရိကား)</item>
+    </string-array>
+
+    
+
+    
+
+    <array name="snooze_dismiss_drawables">
+        <item>@drawable/ic_alarm_alert_dismiss</item>
+        <item>@null</item>
+        <item>@drawable/ic_alarm_alert_snooze</item>
+        <item>@null</item>
+    </array>
+    <array name="snooze_dismiss_descriptions">
+        <item>@string/alarm_alert_dismiss_text</item>
+        <item>@null</item>
+        <item>@string/alarm_alert_snooze_text</item>
+        <item>@null</item>
+    </array>
+    <array name="snooze_dismiss_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@string/description_direction_left</item>
+        <item>@null</item>
+    </array>
+
+    <array name="dismiss_drawables">
+        <item>@drawable/ic_alarm_alert_dismiss</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+    <array name="dismiss_descriptions">
+        <item>@string/alarm_alert_dismiss_text</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+    <array name="dismiss_direction_descriptions">
+        <item>@string/description_direction_right</item>
+        <item>@null</item>
+        <item>@null</item>
+        <item>@null</item>
+    </array>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Ignorar e ligar</string>
+    <string name="power_off">Ignorar e desligar</string>
+
+    <string name="voice_ui_title">Controle de voz</string>
+    <string name="voice_ui_content_text">"Controle de voz está habilitado para Alarme"</string>
+    <string name="alarm_command_summary_format">Você pode falar <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> "\n"para soneca ou parar o alarme.</string>
+    <string name="alarm_command_summary_format_land">Você pode dizer <xliff:g id="first">%1$s</xliff:g> ou <xliff:g id="second">%2$s</xliff:g> para soneca ou parar o alarme.</string>
+</resources>

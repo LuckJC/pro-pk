@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Не програно аудіо.</string>
+    <string name="VideoView_info_text_network_interrupt">Помилка мережі, зупинено потік відео.</string>
+    <string name="VideoView_error_text_connection_failed">Помилка підключення до мережі. Будь ласка, перевірте підключення до мережі.</string>
+    
+    <string name="can_not_trim">Помилка, відео неможливо підрізати.</string>
+	
+	<string name="setp_option_name">Крок</string>
+	<string name="step_option_desc">Особистий крок перемотування вперед/назад</string>
+	<string name="setp_option_three_second">"3 сек."</string>
+	<string name="setp_option_six_second">"6 сек."</string>
+    
+    <string name="camera_print">"Друк"</string>
+    <string name="no_way_to_print">Для друку цих файлів нема жодного застосунку.</string>
+    <string name="printFile">Друкувати файл через</string>
+    
+    
+    <string name="no_storage_title">"Немає пам’яті"</string>
+    
+    
+    <string name="no_storage_message">Будь ласка, вставте карту SD</string>
+    
+    
+    <string name="load_image_fail">Не завантажено зображення</string>
+    
+    
+    <string name="proxy_host">Хост</string>
+    <string name="proxy_port">"Порт"</string>
+    <string name="apn_settings">"Назва точки доступу"</string>
+    <string name="rtsp_proxy_settings">"Налаштування проксі RTSP"</string>
+    <string name="rtsp_proxy_settings_summary">"Встановіть і керуйте налаштування проксі RTSP"</string>
+    <string name="enable_rtsp_proxy">"Активувати проксі RTSP"</string>
+    <string name="enable_rtsp_proxy_summary">"Активувати/Вимкнути проксі RTSP"</string>
+    <string name="http_proxy_settings">"Налаштування проксі НТТР"</string>
+    <string name="http_proxy_settings_summary">"Встановити і керувати налаштування проксі НТТР"</string>
+    <string name="enable_http_proxy">"Активувати проксі НТТР"</string>
+    <string name="enable_http_proxy_summary">"Активувати/Вимкнути проксі НТТР"</string>
+    <string name="apn_settings_summary">"Поточна SIM: %1$s\nПоточна APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"Закрито підключення даних SIM, неможливо встановити APN"</string>
+    <string name="udp_port_settings">"Діапазон порту RTP/RTCP"</string>
+    <string name="udp_port_settings_summary">"Встановити макс. і мін. № порту"</string>
+    <string name="max_udp_port">"Макс. № порту"</string>
+    <string name="min_udp_port">"Мін. № порту"</string>
+    <string name="server_timeout_title">"Тайм-аут сервера"</string>
+    <string name="server_timeout_message">"Чи повторно підключити сервер, щоб програти відео?"</string>
+    <string name="input_url">"Введіть URL"</string>
+    <string name="streaming_settings">"Налаштування передачі потоку"</string>
+    <string name="VideoView_info_text_video_not_supported">"Це відео не підтримується."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Помилка підключення, спробуйте перепідключити %1$d..."</string>
+	<string name="VideoView_info_buffering">"Буферінг..."</string>
+    <string name="stop">"Стоп"</string>
+    <string name="loop">"По колу"</string>
+    <string name="single">"Єдиний"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Субтитри"</string>
+    <string name="SubtitleSetting_text">"ТЕКСТ"</string>
+    <string name="SubtitleSetting_layout">"РОЗМІТКА"</string>
+    <string name="subtitle_layout_alignment">"Вирівнювання"</string>
+    <string name="subtitle_layout_bottom_margins">"Нижні поля"</string>
+    <string name="subtitle_layout_alignment_left">"Ліво"</string>
+    <string name="subtitle_layout_alignment_center">"Сентер"</string>
+    <string name="subtitle_layout_alignment_right">"Право"</string>
+    <string name="subtitle_text_font">Шрифт</string>
+    <string name="subtitle_text_color">"Колір"</string>
+    <string name="subtitle_text_size">"Розмір"</string>
+    <string name="subtitle_text_encoding">"Кодування символів"</string>
+    <string name="subtitle_text_color_black">"Чорний"</string>
+    <string name="subtitle_text_color_dkgray">"Темно-сірий"</string>
+    <string name="subtitle_text_color_gray">"Сірий"</string>
+    <string name="subtitle_text_color_ltgray">"Світло-сірий"</string>
+    <string name="subtitle_text_color_white">"Білий"</string>
+    <string name="subtitle_text_color_red">"Червоний"</string>
+    <string name="subtitle_text_color_green">"Зелений"</string>
+    <string name="subtitle_text_color_blue">"Синява"</string>
+    <string name="subtitle_text_color_yellow">"Жовтий"</string>
+    <string name="subtitle_text_color_cyan">"Блакитний"</string>
+    <string name="subtitle_text_color_magenta">"Рожевий"</string>
+    <string name="subtitle_text_color_translucent">"Прозорий"</string>
+    <string name="subtitle_text_encoding_default">"За умовчанням"</string>
+    <string name="closeSubtitle">"Закрити субтитри"</string>
+    <string name="subTitleChange">"ЗмінитиСубтитри"</string>
+    <string name="subtitleTrackChange">"ЗмінитиСубтитри"</string>
+    
+    <string name="audioTrackChange">"ЗмінаАудіоДоріжки"</string>
+    <string name="audioTrack">"Доріжка аудіо"</string>
+    <string name="noAvailableeTrack">"Недоступна інформація доріжки"</string>
+    <string name="noAvailableeAudioTrack">"Недоступна аудіо доріжка"</string>
+    <string name="audioChange">"Заміна аудіо"</string>
+    
+    
+
+    <string name="bookmark_add">"Додати закладку"</string>
+    <string name="bookmark_display">"Показати закладки"</string>
+    <string name="bookmark_empty">"Нема закладок"</string>
+    <string name="bookmark_exist">"Така ж закладка в істрорії"</string>
+    <string name="bookmark_add_success">"Успішно додано закладку"</string>
+    <string name="bookmark_list">"Закладки"</string>
+    <string name="bookmark_title">"Назва"</string>
+    <string name="bookmark_location">"Розташування"</string>
+    <string name="http_buffer_size">"Розмір буфера НТТР"</string>
+    <string name="http_buffer_size_summary">"Встановіть розмір буфера НТТР для передачі потоку"</string>
+    <string name="http_buffer_size_text">"Поточний розмір буфера НТТР: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"Розмір буфера RTSP"</string>
+    <string name="rtsp_buffer_size_summary">"Встановіть розмір буфера RTSP для передачі потоку"</string>
+    <string name="rtsp_buffer_size_text">"Поточний розмрі буфера RTSP: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Діапазон дійсний значень: %1$d - %2$d секунд"</string>
+    <string name="media_detail">"Медіа-подробиці"</string>
+    <string name="detail_title">"Назва: %1$s"</string>
+    <string name="detail_copyright">"Копірайт: %1$s"</string>
+    <string name="detail_session">"Інфо сесії: %1$s"</string>
+    <string name="stereo">"Стерео"</string>
+    <string name="single_track">"Єдина доріжка"</string>
+    <string name="delete_all">"Видалити все"</string>
+    <string name="default_title">"Назва за промовчанням"</string>
+    <string name="next">"Далі"</string>
+    <string name="previous">"Попереднє"</string>
+    
+    
+    <string name="mav_firstRunTitle">Як дивитися багатокутове зображення</string>
+    <string name="mav_firstRunText">Ковзайте вліво або вправо, щоб дивитись багатокутове зображення</string>
+    
+    
+    <string name="stereo3d_album_name">3D-медія</string>
+    <string name="stereo3d_mode_switchto_2d">Перемкнутися у режим 2D</string>
+    <string name="stereo3d_mode_switchto_3d">Перемкнутися у режим 3D</string>
+    <string name="stereo3d_convert2d_dialog_title">Конвертувати в 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" не підтримується для зображення 3D. Він буде конвертований у 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Конверта в 2D...</string>
+    <string name="stereo3d_pan_firstrun_title">Як дивитися панорамне 3D-зображення</string>
+    <string name="stereo3d_pan_firstrun_text">Ковзайте вліво або вправо, щоб дивитись панорамне 3D-зображення.</string>
+    <string name="stereo3d_share_convert_text_single">Це - 3D-зображення. Щоб продовжити спільне користування, воно перетвориться на 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">Вибрані зображення включають 3D. Щоб продовжити спільне користування, вони перетворяться на 2D.</string>
+    <string name="stereo3d_share_dialog_title">Спільне користування як 3D або 2D.</string>
+    <string name="stereo3d_share_dialog_text_single">Це - 3D-зображення. Отримувач може неправильно його побачити.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Вибрані зображення включають 3D. Отримувач може неправильно їх побачити.</string>
+    <string name="stereo3d_share_dialog_button_2d">Ділитися як 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Ділитися як 3D</string>
+    <string name="stereo3d_attach_dialog_title">Приєднати як 3D або 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Приєднати як 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Приєднати як 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Попередній перегляд зображення</string>
+    <string name="stereo3d_preview_button_set">"Устан."</string>
+    <string name="stereo3d_set_wallpaper_fail">Не встановлено шпалер 3D.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Тонке налаштування глибини</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Якщо очам неприємно, можна відрегулювати глибину вручну</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Авто тонке налаштування глибини</string>
+
+    
+    <string name="stereo3d_video_layout">Розмітка регулювання відео</string>
+    <string name="stereo3d_video_layout_normal">Звичайний</string>
+    <string name="stereo3d_video_layout_sidebyside">Поруч</string>
+    <string name="stereo3d_video_layout_toptobottom">Згори вниз</string>
+    <string name="stereo3d_video_layout_leftrightswap">Поміняти ліво/право</string>
+    <string name="stereo3d_video_layout_topbottomswap">Поміняти гору/низ</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Автоматчино перетворено в режим 3D</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Автоматчино перетворено в режим 2D</string>
+    <string name="stereo3d_save">"Зберегти"</string>
+
+    
+    <string name="widget_load_failed">Не завантажено макрос</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Вимкнути демо</string>
+    <string name="vertical_demo">Вертикальне демо</string>
+    <string name="horizontal_demo">Горизонтальне демо</string>
+                  
+    
+    <string name="conshots_title">"Тривалий знімок"</string>
+    <string name="best_shots">Видобути найкращі знімки</string>
+    <string name="best_shots_confirm">Видалити всі непозначені зображення.</string>
+    <string name="empty_conshots">Доступно О тривалих знімків</string>
+    <string name="make_motion">"Готово"</string>
+    <string name="motion_at_least">"Щонайменше %1$s фото потрібно для створення ефекту."</string>
+    <string name="motion_at_most">"Можна вибрати не більше %1$s фото."</string>
+    <string name="generate_animation">"Створюється анімація..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Попередження"</string>
+    <string name="Text_WFD_Dialog">"Весь захищений від копіювання зміст буде приховано, коли підключено дисплей Wi-Fi."</string>
+    <string name="Disconnecd_WFD">"Вимкніть дисплей Wi-Fi"</string>
+    <string name="Hind_DRMImage_WFD">"Продовжити"</string>
+    <string name="wfd_finishGallery_Warning">"Неможливо відкрити, коли увімкнено бездротовий дисплей."</string>
+    <string name="wfd_protected_warning1">"Зміст захищений від копіювання,"</string>
+    <string name="wfd_protected_warning2">"Щоб побачити його на телефоні,"</string>
+    <string name="wfd_protected_warning3">"будь ласка, відключіть бездротовий дисплей."</string>
+    <string name="wfd_disconnected">"Відключення бездротового дисплею."</string>
+    <string name="smb_protected_warning">"будь ласка, відключіть телефон від смартбука."</string>
+    <string name="hdmi_protected_warning">"будь ласка, відключіть з HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Не підтримується відео 4К, коли підключено бездротовий дисплей. Відключити його і програвати відео 4К?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Гарнітура Bluetooth не може програти звук відео 4К. Відключити її і програти відео 4К?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL не може програти відео 4К. Відключити його і програти відео 4К?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI не може програти відео 4К. Відключити і програти відео 4К?"</string>	
+    <string name="Not_supported_4k_video">"Зовнішній вихід не може програти відео 4К. Відключити його і програти відео 4К?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Весь захищений від копіювання зміст буде прихований, коли підключено дисплей HDMI."</string>
+    
+    
+    <string name="share_format_choose_title">"Виберіть формат"</string>
+    <string name="share_format_image">"Зображення"</string>
+    <string name="share_format_video">"Відео"</string>
+    <string name="generating_tip">"Створення відео..."</string>
+    <string name="generate_video_fail">"Не створено відео"</string>
+
+    <string name="save_fail">"Карта пам'яті заповнена або нема карти пам'яті."</string>
+    <string name="appwidget_error_text">Помилка макроса галереї.</string>
+    <string name="share_limit">Неможливо ділитися понад 300 файлами.</string>
+
+    <string name="file_deleted">Файл видалено.</string>
+    
+    <string name="turn_on_hotknot">"ВИМКНЕНО HotKnot. Будь ласка, увімкніть HotKnot у налаштуваннях."</string>
+    <string name="hotknot_toast">"Будь ласка, користуйтеся екраном, щоб торкатися іншого пристрою."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

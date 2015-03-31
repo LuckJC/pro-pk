@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Afwijzen en inschakelen</string>
+    <string name="power_off">Afwijzen en uitschakelen</string>
+
+    <string name="voice_ui_title">Spraakbesturing</string>
+    <string name="voice_ui_content_text">"Stembediening is ingeschakeld voor alarm"</string>
+    <string name="alarm_command_summary_format">U kunt <xliff:g id="first">%1$s</xliff:g> of <xliff:g id="second">%2$s</xliff:g> "\n"zeggen om het alarm te laten sluimeren of stoppen.</string>
+    <string name="alarm_command_summary_format_land">U kunt <xliff:g id="first">%1$s</xliff:g> of <xliff:g id="second">%2$s</xliff:g> zeggen om het alarm te laten sluimeren of stoppen.</string>
+</resources>

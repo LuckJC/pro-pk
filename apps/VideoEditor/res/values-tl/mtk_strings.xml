@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Abo</string>  
+    <string name="not_enough_space" product="nosdcard">"Puno na ang iyong imbakan na USB."</string>  
+    <string name="not_enough_space" product="default">"Puno ang iyong SD card."</string>
+<string name="add_audio_track_failed">Nabigong magdagdag ng audio track.</string>
+    <string name="insert_transition_failed">Nabigong magpasok ng transisyon.</string>
+    <string name="save_emoticons_failed">Hindi ma-save ang mga emoticon.</string>
+    <string name="save_xml_failed">Hindi ma-save ang mga espesyal na character.</string>
+    </resources>

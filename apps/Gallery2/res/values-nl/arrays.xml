@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>Veld Host mag niet leeg zijn</item>  
+        <item>Veld Poort mag niet leeg zijn</item>  
+        <item>Ongeldige host</item>  
+        <item>Ongeldige poort</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"Standaard"</item>
+        <item>"Mono"</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array></resources>

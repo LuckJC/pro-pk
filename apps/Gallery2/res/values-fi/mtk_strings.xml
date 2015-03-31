@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Audion toisto epäonnistui.</string>
+    <string name="VideoView_info_text_network_interrupt">Verkkovirhe ja suoratoistettava video pysähtyi.</string>
+    <string name="VideoView_error_text_connection_failed">Verkkoyhteys epäonnistui. Tarkista verkkoyhteys.</string>
+    
+    <string name="can_not_trim">Ilmeni virhe. Videota ei voi leikata.</string>
+	
+	<string name="setp_option_name">Vaihe</string>
+	<string name="step_option_desc">Mukauta eteenpäin/taaksepäin-kelausvaihetta</string>
+	<string name="setp_option_three_second">"3 sekuntia"</string>
+	<string name="setp_option_six_second">"6 sekuntia"</string>
+    
+    <string name="camera_print">"Tulosta"</string>
+    <string name="no_way_to_print">Tiedostojen tulostamiseen ei ole käytettävistä sovellusta.</string>
+    <string name="printFile">Tulosta tiedosto välineellä</string>
+    
+    
+    <string name="no_storage_title">"Ei tallennustilaa"</string>
+    
+    
+    <string name="no_storage_message">Liitä SD-kortti</string>
+    
+    
+    <string name="load_image_fail">Kuvan lataus epäonnistui</string>
+    
+    
+    <string name="proxy_host">Isäntä</string>
+    <string name="proxy_port">"Portti"</string>
+    <string name="apn_settings">"Tukiasemien nimet"</string>
+    <string name="rtsp_proxy_settings">"RTSP-välityspalvelinasetukset"</string>
+    <string name="rtsp_proxy_settings_summary">"Aseta ja hallitse RTSP-välityspalvelinasetuksia"</string>
+    <string name="enable_rtsp_proxy">"Ota käyttöön RTSP-välityspalvelin"</string>
+    <string name="enable_rtsp_proxy_summary">"Ota käyttöön/pois käytöstä RTSP-välityspalvelin"</string>
+    <string name="http_proxy_settings">"HTTP-välityspalvelinasetukset"</string>
+    <string name="http_proxy_settings_summary">"Aseta ja hallitse HTTP-välityspalvelinasetuksia"</string>
+    <string name="enable_http_proxy">"Ota käyttöön HTTP-välityspalvelin"</string>
+    <string name="enable_http_proxy_summary">"Ota käyttöön/pois käytöstä HTTP-välityspalvelin"</string>
+    <string name="apn_settings_summary">"Nykyinen SIM: %1$s\nNykyinen APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"SIM-kortin dataliitettävyys on suljettu. Ei voi asettaa APN:ää"</string>
+    <string name="udp_port_settings">"RTP/RTCP-portin alue"</string>
+    <string name="udp_port_settings_summary">"Aseta maksimi- ja minimiporttinumero"</string>
+    <string name="max_udp_port">"Maksimi-porttinumero"</string>
+    <string name="min_udp_port">"Minimi-porttinumero"</string>
+    <string name="server_timeout_title">"Palvelimen aikakatkaisu"</string>
+    <string name="server_timeout_message">"Liitetäänkö palvelin uudelleen videon toistamiseksi?"</string>
+    <string name="input_url">"Anna URL"</string>
+    <string name="streaming_settings">"Suoratoistoasetukset"</string>
+    <string name="VideoView_info_text_video_not_supported">"Tämä video ei ole tuettu."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Yhteys epäonnistui. Yritä yhdistää %1$d uudelleen..."</string>
+	<string name="VideoView_info_buffering">"Puskuroidaan..."</string>
+    <string name="stop">"Pysäytä"</string>
+    <string name="loop">"Silmukka"</string>
+    <string name="single">"Yksittäinen"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Tekstitys"</string>
+    <string name="SubtitleSetting_text">"TEKSTI"</string>
+    <string name="SubtitleSetting_layout">"ASETTELU"</string>
+    <string name="subtitle_layout_alignment">"Tasaus"</string>
+    <string name="subtitle_layout_bottom_margins">"Alamarginaalit"</string>
+    <string name="subtitle_layout_alignment_left">"Vasen"</string>
+    <string name="subtitle_layout_alignment_center">"Center"</string>
+    <string name="subtitle_layout_alignment_right">"Oikea"</string>
+    <string name="subtitle_text_font">Fontti</string>
+    <string name="subtitle_text_color">"Väri"</string>
+    <string name="subtitle_text_size">"Koko"</string>
+    <string name="subtitle_text_encoding">"Merkkien koodaus"</string>
+    <string name="subtitle_text_color_black">"Musta"</string>
+    <string name="subtitle_text_color_dkgray">"Tummanharmaa"</string>
+    <string name="subtitle_text_color_gray">"Harmaa"</string>
+    <string name="subtitle_text_color_ltgray">"Vaaleanharmaa"</string>
+    <string name="subtitle_text_color_white">"Valkoinen"</string>
+    <string name="subtitle_text_color_red">"Punainen"</string>
+    <string name="subtitle_text_color_green">"Vihreä"</string>
+    <string name="subtitle_text_color_blue">"Sininen"</string>
+    <string name="subtitle_text_color_yellow">"Keltainen"</string>
+    <string name="subtitle_text_color_cyan">"Turkoosi"</string>
+    <string name="subtitle_text_color_magenta">"Magenta"</string>
+    <string name="subtitle_text_color_translucent">"Läpikuultava"</string>
+    <string name="subtitle_text_encoding_default">"Oletus"</string>
+    <string name="closeSubtitle">"Sulje tekstitys"</string>
+    <string name="subTitleChange">"Muuta tekstitys"</string>
+    <string name="subtitleTrackChange">"Muuta tekstitys"</string>
+    
+    <string name="audioTrackChange">"Muuta ääniraita"</string>
+    <string name="audioTrack">"Ääniraita"</string>
+    <string name="noAvailableeTrack">"Raitatietoja ei käytettävissä"</string>
+    <string name="noAvailableeAudioTrack">"Ääniraitaa ei käytettävissä"</string>
+    <string name="audioChange">"audioChange"</string>
+    
+    
+
+    <string name="bookmark_add">"Lisää kirjanmerkki"</string>
+    <string name="bookmark_display">"Näytä kirjanmerkit"</string>
+    <string name="bookmark_empty">"Ei kirjanmerkkejä"</string>
+    <string name="bookmark_exist">"Sama kirjanmerkki historiassa"</string>
+    <string name="bookmark_add_success">"Kirjanmerkin lisääminen onnistui"</string>
+    <string name="bookmark_list">"Kirjanmerkit"</string>
+    <string name="bookmark_title">"Nimi"</string>
+    <string name="bookmark_location">"Sijainti"</string>
+    <string name="http_buffer_size">"HTTP-puskurikoko"</string>
+    <string name="http_buffer_size_summary">"Aseta suoratoistolle HTTP-puskurikoko"</string>
+    <string name="http_buffer_size_text">"Nykyinen HTTP-puskurikoko: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"RTSP-puskurikoko"</string>
+    <string name="rtsp_buffer_size_summary">"Aseta suoratoistolle RTSP-puskurikoko"</string>
+    <string name="rtsp_buffer_size_text">"Nykyinen RTSP-puskurikoko: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Kelvollinen arvoalue: %1$d - %2$d sekuntia"</string>
+    <string name="media_detail">"Mediatiedot"</string>
+    <string name="detail_title">"Nimike: %1$s"</string>
+    <string name="detail_copyright">"Tekijänoikeudet: %1$s"</string>
+    <string name="detail_session">"Istuntotiedot: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"Yksittäinen raita"</string>
+    <string name="delete_all">"Poista kaikki"</string>
+    <string name="default_title">"Oletusnimike"</string>
+    <string name="next">"Seuraava"</string>
+    <string name="previous">"Edellinen"</string>
+    
+    
+    <string name="mav_firstRunTitle">Monikuvakulmaisen kuvan näyttäminen</string>
+    <string name="mav_firstRunText">Pyyhkäise vasemmalle tai oikealle näyttääksesi monikuvakulmaisen kuvan</string>
+    
+    
+    <string name="stereo3d_album_name">3D-media</string>
+    <string name="stereo3d_mode_switchto_2d">Vaihda 2D-tilaan</string>
+    <string name="stereo3d_mode_switchto_3d">Vaihda 3D-tilaan</string>
+    <string name="stereo3d_convert2d_dialog_title">Muunna 2D:ksi</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" ei ole tuettu 3D-kuvalle. Se muunnetaan 2D:ksi.</string>
+    <string name="stereo3d_convert2d_progress_text">Muunnetaan 2D:ksi...</string>
+    <string name="stereo3d_pan_firstrun_title">3D-panoraamakuvan näyttäminen</string>
+    <string name="stereo3d_pan_firstrun_text">Pyyhkäise vasemmalle tai oikealle näyttääksesi 3D-panoraamakuvan.</string>
+    <string name="stereo3d_share_convert_text_single">Tämä on 3D-kuva. Jakamisen jatkamiseksi se muunnetaan 2D:ksi.</string>
+    <string name="stereo3d_share_convert_text_multiple">3D-kuvat sisältyvät valittuihin kuviin. Jakamisen jatkamiseksi ne muunnetaan 2D:ksi.</string>
+    <string name="stereo3d_share_dialog_title">Jaa 3D:nä tai 2D:nä</string>
+    <string name="stereo3d_share_dialog_text_single">Tämä on 3D-kuva. Vastaanottaja ei ehkä pysty katsomaan sitä oikein.</string>
+    <string name="stereo3d_share_dialog_text_multiple">3D-kuvat sisältyvät valittuihin kuviin. Vastaanottaja ei ehkä pysty katsomaan niitä oikein.</string>
+    <string name="stereo3d_share_dialog_button_2d">Jaa 2D:nä</string>
+    <string name="stereo3d_share_dialog_button_3d">Jaa 3D:nä</string>
+    <string name="stereo3d_attach_dialog_title">Liitä 3D:nä tai 2D:nä</string>
+    <string name="stereo3d_attach_dialog_button_2d">Liitä 2D:nä</string>
+    <string name="stereo3d_attach_dialog_button_3d">Liitä 3D:nä</string>
+    
+    
+    <string name="stereo3d_preview_title">Esikatsele kuva</string>
+    <string name="stereo3d_preview_button_set">"Aseta"</string>
+    <string name="stereo3d_set_wallpaper_fail">3D-taustakuvan asettaminen epäonnistui.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Syvyyden virittäminen</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Voit säätää syvyyttä manuaalisesti, jos valikko tuntuu silmillesi epämukavalta</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automaattinen syvyyden viritys</string>
+
+    
+    <string name="stereo3d_video_layout">Säädä videoasettelu</string>
+    <string name="stereo3d_video_layout_normal">Normaali</string>
+    <string name="stereo3d_video_layout_sidebyside">Vierekkäin</string>
+    <string name="stereo3d_video_layout_toptobottom">Ylhäältä alas</string>
+    <string name="stereo3d_video_layout_leftrightswap">Vaihda Vasen/Oikea</string>
+    <string name="stereo3d_video_layout_topbottomswap">Vaihda Ylä/Ala</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Muunnettu automaattisesti 3D-tilaan</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Muunnettu automaattisesti 2D-tilaan</string>
+    <string name="stereo3d_save">"Tallenna"</string>
+
+    
+    <string name="widget_load_failed">Pienohjelman lataaminen epäonnistui</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Esittelytila pois päältä</string>
+    <string name="vertical_demo">Pysty-esittely</string>
+    <string name="horizontal_demo">Vaaka-esittely</string>
+                  
+    
+    <string name="conshots_title">"Jatkuva kuvaus"</string>
+    <string name="best_shots">Pura parhaat kuvat</string>
+    <string name="best_shots_confirm">Poista kaikki merkitsemättömät kuvat.</string>
+    <string name="empty_conshots">Jatkuvan kuvauksen kuvia ei käytettävissä.</string>
+    <string name="make_motion">"Valmis"</string>
+    <string name="motion_at_least">"Vähintään %1$s kuvista vaatii tehosteen laatimisen."</string>
+    <string name="motion_at_most">"Enintään %1$s valokuvaa voi valita."</string>
+    <string name="generate_animation">"Luodaan animaatiota..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Varoitus"</string>
+    <string name="Text_WFD_Dialog">"Kaikki kopiointisuojattu sisältö piilotetaan, kun Wi-Fi-näyttö liitetään."</string>
+    <string name="Disconnecd_WFD">"Kytke Wi-Fi-näyttö pois päältä"</string>
+    <string name="Hind_DRMImage_WFD">"Jatka"</string>
+    <string name="wfd_finishGallery_Warning">"Sitä ei voi avata, kun langaton näyttö on päällä."</string>
+    <string name="wfd_protected_warning1">"Sisältö on kopiosuojattu,"</string>
+    <string name="wfd_protected_warning2">"Nähdäksesi sen puhelimessa,"</string>
+    <string name="wfd_protected_warning3">"irrota langaton näyttö."</string>
+    <string name="wfd_disconnected">"Langattoman näytön yhteys katkaistu."</string>
+    <string name="smb_protected_warning">"irrota puhelimesi Smartbook-sovelluksesta."</string>
+    <string name="hdmi_protected_warning">"irrota langaton näyttö HDMI:stä."</string>
+    <string name="Not_supported_4k_video_in_wfd">"4K-videota ei tueta, kun langaton näyttö on yhdistetty. Katkaistaanko yhteys ja toistetaanko 4K-videota?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Bluetooth-kuulokkeet eivät toista 4K-videon ääntä. Katkaistaanko yhteys ja toistetaanko 4K-videota?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL ei toista 4K-videota. Katkaistaanko yhteys ja toistetaanko 4K-videota?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI ei toista 4K-videota. Katkaistaanko yhteys ja toistetaanko 4K-videota?"</string>	
+    <string name="Not_supported_4k_video">"Ulkoinen lähtö ei toista 4K-videota. Katkaistaanko yhteys ja toistetaanko 4K-videota?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Kaikki kopiointisuojattu sisältö piilotetaan, kun HDMI-näyttö liitetään."</string>
+    
+    
+    <string name="share_format_choose_title">"Valitse muoto"</string>
+    <string name="share_format_image">"Kuva"</string>
+    <string name="share_format_video">"Video"</string>
+    <string name="generating_tip">"Luodaan videota..."</string>
+    <string name="generate_video_fail">"Videon luominen epäonnistui"</string>
+
+    <string name="save_fail">Muistikortti täynnä tai ei muistikorttia.</string>
+    <string name="appwidget_error_text">Galleria-pienohjelmavirhe.</string>
+    <string name="share_limit">Ei voi jakaa yli 300 tiedostoa.</string>
+
+    <string name="file_deleted">Tiedosto on poistettu.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot on OFF (Pois päältä). Kytke HotKnot päälle Asetuksissa."</string>
+    <string name="hotknot_toast">"Käytä näyttöä koskettaaksesi toista laitetta."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

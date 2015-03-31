@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_conv_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/translucent_black"
+    android:visibility="gone" >
+
+    <LinearLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dip">
+
+        <ImageButton
+            android:id="@+id/default_layout"
+            style="@style/EffectsMenuActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:src="@drawable/ic_video_layout_2d"/>
+
+        <ImageButton
+            android:id="@+id/side_by_side"
+            style="@style/EffectsMenuActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:src="@drawable/ic_video_layout_side_by_side"/>
+
+        <ImageButton
+            android:id="@+id/top_and_bottom"
+            style="@style/EffectsMenuActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:src="@drawable/ic_video_layout_top_and_bottom"/>
+
+       <ImageButton
+            android:id="@+id/sbs_swap"
+            style="@style/EffectsMenuActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:src="@drawable/ic_video_layout_sbs_swap"/>
+
+        <ImageButton
+            android:id="@+id/tab_swap"
+            style="@style/EffectsMenuActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dip"
+            android:paddingBottom="20dip"
+            android:src="@drawable/ic_video_layout_tab_swap"/>
+
+    </LinearLayout>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_menu"
+        android:paddingBottom="18dip"
+        android:layout_marginLeft="14dip"
+        android:layout_marginRight="14dip" >
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="94dip"
+            android:layout_height="48dip"
+            android:layout_alignParentLeft="true"
+            android:text="@android:string/cancel"
+            android:background="@drawable/s3d_conv_btn_bg"
+            android:textSize="18sp"
+            android:textColor="#FF393939" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="94dip"
+            android:layout_height="48dip"
+            android:layout_alignParentRight="true"
+            android:text="@string/stereo3d_save"
+            android:background="@drawable/s3d_conv_btn_bg"
+            android:textSize="18sp"
+            android:textColor="#FF393939" />
+
+    </RelativeLayout>
+
+</com.mediatek.gallery3d.ui.RelativeLayoutIgnoreTouch>

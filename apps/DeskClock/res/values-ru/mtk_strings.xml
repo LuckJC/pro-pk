@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Пропустить и включить</string>
+    <string name="power_off">Пропустить и выключить</string>
+
+    <string name="voice_ui_title">Голосовое управление</string>
+    <string name="voice_ui_content_text">"Для функции подачи сигнала включен параметр голосового управления"</string>
+    <string name="alarm_command_summary_format">Вы можете сказать <xliff:g id="first">%1$s</xliff:g> или <xliff:g id="second">%2$s</xliff:g> "\n", чтобы включить или отключить подачу сигнала.</string>
+    <string name="alarm_command_summary_format_land">Вы можете сказать <xliff:g id="first">%1$s</xliff:g> или <xliff:g id="second">%2$s</xliff:g>, чтобы повторить сигнал тревоги или остановить его подачу.</string>
+</resources>

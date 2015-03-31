@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="pref_camera_flashmode_label_on" msgid="7347504762794840140">"ເປີດແຟລຊ"</string>
+    <string name="pref_camera_flashmode_label_off" msgid="3541596735596053416">"ປິດແຟລຊຢູ່"</string>
+    <string name="pref_camera_whitebalance_label_auto" msgid="1479694362310491429">"ອັດຕະໂນມັດ"</string>
+    <string name="pref_camera_whitebalance_label_incandescent" msgid="7427628260209908900">"ແສງກ້າ"</string>
+    <string name="pref_camera_whitebalance_label_daylight" msgid="1859710806141461399">"ກາງເວັນ"</string>
+    <string name="pref_camera_whitebalance_label_fluorescent" msgid="5173251749161337707">"ໄຟຟລູອໍເຣສເຊນ"</string>
+    <string name="pref_camera_whitebalance_label_cloudy" msgid="8230173517179285320">"ຟ້າບົດ"</string>
+    <string name="pref_camera_id_label_back" msgid="8745553500400332333">"ກ້ອງຫນ້າ"</string>
+    <string name="pref_camera_id_label_front" msgid="8699439330056996709">"ກ້ອງຫຼັງ"</string>
+  <plurals name="number_of_photos">
+    <item quantity="one" msgid="6949174783125614798">"%1$d ຮູບ"</item>
+    <item quantity="other" msgid="3813306834113858135">"%1$d ຮູບ"</item>
+  </plurals>
+</resources>

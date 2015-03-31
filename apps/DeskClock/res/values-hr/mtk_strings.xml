@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Odbaci i uključi</string>
+    <string name="power_off">Odbaci i isključi</string>
+    <string name="voice_ui_title">"Glasovno upravljanje"</string>
+    <string name="voice_ui_content_text">"Glasovno upravljanje je aktivirano za alarm"</string>
+    <string name="alarm_command_summary_format">Izgovorite <xliff:g id="first">%1$s</xliff:g> ili <xliff:g id="second">%2$s</xliff:g> "\n"za odgodu alarma ili njegovo zaustavljanje.</string>
+    <string name="alarm_command_summary_format_land">Izgovorite <xliff:g id="first">%1$s</xliff:g> ili <xliff:g id="second">%2$s</xliff:g> za odgodu alarma ili njegovo zaustavljanje.</string>
+</resources>

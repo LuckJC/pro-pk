@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="people">လူများ</string>
+    <string name="contactsList">လိပ်စာများ</string>
+    <string name="shortcutContact">အဆက်အသွယ်</string>
+    <string name="shortcutDialContact">တိုက်ရိုက်ခေါ်ဆိုခြင်း</string>
+    <string name="shortcutMessageContact">တိုက်ရိုက်သတင်းတို</string>
+    <string name="shortcutActivityTitle">အဆက်အသွယ်ဖြတ်လမ်းတစ်ခုကိုရွေးရန်</string>
+    <string name="callShortcutActivityTitle">ဖုန်းခေါ်ဆိုရန်နံပါတ်တစ်ခုရွေးပါ</string>
+    <string name="messageShortcutActivityTitle">သတင်းတိုပို့ရန်နံပါတ်တစ်ခုရွေးပါ</string>
+    <string name="contactPickerActivityTitle">အဆက်အသွယ်တစ်ခုရွေးရန်</string>
+    <string name="starredList">ကြယ်ပြုလုပ်သည်</string>
+    <string name="frequentList">မကြာခဏ</string>
+    <string name="strequentList">အနှစ်သက်ဆုံးများ</string>
+    <string name="viewContactTitle">အဆက်အသွယ်အသေးစိတ်</string>
+    <string name="viewContactDesription">အဆက်အသွယ်ကိုကြည့်ရန်</string>
+    <string name="editContactDescription">လိပ်စာတည်းဖြတ်ပါ</string>
+    <string name="insertContactDescription">အဆက်အသွယ်ဖန်တီးရန်</string>
+    <string name="editGroupDescription">အုပ်စုကိုတည်းဖြတ်ရန်</string>
+    <string name="insertGroupDescription">အုပ်စုဖန်တီးရန်</string>
+    <string name="contactDetailAbout">အကြောင်း</string>
+    <string name="contactDetailUpdates">နောက်ဆုံးအခြေအနေများ</string>
+    <string name="searchHint">အဆက်အသွယ်များကိုရှာဖွေရန်</string>
+    <string name="menu_viewContact">အဆက်အသွယ်ကိုကြည့်ရန်</string>
+    <string name="menu_addStar">အနှစ်သက်ဆုံးများသို့ ထပ်ထည့်ရန်</string>
+    <string name="menu_removeStar">အနှစ်သက်ဆုံးများမှ ဖယ်ရှားရန်</string>
+    <string name="menu_editContact">တည်းဖြတ်ပါ</string>
+    <string name="menu_deleteContact">ဖျက်ပါ</string>
+    <string name="menu_create_contact_shortcut">မူလဖန်သားပြင်ပေါ်တွင်ထားရန်</string>
+    <string name="menu_call">အဆက်အသွယ်ကိုခေါ်ဆိုရန်</string>
+    <string name="menu_sendSMS">အဆက်အသွယ်ကိုစာသားသတင်းတိုပို့ရန်</string>
+    <string name="menu_splitAggregate">ခွဲရန်</string>
+    <string name="menu_editGroup">တည်းဖြတ်ပါ</string>
+    <string name="menu_deleteGroup">ဖျက်ပါ</string>
+    <string name="menu_new_contact_action_bar">လိပ်စာထည့်ပါ</string>
+    <string name="menu_new_group_action_bar">အသစ်</string>
+    <string name="splitConfirmation_title">အဆက်အသွယ်ကိုခွဲမှာလား။</string>
+    <string name="splitConfirmation">ဤအဆက်အသွယ်ကို အဆက်အသွယ်မျိုးစုံထဲသို့ ခွဲထားလိမ့်မည်။</string>
+    <string name="menu_joinAggregate">ပေါင်းစည်းရန်</string>
+    <string name="titleJoinContactDataWith">အဆက်အသွယ်များကိုပေါင်းစည်းရန်</string>
+    <string name="blurbJoinContactDataWith">သင်ပေါင်းစည်းလိုသောအဆက်အသွယ်ကိုရွေးရန်  <xliff:g id="name">%s</xliff:g>- </string>
+    <string name="showAllContactsJoinItem">အဆက်အသွယ်အားလုံးကိုပြရန်</string>
+    <string name="separatorJoinAggregateSuggestions">အကြံပေးထားသောအဆက်အသွယ်များ</string>
+    <string name="separatorJoinAggregateAll">အဆက်အသွယ်များ အားလုံး</string>
+    <string name="contactsJoinedMessage">အဆက်အသွယ်များပေါင်းစည်းသည်</string>
+    <string name="menu_set_ring_tone">ဖုန်းမည်သံသတ်မှတ်ရန်</string>
+    <string name="menu_redirect_calls_to_vm">ခေါ်ဆိုမှုများအားလုံးကို အသံစာပို့ခြင်းသို့</string>
+    <string name="readOnlyContactWarning">ဖတ်ရန်သာဟူသောအကောင့်များမှာ အဆက်အသွယ်များကိုသင်မဖျက်နိုင်ပါ။ သို့သော် သင့်အဆက်အသွယ်များစာရင်းတွင် ဖုံးကွယ်ထားနိုင်ပါသည်။</string>
+    <string name="readOnlyContactDeleteConfirmation">ဤအဆက်အသွယ်တွင် အကောင့်မျိုးစုံမှအချက်အလက်များ ပါဝင်သည်။ ဖတ်ရန်သာဟူသော အကောင့်များမှ အချက်အလက်များကို သင့်အဆက်အသွယ်များစာရင်းတွင် ဖွက်ထားလိမ့်မည်။ ဖျက်ပစ်မည်မဟုတ်။</string>
+    <string name="multipleContactDeleteConfirmation">ဤအဆက်အသွယ်ကို ဖျက်ခြင်းဖြင့် အကောင့်မျိုးစုံမှ အချက်အလက်များကို ဖျက်လိမ့်မည်။</string>
+    <string name="deleteConfirmation">ဤအဆက်အသွယ်ကိုဖျက်လိမ့်မည်။</string>
+    <string name="menu_discard">လွှင့်ပစ်ပါ</string>
+    <string name="invalidContactMessage">အဆက်အသွယ်မှာ မရှိပါ။</string>
+    <string name="createContactShortcutSuccessful">အဆက်အသွယ်ဝစ်ဂျက်ကို မူလဖန်သားပြင်တွင် ထည့်ထပ်ထားသည်။</string>
+    <string name="pickerNewContactHeader">အဆက်အသွယ်အသစ်ဖန်တီးရန်</string>
+    <string name="pickerNewContactText">အဆက်အသွယ်အသစ်ဖန်တီးရန်</string>
+
+    <skip />
+
+    <string-array name="otherLabels">
+        <item>အဖွဲ့အစည်း</item>
+        <item>မှတ်စု</item>
+    </string-array>
+
+    <string name="photoPickerNotFoundText" product="tablet">တက်ဘလက်ပေါ်တွင် ဓာတ်ပုံများမရှိပါ။</string>
+    <string name="photoPickerNotFoundText" product="default">ဖုန်းပေါ်တွင် ဓာတ်ပုံများမရှိပါ။</string>
+    <string name="attach_photo_dialog_title">ဆက်သွယ်မည့်လိပ်စာ၏ ဓာတ်ပုံ</string>
+    <string name="customLabelPickerTitle">စိတ်ကြိုက်လုပ်ထားသောအမည်တံဆိပ်</string>
+    <string name="send_to_voicemail_checkbox">အသံစာပို့ခြင်းသို့ ခေါ်ဆိုခြင်းများကိုတိုက်ရိုက်ပို့ရန်</string>
+    <string name="removePhoto">ဓာတ်ပုံကိုဖယ်ရှားရန်</string>
+    <string name="noContacts">အဆက်အသွယ်မရှိ</string>
+    <string name="noGroups">အုပ်စုများမရှိပါ။</string>
+    <string name="noAccounts">အုပ်စုများကိုဖန်တီးရန်သင်အကောင့်တစ်ခုလိုပါသည်။</string>
+    <string name="emptyGroup">ဤအုပ်စုတွင် လူများမရှိပါ။</string>
+    <string name="addPeopleToGroup">အချို့ကိုထပ်ထည့်ရန် အုပ်စုကိုတည်းဖြတ်ပါ။</string>
+    <string name="savingContact">အဆက်အသွယ်သိမ်းဆည်းနေသည်\u2026</string>
+    <string name="contactSavedToast">အဆက်အသွယ်အားသိမ်းဆည်းပြီးပြီ။</string>
+    <string name="contactSavedErrorToast">အဆက်အသွယ်အပြောင်းအလဲများအား မသိမ်းဆည်းနိုင်ပါ။</string>
+    <string name="groupSavedToast">အုပ်စုအားသိမ်းဆည်းပြီးပြီ။</string>
+    <string name="groupSavedErrorToast">အုပ်စုအပြောင်းအလဲများအား မသိမ်းဆည်းနိုင်ပါ။</string>
+
+    <plurals name="listTotalPhoneContacts">
+        <item quantity="one">ဖုန်းနံပါတ်ဖြင့်အဆက်အသွယ် ၁</item>
+        <item quantity="other">ဖုန်းနံပါတ်များဖြင့်အဆက်အသွယ်  <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
+
+    <string name="listTotalPhoneContactsZero">ဖုန်းနံပါတ်များဖြင့်အဆက်အသွယ်မရှိ</string>
+
+    <plurals name="listTotalAllContacts">
+        <item quantity="one">အဆက်အသွယ် ၁</item>
+        <item quantity="other">အဆက်အသွယ်များ  <xliff:g id="count">%d</xliff:g></item>
+    </plurals>
+    <plurals name="listFoundAllContacts">
+        <item quantity="one">၁ ခုတွေ့သည်</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> ခုတွေ့သည် </item>
+    </plurals>
+
+    <string name="listFoundAllContactsZero">အဆက်အသွယ်များမရှိပါ။</string>
+
+    <plurals name="searchFoundContacts">
+        <item quantity="one">၁ ခုတွေ့သည်</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> ခုတွေ့သည် </item>
+    </plurals>
+
+    <string name="contactsAllLabel">အဆက်အသွယ်များ အားလုံး</string>
+    <string name="contactsGroupsLabel">အုပ်စုများ</string>
+    <string name="callBack">ပြန်ခေါ်ရန်</string>
+    <string name="callAgain">နောက်တစ်ကြိမ် ခေါ်သည်</string>
+    <string name="returnCall">ခေါ်ဆိုသည်ကို ပြန်ပို့သည်</string>
+    <string name="add_contact_dlg_message_fmt">အဆက်အသွယ်များ သို့ \"  <xliff:g id="email">%s</xliff:g>\" ကို ပေါင်း ထည့်မည်လား။ </string>
+    <string name="description_contact_photo">ဆက်သွယ်မည့်လိပ်စာ၏ ဓာတ်ပုံ</string>
+    <string name="description_plus_button">ပေါင်းသည်</string>
+    <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> of  <xliff:g id="total_number">%s</xliff:g>အဆက်အသွယ်များ </string>
+    <string name="search_settings_description">သင့် အဆက်အသွယ်များ၏ အမည်များ</string>
+    <string name="quickcontact_missing_app">ဤဆောင်ရွက်ချက်ကို ကိုင်တွယ်ရန် လုပ်ငန်းသုံး ပရိုဂရမ်ကို မတွေ့ရပါ။</string>
+    <string name="menu_share">မျှဝေသည်</string>
+    <string name="share_via">မှတဆင့် အဆက်အသွယ် မျှဝေသည်</string>
+    <string name="dialog_new_group_account">အကောင့် အောက်တွင် အုပ်စု ဖန်တီးသည်</string>
+    <string name="audio_chat">အသံ ဖြင့် စကား ပြောသည်/ချတ်သည်</string>
+    <string name="video_chat">ဗီဒီယိုဖြင့် စကား ပြောသည်/ချတ်သည်</string>
+    <string name="connections">ချိတ်ဆက်ခြင်းများ</string>
+    <string name="add_connection_button">ချိတ်ဆက်ခြင်း ကို ပေါင်းထည့်သည်</string>
+    <string name="recent" msgid="2062236709538790412">မကြာသေးမီက</string>
+    <string name="recent_updates" msgid="2018245636796411442">မကြာသေးမီက နောက်ဆုံးအခြေအနေကို တင်ပို့ခြင်းများ</string>
+    <string name="account_type_format"><xliff:g id="source" example="Gmail">%1$s</xliff:g>အဆက်အသွယ် </string>
+    <string name="use_photo_as_primary">ဤ ဓာတ်ပုံကို အသုံးပြုသည်</string>
+    <string name="contact_read_only">ဤလုပ်ငန်းသုံး ပရိုဂရမ်မှ မတည်းဖြတ်ပါ။</string>
+    <string name="no_contact_details">ဤအဆက်အသွယ် အတွက် နောက်ထပ် သတင်းအချက်အလက် မရှိပါ။</string>
+    <string name="group_read_only">ဤ စက် မှ မတည်းဖြတ်ပါ။</string>
+    <string name="display_options_sort_list_by">ဖြင့် စာရင်း အမျိုးအစားရွေးသည်</string>
+    <string name="display_options_sort_by_given_name">​ပေးထားသည့် အမည်</string>
+    <string name="display_options_sort_by_family_name">မိသားစု အမည်</string>
+    <string name="display_options_view_names_as">အဆက်အသွယ် အမည်များကို ကြည့်ပါ</string>
+    <string name="display_options_view_given_name_first">​ပေးထားသည့် အမည် အရင်လာသည်</string>
+    <string name="display_options_view_family_name_first">မိသားစုအမည် အရင်လာသည်</string>
+    <string name="take_photo">ဓာတ်ပုံ ရိုက်သည်</string>
+    <string name="take_new_photo">ဓာတ်ပုံ အသစ် ရိုက်သည်</string>
+    <string name="pick_photo">ဂယ်လာရီ မှ ဓာတ်ပုံ ရွေးသည်</string>
+    <string name="pick_new_photo">ဂယ်လာရီ မှ ဓာတ်ပုံ အသစ် ရွေးချယ်သည်</string>
+    <string name="locale_change_in_progress">ဘာသာစကား၏ ပြောင်း လဲခြင်းကို ပုံရိပ်ထင်စေ ရန် အဆက်အသွယ် စာရင်းသည် နောက်ဆုံး အခြေအနေကို တင်ပို့ခြင်း ခံရသည်</string>
+    <string name="upgrade_in_progress">အဆက်အသွယ် စာရင်း သည် နောက်ဆုံးအခြေ အနေကို တင်ပို့ခြင်း ခံရသည်။</string>
+    <string name="upgrade_out_of_memory">အဆက်အသွယ်များသည် အဆင့်မြှင့်တင်မှု လုပ်ငန်းများဆောင်ရွက် ခြင်းခံနေရသည်။\n\n အဆင့်မြှင့်တင်မှု လုပ်ငန်း များ ဆောင်ရွက်နေခြင်း သည် ခန့်မှန်းခြေအားဖြင့် အတွင်း သိုလှောင်ခြင်း ၏  <xliff:g id="size_in_megabytes">%s</xliff:g>MB လိုအပ်သည်။\n\n အောက်ပါ ရွေးချယ်စရာ များမှ တစ်ခုကို ရွေးချယ်ပါ- </string>
+    <string name="upgrade_out_of_memory_uninstall">အချို့ လုပ်ငန်းသုံး ပရိုဂရမ်များ မတပ်ဆင်ပါ</string>
+    <string name="upgrade_out_of_memory_retry">အဆင့်မြှင်ခြင်းကို ပြန်လည်ကြိုးစားပါ</string>
+    <string name="search_results_searching">ရှာနေဆဲ\u2026</string>
+    <string name="menu_display_selected">"ရွေးချယ်ထားသည် ကို ပြသည်"</string>
+    <string name="menu_display_all">"အားလုံး ကို ပြသည်"</string>
+    <string name="menu_select_all">အားလုံးကို ရွေးချယ်ပါ</string>
+    <string name="menu_select_none">"အားလုံးကို ရွေးချယ်ထားသည်မှ ဖြုတ်သည်"</string>
+    <string name="add_field">နောက် နယ်ပယ် ကို ပေါင်းထည့်သည်</string>
+    <string name="add_new_entry_for_section">အသစ် ကို ပေါင်းထည့်သည်</string>
+    <string name="add_organization">အဖွဲ့အစည်း ကို ပေါင်းထည့်သည်</string>
+    <string name="event_edit_field_hint_text">နေ့စွဲ</string>
+    <string name="group_edit_field_hint_text">အုပ်စု အမည်</string>
+    <string name="contact_status_update_attribution">မှတဆင့်  <xliff:g id="source" example="GoogleTalk">%1$s</xliff:g></string>
+    <string name="contact_status_update_attribution_with_date"><xliff:g id="date" example="3hoursago">%1$s</xliff:g> via  <xliff:g id="source" example="GoogleTalk">%2$s</xliff:g></string>
+    <string name="description_star">နှစ်သက်သည်</string>
+    <string name="edit_contact">လိပ်စာတည်းဖြတ်ပါ</string>
+
+    <plurals name="merge_info">
+        <item quantity="one">မပေါင်းခဲ့ပါ</item>
+        <item quantity="other"><xliff:g id="count">%0$d</xliff:g> အရင်းအမြစ်များ မှ ပေါင်းခဲ့သည် </item>
+    </plurals>
+
+    <string name="aggregation_suggestion_join_dialog_message">ရွေးချယ်ခဲ့သော အဆက် အသွယ်နှင့် လက်ရှိ အဆက်အသွယ်ကို ပူးပေါင်းမည်လား။</string>
+    <string name="aggregation_suggestion_edit_dialog_message">ရွေးချယ်ခဲ့သော အဆက် အသွယ် ပြင်ဆင်နေ ခြင်းကို ပြောင်းမည်လား။ ယခုအချိန်အထိ သင် ထည့်သွင်းသော သတင်းအချက်အလက် လောက်သာ ကူးယူ ခဲ့လိမ့်မည်။</string>
+    <string name="menu_copyContact">ကျွန်ုပ် အဆက်အသွယ် များသို့ ကူးယူသည်</string>
+    <string name="add_to_my_contacts">ကျွန်ုပ် အဆက်အသွယ်များသို့ ပေါင်းထည့်သည်</string>
+    <string name="contact_directory_description">လမ်းညွှန်  <xliff:g id="type" example="CorporateDirectory">%1$s</xliff:g></string>
+    <string name="toast_making_personal_copy">ကိုယ်ရေးကိုယ်တာ ကူးယူမှု တစ်ခု ဖန်တီး နေသည်\u2026</string>
+    <string name="list_filter_custom">ဓလေ့</string>
+    <string name="activity_title_settings">အဆင်အပြင်များ</string>
+    <string name="menu_settings" msgid="377929915873428211">အဆင်အပြင်များ</string>
+    <string name="menu_help">အကူအညီ</string>
+    <string name="preference_displayOptions">ရွေးချယ်စရာများကို ပြသည်</string>
+    <string name="organization_company_and_title"><xliff:g id="company" example="TechnicalProgramManager">%2$s</xliff:g>,  <xliff:g id="company" example="GoogleInc.">%1$s</xliff:g></string>
+    <string name="non_phone_caption">ဖုန်း နံပါတ်</string>
+    <string name="non_phone_add_to_contacts">အဆက်အသွယ်များ သို့ ပေါင်းထည့်သည်</string>
+    <string name="activity_title_confirm_add_detail">အဆက်အသွယ် သို့ ပေါင်းထည့်သည်</string>
+    <string name="non_phone_close">ပိတ်ပါ</string>
+    <string name="widget_name_and_phonetic"><xliff:g id="display_name" example="JohnHuber">%1$s</xliff:g> (  <xliff:g id="phonetic_name">%2$s</xliff:g>) </string>
+    <string name="date_year_toggle">တစ်နှစ် အထောက်အပံ့ပေးသည်</string>
+    <string name="social_widget_label">အဆက်အသွယ်</string>
+    <string name="social_widget_loading">ဖွင့်နေဆဲ\u2026</string>
+    <string name="contacts_unavailable_create_contact">အဆက်အသွယ် အသစ် တစ်ခု ဖန်တီးသည်</string>
+    <string name="contacts_unavailable_add_account">အကောင့်တစ်ခု သို့ ဝင်ရောက်သည်</string>
+    <string name="contacts_unavailable_import_contacts">အဆက်အသွယ်များ တင်သွင်းသည်</string>
+    <string name="create_group_dialog_title">အုပ်စု အသစ် ဖန်တီးသည်</string>
+    <string name="create_group_item_label">အုပ်စု အသစ် ဖန်တီးသည်</string>
+
+    <plurals name="num_groups_in_account">
+        <item quantity="one">အုပ်စု ၁ စု</item>
+        <item quantity="other"><xliff:g id="count">%0$d</xliff:g> အုပ်စုများ </item>
+    </plurals>
+
+    <string name="delete_group_dialog_message">\"  <xliff:g id="group_label" example="Friends">%1$s</xliff:g>\" အုပ်စု ကို ဖျက်မည်လား။ (အဆက်အသွယ်များ သည် သူတို့ကိုယ်တိုင် ဖျက်ပစ်ခြင်း ခံရလိမ့်မည် မဟုတ်ပါ။) </string>
+
+    <plurals name="num_contacts_in_group">
+        <item quantity="one"><xliff:g id="account_type">%2$s</xliff:g>မှ လူပုဂ္ဂိုလ်  <xliff:g id="count">%1$d</xliff:g></item>
+        <item quantity="other"><xliff:g id="account_type">%2$s</xliff:g> မှ လူပုဂ္ဂိုလ်  <xliff:g id="count">%1$d</xliff:g></item>
+    </plurals>
+    <plurals name="group_list_num_contacts_in_group">
+        <item quantity="one"><xliff:g id="count">%1$d</xliff:g> လူပုဂ္ဂိုလ် </item>
+        <item quantity="other"><xliff:g id="count">%1$d</xliff:g> လူအများ </item>
+    </plurals>
+
+    <string name="toast_join_with_empty_contact">နောက်ထပ်တစ်ခုနှင့် ပူးတွဲနေခြင်း မတိုင်မီ အဆက် အသွယ် အမည်ကို ရိုက်ထည့်ပါ</string>
+    <string name="copy_text">ကလစ်ဘုတ် သို့ ကူးယူသည်</string>
+    <string name="set_default">သတ်မှတ်ထားသည်ကို တပ်ဆင်သည်</string>
+    <string name="clear_default">သတ်မှတ်ထားသည်ကို ရှင်းပစ်သည်</string>
+    <string name="toast_text_copied">စာသားကို ကူးယူခဲ့သည်</string>
+    <string name="cancel_confirmation_dialog_message">သင်၏ ပြောင်းလဲ ခြင်းများ ကို ပယ်ဖျက်မည်လား။</string>
+    <string name="call_type_and_date"><xliff:g id="call_type" example="Friends">%1$s</xliff:g><xliff:g id="call_short_date" example="Friends">%2$s</xliff:g></string>
+    <string name="profile_display_name">ကျွန်ုပ်၏ ပရိုဖိုင်းကို တပ်ဆင်သည်</string>
+    <string name="enter_contact_name">လူတစ်ဦးတစ်ယောက်၏အမည် ရိုက်ထည့်သည်</string>
+    <string name="group_name_hint">အုပ်စု၏ အမည်</string>
+    <string name="local_profile_title">ကျွန်ုပ်၏ အတွင်းပိုင်း ပရိုဖိုင်း</string>
+    <string name="external_profile_title">ကျွန်ုပ်၏  <xliff:g id="external_source">%1$s</xliff:g>ပရိုဖိုင်း </string>
+    <string name="toast_displaying_all_contacts">အဆက်အသွယ်များ အားလုံး ပြနေသည်</string>
+    <string name="no_account_prompt">လူအများ ဂူးဂဲ(လ်) အကောင့်ဖြင့် ကောင်း မွန်စွာ အလုပ်လုပ်သည်။ \n\n\u2022 မည်သည့် ဝက်(ဘ်) ဘရောက်ဆာ မှမဆို ဝင်ရောက်နိုင်သည်။ \n\u2022 သင်၏ အဆက်အသွယ်များကို လုံခြံစိတ်ချစွာ အရန်အဖြစ် ကူးယူထားပါ။</string>
+    <string name="generic_no_account_prompt">သင့်ဖုန်းအား ပိတ် လိုက်သည့်တိုင်အောင် သင့်အဆက်အသွယ်များကို အန္တရာယ်ကင်းစွာ သိမ်းဆည်းနိုင်သည် - အွန်လိုင်း ဝန်ဆောင်မှုနှင့် တစ်မျိုးတည်းဖြစ်အောင် ပြုလုပ်သည်</string>
+    <string name="generic_no_account_prompt_title">အကောင့်ကို ထည့်ပါ</string>
+    <string name="contact_editor_prompt_zero_accounts">သင်၏ အဆက်အသွယ် အသစ်ကို အရန် အဖြစ် ကူးယူ မထားနိုင် ခဲ့ပါ။ အဆက် အသွယ်များ ကို အွန်လိုင်းတွင် အရန် အဖြစ်ကူးယူထားသည့် အကောင့် အသစ် တစ်ခုကို ပေါင်းထည့်မည်လား။</string>
+    <string name="contact_editor_prompt_one_account"><xliff:g id="account_name">%1$s</xliff:g> ဖြင့် သင်၏ အဆက်အသွယ် အသစ်ကို တစ်မျိုးတည်း ဖြစ်အောင်ပြုလုပ်လိမ့် မည်။ </string>
+    <string name="contact_editor_prompt_multiple_accounts">အောက်ပါ အကောင့် များထဲမှ တစ်ခုဖြင့် သင်၏ အဆက်အသွယ် အသစ် ကို တစ်မျိုးတည်းဖြစ် အောင်ပြုလုပ်နိုင်သည်။ မည်သည့်အရာကို သင် အသုံးပြုချင်ပါသနည်း။</string>
+    <string name="keep_local">အတွင်းပိုင်း ကို သိမ်းထားသည်</string>
+    <string name="add_account">အကောင့်ကို ထည့်ပါ</string>
+    <string name="add_new_account">အကောင့် အသစ်ကို ပေါင်းထည့်သည်</string>
+    <string name="menu_export_database">ဒေတာဘေ့စ်ဖိုင်များကို တင်သွင်းပါ</string>
+    <string name="contact_detail_picture_description">ရုပ်ပုံ၊ ပြောင်းရန်ရွေးပါ</string>
+
+</resources>

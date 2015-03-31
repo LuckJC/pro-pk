@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>Pole hostitele nemůže být prázdné</item>  
+        <item>Pole portu nemůže být prázdné</item>  
+        <item>Neplatný hostitel</item>  
+        <item>Neplatný port</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"Výchozí"</item>
+        <item>"Černobíle"</item>
+        <item>Bez patek</item>
+        <item>S patkami</item>
+    </string-array></resources>

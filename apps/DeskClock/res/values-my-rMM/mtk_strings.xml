@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">ဖြုတ်ပြီး ပါဝါဖွင့်ရန်</string>
+    <string name="power_off">ဖြုတ်ပြီး ပါဝါပိတ်ရန်</string>
+    <string name="voice_ui_title">အသံထိန်းညှိချက်</string>
+    <string name="voice_ui_content_text">"အသံထိန်းချုပ်မှုသည် အချက်ပြရန်အတွက် ဖွင့်ထားသည်"</string>
+    <string name="alarm_command_summary_format">သင်ပြောနိုင်သည် <xliff:g id="first">%1$s</xliff:g> သို့မဟုတ် <xliff:g id="second">%2$s</xliff:g> "\n"တရေးမှေးရန် သို့မဟုတ် အချက်ပြမှုကို ရပ်ရန်။</string>
+    <string name="alarm_command_summary_format_land">တစ်ရေးပြန်အိပ်ရန် သို့မဟုတ် နှိုးစက်ပိတ်ရန် <xliff:g id="first">%1$s</xliff:g> သို့မဟုတ် <xliff:g id="second">%2$s</xliff:g> ဟူ၍ ပြောနိုင်သည်။</string>
+</resources>

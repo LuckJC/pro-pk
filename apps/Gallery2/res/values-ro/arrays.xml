@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>Câmpul gazdă nu poate fi vid</item>  
+        <item>Câmpul port nu poate fi vid</item>  
+        <item>Gazdă invalidă</item>  
+        <item>Port invalid</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"Prestabilit"</item>
+        <item>"Mono"</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array></resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">रद्द एवं पॉवर चालू</string>
+    <string name="power_off">रद्द एवं पॉवर बंद</string>
+
+    <string name="voice_ui_title">आवाज़ द्वारा नियंत्रण</string>
+    <string name="voice_ui_content_text">"अलार्म के लिए ध्वनि नियंत्रण सक्षम कर दिया गया है"</string>
+    <string name="alarm_command_summary_format">आप अलार्म स्नूज़ करने या रोकने के लिए <xliff:g id="first">%1$s</xliff:g> या <xliff:g id="second">%2$s</xliff:g> "\n"बोल सकते हैं।</string>
+    <string name="alarm_command_summary_format_land">आप अलार्म को स्नूज़ करने या बंद करने के लिए <xliff:g id="first">%1$s</xliff:g> या <xliff:g id="second">%2$s</xliff:g> कह सकते हैं।</string>
+</resources>

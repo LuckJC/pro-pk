@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>فیلد میزبان نباید خالی باشد</item>  
+        <item>فیلد پورت نباید خالی باشد</item>  
+        <item>میزبان نامعتبر</item>  
+        <item>پورت نامعتبر</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"پیش‌فرض"</item>
+        <item>"مونو"</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array></resources>

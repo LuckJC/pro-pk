@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Zvuk sa nepodarilo prehrať.</string>
+    <string name="VideoView_info_text_network_interrupt">Chyba siete a zastavený prenos videa.</string>
+    <string name="VideoView_error_text_connection_failed">Sieťové pripojenie zlyhalo. Skontrolujte svoje sieťové pripojenie.</string>
+    
+    <string name="can_not_trim">Ak dôjde k chybe, video nemožno upraviť.</string>
+	
+	<string name="setp_option_name">Krok</string>
+	<string name="step_option_desc">Prispôsobiť rýchly krok vpred/vzad</string>
+	<string name="setp_option_three_second">"3 sekundy"</string>
+	<string name="setp_option_six_second">"6 sekúnd"</string>
+    
+    <string name="camera_print">"Tlačiť"</string>
+    <string name="no_way_to_print">Pre tlač súbor(-ov) nie je k dispozícii žiadna aplikácia</string>
+    <string name="printFile">Súbor vytlačiť prostredníctvom</string>
+    
+    
+    <string name="no_storage_title">"Žiadny ukladací priestor"</string>
+    
+    
+    <string name="no_storage_message">Vložte kartu SD</string>
+    
+    
+    <string name="load_image_fail">Nepodarilo sa načítať obrázok</string>
+    
+    
+    <string name="proxy_host">Hostiteľ</string>
+    <string name="proxy_port">"Port"</string>
+    <string name="apn_settings">"Názvy prístupových bodov"</string>
+    <string name="rtsp_proxy_settings">"Nastavenia proxy serveru RTSP"</string>
+    <string name="rtsp_proxy_settings_summary">"Nastaviť a spravovať nastavenia proxy servera RTSP"</string>
+    <string name="enable_rtsp_proxy">"Aktivovať proxy server RTSP"</string>
+    <string name="enable_rtsp_proxy_summary">"Aktivovať/zablokovať proxy servera RTSP"</string>
+    <string name="http_proxy_settings">"Nastavenia proxy servera HTTP"</string>
+    <string name="http_proxy_settings_summary">"Nastaviť a spravovať nastavenia proxy servera HTTP"</string>
+    <string name="enable_http_proxy">"Aktivovať proxy servera HTTP"</string>
+    <string name="enable_http_proxy_summary">"Aktivovať/zablokovať proxy server HTTP"</string>
+    <string name="apn_settings_summary">"Aktuálna karta SIM: %1$s\nAktuálna APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"Dátové pripojenie karty SIM je uzavreté. Nemožno nastaviť APN"</string>
+    <string name="udp_port_settings">"Dosah konektora RTP/RTCP"</string>
+    <string name="udp_port_settings_summary">"Nastaviť max. a min. číslo konektora"</string>
+    <string name="max_udp_port">"Max. číslo konektora"</string>
+    <string name="min_udp_port">"Min. číslo konektora"</string>
+    <string name="server_timeout_title">"Časový limit servera"</string>
+    <string name="server_timeout_message">"Znovu zapojiť server, aby sa video prehralo alebo nie?"</string>
+    <string name="input_url">"Vstupná adresa URL"</string>
+    <string name="streaming_settings">"Nastavenia prenosu"</string>
+    <string name="VideoView_info_text_video_not_supported">"Toto video nie je podporované"</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Pripojenie zlyhalo. Skúste znova pripojiť %1$d..."</string>
+	<string name="VideoView_info_buffering">"Prebieha ukladanie údajov do vyrovnávacej pamäte... "</string>
+    <string name="stop">"Zastaviť"</string>
+    <string name="loop">"Cyklus"</string>
+    <string name="single">"Jeden"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Titulky"</string>
+    <string name="SubtitleSetting_text">"TEXT"</string>
+    <string name="SubtitleSetting_layout">"USPORIADANIE"</string>
+    <string name="subtitle_layout_alignment">"Vyrovnanie"</string>
+    <string name="subtitle_layout_bottom_margins">"Spodné okraje"</string>
+    <string name="subtitle_layout_alignment_left">"Ľavý"</string>
+    <string name="subtitle_layout_alignment_center">"Center"</string>
+    <string name="subtitle_layout_alignment_right">"Pravý"</string>
+    <string name="subtitle_text_font">Písmo</string>
+    <string name="subtitle_text_color">"Farba"</string>
+    <string name="subtitle_text_size">"Veľkosť"</string>
+    <string name="subtitle_text_encoding">"Kódovanie znakov"</string>
+    <string name="subtitle_text_color_black">"Čierna"</string>
+    <string name="subtitle_text_color_dkgray">"Tmavošedá"</string>
+    <string name="subtitle_text_color_gray">"Sivá"</string>
+    <string name="subtitle_text_color_ltgray">"Svetlošedá"</string>
+    <string name="subtitle_text_color_white">"Biela"</string>
+    <string name="subtitle_text_color_red">"Červená"</string>
+    <string name="subtitle_text_color_green">"Zelená"</string>
+    <string name="subtitle_text_color_blue">"Modrá"</string>
+    <string name="subtitle_text_color_yellow">"Žltá"</string>
+    <string name="subtitle_text_color_cyan">"Azúrová"</string>
+    <string name="subtitle_text_color_magenta">"Purpurová"</string>
+    <string name="subtitle_text_color_translucent">"Priesvitná"</string>
+    <string name="subtitle_text_encoding_default">"Predvolená"</string>
+    <string name="closeSubtitle">"Zatvoriť podtitulok"</string>
+    <string name="subTitleChange">"Zmeniť podtitulok"</string>
+    <string name="subtitleTrackChange">"Zmeniť podtitulok"</string>
+    
+    <string name="audioTrackChange">"Zmeniť zvukovú stopu"</string>
+    <string name="audioTrack">"Zvuková stopa"</string>
+    <string name="noAvailableeTrack">"Informácie o stope nie sú k dispozícii"</string>
+    <string name="noAvailableeAudioTrack">"Zvuková stopa je nedostupná"</string>
+    <string name="audioChange">"audioChange"</string>
+    
+    
+
+    <string name="bookmark_add">"Pridať záložku"</string>
+    <string name="bookmark_display">"Zobraziť záložku"</string>
+    <string name="bookmark_empty">"Žiadne záložky"</string>
+    <string name="bookmark_exist">"Rovnaká záložka je v histórii"</string>
+    <string name="bookmark_add_success">"Záložka bola úspešne pridaná"</string>
+    <string name="bookmark_list">"Záložky"</string>
+    <string name="bookmark_title">"Titul"</string>
+    <string name="bookmark_location">"Umiestnenie"</string>
+    <string name="http_buffer_size">"Veľkosť vyrovnávacej pamäte HTTP"</string>
+    <string name="http_buffer_size_summary">"Veľkosť vyrovnávacej pamäte HTTP nataviť na prenos"</string>
+    <string name="http_buffer_size_text">"Veľkosť aktuálnej vyrovnávacej pamäte HTTP: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"Veľkosť vyrovnávacej pamäte RTSP"</string>
+    <string name="rtsp_buffer_size_summary">"Veľkosť vyrovnávacej pamäte RTSP nataviť na prenos"</string>
+    <string name="rtsp_buffer_size_text">"Veľkosť aktuálnej vyrovnávacej pamäte RTSP: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Rozsah platnej hodnoty: %1$d - %2$d sekúnd"</string>
+    <string name="media_detail">"Informácie o médiu"</string>
+    <string name="detail_title">"Názov: %1$s"</string>
+    <string name="detail_copyright">"Autorské právo: %1$s"</string>
+    <string name="detail_session">"Informácie o relácii: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"Jedna stopa"</string>
+    <string name="delete_all">"Vymazať všetky"</string>
+    <string name="default_title">"Predvolený názov"</string>
+    <string name="next">"Ďalšia"</string>
+    <string name="previous">"Predchádzajúca"</string>
+    
+    
+    <string name="mav_firstRunTitle">Ako zobraziť obraz vo viacerých uhloch</string>
+    <string name="mav_firstRunText">Ak chcete zobraziť obraz vo viacerých uhloch, potiahnite prstom doľava alebo doprava</string>
+    
+    
+    <string name="stereo3d_album_name">3D médiá</string>
+    <string name="stereo3d_mode_switchto_2d">Prepnúť do režimu 2D</string>
+    <string name="stereo3d_mode_switchto_3d">Prepnúť do režimu 3D</string>
+    <string name="stereo3d_convert2d_dialog_title">Zmeniť na 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" nie je podporovaná pre obraz 3D. Bude zmenená na 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Prebieha zmena na 2D...</string>
+    <string name="stereo3d_pan_firstrun_title">Ako zobraziť panoramatický obraz 3D</string>
+    <string name="stereo3d_pan_firstrun_text">Ak chcete zobraziť panoramatický obraz 3D, potiahnite prstom doprava alebo doľava. </string>
+    <string name="stereo3d_share_convert_text_single">Toto je obraz 3D. Ak chcete pokračovať v zdieľaní, bude zmenený na 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">Vybrané snímky obsahujú obrazy 3D. Ak chcete pokračovať v zdieľaní, budú zmenené na 2D.</string>
+    <string name="stereo3d_share_dialog_title">Zdieľať ako 3D alebo 2D</string>
+    <string name="stereo3d_share_dialog_text_single">To je obraz 3D. Príjemca ho nemusí zobraziť správne.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Vybrané snímky obsahujú obrazy 3D. Príjemca ich nemusí zobraziť správne.</string>
+    <string name="stereo3d_share_dialog_button_2d">Zdieľať ako 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Zdieľať ako 3D</string>
+    <string name="stereo3d_attach_dialog_title">Pripojiť ako 3D alebo 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Pripojiť ako 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Pripojiť ako 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Náhľad obrázku</string>
+    <string name="stereo3d_preview_button_set">"Nastaviť"</string>
+    <string name="stereo3d_set_wallpaper_fail">Nastavenie tapety 3D zlyhalo.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Ladenie hĺbky</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Ak máte unavené oči, hĺbku môžete v ponuke nastaviť ručne</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automatické ladenie hĺbky</string>
+
+    
+    <string name="stereo3d_video_layout">Upraviť rozvrhnutie videa</string>
+    <string name="stereo3d_video_layout_normal">Štandardne</string>
+    <string name="stereo3d_video_layout_sidebyside">Vedľa seba</string>
+    <string name="stereo3d_video_layout_toptobottom">Zhora nadol</string>
+    <string name="stereo3d_video_layout_leftrightswap">Posunúť doprava/doľava</string>
+    <string name="stereo3d_video_layout_topbottomswap">Posunúť hore/dolu</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Automaticky zmenené do režimu 3D</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Automaticky zmenené do režimu 2D</string>
+    <string name="stereo3d_save">"Uložiť"</string>
+
+    
+    <string name="widget_load_failed">Nepodarilo sa načítať zástupcu</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Vypnúť demonštračnú verziu</string>
+    <string name="vertical_demo">Vertikálna demonštračná verzia</string>
+    <string name="horizontal_demo">Horizontálna demonštračná verzia</string>
+                  
+    
+    <string name="conshots_title">"Sekvenčné snímanie"</string>
+    <string name="best_shots">Vybrať najlepšie zábery</string>
+    <string name="best_shots_confirm">Odstrániť všetky neoznačené obrázky.</string>
+    <string name="empty_conshots">K dispozícii sú sekvenčné zábery obrázkov.</string>
+    <string name="make_motion">"Hotovo"</string>
+    <string name="motion_at_least">"Na zostavenie tohto efektu je potrebných najmenej %1$s fotografií."</string>
+    <string name="motion_at_most">"Vybrať možno najviac %1$s fotografií."</string>
+    <string name="generate_animation">"Prebieha vytváranie animácie..."</string>
+    
+    <string name="Warning_WFD_Dialog">"Upozornenie"</string>
+    <string name="Text_WFD_Dialog">"Keď je pripojený displej Wi-Fi, celý obsah chránený proti kopírovaniu bude skrytý."</string>
+    <string name="Disconnecd_WFD">"Vypnite Wi-Fi zobrazenie"</string>
+    <string name="Hind_DRMImage_WFD">"Pokračovať"</string>
+    <string name="wfd_finishGallery_Warning">"Nemožno ho otvoriť, pokiaľ je zapnutý bezdrôtový displej."</string>
+    <string name="wfd_protected_warning1">"Tento obsah je chránený proti kopírovaniu,"</string>
+    <string name="wfd_protected_warning2">"Ak ho chcete vidieť v telefóne,"</string>
+    <string name="wfd_protected_warning3">"odpojte bezdrôtový displej."</string>
+    <string name="wfd_disconnected">"Odpojiť bezdrôtový displej"</string>
+    <string name="smb_protected_warning">"Odpojte telefón od smartbooku."</string>
+    <string name="hdmi_protected_warning">"odpojte s HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Keď je bezdrôtový displej pripojený, nepodporuje video 4K. Odpojiť ho a prehrať video 4K?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Náhlavná súprava Bluetooth nemôže prehrávať zvuk z videa 4K. Odpojiť ho a prehrať video 4K?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL nemôže prehrať video 4K. Odpojiť ho a prehrať video 4K?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI nemôže prehrať video 4K. Odpojiť ho a prehrať video 4K?"</string>	
+    <string name="Not_supported_4k_video">"Externý výstup nemôže prehrať video 4K. Odpojiť ho a prehrať video 4K?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Keď je pripojený displej HDMI, celý obsah chránený proti kopírovaniu bude skrytý."</string>
+    
+    
+    <string name="share_format_choose_title">"Zvoľte formát"</string>
+    <string name="share_format_image">"Obraz"</string>
+    <string name="share_format_video">"Video"</string>
+    <string name="generating_tip">"Prebieha vytváranie videa..."</string>
+    <string name="generate_video_fail">"Video sa nepodarilo vytvoriť"</string>
+
+    <string name="save_fail">Pamäťová karta je plná alebo nie je vložená žiadna pamäťová karta.</string>
+    <string name="appwidget_error_text">Chyba zástupcu Galéria.</string>
+    <string name="share_limit">Viac ako 300 súborov nemožno zdieľať.</string>
+
+    <string name="file_deleted">Súbor je zmazaný.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot je vypnutý. HotKnot zapojte v možnosti Nastavenia"</string>
+    <string name="hotknot_toast">"Na obrazovke sa dotknite iného zariadenia."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

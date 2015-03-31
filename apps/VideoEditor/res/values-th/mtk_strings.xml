@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">สีเทา</string>  
+    <string name="not_enough_space" product="nosdcard">"ที่เก็บข้อมูล USB ของคุณเต็ม"</string>  
+    <string name="not_enough_space" product="default">"การ์ด SD ของคุณเต็ม"</string>
+<string name="add_audio_track_failed">ไม่สามารถเพิ่มแทร็กเสียง</string>
+    <string name="insert_transition_failed">ไม่สามารถใส่การเปลี่ยน</string>
+    <string name="save_emoticons_failed">อิโมติคอนไม่สามารถถูกบันทึกได้</string>
+    <string name="save_xml_failed">ตัวอักษรพิเศษไม่สามารถถูกบันทึกได้</string>
+    </resources>

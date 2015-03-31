@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">灰色</string>  
+    <string name="not_enough_space" product="nosdcard">"您的 USB 儲存裝置已滿。"</string>  
+    <string name="not_enough_space" product="default">"SD 卡已滿。"</string>
+    <string name="add_audio_track_failed">添加音軌失敗。</string>
+    <string name="insert_transition_failed">插入過渡橋段失敗。</string>
+<string name="save_emoticons_failed">情緒符號不能儲存。</string>
+    <string name="save_xml_failed">特殊字符不能儲存。</string>
+    </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Xám</string>  
+    <string name="not_enough_space" product="nosdcard">"Bộ nhớ USB đầy."</string>  
+    <string name="not_enough_space" product="default">"Thẻ SD của bạn đã đầy."</string>
+<string name="add_audio_track_failed">Không thể thêm đoạn âm thanh.</string>
+    <string name="insert_transition_failed">Không thể chèn chuyển tiếp.</string>
+    <string name="save_emoticons_failed">Ko thể lưu b.tượng cảm xúc.</string>
+    <string name="save_xml_failed">Ko thể lưu các ký tự đặc biệt.</string>
+    </resources>

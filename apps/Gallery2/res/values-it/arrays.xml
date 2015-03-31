@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <!-- add for ICS porting -->  
+    <string-array name="proxy_error"> 
+        <item>Il campo host non può essere vuoto</item>  
+        <item>Il campo porta non può essere vuoto</item>  
+        <item>Host non valido</item>  
+        <item>Porta non valida</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"Predefinito"</item>
+        <item>"Mono"</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array></resources>

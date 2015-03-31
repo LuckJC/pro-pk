@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">مسترد کریں اور آن کریں</string>
+    <string name="power_off">مسترد کریں اور آف کریں</string>
+
+    <string name="voice_ui_title">صوتی کنٹرول</string>
+    <string name="voice_ui_content_text">"الارم کیلئے صوتی کنٹرول فعال ہے" </string>
+    <string name="alarm_command_summary_format">آپ الارم کو ملتوی کرنے یا روکنے کیلئے <xliff:g id="first">%1$s</xliff:g> یا <xliff:g id="second">%2$s</xliff:g> "\n"کہہ سکتے ہیں۔</string>
+    <string name="alarm_command_summary_format_land">الارم کال کو اسنوز کرنے یا روکنے کیلئے آپ <xliff:g id="first">%1$s</xliff:g> یا <xliff:g id="second">%2$s</xliff:g> کہہ سکتے ہیں۔</string>
+</resources>

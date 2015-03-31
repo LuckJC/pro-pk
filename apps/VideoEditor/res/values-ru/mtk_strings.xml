@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Серый</string>  
+    <string name="not_enough_space" product="nosdcard">"На USB-накопителе нет места."</string>  
+    <string name="not_enough_space" product="default">"Ваша SD-карта заполнена."</string>
+    <string name="add_audio_track_failed">Не удается добавить звуковую дорожку.</string>
+    <string name="insert_transition_failed">Не удается вставить переход.</string>
+<string name="save_emoticons_failed">Смайлики не могут быть сохранены.</string>
+    <string name="save_xml_failed">Невозможно сохранить специальные символы.</string>
+    </resources>

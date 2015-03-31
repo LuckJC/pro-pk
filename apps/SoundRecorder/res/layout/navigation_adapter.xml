@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp" 
+    android:splitMotionEvents="false">
+
+    <ImageView
+        android:id="@+id/record_file_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_launcher_soundrecorder" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:paddingEnd="8dp"
+        android:splitMotionEvents="false">
+
+        <TextView
+            android:id="@+id/record_file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textDirection="locale"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/record_file_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/record_file_name"
+            android:singleLine="true"
+            android:textDirection="locale"
+            android:paddingEnd="50dip"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/record_file_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textDirection="locale"
+            android:layout_below="@id/record_file_name"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+</LinearLayout>

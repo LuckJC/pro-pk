@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Hylkää ja käynnistä</string>
+    <string name="power_off">Hylkää ja sammuta</string>
+    <string name="voice_ui_title">"Ääniohjaus"</string>
+    <string name="voice_ui_content_text">"Ääniohjaus on otettu käyttöön hälytykselle"</string>
+    <string name="alarm_command_summary_format">Voit sanoa <xliff:g id="first">%1$s</xliff:g> tai <xliff:g id="second">%2$s</xliff:g> "\n"asettaaksesi torkkumaan tai pysäyttääksesi hälytyksen.</string>
+    <string name="alarm_command_summary_format_land">Voit sanoa <xliff:g id="first">%1$s</xliff:g> tai <xliff:g id="second">%2$s</xliff:g> asettaaksesi torkkumaan tai pysäyttääksesi hälytyksen.</string>
+</resources>

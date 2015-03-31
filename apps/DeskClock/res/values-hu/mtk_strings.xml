@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Elvetés és bekapcsolás</string>
+    <string name="power_off">Elvetés és kikapcsolás</string>
+
+    <string name="voice_ui_title">Hangvezérlés</string>
+    <string name="voice_ui_content_text">"Hangvezérlés engedélyezve az ébresztőhöz"</string>
+    <string name="alarm_command_summary_format">Mondja ki a <xliff:g id="first">%1$s</xliff:g> vagy <xliff:g id="second">%2$s</xliff:g> "\n"szót a szundításhoz vagy az ébresztő leállításához.</string>
+    <string name="alarm_command_summary_format_land">A "szundi" funkcióhoz és az ébresztés kikapcsolásához a következőket mondhatja: <xliff:g id="first">%1$s</xliff:g> vagy <xliff:g id="second">%2$s</xliff:g>.</string>
+</resources>

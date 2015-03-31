@@ -1,0 +1,34 @@
+#.gitignore
+##### ignore auto-generated files by eclipse #####
+*.project
+*.classpath
+.settings/
+project.properties
+
+##### ignore all folder except source codes #####
+docs/
+images/
+gen/
+libs/
+bin/
+tests/bin/
+tests/coverage/
+tests/coverage.em
+tests/instrumented
+tests/gen/
+tests/res/
+tests/libs/
+tests/run_test.sh
+
+##### ignore fixed files #####
+*.log
+*.class
+*.dex
+*.odex
+*.html
+*.xsl
+*.zip
+*.patch
+*.swp
+*.db
+

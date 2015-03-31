@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="power_on">Hủy và bật nguồn</string>
+    <string name="power_off">Hủy và tắt nguồn</string>
+
+    <string name="voice_ui_title">Điều khiển giọng nói</string>
+    <string name="voice_ui_content_text">"Điều khiển thoại đã được bật cho Báo thức"</string>
+    <string name="alarm_command_summary_format">Bạn có thể nói <xliff:g id="first">%1$s</xliff:g> hoặc <xliff:g id="second">%2$s</xliff:g> "\n"để báo lại hoặc dừng báo thức.</string>
+    <string name="alarm_command_summary_format_land">Bạn có thể nói <xliff:g id="first">%1$s</xliff:g> hoặc <xliff:g id="second">%2$s</xliff:g> để báo thức lại hoặc dừng báo thức.</string>
+</resources>

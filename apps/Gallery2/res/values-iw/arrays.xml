@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources> 
+    <string-array name="proxy_error"> 
+        <item>שדה המארח אינו יכול להיות ריק</item>  
+        <item>שדה היציאה אינו יכול להיות ריק</item>  
+        <item>מארח לא תקין</item>  
+        <item>מארח לא תקין</item> 
+    </string-array> 
+<string-array name="text_font">
+        <item>"ברירת מחדל"</item>
+        <item>מונו</item>
+        <item>סאנס סריף</item>
+        <item>Serif</item>
+    </string-array></resources>

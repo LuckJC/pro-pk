@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="power_on">Nutraukti ir įjungti</string>
+    <string name="power_off">Nutraukti ir išjungti</string>
+    <string name="voice_ui_title">"Valdymas balsu"</string>
+    <string name="voice_ui_content_text">"Įjungtas žadintuvo valdymas balsu"</string>
+    <string name="alarm_command_summary_format">Galite pasakyti <xliff:g id="first">%1$s</xliff:g> arba <xliff:g id="second">%2$s</xliff:g> "\n", kad įjungtumėte žadintuvo snaudimo režimą arba išjungtumėte žadintuvą.</string>
+    <string name="alarm_command_summary_format_land">Galite pasakyti <xliff:g id="first">%1$s</xliff:g> arba <xliff:g id="second">%2$s</xliff:g> "\n", kad įjungtumėte žadintuvo snaudimo režimą arba išjungtumėte žadintuvą.</string>
+</resources>

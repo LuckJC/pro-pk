@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="short_app_name">Movie-Studio</string>
+    <string name="full_app_name">Android-Movie-Studio</string>
+
+    
+    <string name="editor_loading_project">Lade Projekt\u2026</string>
+    
+    <string name="editor_no_project">Kein Projekt gefunden</string>
+    
+    <string name="editor_add">Hinzufügen</string>
+    
+    <string name="editor_import_video">Video-Clip importieren</string>
+    
+    <string name="editor_import_image">Bild importieren</string>
+    
+    <string name="editor_import_audio">Musik importieren</string>
+    
+    <string name="editor_share_movie">Film teilen</string>
+    
+    <string name="editor_export_movie">Film exportieren</string>
+    
+    <string name="editor_play_exported_movie">Exportierten Film wiedergeben</string>
+    
+    <string name="editor_change_aspect_ratio">Seitenverhältnis ändern</string>
+    
+    <string name="editor_edit_project_name">Projektname ändern</string>
+    
+    <string name="editor_delete_project">Projekt löschen</string>
+    
+    <string name="editor_capture_video">Video aufnehmen</string>
+    
+    <string name="editor_capture_image">Foto aufnehmen</string>
+    
+    <string name="editor_delete_project_question">Wollen Sie dieses Projekt löschen?</string>
+    
+    <string name="editor_zero_time_stamp">00:00:00.0</string>
+    
+    <string name="editor_remove_audio_track_question">Wollen Sie dieses Musikstück löschen?</string>
+    
+    <string name="editor_title_menu_header">Titel</string>
+    
+    <string name="editor_add_overlay">Titel hinzufügen</string>
+    
+    <string name="editor_edit_overlay">Titel editieren</string>
+    
+    <string name="editor_remove_overlay">Titel entfernen</string>
+    
+    <string name="editor_remove_overlay_question">Wollen Sie dieses Overlay löschen?</string>
+    
+    <string name="editor_change_rendering_mode">Render-Modus ändern</string>
+    
+    <string name="editor_remove_transition_question">Wollen Sie diesen Übergang löschen?</string>
+    
+    <string name="editor_remove_effect_question">Wollen Sie diesen Effekt löschen?</string>
+    
+    <string name="editor_remove_video_question">Wollen Sie diesen Video-Clip löschen?</string>
+    
+    <string name="editor_remove_image_question">Wollen Sie dieses Bild löschen?</string>
+    
+    <string name="editor_effect_menu_header">Effekt</string>
+    
+    <string name="editor_add_effect">Effekt hinzufügen</string>
+    
+    <string name="editor_change_effect">Effekt ändern</string>
+    
+    <string name="editor_remove_effect">Effekt löschen</string>
+    
+    <string name="editor_pan_zoom_effect">Pan Zoom</string>
+    
+    <string name="editor_gradient_effect">Gradient</string>
+    
+    <string name="editor_sepia_effect">Sepia</string>
+    
+    <string name="editor_negative_effect">Negativ</string>
+    
+    <string name="editor_no_effect">Kein Effekt</string>
+    
+    <string name="editor_add_begin_transition">Übergang Clip-Anfang</string>
+    
+    <string name="editor_add_end_transition">Übergang Clip-Ende</string>
+    
+    <string name="editor_change_transition">Übergang ändern</string>
+    
+    <string name="editor_video_load">Video-Clip wird herunter geladen. Sie werden benachrichtigt, wenn der Vorgang abgeschlossen ist.</string>
+    
+    <string name="editor_image_load">Bild wird herunter geladen. Sie werden benachrichtigt, wenn der Vorgang abgeschlossen ist.</string>
+    
+    <string name="editor_transition_title">Übergang</string>
+
+    
+    
+    <string name="editor_enable_loop_audio_track">Wiederholen</string>
+    
+    <string name="editor_disable_loop_audio_track">Nicht wiederholen</string>
+    
+    <string name="editor_mute">Stumm schalten</string>
+    
+    <string name="editor_unmute">Stummschaltung aus</string>
+    
+    <string name="audio_track_menu_duck">Absenken</string>
+
+    
+    
+    <string name="projects_new_project">Neues Projekt erstellen</string>
+    
+    <string name="projects_project_name">Projektname</string>
+
+    
+    
+    <string name="aspect_ratio_11_9">11 x 9</string>
+    <string name="aspect_ratio_16_9">16 x 9</string>
+    <string name="aspect_ratio_3_2">3 x 2</string>
+    <string name="aspect_ratio_4_3">4 x 3</string>
+    <string name="aspect_ratio_5_3">5 x 3</string>
+
+    
+    
+    <string name="editor_storage_not_available">Kann Projekt nicht erstellen, weil auf Speicher nicht zugegriffen werden kann.</string>
+    
+    <string name="editor_create_error">Kann Projekt aufgrund eines Fehlers nicht erstellen.</string>
+    
+    <string name="editor_load_error">Kann Projekt aufgrund eines Fehlers nicht laden. Wollen Sie dieses Projekt löschen?</string>
+    
+    <string name="editor_aspect_ratio_error">Kann Seitenverhältnis nicht löschen.</string>
+    
+    <string name="editor_apply_theme_error">Kann Thema nicht zuweisen.</string>
+    
+    <string name="editor_export_error">Kann Film aufgrund eines Fehlers nicht exportieren.</string>
+    
+    <string name="editor_saved_error">Kann Projekt nicht speichern.</string>
+    
+    <string name="editor_release_error">Kann Projekt aufgrund eines Fehlers nicht veröffentlichen.</string>
+    
+    <string name="editor_delete_error">Kann Projekt aufgrund eines Fehlers nicht löschen.</string>
+    
+    <string name="editor_add_video_clip_error">Kann Video-Clip nicht zu Ihrem Projekt hinzufügen.</string>
+    
+    <string name="editor_add_image_error">Kann Bild nicht zu Ihrem Projekt hinzufügen.</string>
+    
+    <string name="editor_move_media_item_error">Kann Element nicht verschieben.</string>
+    
+    <string name="editor_remove_media_item_error">Kann Element nicht löschen.</string>
+    
+    <string name="editor_set_rendering_mode_error">Kann Render-Modus nicht einrichten.</string>
+    
+    <string name="editor_set_media_item_duration_error">Kann Bild-Standzeit nicht einrichten.</string>
+    
+    <string name="editor_set_media_item_boundaries_error">Kann Begrenzung des Video-Clips nicht einrichten.</string>
+    
+    <string name="editor_add_transition_error">Kann Übergang nicht hinzufügen.</string>
+    
+    <string name="editor_remove_transition_error">Kann Übergang nicht löschen.</string>
+    
+    <string name="editor_set_transition_duration_error">Kann Übergangs-Standzeit nicht einrichten.</string>
+    
+    <string name="editor_add_overlay_error">Kann Overlay nicht hinzufügen.</string>
+    
+    <string name="editor_remove_overlay_error">Kann Overlay nicht löschen.</string>
+    
+    <string name="editor_set_duration_overlay_error">Kann Overlay-Standzeit nicht einrichten.</string>
+    
+    <string name="editor_set_start_time_overlay_error">Kann Overlay-Startzeit nicht einrichten.</string>
+    
+    <string name="editor_set_user_attributes_overlay_error">Kann Overlay-Attribute nicht einrichten.</string>
+    
+    <string name="editor_add_effect_error">Kann Effekt nicht hinzufügen.</string>
+    
+    <string name="editor_remove_effect_error">Kann Effekt nicht löschen.</string>
+    
+    <string name="editor_add_audio_track_error">Kann Tonspur nicht hinzufügen.</string>
+    
+    <string name="editor_remove_audio_track_error">Kann Tonspur nicht löschen.</string>
+    
+    <string name="editor_set_audio_track_boundaries_error">Kann Tonspur nicht beschneiden.</string>
+    
+    <string name="editor_transition_too_short">Kann Übergang nicht hinzufügen. Übergang ist zu kurz,</string>
+    
+    <string name="editor_media_load_error">Kann Datei nicht herunterladen.</string>
+    
+    <string name="editor_preview_error">Kann Projektvorschau aufgrund eines Fehlers nicht anzeigen.</string>
+
+     
+    
+    <string name="export_dialog_export">Export</string>
+    
+    <string name="export_dialog_movie_size">Filmgröße</string>
+    
+    <string name="export_dialog_movie_quality">Filmqualität</string>
+    
+    <string name="export_dialog_movie_quality_low">Niedrig</string>
+    
+    <string name="export_dialog_movie_quality_medium">Mittel</string>
+    
+    <string name="export_dialog_movie_quality_high">Hoch</string>
+ 
+    
+    
+    <string name="pan_zoom_title">Pan- &amp; Zoom-Effekt</string>
+    
+    <string name="pan_zoom_start">Start</string>
+    
+    <string name="pan_zoom_end">Ende</string>
+    <string name="pan_zoom_small_image_error">Das Bild ist für den Pan- &amp; Zoom-Effekt zu klein.</string>
+
+    
+    
+    <string name="theme_name_travel">Reisen</string>
+    
+    <string name="theme_travel_title">Meine Reise nach Kalifornien</string>
+    
+    <string name="theme_travel_subtitle">San Francisco</string>
+    
+    <string name="theme_name_surfing">Surfen</string>
+    
+    <string name="theme_surfing_title">Mein Surf-Abenteuer</string>
+    
+    <string name="theme_surfing_subtitle">SF-Bay</string>
+    
+    <string name="theme_name_film">Film</string>
+    
+    <string name="theme_film_title">Mein Kurzfilm</string>
+    
+    <string name="theme_film_subtitle">Spaß am Strand</string>
+    
+    <string name="theme_name_rock_and_roll">Rock and roll</string>
+    
+    <string name="theme_rock_and_roll_title">Das Konzert</string>
+    
+    <string name="theme_rock_and_roll_subtitle">Zweieinhalb Fässer</string>
+
+    
+    
+    <string name="overlay_preview_center">Zentrierter Titel</string>
+    
+    <string name="overlay_preview_bottom">Untertitel</string>
+
+    
+    
+    <string name="overlay_title">Titel</string>
+    
+    <string name="overlay_title_sample">Meine Reise</string>
+    
+    <string name="overlay_subtitle_sample">San Francisco</string>
+
+    
+    
+    <string name="overlays_select_type">Titelvorlage wählen </string>
+    
+    <string name="overlay_title_label">Titel</string>
+    
+    <string name="overlay_subtitle_label">Untertitel</string>
+    
+    <string name="overlay_change_title_template_button_text">Vorlage ändern</string>
+
+    
+    
+    <string name="effects_select_effect">Effekte</string>
+    
+    <string name="effect_pan_zoom">Pan- &amp; Zoom-Effekt</string>
+    
+    <string name="effect_gradient">Verlaufs-Effekt</string>
+    
+    <string name="effect_sepia">Sepia-Effekt</string>
+    
+    <string name="effect_negative">Negativ-Effekt</string>
+    
+    <string name="effect_fifties">50er-Effekt</string>
+
+    
+    
+    <string name="transitions_select_transition">Übergang wählen</string>
+    
+    <string name="transitions_alpha_countour">Kontur-Alpha</string>
+    
+    <string name="transitions_alpha_diagonal">Diagonal-Alpha</string>
+    
+    <string name="transitions_crossfade">Überblendeffekt</string>
+    
+    <string name="transitions_fade_black">Schwarz auf- oder abblenden</string>
+    
+    <string name="transitions_sliding_right_out_left_in">Rechts raus, links rein schieben</string>
+    
+    <string name="transitions_sliding_left_out_right_in">Links raus, rechts rein schieben</string>
+    
+    <string name="transitions_sliding_top_out_bottom_in">Oben raus, unten rein schieben</string>
+    
+    <string name="transitions_sliding_bottom_out_top_in">Oben rein, unten raus schieben</string>
+    
+    <string name="transitions_duration"><xliff:g id="seconds">%(,.1f</xliff:g> s</string>
+
+    
+    
+    <string name="rendering_mode_black_borders">Ränder schwarz</string>
+    
+    <string name="rendering_mode_stretch">Durch Dehnen anpassen</string>
+    
+    <string name="rendering_mode_crop">Beschneiden</string>
+
+    
+    
+    <string name="yes">Ja</string>
+    
+    <string name="no">Nein</string>
+    
+    <string name="done">Erledigt</string>
+    
+    <string name="edit">Editieren</string>
+    
+    <string name="remove">Entfernen</string>
+    
+    <string name="untitled">Nicht benannt</string>
+
+    
+    <string name="hours_and_minutes"><xliff:g id="hours">%d</xliff:g> Stunden <xliff:g id="minutes">%d</xliff:g> Minuten</string>
+    <string name="hour_and_minutes">1 h <xliff:g id="minutes">%d</xliff:g> Minuten</string>
+    <string name="minutes"><xliff:g id="minutes">%d</xliff:g> Minuten</string>
+    <string name="minute_and_seconds">1 Min <xliff:g id="seconds">%d</xliff:g> Sekunden</string>
+    <string name="seconds"><xliff:g id="seconds">%d</xliff:g> Sekunden</string>
+</resources>

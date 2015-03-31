@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="audio_not_supported">Kunde inte spela upp ljud.</string>
+    <string name="VideoView_info_text_network_interrupt">Nätverksfel och videoströmning har stoppats.</string>
+    <string name="VideoView_error_text_connection_failed">Nätverksanslutning misslyckades. Kontrolellera din nätverksanslutning.</string>
+    
+    <string name="can_not_trim">Ett fel har inträffat. Videon kan inte beskäras.</string>
+	
+	<string name="setp_option_name">Steg</string>
+	<string name="step_option_desc">Anpassa steg för snabbspolning framåt/bakåt</string>
+	<string name="setp_option_three_second">"3 sekunder"</string>
+	<string name="setp_option_six_second">"6 sekunder"</string>
+    
+    <string name="camera_print">"Skriv ut"</string>
+    <string name="no_way_to_print">Inget tillgängligt program för att skriva ut fil(er).</string>
+    <string name="printFile">Skriv ut fil via</string>
+    
+    
+    <string name="no_storage_title">"Ingen lagringsenhet"</string>
+    
+    
+    <string name="no_storage_message">Sätt in ett SD-kort</string>
+    
+    
+    <string name="load_image_fail">Kunde inte ladda bild</string>
+    
+    
+    <string name="proxy_host">Värd</string>
+    <string name="proxy_port">"Port"</string>
+    <string name="apn_settings">"Åtkomstpunktens namn (APN)"</string>
+    <string name="rtsp_proxy_settings">"RTSP-proxyinställningar"</string>
+    <string name="rtsp_proxy_settings_summary">"Konfigurera och hantera RTSP-proxyinställningar"</string>
+    <string name="enable_rtsp_proxy">"Aktivera RTSP-proxy"</string>
+    <string name="enable_rtsp_proxy_summary">"Aktivera/inaktivera RTSP-proxy"</string>
+    <string name="http_proxy_settings">"HTTP-proxyinställningar"</string>
+    <string name="http_proxy_settings_summary">"Konfigurera och hantera HTTP-proxyinställningar"</string>
+    <string name="enable_http_proxy">"Aktivera HTTP-proxy"</string>
+    <string name="enable_http_proxy_summary">"Aktivera/inaktivera HTTP-proxy"</string>
+    <string name="apn_settings_summary">"Nuvarande SIM: %1$s\nAktuell APN: %2$s"</string>
+    <string name="apn_settings_not_valid">"SIM-kortets dataanslutning är stängd, kan inte ställa in APN"</string>
+    <string name="udp_port_settings">"RTP/RTCP portintervall"</string>
+    <string name="udp_port_settings_summary">"Ställ in max. och min. portnummer"</string>
+    <string name="max_udp_port">"Max. portnummer"</string>
+    <string name="min_udp_port">"Min. portnummer"</string>
+    <string name="server_timeout_title">"Timeout för server"</string>
+    <string name="server_timeout_message">"Återansluta till servern för att spela upp videon eller inte?"</string>
+    <string name="input_url">"Ange länk (URL)"</string>
+    <string name="streaming_settings">"Inställningar för strömning"</string>
+    <string name="VideoView_info_text_video_not_supported">"Denna video stöds inte."</string>
+    <string name="VideoView_error_text_cannot_connect_retry">"Anslutning misslyckades, försök att återansluta till %1$d..."</string>
+	<string name="VideoView_info_buffering">"Buffrar"</string>
+    <string name="stop">"Stopp"</string>
+    <string name="loop">"Loopa"</string>
+    <string name="single">"Enkel"</string>
+    <string name="clear_motion">"ClearMotion"</string>
+    
+    
+    <string name="SubtitleSetting">"Undertext"</string>
+    <string name="SubtitleSetting_text">"TEXT"</string>
+    <string name="SubtitleSetting_layout">"LAYOUT"</string>
+    <string name="subtitle_layout_alignment">"Justering"</string>
+    <string name="subtitle_layout_bottom_margins">"Bottenmarginaler"</string>
+    <string name="subtitle_layout_alignment_left">"Vänster"</string>
+    <string name="subtitle_layout_alignment_center">"Center"</string>
+    <string name="subtitle_layout_alignment_right">"Höger"</string>
+    <string name="subtitle_text_font">Teckensnitt</string>
+    <string name="subtitle_text_color">"Färg"</string>
+    <string name="subtitle_text_size">"Storlek"</string>
+    <string name="subtitle_text_encoding">"Teckenkod"</string>
+    <string name="subtitle_text_color_black">"Svart"</string>
+    <string name="subtitle_text_color_dkgray">"Mörkgrå"</string>
+    <string name="subtitle_text_color_gray">"Grå"</string>
+    <string name="subtitle_text_color_ltgray">"Ljusgrå"</string>
+    <string name="subtitle_text_color_white">"Vit"</string>
+    <string name="subtitle_text_color_red">"Röd"</string>
+    <string name="subtitle_text_color_green">"Grön"</string>
+    <string name="subtitle_text_color_blue">"Blue"</string>
+    <string name="subtitle_text_color_yellow">"Gul"</string>
+    <string name="subtitle_text_color_cyan">"Cyan"</string>
+    <string name="subtitle_text_color_magenta">"Magenta"</string>
+    <string name="subtitle_text_color_translucent">"Halvgenomskinlig"</string>
+    <string name="subtitle_text_encoding_default">"Standard"</string>
+    <string name="closeSubtitle">"Stäng undertext"</string>
+    <string name="subTitleChange">"subTitleChange"</string>
+    <string name="subtitleTrackChange">"subTitleChange"</string>
+    
+    <string name="audioTrackChange">"AudioTrackChange"</string>
+    <string name="audioTrack">"Ljudspår"</string>
+    <string name="noAvailableeTrack">"Ingen tillgänglig låtinformation"</string>
+    <string name="noAvailableeAudioTrack">"Inget tillgängligt ljudspår"</string>
+    <string name="audioChange">"audioChange"</string>
+    
+    
+
+    <string name="bookmark_add">"Lägg till bokmärke"</string>
+    <string name="bookmark_display">"Visa bokmärken"</string>
+    <string name="bookmark_empty">"Inga bokmärken"</string>
+    <string name="bookmark_exist">"Samma bokmärke i historik"</string>
+    <string name="bookmark_add_success">"Bokmärke har lagts till"</string>
+    <string name="bookmark_list">"Bokmärken"</string>
+    <string name="bookmark_title">"Titel"</string>
+    <string name="bookmark_location">"Plats"</string>
+    <string name="http_buffer_size">"HTTP-bufferstorlek"</string>
+    <string name="http_buffer_size_summary">"Ställ in HTTP-buffertstorlek för strömning"</string>
+    <string name="http_buffer_size_text">"Aktuell HTTP-bufferstorlek: %1$d(s)"</string>
+    <string name="rtsp_buffer_size">"RTSP-buffertstorlek"</string>
+    <string name="rtsp_buffer_size_summary">"Ställ in RTSP-bufferstorlek för strömning"</string>
+    <string name="rtsp_buffer_size_text">"Aktuell RTSP-bufferstorlek: %1$d(s)"</string>
+    <string name="buffer_size_tip">"Giltigt värdeintervall: %1$d - %2$d sekunder"</string>
+    <string name="media_detail">"Mediainformation"</string>
+    <string name="detail_title">"Titel: %1$s"</string>
+    <string name="detail_copyright">"Copyright: %1$s"</string>
+    <string name="detail_session">"Sessionsinformation: %1$s"</string>
+    <string name="stereo">"Stereo"</string>
+    <string name="single_track">"En låt"</string>
+    <string name="delete_all">"Ta bort alla"</string>
+    <string name="default_title">"Standardtitel"</string>
+    <string name="next">"Nästa"</string>
+    <string name="previous">"Föregående"</string>
+    
+    
+    <string name="mav_firstRunTitle">Hur man visar bild från flera vinklar</string>
+    <string name="mav_firstRunText">Svep vänster eller höger för att visa bild från flera vinklar</string>
+    
+    
+    <string name="stereo3d_album_name">3D-media</string>
+    <string name="stereo3d_mode_switchto_2d">Växla till 2D-läge</string>
+    <string name="stereo3d_mode_switchto_3d">Växla till 3D-läge</string>
+    <string name="stereo3d_convert2d_dialog_title">Konvertera till 2D</string>
+    <string name="stereo3d_convert2d_dialog_text">\"<xliff:g id="operation">%s</xliff:g>\" stöds inte för 3D-bild. Den konverteras till 2D.</string>
+    <string name="stereo3d_convert2d_progress_text">Konverterar till 2D…</string>
+    <string name="stereo3d_pan_firstrun_title">Hur man visar 3D-panoramabild</string>
+    <string name="stereo3d_pan_firstrun_text">Svep vänster eller höger för att visa 3D-panoramabild.</string>
+    <string name="stereo3d_share_convert_text_single">Detta är en 3D-bild. För att fortsätta dela den måste den konverteras till 2D.</string>
+    <string name="stereo3d_share_convert_text_multiple">Valda bilder innehåller 3D-bilder. För att fortsätta dela den måste den konverteras till 2D.</string>
+    <string name="stereo3d_share_dialog_title">Dela som 3D eller 2D.</string>
+    <string name="stereo3d_share_dialog_text_single">Detta är en 3D-bild. Mottagaren kanske inte kan visa den korrekt.</string>
+    <string name="stereo3d_share_dialog_text_multiple">Valda bilder innehåller 3D-bilder. Mottagaren kanske inte kan visa den korrekt.</string>
+    <string name="stereo3d_share_dialog_button_2d">Dela som 2D</string>
+    <string name="stereo3d_share_dialog_button_3d">Dela som 3D</string>
+    <string name="stereo3d_attach_dialog_title">Bifoga som 3D eller 2D</string>
+    <string name="stereo3d_attach_dialog_button_2d">Bifoga som 2D</string>
+    <string name="stereo3d_attach_dialog_button_3d">Bifoga som 3D</string>
+    
+    
+    <string name="stereo3d_preview_title">Förhandsgranska bild</string>
+    <string name="stereo3d_preview_button_set">"Ställ in"</string>
+    <string name="stereo3d_set_wallpaper_fail">Inställning av 3D-bakgrund misslyckades.</string>
+
+    
+    <string name="stereo3d_convergence_menu">Djupjustering</string>
+    
+    <string name="stereo3d_convergence_firstrun_hint">Du kan justera djupet manuellt i menyn om dina ögon är obekväma</string>
+    
+    
+    <string name="stereo3d_switch_auto_convergence">Automatisk djupjustering</string>
+
+    
+    <string name="stereo3d_video_layout">Justera videolayout</string>
+    <string name="stereo3d_video_layout_normal">Normal</string>
+    <string name="stereo3d_video_layout_sidebyside">Sida vid sida</string>
+    <string name="stereo3d_video_layout_toptobottom">Topp till botten</string>
+    <string name="stereo3d_video_layout_leftrightswap">Byt vänster/höger</string>
+    <string name="stereo3d_video_layout_topbottomswap">Byt topp/botten</string>
+
+    <string name="stereo3d_auto_switch_to_3d_mode">Konvertera automatiskt till 3D-läge</string>
+    <string name="stereo3d_auto_switch_to_2d_mode">Konvertera automatiskt till 2D-läge</string>
+    <string name="stereo3d_save">"Spara"</string>
+
+    
+    <string name="widget_load_failed">Kunde inte ladda widget</string>
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+        
+
+    
+    
+    
+    
+    
+    <string name="step_option_default_value">0</string>
+    
+    <string name="demo_off">Demo av</string>
+    <string name="vertical_demo">Vertikal demo</string>
+    <string name="horizontal_demo">Horistonal demo</string>
+                  
+    
+    <string name="conshots_title">"Kontinuerlig bild"</string>
+    <string name="best_shots">Extraherar de bästa bilderna</string>
+    <string name="best_shots_confirm">Tar bort alla omarkerade bilder.</string>
+    <string name="empty_conshots">0 kontinuerliga bilder tillgängliga.</string>
+    <string name="make_motion">"Klar"</string>
+    <string name="motion_at_least">"Minst %1$s bilder behövs för att komponera effekten."</string>
+    <string name="motion_at_most">"Högst %1$s foton kan väljas."</string>
+    <string name="generate_animation">"Genererar animation…"</string>
+    
+    <string name="Warning_WFD_Dialog">"Varning"</string>
+    <string name="Text_WFD_Dialog">"Allt kopieringsskyddat innehåll kommer att döljas när Wi-Fi-bildskärm är ansluten"</string>
+    <string name="Disconnecd_WFD">"Stäng av Wi-Fi-bildskärm"</string>
+    <string name="Hind_DRMImage_WFD">"Fortsätt"</string>
+    <string name="wfd_finishGallery_Warning">"Kan inte öppna när trådlös display är på."</string>
+    <string name="wfd_protected_warning1">"Innehållet är kopieringsskyddat,"</string>
+    <string name="wfd_protected_warning2">"För att se det på telefonen,"</string>
+    <string name="wfd_protected_warning3">"anslut en trådlös display."</string>
+    <string name="wfd_disconnected">"Koppla från trådlös display."</string>
+    <string name="smb_protected_warning">"koppla bort telefonen från Smartbook."</string>
+    <string name="hdmi_protected_warning">"koppla från med HDMI."</string>
+    <string name="Not_supported_4k_video_in_wfd">"Stöder inte 4K-video när trådlös display är ansluten. Koppla från och spela upp 4K-video?"</string>
+    <string name="Not_supported_4k_video_in_bluetooth">"Bluetooth-headsettet kan inte spela upp 4K-videons ljud. Koppla från och spela upp 4K-video?"</string>
+    <string name="Not_supported_4k_video_in_mhl">"MHL kan inte spela upp 4K-video. Koppla från och spela upp 4K-video?"</string>
+    <string name="Not_supported_4k_video_in_hdmi">"HDMI kan inte spela upp 4K-video. Koppla från och spela upp 4K-video?"</string>	
+    <string name="Not_supported_4k_video">"Den externa utgången kan inte spela upp 4K-video. Koppla från och spela upp 4K-video?"</string>
+    
+    <string name="Text_HDMI_Dialog">"Allt kopieringsskyddat innehåll kommer att döljas när HDMI-skärm är ansluten."</string>
+    
+    
+    <string name="share_format_choose_title">"Välj format"</string>
+    <string name="share_format_image">"Bild"</string>
+    <string name="share_format_video">"Video"</string>
+    <string name="generating_tip">"Genererar video…"</string>
+    <string name="generate_video_fail">"Kunde inte generera video"</string>
+
+    <string name="save_fail">Minneskortet är fullt eller inte isatt.</string>
+    <string name="appwidget_error_text">Widgetfel i galleriet.</string>
+    <string name="share_limit">Kan inte dela mer än 300 filer.</string>
+
+    <string name="file_deleted">Filen har tagits bort.</string>
+    
+    <string name="turn_on_hotknot">"HotKnot är AV. Slå på HotKnot i Inställningar"</string>
+    <string name="hotknot_toast">"Använd skärmen för att peka på en annan enhet."</string>
+    <string name="hotknot">"HotKnot"</string>	
+</resources>

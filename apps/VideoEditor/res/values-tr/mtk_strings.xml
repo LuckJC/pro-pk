@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">  
+    <string name="editor_gray_effect">Gri</string>  
+    <string name="not_enough_space" product="nosdcard">"USB depolama biriminiz dolu."</string>  
+    <string name="not_enough_space" product="default">"SD kartınız dolu."</string>
+<string name="add_audio_track_failed">Ses parçası eklenemedi.</string>
+    <string name="insert_transition_failed">Geçiş eklenemedi.</string>
+    <string name="save_emoticons_failed">İfadeler kaydedilemez.</string>
+    <string name="save_xml_failed">Özel karakterler kaydedilemez.</string>
+    </resources>
