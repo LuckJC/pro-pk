@@ -9,14 +9,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.xuntongwatch.R;
+import com.example.xuntongwatch.data.ContactDbUtil;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
 import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.util.PhoneUtil;
@@ -24,7 +27,7 @@ import com.example.xuntongwatch.util.PhoneUtil;
 public class Contact_Detail_Activity extends Activity implements
 		OnClickListener {
 
-	private ImageView call, message, call_detail;
+	private ImageView call, message,delete_contact,mEditContact;
 	private RelativeLayout bg;
 	private String contact_name, contact_phone;
 	private byte[] contact_head;
@@ -33,22 +36,24 @@ public class Contact_Detail_Activity extends Activity implements
 	public static final int RESULT_CODE = 1113;
 	private boolean isUpdate = false;// 判断是否修改了
 	private boolean isDelete = false;// 判断是否删除了
-//	private ContactDbUtil contactUtil;
+	private ContactDbUtil contactUtil;
 
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_detail);
-//		contactUtil = new ContactDbUtil(this);
+		contactUtil = new ContactDbUtil(this);
 		call = (ImageView) this.findViewById(R.id.contact_detail_call);
 		message = (ImageView) this.findViewById(R.id.contact_detail_message);
-		call_detail = (ImageView) this
-				.findViewById(R.id.contact_detail_call_detail);
+		delete_contact=(ImageView) this.findViewById(R.id.delete_contact);
+		mEditContact=(ImageView) this.findViewById(R.id.edit_contact);
 		bg = (RelativeLayout) this.findViewById(R.id.contact_detail_bg);
+		delete_contact.setOnClickListener(this);
 		message.setOnClickListener(this);
+		mEditContact.setOnClickListener(this);
 		call.setOnClickListener(this);
-		call_detail.setOnClickListener(this);
+	 
 
 		Intent intent = this.getIntent();
 		if (intent != null) {
@@ -95,39 +100,27 @@ public class Contact_Detail_Activity extends Activity implements
 			intent.putExtra("state", Message_Chat_Activity.ONE);
 			this.startActivity(intent);
 			break;
-		case R.id.contact_detail_call_detail:
-			Intent intent_detail = new Intent(this,
-					RecordDetails_Activity.class);
-			intent_detail.putExtra("record_phone", contact_phone);
-			intent_detail.putExtra("contact_name", contact_name);
-			intent_detail.putExtra("contact_head", contact_head);
-			startActivity(intent_detail);
-			// record_phone = intent.getStringExtra("record_phone");
-			// contact_name = intent.getStringExtra("contact_name");
-			// contact_head = intent.getStringExtra("contact_head");
+//		case R.id.contact_detail_call_detail:
+//			Intent intent_detail = new Intent(this,
+//					RecordDetails_Activity.class);
+//			intent_detail.putExtra("record_phone", contact_phone);
+//			intent_detail.putExtra("contact_name", contact_name);
+//			intent_detail.putExtra("contact_head", contact_head);
+//			startActivity(intent_detail);
+//			// record_phone = intent.getStringExtra("record_phone");
+//			// contact_name = intent.getStringExtra("contact_name");
+//			// contact_head = intent.getStringExtra("contact_head");
+//			break;
+		case R.id.edit_contact:
+			Intent intent_edit = new Intent(this, EditContactActivity.class);
+			intent_edit.putExtra("contact_name", contact_name);
+			intent_edit.putExtra("contact_phone", contact_phone);
+			intent_edit.putExtra("contact_id", raw_contact_id);
+			this.startActivity(intent_edit);
+			Toast.makeText(this, contact_name+contact_phone+raw_contact_id, 0).show();
+	 
 			break;
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.contact_detail_activity_menu, menu);
-		return true;
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		switch (item.getItemId()) {
-		case R.id.contact_detail_activity_menu_update:
-			Intent intent = new Intent(this, Add_Contact_Activity.class);
-			intent.putExtra("contact_name", contact_name);
-			intent.putExtra("contact_phone", contact_phone);
-			intent.putExtra("contact_head", contact_head);
-			intent.putExtra("contact_id", raw_contact_id);
-			this.startActivityForResult(intent,
-					Add_Contact_Activity.RESULT_CODE);
-			break;
-		case R.id.contact_detail_activity_menu_delete:
+		case R.id.delete_contact:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			final AlertDialog dialog = builder.create();
 			dialog.setTitle("确认删除" + contact_name + "?");
@@ -137,9 +130,10 @@ public class Contact_Detail_Activity extends Activity implements
 						@Override
 						public void onClick(DialogInterface dialogInterface,
 								int which) {
-//							contactUtil.deleteByContact_id(raw_contact_id);
+							contactUtil.deleteByContact_id(raw_contact_id);
 							PhoneDatabaseUtil.deleteContactByRawContact_id(Contact_Detail_Activity.this, raw_contact_id);
 							dialog.cancel();
+							finish();
 						}
 					});
 			dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
@@ -153,8 +147,54 @@ public class Contact_Detail_Activity extends Activity implements
 			dialog.show();
 			break;
 		}
-		return super.onOptionsItemSelected(item);
 	}
+
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.contact_detail_activity_menu, menu);
+//		return true;
+//	}
+//
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		// TODO Auto-generated method stub
+//		switch (item.getItemId()) {
+//		case R.id.contact_detail_activity_menu_update:
+//			Intent intent = new Intent(this, Add_Contact_Activity.class);
+//			intent.putExtra("contact_name", contact_name);
+//			intent.putExtra("contact_phone", contact_phone);
+//			intent.putExtra("contact_head", contact_head);
+//			intent.putExtra("contact_id", raw_contact_id);
+//			this.startActivityForResult(intent,
+//					Add_Contact_Activity.RESULT_CODE);
+//			break;
+//		case R.id.contact_detail_activity_menu_delete:
+//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//			final AlertDialog dialog = builder.create();
+//			dialog.setTitle("确认删除" + contact_name + "?");
+//			dialog.setIcon(R.drawable.ic_launcher);
+//			dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialogInterface,
+//								int which) {
+////							contactUtil.deleteByContact_id(raw_contact_id);
+//							PhoneDatabaseUtil.deleteContactByRawContact_id(Contact_Detail_Activity.this, raw_contact_id);
+//							dialog.cancel();
+//						}
+//					});
+//			dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialogInterface,
+//								int which) {
+//							dialog.cancel();
+//						}
+//					});
+//			dialog.show();
+//			break;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == Add_Contact_Activity.RESULT_CODE) {
@@ -177,5 +217,6 @@ public class Contact_Detail_Activity extends Activity implements
 		setResult(RESULT_CODE, intent);
 		super.finish();
 	}
+	
 
 }

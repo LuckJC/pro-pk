@@ -175,6 +175,7 @@ public class Message_Activity extends DatabaseUpdataActivity implements OnClickL
 //		contactUtil.findAllContact();
 		adapter = new MessageAdapter();
 		lv.setAdapter(adapter);
+			
 	}
 
 	public void back() {

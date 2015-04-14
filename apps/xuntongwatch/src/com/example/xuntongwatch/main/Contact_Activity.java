@@ -7,14 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.example.xuntongwatch.R;
@@ -25,14 +24,15 @@ import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.GridViewItemImageView;
 import com.example.xuntongwatch.util.Constant;
 import com.example.xuntongwatch.util.PhoneUtil;
+import com.example.xuntongwatch.view.PageView;
 
 public class Contact_Activity extends Activity {
-	HorizontalScrollView horizontalScrollView;
+	PageView horizontalScrollView;
 	GridView gridView;
 	private int NUM = 2; // 每行显示个数
 	public static int imageWidth, imageHeight;
-//	private ContactDbUtil contactUtil;
-
+	// private ContactDbUtil contactUtil;
+	private Button mAddContact;
 	private ArrayList<GridViewItemImageView> list;
 	private MyGridViewAdapter adapter;
 
@@ -41,20 +41,30 @@ public class Contact_Activity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact);
 		initWidthOrHeight();
-		horizontalScrollView = (HorizontalScrollView) findViewById(R.id.scrollView);
+		horizontalScrollView = (PageView) findViewById(R.id.scrollView);
+
+		mAddContact = (Button) findViewById(R.id.add_contact);
 		gridView = (GridView) findViewById(R.id.gridView1);
 		horizontalScrollView.setHorizontalScrollBarEnabled(false);// 隐藏滚动条
 		initArrayList();
 		setValue();
 		initGridViewOnItemClickListener();
+		mAddContact.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(Contact_Activity.this, Add_Contact_Activity.class);
+				startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
+			}
+		});
 	}
 
 	public void initArrayList() {
 		list = PhoneDatabaseUtil.allContact_(this);
-//		if (contactUtil == null) {
-//			contactUtil = new ContactDbUtil(this);
-//		}
-//		list = contactUtil.findAllContact();
+		// if (contactUtil == null) {
+		// contactUtil = new ContactDbUtil(this);
+		// }
+		// list = contactUtil.findAllContact();
 		// for (int i = 0; i < 10; i++) {
 		// ClassicImage image = new ClassicImage();
 		// list.add(image);
@@ -65,38 +75,35 @@ public class Contact_Activity extends Activity {
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Log.e("", "5555555555555555555555555");
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				Contact contact = (Contact) list.get(position);
+//				String phone = contact.getContact_phone();
+//				PhoneUtil.callPhone(Contact_Activity.this, phone);
+				Intent intent = new Intent(Contact_Activity.this, Contact_Detail_Activity.class);
 				Contact contact = (Contact) list.get(position);
-				String phone = contact.getContact_phone();
-				PhoneUtil.callPhone(Contact_Activity.this, phone);
-			}
-		});
-
-		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Intent intent = new Intent(Contact_Activity.this,Contact_Detail_Activity.class);
-				Contact contact = (Contact) list.get(position);
-//				byte[] contact_head = contact.getContact_head();
-//				String contact_name = contact.getContact_name();
-//				String contact_phone = contact.getContact_phone();
-//				int contact_id = contact.getContact_id();
-//				intent.putExtra("contact_id", contact_id);
-//				intent.putExtra("contact_phone", contact_phone);
-//				intent.putExtra("contact_name", contact_name);
-//				intent.putExtra("contact_head", contact_head);
+				// byte[] contact_head = contact.getContact_head();
+				// String contact_name = contact.getContact_name();
+				// String contact_phone = contact.getContact_phone();
+				// int contact_id = contact.getContact_id();
+				// intent.putExtra("contact_id", contact_id);
+				// intent.putExtra("contact_phone", contact_phone);
+				// intent.putExtra("contact_name", contact_name);
+				// intent.putExtra("contact_head", contact_head);
 				Bundle b = new Bundle();
 				b.putSerializable("contact", contact);
 				intent.putExtras(b);
-				startActivityForResult(intent,Contact_Detail_Activity.RESULT_CODE);
-				Log.e("", "666666666666666666666");
-				return false;
+				startActivityForResult(intent, Contact_Detail_Activity.RESULT_CODE);
 			}
 		});
+//
+//		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
+//
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//			
+//				return false;
+//			}
+//		});
 	}
 
 	private void setValue() {
@@ -107,10 +114,10 @@ public class Contact_Activity extends Activity {
 	}
 
 	private void setGridViewWidthAndHeight(MyGridViewAdapter adapter) {
-		int gridViewLie = (adapter.getCount() % 2 == 0) ? adapter.getCount() / 2
-				: adapter.getCount() / 2 + 1;
-		LayoutParams params = new LayoutParams(gridViewLie * (imageWidth + 3)
-				+ 15, LayoutParams.WRAP_CONTENT);
+		int gridViewLie = (adapter.getCount() % 2 == 0) ? adapter.getCount() / 2 : adapter
+				.getCount() / 2 + 1;
+		LayoutParams params = new LayoutParams(gridViewLie * (imageWidth + 3) + 15,
+				LayoutParams.WRAP_CONTENT);
 		gridView.setLayoutParams(params);
 		gridView.setVerticalSpacing(3);
 		gridView.setColumnWidth(Constant.screenWidth / NUM);
@@ -118,22 +125,23 @@ public class Contact_Activity extends Activity {
 		gridView.setNumColumns(gridViewLie);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.contact_activity_menu, menu);
-		return true;
-	}
+	//
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// getMenuInflater().inflate(R.menu.contact_activity_menu, menu);
+	// return true;
+	// }
 
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		switch (item.getItemId()) {
-		case R.id.contact_activity_menu_add:
-			Intent intent = new Intent(this, Add_Contact_Activity.class);
-			startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	// public boolean onOptionsItemSelected(MenuItem item) {
+	// // TODO Auto-generated method stub
+	// switch (item.getItemId()) {
+	// case R.id.contact_activity_menu_add:
+	// Intent intent = new Intent(this, Add_Contact_Activity.class);
+	// startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
+	// break;
+	// }
+	// return super.onOptionsItemSelected(item);
+	// }
 
 	public void initWidthOrHeight() {
 		DisplayMetrics dm = new DisplayMetrics();
@@ -166,14 +174,26 @@ public class Contact_Activity extends Activity {
 				boolean isUpdate = data.getBooleanExtra("isUpdate", false);
 				boolean isDelete = data.getBooleanExtra("isDelete", false);
 				if (isUpdate || isDelete) {
-//					list = contactUtil.findAllContact();
-					list = PhoneDatabaseUtil.allContact_(this);
-					adapter = new MyGridViewAdapter(this, list, imageWidth,
-							imageHeight, MyGridViewAdapter.CONTACT_IMAGE);
-					gridView.setAdapter(adapter);
+					// list = contactUtil.findAllContact();
+//					Log.i("个人信息", "从个人信息返回");
+//					adapter.notifyDataSetChanged();
+//					list = PhoneDatabaseUtil.allContact_(this);
+//					adapter = new MyGridViewAdapter(this, list, imageWidth, imageHeight,
+//							MyGridViewAdapter.CONTACT_IMAGE);
+//					gridView.setAdapter(adapter);
 				}
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	@Override
+	protected void onRestart() {
+		Log.i("bb", "从个人信息返回");
+		adapter.notifyDataSetChanged();
+		list = PhoneDatabaseUtil.allContact_(this);
+		adapter = new MyGridViewAdapter(this, list, imageWidth, imageHeight,
+				MyGridViewAdapter.CONTACT_IMAGE);
+		gridView.setAdapter(adapter);
+		super.onRestart();
 	}
 }

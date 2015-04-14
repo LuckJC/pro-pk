@@ -20,7 +20,7 @@
             android:paddingRight="5dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="收件人："
+            android:hint="@string/recipient"
             android:textColor="#000000"
             android:singleLine="true"
             android:background="@drawable/message_chat_input_box"

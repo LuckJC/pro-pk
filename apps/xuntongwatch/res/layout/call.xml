@@ -9,7 +9,7 @@
         android:id="@+id/keyboad_tv"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="@string/layout_weight_one"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:singleLine="true"
@@ -20,19 +20,19 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="@string/layout_weight_one"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/keyboad_bt_one"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="1"
+            android:text="@string/keyboard_one"
             android:textColor="#ffffff"
             android:gravity="center"
             android:background="@drawable/button_press"
             android:textSize="35sp"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
 
         <View
             android:layout_width="2dp"
@@ -44,11 +44,11 @@
             android:layout_width="0dp"
             android:background="@drawable/button_press"
             android:textColor="#ffffff"
-            android:text="2"
+            android:text="@string/keyboard_two"
             android:textSize="35sp"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
 
         <View
             android:layout_width="2dp"
@@ -58,13 +58,13 @@
         <Button
             android:id="@+id/keyboad_bt_three"
             android:gravity="center"
-            android:text="3"
+            android:text="@string/keyboard_three"
             android:textSize="35sp"
             android:textColor="#ffffff"
             android:background="@drawable/button_press"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
     </LinearLayout>
 
     <View
@@ -75,19 +75,19 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="@string/layout_weight_one"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/keyboad_bt_four"
             android:layout_width="0dp"
             android:background="@drawable/button_press"
-            android:text="4"
+            android:text="@string/keyboard_four"
             android:gravity="center"
             android:textSize="35sp"
             android:layout_height="match_parent"
             android:textColor="#ffffff"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
 
         <View
             android:layout_width="2dp"
@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="5"
+            android:text="@string/keyboard_five"
             android:textSize="35sp"
             android:textColor="#ffffff"
             android:background="@drawable/button_press"
@@ -112,7 +112,7 @@
 
         <Button
             android:id="@+id/keyboad_bt_six"
-            android:text="6"
+            android:text="@string/keyboard_six"
             android:background="@drawable/button_press"
             android:textSize="35sp"
             android:layout_width="0dp"
@@ -136,7 +136,7 @@
         <Button
             android:id="@+id/keyboad_bt_seven"
             android:layout_width="0dp"
-            android:text="7"
+            android:text="@string/keyboard_seven"
             android:background="@drawable/button_press"
             android:gravity="center"
             android:textColor="#ffffff"
@@ -152,7 +152,7 @@
         <Button
             android:id="@+id/keyboad_bt_eight"
             android:layout_width="0dp"
-            android:text="8"
+            android:text="@string/keyboard_eight"
             android:textColor="#ffffff"
             android:background="@drawable/button_press"
             android:gravity="center"
@@ -168,13 +168,13 @@
         <Button
             android:id="@+id/keyboad_bt_nine"
             android:layout_width="0dp"
-            android:text="9"
+            android:text="@string/keyboard_nine"
             android:background="@drawable/button_press"
             android:gravity="center"
             android:textSize="35sp"
             android:textColor="#ffffff"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
     </LinearLayout>
 
     <View
@@ -185,19 +185,19 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="@string/layout_weight_one"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/keyboad_bt_xin"
-            android:text="*"
+            android:text="@string/keyboard_other_one"
             android:textSize="35sp"
             android:background="@drawable/button_press"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:textColor="#ffffff"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
 
         <View
             android:layout_width="2dp"
@@ -206,14 +206,14 @@
 
         <Button
             android:id="@+id/keyboad_bt_zero"
-            android:text="0"
+            android:text="@string/keyboard_other_two"
             android:background="@drawable/button_press"
             android:textSize="35sp"
             android:layout_width="0dp"
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
 
         <View
             android:layout_width="2dp"
@@ -224,12 +224,12 @@
             android:id="@+id/keyboad_bt_jin"
             android:layout_width="0dp"
             android:background="@drawable/button_press"
-            android:text="#"
+            android:text="@string/keyboard_other_three"
             android:textColor="#ffffff"
             android:gravity="center"
             android:textSize="35sp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="@string/layout_weight_one" />
     </LinearLayout>
 
     <LinearLayout
@@ -260,7 +260,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="7dp"
             android:layout_marginTop="7dp"
-            android:layout_weight="1"
+            android:layout_weight="@string/layout_weight_one"
             android:background="@drawable/bt_call" />
 
         <RelativeLayout
