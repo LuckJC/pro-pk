@@ -298,7 +298,7 @@ public class CallButtonFragment
 
     @Override
     public void showHold(boolean show) {
-        mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
+      //  mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -318,7 +318,7 @@ public class CallButtonFragment
 
     @Override
     public void showAddCall(boolean show) {
-        mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
+        mAddCallButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -657,6 +657,7 @@ public class CallButtonFragment
         mMenuButton = (ImageButton) parent.findViewById(R.id.overflowMenu);
         if (InCallUtils.hasPermanentMenuKey(getActivity())) {
             mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
+            
             if (mAddCallButton != null) {
                 mAddCallButton.setOnClickListener(this);
             }

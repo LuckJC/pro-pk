@@ -5,14 +5,14 @@
     <dimen name="call_card_name_number_max_name">190dp</dimen>
     <dimen name="call_card_name_number_max_number">125dp</dimen>
 
-    <dimen name="call_state_label_height">24dip</dimen>
-    <dimen name="call_banner_text_size">17dip</dimen>
-    <dimen name="call_banner_call_state_label_text_size">16dip</dimen>
-    <dimen name="call_banner_small_text_size">10dip</dimen>
+    <dimen name="call_state_label_height">48dip</dimen>
+    <dimen name="call_banner_text_size">24dip</dimen>
+    <dimen name="call_banner_call_state_label_text_size">32dip</dimen>
+    <dimen name="call_banner_small_text_size">20dip</dimen>
     <dimen name="call_banner_sim_indicator_padding">1dip</dimen>
     <dimen name="call_banner_sim_indicator_padding_left">10dip</dimen>
     <dimen name="call_banner_sim_indicator_padding_right">6dip</dimen>
-    <dimen name="call_sim_indicator_height">14dip</dimen>
+    <dimen name="call_sim_indicator_height">28dip</dimen>
 
     <!-- Add for VT -->
     <dimen name="vt_incall_screen_image_button_height">80px</dimen>

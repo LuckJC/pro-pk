@@ -788,7 +788,8 @@ public class InCallPresenter implements CallList.Listener {
     }
 
     private void showInCall(boolean showDialpad) {
-        mContext.startActivity(getInCallIntent(showDialpad));
+       mContext.startActivity(getInCallIntent(showDialpad));
+	    
     }
 
     public Intent getInCallIntent(boolean showDialpad) {
