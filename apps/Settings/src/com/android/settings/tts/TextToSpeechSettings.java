@@ -489,9 +489,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         //
         // Note that if TextToSpeech#getCurrentEngine is not null, it means at
         // the very least that we successfully bound to the engine service.
-        mPreviousEngine = mTts.getCurrentEngine();
-
-        // Step 1: Shut down the existing TTS engine.
+        //mPreviousEngine = mTts.getCurrentEngine();
+		//--------------------add by lixd-----------------------------------------------------------
+		mPreviousEngine = "com.iflytek.speechcloud";
+        //------------------------------------------------------------------------------------------
+		// Step 1: Shut down the existing TTS engine.
         if (mTts != null) {
             try {
                 mTts.shutdown();
