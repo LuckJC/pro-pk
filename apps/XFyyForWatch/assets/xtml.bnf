@@ -1,0 +1,22 @@
+#BNF+IAT 1.0 UTF-8;
+!grammar xtml;
+!slot <contact>;
+!slot <iWant>;
+!slot <callPhone>;
+!slot <to>;
+!slot <openApp>;
+!slot <appName>;
+!slot <sendmsgPhone>;
+!start <callStart>;
+<callStart>:[<iWant>][<to>][<contact>][<callPhone>]|
+[<iWant>]<callPhone>[<to>]<contact>|
+<openApp><appName>|
+[<iWant>][<to>]<contact><sendmsgPhone>|
+[<iWant>]<sendmsgPhone>[<to>]<contact>;
+<contact>:;
+<iWant>:我要|我想|我想要;
+<callPhone>:打电话;
+<to>:给;
+<openApp>:打开;
+<appName>:设置|音乐|录音机|相机|图片|拨号|网络;
+<sendmsgPhone>:发短信;
