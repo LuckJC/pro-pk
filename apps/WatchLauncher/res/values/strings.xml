@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	 <string name="app_id">54d1dbd6</string>  
+    
+    <string name="app_name">启动器</string>
+    <string name="activity_not_found">没有找到应用</string>
+    <string name="title_activity_package_added_prompt">添加到“运动”板块？</string>
+
+    <string name="show_grammar_false">语法构建失败</string>
+</resources>

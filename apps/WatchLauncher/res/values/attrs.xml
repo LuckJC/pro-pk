@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AnalogClock_Old">
+        <attr name="jewelRadius" format="dimension"/>
+        <attr name="jewelOffset" format="dimension"/>
+        <attr name="jewelColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="ClockScreen">
+        <attr name="batteryCharingIcon" format="reference" />
+        <attr name="batteryLevelIcon" format="reference"/>
+        <attr name="timeUpdatePeriod" format="integer"/>
+    </declare-styleable>
+    
+    <declare-styleable name="AnalogClock">
+        <attr name="dial" format="reference" />
+        <attr name="hour" format="reference" />
+        <attr name="minute" format="reference" />
+        <attr name="second" format="reference" />
+        <attr name="pin" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:analogclock="http://schemas.android.com/apk/res/com.infocomiot.watch.launcher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dial02">
+
+    <TextView android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ClockDateText.Clock2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="76px"/>
+    
+    <ImageView android:id="@+id/battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <TextView android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/call02"
+        style="@style/ClockCallText"
+        android:gravity="center_vertical"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="82px"
+        android:layout_marginBottom="86px"/>
+        
+    <TextView android:id="@+id/sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/sms02"
+        style="@style/ClockSmsText"
+        android:gravity="center_vertical"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="82px"
+        android:layout_marginBottom="86px"/>
+    
+    <com.infocomiot.watch.launcher.clock.AnalogClock
+        android:id="@+id/clock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        analogclock:hour="@drawable/hour02"
+        analogclock:minute="@drawable/minute02"
+        analogclock:second="@drawable/second02"
+        analogclock:pin="@drawable/pin02"/>
+</FrameLayout>

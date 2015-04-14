@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
+    
+    <dimen name="workspace_app_icon_width">90px</dimen>
+    <dimen name="workspace_app_icon_height">90px</dimen>
+</resources>

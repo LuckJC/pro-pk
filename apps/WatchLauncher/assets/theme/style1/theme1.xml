@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gbk"?>
+<watch>
+ <style watchid="W001">
+  <name>天王表</name>
+  <dial>1.png</dial>	
+  <hourhand>1-1.png</hourhand>
+  <minutehand>1-2.png</minutehand>
+  <secondhand>1-3.png</secondhand>
+  <showdate>1</showdate>
+  <showweek>1</showweek>
+ </style>
+</watch>

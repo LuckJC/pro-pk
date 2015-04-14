@@ -1,0 +1,103 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="AnalogClockTheme" parent="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+		
+    </style>
+   
+    <!-- Application theme. -->
+    <style name="Theme" parent="@android:style/Theme.Holo.Wallpaper.NoTitleBar">
+    	
+    </style>
+    
+    <style name="DialerTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+    </style>
+    
+    <style name="textAppearanceLarge" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">30sp</item>
+    </style>
+    
+    <style name="textAppearanceSmall" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">24sp</item>
+    </style>
+    
+    <style name="app_item_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">24px</item>
+    </style>
+    
+    <style name="app_item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    
+    <style name="PackageAddedActivityTheme" parent="@android:style/Theme.DeviceDefault.Dialog">
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+    
+    <style name="ClockDateText">
+        <item name="android:textSize">22px</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="ClockSmsText">
+        <item name="android:textSize">24px</item>
+        <item name="android:textColor">#ff0000</item>
+    </style>
+    
+    <style name="ClockCallText">
+        <item name="android:textSize">24px</item>
+        <item name="android:textColor">#ff0000</item>
+    </style>
+    
+    <style name="ClockDateText.Clock1">
+        <item name="android:textColor">#faf6cb</item>
+    </style>
+    
+    <style name="ClockDateText.Clock2">
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@drawable/date02</item>
+        <item name="android:textSize">20px</item>
+        <item name="android:paddingTop">2px</item>
+    </style>
+    
+    <style name="ClockDateText.Clock3">
+        <item name="android:textColor">#fff</item>
+    </style>
+    
+    <style name="ClockDateText.Clock4">
+        <item name="android:textColor">#000</item>
+    </style>
+   
+    <style name="ClockDateText.Clock5">
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@drawable/date05</item>
+        <item name="android:textSize">20px</item>
+        <item name="android:paddingTop">2px</item>
+    </style>
+    
+    <style name="ClockDateText.Clock6">
+        <item name="android:textColor">#faf6cb</item>
+    </style>
+    
+</resources>
