@@ -381,9 +381,9 @@ public abstract class ClockFragment extends Fragment {
 	 * @return 电话Intent
 	 */
 	protected final static Intent getCallIntent() {
-//		Intent intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
-		Intent intent = new Intent(Intent.ACTION_DIAL);
-		intent.setData(Uri.parse("tel:*#3646633#"));
+		Intent intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
+//		Intent intent = new Intent(Intent.ACTION_DIAL);
+//		intent.setData(Uri.parse("tel:*#3646633#"));
 		return intent;
 	}
 	
