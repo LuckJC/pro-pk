@@ -8,7 +8,7 @@
         android:id="@+id/message_delete_title_ll"
         android:layout_width="fill_parent"
        android:visibility="gone"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:orientation="horizontal"

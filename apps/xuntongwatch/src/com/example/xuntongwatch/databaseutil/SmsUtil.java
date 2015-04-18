@@ -141,10 +141,10 @@ public class SmsUtil {
 	
 	@SuppressLint("InlinedApi") public static ArrayList<Message_> findMessageByPhone(Context context,String phone)
 	{
-		if(!phone.contains("+86"))
-		{
-			phone = "+86"+phone;
-		}
+//		if(!phone.contains("+86"))
+//		{
+//			phone = "+86"+phone;
+//		}
 		ArrayList<Message_> list = new ArrayList<Message_>();
 		String[] projection = new String[]{
 				Sms._ID,Sms.ADDRESS,Sms.BODY,Sms.READ,Sms.TYPE,Sms.DATE
@@ -216,6 +216,7 @@ public class SmsUtil {
 			}
 			selectionArgs[i] = thread_ids.get(i)+"";
 		}
+			
 		context.getContentResolver().delete(sms_uri, where.toString(), selectionArgs);
 	}
 	

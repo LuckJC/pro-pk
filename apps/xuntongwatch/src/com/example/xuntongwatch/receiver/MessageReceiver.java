@@ -4,9 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import com.example.xuntongwatch.MyApplication;
 import com.example.xuntongwatch.data.MessageDbUtil;
 import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.Message_;
@@ -37,17 +39,19 @@ public class MessageReceiver extends BroadcastReceiver {
 			msg.setMessage_state(Message_.RECEIVE);
 			msg.setMessage_see(Message_.SEE_NONE);
 			SmsUtil.insertMessageIntoOutbox(context, msg);
-//			final MessageDbUtil util = new MessageDbUtil(context);
+			// final MessageDbUtil util = new MessageDbUtil(context);
 			Log.e("", "接收的message_conten == " + content);
 			Log.e("", "接收的message_phone == " + mobile);
-//			new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//					Log.e("", "接收的短信插入数据库成功");
-//					util.insertInto(msg);
-//				}
-//			}).start();
-
+			// new Thread(new Runnable() {
+			// @Override
+			// public void run() {
+			// Log.e("", "接收的短信插入数据库成功");
+			// util.insertInto(msg);
+			// }
+			// }).start();
+			Message receiver = Message.obtain();
+			receiver.what = 110;
+			MyApplication.handler.sendMessage(receiver);
 		}
 
 	}

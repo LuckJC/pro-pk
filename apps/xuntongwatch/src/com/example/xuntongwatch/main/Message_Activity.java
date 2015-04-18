@@ -202,7 +202,8 @@ public class Message_Activity extends DatabaseUpdataActivity implements OnClickL
 				enterNormalMode();
 			} else if (delete_title.getVisibility() == View.GONE)// 写信息
 			{
-				Intent intent = new Intent(this, Send_Message_Activity.class);
+				Intent intent = new Intent(this, Message_Chat_Activity.class);
+				intent.putExtra("state", Message_Chat_Activity.TWO);
 				this.startActivity(intent);
 			}
 
