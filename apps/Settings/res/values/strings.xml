@@ -4916,4 +4916,8 @@
     <string name="keyguard_mms_summary">"Viewing SMS, it will dail the contact's number directly when taking phone close to your face"</string>
     <string name="touch_float_summary">"Turn on to open shortcut icon, which includes Screenshot, Setting, Lock screen, Back and Main Screen"</string>
     <string name="sensor_switch">"Gesture Sensor"</string>
+	
+	<string name="close">关闭</string>
+    <string name="open">开启</string>
+	<string name="hear_aid_name">助听器</string>
 </resources>
