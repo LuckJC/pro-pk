@@ -9,9 +9,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 
-import com.iflytek.cloud.SpeechConstant;
-import com.iflytek.cloud.SpeechUtility;
-import com.infocomiot.watch.launcher.R;
 import com.infocomiot.watch.launcher.provider.LauncherConfig;
 
 public class MyApplication extends Application {
@@ -29,19 +26,7 @@ public class MyApplication extends Application {
 		getContentResolver().registerContentObserver(
 				LauncherConfig.WORKSPACE_CONTENT_URI, 
 				true, 
-				new WorkspaceTableObserver(mHandler));
-		
-		//语音相关
-		// 应用程序入口处调用,避免手机内存过小，杀死后台进程,造成SpeechUtility对象为null
-				// 设置你申请的应用appid-----------------------------------------
-				StringBuffer param = new StringBuffer();
-				param.append("appid="+getString(R.string.app_id));
-				param.append(",");
-				// 设置使用v5+
-				param.append(SpeechConstant.ENGINE_MODE+"="+SpeechConstant.MODE_MSC);
-				SpeechUtility.createUtility(MyApplication.this, param.toString());
-			//-----------------------------------------------------------------------
-		
+				new WorkspaceTableObserver(mHandler));		
 	}
 	
 	private Handler mHandler = new Handler(new Handler.Callback() {

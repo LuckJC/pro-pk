@@ -2,14 +2,10 @@ package com.infocomiot.watch.launcher.clock;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -17,11 +13,8 @@ import android.widget.Toast;
 
 import com.infocomiot.watch.launcher.R;
 import com.infocomiot.watch.launcher.launcher.LauncherActivity;
-import com.infocomiot.watch.launcher.launcher.MyApplication;
 import com.infocomiot.watch.launcher.provider.LauncherConfig;
 import com.infocomiot.watch.launcher.provider.WatchConfig;
-import com.infocomiot.watch.launcher.speechsound.SpeechsoudService;
-import com.infocomiot.watch.launcher.speechsound.SpeechsoudService.MyBinder;
 
 public class ClockActivity extends Activity {
 	private static final Class<? extends ClockFragment>[] CLOCKS;
@@ -53,10 +46,7 @@ public class ClockActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_clock);
 		
-		
-		
 		mGestureDetector = new GestureDetector(this, mSwipeGestureListener);
-		
 		
 //		AnalogClockFragment1 fragment = new AnalogClockFragment1();
 //		AnalogClockFragment2 fragment = new AnalogClockFragment2();
@@ -188,61 +178,5 @@ public class ClockActivity extends Activity {
 	@Override
 	public void onBackPressed() {
 		//Do nothing
-	}
-
-	/** {@inheritDoc} */
-	 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Log.e(">>>>","onResume()");
-//		Intent it=new Intent(this, SpeechsoudService.class);
-//		bindService(it, connection, BIND_AUTO_CREATE);
-	}
-
-	/** {@inheritDoc} */
-	 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		Log.e(">>>>","onDestroy()");
-//		Intent it=new Intent(this, SpeechsoudService.class);
-//		stopService(it);
-	}
-
-	/** {@inheritDoc} */
-	 
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		Log.e(">>>>","onPause()");
-//		Intent it=new Intent(this, SpeechsoudService.class);
-//		unbindService(connection);
-	}
-	
-	
-	// 创建一个 ServiceConnection 对象  
-    final ServiceConnection connection = new ServiceConnection() { 
-    	MyBinder mybinder;
-    	SpeechsoudService shs;
-    	@Override
-        public void onServiceDisconnected(ComponentName name) {  
-            // TODO Auto-generated method stub  
-    		Log.i(">>>>>>>>", "onServiceDisconnected(ComponentName name)");
-    		shs.stopListen();
-        }  
-  
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			// TODO Auto-generated method stub
-			
-			mybinder = (MyBinder)service;
-			shs = mybinder.getservice();
-			shs.startListen();
-			Log.i(">>>>>>>>", "onServiceConnected(ComponentName name, IBinder service)");
-		}  
-    }; 
+	} 
 }
