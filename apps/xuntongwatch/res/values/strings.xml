@@ -51,6 +51,7 @@
 <string name="time_three">14:08</string>
 <string name="all_choose">全选</string>
 <string name="text_five">hello</string>
+	<string name="imei">IMEI</string>
 
   
 </resources>

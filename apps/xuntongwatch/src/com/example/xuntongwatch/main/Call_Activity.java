@@ -3,6 +3,8 @@ package com.example.xuntongwatch.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -11,8 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.xuntongwatch.R;
+import com.example.xuntongwatch.util.SpecialCharSequenceMgr;
 
-public class Call_Activity extends BaseActivity implements OnClickListener{
+public class Call_Activity extends BaseActivity implements OnClickListener, TextWatcher{
 
 	private Button one,two,three,four,five,six,seven,eight,nine,xin,jin,zero;
 	private TextView tv;
@@ -44,6 +47,7 @@ public class Call_Activity extends BaseActivity implements OnClickListener{
 		back = (RelativeLayout) this.findViewById(R.id.keyboad_rl_back);
 		delete = (RelativeLayout) this.findViewById(R.id.keyboad_rl_delete);
 		tv = (TextView) this.findViewById(R.id.keyboad_tv);
+		tv.addTextChangedListener(this);
 		tv.setEnabled(false);
 		back.setOnClickListener(this);
 		delete.setOnClickListener(this);
@@ -135,6 +139,22 @@ public class Call_Activity extends BaseActivity implements OnClickListener{
 		case R.id.keyboad_rl_back:
 			startActivity(new Intent(this,Record_Activity.class));
 			break;
+		}
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		if (SpecialCharSequenceMgr.handleChars(this, s.toString())) {
+			s.clear();
+			sb = new StringBuffer();
 		}
 	}
 }
