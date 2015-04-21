@@ -13,7 +13,7 @@
 <openApp><appName>|
 [<iWant>][<to>]<contact><sendmsgPhone>|
 [<iWant>]<sendmsgPhone>[<to>]<contact>;
-<contact>:;
+<contact>:112;
 <iWant>:我要|我想|我想要;
 <callPhone>:打电话;
 <to>:给;
