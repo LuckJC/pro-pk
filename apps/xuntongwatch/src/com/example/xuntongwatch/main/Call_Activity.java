@@ -133,7 +133,7 @@ public class Call_Activity extends BaseActivity implements OnClickListener{
 			deleteNumber();
 			break;
 		case R.id.keyboad_rl_back:
-			this.finish();
+			startActivity(new Intent(this,Record_Activity.class));
 			break;
 		}
 	}

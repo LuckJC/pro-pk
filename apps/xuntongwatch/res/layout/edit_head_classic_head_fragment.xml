@@ -18,7 +18,8 @@
             <GridView
                 android:id="@+id/edit_head_classic_head_fragment_gridView1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+  android:listSelector="@drawable/menuitemshape"				>
             </GridView>
         </LinearLayout>
     </HorizontalScrollView>

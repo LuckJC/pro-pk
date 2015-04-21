@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+    
+    
+    <!-- Add for TV out end -->
+    <!-- Audio start -->
+    <string-array name="audio_functions">
+        <item>Normal Mode</item>
+        <item>Headset Mode</item>
+        <item>LoudSpeaker Mode</item>
+        <item>Headset_LoudSpeaker Mode</item>
+        <item>Speech Enhancement</item>
+        <item>Debug Info</item>
+        <item>Debug Session</item>
+        <item>Speech Logger</item>
+        <item>Audio Logger</item>
+    </string-array>
+    <string-array name="mode_type0">
+        <item>Sip</item>
+        <item>Mic</item>
+        <item>Sph</item>
+        <item>Sid</item>
+        <item>Media</item>
+    </string-array>
+    <string-array name="mode_type1">
+        <item>Sip</item>
+        <item>Mic</item>
+        <item>FMR</item>
+        <item>Sph</item>
+        <item>Sid</item>
+        <item>Media</item>
+        <item>Matv</item>
+    </string-array>
+    <string-array name="mode_type2">
+        <item>Ring</item>
+        <item>Sip</item>
+        <item>Mic</item>
+        <item>FMR</item>
+        <item>Sph</item>
+        <item>Sid</item>
+        <item>Media</item>
+        <item>Matv</item>
+    </string-array>
+    <string-array name="mode_type0_enh">
+        <item>@string/audio_val_type_sip</item>
+        <item>@string/audio_val_type_mic</item>
+        <item>@string/audio_val_type_sph</item>
+        <item>@string/audio_val_type_sph2</item>
+        <item>@string/audio_val_type_sid</item>
+        <item>@string/audio_val_type_media</item>
+    </string-array>
+    <string-array name="mode_type1_enh">
+        <item>@string/audio_val_type_sip</item>
+        <item>@string/audio_val_type_mic</item>
+        <item>@string/audio_val_type_fmr</item>
+        <item>@string/audio_val_type_sph</item>
+        <item>@string/audio_val_type_sph2</item>
+        <item>@string/audio_val_type_sid</item>
+        <item>@string/audio_val_type_media</item>
+        <item>@string/audio_val_type_matv</item>
+    </string-array>
+    <string-array name="mode_type2_enh">
+        <item>@string/audio_val_type_ring</item>
+        <item>@string/audio_val_type_sip</item>
+        <item>@string/audio_val_type_mic</item>
+        <item>@string/audio_val_type_fmr</item>
+        <item>@string/audio_val_type_sph</item>
+        <item>@string/audio_val_type_sph2</item>
+        <item>@string/audio_val_type_sid</item>
+        <item>@string/audio_val_type_media</item>
+        <item>@string/audio_val_type_matv</item>
+    </string-array>
+    <string-array name="mode_type3_enh">
+        <item>@string/audio_val_type_ring</item>
+    </string-array>
+    <string-array name="mode_level">
+        <item>Level 0</item>
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Level 4</item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+    </string-array>
+    <string-array name="mode_fir">
+        <item>FIR 0</item>
+        <item>FIR 1</item>
+        <item>FIR 2</item>
+        <item>FIR 3</item>
+        <item>FIR 4</item>
+        <item>FIR 5</item>
+    </string-array>
+    <string-array name="speech_enhance_mode">
+        <item>Common Parameter</item>
+        <item>Normal Mode</item>
+        <item>Headset Mode</item>
+        <item>LoudSpeaker Mode</item>
+        <item>BT Earphone Mode</item>
+        <item>BT Cordless Mode</item>
+        <item>BT Karkit Mode</item>
+        <item>AUX1 Mode</item>
+        <item>AUX2 Mode</item>
+    </string-array>
+    <!-- Audio end -->
+   
+</resources>

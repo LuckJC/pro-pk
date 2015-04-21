@@ -22,11 +22,11 @@
         <TextView 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="@string/layout_weight_one"
             android:layout_gravity="center_vertical"
             android:textSize="30sp"
             android:textColor="#ffffff"
-            android:text="头像编辑"
+            android:text="@string/photo_edit"
             />
     </LinearLayout>
 
@@ -45,7 +45,7 @@
                 android:id="@+id/edit_head_custom_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="自定义头像"
+                android:text="@string/custom_photo"
                 android:layout_alignParentRight="true"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
@@ -63,17 +63,18 @@
             android:layout_marginBottom="5dp"
             android:layout_height="match_parent"
             android:background="#000000"
+           	
             />
         
         <RelativeLayout 
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
             <TextView 
                 android:id="@+id/edit_head_classic_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="经典头像"
+                android:text="@string/calssics_photo"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:paddingTop="4dp"
@@ -88,7 +89,7 @@
     <LinearLayout 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="@string/layout_weight_two"
         android:orientation="vertical">
          <fragment
 	       	android:id="@+id/edit_head_custom_fragment"
@@ -105,13 +106,13 @@
      <RelativeLayout 
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="@string/layout_weight_one">
 	    <TextView 
 	        android:id="@+id/edit_head_next_tv"	
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerInParent="true"
-	        android:text="下一步"
+	        android:text="@string/next"
 	        android:textSize="30sp"
 	        android:textColor="#ffffff"
 	        android:background="@drawable/edit_head_text_next_style"

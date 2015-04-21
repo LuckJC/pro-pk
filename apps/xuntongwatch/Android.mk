@@ -20,19 +20,19 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-
+LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 LOCAL_JAVA_LIBRARIES += mediatek-framework
 LOCAL_JAVA_LIBRARIES += telephony-common mms-common
 #LOCAL_JAVA_LIBRARIES += mediatek-telephony-common
 
-LOCAL_PACKAGE_NAME := PhoneAndSend
+LOCAL_PACKAGE_NAME := xuntongwatch
 
 include $(BUILD_PACKAGE)
 ##################################################
-include $(CLEAR_VARS)
+#include $(CLEAR_VARS)
 
 
 #include $(BUILD_MULTI_PREBUILT)
 
 # Use the folloing include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))
+#include $(call all-makefiles-under,$(LOCAL_PATH))

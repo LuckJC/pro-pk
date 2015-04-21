@@ -20,7 +20,7 @@ public class Watch_UI_Fragment extends Fragment {
 	private ImageView iv;
 	 int[] images= {R.drawable.watch_ui_preview_1,R.drawable.watch_ui_preview_2,R.drawable.watch_ui_preview_3,
 			 R.drawable.watch_ui_preview_4,R.drawable.watch_ui_preview_5,R.drawable.watch_ui_preview_6,
-			 R.drawable.watch_ui_preview_7,R.drawable.watch_ui_preview_8,R.drawable.watch_ui_preview_9};
+			 R.drawable.watch_ui_preview_7,R.drawable.watch_ui_preview_8};
 	 
 	/** {@inheritDoc} */
 	 

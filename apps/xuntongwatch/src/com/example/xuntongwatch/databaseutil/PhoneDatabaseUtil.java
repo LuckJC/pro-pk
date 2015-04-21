@@ -448,7 +448,7 @@ public class PhoneDatabaseUtil {
 		
 		values.clear();
 		values.put(Data.DATA1, phone);
-		operations.add(newUpdateContentProviderOperation(values,StructuredName.CONTENT_ITEM_TYPE,raw_id));
+		operations.add(newUpdateContentProviderOperation(values,Phone.CONTENT_ITEM_TYPE,raw_id));
 		
 		values.clear();
 		values.put(Data.DATA15, photo);

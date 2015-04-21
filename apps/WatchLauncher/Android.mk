@@ -17,7 +17,7 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_PREBUILT_LIBS := libmsc:libs/armeabi/libmsc.so
+#LOCAL_PREBUILT_LIBS := libmsc:libs/armeabi/libmsc.so
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
@@ -43,4 +43,4 @@ LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := Msc:libs/Msc.jar
 include $(BUILD_MULTI_PREBUILT)
 
 # Use the folloing include to make our test apk.
-include $(call all-makefiles-under,$(LOCAL_PATH))
+#include $(call all-makefiles-under,$(LOCAL_PATH))

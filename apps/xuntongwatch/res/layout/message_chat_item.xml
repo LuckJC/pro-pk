@@ -8,7 +8,7 @@
 	    android:id="@+id/message_chat_item_time"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:text="1月6号，周二，20：45"
+	    android:text="@string/time"
 	    android:textSize="12sp"
 	    android:textColor="#000000"
 	    android:alpha="0.6"
@@ -31,7 +31,7 @@
 			    android:layout_height="wrap_content"
 			    android:background="@drawable/message_chat_other"
 			    android:layout_alignParentLeft="true"
-			    android:text="别让电子券过期，买 注彩"
+			    android:text="@string/text_one"
 			    android:textSize="15sp"
 			    android:textColor="#000000" />
 	    </RelativeLayout>
@@ -61,7 +61,7 @@
 			    android:layout_width="wrap_content"
 			    android:layout_marginRight="5dp"
 			    android:layout_height="wrap_content"
-			    android:text="好呀  ，等哪天有钱了，一定买 一注。"
+			    android:text="@string/text_two"
 			    android:textSize="15sp"
 			    android:layout_alignParentRight="true"
 			    android:gravity="center_vertical"

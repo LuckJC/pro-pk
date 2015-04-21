@@ -57,7 +57,7 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 			}
 			add_or_update.setText("修改联系人");
 			String contact_phone = intent.getStringExtra("contact_phone");
-			String contact_head = intent.getStringExtra("contact_head");
+//			String contact_head = intent.getStringExtra("contact_head");
 			int contact_id = intent.getIntExtra("contact_id", -1);
 			contact = new Contact();
 //			contact.setContact_head(contact_head);

@@ -35,7 +35,11 @@
         android:title="@string/wifi_settings_title"
         android:icon="@drawable/ic_settings_wireless"
 			/>
-
+	 <header
+        android:id="@+id/hear_aid"
+		android:fragment="com.android.settings.hear.HearNullFragment"
+        android:icon="@drawable/ic_setting_hear"
+        android:title="@string/hear_aid_name" />
     <!-- Bluetooth -->
     <header
         android:id="@+id/bluetooth_settings"
@@ -122,6 +126,7 @@
 		android:fragment="com.android.settings.Watch_UI_Fragment"
         android:icon="@drawable/ic_watch_ui"
         android:title="@string/watch_ui_title" />
+
 
     <!-- Application Settings -->
     <header

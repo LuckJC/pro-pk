@@ -77,7 +77,7 @@ public class ClockActivity extends Activity {
 				WatchConfig.WATCH_CONTENT_URI, PROJECTION, null, null, null);
 		if (cursor != null && cursor.moveToFirst()) {
 			int currentStyle = cursor.getInt(1);
-			if (currentStyle > 0 && currentStyle < CLOCKS.length && currentStyle != mCurrentStyle) {
+			if (currentStyle >= 0 && currentStyle < CLOCKS.length && currentStyle != mCurrentStyle) {
 				createClock(currentStyle);
 				created = true;
 			}

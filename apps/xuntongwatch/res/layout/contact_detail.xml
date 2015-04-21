@@ -12,7 +12,7 @@
         android:orientation="horizontal">
         
         <RelativeLayout 
-            android:layout_weight="3"
+            android:layout_weight="@string/layout_weight_three"
             android:layout_width="0dp"
             android:paddingBottom="15dp"
             android:layout_height="wrap_content" >
@@ -26,7 +26,7 @@
                 />
         </RelativeLayout>
         <RelativeLayout 
-            android:layout_weight="2"
+            android:layout_weight="@string/layout_weight_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content" >
             <ImageView 
@@ -40,18 +40,24 @@
                 />
         </RelativeLayout>
         <RelativeLayout 
-            android:layout_weight="2"
+            android:layout_weight="@string/layout_weight_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content" >
             <ImageView 
-                android:id="@+id/contact_detail_call_detail"
+                android:id="@+id/edit_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/contact_call_detail"
+                android:src="@drawable/edit_contact"
                 />
         </RelativeLayout>
-        
+         <ImageView 
+                android:id="@+id/delete_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/delete_contact"
+                />
     </LinearLayout>
     
 </RelativeLayout>

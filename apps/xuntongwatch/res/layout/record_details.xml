@@ -29,7 +29,7 @@
                 android:id="@+id/record_details_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="王武"
+                android:text="@string/name_one"
                 android:textSize="25sp"
                 android:textColor="#ffffff"
                 />
@@ -37,7 +37,7 @@
                android:id="@+id/record_details_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="广东  深圳  移动"
+                android:text="@string/text_four"
                 android:textSize="20sp"
                 android:layout_marginTop="5dp"
                 android:textColor="#ffffff"
@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="13567643587"
+            android:text="@string/contact_phone_number"
             android:textSize="30sp"
             android:textColor="#ffffff"
             />
@@ -123,8 +123,8 @@
             android:paddingTop="8dp" >
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/back_press" />
         </RelativeLayout>
@@ -159,7 +159,7 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="清空记录"
+            android:text="@string/clean"
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:layout_gravity="center_vertical"

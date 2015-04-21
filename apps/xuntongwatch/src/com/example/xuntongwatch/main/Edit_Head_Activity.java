@@ -19,8 +19,8 @@ import android.widget.Toast;
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.main.Edit_Head_Custom_Fragment.Custom_interface;
 
-public class Edit_Head_Activity extends FragmentActivity implements
-		OnClickListener, Custom_interface {
+public class Edit_Head_Activity extends FragmentActivity implements OnClickListener,
+		Custom_interface {
 
 	private ImageView title_image;
 	private Edit_Head_Custom_Fragment custom_frag;
@@ -64,15 +64,13 @@ public class Edit_Head_Activity extends FragmentActivity implements
 	}
 
 	private void showFragment(android.support.v4.app.Fragment fragment) {
-		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.show(fragment);
 		transaction.commit();
 	}
 
 	private void hideFragment(android.support.v4.app.Fragment fragment) {
-		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction();
+		FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 		transaction.hide(fragment);
 		transaction.commit();
 	}
@@ -97,6 +95,9 @@ public class Edit_Head_Activity extends FragmentActivity implements
 			state = CLASSIC;
 			break;
 		case R.id.edit_head_next_tv:
+			if(state==CLASSIC){
+				bitmap = Edit_Head_Classic_Fragment.sClassicBitmap;
+			}
 			if (bitmap != null) {
 				Intent intent = new Intent();
 				intent.putExtra("bitmap", bitmap);
@@ -141,7 +142,7 @@ public class Edit_Head_Activity extends FragmentActivity implements
 	 * 
 	 * @param activity
 	 * @param resultCode
-	 *            结果�?
+	 * 
 	 */
 	public void callCallery(Activity activity, int resultCode) {
 		Intent intent = new Intent(Intent.ACTION_PICK,
@@ -149,8 +150,7 @@ public class Edit_Head_Activity extends FragmentActivity implements
 		activity.startActivityForResult(intent, resultCode);
 	}
 
-	public void imageScale(Uri imageUri, Activity activity, int resultCode,
-			int width, int height) {
+	public void imageScale(Uri imageUri, Activity activity, int resultCode, int width, int height) {
 		Intent intent = new Intent("com.android.camera.action.CROP");
 		intent.setDataAndType(imageUri, "image/*");// 按照片的Uri选中图片进行手动缩放
 		int i = 320;
