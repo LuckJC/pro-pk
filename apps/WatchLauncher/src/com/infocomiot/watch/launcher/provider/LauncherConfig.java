@@ -13,7 +13,7 @@ public class LauncherConfig implements BaseColumns {
 	
 	static final String[] APPS_COMMON = {
 		"com.android.dialer",  //拨号盘（暂时）
-		"com.example.hear_aid",  //头条新闻
+		"com.example.hear_aid",  //助听器
 		"com.android.gallery3d",  //相机,照片
 		"com.android.music",  //音乐
 		"com.android.soundrecorder",  //录音机

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="19"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
@@ -48,6 +48,7 @@
             android:name="com.infocomiot.watch.launcher.launcher.LauncherActivity"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
             android:name="com.infocomiot.watch.launcher.packageobserver.PackageAddedPromptActivity"
             android:label="@string/title_activity_package_added_prompt"
@@ -58,7 +59,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -68,11 +68,6 @@
             android:authorities="com.infocomiot.watch.launcher"
             android:exported="true" >
         </provider>
-
-        <service android:name="com.infocomiot.watch.launcher.speechsound.MyService">
-        </service>
-        <service android:name="com.infocomiot.watch.launcher.speechsound.SpeechsoudService">
-        </service>
         
     </application>
 

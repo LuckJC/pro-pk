@@ -31,12 +31,12 @@ LOCAL_PACKAGE_NAME := XFyyForWatch
 
 #LOCAL_JNI_SHARED_LIBRARIES := libmsc
 
-include $(BUILD_PACKAGE)
+include $(BUILD_PACKAGE) 
 ##################################################
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := Msc:libs/Msc.jar
-
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/libs/armeabi/libmsc.so:system/lib/libmsc.so
 
 include $(BUILD_MULTI_PREBUILT)
 

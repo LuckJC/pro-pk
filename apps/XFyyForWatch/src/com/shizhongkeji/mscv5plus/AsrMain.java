@@ -89,7 +89,6 @@ public class AsrMain extends Activity {
 
 	private String mEngineType = "local";
 
-
 	HashMap<String, String> IDmap = new HashMap<String, String>();
 	String[] items;// 记录人名数组
 	// List<String> items = new ArrayList<String>();
@@ -143,7 +142,7 @@ public class AsrMain extends Activity {
 		// getActionBar().setDisplayHomeAsUpEnabled(true);
 		Log.e("XF", "onCreate()");
 		setContentView(R.layout.asrdemo);
-		mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+		mToast = Toast.makeText(this, "", 1500);
 		// 初始化识别对象
 		mAsr = SpeechRecognizer.createRecognizer(this, mInitListener);
 		// 初始化语法、命令词
@@ -154,9 +153,11 @@ public class AsrMain extends Activity {
 			@Override
 			public void onStart(String utteranceId) {
 			}
+
 			@Override
 			public void onError(String utteranceId) {
 			}
+
 			@Override
 			public void onDone(String utteranceId) {
 				if (utteranceId.equals("1001")) {
@@ -167,6 +168,10 @@ public class AsrMain extends Activity {
 				}
 			}
 		});
+
+		mLocalLexicon = "";
+
+		mLocalGrammar = FucUtil.readFile(AsrMain.this, "xtml.bnf", "utf-8");
 
 		IntentFilter phonefilter = new IntentFilter();
 		phonefilter.addAction("android.intent.action.PHONE_STATE");
@@ -192,10 +197,15 @@ public class AsrMain extends Activity {
 		// 设置资源路径
 		mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
 		// 单个文件命令构建 add by lixd
+		// grammarListener
 		ret = mAsr.buildGrammar(GRAMMAR_TYPE_BNF, mContent, grammarListener);
 		if (ret != ErrorCode.SUCCESS) {
 			showTip("grammar() error:" + ret);
 		}
+		// else
+		// {
+		//
+		// }
 	}
 
 	private void updataLexcion() {
@@ -204,6 +214,13 @@ public class AsrMain extends Activity {
 			showTip("no person");
 			handler.sendEmptyMessage(1);
 		}
+//		// 设置语法名称
+//		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
+//		// lexiconListener
+//		ret = mAsr.updateLexicon("contact", mLocalLexicon, lexiconListener);
+//		if (ret != ErrorCode.SUCCESS) {
+//			showTip("updataLexcion() error:" + ret);
+//		}
 		mAsr.setParameter(SpeechConstant.PARAMS, null);
 		// 设置引擎类型
 		mAsr.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
@@ -233,34 +250,43 @@ public class AsrMain extends Activity {
 		public void onInit(int code) {
 			Log.d(TAG, "SpeechRecognizer  () code = " + code);
 			if (code != ErrorCode.SUCCESS) {
+				// TODO 提示初始化引擎失败，退出应用
 				showTip("mInitListener error:" + code);
-			}
-			mLocalLexicon = "";
-
-			mLocalGrammar = FucUtil.readFile(AsrMain.this, "xtml.bnf", "utf-8");
-			if (!is_other_back) {
+			} else {
 				grammar();
 			}
 		}
 	};
-	
+
 	/**
 	 * 更新词典监听器。
 	 */
 	private LexiconListener lexiconListener = new LexiconListener() {
 		@Override
 		public void onLexiconUpdated(String lexiconId, SpeechError error) {
+
 			if (error == null) {
 				showTip("LexiconUpdated ok");
+
+				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+						TextToSpeech.QUEUE_ADD, IDmap);
+						ProgressDialogUtils.dismissProgressDialog();
 			} else {
-				showTip("LexiconUpdated error:" + error.getErrorCode());
+					showTip("no person");
+					AsrMain.this.finish();
+				if (error.getErrorCode() == 23108) {
+					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+					mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+							TextToSpeech.QUEUE_ADD, IDmap);
+				}
+				showTip("lexiconListener error:" + error.getErrorCode());
+				// return;
+				// ProgressDialogUtils.dismissProgressDialog();
 			}
 
-			ProgressDialogUtils.dismissProgressDialog();
+			// ProgressDialogUtils.dismissProgressDialog();
 
-			IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
-			mSpeech.speak(getResources().getString(R.string.help_you_dothing),
-					TextToSpeech.QUEUE_ADD, IDmap);
 		}
 	};
 
@@ -270,20 +296,14 @@ public class AsrMain extends Activity {
 	private GrammarListener grammarListener = new GrammarListener() {
 		@Override
 		public void onBuildFinish(String grammarId, SpeechError error) {
-			if (error == null) {
-				showTip("grammarListener：" + grammarId);
-			} else {
-				showTip("grammarListener error:" + error.getErrorCode());
-			}
-			ProgressDialogUtils.showProgressDialog(AsrMain.this, "正在更新联系人");
-
-			// 获取联系人，本地更新词典时使用
+			showTip("grammarListener：" + grammarId);
 			ContactManager mgr = ContactManager.createManager(AsrMain.this, mContactListener);
 			mgr.asyncQueryAllContactsName();
 			mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+
 		}
 	};
-	
+
 	/**
 	 * 获取联系人监听器。
 	 */
@@ -293,12 +313,13 @@ public class AsrMain extends Activity {
 			// 获取联系人
 			mLocalLexicon = contactInfos;
 			if (!is_updata_lexcion_finish) {
+				ProgressDialogUtils.showProgressDialog(AsrMain.this, getResources().getString(R.string.going_updataLexcion));
 				updataLexcion();
 				is_updata_lexcion_finish = true;
 			}
 		}
 	};
-	
+
 	/**
 	 * 识别监听器。
 	 */
@@ -308,6 +329,7 @@ public class AsrMain extends Activity {
 		public void onVolumeChanged(int volume) {
 			showTip("VolumeChanged:" + volume);
 		}
+
 		@Override
 		public void onResult(final RecognizerResult result, boolean isLast) {
 
@@ -317,10 +339,21 @@ public class AsrMain extends Activity {
 				Map<String, List<String>> map = null;
 
 				if (mResultType.equals("json")) {
-					map = JsonParser
-							.parseGrammarResultIntent(result.getResultString(), mEngineType);
+					map = JsonParser.parseGrammarResultIntent(result.getResultString(), mEngineType);
 					if (map == null) {
 						showTip("again speak");
+//						mAsr.stopListening();
+//						mAsr.cancel();
+//						mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
+//						// 使用8k音频的时候请解开注释
+//						// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
+//						mAsr.setParameter(SpeechConstant.VAD_BOS, "3000");
+//						ret = mAsr.startListening(mRecognizerListener);
+//
+//						if (ret != ErrorCode.SUCCESS) {
+//							showTip("startListening error:" + ret);
+//						}
+						
 						mAsr.setParameter(SpeechConstant.PARAMS, null);
 						// 设置识别引擎
 						mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
@@ -383,7 +416,7 @@ public class AsrMain extends Activity {
 								intent.setData(Uri.parse("smsto:" + number));
 								startActivity(intent);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							}
 						}
 						// else 的是 keyset为openApp
@@ -397,7 +430,7 @@ public class AsrMain extends Activity {
 								intent.addCategory(Intent.CATEGORY_APP_MUSIC);
 								startActivity(intent);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							} else if ((getResources().getString(R.string.settings)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1005");
@@ -408,7 +441,7 @@ public class AsrMain extends Activity {
 								mIntent.setAction(Settings.ACTION_SETTINGS);
 								startActivity(mIntent);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 
 							} else if ((getResources().getString(R.string.camera)).equals(map.get(
 									"openApp").get(0))) {
@@ -419,7 +452,7 @@ public class AsrMain extends Activity {
 								Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 								startActivity(camera);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							} else if ((getResources().getString(R.string.picture)).equals(map.get(
 									"openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1007");
@@ -430,7 +463,7 @@ public class AsrMain extends Activity {
 								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 								startActivity(intent);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							} else if ((getResources().getString(R.string.call_dial)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1008");
@@ -440,7 +473,7 @@ public class AsrMain extends Activity {
 								Intent intent = new Intent(Intent.ACTION_DIAL);
 								startActivity(intent);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							} else if ((getResources().getString(R.string.recorder)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1009");
@@ -451,7 +484,7 @@ public class AsrMain extends Activity {
 								Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
 								startActivity(mi);
 								mAsr.stopListening();
-								is_other_back = true;
+								// is_other_back = true;
 							}
 						}
 					}
@@ -467,7 +500,7 @@ public class AsrMain extends Activity {
 			}
 
 		}
-		
+
 		// 根据名字查找手机号码 add by lixd
 		private String FindPhoneNumber(String name) {
 			ContentResolver contentResolver = AsrMain.this.getContentResolver();
@@ -486,34 +519,46 @@ public class AsrMain extends Activity {
 		public void onEndOfSpeech() {
 
 			showTip("end talk");
-			Log.e("XF", "onEndOfSpeech()");
+			Log.d("XF", "onEndOfSpeech()");
 		}
 
 		@Override
 		public void onBeginOfSpeech() {
 			showTip("start talk");
-			Log.e("XF", "onBeginOfSpeech()");
+			Log.d("XF", "onBeginOfSpeech()");
 		}
 
 		@Override
 		public void onError(SpeechError error) {
-			mAsr.stopListening();
-			if(error.getErrorCode()==20005)
-			{
-				showTip(getResources().getString(R.string.no_result_show));				
+			// mAsr.stopListening();
+			// mAsr.cancel();
+			mAsr.setParameter(SpeechConstant.PARAMS, null);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			else if(error.getErrorCode()==23300)
-			{
+			if (error.getErrorCode() == 20005) {
+				showTip(getResources().getString(R.string.no_result_show));
+			} else if (error.getErrorCode() == 23300) {
 				showTip(getResources().getString(R.string.again_grammar));
-			}
-			else if(error.getErrorCode()==23108)
-			{
+			} else if (error.getErrorCode() == 23108) {
 				showTip(getResources().getString(R.string.again_updataLexcion));
+			} else {
+				Log.e("XF", "onError()");
+				Toast.makeText(AsrMain.this, "" + error.getErrorCode(), Toast.LENGTH_SHORT).show();
 			}
-			else
-			{
-				showTip("onError Code:" + error.getErrorCode());
-			}
+
+//			mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
+//			// 使用8k音频的时候请解开注释
+//			// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
+//			mAsr.setParameter(SpeechConstant.VAD_BOS, "3000");
+//			ret = mAsr.startListening(mRecognizerListener);
+//
+//			if (ret != ErrorCode.SUCCESS) {
+//				showTip("error code:" + ret);
+//			}
 			mAsr.setParameter(SpeechConstant.PARAMS, null);
 			// 设置识别引擎
 			mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
@@ -537,9 +582,10 @@ public class AsrMain extends Activity {
 			}
 
 		}
+
 		@Override
 		public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
-			Log.e("XF", "onEvent()");
+			Log.d("XF", "onEvent()" + eventType + " " + arg1 + " " + arg2 + " ");
 		}
 	};
 
@@ -582,6 +628,7 @@ public class AsrMain extends Activity {
 			mAsr.setParameter(SpeechConstant.LOCAL_GRAMMAR, "xtml");
 			// 设置识别的门限值
 			mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
+			mAsr.setParameter(SpeechConstant.VAD_BOS, "2000");
 			// 使用8k音频的时候请解开注释
 			// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
 			result = true;
@@ -613,9 +660,9 @@ public class AsrMain extends Activity {
 		mSpeech.stop();
 		mSpeech.shutdown();
 		mSpeech = null;
-		
+
 		unregisterReceiver(ps);
-		
+
 	}
 
 	/** {@inheritDoc} */
@@ -639,13 +686,13 @@ public class AsrMain extends Activity {
 		mAsr.cancel();
 		mAsr.destroy();
 		mAsr.stopListening();
-		
+		is_other_back = true;
 	}
 
 	public class PhoneStateReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			
+
 			// 如果是拨打电话
 			if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
 				mAsr.cancel();

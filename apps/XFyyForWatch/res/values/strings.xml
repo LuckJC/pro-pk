@@ -137,5 +137,6 @@
     
     <string name="no_result_show">没有匹配到结果</string>
     <string name="again_updataLexcion">再次更新联系人</string>
+	<string name="going_updataLexcion">正在更新联系人</string>
     <string name="again_grammar">再次构建语法</string>
 </resources>
