@@ -168,20 +168,20 @@ public class HearService extends Service {
 		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
 		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
 		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		Xlog.i(TAG, "mCurMediaV  : " + mCurMediaV + "<>" + "mCurSphV:" + mCurSphV);
+		showToast("mCurMediaV  : " + mCurMediaV + "<>" + "mCurSphV:" + mCurSphV +"mCurMicV:" + mCurMicV);
 		setMaxVolEdit();
 		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
 		byte editByte = (byte) VALUE_RANGE_160;
 		setMaxVolData(editByte, false);
 		setAudioData();
 		// 媒体
-		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) VALUE_RANGE_255);
+		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) (VALUE_RANGE_255-80));
 		setAudioData();
 		// 通话
-		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) VALUE_RANGE_160);
+		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) (VALUE_RANGE_160-50));
 		setAudioData();
 		// Mic
-		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) VALUE_RANGE_255);
+		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte)  (VALUE_RANGE_255-80));
 		setAudioData();
 		Xlog.v(TAG, "start");
 		new RecordPlayThread().start();// ������¼�߷��߳�
@@ -227,7 +227,7 @@ public class HearService extends Service {
 				audioRecord.startRecording();// ��ʼ¼��
 				audioTrack.play();// ��ʼ����
 				Xlog.v(TAG, "isRecording:" + isRecording);
-				while (isRecording) {
+				while (isRecording ) {
 					// ��ȡMic������
 					Xlog.v(TAG, "isRecording:" + isRecording);
 					int bufferReadResult = audioRecord.read(buffer, 0, recBufSize);
