@@ -237,7 +237,14 @@ public class AsrMain extends Activity {
 
 		ret = mAsr.updateLexicon("contact", mLocalLexicon, lexiconListener);
 		if (ret != ErrorCode.SUCCESS) {
-			showTip("updataLexcion() error:" + ret);
+			if(ret == 20009)
+			{
+				showTip("updataLexcion() error:" + ret + " no person");
+				}
+			else
+			{
+				showTip("updataLexcion() error:" + ret);
+			}
 		}
 	}
 
@@ -273,14 +280,15 @@ public class AsrMain extends Activity {
 						TextToSpeech.QUEUE_ADD, IDmap);
 						ProgressDialogUtils.dismissProgressDialog();
 			} else {
-					showTip("no person");
-					AsrMain.this.finish();
+					
 				if (error.getErrorCode() == 23108) {
 					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 					mSpeech.speak(getResources().getString(R.string.help_you_dothing),
 							TextToSpeech.QUEUE_ADD, IDmap);
 				}
-				showTip("lexiconListener error:" + error.getErrorCode());
+				if (error.getErrorCode() == 20009)
+				{showTip("lexiconListener error:" + "  no person");}
+				AsrMain.this.finish();
 				// return;
 				// ProgressDialogUtils.dismissProgressDialog();
 			}
@@ -300,7 +308,10 @@ public class AsrMain extends Activity {
 			ContactManager mgr = ContactManager.createManager(AsrMain.this, mContactListener);
 			mgr.asyncQueryAllContactsName();
 			mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-
+			if(error!=null)
+			{
+				AsrMain.this.finish();
+			}
 		}
 	};
 
@@ -312,10 +323,14 @@ public class AsrMain extends Activity {
 		public void onContactQueryFinish(String contactInfos, boolean changeFlag) {
 			// 获取联系人
 			mLocalLexicon = contactInfos;
-			if (!is_updata_lexcion_finish) {
+			if (!is_updata_lexcion_finish && mLocalLexicon!=null) {
 				ProgressDialogUtils.showProgressDialog(AsrMain.this, getResources().getString(R.string.going_updataLexcion));
 				updataLexcion();
 				is_updata_lexcion_finish = true;
+			}
+			if(mLocalLexicon.equals(""))
+			{
+				AsrMain.this.finish();
 			}
 		}
 	};
