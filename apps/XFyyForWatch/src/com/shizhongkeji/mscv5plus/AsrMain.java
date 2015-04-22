@@ -120,7 +120,7 @@ public class AsrMain extends Activity {
 				// int result = mSpeech.setLanguage(Locale.ENGLISH);
 				int result = mSpeech.setLanguage(Locale.CHINA);
 				// 如果打印为-2，说明不支持这种语言
-				Toast.makeText(AsrMain.this, "-------------result = " + result, Toast.LENGTH_LONG)
+				Toast.makeText(AsrMain.this, "-------------result = " + result, Toast.LENGTH_SHORT)
 						.show();
 				if (result == TextToSpeech.LANG_MISSING_DATA
 						|| result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -142,7 +142,7 @@ public class AsrMain extends Activity {
 		// getActionBar().setDisplayHomeAsUpEnabled(true);
 		Log.e("XF", "onCreate()");
 		setContentView(R.layout.asrdemo);
-		mToast = Toast.makeText(this, "", 1500);
+		mToast = Toast.makeText(this, "", 500);
 		// 初始化识别对象
 		mAsr = SpeechRecognizer.createRecognizer(this, mInitListener);
 		// 初始化语法、命令词
@@ -221,17 +221,17 @@ public class AsrMain extends Activity {
 //		if (ret != ErrorCode.SUCCESS) {
 //			showTip("updataLexcion() error:" + ret);
 //		}
-		mAsr.setParameter(SpeechConstant.PARAMS, null);
-		// 设置引擎类型
-		mAsr.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
-		// 设置资源路径
-		mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
-		// 使用8k音频的时候请解开注释
-		// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
-		// 设置语法构建路径
-		mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
-		// 设置文本编码格式
-		mAsr.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
+//		mAsr.setParameter(SpeechConstant.PARAMS, null);
+//		// 设置引擎类型
+//		mAsr.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
+//		// 设置资源路径
+//		mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
+//		// 使用8k音频的时候请解开注释
+//		// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
+//		// 设置语法构建路径
+//		mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
+//		// 设置文本编码格式
+//		mAsr.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
 		// 设置语法名称
 		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
 
@@ -278,8 +278,9 @@ public class AsrMain extends Activity {
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
 						TextToSpeech.QUEUE_ADD, IDmap);
-						ProgressDialogUtils.dismissProgressDialog();
+				ProgressDialogUtils.dismissProgressDialog();
 			} else {
+					
 					
 				if (error.getErrorCode() == 23108) {
 					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
@@ -287,7 +288,7 @@ public class AsrMain extends Activity {
 							TextToSpeech.QUEUE_ADD, IDmap);
 				}
 				if (error.getErrorCode() == 20009)
-				{showTip("lexiconListener error:" + "  no person");}
+				{showTip("lexiconListener error:" + error.getErrorCode()+"  no person");}
 				AsrMain.this.finish();
 				// return;
 				// ProgressDialogUtils.dismissProgressDialog();
@@ -304,10 +305,13 @@ public class AsrMain extends Activity {
 	private GrammarListener grammarListener = new GrammarListener() {
 		@Override
 		public void onBuildFinish(String grammarId, SpeechError error) {
-			showTip("grammarListener：" + grammarId);
-			ContactManager mgr = ContactManager.createManager(AsrMain.this, mContactListener);
-			mgr.asyncQueryAllContactsName();
-			mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+			if(error==null)
+				{
+				showTip("grammarListener：" + grammarId);
+				ContactManager mgr = ContactManager.createManager(AsrMain.this, mContactListener);
+				mgr.asyncQueryAllContactsName();
+				mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+				}
 			if(error!=null)
 			{
 				AsrMain.this.finish();
@@ -323,13 +327,15 @@ public class AsrMain extends Activity {
 		public void onContactQueryFinish(String contactInfos, boolean changeFlag) {
 			// 获取联系人
 			mLocalLexicon = contactInfos;
-			if (!is_updata_lexcion_finish && mLocalLexicon!=null) {
+			if (!is_updata_lexcion_finish && !mLocalLexicon.equals("")) {
 				ProgressDialogUtils.showProgressDialog(AsrMain.this, getResources().getString(R.string.going_updataLexcion));
 				updataLexcion();
 				is_updata_lexcion_finish = true;
+				
 			}
 			if(mLocalLexicon.equals(""))
 			{
+				showTip("No Person");
 				AsrMain.this.finish();
 			}
 		}
@@ -398,7 +404,17 @@ public class AsrMain extends Activity {
 					String number = null;
 
 					for (String keyset : set) {
-						if (keyset.equals("callPhone")) {
+						/*if(keyset.equals("nothing"))
+						{
+							if(map.get("nothing").size()>=1)
+							{
+							IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1002");
+							mSpeech.speak("你要找"+map.get("nothing").get(0)+"做什么", TextToSpeech.QUEUE_ADD,
+									IDmap);
+							return;}
+							}*/
+//						else 
+							if (keyset.equals("callPhone")) {
 							if (map.get("callPhone").size() >= 1) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1002");
 								mSpeech.speak(getResources().getString(R.string.call_phone)
