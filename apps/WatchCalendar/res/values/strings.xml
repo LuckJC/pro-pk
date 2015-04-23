@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">" 日历"</string>
+    <string name="init_name">init</string>
+    <string name="sun">日</string>
+    <string name="monday">一</string>
+    <string name="tuesday">二</string>
+    <string name="wednesday">三</string>
+    <string name="thursday">四</string>
+    <string name="friday">五</string>
+    <string name="saturday">六</string>
+</resources>
