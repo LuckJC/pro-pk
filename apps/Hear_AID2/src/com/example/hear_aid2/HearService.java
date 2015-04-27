@@ -1,9 +1,10 @@
-package com.android.settings.hear;
+package com.example.hear_aid2;
 
 import java.util.Arrays;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -102,15 +103,17 @@ public class HearService extends Service {
 	private TelephonyManager telephonyManager;
 	private AudioManager audioManager;
 
-	private boolean isFocusAudio = false;
+	private SharedPreferences mSharedPreferences;
+	private boolean isFocusAudio = true;
 	private int mTypeMedia = 7;
 	private int mTypeSph = 4;
 	private int mTypeMic = 2;
 	private int mCurMediaV = 70;
 	private int mCurSphV = 50;
 	private int mCurMicV = 70;
-
 	
+	private static int VOL_70 = 70;
+	private static int  VOL_50 = 50;
 	@Override
 	public IBinder onBind(Intent intent) {
 
@@ -122,12 +125,10 @@ public class HearService extends Service {
 		// TODO Auto-generated method stub
 		return super.onStartCommand(intent, flags, startId);
 	}
-
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Resources resources = getResources();
-		Xlog.v(TAG, "mCurrentMode: " + mCurrentMode + "mSupportEnhance: " + mSupportEnhance);
 		sMaxVolMode = 4;
 		sMaxVolLevel = 15;
 		sMaxVolType = 9;
@@ -155,8 +156,9 @@ public class HearService extends Service {
 		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
 		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
-		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
-		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN);
+		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
 			isFocusAudio = true;
 		}
@@ -174,44 +176,35 @@ public class HearService extends Service {
 
 		mCurrentValue = getValue(mData, mCurrentMode, mTypeIndex, mLevelIndex);
 
-//		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
-//		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
-//		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		showToast("mCurMediaV  : " + mCurMediaV  + "mCurSphV:" + mCurSphV +"mCurMicV:" + mCurMicV);
-		setMaxVolEdit();
+		// mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
+		// mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
+		// mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
+		
 		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
-		byte editByte = (byte) VALUE_RANGE_160;
-		setMaxVolData(editByte, false);
-		setAudioData();
-		// 媒体
-		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) (VALUE_RANGE_255-80));
-		setAudioData();
-		// 通话
-		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) (VALUE_RANGE_160-50));
-		setAudioData();
-		// Mic
-		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte)  (VALUE_RANGE_255-80));
-		setAudioData();
+		firstVolume();
+
 		Xlog.v(TAG, "start");
 		new RecordPlayThread().start();// ������¼�߷��߳�
 	}
+
 	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
-	    public void onAudioFocusChange(int focusChange) {
-	        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT){
-	        	Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS_TRANSIENT");
-	        	isFocusAudio = false;
-	        } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-	            // Stop playback
-	        	Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS");
-	        	isFocusAudio = false;
-	        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-	        	Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
-	        	isFocusAudio = true;
-	        } else {
-	        	Log.e(TAG, "focus的值："+focusChange);
-	        }
-	    }
+		public void onAudioFocusChange(int focusChange) {
+			if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS_TRANSIENT");
+				isFocusAudio = true;
+			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+				// Stop playback
+				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS");
+				isFocusAudio = true;
+			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+				Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
+				isFocusAudio = true;
+			} else  if(focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+				Log.e(TAG, "focus的值：" + focusChange);
+			}
+		}
 	};
+
 	private class MyPhoneStateListener extends PhoneStateListener {
 		@Override
 		public void onCallStateChanged(int state, String incomingNumber) {
@@ -276,18 +269,8 @@ public class HearService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		audioManager.abandonAudioFocus(afChangeListener);
-		byte editByt = (byte) (VALUE_RANGE_160 - 60);
-		setMaxVolData(editByt, false);
-		setAudioData();
-		// 媒体
-		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) mCurMediaV);
-		setAudioData();
-		//
-		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) mCurSphV);
-		setAudioData();
-		// Mic
-		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) mCurMicV);
-		setAudioData();
+		initFirstVolume();
+		initSecondVolume();
 		isRecording = false;
 	}
 
@@ -354,5 +337,61 @@ public class HearService extends Service {
 
 	private void showToast(String msg) {
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
+
+	/**
+	 * <br>
+	 * 功能简述:一级  声音放大 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
+	 */
+	public void firstVolume() {
+		setMaxVolEdit();
+		byte editByte = (byte) VALUE_RANGE_160;
+		setMaxVolData(editByte, false);
+		setAudioData();
+	}
+	/**
+	 * <br>功能简述:把  一级  功放简绍到默认值
+	 * <br>功能详细描述:
+	 * <br>注意:
+	 */
+	public void initFirstVolume(){
+		byte editByt = (byte) (VALUE_RANGE_160 - 60);
+		setMaxVolData(editByt, false);
+		setAudioData();
+	}
+	/**
+	 * <br>
+	 * 功能简述:二级 声音放大 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
+	 */
+	public void secondVolume() {
+		// 媒体
+		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) (VALUE_RANGE_255 - 80));
+		setAudioData();
+		// 通话
+		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) (VALUE_RANGE_160 - 50));
+		setAudioData();
+		// Mic
+		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) (VALUE_RANGE_255 - 80));
+		setAudioData();
+	}
+	/**
+	 * <br>功能简述:把  二级  功放简绍到默认值
+	 * <br>功能详细描述:
+	 * <br>注意:
+	 */
+	public void initSecondVolume() {
+		// 媒体
+		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) VOL_70);
+		setAudioData();
+		//
+		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) VOL_50);
+		setAudioData();
+		// Mic
+		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) VOL_70);
+		setAudioData();
 	}
 }
