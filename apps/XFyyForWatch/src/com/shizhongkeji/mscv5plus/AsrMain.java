@@ -9,10 +9,12 @@ import java.util.Set;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -120,14 +122,25 @@ public class AsrMain extends Activity {
 				// int result = mSpeech.setLanguage(Locale.ENGLISH);
 				int result = mSpeech.setLanguage(Locale.CHINA);
 				// 如果打印为-2，说明不支持这种语言
-				Toast.makeText(AsrMain.this, "-------------result = " + result, Toast.LENGTH_SHORT)
-						.show();
+				if(result==-2)
+				{
+					Toast.makeText(AsrMain.this,"当前引擎不支持中文", Toast.LENGTH_SHORT)
+					.show();
+					AsrMain.this.finish();
+				}
 				if (result == TextToSpeech.LANG_MISSING_DATA
 						|| result == TextToSpeech.LANG_NOT_SUPPORTED) {
 					System.out.println("-------------not use");
-				} else {
-
+				} 
+				else {
+//					mSpeech.speak("我靠！为什么要酱", TextToSpeech.QUEUE_FLUSH, null);
 				}
+			}
+			else
+			{
+				Toast.makeText(AsrMain.this,"TTS初始化出错！", Toast.LENGTH_SHORT)
+				.show();
+				AsrMain.this.finish();
 			}
 		}
 
@@ -202,10 +215,6 @@ public class AsrMain extends Activity {
 		if (ret != ErrorCode.SUCCESS) {
 			showTip("grammar() error:" + ret);
 		}
-		// else
-		// {
-		//
-		// }
 	}
 
 	private void updataLexcion() {
@@ -214,24 +223,7 @@ public class AsrMain extends Activity {
 			showTip("no person");
 			handler.sendEmptyMessage(1);
 		}
-//		// 设置语法名称
-//		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
-//		// lexiconListener
-//		ret = mAsr.updateLexicon("contact", mLocalLexicon, lexiconListener);
-//		if (ret != ErrorCode.SUCCESS) {
-//			showTip("updataLexcion() error:" + ret);
-//		}
-//		mAsr.setParameter(SpeechConstant.PARAMS, null);
-//		// 设置引擎类型
-//		mAsr.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
-//		// 设置资源路径
-//		mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
-//		// 使用8k音频的时候请解开注释
-//		// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
-//		// 设置语法构建路径
-//		mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
-//		// 设置文本编码格式
-//		mAsr.setParameter(SpeechConstant.TEXT_ENCODING, "utf-8");
+
 		// 设置语法名称
 		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
 
@@ -259,6 +251,7 @@ public class AsrMain extends Activity {
 			if (code != ErrorCode.SUCCESS) {
 				// TODO 提示初始化引擎失败，退出应用
 				showTip("mInitListener error:" + code);
+				AsrMain.this.finish();
 			} else {
 				grammar();
 			}
@@ -290,12 +283,8 @@ public class AsrMain extends Activity {
 				if (error.getErrorCode() == 20009)
 				{showTip("lexiconListener error:" + error.getErrorCode()+"  no person");}
 				AsrMain.this.finish();
-				// return;
-				// ProgressDialogUtils.dismissProgressDialog();
+				
 			}
-
-			// ProgressDialogUtils.dismissProgressDialog();
-
 		}
 	};
 
@@ -335,8 +324,38 @@ public class AsrMain extends Activity {
 			}
 			if(mLocalLexicon.equals(""))
 			{
-				showTip("No Person");
-				AsrMain.this.finish();
+				new AlertDialog.Builder(AsrMain.this).setTitle("系统提示")// 设置对话框标题
+
+						.setMessage("您还没有联系人，不能语音控制打电话和发短信，现在去添加联系人？")// 设置显示的内容
+
+						.setPositiveButton("确定", new DialogInterface.OnClickListener() {// 添加确定按钮
+
+									@Override
+									public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
+
+										// TODO Auto-generated method stub
+										Intent it=new Intent();
+										it.setAction("com.example.xuntongwatch.main.Contact_Activity");
+										startActivity(it);
+										AsrMain.this.finish();
+									}
+
+								}).setNegativeButton("返回", new DialogInterface.OnClickListener() {// 添加返回按钮
+
+									@Override
+									public void onClick(DialogInterface dialog, int which) {// 响应事件
+
+										// TODO Auto-generated method stub
+										IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
+												"1001");
+										mSpeech.speak(
+												getResources().getString(R.string.help_you_dothing),
+												TextToSpeech.QUEUE_ADD, IDmap);
+										// finish();
+
+									}
+
+								}).show();// 在按键响应事件中显示此对话框
 			}
 		}
 	};
@@ -363,17 +382,6 @@ public class AsrMain extends Activity {
 					map = JsonParser.parseGrammarResultIntent(result.getResultString(), mEngineType);
 					if (map == null) {
 						showTip("again speak");
-//						mAsr.stopListening();
-//						mAsr.cancel();
-//						mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
-//						// 使用8k音频的时候请解开注释
-//						// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
-//						mAsr.setParameter(SpeechConstant.VAD_BOS, "3000");
-//						ret = mAsr.startListening(mRecognizerListener);
-//
-//						if (ret != ErrorCode.SUCCESS) {
-//							showTip("startListening error:" + ret);
-//						}
 						
 						mAsr.setParameter(SpeechConstant.PARAMS, null);
 						// 设置识别引擎
@@ -381,7 +389,7 @@ public class AsrMain extends Activity {
 
 						mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
 						// 设置语法构建路径
-						mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
+						mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath); 
 						// 设置返回结果格式
 						mAsr.setParameter(SpeechConstant.RESULT_TYPE, mResultType);
 						// 设置本地识别使用语法id
@@ -564,32 +572,18 @@ public class AsrMain extends Activity {
 			// mAsr.stopListening();
 			// mAsr.cancel();
 			mAsr.setParameter(SpeechConstant.PARAMS, null);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 			if (error.getErrorCode() == 20005) {
 				showTip(getResources().getString(R.string.no_result_show));
 			} else if (error.getErrorCode() == 23300) {
 				showTip(getResources().getString(R.string.again_grammar));
 			} else if (error.getErrorCode() == 23108) {
-				showTip(getResources().getString(R.string.again_updataLexcion));
+//				showTip(getResources().getString(R.string.again_updataLexcion));
 			} else {
 				Log.e("XF", "onError()");
 				Toast.makeText(AsrMain.this, "" + error.getErrorCode(), Toast.LENGTH_SHORT).show();
 			}
 
-//			mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
-//			// 使用8k音频的时候请解开注释
-//			// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
-//			mAsr.setParameter(SpeechConstant.VAD_BOS, "3000");
-//			ret = mAsr.startListening(mRecognizerListener);
-//
-//			if (ret != ErrorCode.SUCCESS) {
-//				showTip("error code:" + ret);
-//			}
 			mAsr.setParameter(SpeechConstant.PARAMS, null);
 			// 设置识别引擎
 			mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
@@ -684,13 +678,17 @@ public class AsrMain extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// 退出时释放连接
-		mAsr.cancel();
-		mAsr.destroy();
-		mAsr.stopListening();
-
-		mSpeech.stop();
-		mSpeech.shutdown();
-		mSpeech = null;
+		if(mAsr!=null)
+		{
+			mAsr.cancel();
+			mAsr.destroy();
+			mAsr.stopListening();
+		}
+		/*mSpeech.stop();*/
+		if(mSpeech!=null)
+		{
+			mSpeech.shutdown();
+			}
 
 		unregisterReceiver(ps);
 
@@ -714,9 +712,12 @@ public class AsrMain extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		mAsr.cancel();
-		mAsr.destroy();
-		mAsr.stopListening();
+		if(mAsr!=null)
+		{
+			mAsr.cancel();
+			mAsr.destroy();
+			mAsr.stopListening();
+		}
 		is_other_back = true;
 	}
 
