@@ -672,6 +672,8 @@ public class Settings extends PreferenceActivity
 				  {headers.remove(i);continue;}
 				   else if(id == R.id.wireless_settings)
 				  {headers.remove(i);continue;}
+				   else if(id == R.id.hear_aid)
+				  {headers.remove(i);continue;}
 				  
 				  //  DEVICE
 				  else if(id == R.id.home_settings) //�龰ģʽ
