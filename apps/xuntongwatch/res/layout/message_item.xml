@@ -52,7 +52,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="@string/text_three"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
         </LinearLayout>

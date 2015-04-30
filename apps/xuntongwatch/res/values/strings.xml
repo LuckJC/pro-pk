@@ -10,8 +10,8 @@
   <string name="edit_contact">编辑联系人</string>
     <string name="add_contact">添加联系人</string>
     <string name="name">姓名</string>
-    <string name="phone_number">手机号码</string>
-    <string name="custom_photo">自定义</string>
+    <string name="phone_number">手机号码</string> 
+    <string name="custom_photo">头像编辑</string>
     <string name="sure">确定</string>
     <string name="keyboard_one">1</string>
     <string name="keyboard_two">2</string>
@@ -39,7 +39,6 @@
     <string name="time_two">呼出47秒</string>
     <string name="text_one">别让电子券过期，买注彩</string>
     <string name="text_two">好呀  ，等哪天有钱了，一定买一注。</string>
-    <string name="text_three">你好呀</string>
     <string name="text_four">移动 广东 深圳</string>
     <string name="name_one">王武（3）</string>
     <string name="name_two">小明</string>
@@ -51,7 +50,9 @@
 <string name="time_three">14:08</string>
 <string name="all_choose">全选</string>
 <string name="text_five">hello</string>
-	<string name="imei">IMEI</string>
-
+<string name="no_contact">没有联系人</string>
+<string name="add_new_contact">点击菜单键添加联系人</string>
+<string name="record_reminder">无通话记录</string>
+<string name="imei">IMEI</string>
   
 </resources>

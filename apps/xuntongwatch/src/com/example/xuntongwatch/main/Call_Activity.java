@@ -3,8 +3,6 @@ package com.example.xuntongwatch.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -13,15 +11,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.xuntongwatch.R;
-import com.example.xuntongwatch.util.SpecialCharSequenceMgr;
 
-public class Call_Activity extends BaseActivity implements OnClickListener, TextWatcher{
+public class Call_Activity extends BaseActivity implements OnClickListener{
 
 	private Button one,two,three,four,five,six,seven,eight,nine,xin,jin,zero;
 	private TextView tv;
-	private RelativeLayout back,delete;
+	private RelativeLayout back,delete,call;
 //	private ImageView back_iv,delete_iv;
-	private Button call;
+ 
 	private StringBuffer sb = new StringBuffer("");
 	
 	@Override
@@ -40,15 +37,16 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		initButton(xin,R.id.keyboad_bt_xin);
 		initButton(jin,R.id.keyboad_bt_jin);
 		initButton(zero,R.id.keyboad_bt_zero);
-		initButton(call, R.id.keyboad_bt_call);
+//		initButton(call, R.id.keyboad_bt_call);
 		
 //		back_iv = (ImageView) this.findViewById(R.id.keyboad_iv_back);
 //		delete_iv = (ImageView) this.findViewById(R.id.keyboad_iv_delete);
+		call= (RelativeLayout) this.findViewById(R.id.keyboad_bt_call);
 		back = (RelativeLayout) this.findViewById(R.id.keyboad_rl_back);
 		delete = (RelativeLayout) this.findViewById(R.id.keyboad_rl_delete);
 		tv = (TextView) this.findViewById(R.id.keyboad_tv);
-		tv.addTextChangedListener(this);
 		tv.setEnabled(false);
+		call.setOnClickListener(this);
 		back.setOnClickListener(this);
 		delete.setOnClickListener(this);
 		delete.setOnLongClickListener(new OnLongClickListener() {
@@ -139,22 +137,6 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		case R.id.keyboad_rl_back:
 			startActivity(new Intent(this,Record_Activity.class));
 			break;
-		}
-	}
-
-	@Override
-	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-	}
-
-	@Override
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
-	}
-
-	@Override
-	public void afterTextChanged(Editable s) {
-		if (SpecialCharSequenceMgr.handleChars(this, s.toString())) {
-			s.clear();
-			sb = new StringBuffer();
 		}
 	}
 }
