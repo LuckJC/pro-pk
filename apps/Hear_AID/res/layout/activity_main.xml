@@ -1,36 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<!-- <Button android:layout_height="wrap_content" android:id="@+id/start"
-		android:layout_width="fill_parent" android:text="@string/start"></Button>
-	<Button android:layout_height="wrap_content" android:id="@+id/stop"
-		android:layout_width="fill_parent" android:text="@string/stop"></Button>
-	<Button android:layout_height="wrap_content" android:id="@+id/exit"
-	   android:paddingTop="8dp" android:paddingBottom="8dp" android:layout_margin="3dp"
-		android:layout_width="fill_parent" android:text="@string/exit" android:background="#A50505"></Button>
-	
-	<TextView android:id="@+id/TextView01" android:layout_height="wrap_content"
-		android:text="@string/volume_control" android:layout_width="fill_parent"></TextView>
-	<SeekBar android:layout_height="wrap_content" android:id="@+id/volume_control"
-		android:layout_width="fill_parent"></SeekBar> -->
-		<TextView 
-		    android:layout_width="wrap_content"
-			android:layout_height="wrap_content" 
-		    android:text="@string/app_name"
-		    android:paddingLeft="15dp"
-		    />
-		<TextView 
-		    android:layout_width="match_parent"
-			android:layout_height="wrap_content" 
-		    android:layout_weight="1"
-		    />
-		<Switch 
-		    android:id="@+id/switchs"
-		    android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textOn="@string/close"
-		    android:textOff="@string/open"
-		    android:layout_marginRight="15dp"
-		    />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <Button
+        android:id="@+id/setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:text="@string/setting" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_hear" />
+
+    <LinearLayout
+        android:id="@+id/volume"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/main_sub"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="@string/sub"
+            android:textSize="14sp" />
+
+        <SeekBar
+            android:id="@+id/progress_main_vol"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:max="15"
+            android:progress="4" />
+
+        <Button
+            android:id="@+id/main_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:text="@string/add"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/volume"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:text="@string/start"
+        android:textSize="20sp" />
+
+</RelativeLayout>

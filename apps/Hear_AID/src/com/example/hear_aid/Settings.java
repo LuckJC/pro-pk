@@ -2,31 +2,25 @@ package com.example.hear_aid;
 
 import java.util.Arrays;
 
-import android.app.Service;
-import android.content.Intent;
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioRecord;
-import android.media.AudioTrack;
-import android.media.MediaRecorder;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.os.IBinder;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.media.AudioSystem;
-import android.media.AudioManager.OnAudioFocusChangeListener;
+
 
 import com.mediatek.xlog.Xlog;
 
-public class HearService extends Service {
+import android.media.AudioSystem;
+
+public class Settings extends Activity {
+
 	private static final String TAG = "EM/Audio_modesetting";
 
 	/** normal, headset, handfree. */
@@ -93,18 +87,7 @@ public class HearService extends Service {
 	/** Current Max Vol */
 	private int mCurrentMaxV;
 	private int mCurrentValue;
-	boolean isRecording = true;// �Ƿ�¼��
-	static final int frequency = 44100;
-	static final int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
-	static final int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
-	int recBufSize, playBufSize;
-	private AudioRecord audioRecord;
-	private AudioTrack audioTrack;
-	private TelephonyManager telephonyManager;
-	private AudioManager audioManager;
 
-	private SharedPreferences mSharedPreferences;
-	private boolean isFocusAudio = true;
 	private int mTypeMedia = 7;
 	private int mTypeSph = 4;
 	private int mTypeMic = 2;
@@ -113,22 +96,19 @@ public class HearService extends Service {
 	private int mCurMicV = 70;
 	
 	private static int VOL_70 = 70;
-	private static int  VOL_50 = 50;
-	@Override
-	public IBinder onBind(Intent intent) {
+	private static int  VOL_50 = 50; 
+	private RadioGroup mRadioGroup;
+	private RadioButton mRadioFirst;
+	private RadioButton mRadioSecond;
+	private SharedPreferences mSharedPreferences;
+	private Editor edit = null;
 
-		return null;
-	}
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
 
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub
-		return super.onStartCommand(intent, flags, startId);
-	}
-	
-	@Override
-	public void onCreate() {
-		super.onCreate();
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_settings);
+		initView();
 		sMaxVolMode = 4;
 		sMaxVolLevel = 15;
 		sMaxVolType = 9;
@@ -152,126 +132,52 @@ public class HearService extends Service {
 		if (ret != 0) {
 			Xlog.i(TAG, "AudioModeSetting GetAudioData return value is : " + ret);
 		}
-		telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
-
-		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
-		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
-				AudioManager.AUDIOFOCUS_GAIN);
-		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
-			isFocusAudio = true;
-		}
-		recBufSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
-
-		playBufSize = AudioTrack.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
-		// -----------------------------------------
-		audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, frequency,
-				channelConfiguration, audioEncoding, recBufSize);
-
-		audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, frequency, channelConfiguration,
-				audioEncoding, playBufSize, AudioTrack.MODE_STREAM);
-		// ------------------------------------------
-		audioTrack.setStereoVolume(1.0f, 1.0f);// ���ò��ŵ�����
-
 		mCurrentValue = getValue(mData, mCurrentMode, mTypeIndex, mLevelIndex);
 
 		// mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
 		// mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
 		// mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		
-		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
-		firstVolume();
-
-		Xlog.v(TAG, "start");
-		new RecordPlayThread().start();// ������¼�߷��߳�
+		showToast("mCurMediaV  : " + mCurMediaV + "mCurSphV:" + mCurSphV + "mCurMicV:" + mCurMicV);
 	}
 
-	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
-		public void onAudioFocusChange(int focusChange) {
-			if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS_TRANSIENT");
-				isFocusAudio = true;
-			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-				// Stop playback
-				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS");
-				isFocusAudio = true;
-			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-				Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
-				isFocusAudio = true;
-			} else  if(focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
-				Log.e(TAG, "focus的值：" + focusChange);
-			}
+	private void initView() {
+		mSharedPreferences = getSharedPreferences("status", Activity.MODE_PRIVATE);
+		edit = mSharedPreferences.edit();
+		mRadioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+		mRadioFirst = (RadioButton) findViewById(R.id.radiobutton_first);
+		mRadioSecond = (RadioButton) findViewById(R.id.radiobutton_second);
+		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
+		if (isSecond) {
+			mRadioSecond.setChecked(true);
+		} else {
+			mRadioFirst.setChecked(true);
 		}
-	};
+		mRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-	private class MyPhoneStateListener extends PhoneStateListener {
-		@Override
-		public void onCallStateChanged(int state, String incomingNumber) {
-			// String stuate = "";
-			switch (state) {
-			case TelephonyManager.CALL_STATE_IDLE:
-				// stuate = "û��ͨ��״̬";
-				// Log.e("MyPhoneStateListener", stuate);
-				isRecording = true;
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.radiobutton_first:
+					mRadioFirst.setChecked(true);
+					setMaxVolEdit();
+					firstVolume();
+					initSecondVolume();
+					edit.putBoolean("isSecond", false);
+					edit.commit();
+					break;
+				case R.id.radiobutton_second:
+					mRadioSecond.setChecked(true);
+					secondVolume();
+					edit.putBoolean("isSecond", true);
+					edit.commit();
+					break;
 
-				break;
-			case TelephonyManager.CALL_STATE_RINGING:
-				// stuate = "��������";
-				// Log.e("MyPhoneStateListener", stuate);
-				isRecording = false;
-				// audioManager.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL,
-				// audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
-				// 0);
-				break;
-			case TelephonyManager.CALL_STATE_OFFHOOK:
-				// stuate = "ͨ����";
-				// Log.e("MyPhoneStateListener", stuate);
-				isRecording = true;
-				break;
-
-			default:
-				break;
-			}
-			super.onCallStateChanged(state, incomingNumber);
-		}
-	}
-
-	class RecordPlayThread extends Thread {
-		public void run() {
-			try {
-				Xlog.v(TAG, "RecordPlayThread run()");
-				byte[] buffer = new byte[recBufSize];
-				audioRecord.startRecording();// ��ʼ¼��
-				audioTrack.play();// ��ʼ����
-				Xlog.v(TAG, "isRecording:" + isRecording);
-				while (isRecording && isFocusAudio) {
-					// ��ȡMic������
-					int bufferReadResult = audioRecord.read(buffer, 0, recBufSize);
-					byte[] tmpBuf = new byte[bufferReadResult];
-					System.arraycopy(buffer, 0, tmpBuf, 0, bufferReadResult);
-					//
-					audioTrack.write(tmpBuf, 0, tmpBuf.length);
+				default:
+					break;
 				}
-				audioTrack.stop();
-				audioRecord.stop();
-				audioRecord.release();
-				audioRecord = null;
-			} catch (Throwable t) {
-				// Toast.makeText(MainActivity.this, t.getMessage(),
-				// Toast.LENGTH_SHORT).show();;
-				t.printStackTrace();
-			}
-		}
-	};
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		audioManager.abandonAudioFocus(afChangeListener);
-		initFirstVolume();
-		initSecondVolume();
-		isRecording = false;
+			}
+		});
 	}
 
 	private void setValue(byte[] dataPara, int mode, int type, int level, byte val) {
@@ -330,7 +236,6 @@ public class HearService extends Service {
 		if (0 == result) {
 
 		} else {
-
 			Xlog.i(TAG, "AudioModeSetting SetAudioData return value is : " + result);
 		}
 	}
@@ -341,26 +246,28 @@ public class HearService extends Service {
 
 	/**
 	 * <br>
-	 * 功能简述:一级  声音放大 <br>
+	 * 功能简述:一级 声音放大 <br>
 	 * 功能详细描述: <br>
 	 * 注意:
 	 */
 	public void firstVolume() {
-		setMaxVolEdit();
 		byte editByte = (byte) VALUE_RANGE_160;
 		setMaxVolData(editByte, false);
 		setAudioData();
 	}
+
 	/**
-	 * <br>功能简述:把  一级  功放简绍到默认值
-	 * <br>功能详细描述:
-	 * <br>注意:
+	 * <br>
+	 * 功能简述:把 一级 功放简绍到默认值 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
 	 */
-	public void initFirstVolume(){
+	public void initFirstVolume() {
 		byte editByt = (byte) (VALUE_RANGE_160 - 60);
 		setMaxVolData(editByt, false);
 		setAudioData();
 	}
+
 	/**
 	 * <br>
 	 * 功能简述:二级 声音放大 <br>
@@ -377,21 +284,31 @@ public class HearService extends Service {
 		// Mic
 		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) (VALUE_RANGE_255 - 80));
 		setAudioData();
+		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
+		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
+		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
+		showToast("mCurMediaV  : " + mCurMediaV + "mCurSphV:" + mCurSphV + "mCurMicV:" + mCurMicV);
 	}
+
 	/**
-	 * <br>功能简述:把  二级  功放简绍到默认值
-	 * <br>功能详细描述:
-	 * <br>注意:
+	 * <br>
+	 * 功能简述:把 二级 功放简绍到默认值 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
 	 */
 	public void initSecondVolume() {
 		// 媒体
 		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) VOL_70);
 		setAudioData();
-		//
+		// Sph
 		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) VOL_50);
 		setAudioData();
 		// Mic
 		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) VOL_70);
 		setAudioData();
+		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
+		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
+		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
+		showToast("mCurMediaV  : " + mCurMediaV + "mCurSphV:" + mCurSphV + "mCurMicV:" + mCurMicV);
 	}
 }
