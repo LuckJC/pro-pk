@@ -93,7 +93,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private Editor edit;
 
 	private Dialog mDialog;
-	private Timer mTimer;
+	
 	private PlayerReceiver playerReceiver;
 	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // 更新动作
 	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // 控制动作
@@ -102,12 +102,12 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	public static final String MUSIC_PLAYING = "com.shizhong.action.MUSIC_PLAYING"; // 音乐正在播放动作
 	public static final String REPEAT_ACTION = "com.shizhong.action.REPEAT_ACTION"; // 音乐重复播放动作
 	public static final String SHUFFLE_ACTION = "com.shizhong.action.SHUFFLE_ACTION";// 音乐随机播放动作
+	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势控制自动播放
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mTimer = new Timer();
 		mDialog = new Dialog(this);
 		mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		share = getSharedPreferences("playInfo", Context.MODE_PRIVATE);
@@ -228,6 +228,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		filter.addAction(MUSIC_DURATION);
 		filter.addAction(REPEAT_ACTION);
 		filter.addAction(SHUFFLE_ACTION);
+		filter.addAction(GESTRUE_PLAYING);
 		registerReceiver(playerReceiver, filter);
 	}
 
@@ -605,7 +606,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	/**
 	 * 用来接收从service传回来的广播的内部类
 	 * 
-	 * @author wwj
+	 * @author 
 	 * 
 	 */
 	public class PlayerReceiver extends BroadcastReceiver {
@@ -662,6 +663,20 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					shuffleBtn.setBackgroundResource(R.drawable.shuffle_none_selector);
 					repeatBtn.setClickable(true);
 				}
+			}else if(action.equals(GESTRUE_PLAYING)){
+				if(share.getBoolean("isPlaying", false)){
+					url = share.getString("url", "");
+					listPosition = share.getInt("position", 0);
+				}else{
+					listPosition = 0;
+					Mp3Info mp3Info = mp3Infos.get(listPosition);
+					url = mp3Info.getUrl();
+				}
+				Intent intentService = new Intent(context, PlayerService.class);
+				intentService.putExtra("url", url);
+				intentService.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_MSG);
+				intentService.putExtra("listPosition", listPosition);
+				startService(intentService);
 			}
 
 		}
@@ -670,16 +685,16 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		edit.putBoolean("isPlaying", true);
+		edit.putBoolean("isPlaying", isPlaying);
 		edit.putString("title", mMusicName.getText().toString());
 		edit.putString("singer", mMusicSiger.getText().toString());
 		edit.putInt("duration", duration);
 		edit.putInt("currentTime", currentTime);
 		edit.putInt("position", listPosition);
 		edit.putInt("repeatstate", repeatState);
+		edit.putString("url", url);
 		edit.commit();
 
-		unregisterReceiver(playerReceiver);
 	}
 
 	/**
