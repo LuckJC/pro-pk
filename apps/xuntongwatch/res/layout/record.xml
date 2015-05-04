@@ -8,10 +8,19 @@
         android:id="@+id/call_record_listview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-	<View 
-	    android:id="@+id/call_record_view"
-	    android:layout_width="fill_parent"
-	    android:layout_height="0dp"
-	    android:layout_weight="1"
-	    />
+
+    <View
+        android:id="@+id/call_record_view"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/lv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/record_reminder"
+        android:textSize="28sp" />
+
 </LinearLayout>

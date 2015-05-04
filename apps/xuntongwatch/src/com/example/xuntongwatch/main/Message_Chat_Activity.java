@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Telephony.Sms;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +29,7 @@ import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.abstract_.DatabaseUpdataActivity;
 import com.example.xuntongwatch.adapter.Message_Chat_Adapter;
 import com.example.xuntongwatch.databaseutil.SmsUtil;
+import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.Message_;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.MessageUtil;
@@ -39,8 +43,8 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 	private ArrayList<Message_> list;
 	private String contact_name, message_phone;
 	private Message_Chat_Adapter adapter;
-	private RelativeLayout send;
-
+	private RelativeLayout send, mChooseContact;
+	private String addname=null;
 	private EditText et, et_phone;
 	private final int SEND_MSG = 111;
 	private int thread_id = -1;
@@ -50,21 +54,44 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 	private int state;
 	private ArrayList<Message_Thread> arrayList;
 	private boolean isClear = true;
-
+	private TextView viewadd;
 	@SuppressLint({ "HandlerLeak", "NewApi" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		PreferenceOperation.getInstant(this);
 		setContentView(R.layout.message_chat);
+		viewadd = (TextView) findViewById(R.id.send_contact_name);
 		name = (TextView) this.findViewById(R.id.message_chat_name);
+		et_phone = (EditText) this.findViewById(R.id.message_chat_person_et);
 		et = (EditText) this.findViewById(R.id.message_chat_et);
+		et_phone.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+		 
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				 if(arg3==0){
+					 viewadd.setText(""); 
+				 }
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		lv = (ListView) this.findViewById(R.id.message_chat_lv);
 		send = (RelativeLayout) this.findViewById(R.id.message_chat_send_rl);
-
+		mChooseContact = (RelativeLayout) this.findViewById(R.id.message_chat_add_person);
+		mChooseContact.setOnClickListener(this);
 		title_one = (LinearLayout) this.findViewById(R.id.message_chat_title);
 		title_two = (LinearLayout) this.findViewById(R.id.message_chat_top_ll);
-		et_phone = (EditText) this.findViewById(R.id.message_chat_person_et);
+		
 		MyApplication.handler = handler;
 
 		send.setOnClickListener(this);
@@ -100,61 +127,7 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 						if (hasFocus) {
 							// 此处为得到焦点时的处理内容
 						} else {
-							// 此处为失去焦点时的处理内容
-							arrayList = SmsUtil.allMessage_Thread(Message_Chat_Activity.this);
-							int thread_id = -1;
-							String name = null;
-							// for (Message_Thread iterable_element : arrayList)
-							// {
-							// if
-							// (iterable_element.getPhone().equals(contact_phone))
-							// {
-							// thread_id = iterable_element.getThread_id();
-							// return;
-							// }
-							// }
-							String phone = et_phone.getText().toString();
-							for (int i = 0; i < arrayList.size(); i++) {
-								if (arrayList.get(i).getPhone().equals(phone)) {
-									thread_id = arrayList.get(i).getThread_id();
-									name = arrayList.get(i).getName();
-									// Intent intent = new
-									// Intent(Send_Message_Activity.this,
-									// Message_Chat_Activity.class);
-									// intent.putExtra("contact_name", name);
-									// intent.putExtra("message_phone",
-									// recieverPerson.getText());
-									// intent.putExtra("state",
-									// Message_Chat_Activity.ONE);
-									// intent.putExtra("thread_id", thread_id);
-									// Send_Message_Activity.this.startActivity(intent);
-
-									if (thread_id == -1) {
-										list = SmsUtil.findMessageByPhone(
-												Message_Chat_Activity.this, phone);
-									} else {
-										list = SmsUtil.findMessageByThread_id(
-												Message_Chat_Activity.this, thread_id);
-									}
-									adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
-											list);
-									lv.setAdapter(adapter);
-									lv.setSelection(list.size() - 1);
-									isClear = false;
-									mListSize = list.size();
-									break;
-								}
-
-							}
-							if (isClear) {
-								list = new ArrayList<Message_>();
-								list.clear();
-								adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
-								lv.setAdapter(adapter);
-								lv.setSelection(list.size() - 1);
-
-							}
-							isClear = true;
+							updataUI();
 						}
 					}
 				});
@@ -187,8 +160,30 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 10086) {
+			if (resultCode == 9527) {
+				String phone = data.getStringExtra("contact_phone");
+				 addname = data.getStringExtra("contact_name");
+				et_phone.setText(phone);
+				et.setFocusable(true);
+				et.setFocusableInTouchMode(true);
+				et.requestFocus();
+				viewadd.setText("(" + addname + ")");
+				updataUI();
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.message_chat_add_person:
+			Intent intent = new Intent(this, Contact_Activity.class);
+			intent.putExtra("tag", "send");
+			startActivityForResult(intent, 10086);
+			break;
 		case R.id.message_chat_send_rl:
 			if (state == ONE) {
 				String msg = et.getText().toString();
@@ -202,11 +197,20 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 					message.setMessage_time(time);
 					SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
 					MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
+				} else {
+					Toast.makeText(this, "请填写短信内容", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				mFailSend = et.getText().toString();
 				et.setText(null);
 			} else {
 				String msg = et.getText().toString();
+				String phone = et_phone.getText().toString();
+				if (TextUtils.isEmpty(phone)) {
+					Toast.makeText(this, "请填写收件人", Toast.LENGTH_SHORT).show();
+					return;
+				}
+
 				if (!TextUtils.isEmpty(msg)) {
 					final Message_ message = new Message_();
 					message.setMessage_content(msg);
@@ -217,6 +221,9 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 					message.setMessage_time(time);
 					SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
 					MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
+				} else {
+					Toast.makeText(this, "请填写短信内容", Toast.LENGTH_SHORT).show();
+					return;
 				}
 				mFailSend = et.getText().toString();
 				et.setText(null);
@@ -275,7 +282,8 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 					@Override
 					public void run() {
 						if (state == ONE) {
-							list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this, thread_id);
+							list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this,
+									thread_id);
 						} else {
 							list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, et_phone
 									.getText().toString());
@@ -325,5 +333,51 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		}
 
 	};
+	private void updataUI(){
 
+		// 此处为失去焦点时的处理内容
+		arrayList = SmsUtil.allMessage_Thread(Message_Chat_Activity.this);
+		int thread_id = -1;
+		String name = null;
+		// for (Message_Thread iterable_element : arrayList)
+		// {
+		// if
+		// (iterable_element.getPhone().equals(contact_phone))
+		// {
+		// thread_id = iterable_element.getThread_id();
+		// return;
+		// }
+		// }
+		String phone = et_phone.getText().toString();
+		for (int i = 0; i < arrayList.size(); i++) {
+			if (arrayList.get(i).getPhone().equals(phone)) {
+				thread_id = arrayList.get(i).getThread_id();
+				name = arrayList.get(i).getName();
+				if (thread_id == -1) {
+					list = SmsUtil.findMessageByPhone(
+							Message_Chat_Activity.this, phone);
+				} else {
+					list = SmsUtil.findMessageByThread_id(
+							Message_Chat_Activity.this, thread_id);
+				}
+				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
+						list);
+				lv.setAdapter(adapter);
+				lv.setSelection(list.size() - 1);
+				isClear = false;
+				mListSize = list.size();
+				break;
+			}
+
+		}
+		if (isClear) {
+			list = new ArrayList<Message_>();
+			list.clear();
+			adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
+			lv.setAdapter(adapter);
+			lv.setSelection(list.size() - 1);
+
+		}
+		isClear = true;
+	}
 }

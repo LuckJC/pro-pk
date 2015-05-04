@@ -33,7 +33,6 @@ public class EditContactActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				updateContact(name.getText().toString(),phone.getText().toString(),null); 
-				Toast.makeText(EditContactActivity.this, "edit succeed"+name.getText().toString()+phone.getText().toString()+contact.getRawContact_id(), 0).show();
 				finish();
 			}
 		});

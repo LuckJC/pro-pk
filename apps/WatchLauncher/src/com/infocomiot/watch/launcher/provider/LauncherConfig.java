@@ -18,13 +18,11 @@ public class LauncherConfig implements BaseColumns {
 		"com.android.music",  //音乐
 		"com.android.soundrecorder",  //录音机
 		"com.mediatek.FMRadio",  //收音机
-		"com.mediatek.todos",  //备忘录
-		"com.android.email",  //电子邮件
 		"com.ss.android.article.news",  //头条新闻
 	};
 	
 	static final String[] APPS_SPORTS = {
-		"com.android.calendar",  //日历
+		"com.example.calendar",  //日历
 		"com.android.deskclock",  //时钟
 		"com.codoon.gps",  //咕咚运动
 		"com.baidu.BaiduMap",  //百度地图
