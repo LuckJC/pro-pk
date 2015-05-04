@@ -13,15 +13,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	public static String TAG = "ZhuTingQi";
+	
 	private SeekBar mSeekBar;
 	private Button mStartButton;
-
+	private LinearLayout mLinearVol;
+	
 	private boolean isFirst = false;
 	private boolean isOpen = false;
 	private SharedPreferences mSharedPreferences;
@@ -46,6 +49,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		findViewById(R.id.setting).setOnClickListener(this);
 		findViewById(R.id.main_sub).setOnClickListener(this);
 		findViewById(R.id.main_add).setOnClickListener(this);
+		mLinearVol = (LinearLayout) findViewById(R.id.volume);
 		mStartButton = (Button) findViewById(R.id.start);
 		mStartButton.setOnClickListener(this);
 		mSeekBar = (SeekBar) findViewById(R.id.progress_main_vol);
@@ -81,10 +85,12 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			intent = new Intent(this, HearService.class);
 			isOpen = mSharedPreferences.getBoolean("isOpen", false);
 			if (isOpen) {
+				mLinearVol.setFocusable(false);
 				edit.putBoolean("isOpen", false);
 				stopService(intent);
 				mStartButton.setText(R.string.start);
 			} else {
+				mLinearVol.setFocusable(true);
 				edit.putBoolean("isOpen", true);
 				startService(intent);
 				mStartButton.setText(R.string.stop);
