@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">Recorder</string>
+    <string name="init"></string>
+    <string name="history">历史记录</string>
+     <string name="cancel">取消</string>
+</resources>
