@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">音乐播放器</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="play_order">随机/顺序/单曲</string>
+    <string name="song">无</string>
+    <string name="singer">无</string>
+    <string name="last">上</string>
+    <string name="next">下</string>
+    <string name="sound">声音</string>
+    <string name="menu">菜单</string>
+    <string name="paly">播放/暂停</string>
+    <string name="paly_list">播放列表</string>
+    <string name="add_list">添加列表</string>
+    <string name="left_bracket">(</string>
+    <string name="right_bracket">首)</string>
+    <string name="number">0</string>
+    <string name="add">添加</string>
+    <string name="cencel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="time">04:50</string>
+    <string name="shuffle_none">随机播放已关闭</string>
+    <string name="shuffle">随机播放已打开</string>
+    <string name="repeat_none">重复播放已关闭</string>
+    <string name="repeat_current">重复播放当前歌曲</string>
+    <string name="repeat_all">重复播放所有歌曲</string>
+    <string name="prompt">提示:</string>
+    <string name="exit">退出播放器</string>
+    <string name="moveback">后台播放</string>
+
+</resources>

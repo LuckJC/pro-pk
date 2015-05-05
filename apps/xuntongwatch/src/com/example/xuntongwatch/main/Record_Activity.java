@@ -71,13 +71,13 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		initArrayList();
 		initCurrentTime();
 		super.handleObserverUtil(CallLog.Calls.CONTENT_URI);
-//		handleObserverUtil();
+		// handleObserverUtil();
 	}
 
 	private void initCurrentTime() {
 		Calendar c = Calendar.getInstance();
 		currentTime = c.getTimeInMillis();
-		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 		todayZeroTime = c.getTimeInMillis();
 		c.set(Calendar.DAY_OF_MONTH, -1);
 		yesterdayZeroTime = c.getTimeInMillis();
@@ -89,6 +89,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 			list = PhoneRecordUtil.findAllPhoneRecordByPhone(this);
 			adapter = new Call_Record_Adapter();
 			lv.setAdapter(adapter);
+			TextView view = (TextView) findViewById(R.id.lv_empty);
+			lv.setEmptyView(view);
 		}
 	}
 
@@ -127,7 +129,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Record_Activity_Holder holder = null;
 			if (convertView == null) {
-				convertView = LayoutInflater.from(Record_Activity.this).inflate(R.layout.record_item, null);
+				convertView = LayoutInflater.from(Record_Activity.this).inflate(
+						R.layout.record_item, null);
 				holder = new Record_Activity_Holder();
 				holder.main = (LinearLayout) convertView.findViewById(R.id.call_record_item_main);
 				holder.other = (LinearLayout) convertView.findViewById(R.id.call_record_item_other);
@@ -139,16 +142,20 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 				holder.name = (TextView) convertView.findViewById(R.id.call_record_item_name);
 				holder.msg = (TextView) convertView.findViewById(R.id.call_record_item_msg);
 				holder.time = (TextView) convertView.findViewById(R.id.call_record_item_time);
-				holder.img_style = (ImageView) convertView.findViewById(R.id.call_record_item_style);
+				holder.img_style = (ImageView) convertView
+						.findViewById(R.id.call_record_item_style);
 				holder.img_tou = (ImageView) convertView.findViewById(R.id.call_record_item_iv);
 
 				LinearLayout.LayoutParams params = (LayoutParams) holder.img_tou.getLayoutParams();
 				params.width = Constant.screenWidth / 4;
 				params.height = Constant.screenWidth / 4;
 				holder.img_tou.setLayoutParams(params);
-				holder.call = (RelativeLayout) convertView.findViewById(R.id.call_record_item_call_rl);
-				holder.delete = (RelativeLayout) convertView.findViewById(R.id.call_record_item_delete_rl);
-				holder.message = (RelativeLayout) convertView.findViewById(R.id.call_record_item_message_rl);
+				holder.call = (RelativeLayout) convertView
+						.findViewById(R.id.call_record_item_call_rl);
+				holder.delete = (RelativeLayout) convertView
+						.findViewById(R.id.call_record_item_delete_rl);
+				holder.message = (RelativeLayout) convertView
+						.findViewById(R.id.call_record_item_message_rl);
 				convertView.setTag(holder);
 			} else {
 				holder = (Record_Activity_Holder) convertView.getTag();
@@ -176,13 +183,13 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 				holder.img_style.setImageResource(R.drawable.call_no_joint);
 			}
 			if (!TextUtils.isEmpty(photo)) {
-//				File file = new File(photo);
-//				if (file.exists()) {
-//					Bitmap bitmap = BitmapFactory.decodeFile(photo);
-//					if (bitmap != null) {
-//						holder.img_tou.setImageBitmap(bitmap);
-//					}
-//				}
+				// File file = new File(photo);
+				// if (file.exists()) {
+				// Bitmap bitmap = BitmapFactory.decodeFile(photo);
+				// if (bitmap != null) {
+				// holder.img_tou.setImageBitmap(bitmap);
+				// }
+				// }
 				Uri uri = Uri.parse(photo);
 				holder.img_tou.setImageURI(uri);
 			}
@@ -194,20 +201,26 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 				int hour = c.get(Calendar.HOUR_OF_DAY);
 				int minute = c.get(Calendar.MINUTE);
 				if (date > todayZeroTime || date == todayZeroTime) {// 今天
-//					Log.e("", "record_time == " + date);
-//					Log.e("", "currentTime == " + currentTime);
+					// Log.e("", "record_time == " + date);
+					// Log.e("", "currentTime == " + currentTime);
 					long t1 = currentTime - date;
 					if (t1 < (long) 1000 * (long) 60 * (long) 24) {// 一小时内
-//						Log.e("", "t1  ==  " + t1);
+						// Log.e("", "t1  ==  " + t1);
 						long time = t1 / (long) (1000 * 60);
-						holder.time.setText(time + "分钟前");
+						if (time == 0) {
+							holder.time.setText("刚刚");
+						} else {
+							holder.time.setText(time + "分钟前");
+						}
 					} else {
-						holder.time.setText(Utils.getDoubleInt(hour) + ":"+ Utils.getDoubleInt(minute));
+						holder.time.setText(Utils.getDoubleInt(hour) + ":"
+								+ Utils.getDoubleInt(minute));
 					}
-				} else if (date < todayZeroTime|| date > yesterdayZeroTime) {// 昨天
-					holder.time.setText("昨天" + Utils.getDoubleInt(hour) + ":"+ Utils.getDoubleInt(minute));
+				} else if (date < todayZeroTime || date > yesterdayZeroTime) {// 昨天
+					holder.time.setText("昨天" + Utils.getDoubleInt(hour) + ":"
+							+ Utils.getDoubleInt(minute));
 				} else {
-					holder.time.setText(Utils.getDoubleInt(month) + "."+ Utils.getDoubleInt(day));
+					holder.time.setText(Utils.getDoubleInt(month) + "." + Utils.getDoubleInt(day));
 				}
 
 			}
@@ -251,8 +264,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * 
 		 * @param call
 		 */
-		private void initHolderDelete(RelativeLayout delete,
-				final PhoneRecord record) {
+		private void initHolderDelete(RelativeLayout delete, final PhoneRecord record) {
 			delete.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -272,8 +284,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * 
 		 * @param call
 		 */
-		private void initHolderMessage(RelativeLayout message,
-				final PhoneRecord record) {
+		private void initHolderMessage(RelativeLayout message, final PhoneRecord record) {
 			message.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -299,57 +310,62 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * @param convertView
 		 */
 		private void initConvertView(View convertView, final PhoneRecord record) {
-			convertView.setOnTouchListener(new OnTouchListener() {
-
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					final Record_Activity_Holder holder = (Record_Activity_Holder) v.getTag();
-					if (event.getAction() == MotionEvent.ACTION_DOWN) {
-						x = event.getX();
-						if (showView != null) {
-							hiddenOtherLinear();
-						}
-					} else if (event.getAction() == MotionEvent.ACTION_UP) {
-						if (ss == 0) {
-							ss = -1;
-							lv.setIsScroll(true);
-							return true;
-						}
-						ux = event.getX();
-						if (x - ux > 20 && ss == -1)// 右进
-						{
-							state = RIGHT_IN;
-							holder.main.setVisibility(View.GONE);
-							holder.other.setVisibility(View.VISIBLE);
-							Animation leftOut = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_left_to_right);
-							Animation rightIn = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_right_to_left);
-							holder.main.setAnimation(leftOut);
-							holder.other.setAnimation(rightIn);
-							showView = holder.other;
-							hiddenView = holder.main;
-							lv.setIsScroll(false);
-							ss = 0;
-							return true;
-						} else if (ux - x > 20 && ss == -1)// 左进
-						{
-							state = LEFT_IN;
-							Animation rightOut = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_right_to_left);
-							Animation leftIn = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_left_to_right);
-							holder.main.setVisibility(View.GONE);
-							holder.other.setVisibility(View.VISIBLE);
-							holder.main.setAnimation(rightOut);
-							holder.other.setAnimation(leftIn);
-							showView = holder.other;
-							hiddenView = holder.main;
-							lv.setIsScroll(false);
-							ss = 0;
-							return true;
-						}
-
-					}
-					return false;
-				}
-			});
+			// convertView.setOnTouchListener(new OnTouchListener() {
+			//
+			// @Override
+			// public boolean onTouch(View v, MotionEvent event) {
+			// final Record_Activity_Holder holder = (Record_Activity_Holder)
+			// v.getTag();
+			// if (event.getAction() == MotionEvent.ACTION_DOWN) {
+			// x = event.getX();
+			// if (showView != null) {
+			// hiddenOtherLinear();
+			// }
+			// } else if (event.getAction() == MotionEvent.ACTION_UP) {
+			// if (ss == 0) {
+			// ss = -1;
+			// lv.setIsScroll(true);
+			// return true;
+			// }
+			// ux = event.getX();
+			// if (x - ux > 20 && ss == -1)// 右进
+			// {
+			// state = RIGHT_IN;
+			// holder.main.setVisibility(View.GONE);
+			// holder.other.setVisibility(View.VISIBLE);
+			// Animation leftOut =
+			// AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_left_to_right);
+			// Animation rightIn =
+			// AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_right_to_left);
+			// holder.main.setAnimation(leftOut);
+			// holder.other.setAnimation(rightIn);
+			// showView = holder.other;
+			// hiddenView = holder.main;
+			// lv.setIsScroll(false);
+			// ss = 0;
+			// return true;
+			// } else if (ux - x > 20 && ss == -1)// 左进
+			// {
+			// state = LEFT_IN;
+			// Animation rightOut =
+			// AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_right_to_left);
+			// Animation leftIn =
+			// AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_left_to_right);
+			// holder.main.setVisibility(View.GONE);
+			// holder.other.setVisibility(View.VISIBLE);
+			// holder.main.setAnimation(rightOut);
+			// holder.other.setAnimation(leftIn);
+			// showView = holder.other;
+			// hiddenView = holder.main;
+			// lv.setIsScroll(false);
+			// ss = 0;
+			// return true;
+			// }
+			//
+			// }
+			// return false;
+			// }
+			// });
 
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
@@ -358,14 +374,29 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 					if (ss == 0) {
 						ss = -1;
 					} else {
-						Intent intent = new Intent(Record_Activity.this,RecordDetails_Activity.class);
+						Intent intent = new Intent(Record_Activity.this,
+								RecordDetails_Activity.class);
 						String record_phone = record.getNumber();
 						String contact_name = record.getName();
 						String contact_head = record.getPhoto();
 						intent.putExtra("record_phone", record_phone);
 						intent.putExtra("contact_name", contact_name);
 						intent.putExtra("contact_head", contact_head);
-						Record_Activity.this.startActivityForResult(intent,RecordDetails_Activity.RESULT_CODE);
+						Record_Activity.this.startActivityForResult(intent,
+								RecordDetails_Activity.RESULT_CODE);
+						// Intent intent = new
+						// Intent(Record_Activity.this,RecordDetails_Activity.class);
+						// String record_phone = record.getNumber();
+						// String contact_name = record.getName();
+						// String contact_head = record.getPhoto();
+						// intent.putExtra("record_phone", record_phone);
+						// intent.putExtra("contact_name", contact_name);
+						// intent.putExtra("contact_head", contact_head);
+						// Record_Activity.this.startActivityForResult(intent,RecordDetails_Activity.RESULT_CODE);
+						// Intent phoneIntent = new
+						// Intent("android.intent.action.CALL",
+						// Uri.parse("tel:"+ record.getNumber()));
+						// startActivity(phoneIntent);
 					}
 
 				}
@@ -379,13 +410,17 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 			showView.setVisibility(View.GONE);
 			hiddenView.setVisibility(View.VISIBLE);
 			if (state == LEFT_IN) {
-				Animation leftOut = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_left_to_right);
-				Animation rightIn = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_right_to_left);
+				Animation leftOut = AnimationUtils.loadAnimation(Record_Activity.this,
+						R.anim.activity_back_left_to_right);
+				Animation rightIn = AnimationUtils.loadAnimation(Record_Activity.this,
+						R.anim.activity_into_right_to_left);
 				showView.setAnimation(leftOut);
 				hiddenView.setAnimation(rightIn);
 			} else if (state == RIGHT_IN) {
-				Animation rightOut = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_back_right_to_left);
-				Animation leftIn = AnimationUtils.loadAnimation(Record_Activity.this,R.anim.activity_into_left_to_right);
+				Animation rightOut = AnimationUtils.loadAnimation(Record_Activity.this,
+						R.anim.activity_back_right_to_left);
+				Animation leftIn = AnimationUtils.loadAnimation(Record_Activity.this,
+						R.anim.activity_into_left_to_right);
 				showView.setAnimation(rightOut);
 				hiddenView.setAnimation(leftIn);
 			}
@@ -405,7 +440,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 	private void deleteRecord(PhoneRecord record) {
 		String number = record.getNumber();
 		PhoneRecordUtil.deleteRecordByNumber(this, number);
-//		recordUtil.deleteRecordByPhone(phone);
+		// recordUtil.deleteRecordByPhone(phone);
 		// recordUtil.deleteRecordByRecord_id(record.getRecord_id());
 	}
 
@@ -427,14 +462,14 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 			if (data != null) {
 				boolean isDelete = data.getBooleanExtra("isDelete", false);
 				if (isDelete) {
-//					adapter = new Call_Record_Adapter();
-//					lv.setAdapter(adapter);
+					// adapter = new Call_Record_Adapter();
+					// lv.setAdapter(adapter);
 				}
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-	
+
 	@Override
 	public void operation() {
 		list = PhoneRecordUtil.findAllPhoneRecordByPhone(Record_Activity.this);
@@ -444,5 +479,11 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 	public void update() {
 		adapter.notifyDataSetChanged();
 	}
-
+	@Override
+	protected void onRestart() {
+		list = PhoneRecordUtil.findAllPhoneRecordByPhone(this);
+		adapter = new Call_Record_Adapter();
+		lv.setAdapter(adapter);
+		super.onRestart();
+	}
 }

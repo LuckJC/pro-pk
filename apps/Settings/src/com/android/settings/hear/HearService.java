@@ -13,6 +13,7 @@ import android.media.MediaRecorder;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,8 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.media.AudioSystem;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+
 import com.mediatek.xlog.Xlog;
 
 public class HearService extends Service {
@@ -99,13 +102,15 @@ public class HearService extends Service {
 	private TelephonyManager telephonyManager;
 	private AudioManager audioManager;
 
+	private boolean isFocusAudio = false;
 	private int mTypeMedia = 7;
 	private int mTypeSph = 4;
 	private int mTypeMic = 2;
-	private int mCurMediaV;
-	private int mCurSphV;
-	private int mCurMicV;
+	private int mCurMediaV = 70;
+	private int mCurSphV = 50;
+	private int mCurMicV = 70;
 
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 
@@ -150,7 +155,11 @@ public class HearService extends Service {
 		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
 		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
-
+		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
+			isFocusAudio = true;
+		}
 		recBufSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
 
 		playBufSize = AudioTrack.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
@@ -165,10 +174,10 @@ public class HearService extends Service {
 
 		mCurrentValue = getValue(mData, mCurrentMode, mTypeIndex, mLevelIndex);
 
-		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
-		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
-		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		showToast("mCurMediaV  : " + mCurMediaV + "<>" + "mCurSphV:" + mCurSphV +"mCurMicV:" + mCurMicV);
+//		mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
+//		mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
+//		mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
+		showToast("mCurMediaV  : " + mCurMediaV  + "mCurSphV:" + mCurSphV +"mCurMicV:" + mCurMicV);
 		setMaxVolEdit();
 		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
 		byte editByte = (byte) VALUE_RANGE_160;
@@ -186,7 +195,23 @@ public class HearService extends Service {
 		Xlog.v(TAG, "start");
 		new RecordPlayThread().start();// ������¼�߷��߳�
 	}
-
+	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+	    public void onAudioFocusChange(int focusChange) {
+	        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT){
+	        	Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS_TRANSIENT");
+	        	isFocusAudio = false;
+	        } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+	            // Stop playback
+	        	Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS");
+	        	isFocusAudio = false;
+	        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+	        	Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
+	        	isFocusAudio = true;
+	        } else {
+	        	Log.e(TAG, "focus的值："+focusChange);
+	        }
+	    }
+	};
 	private class MyPhoneStateListener extends PhoneStateListener {
 		@Override
 		public void onCallStateChanged(int state, String incomingNumber) {
@@ -227,11 +252,9 @@ public class HearService extends Service {
 				audioRecord.startRecording();// ��ʼ¼��
 				audioTrack.play();// ��ʼ����
 				Xlog.v(TAG, "isRecording:" + isRecording);
-				while (isRecording ) {
+				while (isRecording && isFocusAudio) {
 					// ��ȡMic������
-					Xlog.v(TAG, "isRecording:" + isRecording);
 					int bufferReadResult = audioRecord.read(buffer, 0, recBufSize);
-
 					byte[] tmpBuf = new byte[bufferReadResult];
 					System.arraycopy(buffer, 0, tmpBuf, 0, bufferReadResult);
 					//
@@ -252,13 +275,14 @@ public class HearService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		audioManager.abandonAudioFocus(afChangeListener);
 		byte editByt = (byte) (VALUE_RANGE_160 - 60);
 		setMaxVolData(editByt, false);
 		setAudioData();
 		// 媒体
 		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) mCurMediaV);
 		setAudioData();
-		// 通话
+		//
 		setValue(mData, mCurrentMode, mTypeSph, mLevelIndex, (byte) mCurSphV);
 		setAudioData();
 		// Mic

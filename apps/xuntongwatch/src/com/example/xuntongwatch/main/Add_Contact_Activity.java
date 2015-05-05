@@ -40,6 +40,7 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 		sure = (TextView) this.findViewById(R.id.add_contact_sure);
 		phone = (EditText) this.findViewById(R.id.add_contact_phone);
 		name = (EditText) this.findViewById(R.id.add_contact_name);
+	
 		custom_head.setOnClickListener(this);
 		sure.setOnClickListener(this);
 		ajustUpdate();
@@ -50,6 +51,7 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 	 */
 	private void ajustUpdate() {
 		Intent intent = this.getIntent();
+		phone.setText(intent.getStringExtra("new_contact_phone"));
 		if (intent != null) {
 			String contact_name = intent.getStringExtra("contact_name");
 			if (TextUtils.isEmpty(contact_name)) {

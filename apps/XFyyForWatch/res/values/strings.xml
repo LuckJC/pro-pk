@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">时钟语音v5+</string>
+    <string name="app_name">时钟语音</string>
+    <string name="app_name_sms">时钟语音短信</string>
     <!-- 请替换成在语音云官网申请的appid -->
        <!-- <string name="app_id">54c9d515</string> --> 
         <string name="app_id">54d1dbd6</string>  
@@ -122,21 +123,32 @@
     <string name="call_phone">打电话给</string>
     <string name="sen_msg">发短信给</string>
     <string name="music">音乐</string>
-    <string name="music_alert_sound">别说话，用心聆听！</string>
+    <string name="music_alert_sound">音乐已打开！</string>
     <string name="settings">设置</string>
-    <string name="settings_alert_sound">知道了，打开设置嘛！</string>
+    <string name="settings_alert_sound">设置已打开！</string>
     <string name="camera">相机</string>
-    <string name="camera_alert_sound">哇哦，赶紧拍一个！</string>
+    <string name="camera_alert_sound">相机已打开！</string>
     <string name="picture">图片</string>
-    <string name="picture_alert_sound">闲着无聊看看图片</string>
+    <string name="picture_alert_sound">图片已打开</string>
     <string name="call_dial">拨号</string>
-    <string name="call_dial_alert_sound">正在打开拨号盘</string>
+    <string name="call_dial_alert_sound">拨号盘已打开</string>
     <string name="recorder">录音机</string>
-    <string name="recorder_alert_sound">嗯，正打开录音机！</string>
+    <string name="recorder_alert_sound">录音机已打开！</string>
     <string name="no_thing">没听懂你的意思   别吵我  哈哈哈哈哈</string>
     
+    <string name="gramar_ok">构建语法成功</string>
+    <string name="updatalexcion_ok">更新联系人成功</string>
     <string name="no_result_show">没有匹配到结果</string>
+    <string name="start_talk">说话开始</string>
+    <string name="end_talk">说话结束</string>
+    <string name="volume_changed">您的声音大小：</string>
     <string name="again_updataLexcion">再次更新联系人</string>
-	<string name="going_updataLexcion">正在更新联系人</string>
+    <string name="going_updataLexcion">正在更新联系人</string>
     <string name="again_grammar">再次构建语法</string>
+    
+    <string name="dialog_system_prompt">系统提示</string>
+    <string name="dialog_system_prompt_content">您还没有联系人，不能语音控制打电话和发短信，现在去添加联系人？</string>
+    <string name="dialog_system_prompt_btn_ok">确定</string>
+    <string name="dialog_system_prompt_btn_cancel">返回</string>
+    
 </resources>
