@@ -2,9 +2,11 @@ package com.example.hear_aid;
 
 import java.util.Arrays;
 
+import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -111,9 +113,10 @@ public class HearService extends Service {
 	private int mCurMediaV = 70;
 	private int mCurSphV = 50;
 	private int mCurMicV = 70;
-	
-	private static int VOL_70 = 70;
-	private static int  VOL_50 = 50;
+
+	private static int VOL_70 = 70; // 二级放大的初始音量70  媒体和Mic
+	private static int VOL_50 = 50; // 二级方法的初始音量50 sph
+
 	@Override
 	public IBinder onBind(Intent intent) {
 
@@ -125,7 +128,7 @@ public class HearService extends Service {
 		// TODO Auto-generated method stub
 		return super.onStartCommand(intent, flags, startId);
 	}
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -162,6 +165,8 @@ public class HearService extends Service {
 			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
 			isFocusAudio = true;
 		}
+		mSharedPreferences = getSharedPreferences("status", Activity.MODE_PRIVATE);
+
 		recBufSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
 
 		playBufSize = AudioTrack.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
@@ -179,10 +184,13 @@ public class HearService extends Service {
 		// mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
 		// mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
 		// mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		
+
 		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
 		firstVolume();
-
+		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
+		if (isSecond) {
+			secondVolume();
+		}
 		Xlog.v(TAG, "start");
 		new RecordPlayThread().start();// ������¼�߷��߳�
 	}
@@ -199,7 +207,7 @@ public class HearService extends Service {
 			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
 				Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
 				isFocusAudio = true;
-			} else  if(focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
 				Log.e(TAG, "focus的值：" + focusChange);
 			}
 		}
@@ -269,8 +277,11 @@ public class HearService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		audioManager.abandonAudioFocus(afChangeListener);
+		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
 		initFirstVolume();
-		initSecondVolume();
+		if (isSecond) {
+			initSecondVolume();
+		}
 		isRecording = false;
 	}
 
@@ -341,7 +352,7 @@ public class HearService extends Service {
 
 	/**
 	 * <br>
-	 * 功能简述:一级  声音放大 <br>
+	 * 功能简述:一级 声音放大 <br>
 	 * 功能详细描述: <br>
 	 * 注意:
 	 */
@@ -351,16 +362,19 @@ public class HearService extends Service {
 		setMaxVolData(editByte, false);
 		setAudioData();
 	}
+
 	/**
-	 * <br>功能简述:把  一级  功放简绍到默认值
-	 * <br>功能详细描述:
-	 * <br>注意:
+	 * <br>
+	 * 功能简述:把 一级 功放简绍到默认值 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
 	 */
-	public void initFirstVolume(){
+	public void initFirstVolume() {
 		byte editByt = (byte) (VALUE_RANGE_160 - 60);
 		setMaxVolData(editByt, false);
 		setAudioData();
 	}
+
 	/**
 	 * <br>
 	 * 功能简述:二级 声音放大 <br>
@@ -378,10 +392,12 @@ public class HearService extends Service {
 		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) (VALUE_RANGE_255 - 80));
 		setAudioData();
 	}
+
 	/**
-	 * <br>功能简述:把  二级  功放简绍到默认值
-	 * <br>功能详细描述:
-	 * <br>注意:
+	 * <br>
+	 * 功能简述:把 二级 功放简绍到默认值 <br>
+	 * 功能详细描述: <br>
+	 * 注意:
 	 */
 	public void initSecondVolume() {
 		// 媒体

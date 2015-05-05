@@ -4,8 +4,8 @@
     <string name="app_name">MusicPlayer</string>
     <string name="hello_world">Hello world!</string>
     <string name="play_order">随机/顺序/单曲</string>
-    <string name="song">最炫民族风</string>
-    <string name="singer">凤凰传奇</string>
+    <string name="song">无</string>
+    <string name="singer">无</string>
     <string name="last">上</string>
     <string name="next">下</string>
     <string name="sound">声音</string>

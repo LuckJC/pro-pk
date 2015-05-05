@@ -114,8 +114,11 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		edit = share.edit();
 		initView();
 		mp3Infos = MediaUtil.getMp3Infos(MainActivity.this); // 获取所有音乐的集合对象
-		Mp3Info mp3Info = mp3Infos.get(listPosition);
-		showArtwork(mp3Info);
+		if(mp3Infos != null &&mp3Infos.size() > 0 ){
+			Mp3Info mp3Info = mp3Infos.get(listPosition);
+			showArtwork(mp3Info);
+			
+		}
 		switch (repeatState) {
 		case isCurrentRepeat: // 单曲循环
 			shuffleBtn.setClickable(false);
@@ -560,17 +563,19 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		playBtn.setBackgroundResource(R.drawable.play_selector);
 		listPosition = listPosition - 1;
 		if (listPosition >= 0) {
-			Mp3Info mp3Info = mp3Infos.get(listPosition); // 上一首MP3
-			showArtwork(mp3Info); // 显示专辑封面
-			mMusicName.setText(mp3Info.getTitle());
-			mMusicSiger.setText(mp3Info.getArtist());
-			url = mp3Info.getUrl();
-			Intent intent = new Intent();
-			intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-			intent.putExtra("url", mp3Info.getUrl());
-			intent.putExtra("listPosition", listPosition);
-			intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
-			startService(intent);
+			if(mp3Infos != null &&mp3Infos.size() > 0 ){
+				Mp3Info mp3Info = mp3Infos.get(listPosition); // 上一首MP3
+				showArtwork(mp3Info); // 显示专辑封面
+				mMusicName.setText(mp3Info.getTitle());
+				mMusicSiger.setText(mp3Info.getArtist());
+				url = mp3Info.getUrl();
+				Intent intent = new Intent();
+				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+				intent.putExtra("url", mp3Info.getUrl());
+				intent.putExtra("listPosition", listPosition);
+				intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
+				startService(intent);	
+			}
 
 		} else {
 			listPosition = 0;
@@ -584,18 +589,20 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	public void next_music() {
 		playBtn.setBackgroundResource(R.drawable.play_selector);
 		listPosition = listPosition + 1;
-		if (listPosition <= mp3Infos.size() - 1) {
-			Mp3Info mp3Info = mp3Infos.get(listPosition);
-			showArtwork(mp3Info); // 显示专辑封面
-			url = mp3Info.getUrl();
-			mMusicName.setText(mp3Info.getTitle());
-			mMusicSiger.setText(mp3Info.getArtist());
-			Intent intent = new Intent();
-			intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-			intent.putExtra("url", mp3Info.getUrl());
-			intent.putExtra("listPosition", listPosition);
-			intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
-			startService(intent);
+		if(mp3Infos != null &&mp3Infos.size() > 2 ){
+			if (listPosition <= mp3Infos.size() - 1) {
+				Mp3Info mp3Info = mp3Infos.get(listPosition);
+				showArtwork(mp3Info); // 显示专辑封面
+				url = mp3Info.getUrl();
+				mMusicName.setText(mp3Info.getTitle());
+				mMusicSiger.setText(mp3Info.getArtist());
+				Intent intent = new Intent();
+				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+				intent.putExtra("url", mp3Info.getUrl());
+				intent.putExtra("listPosition", listPosition);
+				intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
+				startService(intent);
+		}
 
 		} else {
 			listPosition = mp3Infos.size() - 1;
@@ -664,19 +671,21 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					repeatBtn.setClickable(true);
 				}
 			}else if(action.equals(GESTRUE_PLAYING)){
-				if(share.getBoolean("isPlaying", false)){
-					url = share.getString("url", "");
-					listPosition = share.getInt("position", 0);
-				}else{
-					listPosition = 0;
-					Mp3Info mp3Info = mp3Infos.get(listPosition);
-					url = mp3Info.getUrl();
+				if(mp3Infos != null &&mp3Infos.size() > 0 ){
+					if(share.getBoolean("isPlaying", false)){
+						url = share.getString("url", "");
+						listPosition = share.getInt("position", 0);
+					}else{
+						listPosition = 0;
+						Mp3Info mp3Info = mp3Infos.get(listPosition);
+						url = mp3Info.getUrl();
+					}
+					Intent intentService = new Intent(context, PlayerService.class);
+					intentService.putExtra("url", url);
+					intentService.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_MSG);
+					intentService.putExtra("listPosition", listPosition);
+					startService(intentService);	
 				}
-				Intent intentService = new Intent(context, PlayerService.class);
-				intentService.putExtra("url", url);
-				intentService.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_MSG);
-				intentService.putExtra("listPosition", listPosition);
-				startService(intentService);
 			}
 
 		}

@@ -21,6 +21,8 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	public static String TAG = "ZhuTingQi";
 	
+	private Button mSubBtn;
+	private Button mAddBtn;
 	private SeekBar mSeekBar;
 	private Button mStartButton;
 	private LinearLayout mLinearVol;
@@ -47,8 +49,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 	private void initView() {
 		findViewById(R.id.setting).setOnClickListener(this);
-		findViewById(R.id.main_sub).setOnClickListener(this);
-		findViewById(R.id.main_add).setOnClickListener(this);
+		mSubBtn = (Button) findViewById(R.id.main_sub);
+		mSubBtn.setOnClickListener(this);
+		mAddBtn =(Button) findViewById(R.id.main_add);
+		mAddBtn.setOnClickListener(this);
 		mLinearVol = (LinearLayout) findViewById(R.id.volume);
 		mStartButton = (Button) findViewById(R.id.start);
 		mStartButton.setOnClickListener(this);
@@ -69,31 +73,42 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		} else {
 			mStartButton.setText(R.string.start);
 		}
+		setEnable(isOpen);
 	}
-
+	private void setEnable(boolean b){
+		mSubBtn.setEnabled(b);
+		mAddBtn.setEnabled(b);
+		mSeekBar.setEnabled(b);
+	}
 	@Override
 	public void onClick(View v) {
 		Intent intent = null;
 		int curSeeBar = mSeekBar.getProgress();
 		mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+		isOpen = mSharedPreferences.getBoolean("isOpen", false);
 		switch (v.getId()) {
 		case R.id.setting:
-			intent = new Intent(this, Settings.class);
-			startActivity(intent);
+			if(isOpen){
+				intent = new Intent(this, Settings.class);
+				startActivity(intent);	
+			}else{
+				Toast.makeText(MainActivity.this, "请先开启助听器", Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case R.id.start:
 			intent = new Intent(this, HearService.class);
-			isOpen = mSharedPreferences.getBoolean("isOpen", false);
 			if (isOpen) {
 				mLinearVol.setFocusable(false);
 				edit.putBoolean("isOpen", false);
 				stopService(intent);
 				mStartButton.setText(R.string.start);
+				setEnable(false);
 			} else {
 				mLinearVol.setFocusable(true);
 				edit.putBoolean("isOpen", true);
 				startService(intent);
 				mStartButton.setText(R.string.stop);
+				setEnable(true);
 			}
 			edit.commit();
 			break;

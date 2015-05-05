@@ -137,7 +137,7 @@ public class Settings extends Activity {
 		// mCurMediaV = getValue(mData, mCurrentMode, mTypeMedia, mLevelIndex);
 		// mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
 		// mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
-		showToast("mCurMediaV  : " + mCurMediaV + "mCurSphV:" + mCurSphV + "mCurMicV:" + mCurMicV);
+//		showToast("mCurMediaV  : " + mCurMediaV + "mCurSphV:" + mCurSphV + "mCurMicV:" + mCurMicV);
 	}
 
 	private void initView() {
