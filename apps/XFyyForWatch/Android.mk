@@ -31,7 +31,7 @@ LOCAL_PACKAGE_NAME := XFyyForWatch
 
 #LOCAL_JNI_SHARED_LIBRARIES := libmsc
 
-include $(BUILD_PACKAGE) 
+include $(BUILD_PACKAGE)
 ##################################################
 include $(CLEAR_VARS)
 

@@ -8,8 +8,8 @@
 !slot <appName>;
 !slot <sendmsgPhone>;
 !start <callStart>;
-<callStart>:[<iWant>][<to>][<contact>][<callPhone>]|
-[<iWant>]<callPhone>[<to>]<contact>|
+<callStart>:[<iWant>]<to><contact><callPhone>|
+[<iWant>]<callPhone><to><contact>|
 <openApp><appName>|
 [<iWant>][<to>]<contact><sendmsgPhone>|
 [<iWant>]<sendmsgPhone>[<to>]<contact>;
