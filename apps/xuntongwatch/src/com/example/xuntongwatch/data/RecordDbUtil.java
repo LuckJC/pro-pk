@@ -144,4 +144,28 @@ public class RecordDbUtil {
 		return list;
 	}
 
+	public ArrayList<Record_> findContactByPhone(String phone) {
+		ArrayList<Record_> list = new ArrayList<Record_>();
+		open();
+		String sql = "select * from record where record_phone = ?";
+		String[] str = new String[] { phone };
+		Cursor cursor = db.rawQuery(sql, str);
+		while (cursor.moveToNext()) {
+			int record_id = cursor.getInt(cursor.getColumnIndex("record_id"));
+			String record_phone = cursor.getString(cursor
+					.getColumnIndex("record_phone"));
+			long record_time = cursor.getLong(cursor
+					.getColumnIndex("record_time"));
+			long record_when = cursor.getLong(cursor
+					.getColumnIndex("record_when"));
+			String record_state = cursor.getString(cursor
+					.getColumnIndex("record_state"));
+			Record_ record = new Record_(record_id, record_phone, record_time,
+					record_when, record_state, "", "");
+			list.add(record);
+		}
+		close(cursor);
+		return list;
+	}
+
 }

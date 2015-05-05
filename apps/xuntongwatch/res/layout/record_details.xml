@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/contact_phone_number"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="#ffffff"
             />
         
@@ -126,7 +126,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/back_press" />
+                android:background="@drawable/add_and_edit" />
         </RelativeLayout>
         <View 
             android:layout_width="1dp"
@@ -140,6 +140,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
        		 android:id="@+id/record_details_delete_linear"
+        android:layout_gravity="center_vertical"
         >
         
           <RelativeLayout 

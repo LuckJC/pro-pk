@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:padding="5dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="5dp" >
 
     <LinearLayout
         android:id="@+id/call_record_item_main"
@@ -85,8 +85,9 @@
         android:layout_height="wrap_content"
         android:background="#ff4337"
         android:gravity="center_vertical"
-        android:visibility="gone"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
         <RelativeLayout
             android:id="@+id/call_record_item_call_rl"
             android:layout_width="0dp"
@@ -114,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/delete_item" />
+                android:src="@drawable/message_item" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -129,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/message_item" />
+                android:src="@drawable/delete_item" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -50,7 +50,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 		this.imageWidth = imageWidth;
 		this.imageHeight = imageHeight;
 	}
-
+ 
 	@Override
 	public int getCount() {
 		return list.size();

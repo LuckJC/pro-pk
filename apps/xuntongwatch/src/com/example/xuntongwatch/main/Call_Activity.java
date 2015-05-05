@@ -19,9 +19,9 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 
 	private Button one,two,three,four,five,six,seven,eight,nine,xin,jin,zero;
 	private TextView tv;
-	private RelativeLayout back,delete;
+	private RelativeLayout back,delete,call;
 //	private ImageView back_iv,delete_iv;
-	private Button call;
+ 
 	private StringBuffer sb = new StringBuffer("");
 	
 	@Override
@@ -40,15 +40,17 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		initButton(xin,R.id.keyboad_bt_xin);
 		initButton(jin,R.id.keyboad_bt_jin);
 		initButton(zero,R.id.keyboad_bt_zero);
-		initButton(call, R.id.keyboad_bt_call);
+//		initButton(call, R.id.keyboad_bt_call);
 		
 //		back_iv = (ImageView) this.findViewById(R.id.keyboad_iv_back);
 //		delete_iv = (ImageView) this.findViewById(R.id.keyboad_iv_delete);
+		call= (RelativeLayout) this.findViewById(R.id.keyboad_bt_call);
 		back = (RelativeLayout) this.findViewById(R.id.keyboad_rl_back);
 		delete = (RelativeLayout) this.findViewById(R.id.keyboad_rl_delete);
 		tv = (TextView) this.findViewById(R.id.keyboad_tv);
 		tv.addTextChangedListener(this);
 		tv.setEnabled(false);
+		call.setOnClickListener(this);
 		back.setOnClickListener(this);
 		delete.setOnClickListener(this);
 		delete.setOnLongClickListener(new OnLongClickListener() {
