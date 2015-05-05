@@ -6,17 +6,14 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnCreateContextMenuListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,12 +27,12 @@ public class PlayListActivity extends Activity {
 	private TextView mNumberMusic;
 	private MusicListAdapter mMisicListAdapter;
 	private List<Mp3Info> mp3Infos;
-	private int listPosition = 0; // ±êÊ¶ÁĞ±íÎ»ÖÃ
+	private int listPosition = 0; // åœ¨Listä¸­çš„ä½ç½®
 
 	
-	private long musicDuration; // ¸èÇúÊ±¼ä
-	private int currentTime; // µ±Ç°Ê±¼ä
-	private int duration; // Ê±³¤
+	private long musicDuration; // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private int currentTime; // å½“å‰æ’­æ”¾ä½ç½®
+	private int duration; // æ­Œæ›²æ—¶é•¿
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -50,7 +47,7 @@ public class PlayListActivity extends Activity {
 		mListMusic = (ListView) findViewById(R.id.song_list);
 		mListMusic.setOnItemClickListener(new MusicListItemClickListener());
 		mListMusic.setOnCreateContextMenuListener(new MusicListItemContextMenuListener());
-		mp3Infos = MediaUtil.getMp3Infos(this); // »ñÈ¡¸èÇú¶ÔÏó¼¯ºÏ
+		mp3Infos = MediaUtil.getMp3Infos(this); // è·å–æ‰‹æœºä¸­æ‰€å¾—mp3æ–‡ä»¶é›†åˆ
 		mNumberMusic = (TextView) findViewById(R.id.number);
 		if(mp3Infos != null && mp3Infos.size() >= 0 ){
 			mNumberMusic.setText(mp3Infos.size()+"");
@@ -61,7 +58,7 @@ public class PlayListActivity extends Activity {
 
 
 	/**
-	 * ´Ë·½·¨Í¨¹ı´«µİÁĞ±íµã»÷Î»ÖÃÀ´»ñÈ¡mp3Info¶ÔÏó
+	 * 
 	 * 
 	 * @param listPosition
 	 */
@@ -69,9 +66,9 @@ public class PlayListActivity extends Activity {
 		if (mp3Infos != null) {
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 //			Bitmap bitmap = MediaUtil.getArtwork(this, mp3Info.getId(), mp3Info.getAlbumId(), true,
-//					true);// »ñÈ¡×¨¼­Î»Í¼¶ÔÏó£¬ÎªĞ¡Í¼
-			Intent intent = new Intent(); // ¶¨ÒåIntent¶ÔÏó£¬Ìø×ªµ½PlayerActivity
-			// Ìí¼ÓÒ»ÏµÁĞÒª´«µİµÄÊı¾İ
+//					true);// ï¿½ï¿½È¡×¨ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½ï¿½ÎªĞ¡Í¼
+			Intent intent = new Intent(); // ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½PlayerActivity
+			// ï¿½ï¿½ï¿½Ò»Ïµï¿½ï¿½Òªï¿½ï¿½ï¿½İµï¿½ï¿½ï¿½ï¿½ï¿½
 			intent.putExtra("title", mp3Info.getTitle());
 			intent.putExtra("url", mp3Info.getUrl());
 			intent.putExtra("artist", mp3Info.getArtist());
@@ -87,38 +84,40 @@ public class PlayListActivity extends Activity {
 	}
 
 	/**
-	 * ÁĞ±íµã»÷¼àÌıÆ÷
 	 * 
-	 * @author wwj
+	 * 
+	 * @author 
 	 * 
 	 */
 	private class MusicListItemClickListener implements OnItemClickListener {
 		/**
-		 * µã»÷ÁĞ±í²¥·ÅÒôÀÖ
+		 * 
 		 */
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			listPosition = position; // »ñÈ¡ÁĞ±íµã»÷µÄÎ»ÖÃ
-			playMusic(listPosition); // ²¥·ÅÒôÀÖ
+			listPosition = position; // ï¿½ï¿½È¡ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+			playMusic(listPosition); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 
 	}
 
 	/**
-	 * ÉÏÏÂÎÄ²Ëµ¥ÏÔÊ¾¼àÌıÆ÷
 	 * 
-	 * @author Administrator
+	 * <br>ç±»æè¿°:
+	 * <br>åŠŸèƒ½è¯¦ç»†æè¿°:
 	 * 
+	 * @author  ZhouHaibo
+	 * @date  [2015å¹´5æœˆ5æ—¥]
 	 */
 	public class MusicListItemContextMenuListener implements OnCreateContextMenuListener {
 
 		@Override
 		public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 			Vibrator vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
-			vibrator.vibrate(50); // ³¤°´Õñ¶¯
-//			musicListItemDialog(); // ³¤°´ºóµ¯³öµÄ¶Ô»°¿ò
+			vibrator.vibrate(50); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//			musicListItemDialog(); // ï¿½ï¿½ï¿½ï¿½ï¿½óµ¯³ï¿½ï¿½Ä¶Ô»ï¿½ï¿½ï¿½
 			final AdapterView.AdapterContextMenuInfo menuInfo2 = (AdapterView.AdapterContextMenuInfo) menuInfo;
-			listPosition = menuInfo2.position; // µã»÷ÁĞ±íµÄÎ»ÖÃ
+			listPosition = menuInfo2.position; // ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Î»ï¿½ï¿½
 		}
 
 	}

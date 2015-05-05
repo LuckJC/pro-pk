@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MusicPlayer</string>
+    <string name="app_name">音乐播放器</string>
     <string name="hello_world">Hello world!</string>
     <string name="play_order">随机/顺序/单曲</string>
     <string name="song">无</string>
