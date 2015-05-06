@@ -78,7 +78,7 @@ public class HistoryListActivity extends Activity{
 				myPlayFile = new File(MainActivity.myRecAudioDir.getAbsolutePath()
 						+ File.separator
 						+ textView.getText().toString());
-				Toast.makeText(HistoryListActivity.this, MainActivity.myRecAudioDir.getAbsolutePath(), 3000).show();
+			//	Toast.makeText(HistoryListActivity.this, MainActivity.myRecAudioDir.getAbsolutePath(), 3000).show();
 				try {
 					play(myPlayFile);
 					

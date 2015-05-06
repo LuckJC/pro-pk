@@ -153,7 +153,7 @@ public class MainActivity extends Activity{
 					recorderStop();
 					getInputCollection(lists, true);
 				}
-				Toast.makeText(MainActivity.this, "保存成功", 3000).show();
+			//	Toast.makeText(MainActivity.this, "保存成功", 3000).show();
 				minute=0;
 				second=0;
 				times.setText("00:00");
@@ -210,7 +210,7 @@ public class MainActivity extends Activity{
 				return;
 			}
 			String mMinute1=getTime();
-			Toast.makeText(MainActivity.this, "当前时间是:"+mMinute1,Toast.LENGTH_LONG).show();
+			//Toast.makeText(MainActivity.this, "当前时间是:"+mMinute1,Toast.LENGTH_LONG).show();
 			// 创建音频文件
 //			myRecAudioFile = File.createTempFile(mMinute1, ".amr",
 //					myRecAudioDir);
@@ -243,9 +243,13 @@ public class MainActivity extends Activity{
 			String minutes = null,seconds=null;
 			if(minute<10){
 				minutes="0"+minute;
+			}else{
+				minutes=minute+"";	
 			}
 			if(second<10){
 				seconds="0"+second;
+			}else{
+				seconds=second+"";
 			}
 			times.setText(minutes+":"+seconds);
 		}
@@ -272,7 +276,7 @@ public class MainActivity extends Activity{
 	 */
 	public  void getInputCollection(List list,boolean isAddLastRecord){
 		String	mMinute1=getTime();
-		Toast.makeText(MainActivity.this, "当前时间是:"+mMinute1,Toast.LENGTH_LONG).show();
+		//Toast.makeText(MainActivity.this, "当前时间是:"+mMinute1,Toast.LENGTH_LONG).show();
 		// 创建音频文件,合并的文件放这里
 		File file1=new File(myRecAudioDir,mMinute1+SUFFIX);
 		FileOutputStream fileOutputStream = null;
