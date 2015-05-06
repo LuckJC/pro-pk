@@ -15,13 +15,13 @@
 
     <TextView
         android:id="@+id/deletename"
-        android:textSize="26dp"
+        android:textSize="22sp"
         android:textColor="#6A6AFF"
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/init"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+         />
 
     <CheckBox
         android:id="@+id/checkBox1"
