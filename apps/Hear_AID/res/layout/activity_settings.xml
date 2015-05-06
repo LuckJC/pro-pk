@@ -9,38 +9,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout style="@style/Setting_LinearLayout" >
+        <LinearLayout style="@style/Setting_LinearLayout" 
+            android:layout_height="80dp">
 
             <TextView
                 style="@style/Setting_Title"
                 android:text="@string/hear_level" />
 
-            <RadioGroup
-                android:id="@+id/radiogroup"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:orientation="vertical" >
 
-                <RadioButton
-                    android:id="@+id/radiobutton_first"
+                <RadioGroup
+                    android:id="@+id/radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_first"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/first_level" />
+
+                    <RadioButton
+                        android:id="@+id/radiobutton_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/second_level" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+           
+
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="@string/first_level" />
+                    android:text="@string/mild"
+                   />
 
-                <RadioButton
-                    android:id="@+id/radiobutton_second"
+                <TextView
+                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/second_level" />
-            </RadioGroup>
+                    android:text="@string/mezzo"
+                   />
+                     </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout style="@style/Setting_LinearLayout" >
+        <LinearLayout style="@style/Setting_LinearLayout"
+              android:layout_height="80dp" >
 
             <TextView
                 style="@style/Setting_Title"
@@ -60,13 +90,15 @@
                 android:layout_weight="1" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/start" />
+               android:background="@drawable/button_off"
+               />
         </LinearLayout>
 
-        <LinearLayout style="@style/Setting_LinearLayout" >
+        <LinearLayout style="@style/Setting_LinearLayout"
+              android:layout_height="80dp" >
 
             <TextView
                 style="@style/Setting_Title"
@@ -74,98 +106,100 @@
 
             <TextView
                 android:id="@+id/channel_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:padding="15dp"
-                android:text="@string/add" />
+                android:background="@drawable/aid_set_press_left"
+                android:padding="15dp" />
 
             <SeekBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:max="10"
-                android:progress="3"
-                android:layout_weight="1" />
+                android:progress="3" />
 
             <TextView
                 android:id="@+id/channel_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:padding="15dp"
-                android:text="@string/sub" />
+                android:background="@drawable/aid_set_press_right"
+                android:padding="15dp" />
         </LinearLayout>
 
-        <LinearLayout style="@style/Setting_LinearLayout" >
+        <LinearLayout style="@style/Setting_LinearLayout" 
+              android:layout_height="80dp">
 
             <TextView
                 style="@style/Setting_Title"
                 android:text="@string/high_pitch" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/high_pitch_sub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:padding="15dp"
-                android:text="@string/add" />
+                android:background="@drawable/aid_main_press"
+                android:padding="15dp" />
 
             <SeekBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                 android:max="10"
-                android:progress="5"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:max="10"
+                android:progress="5" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/high_pitch_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:padding="15dp"
-                android:text="@string/sub" />
+                android:background="@drawable/aid_main_press_cut"
+                android:padding="15dp" />
         </LinearLayout>
 
-        <LinearLayout style="@style/Setting_LinearLayout" >
+        <LinearLayout style="@style/Setting_LinearLayout"
+  android:layout_height="80dp">
 
             <TextView
                 style="@style/Setting_Title"
                 android:text="@string/low_pitch" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/low_pitch_sub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
-                android:padding="15dp"
-                android:text="@string/add" />
+                android:background="@drawable/aid_main_press"
+                android:padding="15dp" />
 
             <SeekBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 android:max="10"
-                android:progress="6"
-                android:layout_weight="1" />
+                android:progress="6" />
 
-            <TextView
+            <ImageView
                 android:id="@+id/low_pitch_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:padding="15dp"
-                android:text="@string/sub" />
+                android:background="@drawable/aid_main_press_cut"
+                android:padding="15dp" />
         </LinearLayout>
     </LinearLayout>
 
