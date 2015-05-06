@@ -28,7 +28,7 @@ public class Utils {
 	public static final int MINUTE = 4;
 	public static final int SECOND = 5;
 	public static final int WEEK = 6;
-
+	private static long lastClickTime;
 	public static Calendar c = Calendar.getInstance();
 
 	/**
@@ -38,9 +38,18 @@ public class Utils {
 	 * @param phone
 	 */
 	public static void call(Context context, String phone) {
-		Intent intent = new Intent(Intent.ACTION_CALL,
-				Uri.parse("tel:" + phone));
+		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
 		context.startActivity(intent);
+	}
+
+	public synchronized static boolean isFastClick() {
+		long time = System.currentTimeMillis();
+		if (time - lastClickTime < 1000) {
+			return true;
+		}
+		lastClickTime = time;
+		return false;
+
 	}
 
 	public static int[] longDateToY_M_D_H_m_S(long date) {
@@ -121,8 +130,7 @@ public class Utils {
 	@SuppressLint("SimpleDateFormat")
 	public static String getPhotoFileName() {
 		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				"'IMG'_yyyyMMdd_HHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
 	}
 
@@ -138,8 +146,8 @@ public class Utils {
 	 *            图片
 	 * @return String
 	 */
-	public static String saveBitmapToFile(String path, Activity mActivity,
-			String imageName, Bitmap bitmap) {
+	public static String saveBitmapToFile(String path, Activity mActivity, String imageName,
+			Bitmap bitmap) {
 		String bitmapPath = null;
 		File file = null;
 		String real_path = "";
@@ -169,9 +177,7 @@ public class Utils {
 				fos = mActivity.openFileOutput(imageName, Context.MODE_PRIVATE);
 			}
 
-			if (imageName != null
-					&& (imageName.contains(".png") || imageName
-							.contains(".PNG"))) {
+			if (imageName != null && (imageName.contains(".png") || imageName.contains(".PNG"))) {
 				bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
 			} else {
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
@@ -197,11 +203,10 @@ public class Utils {
 				}
 		}
 	}
-	
-	public static boolean isMobilePhone(String phone)
-	{
+
+	public static boolean isMobilePhone(String phone) {
 		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-		Matcher m = p.matcher(phone); 
+		Matcher m = p.matcher(phone);
 		return m.matches();
 	}
 

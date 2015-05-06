@@ -11,6 +11,7 @@ import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.data.MessageDbUtil;
 import com.example.xuntongwatch.util.Constant;
 import com.example.xuntongwatch.util.InitDatabase;
+import com.example.xuntongwatch.util.Utils;
 
 public class MainActivity extends BaseActivity implements OnClickListener {
 
@@ -38,6 +39,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.main_call:
 			startMyActivity(Call_Activity.class);

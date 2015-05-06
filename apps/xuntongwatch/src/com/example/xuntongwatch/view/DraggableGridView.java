@@ -8,6 +8,8 @@ package com.example.xuntongwatch.view;
 import java.util.Collections;
 import java.util.ArrayList;
 
+import com.example.xuntongwatch.util.Utils;
+
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -205,6 +207,9 @@ import android.widget.ImageView;
     
     //EVENT HANDLERS
     public void onClick(View view) {
+    	if (Utils.isFastClick()) {
+			return;
+		}
     	if (enabled)
     	{
     		if (secondaryOnClickListener != null)

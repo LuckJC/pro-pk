@@ -36,6 +36,7 @@ import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.PhoneUtil;
+import com.example.xuntongwatch.util.Utils;
 
 public class Contact_Detail_Activity extends Activity implements OnClickListener {
 
@@ -132,6 +133,9 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 	}
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.contact_detail_call:
 			PhoneUtil.callPhone(this, contact_phone);
@@ -172,6 +176,9 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int which) {
+							if (Utils.isFastClick()) {
+								return;
+							}
 							contactUtil.deleteByContact_id(raw_contact_id);
 							PhoneDatabaseUtil.deleteContactByRawContact_id(
 									Contact_Detail_Activity.this, raw_contact_id);
@@ -183,6 +190,9 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialogInterface, int which) {
+							if (Utils.isFastClick()) {
+								return;
+							}
 							dialog.cancel();
 						}
 					});
