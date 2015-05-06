@@ -96,8 +96,7 @@ public class DeleteListActivity extends Activity{
             		Toast.makeText(DeleteListActivity.this, "ÇëÑ¡ÔñÎÄ¼þ", 3000).show();
             	}else{
             		for(int i=0;i<positionList.size();i++){
-                		File file=new File(MainActivity.recordFiles.get((Integer) positionList.get(i)));
-                		file.delete();
+                		File file=new File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
                 		File file2=new File(MainActivity.myRecAudioDir.getAbsolutePath()+file.getAbsolutePath());
                 		Toast.makeText(DeleteListActivity.this, file2+"", 3000).show();
                 		file2.delete();

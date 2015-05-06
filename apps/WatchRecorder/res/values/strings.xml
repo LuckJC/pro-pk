@@ -1,7 +1,11 @@
 <resources>
 
-    <string name="app_name">Recorder</string>
+    <string name="app_name">录音机</string>
     <string name="init"></string>
     <string name="history">历史记录</string>
      <string name="cancel">取消</string>
+     <string name="delete">删除</string>
+     <string name="timeinit">00:00</string>
+     <string name="recordcancel">放弃</string>
+     <string name="recordsave">保存</string>
 </resources>

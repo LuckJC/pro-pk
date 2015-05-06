@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="00 : 00"
+            android:text="@string/timeinit"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
@@ -62,7 +62,7 @@
             android:enabled="false"
             android:clickable="false"
             android:layout_height="match_parent"
-            android:text="放弃" />
+            android:text="@string/recordcancel" />
 
         <Button
             android:layout_weight="1"
@@ -74,7 +74,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="保存" />
+            android:text="@string/recordsave" />
 
     </LinearLayout>
 

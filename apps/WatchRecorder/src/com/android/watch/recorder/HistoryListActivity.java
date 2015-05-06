@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.android.watch.recorder.DeleteListActivity.Item;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -69,6 +67,7 @@ public class HistoryListActivity extends Activity{
 				startActivityForResult(deleteinIntent, 1);
 			}
 		});
+	    myBaseAdater.notifyDataSetChanged();
 	    listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -95,6 +94,7 @@ public class HistoryListActivity extends Activity{
 				}
 			}
 		});
+	    
 	  //  seekBar1.setOnSeekBarChangeListener(onSeekBarChangeListener);
 	}
 	
@@ -103,9 +103,9 @@ public class HistoryListActivity extends Activity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if(1==requestCode){
+		
 			myBaseAdater.notifyDataSetChanged();
-		}
+		
 	}
     
 	OnSeekBarChangeListener onSeekBarChangeListener = new OnSeekBarChangeListener() {
@@ -164,8 +164,8 @@ public class HistoryListActivity extends Activity{
 				mediaPlayer.setDataSource(f.getAbsolutePath());
 				// 播放结束后的事件
 				mediaPlayer.setOnCompletionListener(onCompletionListener);
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			     	"mm:ss");
+//				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+//			     	"mm:ss");
 				
 				// mediaPlayer.getDuration()获取当前歌曲的总时间【毫秒】
 //				Date date = new Date(mediaPlayer.getDuration());
@@ -208,8 +208,8 @@ public class HistoryListActivity extends Activity{
 				// 每过1秒钟这里需要获得消息
 		        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
 				// mediaPlayer.getCurrentPosition()获取当前歌曲的当前时间【毫秒】
-				Date date = new Date(mediaPlayer.getCurrentPosition());
-				starttime.setText(simpleDateFormat.format(date));
+			//	Date date = new Date(mediaPlayer.getCurrentPosition());
+			//	starttime.setText(simpleDateFormat.format(date));
 				seekBar1.setProgress(mediaPlayer.getCurrentPosition());
 			}
 		};
@@ -223,7 +223,6 @@ public class HistoryListActivity extends Activity{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			 
 			return me.recordFiles.size();
 		}
 
@@ -242,11 +241,15 @@ public class HistoryListActivity extends Activity{
 		@Override
 		public View getView(int arg0, View view, ViewGroup arg2) {
 			// TODO Auto-generated method stub
+			
 			view=LayoutInflater.from(getApplicationContext()).inflate(R.layout.historylist_item, null);
 			name=(TextView) view.findViewById(R.id.name);
 			name.setText(MainActivity.recordFiles.get(arg0));
 //			name.setText((ArrayList)MainActivity.map.get("recordFiles").);
 			timesitem=(TextView) view.findViewById(R.id.timesitem);
+			//设置时间
+//			Item item=(Item) getItem(arg0);
+//			timesitem.setText(item.times);
 			return view;
 		}
 		

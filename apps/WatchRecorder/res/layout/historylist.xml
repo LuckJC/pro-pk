@@ -15,7 +15,7 @@
             android:textSize="33dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="录音记录"
+            android:text="@string/history"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
@@ -68,7 +68,7 @@
                 android:gravity="left"
                 android:textColor="#000"
                 android:layout_height="wrap_content"
-                android:text="00:00" />
+                android:text="@string/timeinit" />
 
             <TextView
                 android:id="@+id/endtime"
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
-                android:text="00:00" />
+                android:text="@string/timeinit" />
         </RelativeLayout>
 
     </LinearLayout>
