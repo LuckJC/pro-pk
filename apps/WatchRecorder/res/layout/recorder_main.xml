@@ -5,39 +5,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     <LinearLayout
-        android:layout_weight="1"
+       
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:gravity="center|left">
+
         <ImageView
-            android:layout_weight="1"
-            android:layout_gravity="left"
             android:id="@+id/menu"
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:src="@drawable/menu" />
+
         <TextView
             android:id="@+id/times"
-            android:layout_marginTop="5dp"
-            android:layout_weight="2"
-            android:textSize="58dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_marginLeft="15dp"
             android:text="@string/timeinit"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="58dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="184dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <ImageView
             android:id="@+id/watch"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="158dp"
+            android:layout_height="158dp"
             android:layout_gravity="center_horizontal|top"
             android:src="@drawable/recorder" />
 

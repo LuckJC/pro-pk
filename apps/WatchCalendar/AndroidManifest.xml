@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/calendar"
+        android:icon="@drawable/calendarmain"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity android:name="com.watch.calendar.MyCalendar">
