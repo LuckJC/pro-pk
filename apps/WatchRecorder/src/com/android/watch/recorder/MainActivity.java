@@ -156,7 +156,7 @@ public class MainActivity extends Activity{
 				Toast.makeText(MainActivity.this, "±£´æ³É¹¦", 3000).show();
 				minute=0;
 				second=0;
-				times.setText(00+":"+00);
+				times.setText("00:00");
 				isStopRecord = true;
 				imageView.setImageResource(R.drawable.startrecorder);
 				save.setVisibility(View.INVISIBLE);
@@ -168,7 +168,7 @@ public class MainActivity extends Activity{
 				deleteListRecord(isPause);
 				minute=0;
 				second=0;
-				times.setText(00+":"+00);
+				times.setText("00:00");
 				imageView.setImageResource(R.drawable.startrecorder);
 				save.setVisibility(View.INVISIBLE);
 				cancel.setVisibility(View.INVISIBLE);
