@@ -63,8 +63,10 @@ public class MainActivity extends Activity{
     ImageView imageView;
     ImageView menu;
     TextView times;
-    Button cancel;
-    Button save;
+    ImageView cancel;
+    ImageView save;
+//    Button cancel;
+//    Button save;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -80,8 +82,8 @@ public class MainActivity extends Activity{
 		imageView=(ImageView) this.findViewById(R.id.recorder);
 		imageView.setOnClickListener(myClick);
 		times=(TextView) this.findViewById(R.id.times);
-		cancel=(Button) this.findViewById(R.id.cancel);
-		save=(Button) this.findViewById(R.id.save);
+		cancel=(ImageView) this.findViewById(R.id.cancel);
+		save=(ImageView) this.findViewById(R.id.save);
 		menu=(ImageView) this.findViewById(R.id.menu);
 		menu.setOnClickListener(myClick);
 		cancel.setOnClickListener(myClick);
@@ -109,7 +111,7 @@ public class MainActivity extends Activity{
 //				adapter = new ArrayAdapter<String>(this,
 //						android.R.layout.simple_list_item_1, recordFiles);
 	}
-
+   
 	class MyClick implements View.OnClickListener{
 		@Override
 		public void onClick(View arg0) {
@@ -157,8 +159,8 @@ public class MainActivity extends Activity{
 				times.setText(00+":"+00);
 				isStopRecord = true;
 				imageView.setImageResource(R.drawable.startrecorder);
-				save.setEnabled(false);
-				cancel.setEnabled(false);
+				save.setVisibility(View.INVISIBLE);
+				cancel.setVisibility(View.INVISIBLE);
 				isPause=false;
 				break;
 			case R.id.cancel:
@@ -168,8 +170,10 @@ public class MainActivity extends Activity{
 				second=0;
 				times.setText(00+":"+00);
 				imageView.setImageResource(R.drawable.startrecorder);
-				save.setEnabled(false);
-				cancel.setEnabled(false);
+				save.setVisibility(View.INVISIBLE);
+				cancel.setVisibility(View.INVISIBLE);
+//				save.setEnabled(false);
+//				cancel.setEnabled(false);
 				isPause=false;
 				break;
 			case R.id.menu:
@@ -224,8 +228,8 @@ public class MainActivity extends Activity{
 					.getAbsolutePath());
 			mMediaRecorder.prepare();
 			mMediaRecorder.start();
-			cancel.setEnabled(true);
-			save.setEnabled(true);
+			save.setVisibility(View.VISIBLE);
+			cancel.setVisibility(View.VISIBLE);
 			isStopRecord = false;
 		} catch (IOException e) {
 			e.printStackTrace();
