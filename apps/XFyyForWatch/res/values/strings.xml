@@ -151,4 +151,7 @@
     <string name="dialog_system_prompt_btn_ok">确定</string>
     <string name="dialog_system_prompt_btn_cancel">返回</string>
     
+    <string name="iat_start_talk">开始</string>
+    <string name="iat_send_sms">发送</string>
+    
 </resources>

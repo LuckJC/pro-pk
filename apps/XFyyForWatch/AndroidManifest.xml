@@ -26,6 +26,14 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name="com.shizhongkeji.mscv5plus.IatActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name="com.shizhongkeji.mscv5plus.IatSettings" >
+        </activity>
+        
     </application>
 
     <uses-sdk android:minSdkVersion="15" />
@@ -42,7 +50,10 @@
     
     <uses-permission android:name="android.permission.SEND_SMS"></uses-permission> 
 	<uses-permission android:name="android.permission.READ_SMS"></uses-permission> 
-	<uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission> 
+	<uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+	
+	<uses-permission android:name="android.permission.DISABLE_KEYGUARD" /> 
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
     
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
