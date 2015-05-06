@@ -61,6 +61,7 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp">
             <EditText 
+                android:maxLength="8"
                 android:id="@+id/add_contact_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

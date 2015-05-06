@@ -22,6 +22,7 @@ import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.Message_;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.MessageUtil;
+import com.example.xuntongwatch.util.Utils;
 
 public class Send_Message_Activity extends BaseActivity implements OnClickListener {
 	private ArrayList<Message_Thread> arrayList;
@@ -48,6 +49,9 @@ public class Send_Message_Activity extends BaseActivity implements OnClickListen
 
 			@Override
 			public void onClick(View arg0) {
+				if (Utils.isFastClick()) {
+					return;
+				}
 				arrayList = SmsUtil.allMessage_Thread(Send_Message_Activity.this);
 				int thread_id = -100;
 				String name = null;
@@ -110,6 +114,9 @@ public class Send_Message_Activity extends BaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.send_message_add_person:
 

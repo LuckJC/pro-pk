@@ -141,6 +141,9 @@ public class RecordDetails_Activity extends BaseActivity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.record_details_back:
 			Intent intent = null;

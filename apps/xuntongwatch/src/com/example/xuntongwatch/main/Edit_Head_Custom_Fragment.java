@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.xuntongwatch.R;
+import com.example.xuntongwatch.util.Utils;
 
 public class Edit_Head_Custom_Fragment extends Fragment {
 
@@ -44,6 +45,9 @@ public class Edit_Head_Custom_Fragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+				if (Utils.isFastClick()) {
+					return;
+				}
 				face.addImage();
 			}
 		});

@@ -34,6 +34,7 @@ import com.example.xuntongwatch.entity.Message_;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.MessageUtil;
 import com.example.xuntongwatch.util.PreferenceOperation;
+import com.example.xuntongwatch.util.Utils;
 
 public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnClickListener {
 	private String mFailSend;
@@ -178,6 +179,9 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.message_chat_add_person:
 			Intent intent = new Intent(this, Contact_Activity.class);

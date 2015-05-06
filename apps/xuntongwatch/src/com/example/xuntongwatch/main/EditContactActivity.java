@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
 import com.example.xuntongwatch.entity.Contact;
+import com.example.xuntongwatch.util.Utils;
 
 public class EditContactActivity extends Activity {
 	private Contact contact;
@@ -32,6 +33,9 @@ public class EditContactActivity extends Activity {
 			
 			@Override
 			public void onClick(View arg0) {
+				if (Utils.isFastClick()) {
+					return;
+				}
 				updateContact(name.getText().toString(),phone.getText().toString(),null); 
 				finish();
 			}
