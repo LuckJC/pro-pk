@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 public class DeleteListActivity extends Activity{
 	public ListView listdelete;
+	ArrayList<String> nodeletes=new ArrayList<String>();
 	ImageView deleImage;
 	Button commit;
 	ViewHolder holder;
@@ -35,6 +36,25 @@ public class DeleteListActivity extends Activity{
 	Button cancel;
 	private List<Item> list; 
 	DeleteBaseAdater deleteBaseAdater=new DeleteBaseAdater();
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		intent=new Intent();
+		DeleteListActivity.this.setResult(RESULT_OK, intent);
+		super.onDestroy();
+	}
+
+
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		intent=new Intent();
+		DeleteListActivity.this.setResult(RESULT_OK, intent);
+		super.finish();
+	}
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -51,15 +71,20 @@ public class DeleteListActivity extends Activity{
 		deleImage.setOnClickListener(delteClick);
 		commit.setOnClickListener(delteClick);
 		cancel.setOnClickListener(delteClick);
-		check=false;
+		check=true;
 		
 		listdelete.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				positionList.add(arg2);
+				if(check){
+					positionList.add(arg2);
+					nodeletes.add(MainActivity.recordFiles.get(arg2));
+				}
+				
 				Item item = list.get(arg2);   
 				item.status = !item.status;// 取反
+				
 				holder.cb.setChecked(item.status);
 				deleteBaseAdater.notifyDataSetChanged();
 				Toast.makeText(DeleteListActivity.this, ""+arg2, 3000).show();
@@ -95,17 +120,20 @@ public class DeleteListActivity extends Activity{
             	if(positionList.size()==0){
             		Toast.makeText(DeleteListActivity.this, "请选择文件", 3000).show();
             	}else{
-            		for(int i=0;i<positionList.size();i++){
-                		File file=new File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
-                		File file2=new File(MainActivity.myRecAudioDir.getAbsolutePath()+file.getAbsolutePath());
+            		for(int i=0;i<nodeletes.size();i++){
+//                		File file=new File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
+            			File file=new File(nodeletes.get(i));
+            			File file2=new File(MainActivity.myRecAudioDir.getAbsolutePath()+file.getAbsolutePath());
                 		Toast.makeText(DeleteListActivity.this, file2+"", 3000).show();
                 		file2.delete();
-                		MainActivity.recordFiles.remove((int)(positionList.get(i)));
-                		list.remove(positionList.get(i));
+//                		MainActivity.recordFiles.remove((int)(positionList.get(i)));
+                		MainActivity.recordFiles.remove(nodeletes.get(i));
+                		//nodeletes.remove();
+//                		list.remove(positionList.get(i));
                 	}
             		intent=new Intent();
             		deleteBaseAdater.notifyDataSetChanged();
-            		int m=MainActivity.recordFiles.size();
+            		//intent.putStringArrayListExtra("nodeletes", nodeletes);
             		DeleteListActivity.this.setResult(RESULT_OK, intent);
             		DeleteListActivity.this.finish();
             	}
