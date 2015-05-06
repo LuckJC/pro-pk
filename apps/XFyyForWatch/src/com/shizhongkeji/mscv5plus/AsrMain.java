@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.Media;
@@ -436,6 +438,8 @@ public class AsrMain extends Activity {
 						} else if (keyset.equals("sendmsgPhone")) {
 
 							if (map.get("sendmsgPhone").size() >= 1) {
+								AcquireWakeLock();
+								
 								name = map.get("sendmsgPhone").get(0);
 								number = FindPhoneNumber(name);
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1003");
@@ -457,6 +461,7 @@ public class AsrMain extends Activity {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1004");
 								mSpeech.speak(getResources().getString(R.string.music_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
+								AcquireWakeLock();
 								Intent intent = new Intent(Intent.ACTION_MAIN);
 								intent.addCategory(Intent.CATEGORY_APP_MUSIC);
 								startActivity(intent);
@@ -467,6 +472,7 @@ public class AsrMain extends Activity {
 								mSpeech.speak(
 										getResources().getString(R.string.settings_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
+								AcquireWakeLock();
 								Intent mIntent = new Intent();
 								mIntent.setAction(Settings.ACTION_SETTINGS);
 								startActivity(mIntent);
@@ -478,6 +484,7 @@ public class AsrMain extends Activity {
 								mSpeech.speak(
 										getResources().getString(R.string.camera_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
+								AcquireWakeLock();
 								Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 								startActivity(camera);
 								mAsr.stopListening();
@@ -487,6 +494,7 @@ public class AsrMain extends Activity {
 								mSpeech.speak(getResources()
 										.getString(R.string.picture_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
+								AcquireWakeLock();
 								Uri uri = Images.Media.INTERNAL_CONTENT_URI;
 								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 								startActivity(intent);
@@ -497,7 +505,8 @@ public class AsrMain extends Activity {
 								mSpeech.speak(
 										getResources().getString(R.string.call_dial_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								Intent intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
+								AcquireWakeLock();
+								Intent intent = new Intent(Intent.ACTION_DIAL);
 								startActivity(intent);
 								mAsr.stopListening();
 							} else if ((getResources().getString(R.string.recorder)).equals(map
@@ -506,7 +515,7 @@ public class AsrMain extends Activity {
 								mSpeech.speak(
 										getResources().getString(R.string.recorder_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-
+								AcquireWakeLock();
 								Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
 								startActivity(mi);
 								mAsr.stopListening();
@@ -659,6 +668,24 @@ public class AsrMain extends Activity {
 		return tempBuffer.toString();
 	}
 
+	/**
+	 * {@inheritDoc}点亮屏幕
+	 */
+	private void AcquireWakeLock() { 
+	    PowerManager pm = (PowerManager)getApplication().getSystemService(Context.POWER_SERVICE); 
+	       
+	    WakeLock m_wakeObj = (WakeLock)pm.newWakeLock(PowerManager.FULL_WAKE_LOCK 
+	               | PowerManager.ACQUIRE_CAUSES_WAKEUP 
+	               | PowerManager.ON_AFTER_RELEASE, ""); 
+	       
+	    // m_wakeObj.acquire(); 
+	       
+	    //点亮屏幕15秒钟 
+	    m_wakeObj.acquire(1000 * 5); 
+	    m_wakeObj.release();//释放资源 
+	       
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

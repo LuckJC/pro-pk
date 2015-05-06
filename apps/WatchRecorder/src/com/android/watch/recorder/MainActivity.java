@@ -16,6 +16,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
@@ -54,14 +55,18 @@ public class MainActivity extends Activity{
 	public static Map map;
 	/**存放音频文件列表**/
 	public static ArrayList<String> recordFiles;
+	public static ArrayList<Item> recordFile;
 	private ArrayAdapter<String> adapter;
 	private MediaRecorder mMediaRecorder;
+	MediaPlayer mediaPlayer;
 	private String length1 = null;
     ImageView imageView;
     ImageView menu;
     TextView times;
-    Button cancel;
-    Button save;
+    ImageView cancel;
+    ImageView save;
+//    Button cancel;
+//    Button save;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -70,14 +75,15 @@ public class MainActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recorder_main);
 		MyClick myClick=new MyClick();
+		mediaPlayer = new MediaPlayer();
 		lists=new ArrayList<String>();
 		map=new HashMap();
 		listTimes=new ArrayList<String>();
 		imageView=(ImageView) this.findViewById(R.id.recorder);
 		imageView.setOnClickListener(myClick);
 		times=(TextView) this.findViewById(R.id.times);
-		cancel=(Button) this.findViewById(R.id.cancel);
-		save=(Button) this.findViewById(R.id.save);
+		cancel=(ImageView) this.findViewById(R.id.cancel);
+		save=(ImageView) this.findViewById(R.id.save);
 		menu=(ImageView) this.findViewById(R.id.menu);
 		menu.setOnClickListener(myClick);
 		cancel.setOnClickListener(myClick);
@@ -100,30 +106,20 @@ public class MainActivity extends Activity{
 				}
 				// 取得sd card 目录里的.arm文件
 				getRecordFiles();
-				map.put("recordFiles", recordFiles);
-				map.put("listTimes", listTimes);
+//				map.put("recordFiles", recordFiles);
+//				map.put("listTimes", listTimes);
 //				adapter = new ArrayAdapter<String>(this,
 //						android.R.layout.simple_list_item_1, recordFiles);
 	}
-
+   
 	class MyClick implements View.OnClickListener{
 		@Override
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.recorder:
-//				if(startCount%2==1){
-//					imageView.setImageResource(R.drawable.ic_launcher);
-//					start();
-//				//	inThePause=true;
-//					
-//				}
-//				if(startCount%2==0){
-//					imageView.setImageResource(R.drawable.recorder);
-//					isPause=true;
-					//已经暂停过了，再次点击按钮 开始录音，录音状态在录音中
 				if(isPause){
 					//当前正在录音的文件名，全程
-					imageView.setImageResource(R.drawable.recorder);
+					imageView.setImageResource(R.drawable.startrecorder);
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
 					//start();
@@ -134,7 +130,7 @@ public class MainActivity extends Activity{
 				}
 				//正在录音，点击暂停,现在录音状态为暂停
 				else{
-					imageView.setImageResource(R.drawable.ic_launcher);
+					imageView.setImageResource(R.drawable.endre);
 					start();
 					isPause=true;
 				}
@@ -160,21 +156,25 @@ public class MainActivity extends Activity{
 				Toast.makeText(MainActivity.this, "保存成功", 3000).show();
 				minute=0;
 				second=0;
-				times.setText(00+":"+00);
+				times.setText("00:00");
 				isStopRecord = true;
-				imageView.setImageResource(R.drawable.recorder);
-				save.setEnabled(false);
-				cancel.setEnabled(false);
+				imageView.setImageResource(R.drawable.startrecorder);
+				save.setVisibility(View.INVISIBLE);
+				cancel.setVisibility(View.INVISIBLE);
+				isPause=false;
 				break;
 			case R.id.cancel:
 				recorderStop();
 				deleteListRecord(isPause);
 				minute=0;
 				second=0;
-				times.setText(00+":"+00);
-				imageView.setImageResource(R.drawable.recorder);
-				save.setEnabled(false);
-				cancel.setEnabled(false);
+				times.setText("00:00");
+				imageView.setImageResource(R.drawable.startrecorder);
+				save.setVisibility(View.INVISIBLE);
+				cancel.setVisibility(View.INVISIBLE);
+//				save.setEnabled(false);
+//				cancel.setEnabled(false);
+				isPause=false;
 				break;
 			case R.id.menu:
 				Intent intent=new Intent(MainActivity.this, HistoryListActivity.class);
@@ -228,8 +228,8 @@ public class MainActivity extends Activity{
 					.getAbsolutePath());
 			mMediaRecorder.prepare();
 			mMediaRecorder.start();
-			cancel.setEnabled(true);
-			save.setEnabled(true);
+			save.setVisibility(View.VISIBLE);
+			cancel.setVisibility(View.VISIBLE);
 			isStopRecord = false;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -276,7 +276,6 @@ public class MainActivity extends Activity{
 		// 创建音频文件,合并的文件放这里
 		File file1=new File(myRecAudioDir,mMinute1+SUFFIX);
 		FileOutputStream fileOutputStream = null;
-		 
 		if(!file1.exists()){
 			try {
 				file1.createNewFile();
@@ -307,7 +306,6 @@ public class MainActivity extends Activity{
 								fileOutputStream.write(myByte, 0,length);
 							}
 						}
-					
 				//之后的文件，去掉头文件就可以了
 				else{
 					while(fileInputStream.read(myByte)!=-1){
@@ -315,7 +313,6 @@ public class MainActivity extends Activity{
 						fileOutputStream.write(myByte, 6, length-6);
 					}
 				}
-				
 				fileOutputStream.flush();
 				fileInputStream.close();
 				System.out.println("合成文件长度："+file1.length());
@@ -357,6 +354,7 @@ public class MainActivity extends Activity{
 	private void getRecordFiles() {
 		// TODO Auto-generated method stub
 		recordFiles = new ArrayList<String>();
+		recordFile = new ArrayList<Item>();
 		if (sdcardExit) {
 			File files[] = myRecAudioDir.listFiles();
 			if (files != null) {
@@ -368,6 +366,22 @@ public class MainActivity extends Activity{
 								|| fileS.toLowerCase().equals(".amr")
 								|| fileS.toLowerCase().equals(".mp4"))
 							recordFiles.add(files[i].getName());
+							try {
+								mediaPlayer.setDataSource(files[i].getAbsolutePath());
+							} catch (IllegalArgumentException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (SecurityException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IllegalStateException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						recordFile.add(new Item(files[i].getName(), mediaPlayer.getDuration()+""));
 					}
 				}
 			}
