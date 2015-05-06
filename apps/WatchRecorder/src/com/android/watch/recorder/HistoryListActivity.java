@@ -35,6 +35,7 @@ public class HistoryListActivity extends Activity{
     public static ListView listView;
     MyBaseAdater myBaseAdater=new MyBaseAdater();
     MainActivity me= new MainActivity();
+    ArrayList<String> files=new ArrayList<String>();
     private List<Item> list; 
     ImageView imageView;
     TextView name;
@@ -103,9 +104,11 @@ public class HistoryListActivity extends Activity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		
+		   // me.recordFiles=data.getStringArrayListExtra("nodeletes");
+		if(requestCode==1){
 			myBaseAdater.notifyDataSetChanged();
-		
+		}
+			
 	}
     
 	OnSeekBarChangeListener onSeekBarChangeListener = new OnSeekBarChangeListener() {
@@ -192,7 +195,6 @@ public class HistoryListActivity extends Activity{
 				handler.obtainMessage().sendToTarget();
 			}
 		}
-
 		private void startTime() {
 			if (timer == null) {
 				timer = new Timer();
@@ -227,7 +229,7 @@ public class HistoryListActivity extends Activity{
 		}
 
 		@Override
-		public Object getItem(int arg0) {
+		public String getItem(int arg0) {
 			// TODO Auto-generated method stub
 			return me.recordFiles.get(arg0);
 		}
