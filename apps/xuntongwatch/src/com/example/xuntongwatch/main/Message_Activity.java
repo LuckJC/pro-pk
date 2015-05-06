@@ -184,6 +184,9 @@ public class Message_Activity extends DatabaseUpdataActivity implements OnClickL
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.message_bottom_image:
 			if (delete_title.getVisibility() == View.VISIBLE)// 删除信息

@@ -7,7 +7,7 @@
     <application
         android:icon="@drawable/icon"
         android:name="SpeechApp"
-        android:label="时钟语音" >
+        android:label="时中语音" >
         
         <activity
             android:name="com.shizhongkeji.mscv5plus.AsrMain"

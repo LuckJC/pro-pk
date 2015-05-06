@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.main.Edit_Head_Custom_Fragment.Custom_interface;
+import com.example.xuntongwatch.util.Utils;
 
 public class Edit_Head_Activity extends FragmentActivity implements OnClickListener,
 		Custom_interface {
@@ -77,6 +78,9 @@ public class Edit_Head_Activity extends FragmentActivity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
+		if (Utils.isFastClick()) {
+			return;
+		}
 		switch (v.getId()) {
 		case R.id.edit_head_custom_tv:
 			if (state == CUSTOM)

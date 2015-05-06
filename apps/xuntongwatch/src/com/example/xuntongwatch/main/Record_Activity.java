@@ -60,6 +60,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		v.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (Utils.isFastClick()) {
+					return;
+				}
 				if (showView != null) {
 					if (adapter != null) {
 						adapter.hiddenOtherLinear();
@@ -100,7 +103,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 
 	@Override
 	public void onClick(View v) {
-
+		if (Utils.isFastClick()) {
+			return;
+		}
 	}
 
 	public class Call_Record_Adapter extends BaseAdapter {
@@ -243,6 +248,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 
 				@Override
 				public void onClick(View v) {
+					if (Utils.isFastClick()) {
+						return;
+					}
 					if (showView == null || hiddenView == null)
 						return;
 					// 点击事件 在这里执行
@@ -269,6 +277,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 
 				@Override
 				public void onClick(View v) {
+					if (Utils.isFastClick()) {
+						return;
+					}
 					if (showView == null || hiddenView == null)
 						return;
 					deleteRecord(record);
@@ -289,6 +300,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 
 				@Override
 				public void onClick(View v) {
+					if (Utils.isFastClick()) {
+						return;
+					}
 					if (showView == null || hiddenView == null)
 						return;
 					hiddenOtherLinear();
@@ -370,7 +384,9 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 			convertView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-
+					if (Utils.isFastClick()) {
+						return;
+					}
 					if (ss == 0) {
 						ss = -1;
 					} else {

@@ -19,7 +19,7 @@
     <uses-sdk android:minSdkVersion="17" android:targetSdkVersion="17" ></uses-sdk>
 
     <application android:label="@string/app_label"
-                 android:icon="@mipmap/ic_launcher_alarmclock"
+                 android:icon="@mipmap/icon_alarmclock"
                  android:requiredForAllUsers="true"
                  android:supportsRtl="true">
 
@@ -30,7 +30,7 @@
         <activity android:name="DeskClock"
                 android:label="@string/app_label"
                 android:theme="@style/DeskClock"
-                android:icon="@mipmap/ic_launcher_alarmclock"
+                android:icon="@mipmap/icon_alarmclock"
                 android:launchMode="singleTask"
                 android:windowSoftInputMode="adjustNothing"
                 >

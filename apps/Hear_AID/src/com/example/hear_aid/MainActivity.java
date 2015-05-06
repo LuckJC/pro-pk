@@ -69,9 +69,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		}
 		isOpen = mSharedPreferences.getBoolean("isOpen", false);
 		if (isOpen) {
-			mStartButton.setText(R.string.stop);
+			mStartButton.setBackgroundResource(R.drawable.button_background_on);
 		} else {
-			mStartButton.setText(R.string.start);
+			mStartButton.setBackgroundResource(R.drawable.button_background);
 		}
 		setEnable(isOpen);
 	}
@@ -101,13 +101,13 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 				mLinearVol.setFocusable(false);
 				edit.putBoolean("isOpen", false);
 				stopService(intent);
-				mStartButton.setText(R.string.start);
+				mStartButton.setBackgroundResource(R.drawable.button_background);
 				setEnable(false);
 			} else {
 				mLinearVol.setFocusable(true);
 				edit.putBoolean("isOpen", true);
 				startService(intent);
-				mStartButton.setText(R.string.stop);
+				mStartButton.setBackgroundResource(R.drawable.button_background_on);
 				setEnable(true);
 			}
 			edit.commit();

@@ -11,6 +11,7 @@
     <string name="add_contact">添加联系人</string>
     <string name="name">姓名</string>
     <string name="phone_number">手机号码</string> 
+       <string name="custom_photo_">自定义</string>
     <string name="custom_photo">头像编辑</string>
     <string name="sure">确定</string>
     <string name="keyboard_one">1</string>
