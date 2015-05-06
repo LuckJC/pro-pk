@@ -182,10 +182,10 @@ public class AsrMain extends Activity {
 				else if(utteranceId.equals("1003"))
 				{
 					// 语音编辑发短息
-				//	Intent intent = new Intent(AsrMain.this, IatActivity.class);
-				//	intent.putExtra("Name", name);
-				//	intent.putExtra("PhoneNumber", number);
-				//	startActivity(intent);
+					Intent intent = new Intent(AsrMain.this, IatActivity.class);
+					intent.putExtra("Name", name);
+					intent.putExtra("PhoneNumber", number);
+					startActivity(intent);
 				}
 				
 			}
@@ -497,7 +497,7 @@ public class AsrMain extends Activity {
 								mSpeech.speak(
 										getResources().getString(R.string.call_dial_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								Intent intent = new Intent(Intent.ACTION_DIAL);
+								Intent intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
 								startActivity(intent);
 								mAsr.stopListening();
 							} else if ((getResources().getString(R.string.recorder)).equals(map

@@ -2,23 +2,26 @@ package com.example.info;
 
 
 /**
- * 2013/5/7 mp3ÊµÌåÀà
  * 
- * @author wwj
+ * <br>ç±»æè¿°:
+ * <br>åŠŸèƒ½è¯¦ç»†æè¿°:
  * 
+ * @author  ZhouHaibo
+ * @date  [2015å¹´5æœˆ5æ—¥]
  */
+
 public class Mp3Info{
-	private long id; // ¸èÇúID 3
-	private String title; // ¸èÇúÃû³Æ 0
-	private String album; // ×¨¼­ 7
-	private long albumId;//×¨¼­ID 6
-	private String displayName; //ÏÔÊ¾Ãû³Æ 4
-	private String artist; // ¸èÊÖÃû³Æ 2
-	private long duration; // ¸èÇúÊ±³¤ 1
-	private long size; // ¸èÇú´óĞ¡ 8
-	private String url; // ¸èÇúÂ·¾¶ 5
-	private String lrcTitle; // ¸è´ÊÃû³Æ
-	private String lrcSize; // ¸è´Ê´óĞ¡ 
+	private long id; // æ­Œæ›²ID 3
+	private String title; // æ­Œæ›²åç§° 0
+	private String album; // ä¸“è¾‘ 7
+	private long albumId;//ä¸“è¾‘ID 6
+	private String displayName; //æ˜¾ç¤ºåç§° 4
+	private String artist; // æ­Œæ‰‹åç§° 2
+	private long duration; // æ­Œæ›²æ—¶é•¿ 1
+	private long size; // æ­Œæ›²å¤§å° 8
+	private String url; // æ­Œæ›²è·¯å¾„ 5
+	private String lrcTitle; // æ­Œè¯åç§°
+	private String lrcSize; // æ­Œè¯å¤§å° 
 
 	public Mp3Info() {
 		super();

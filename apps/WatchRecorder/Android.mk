@@ -17,26 +17,15 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_PREBUILT_LIBS := xunfei:libs/armeabi/libmsc.so
-
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_STATIC_JAVA_LIBRARIES := Msc android-support-v4
+LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 
-LOCAL_JAVA_LIBRARIES += mediatek-framework
-LOCAL_JAVA_LIBRARIES += telephony-common mms-common
-#LOCAL_JAVA_LIBRARIES += mediatek-telephony-common
-
-LOCAL_PACKAGE_NAME := XFyyForWatch
-
-#LOCAL_JNI_SHARED_LIBRARIES := libmsc
+LOCAL_PACKAGE_NAME := WatchRecorder
 
 include $(BUILD_PACKAGE)
 ##################################################
 include $(CLEAR_VARS)
-
-LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := Msc:libs/Msc.jar
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/libs/armeabi/libmsc.so:system/lib/libmsc.so
 
 include $(BUILD_MULTI_PREBUILT)
 

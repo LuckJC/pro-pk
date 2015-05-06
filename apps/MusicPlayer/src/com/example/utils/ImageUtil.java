@@ -27,43 +27,37 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
- * Í¼Æ¬¹¤¾ßÀà
+ * å›¾ç‰‡å·¥å…·ç±»
  * 
- * @author wwj 2013/7/3
+ * 
  */
 public class ImageUtil {
-	/** Í¼Æ¬µÄ°Ë¸öÎ»ÖÃ **/
-	public static final int TOP = 0; // ÉÏ
-	public static final int BOTTOM = 1; // ÏÂ
-	public static final int LEFT = 2; // ×ó
-	public static final int RIGHT = 3; // ÓÒ
-	public static final int LEFT_TOP = 4; // ×óÉÏ
-	public static final int LEFT_BOTTOM = 5; // ×óÏÂ
-	public static final int RIGHT_TOP = 6; // ÓÒÉÏ
-	public static final int RIGHT_BOTTOM = 7; // ÓÒÏÂ
-
+	/**å›¾ç‰‡çš„å…«ä¸ªä½ç½®**/
+	public static final int TOP = 0;			//ä¸Š	
+	public static final int BOTTOM = 1;			//ä¸‹
+	public static final int LEFT = 2;			//å·¦
+	public static final int RIGHT = 3;			//å³
+	public static final int LEFT_TOP = 4;		//å·¦ä¸Š
+	public static final int LEFT_BOTTOM = 5;	//å·¦ä¸‹
+	public static final int RIGHT_TOP = 6;		//å³ä¸Š
+	public static final int RIGHT_BOTTOM = 7;	//å³ä¸‹
+	
 	/**
-	 * Í¼ÏñµÄ·Å´óËõĞ¡·½·¨
-	 * 
-	 * @param src
-	 *            Ô´Î»Í¼¶ÔÏó
-	 * @param scaleX
-	 *            ¿í¶È±ÈÀıÏµÊı
-	 * @param scaleY
-	 *            ¸ß¶È±ÈÀıÏµÊı
-	 * @return ·µ»ØÎ»Í¼¶ÔÏó
+	 * å›¾åƒçš„æ”¾å¤§ç¼©å°æ–¹æ³•
+	 * @param src		æºä½å›¾å¯¹è±¡
+	 * @param scaleX	å®½åº¦æ¯”ä¾‹ç³»æ•°
+	 * @param scaleY	é«˜åº¦æ¯”ä¾‹ç³»æ•°
+	 * @return è¿”å›ä½å›¾å¯¹è±¡
 	 */
 	public static Bitmap zoomBitmap(Bitmap src, float scaleX, float scaleY) {
 		Matrix matrix = new Matrix();
 		matrix.setScale(scaleX, scaleY);
-		Bitmap t_bitmap = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix,
-				true);
+		Bitmap t_bitmap = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
 		return t_bitmap;
 	}
-
+	
 	/**
-	 * Í¼Ïñ·Å´óËõĞ¡--¸ù¾İ¿í¶ÈºÍ¸ß¶È
-	 * 
+	 * å›¾åƒæ”¾å¤§ç¼©å°--æ ¹æ®å®½åº¦å’Œé«˜åº¦
 	 * @param src
 	 * @param width
 	 * @param height
@@ -72,20 +66,19 @@ public class ImageUtil {
 	public static Bitmap zoomBimtap(Bitmap src, int width, int height) {
 		return Bitmap.createScaledBitmap(src, width, height, true);
 	}
-
+	
 	/**
-	 * ½«Drawable×ªÎªBitmap¶ÔÏó
-	 * 
+	 * å°†Drawableè½¬ä¸ºBitmapå¯¹è±¡
 	 * @param drawable
 	 * @return
 	 */
 	public static Bitmap drawableToBitmap(Drawable drawable) {
-		return ((BitmapDrawable) drawable).getBitmap();
+		return ((BitmapDrawable)drawable).getBitmap();
 	}
-
+	
+	
 	/**
-	 * ½«Bitmap×ª»»ÎªDrawable¶ÔÏó
-	 * 
+	 * å°†Bitmapè½¬æ¢ä¸ºDrawableå¯¹è±¡
 	 * @param bitmap
 	 * @return
 	 */
@@ -93,10 +86,9 @@ public class ImageUtil {
 		Drawable drawable = new BitmapDrawable(bitmap);
 		return drawable;
 	}
-
+	
 	/**
-	 * Bitmap×ªbyte[]
-	 * 
+	 * Bitmapè½¬byte[]
 	 * @param bitmap
 	 * @return
 	 */
@@ -105,23 +97,21 @@ public class ImageUtil {
 		bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
 		return out.toByteArray();
 	}
-
+	
 	/**
-	 * byte[]×ªBitmap
-	 * 
+	 * byte[]è½¬Bitmap
 	 * @param data
 	 * @return
 	 */
 	public static Bitmap byteToBitmap(byte[] data) {
-		if (data.length != 0) {
+		if(data.length != 0) {
 			return BitmapFactory.decodeByteArray(data, 0, data.length);
 		}
 		return null;
 	}
-
+	
 	/**
-	 * »æÖÆ´øÔ²½ÇµÄÍ¼Ïñ
-	 * 
+	 * ç»˜åˆ¶å¸¦åœ†è§’çš„å›¾åƒ
 	 * @param src
 	 * @param radius
 	 * @return
@@ -129,29 +119,28 @@ public class ImageUtil {
 	public static Bitmap createRoundedCornerBitmap(Bitmap src, int radius) {
 		final int w = src.getWidth();
 		final int h = src.getHeight();
-		// ¸ßÇåÁ¿32Î»Í¼
+		// é«˜æ¸…é‡32ä½å›¾
 		Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 		Paint paint = new Paint();
 		Canvas canvas = new Canvas(bitmap);
 		canvas.drawARGB(0, 0, 0, 0);
 		paint.setColor(0xff424242);
-		// ·ÀÖ¹±ßÔµµÄ¾â³İ
+		// é˜²æ­¢è¾¹ç¼˜çš„é”¯é½¿
 		paint.setFilterBitmap(true);
 		Rect rect = new Rect(0, 0, w, h);
 		RectF rectf = new RectF(rect);
-		// »æÖÆ´øÔ²½ÇµÄ¾ØĞÎ
+		// ç»˜åˆ¶å¸¦åœ†è§’çš„çŸ©å½¢
 		canvas.drawRoundRect(rectf, radius, radius, paint);
-
-		// È¡Á½²ã»æÖÆ½»¼¯£¬ÏÔÊ¾ÉÏ²ã
+		
+		// å–ä¸¤å±‚ç»˜åˆ¶äº¤é›†ï¼Œæ˜¾ç¤ºä¸Šå±‚
 		paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-		// »æÖÆÍ¼Ïñ
+		// ç»˜åˆ¶å›¾åƒ
 		canvas.drawBitmap(src, rect, rect, paint);
 		return bitmap;
 	}
-
+	
 	/**
-	 * ´´½¨Ñ¡ÖĞ´øÌáÊ¾Í¼Æ¬
-	 * 
+	 * åˆ›å»ºé€‰ä¸­å¸¦æç¤ºå›¾ç‰‡
 	 * @param context
 	 * @param srcId
 	 * @param tipId
@@ -165,102 +154,99 @@ public class ImageUtil {
 		Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 		Paint paint = new Paint();
 		Canvas canvas = new Canvas(bitmap);
-		// »æÖÆÔ­Í¼
+		//ç»˜åˆ¶åŸå›¾
 		canvas.drawBitmap(src, 0, 0, paint);
-		// »æÖÆÌáÊ¾Í¼Æ¬
+		//ç»˜åˆ¶æç¤ºå›¾ç‰‡
 		canvas.drawBitmap(tip, (w - tip.getWidth()), 0, paint);
 		return bitmapToDrawable(bitmap);
 	}
-
+	
 	/**
-	 * ´øµ¹Ó°µÄÍ¼Ïñ
-	 * 
+	 * å¸¦å€’å½±çš„å›¾åƒ
 	 * @param src
 	 * @return
 	 */
 	public static Bitmap createReflectionBitmap(Bitmap src) {
-		// Á½¸öÍ¼Ïñ¼äµÄ¿ÕÏ¶
+		// ä¸¤ä¸ªå›¾åƒé—´çš„ç©ºéš™
 		final int spacing = 4;
 		final int w = src.getWidth();
 		final int h = src.getHeight();
-		// »æÖÆ¸ßÖÊÁ¿32Î»Í¼
+		// ç»˜åˆ¶é«˜è´¨é‡32ä½å›¾
 		Bitmap bitmap = Bitmap.createBitmap(w, h + h / 2 + spacing, Config.ARGB_8888);
-		// ´´½¨ÑàXÖáµÄµ¹Ó°Í¼Ïñ
+		// åˆ›å»ºç‡•Xè½´çš„å€’å½±å›¾åƒ
 		Matrix m = new Matrix();
 		m.setScale(1, -1);
 		Bitmap t_bitmap = Bitmap.createBitmap(src, 0, h / 2, w, h / 2, m, true);
-
+		
 		Canvas canvas = new Canvas(bitmap);
 		Paint paint = new Paint();
-		// »æÖÆÔ­Í¼Ïñ
+		//	ç»˜åˆ¶åŸå›¾åƒ
 		canvas.drawBitmap(src, 0, 0, paint);
-		// »æÖÆµ¹Ó°Í¼Ïñ
+		// ç»˜åˆ¶å€’å½±å›¾åƒ
 		canvas.drawBitmap(t_bitmap, 0, h + spacing, paint);
-		// ÏßĞÔäÖÈ¾-ÑØYÖá¸ßµ½µÍäÖÈ¾
-		Shader shader = new LinearGradient(0, h + spacing, 0, h + spacing + h / 2, 0x70ffffff,
-				0x00ffffff, Shader.TileMode.MIRROR);
+		// çº¿æ€§æ¸²æŸ“-æ²¿Yè½´é«˜åˆ°ä½æ¸²æŸ“
+		Shader shader = new LinearGradient(0, h + spacing, 0, h + spacing + h / 2, 0x70ffffff, 0x00ffffff, Shader.TileMode.MIRROR);
 		paint.setShader(shader);
-		// È¡Á½²ã»æÖÆ½»¼¯£¬ÏÔÊ¾ÏÂ²ã¡£
+		// å–ä¸¤å±‚ç»˜åˆ¶äº¤é›†ï¼Œæ˜¾ç¤ºä¸‹å±‚ã€‚
 		paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
-		// »æÖÆäÖÈ¾µ¹Ó°µÄ¾ØĞÎ
+		// ç»˜åˆ¶æ¸²æŸ“å€’å½±çš„çŸ©å½¢
 		canvas.drawRect(0, h + spacing, w, h + h / 2 + spacing, paint);
 		return bitmap;
 	}
-
+	
+	
 	/**
-	 * ¶ÀÁ¢µÄµ¹Ó°Í¼Ïñ
-	 * 
+	 * ç‹¬ç«‹çš„å€’å½±å›¾åƒ
 	 * @param src
 	 * @return
 	 */
 	public static Bitmap createReflectionBitmapForSingle(Bitmap src) {
 		final int w = src.getWidth();
 		final int h = src.getHeight();
-		// »æÖÆ¸ßÖÊÁ¿32Î»Í¼
+		// ç»˜åˆ¶é«˜è´¨é‡32ä½å›¾
 		Bitmap bitmap = Bitmap.createBitmap(w, h / 2, Config.ARGB_8888);
-		// ´´½¨ÑØXÖáµÄµ¹Ó°Í¼Ïñ
+		// åˆ›å»ºæ²¿Xè½´çš„å€’å½±å›¾åƒ
 		Matrix m = new Matrix();
 		m.setScale(1, -1);
 		Bitmap t_bitmap = Bitmap.createBitmap(src, 0, h / 2, w, h / 2, m, true);
 
 		Canvas canvas = new Canvas(bitmap);
 		Paint paint = new Paint();
-		// »æÖÆµ¹Ó°Í¼Ïñ
+		// ç»˜åˆ¶å€’å½±å›¾åƒ
 		canvas.drawBitmap(t_bitmap, 0, 0, paint);
-		// ÏßĞÔäÖÈ¾-ÑØYÖá¸ßµ½µÍäÖÈ¾
-		Shader shader = new LinearGradient(0, 0, 0, h / 2, 0x70ffffff, 0x00ffffff,
-				Shader.TileMode.MIRROR);
+		// çº¿æ€§æ¸²æŸ“-æ²¿Yè½´é«˜åˆ°ä½æ¸²æŸ“	
+		Shader shader = new LinearGradient(0, 0, 0, h / 2, 0x70ffffff,
+				0x00ffffff, Shader.TileMode.MIRROR);
 		paint.setShader(shader);
-		// È¡Á½²ã»æÖÆ½»¼¯¡£ÏÔÊ¾ÏÂ²ã¡£
+		// å–ä¸¤å±‚ç»˜åˆ¶äº¤é›†ã€‚æ˜¾ç¤ºä¸‹å±‚ã€‚
 		paint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
-		// »æÖÆäÖÈ¾µ¹Ó°µÄ¾ØĞÎ
+		// ç»˜åˆ¶æ¸²æŸ“å€’å½±çš„çŸ©å½¢
 		canvas.drawRect(0, 0, w, h / 2, paint);
 		return bitmap;
 	}
-
+	
+	
 	public static Bitmap createGreyBitmap(Bitmap src) {
 		final int w = src.getWidth();
 		final int h = src.getHeight();
 		Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		Paint paint = new Paint();
-		// ÑÕÉ«±ä»»µÄ¾ØÕó
+		// é¢œè‰²å˜æ¢çš„çŸ©é˜µ
 		ColorMatrix matrix = new ColorMatrix();
-		// saturation ±¥ºÍ¶ÈÖµ£¬×îĞ¡¿ÉÉèÎª0£¬´ËÊ±¶ÔÓ¦µÄÊÇ»Ò¶ÈÍ¼£»Îª1±íÊ¾±¥ºÍ¶È²»±ä£¬ÉèÖÃ´óÓÚ1£¬¾ÍÏÔÊ¾¹ı±¥ºÍ
+		// saturation é¥±å’Œåº¦å€¼ï¼Œæœ€å°å¯è®¾ä¸º0ï¼Œæ­¤æ—¶å¯¹åº”çš„æ˜¯ç°åº¦å›¾ï¼›ä¸º1è¡¨ç¤ºé¥±å’Œåº¦ä¸å˜ï¼Œè®¾ç½®å¤§äº1ï¼Œå°±æ˜¾ç¤ºè¿‡é¥±å’Œ
 		matrix.setSaturation(0);
 		ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
 		paint.setColorFilter(filter);
 		canvas.drawBitmap(src, 0, 0, paint);
 		return bitmap;
 	}
-
+	
 	/**
-	 * ±£´æÍ¼Æ¬
-	 * 
+	 * ä¿å­˜å›¾ç‰‡
 	 * @param src
 	 * @param filepath
-	 * @param format
-	 *            :[Bitmap.CompressFormat.PNG,Bitmap.CompressFormat.JPEG]
+	 * @param format:[Bitmap.CompressFormat.PNG,Bitmap.CompressFormat.JPEG]
 	 * @return
 	 */
 	public static boolean saveImage(Bitmap src, String filepath, CompressFormat format) {
@@ -268,8 +254,8 @@ public class ImageUtil {
 		File file = new File(filepath);
 		try {
 			FileOutputStream out = new FileOutputStream(file);
-			if (src.compress(format, 100, out)) {
-				out.flush(); // Ğ´ÈëÁ÷
+			if(src.compress(format, 100, out)) {
+				out.flush();	//å†™å…¥æµ
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -279,18 +265,13 @@ public class ImageUtil {
 		}
 		return rs;
 	}
-
+	
 	/**
-	 * Ìí¼ÓË®Ó¡Ğ§¹û
-	 * 
-	 * @param src
-	 *            Ô´Î»Í¼
-	 * @param watermark
-	 *            Ë®Ó¡
-	 * @param direction
-	 *            ·½Ïò
-	 * @param spacing
-	 *            ¼ä¾à
+	 * æ·»åŠ æ°´å°æ•ˆæœ
+	 * @param src		æºä½å›¾
+	 * @param watermark	æ°´å°
+	 * @param direction	æ–¹å‘
+	 * @param spacing é—´è·
 	 * @return
 	 */
 	public static Bitmap createWatermark(Bitmap src, Bitmap watermark, int direction, int spacing) {
@@ -299,28 +280,27 @@ public class ImageUtil {
 		Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		canvas.drawBitmap(src, 0, 0, null);
-		if (direction == LEFT_TOP) {
+		if(direction == LEFT_TOP) {
 			canvas.drawBitmap(watermark, spacing, spacing, null);
-		} else if (direction == LEFT_BOTTOM) {
+		} else if(direction == LEFT_BOTTOM){
 			canvas.drawBitmap(watermark, spacing, h - watermark.getHeight() - spacing, null);
-		} else if (direction == RIGHT_TOP) {
+		} else if(direction == RIGHT_TOP) {
 			canvas.drawBitmap(watermark, w - watermark.getWidth() - spacing, spacing, null);
-		} else if (direction == RIGHT_BOTTOM) {
-			canvas.drawBitmap(watermark, w - watermark.getWidth() - spacing,
-					h - watermark.getHeight() - spacing, null);
+		} else if(direction == RIGHT_BOTTOM) {
+			canvas.drawBitmap(watermark, w - watermark.getWidth() - spacing, h - watermark.getHeight() - spacing, null);
 		}
 		return bitmap;
 	}
-
+	
+	
 	/**
-	 * ºÏ³ÉÍ¼Ïñ
-	 * 
+	 * åˆæˆå›¾åƒ
 	 * @param direction
 	 * @param bitmaps
 	 * @return
 	 */
 	public static Bitmap composeBitmap(int direction, Bitmap... bitmaps) {
-		if (bitmaps.length < 2) {
+		if(bitmaps.length < 2) {
 			return null;
 		}
 		Bitmap firstBitmap = bitmaps[0];
@@ -331,18 +311,18 @@ public class ImageUtil {
 	}
 
 	/**
-	 * ºÏ³ÉÁ½ÕÅÍ¼Ïñ
-	 * 
+	 * åˆæˆä¸¤å¼ å›¾åƒ
 	 * @param firstBitmap
 	 * @param secondBitmap
 	 * @param direction
 	 * @return
 	 */
-	private static Bitmap composeBitmap(Bitmap firstBitmap, Bitmap secondBitmap, int direction) {
-		if (firstBitmap == null) {
+	private static Bitmap composeBitmap(Bitmap firstBitmap, Bitmap secondBitmap,
+			int direction) {
+		if(firstBitmap == null) {
 			return null;
 		}
-		if (secondBitmap == null) {
+		if(secondBitmap == null) {
 			return firstBitmap;
 		}
 		final int fw = firstBitmap.getWidth();
@@ -351,28 +331,30 @@ public class ImageUtil {
 		final int sh = secondBitmap.getHeight();
 		Bitmap bitmap = null;
 		Canvas canvas = null;
-		if (direction == TOP) {
+		if(direction == TOP) {
 			bitmap = Bitmap.createBitmap(sw > fw ? sw : fw, fh + sh, Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(secondBitmap, 0, 0, null);
 			canvas.drawBitmap(firstBitmap, 0, sh, null);
-		} else if (direction == BOTTOM) {
+		} else if(direction == BOTTOM) {
 			bitmap = Bitmap.createBitmap(fw > sw ? fw : sw, fh + sh, Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(firstBitmap, 0, 0, null);
 			canvas.drawBitmap(secondBitmap, 0, fh, null);
-		} else if (direction == LEFT) {
+		} else if(direction == LEFT) {
 			bitmap = Bitmap.createBitmap(fw + sw, sh > fh ? sh : fh, Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(secondBitmap, 0, 0, null);
 			canvas.drawBitmap(firstBitmap, sw, 0, null);
-		} else if (direction == RIGHT) {
-			bitmap = Bitmap.createBitmap(fw + sw, fh > sh ? fh : sh, Config.ARGB_8888);
+		} else if(direction == RIGHT) {
+			bitmap = Bitmap.createBitmap(fw + sw, fh > sh ? fh : sh,
+					Config.ARGB_8888);
 			canvas = new Canvas(bitmap);
 			canvas.drawBitmap(firstBitmap, 0, 0, null);
 			canvas.drawBitmap(secondBitmap, fw, 0, null);
 		}
 		return bitmap;
 	}
-
+	
+	
 }

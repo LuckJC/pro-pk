@@ -1,8 +1,6 @@
 package com.example.musicplayer;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -42,52 +40,52 @@ import com.example.utils.MediaUtil;
 @SuppressLint("NewApi")
 public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 
-	private int repeatState; // Ñ­»·±êÊ¶
-	private final int isCurrentRepeat = 1; // µ¥ÇúÑ­»·
-	private final int isAllRepeat = 2; // È«²¿Ñ­»·
-	private final int isNoneRepeat = 3; // ÎŞÖØ¸´²¥·Å
+	private int repeatState; // é‡å¤çŠ¶æ€
+	private final int isCurrentRepeat = 1; // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
+	private final int isAllRepeat = 2; // È«ï¿½ï¿½Ñ­ï¿½ï¿½
+	private final int isNoneRepeat = 3; // ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	private boolean isFirstTime = true;
-	private boolean isPlaying; // ÕıÔÚ²¥·Å
-	private boolean isPause; // ÔİÍ£
-	private boolean isNoneShuffle = true; // Ë³Ğò²¥·Å
-	private boolean isShuffle = false; // Ëæ»ú²¥·Å
+	private boolean isPlaying; // 
+	private boolean isPause; // ï¿½ï¿½Í£
+	private boolean isNoneShuffle = true; // Ë³ï¿½ò²¥·ï¿½
+	private boolean isShuffle = false; // éšæœº
 	private RelativeLayout mLinearLayoutVol;
 
-	private String title; // ¸èÇú±êÌâ
-	private String artist; // ¸èÇúÒÕÊõ¼Ò
-	private String url; // ¸èÇúÂ·¾¶
-	private int listPosition; // ²¥·Å¸èÇúÔÚmp3InfosµÄÎ»ÖÃ
-	private int currentTime; // µ±Ç°¸èÇú²¥·ÅÊ±¼ä
-	private int duration; // ¸èÇú³¤¶È
-	private int flag; // ²¥·Å±êÊ¶
+	private String title; // æ­Œå
+	private String artist; // æ­Œæ‰‹å
+	private String url; // æ­Œæ›²è·¯å¾„
+	private int listPosition; // å½“å‰æ­Œæ›²ä½ç½®
+	private int currentTime; // å½“å‰æ’­æ”¾æ—¶é—´
+	private int duration; // éŸ³ä¹æ—¶é•¿
+	private int flag; // ï¿½ï¿½ï¿½Å±ï¿½Ê¶
 
 	private TextView mPlayCurrentTime;
 	private TextView mPlayFinalTime;
 	private TextView mMusicName;
 	private TextView mMusicSiger;
 	private SeekBar mPlayProgress;
-	private SeekBar mPlayVol; // ¿ØÖÆÒôÁ¿´óĞ¡
+	private SeekBar mPlayVol; // å£°éŸ³æ§åˆ¶
 	// private CheckBox mPlay;
 	private Button mLastSong;
 	private Button mNextSong;
 	private Button mAddVol;
 	private Button mSubVol;
-	private Button playBtn; // ²¥·Å£¨²¥·Å¡¢ÔİÍ££©
+	private Button playBtn; // æ’­æ”¾æŒ‰é’®
 	private Button repeatBtn;
 	private Button shuffleBtn;
 	private List<Mp3Info> mp3Infos;
 
-	private AudioManager am; // ÒôÆµ¹ÜÀíÒıÓÃ£¬Ìá¹©¶ÔÒôÆµµÄ¿ØÖÆ
-	// RelativeLayout ll_player_voice; // ÒôÁ¿¿ØÖÆÃæ°å²¼¾Ö
-	int currentVolume; // µ±Ç°ÒôÁ¿
-	int maxVolume; // ×î´óÒôÁ¿
-	// ImageButton ibtn_player_voice; // ÏÔÊ¾ÒôÁ¿¿ØÖÆÃæ°åµÄ°´Å¥
-	// ÒôÁ¿Ãæ°åÏÔÊ¾ºÍÒş²Ø¶¯»­
+	private AudioManager am; // ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½á¹©ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä¿ï¿½ï¿½ï¿½
+	// RelativeLayout ll_player_voice; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å²¼ï¿½ï¿½
+	int currentVolume; // å½“å‰éŸ³é‡
+	int maxVolume; // æœ€å¤§éŸ³é‡
+	// ImageButton ibtn_player_voice; // ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä°ï¿½Å¥
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
 	private Animation showVoicePanelAnimation;
 	private Animation hiddenVoicePanelAnimation;
 
-	private ImageView musicAlbum; // ÒôÀÖ×¨¼­·âÃæ
-	// private ImageView musicAblumReflection; // µ¹Ó°·´Éä
+	private ImageView musicAlbum; // ä¸“è¾‘çš„å°é¢
+	// private ImageView musicAblumReflection; // ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½
 
 	private SharedPreferences share;
 	private Editor edit;
@@ -95,14 +93,14 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private Dialog mDialog;
 	
 	private PlayerReceiver playerReceiver;
-	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // ¸üĞÂ¶¯×÷
-	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // ¿ØÖÆ¶¯×÷
-	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // ÒôÀÖµ±Ç°Ê±¼ä¸Ä±ä¶¯×÷
-	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// ÒôÀÖ²¥·Å³¤¶È¸Ä±ä¶¯×÷
-	public static final String MUSIC_PLAYING = "com.shizhong.action.MUSIC_PLAYING"; // ÒôÀÖÕıÔÚ²¥·Å¶¯×÷
-	public static final String REPEAT_ACTION = "com.shizhong.action.REPEAT_ACTION"; // ÒôÀÖÖØ¸´²¥·Å¶¯×÷
-	public static final String SHUFFLE_ACTION = "com.shizhong.action.SHUFFLE_ACTION";// ÒôÀÖËæ»ú²¥·Å¶¯×÷
-	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // ÊÖÊÆ¿ØÖÆ×Ô¶¯²¥·Å
+	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // æ›´æ–°åŠ¨ä½œ
+	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // æ§åˆ¶åŠ¨ä½œ
+	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // å½“å‰éŸ³ä¹æ”¹å˜åŠ¨ä½œ
+	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// éŸ³ä¹æ—¶é•¿æ”¹å˜åŠ¨ä½œ
+	public static final String MUSIC_PLAYING = "com.shizhong.action.MUSIC_PLAYING"; // æ’­æ”¾éŸ³ä¹åŠ¨ä½œ
+	public static final String REPEAT_ACTION = "com.shizhong.action.REPEAT_ACTION"; // éŸ³ä¹é‡å¤æ”¹å˜åŠ¨ä½œ
+	public static final String SHUFFLE_ACTION = "com.shizhong.action.SHUFFLE_ACTION";// éŸ³ä¹éšæœºæ’­æ”¾åŠ¨ä½œ
+	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // æ‰‹åŠ¿æ’­æ”¾éŸ³ä¹åŠ¨ä½œ
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -113,22 +111,21 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		share = getSharedPreferences("playInfo", Context.MODE_PRIVATE);
 		edit = share.edit();
 		initView();
-		mp3Infos = MediaUtil.getMp3Infos(MainActivity.this); // »ñÈ¡ËùÓĞÒôÀÖµÄ¼¯ºÏ¶ÔÏó
+		mp3Infos = MediaUtil.getMp3Infos(MainActivity.this); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¼ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
 		if(mp3Infos != null &&mp3Infos.size() > 0 ){
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
-			
 		}
 		switch (repeatState) {
-		case isCurrentRepeat: // µ¥ÇúÑ­»·
+		case isCurrentRepeat: // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 			break;
-		case isAllRepeat: // È«²¿Ñ­»·
+		case isAllRepeat: // È«ï¿½ï¿½Ñ­ï¿½ï¿½
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 			break;
-		case isNoneRepeat: // ÎŞÖØ¸´
+		case isNoneRepeat: // ï¿½ï¿½ï¿½Ø¸ï¿½
 			shuffleBtn.setClickable(true);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 			break;
@@ -142,20 +139,20 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			shuffleBtn.setBackgroundResource(R.drawable.shuffle_none_selector);
 			repeatBtn.setClickable(true);
 		}
-		if (flag == AppConstant.PlayerMsg.PLAYING_MSG) { // Èç¹û²¥·ÅĞÅÏ¢ÊÇÕıÔÚ²¥·Å
-			Toast.makeText(MainActivity.this, "ÕıÔÚ²¥·Å--" + title, 1).show();
+		if (flag == AppConstant.PlayerMsg.PLAYING_MSG) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½
+			Toast.makeText(MainActivity.this, "ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½--" + title, 1).show();
 			Intent intent = new Intent();
 			// intent.setAction(SHOW_LRC);
 			intent.putExtra("listPosition", listPosition);
 			sendBroadcast(intent);
-		} else if (flag == AppConstant.PlayerMsg.PLAY_MSG) { // Èç¹ûÊÇµã»÷ÁĞ±í²¥·Å¸èÇúµÄ»°
+		} else if (flag == AppConstant.PlayerMsg.PLAY_MSG) { // ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½Ğ±ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½Ä»ï¿½
 			playBtn.setBackgroundResource(R.drawable.play_selector);
 			play();
 		} else if (flag == AppConstant.PlayerMsg.CONTINUE_MSG) {
 			Intent intent = new Intent(MainActivity.this, PlayerService.class);
 			playBtn.setBackgroundResource(R.drawable.play_selector);
 			intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-			intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ¼ÌĞø²¥·ÅÒôÀÖ
+			intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			startService(intent);
 		}
 		registerReceiver();
@@ -188,9 +185,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		playBtn.setOnClickListener(this);
 		repeatBtn.setOnClickListener(this);
 		shuffleBtn.setOnClickListener(this);
-		repeatState = isNoneRepeat; // ³õÊ¼×´Ì¬ÎªÎŞÖØ¸´²¥·Å×´Ì¬
+		repeatState = isNoneRepeat; // ï¿½ï¿½Ê¼×´Ì¬Îªï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 		boolean isRead = share.getBoolean("isPlaying", false);
 		if (isRead) {
+			url = share.getString("url", "");
 			currentTime = share.getInt("duration", 0);
 			duration = share.getInt("currentTime", 0);
 			listPosition = share.getInt("position", 0);
@@ -201,16 +199,22 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
 			mMusicName.setText(share.getString("title", ""));
 			mMusicSiger.setText(share.getString("singer", ""));
+		}else{
+			if(mp3Infos != null &&mp3Infos.size() > 0 ){
+				Mp3Info mp3Info = mp3Infos.get(listPosition);
+				url = mp3Info.getUrl();
+				listPosition = 0;
+			}
 		}
-		// Ìí¼ÓÀ´µç¼àÌıÊÂ¼ş
-		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); // »ñÈ¡ÏµÍ³·şÎñ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
+		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); // ï¿½ï¿½È¡ÏµÍ³ï¿½ï¿½ï¿½ï¿½
 		telManager.listen(new MobliePhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
-		// ÒôÁ¿µ÷½ÚÃæ°åÏÔÊ¾ºÍÒş²ØµÄ¶¯»­
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄ¶ï¿½ï¿½ï¿½
 		showVoicePanelAnimation = AnimationUtils.loadAnimation(this, R.anim.push_up_in);
 		hiddenVoicePanelAnimation = AnimationUtils.loadAnimation(this, R.anim.push_up_out);
 
-		// »ñµÃÏµÍ³ÒôÆµ¹ÜÀí·şÎñ¶ÔÏó
+		// ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
 		maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -223,7 +227,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	private void registerReceiver() {
-		// ¶¨ÒåºÍ×¢²á¹ã²¥½ÓÊÕÆ÷
+		// ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		playerReceiver = new PlayerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(UPDATE_ACTION);
@@ -239,18 +243,18 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		@Override
 		public void onCallStateChanged(int state, String incomingNumber) {
 			switch (state) {
-			case TelephonyManager.CALL_STATE_IDLE: // ¹Ò»ú×´Ì¬
+			case TelephonyManager.CALL_STATE_IDLE: // ï¿½Ò»ï¿½×´Ì¬
 				Intent intent = new Intent(MainActivity.this, PlayerService.class);
 				playBtn.setBackgroundResource(R.drawable.play_selector);
 				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-				intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ¼ÌĞø²¥·ÅÒôÀÖ
+				intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				startService(intent);
 				isPlaying = false;
 				isPause = true;
 
 				break;
-			case TelephonyManager.CALL_STATE_OFFHOOK: // Í¨»°×´Ì¬
-			case TelephonyManager.CALL_STATE_RINGING: // ÏìÁå×´Ì¬
+			case TelephonyManager.CALL_STATE_OFFHOOK: // Í¨ï¿½ï¿½×´Ì¬
+			case TelephonyManager.CALL_STATE_RINGING: // ï¿½ï¿½ï¿½ï¿½×´Ì¬
 				Intent intent2 = new Intent(MainActivity.this, PlayerService.class);
 				playBtn.setBackgroundResource(R.drawable.pause_selector);
 				intent2.setAction("com.shizhong.media.MUSIC_SERVICE");
@@ -320,23 +324,51 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
-			if (isPlaying) {
-				playBtn.setBackgroundResource(R.drawable.pause_selector);
-				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-				intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
-				startService(intent);
-				isPlaying = false;
-				isPause = true;
-			} else if (isPause) {
+			if(isFirstTime){
+//				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+//				intent.putExtra("url", url);
+//				intent.putExtra("listPosition", listPosition);
+//				intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
+//				startService(intent);
 				playBtn.setBackgroundResource(R.drawable.play_selector);
-				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-				intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
-				startService(intent);
-				isPause = false;
-				isPlaying = true;
+				if(mp3Infos != null &&mp3Infos.size() > 1 ){
+					if (listPosition <= mp3Infos.size() - 1) {
+						Mp3Info mp3Info = mp3Infos.get(listPosition);
+						showArtwork(mp3Info); // 
+						url = mp3Info.getUrl();
+						mMusicName.setText(mp3Info.getTitle());
+						mMusicSiger.setText(mp3Info.getArtist());
+						intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+						intent.putExtra("url", mp3Info.getUrl());
+						intent.putExtra("listPosition", listPosition);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
+						startService(intent);
+				}
+
+				} else {
+					listPosition = mp3Infos.size() - 1;
+					Toast.makeText(MainActivity.this, "æ²¡æœ‰éŸ³ä¹æ–‡ä»¶", Toast.LENGTH_SHORT).show();
+				}
+				isFirstTime = false;
+			}else{
+				if (isPlaying) {
+					playBtn.setBackgroundResource(R.drawable.pause_selector);
+					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+					intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
+					startService(intent);
+					isPlaying = false;
+					isPause = true;
+				} else if (isPause) {
+					playBtn.setBackgroundResource(R.drawable.play_selector);
+					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
+					startService(intent);
+					isPause = false;
+					isPlaying = true;
+				}
 			}
 			break;
-		case R.id.repeat_music: // ÖØ¸´²¥·Å
+		case R.id.repeat_music: // ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (repeatState == isNoneRepeat) {
 				repeat_one();
 				shuffleBtn.setClickable(false);
@@ -351,23 +383,23 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 				repeatState = isNoneRepeat;
 			}
 			switch (repeatState) {
-			case isCurrentRepeat: // µ¥ÇúÑ­»·
+			case isCurrentRepeat: // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 				repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 				Toast.makeText(MainActivity.this, R.string.repeat_current, Toast.LENGTH_SHORT)
 						.show();
 				break;
-			case isAllRepeat: // È«²¿Ñ­»·
+			case isAllRepeat: // È«ï¿½ï¿½Ñ­ï¿½ï¿½
 				repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 				Toast.makeText(MainActivity.this, R.string.repeat_all, Toast.LENGTH_SHORT).show();
 				break;
-			case isNoneRepeat: // ÎŞÖØ¸´
+			case isNoneRepeat: // ï¿½ï¿½ï¿½Ø¸ï¿½
 				repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 				Toast.makeText(MainActivity.this, R.string.repeat_none, Toast.LENGTH_SHORT).show();
 				break;
 			}
 
 			break;
-		case R.id.shuffle_music: // Ëæ»ú²¥·Å
+		case R.id.shuffle_music: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (isNoneShuffle) {
 				shuffleBtn.setBackgroundResource(R.drawable.shuffle_selector);
 				Toast.makeText(MainActivity.this, R.string.shuffle, Toast.LENGTH_SHORT).show();
@@ -408,25 +440,26 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 
 	/**
-	 * ²¥·ÅÒôÀÖ
+	 * æ’­æ”¾
 	 */
 	public void play() {
-		// ¿ªÊ¼²¥·ÅµÄÊ±ºòÎªË³Ğò²¥·Å
+		// é»˜è®¤ä¸å¾ªç¯
 		repeat_none();
 		Intent intent = new Intent();
 		intent.setAction("com.shizhong.media.MUSIC_SERVICE");
 		intent.putExtra("url", url);
 		intent.putExtra("listPosition", listPosition);
-		intent.putExtra("MSG", flag);
+		intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
 		startService(intent);
 	}
 
 	/**
-	 * <br>
-	 * ¹¦ÄÜ¼òÊö:ÉùÒô²¼¾ÖÏÔÊ¾»òÒş²Ø <br>
-	 * ¹¦ÄÜÏêÏ¸ÃèÊö: <br>
-	 * ×¢Òâ:
+	 * <br>åŠŸèƒ½ç®€è¿°:
+	 * <br>åŠŸèƒ½è¯¦ç»†æè¿°:
+	 * <br>æ³¨æ„:
 	 */
+	
+	
 	private void volumeStatusLayout() {
 		if (mLinearLayoutVol.isShown()) {
 			mLinearLayoutVol.setVisibility(View.GONE);
@@ -461,11 +494,11 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		switch (seekBar.getId()) {
 		case R.id.audioTrack:
 			if (fromUser) {
-				audioTrackChange(progress); // ÓÃ»§¿ØÖÆ½ø¶ÈµÄ¸Ä±ä
+				audioTrackChange(progress); // 
 			}
 			break;
 		case R.id.seekbar_vol:
-			// ÉèÖÃÒôÁ¿
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			am.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
 			System.out.println("am--->" + progress);
 			break;
@@ -484,29 +517,29 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * ÏÔÊ¾×¨¼­·âÃæ
+	 * æ˜¾ç¤ºä¸“è¾‘å°é¢
 	 */
 	private void showArtwork(Mp3Info mp3Info) {
 		Bitmap bm = MediaUtil.getArtwork(this, mp3Info.getId(), mp3Info.getAlbumId(), true, false);
-		// ÇĞ»»²¥·ÅÊ±ºò×¨¼­Í¼Æ¬³öÏÖÍ¸Ã÷Ğ§¹û
+		// ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½×¨ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½Ğ§ï¿½ï¿½
 		Animation albumanim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.album_replace);
-		// ¿ªÊ¼²¥·Å¶¯»­Ğ§¹û
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Å¶ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½
 		musicAlbum.startAnimation(albumanim);
 		if (bm != null) {
-			musicAlbum.setImageBitmap(bm); // ÏÔÊ¾×¨¼­·âÃæÍ¼Æ¬
+			musicAlbum.setImageBitmap(bm); // ï¿½ï¿½Ê¾×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
-			// // ÏÔÊ¾µ¹Ó°
+			// // ï¿½ï¿½Ê¾ï¿½ï¿½Ó°
 		} else {
 			bm = MediaUtil.getDefaultArtwork(this, false);
-			musicAlbum.setImageBitmap(bm); // ÏÔÊ¾×¨¼­·âÃæÍ¼Æ¬
+			musicAlbum.setImageBitmap(bm); // ï¿½ï¿½Ê¾×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬
 			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
-			// // ÏÔÊ¾µ¹Ó°
+			// // ï¿½ï¿½Ê¾ï¿½ï¿½Ó°
 		}
 
 	}
 
 	/**
-	 * ²¥·Å½ø¶È¸Ä±ä
+	 * ï¿½ï¿½ï¿½Å½ï¿½ï¿½È¸Ä±ï¿½
 	 * 
 	 * @param progress
 	 */
@@ -521,7 +554,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * µ¥ÇúÑ­»·
+	 * å•æ›²å¾ªç¯
 	 */
 	public void repeat_one() {
 		Intent intent = new Intent(CTL_ACTION);
@@ -530,7 +563,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * È«²¿Ñ­»·
+	 * åˆ—è¡¨å¾ªç¯
 	 */
 	public void repeat_all() {
 		Intent intent = new Intent(CTL_ACTION);
@@ -539,7 +572,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * Ë³Ğò²¥·Å
+	 * ä¸å¾ªç¯
 	 */
 	public void repeat_none() {
 		Intent intent = new Intent(CTL_ACTION);
@@ -548,7 +581,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * Ëæ»ú²¥·Å
+	 * éšæœºæ’­æ”¾
 	 */
 	public void shuffleMusic() {
 		Intent intent = new Intent(CTL_ACTION);
@@ -557,15 +590,15 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * ÉÏÒ»Ê×
+	 * ä¸Šä¸€é¦–
 	 */
 	public void previous_music() {
 		playBtn.setBackgroundResource(R.drawable.play_selector);
 		listPosition = listPosition - 1;
 		if (listPosition >= 0) {
 			if(mp3Infos != null &&mp3Infos.size() > 0 ){
-				Mp3Info mp3Info = mp3Infos.get(listPosition); // ÉÏÒ»Ê×MP3
-				showArtwork(mp3Info); // ÏÔÊ¾×¨¼­·âÃæ
+				Mp3Info mp3Info = mp3Infos.get(listPosition); // ï¿½ï¿½Ò»ï¿½ï¿½MP3
+				showArtwork(mp3Info); // ï¿½ï¿½Ê¾×¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				mMusicName.setText(mp3Info.getTitle());
 				mMusicSiger.setText(mp3Info.getArtist());
 				url = mp3Info.getUrl();
@@ -579,12 +612,12 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 		} else {
 			listPosition = 0;
-			Toast.makeText(MainActivity.this, "Ã»ÓĞÉÏÒ»Ê×ÁË", Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, "æ²¡æœ‰ä¸Šä¸€é¦–äº†", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	/**
-	 * ÏÂÒ»Ê×
+	 * ä¸‹ä¸€é¦–
 	 */
 	public void next_music() {
 		playBtn.setBackgroundResource(R.drawable.play_selector);
@@ -592,7 +625,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		if(mp3Infos != null &&mp3Infos.size() > 2 ){
 			if (listPosition <= mp3Infos.size() - 1) {
 				Mp3Info mp3Info = mp3Infos.get(listPosition);
-				showArtwork(mp3Info); // ÏÔÊ¾×¨¼­·âÃæ
+				showArtwork(mp3Info); // 
 				url = mp3Info.getUrl();
 				mMusicName.setText(mp3Info.getTitle());
 				mMusicSiger.setText(mp3Info.getArtist());
@@ -606,12 +639,12 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 		} else {
 			listPosition = mp3Infos.size() - 1;
-			Toast.makeText(MainActivity.this, "Ã»ÓĞÏÂÒ»Ê×ÁË", Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainActivity.this, "å·²ç»æ˜¯æœ€åä¸€é¦–æ­Œäº†", Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	/**
-	 * ÓÃÀ´½ÓÊÕ´Óservice´«»ØÀ´µÄ¹ã²¥µÄÄÚ²¿Àà
+	 * 
 	 * 
 	 * @author 
 	 * 
@@ -630,7 +663,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 				mPlayProgress.setMax(duration);
 				mPlayFinalTime.setText(MediaUtil.formatTime(duration));
 			} else if (action.equals(UPDATE_ACTION)) {
-				// »ñÈ¡IntentÖĞµÄcurrentÏûÏ¢£¬current´ú±íµ±Ç°ÕıÔÚ²¥·ÅµÄ¸èÇú
+				// ï¿½ï¿½È¡Intentï¿½Ğµï¿½currentï¿½ï¿½Ï¢ï¿½ï¿½currentï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ÅµÄ¸ï¿½ï¿½ï¿½
 				listPosition = intent.getIntExtra("current", -1);
 				url = mp3Infos.get(listPosition).getUrl();
 				if (listPosition >= 0) {
@@ -646,15 +679,15 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			} else if (action.equals(REPEAT_ACTION)) {
 				repeatState = intent.getIntExtra("repeatState", -1);
 				switch (repeatState) {
-				case isCurrentRepeat: // µ¥ÇúÑ­»·
+				case isCurrentRepeat: // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 					repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 					shuffleBtn.setClickable(false);
 					break;
-				case isAllRepeat: // È«²¿Ñ­»·
+				case isAllRepeat: // È«ï¿½ï¿½Ñ­ï¿½ï¿½
 					repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 					shuffleBtn.setClickable(false);
 					break;
-				case isNoneRepeat: // ÎŞÖØ¸´
+				case isNoneRepeat: // ï¿½ï¿½ï¿½Ø¸ï¿½
 					repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 					shuffleBtn.setClickable(true);
 					break;
@@ -707,7 +740,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	}
 
 	/**
-	 * °´·µ»Ø¼üµ¯³ö¶Ô»°¿òÈ·¶¨ÍË³ö
+	 * æ‹¦æˆªé€€å‡ºé”®
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

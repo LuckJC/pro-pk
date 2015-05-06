@@ -22,46 +22,46 @@ import com.example.utils.MediaUtil;
 /***
  * 2013/5/25
  * 
- * @author wwj ÒôÀÖ²¥·Å·şÎñ
+ * @author wwj ï¿½ï¿½ï¿½Ö²ï¿½ï¿½Å·ï¿½ï¿½ï¿½
  */
 @SuppressLint("NewApi")
 public class PlayerService extends Service {
-	private MediaPlayer mediaPlayer; // Ã½Ìå²¥·ÅÆ÷¶ÔÏó
-	private String path; // ÒôÀÖÎÄ¼şÂ·¾¶
-	private int msg; // ²¥·ÅĞÅÏ¢
-	private boolean isPause; // ÔİÍ£×´Ì¬
-	private int current = 0; // ¼ÇÂ¼µ±Ç°ÕıÔÚ²¥·ÅµÄÒôÀÖ
-	private List<Mp3Info> mp3Infos; // ´æ·ÅMp3Info¶ÔÏóµÄ¼¯ºÏ
-	private int status = 3; // ²¥·Å×´Ì¬£¬Ä¬ÈÏÎªË³Ğò²¥·Å
-	private MyReceiver myReceiver; // ×Ô¶¨Òå¹ã²¥½ÓÊÕÆ÷
-	private int currentTime; // µ±Ç°²¥·Å½ø¶È
-	private int duration; // ²¥·Å³¤¶È
+	private MediaPlayer mediaPlayer; // Ã½ï¿½å²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String path; // æ’­æ”¾çš„è·¯å¾„
+	private int msg; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	private boolean isPause; // æš‚åœ×´
+	private int current = 0; // ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½
+	private List<Mp3Info> mp3Infos; // æ‰€æœ‰æ­Œæ›²çš„é›†åˆ
+	private int status = 3; // ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ä¬ï¿½ï¿½ÎªË³ï¿½ò²¥·ï¿½
+	private MyReceiver myReceiver; // ï¿½Ô¶ï¿½ï¿½ï¿½ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int currentTime; // å½“å‰æ’­æ”¾è¿›åº¦
+	private int duration; // æ­Œæ›²æ—¶é•¿
 
-	private String mSongName; // ¸èÃû
-	private String mSinger; // ¸èÊÖ
+	private String mSongName; // æ­Œå
+	private String mSinger; // æ­Œæ‰‹å
 
-	// private LrcProcess mLrcProcess; //¸è´Ê´¦Àí
+	// private LrcProcess mLrcProcess; //ï¿½ï¿½Ê´ï¿½ï¿½ï¿½
 	// private List<LrcContent> lrcList = new ArrayList<LrcContent>();
-	// //´æ·Å¸è´ÊÁĞ±í¶ÔÏó
-	// private int index = 0; //¸è´Ê¼ìË÷Öµ
+	// //ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½
+	// private int index = 0; //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Öµ
 
-	// ·şÎñÒª·¢ËÍµÄÒ»Ğ©Action
-	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // ¸üĞÂ¶¯×÷
-	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // ¿ØÖÆ¶¯×÷
-	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // µ±Ç°ÒôÀÖ²¥·ÅÊ±¼ä¸üĞÂ¶¯×÷
-	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// ĞÂÒôÀÖ³¤¶È¸üĞÂ¶¯×÷
-	public static final String SHOW_LRC = "com.shizhong.action.SHOW_LRC"; // Í¨ÖªÏÔÊ¾¸è´Ê
-	public static final String LAST_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; //ÉÏÒ»Ê×¸è
-	public static final String NEXT_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT";   //ÏÂÒ»Ê×¸è
-	public static final String PLAY_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC";   // ²¥·Å»òÔİÍ£
+	// ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Íµï¿½Ò»Ğ©Action
+	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½
+	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½
+	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½
+	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// ï¿½ï¿½ï¿½ï¿½ï¿½Ö³ï¿½ï¿½È¸ï¿½ï¿½Â¶ï¿½ï¿½ï¿½
+	public static final String SHOW_LRC = "com.shizhong.action.SHOW_LRC"; // Í¨Öªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+	public static final String LAST_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; //ï¿½ï¿½Ò»ï¿½×¸ï¿½
+	public static final String NEXT_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT";   //ï¿½ï¿½Ò»ï¿½×¸ï¿½
+	public static final String PLAY_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC";   // ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½Í£
 	/**
-	 * handlerÓÃÀ´½ÓÊÕÏûÏ¢£¬À´·¢ËÍ¹ã²¥¸üĞÂ²¥·ÅÊ±¼ä
+	 * handle æ›´æ–°æ’­æ”¾è¿›åº¦æ¡
 	 */
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == 1) {
 				if (mediaPlayer != null) {
-					currentTime = mediaPlayer.getCurrentPosition(); // »ñÈ¡µ±Ç°ÒôÀÖ²¥·ÅµÄÎ»ÖÃ
+					currentTime = mediaPlayer.getCurrentPosition(); // ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ö²ï¿½ï¿½Åµï¿½Î»ï¿½ï¿½
 					Intent intent = new Intent();
 					intent.setAction(MUSIC_CURRENT);
 //					intent.setAction(LAST_SONG);
@@ -71,7 +71,7 @@ public class PlayerService extends Service {
 					intent.putExtra("duration", duration);
 					intent.putExtra("song", mSongName);
 					intent.putExtra("singer", mSinger);
-					sendBroadcast(intent); // ¸øPlayerActivity·¢ËÍ¹ã²¥
+					sendBroadcast(intent); // ï¿½ï¿½PlayerActivityï¿½ï¿½ï¿½Í¹ã²¥
 					handler.sendEmptyMessageDelayed(1, 1000);
 				}
 			}
@@ -86,31 +86,31 @@ public class PlayerService extends Service {
 		mp3Infos = MediaUtil.getMp3Infos(PlayerService.this);
 
 		/**
-		 * ÉèÖÃÒôÀÖ²¥·ÅÍê³ÉÊ±µÄ¼àÌıÆ÷
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		 */
 		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
 
 			@Override
 			public void onCompletion(MediaPlayer mp) {
-				if (status == 1) { // µ¥ÇúÑ­»·
+				if (status == 1) { // ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 					mediaPlayer.start();
-				} else if (status == 2) { // È«²¿Ñ­»·
+				} else if (status == 2) { // È«ï¿½ï¿½Ñ­ï¿½ï¿½
 					current++;
-					if (current > mp3Infos.size() - 1) { // ±äÎªµÚÒ»Ê×µÄÎ»ÖÃ¼ÌĞø²¥·Å
+					if (current > mp3Infos.size() - 1) { // ï¿½ï¿½Îªï¿½ï¿½Ò»ï¿½×µï¿½Î»ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						current = 0;
 					}
 					Intent sendIntent = new Intent(UPDATE_ACTION);
 					sendIntent.putExtra("current", current);
-					// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+					// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
-				} else if (status == 3) { // Ë³Ğò²¥·Å
-					current++; // ÏÂÒ»Ê×Î»ÖÃ
+				} else if (status == 3) { // Ë³ï¿½ò²¥·ï¿½
+					current++; // ï¿½ï¿½Ò»ï¿½ï¿½Î»ï¿½ï¿½
 					if (current <= mp3Infos.size() - 1) {
 						Intent sendIntent = new Intent(UPDATE_ACTION);
 						sendIntent.putExtra("current", current);
-						// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+						// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 						sendBroadcast(sendIntent);
 						path = mp3Infos.get(current).getUrl();
 						play(0);
@@ -119,15 +119,15 @@ public class PlayerService extends Service {
 						current = 0;
 						Intent sendIntent = new Intent(UPDATE_ACTION);
 						sendIntent.putExtra("current", current);
-						// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+						// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 						sendBroadcast(sendIntent);
 					}
-				} else if (status == 4) { // Ëæ»ú²¥·Å
+				} else if (status == 4) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					current = getRandomIndex(mp3Infos.size() - 1);
 					System.out.println("currentIndex ->" + current);
 					Intent sendIntent = new Intent(UPDATE_ACTION);
 					sendIntent.putExtra("current", current);
-					// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+					// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
@@ -146,7 +146,7 @@ public class PlayerService extends Service {
 	}
 
 	/**
-	 * »ñÈ¡Ëæ»úÎ»ÖÃ
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 	 * 
 	 * @param end
 	 * @return
@@ -163,22 +163,22 @@ public class PlayerService extends Service {
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-		path = intent.getStringExtra("url"); // ¸èÇúÂ·¾¶
-		current = intent.getIntExtra("listPosition", -1); // µ±Ç°²¥·Å¸èÇúµÄÔÚmp3InfosµÄÎ»ÖÃ
-		msg = intent.getIntExtra("MSG", 0); // ²¥·ÅĞÅÏ¢
-		if (msg == AppConstant.PlayerMsg.PLAY_MSG) { // Ö±½Ó²¥·ÅÒôÀÖ
+		path = intent.getStringExtra("url"); // ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+		current = intent.getIntExtra("listPosition", -1); // ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mp3Infosï¿½ï¿½Î»ï¿½ï¿½
+		msg = intent.getIntExtra("MSG", 0); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+		if (msg == AppConstant.PlayerMsg.PLAY_MSG) { // Ö±ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			play(0);
-		} else if (msg == AppConstant.PlayerMsg.PAUSE_MSG) { // ÔİÍ£
+		} else if (msg == AppConstant.PlayerMsg.PAUSE_MSG) { // ï¿½ï¿½Í£
 			pause();
 		} else if (msg == AppConstant.PlayerMsg.STOP_MSG) { // Í£Ö¹
 			stop();
-		} else if (msg == AppConstant.PlayerMsg.CONTINUE_MSG) { // ¼ÌĞø²¥·Å
+		} else if (msg == AppConstant.PlayerMsg.CONTINUE_MSG) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			resume();
-		} else if (msg == AppConstant.PlayerMsg.PRIVIOUS_MSG) { // ÉÏÒ»Ê×
+		} else if (msg == AppConstant.PlayerMsg.PRIVIOUS_MSG) { // ï¿½ï¿½Ò»ï¿½ï¿½
 			previous();
-		} else if (msg == AppConstant.PlayerMsg.NEXT_MSG) { // ÏÂÒ»Ê×
+		} else if (msg == AppConstant.PlayerMsg.NEXT_MSG) { // ï¿½ï¿½Ò»ï¿½ï¿½
 			next();
-		} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // ½ø¶È¸üĞÂ
+		} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½
 			currentTime = intent.getIntExtra("progress", -1);
 			play(currentTime);
 		} else if (msg == AppConstant.PlayerMsg.PLAYING_MSG) {
@@ -188,16 +188,16 @@ public class PlayerService extends Service {
 	}
 
 	// /**
-	// * ³õÊ¼»¯¸è´ÊÅäÖÃ
+	// * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	// */
 	// public void initLrc(){
 	// mLrcProcess = new LrcProcess();
-	// //¶ÁÈ¡¸è´ÊÎÄ¼ş
+	// //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 	// mLrcProcess.readLRC(mp3Infos.get(current).getUrl());
-	// //´«»Ø´¦ÀíºóµÄ¸è´ÊÎÄ¼ş
+	// //ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Ä¼ï¿½
 	// lrcList = mLrcProcess.getLrcList();
 	// PlayerActivity.lrcView.setmLrcList(lrcList);
-	// //ÇĞ»»´ø¶¯»­ÏÔÊ¾¸è´Ê
+	// //ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
 	// PlayerActivity.lrcView.setAnimation(AnimationUtils.loadAnimation(PlayerService.this,R.anim.alpha_z));
 	// handler.post(mRunnable);
 	// }
@@ -212,7 +212,7 @@ public class PlayerService extends Service {
 	// };
 
 	// /**
-	// * ¸ù¾İÊ±¼ä»ñÈ¡¸è´ÊÏÔÊ¾µÄË÷ÒıÖµ
+	// * ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 	// * @return
 	// */
 	// public int lrcIndex() {
@@ -240,17 +240,17 @@ public class PlayerService extends Service {
 	// return index;
 	// }
 	/**
-	 * ²¥·ÅÒôÀÖ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param position
 	 */
 	private void play(int currentTime) {
 		try {
 			// initLrc();
-			mediaPlayer.reset();// °Ñ¸÷Ïî²ÎÊı»Ö¸´µ½³õÊ¼×´Ì¬
+			mediaPlayer.reset();// ï¿½Ñ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼×´Ì¬
 			mediaPlayer.setDataSource(path);
-			mediaPlayer.prepare(); // ½øĞĞ»º³å
-			mediaPlayer.setOnPreparedListener(new PreparedListener(currentTime));// ×¢²áÒ»¸ö¼àÌıÆ÷
+			mediaPlayer.prepare(); // ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½
+			mediaPlayer.setOnPreparedListener(new PreparedListener(currentTime));// ×¢ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			handler.sendEmptyMessage(1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -258,7 +258,7 @@ public class PlayerService extends Service {
 	}
 
 	/**
-	 * ÔİÍ£ÒôÀÖ
+	 * ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void pause() {
 		if (mediaPlayer != null && mediaPlayer.isPlaying()) {
@@ -275,35 +275,35 @@ public class PlayerService extends Service {
 	}
 
 	/**
-	 * ÉÏÒ»Ê×
+	 * ï¿½ï¿½Ò»ï¿½ï¿½
 	 */
 	private void previous() {
 		Intent sendIntent = new Intent(UPDATE_ACTION);
 		sendIntent.putExtra("current", current);
-		// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+		// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 		sendBroadcast(sendIntent);
 		play(0);
 	}
 
 	/**
-	 * ÏÂÒ»Ê×
+	 * ï¿½ï¿½Ò»ï¿½ï¿½
 	 */
 	private void next() {
 		Intent sendIntent = new Intent(UPDATE_ACTION);
 		sendIntent.putExtra("current", current);
-		// ·¢ËÍ¹ã²¥£¬½«±»Activity×é¼şÖĞµÄBroadcastReceiver½ÓÊÕµ½
+		// ï¿½ï¿½ï¿½Í¹ã²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½Ğµï¿½BroadcastReceiverï¿½ï¿½ï¿½Õµï¿½
 		sendBroadcast(sendIntent);
 		play(0);
 	}
 
 	/**
-	 * Í£Ö¹ÒôÀÖ
+	 * Í£Ö¹ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void stop() {
 		if (mediaPlayer != null) {
 			mediaPlayer.stop();
 			try {
-				mediaPlayer.prepare(); // ÔÚµ÷ÓÃstopºóÈç¹ûĞèÒªÔÙ´ÎÍ¨¹ıstart½øĞĞ²¥·Å,ĞèÒªÖ®Ç°µ÷ÓÃprepareº¯Êı
+				mediaPlayer.prepare(); // ï¿½Úµï¿½ï¿½ï¿½stopï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ù´ï¿½Í¨ï¿½ï¿½startï¿½ï¿½ï¿½Ğ²ï¿½ï¿½ï¿½,ï¿½ï¿½ÒªÖ®Ç°ï¿½ï¿½ï¿½ï¿½prepareï¿½ï¿½ï¿½ï¿½
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -318,11 +318,12 @@ public class PlayerService extends Service {
 			mediaPlayer = null;
 		}
 		// handler.removeCallbacks(mRunnable);
+		unregisterReceiver(myReceiver);
 	}
 
 	/**
 	 * 
-	 * ÊµÏÖÒ»¸öOnPrepareLister½Ó¿Ú,µ±ÒôÀÖ×¼±¸ºÃµÄÊ±ºò¿ªÊ¼²¥·Å
+	 * Êµï¿½ï¿½Ò»ï¿½ï¿½OnPrepareListerï¿½Ó¿ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½Ãµï¿½Ê±ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	private final class PreparedListener implements OnPreparedListener {
@@ -334,14 +335,14 @@ public class PlayerService extends Service {
 
 		@Override
 		public void onPrepared(MediaPlayer mp) {
-			mediaPlayer.start(); // ¿ªÊ¼²¥·Å
-			if (currentTime > 0) { // Èç¹ûÒôÀÖ²»ÊÇ´ÓÍ·²¥·Å
+			mediaPlayer.start(); // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+			if (currentTime > 0) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½ï¿½Ç´ï¿½Í·ï¿½ï¿½ï¿½ï¿½
 				mediaPlayer.seekTo(currentTime);
 			}
 			Intent intent = new Intent();
 			intent.setAction(MUSIC_DURATION);
 			duration = mediaPlayer.getDuration();
-			intent.putExtra("duration", duration); // Í¨¹ıIntentÀ´´«µİ¸èÇúµÄ×Ü³¤¶È
+			intent.putExtra("duration", duration); // Í¨ï¿½ï¿½Intentï¿½ï¿½ï¿½ï¿½ï¿½İ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½
 			sendBroadcast(intent);
 		}
 	}
@@ -353,16 +354,16 @@ public class PlayerService extends Service {
 			int control = intent.getIntExtra("control", -1);
 			switch (control) {
 			case 1:
-				status = 1; // ½«²¥·Å×´Ì¬ÖÃÎª1±íÊ¾£ºµ¥ÇúÑ­»·
+				status = 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
 				break;
 			case 2:
-				status = 2; // ½«²¥·Å×´Ì¬ÖÃÎª2±íÊ¾£ºÈ«²¿Ñ­»·
+				status = 2; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª2ï¿½ï¿½Ê¾ï¿½ï¿½È«ï¿½ï¿½Ñ­ï¿½ï¿½
 				break;
 			case 3:
-				status = 3; // ½«²¥·Å×´Ì¬ÖÃÎª3±íÊ¾£ºË³Ğò²¥·Å
+				status = 3; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª3ï¿½ï¿½Ê¾ï¿½ï¿½Ë³ï¿½ò²¥·ï¿½
 				break;
 			case 4:
-				status = 4; // ½«²¥·Å×´Ì¬ÖÃÎª4±íÊ¾£ºËæ»ú²¥·Å
+				status = 4; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª4ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				break;
 			}
 

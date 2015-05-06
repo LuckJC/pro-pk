@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dip"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="@string/app_name_sms"
+            android:textSize="26sp" />
+
+        <ImageButton
+            android:id="@+id/image_iat_set"
+            android:layout_width="35dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center"
+            android:layout_margin="6dip"
+            android:background="@drawable/main_setting_btn_np" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/iat_name_phonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="ltr"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/iat_text"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="top|left"
+        android:paddingBottom="20dip"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dip"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/iat_recognize"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:text="@string/iat_start_talk"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/iat_sendsms"
+            android:layout_width="0dip"
+            android:layout_height="50dip"
+            android:layout_weight="1"
+            android:text="@string/iat_send_sms"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>
