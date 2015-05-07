@@ -60,21 +60,26 @@ import com.shizhongkeji.speech.util.ProgressDialogUtils;
 
 public class AsrMain extends Activity {
 
-	private static String TAG = "AbnfDemo";
+	private static int TAG = 555;
 	/**
-	 * 是不是更新完联系人
+	 * 是不是更新完联系人标志
 	 */
 	private boolean is_updata_lexcion_finish = false;
 
 	private TextToSpeech mSpeech = null;
 	/**
-	 * 是不是从别的地方返回来
+	 * 是不是从别的地方返回来标志
 	 */
 	private boolean is_other_back = false;
 	/**
-	 * 是否有弹框
+	 * 是否有弹框标志
 	 */
 	private boolean is_have_dialog = false;
+	/**
+	/**
+	 * 发现暂停标志
+	 */
+	private boolean is_found_pause = false; 
 	// 语音识别对象
 	private SpeechRecognizer mAsr;
 	private Toast mToast;
@@ -113,6 +118,12 @@ public class AsrMain extends Activity {
 			if (msg.what == 1) {
 				mSpeech.speak(getResources().getString(R.string.no_person),
 						TextToSpeech.QUEUE_FLUSH, null);
+			}
+			if(msg.what == AsrMain.TAG)
+			{
+				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+						TextToSpeech.QUEUE_ADD, IDmap);
 			}
 		}
 
@@ -382,8 +393,9 @@ public class AsrMain extends Activity {
 
 		@Override
 		public void onResult(final RecognizerResult result, boolean isLast) {
-
-			if (null != result && !TextUtils.isEmpty(result.getResultString())) {
+			//add by lixd
+		if(!is_found_pause)	
+		{	if (null != result && !TextUtils.isEmpty(result.getResultString())) {
 				Log.d("lixianda", "recognizer result:" + result.getResultString());
 
 				Map<String, List<String>> map = null;
@@ -538,7 +550,13 @@ public class AsrMain extends Activity {
 						TextToSpeech.QUEUE_FLUSH, null);
 				Log.d("lixianda", "recognizer result : null");
 			}
-
+		}
+		//add by lixd
+		else
+		{
+			
+		}
+			
 		}
 
 		// 根据名字查找手机号码 add by lixd
@@ -570,7 +588,8 @@ public class AsrMain extends Activity {
 
 		@Override
 		public void onError(SpeechError error) {
-
+		if(!is_found_pause)	
+		{	
 			if (error.getErrorCode() == 20005) {
 				showTip(getResources().getString(R.string.no_result_show));
 			} else if (error.getErrorCode() == 23300) {
@@ -602,10 +621,15 @@ public class AsrMain extends Activity {
 			// mAsr.setParameter(SpeechConstant.VAD_BOS, "1000");
 			ret = mAsr.startListening(mRecognizerListener);
 
-			if (ret != ErrorCode.SUCCESS) {
-				showTip("error code:" + ret);
+				if (ret != ErrorCode.SUCCESS) {
+					showTip("error code:" + ret);
+				}
 			}
-
+		else
+		{
+			
+		}
+		
 		}
 
 		@Override
@@ -715,11 +739,10 @@ public class AsrMain extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (is_other_back && (!is_have_dialog)) {
-
-			IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
-			mSpeech.speak(getResources().getString(R.string.help_you_dothing),
-					TextToSpeech.QUEUE_ADD, IDmap);
+ 		if(is_other_back && (!is_have_dialog))
+ 		{
+		handler.sendEmptyMessageDelayed(AsrMain.TAG, 1000);
+		is_found_pause = false;
 		}
 
 	}
@@ -734,6 +757,9 @@ public class AsrMain extends Activity {
 			mAsr.stopListening();
 		}
 		is_other_back = true;
+		
+		is_found_pause = true;
+		handler.removeMessages(TAG);
 	}
 
 	public class PhoneStateReceiver extends BroadcastReceiver {
@@ -745,7 +771,8 @@ public class AsrMain extends Activity {
 				mAsr.stopListening();
 				mAsr.cancel();
 				mSpeech.stop();
-			} else {
+			} 
+			else {
 				TelephonyManager tm = (TelephonyManager) context
 						.getSystemService(Service.TELEPHONY_SERVICE);
 				switch (tm.getCallState()) {
