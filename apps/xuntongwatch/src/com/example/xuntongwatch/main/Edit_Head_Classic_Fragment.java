@@ -65,6 +65,9 @@ public class Edit_Head_Classic_Fragment extends Fragment {
 		Bitmap[] bitmaps = new Bitmap[] {
 				BitmapFactory.decodeResource(getResources(), R.drawable.head01),
 				BitmapFactory.decodeResource(getResources(), R.drawable.head02),
+				BitmapFactory.decodeResource(getResources(), R.drawable.head03),
+				BitmapFactory.decodeResource(getResources(), R.drawable.head04),
+				BitmapFactory.decodeResource(getResources(), R.drawable.head05),
 				BitmapFactory.decodeResource(getResources(), R.drawable.head06) };
 		for (int i = 0; i < bitmaps.length; i++) {
 			ClassicImage image = new ClassicImage();

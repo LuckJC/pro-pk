@@ -44,7 +44,7 @@ public class Utils {
 
 	public synchronized static boolean isFastClick() {
 		long time = System.currentTimeMillis();
-		if (time - lastClickTime < 1000) {
+		if (time - lastClickTime < 500) {
 			return true;
 		}
 		lastClickTime = time;
