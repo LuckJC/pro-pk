@@ -71,21 +71,26 @@ public class DeleteListActivity extends Activity{
 		deleImage.setOnClickListener(delteClick);
 		commit.setOnClickListener(delteClick);
 		cancel.setOnClickListener(delteClick);
-		check=true;
+		check=false;
 		
 		listdelete.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				if(check){
-					positionList.add(arg2);
-					nodeletes.add(MainActivity.recordFiles.get(arg2));
-				}
 				
 				Item item = list.get(arg2);   
-				item.status = !item.status;// »°∑¥
+				item.status = !item.status;// ÂèñÂèç
 				
 				holder.cb.setChecked(item.status);
+				boolean ff=item.status==true;
+				if(item.status==true){
+					positionList.add(arg2);
+					nodeletes.add(MainActivity.recordFiles.get(arg2));
+				}else{
+					positionList.remove(arg2);
+					nodeletes.remove(MainActivity.recordFiles.get(arg2));
+				}
+				
 				deleteBaseAdater.notifyDataSetChanged();
 				Toast.makeText(DeleteListActivity.this, ""+arg2, 3000).show();
 				
@@ -108,7 +113,7 @@ public class DeleteListActivity extends Activity{
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.deleImage:
-				//Œﬁ≤Ÿ◊˜
+				//Êó†Êìç‰Ωú
 				break;
             case R.id.cancelDelete:
             	intent=new Intent();
@@ -118,7 +123,7 @@ public class DeleteListActivity extends Activity{
             case R.id.deleteCommit:
             	//MainActivity.recordFiles.remove(index);
             	if(positionList.size()==0){
-            		Toast.makeText(DeleteListActivity.this, "«Î—°‘ÒŒƒº˛", 3000).show();
+            		Toast.makeText(DeleteListActivity.this, "ËØ∑ÈÄâÊã©Êñá‰ª∂", 3000).show();
             	}else{
             		for(int i=0;i<nodeletes.size();i++){
 //                		File file=new File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
@@ -197,7 +202,7 @@ public class DeleteListActivity extends Activity{
 					file.delete();
 				}
 			}
-//			//’˝‘⁄‘›Õ£∫Û£¨ºÃ–¯¬º“Ùµƒ’‚“ª∂Œ“Ù∆µŒƒº˛
+//			//Ê≠£Âú®ÊöÇÂÅúÂêéÔºåÁªßÁª≠ÂΩïÈü≥ÁöÑËøô‰∏ÄÊÆµÈü≥È¢ëÊñá‰ª∂
 //			if(isAddLastRecord){
 //				MainActivity.myRecAudioFile.delete();
 //			}
