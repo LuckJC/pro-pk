@@ -49,7 +49,7 @@
             android:normalScreens="true" android:largeScreens="true"
             android:anyDensity="true" />
 
-    <application android:icon="@mipmap/ic_launcher_gallery" android:label="@string/app_name"
+    <application android:icon="@mipmap/icon_gallery" android:label="@string/app_name"
             android:name="com.android.gallery3d.app.GalleryAppImpl"
             android:theme="@style/Theme.Gallery"
             android:logo="@mipmap/ic_launcher_gallery"
@@ -227,7 +227,7 @@
              in com.android.camera2 package, so that existing shortcuts
              are preserved. -->
         <activity android:name="com.android.camera.CameraActivity"
-            android:icon="@mipmap/ic_launcher_camera"
+            android:icon="@mipmap/icon_camera"
             android:label="@string/camera_label"
             android:taskAffinity="com.android.camera.CameraActivity"
             android:theme="@style/android:Theme.NoDisplay" />
@@ -420,7 +420,7 @@
                 android:taskAffinity="com.android.camera"
                 android:label="@string/camera_label"
                 android:theme="@style/ThemeCamera"
-                android:icon="@mipmap/ic_launcher_camera"
+                android:icon="@mipmap/icon_camera"
                 android:configChanges="orientation|screenSize|keyboardHidden|mnc|mcc|smallestScreenSize|uiMode|screenLayout|navigation|keyboard|touchscreen"
                 android:clearTaskOnLaunch="true"
                 android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
@@ -436,7 +436,7 @@
                 android:taskAffinity="com.android.camera.SecureCameraActivity"
                 android:excludeFromRecents="true"
                 android:label="@string/camera_label"
-                android:icon="@mipmap/ic_launcher_camera"
+                android:icon="@mipmap/icon_camera"
                 android:configChanges="orientation|screenSize|keyboardHidden"
                 android:clearTaskOnLaunch="true"
                 android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -465,7 +465,7 @@
             </intent-filter>
         </activity-alias>
 
-        <activity-alias android:icon="@mipmap/ic_launcher_camera"
+        <activity-alias android:icon="@mipmap/icon_camera"
                         android:label="@string/camera_label"
                         android:name="com.android.camera.CameraLauncher"
                         android:targetActivity="com.android.camera.Camera" >

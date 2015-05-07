@@ -157,6 +157,9 @@ public class MainActivity extends Activity{
 				minute=0;
 				second=0;
 				times.setText("00:00");
+				getRecordFiles();
+				ArrayList<String> gg=new ArrayList<String>();
+			    gg=recordFiles;
 				isStopRecord = true;
 				imageView.setImageResource(R.drawable.startrecorder);
 				save.setVisibility(View.INVISIBLE);

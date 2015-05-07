@@ -5,9 +5,9 @@
     android:versionName="1.0" >
 
     <application
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon_soundhelper"
         android:name="SpeechApp"
-        android:label="时钟语音" >
+        android:label="时中语音" >
         
         <activity
             android:name="com.shizhongkeji.mscv5plus.AsrMain"
