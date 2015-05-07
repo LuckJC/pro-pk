@@ -37,23 +37,23 @@ public class MainActivity extends Activity{
     int second=0;
 	int minute=0;
 	
-	/**ÎÄ¼ş´æÔÚ**/
+	/**æ–‡ä»¶å­˜åœ¨**/
 	private boolean sdcardExit;
 	public static File myRecAudioFile;
-	//**ÊÇ·ñÔİÍ£±êÖ¾Î»**/
+	//**æ˜¯å¦æš‚åœæ ‡å¿—ä½**/
 	private boolean isPause;
-	/**ÔÚÔİÍ£×´Ì¬ÖĞ**/
+	/**åœ¨æš‚åœçŠ¶æ€ä¸­**/
 	private boolean inThePause;
-	/**Â¼Òô±£´æÂ·¾¶**/
+	/**å½•éŸ³ä¿å­˜è·¯å¾„**/
 	public static File myRecAudioDir;
 	private  final String SUFFIX=".amr";
-	/**ÊÇ·ñÍ£Ö¹Â¼Òô**/
+	/**æ˜¯å¦åœæ­¢å½•éŸ³**/
 	private boolean isStopRecord;
-	/**¼ÇÂ¼ĞèÒªºÏ³ÉµÄ¼¸¶ÎamrÓïÒôÎÄ¼ş**/
+	/**è®°å½•éœ€è¦åˆæˆçš„å‡ æ®µamrè¯­éŸ³æ–‡ä»¶**/
 	public static ArrayList<String> lists;
 	private ArrayList<String> listTimes;
 	public static Map map;
-	/**´æ·ÅÒôÆµÎÄ¼şÁĞ±í**/
+	/**å­˜æ”¾éŸ³é¢‘æ–‡ä»¶åˆ—è¡¨**/
 	public static ArrayList<String> recordFiles;
 	public static ArrayList<Item> recordFile;
 	private ArrayAdapter<String> adapter;
@@ -90,21 +90,21 @@ public class MainActivity extends Activity{
 		save.setOnClickListener(myClick);
 		isPause=false;
 		inThePause=false;
-		// ÅĞ¶Ïsd CardÊÇ·ñ²åÈë
+		// åˆ¤æ–­sd Cardæ˜¯å¦æ’å…¥
 		sdcardExit = Environment.getExternalStorageState().equals(
 						android.os.Environment.MEDIA_MOUNTED);
-				// È¡µÃsd cardÂ·¾¶×÷ÎªÂ¼ÒôÎÄ¼şµÄÎ»ÖÃ
+				// å–å¾—sd cardè·¯å¾„ä½œä¸ºå½•éŸ³æ–‡ä»¶çš„ä½ç½®
 				if (sdcardExit){
 					String pathStr = Environment.getExternalStorageDirectory().getAbsolutePath()+"/YYT";
 					//String pathStr = "/storage/sdcard1/MIUI/"+"/YY";
 					myRecAudioDir= new File(pathStr);
 					if(!myRecAudioDir.exists()){
 						myRecAudioDir.mkdirs();
-						Log.v("Â¼Òô", "´´½¨Â¼ÒôÎÄ¼ş£¡" + myRecAudioDir.exists());
+						Log.v("å½•éŸ³", "åˆ›å»ºå½•éŸ³æ–‡ä»¶ï¼" + myRecAudioDir.exists());
 					}
 //					Environment.getExternalStorageDirectory().getPath() + "/" + PREFIX + "/";
 				}
-				// È¡µÃsd card Ä¿Â¼ÀïµÄ.armÎÄ¼ş
+				// å–å¾—sd card ç›®å½•é‡Œçš„.armæ–‡ä»¶
 				getRecordFiles();
 //				map.put("recordFiles", recordFiles);
 //				map.put("listTimes", listTimes);
@@ -118,17 +118,17 @@ public class MainActivity extends Activity{
 			switch (arg0.getId()) {
 			case R.id.recorder:
 				if(isPause){
-					//µ±Ç°ÕıÔÚÂ¼ÒôµÄÎÄ¼şÃû£¬È«³Ì
+					//å½“å‰æ­£åœ¨å½•éŸ³çš„æ–‡ä»¶åï¼Œå…¨ç¨‹
 					imageView.setImageResource(R.drawable.startrecorder);
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
 					//start();
-					//				buttonpause.setText("¼ÌĞøÂ¼Òô");
-					//¼ÆÊ±Í£Ö¹
+					//				buttonpause.setText("ç»§ç»­å½•éŸ³");
+					//è®¡æ—¶åœæ­¢
 //					timer.cancel();
 					isPause=false; 
 				}
-				//ÕıÔÚÂ¼Òô£¬µã»÷ÔİÍ£,ÏÖÔÚÂ¼Òô×´Ì¬ÎªÔİÍ£
+				//æ­£åœ¨å½•éŸ³ï¼Œç‚¹å‡»æš‚åœ,ç°åœ¨å½•éŸ³çŠ¶æ€ä¸ºæš‚åœ
 				else{
 					imageView.setImageResource(R.drawable.endre);
 					start();
@@ -140,9 +140,9 @@ public class MainActivity extends Activity{
 			case R.id.save:
 				//timer.cancel();
 				// TODO Auto-generated method stub
-				//ÕâÀïĞ´ÔİÍ£´¦ÀíµÄ ÎÄ¼ş£¡¼ÓÉÏlistÀïÃæ ÓïÒôºÏ³ÉÆğÀ´
+				//è¿™é‡Œå†™æš‚åœå¤„ç†çš„ æ–‡ä»¶ï¼åŠ ä¸Šlisté‡Œé¢ è¯­éŸ³åˆæˆèµ·æ¥
 				if(!isPause){
-					//ÔÚÔİÍ£×´Ì¬°´ÏÂ½áÊø¼ü,´¦Àílist¾Í¿ÉÒÔÁË
+					//åœ¨æš‚åœçŠ¶æ€æŒ‰ä¸‹ç»“æŸé”®,å¤„ç†listå°±å¯ä»¥äº†
 					getInputCollection(lists, false);
 					isPause=true;
 					inThePause=false;
@@ -153,7 +153,7 @@ public class MainActivity extends Activity{
 					recorderStop();
 					getInputCollection(lists, true);
 				}
-			//	Toast.makeText(MainActivity.this, "±£´æ³É¹¦", 3000).show();
+			//	Toast.makeText(MainActivity.this, "ä¿å­˜æˆåŠŸ", 3000).show();
 				minute=0;
 				second=0;
 				times.setText("00:00");
@@ -189,7 +189,7 @@ public class MainActivity extends Activity{
 			}
 		}
 	}
-	/**¼ÆÊ±Æ÷**/
+	/**è®¡æ—¶å™¨**/
 	Timer timer;
 	public void start() {
 		 TimerTask timerTask=new TimerTask() {
@@ -208,25 +208,25 @@ public class MainActivity extends Activity{
 		 timer.schedule(timerTask, 0,1000);
 		try {
 			if (!sdcardExit) {
-				Toast.makeText(MainActivity.this, "Çë²åÈëSD card",
+				Toast.makeText(MainActivity.this, "è¯·æ’å…¥SD card",
 						Toast.LENGTH_LONG).show();
 				return;
 			}
 			String mMinute1=getTime();
-			//Toast.makeText(MainActivity.this, "µ±Ç°Ê±¼äÊÇ:"+mMinute1,Toast.LENGTH_LONG).show();
-			// ´´½¨ÒôÆµÎÄ¼ş
+			//Toast.makeText(MainActivity.this, "å½“å‰æ—¶é—´æ˜¯:"+mMinute1,Toast.LENGTH_LONG).show();
+			// åˆ›å»ºéŸ³é¢‘æ–‡ä»¶
 //			myRecAudioFile = File.createTempFile(mMinute1, ".amr",
 //					myRecAudioDir);
 			myRecAudioFile=new File(myRecAudioDir,mMinute1+SUFFIX);
 			mMediaRecorder = new MediaRecorder();
-			// ÉèÖÃÂ¼ÒôÎªÂó¿Ë·ç
+			// è®¾ç½®å½•éŸ³ä¸ºéº¦å…‹é£
 			mMediaRecorder
 					.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mMediaRecorder
 					.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
 			mMediaRecorder
 					.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-			//Â¼ÒôÎÄ¼ş±£´æÕâÀï
+			//å½•éŸ³æ–‡ä»¶ä¿å­˜è¿™é‡Œ
 			mMediaRecorder.setOutputFile(myRecAudioFile
 					.getAbsolutePath());
 			mMediaRecorder.prepare();
@@ -259,28 +259,29 @@ public class MainActivity extends Activity{
 	};
 	private String getTime(){
 		SimpleDateFormat   formatter   =   new   SimpleDateFormat   ("yyyyMMddHHmmss");      
-		Date  curDate=new  Date(System.currentTimeMillis());//»ñÈ¡µ±Ç°Ê±¼ä      
+		Date  curDate=new  Date(System.currentTimeMillis());//è·å–å½“å‰æ—¶é—´      
 		String   time   =   formatter.format(curDate);  
-		System.out.println("µ±Ç°Ê±¼ä");
+		System.out.println("å½“å‰æ—¶é—´");
 		return time;
 		}
 	protected void recorderStop() {
 		if (mMediaRecorder != null) {
-			// Í£Ö¹Â¼Òô
+			// åœæ­¢å½•éŸ³
 			mMediaRecorder.stop();
+			mMediaRecorder.reset();
 			mMediaRecorder.release();
 			mMediaRecorder = null;
 		}
 		timer.cancel();
 	}
 	/**
-	 *  @param isAddLastRecord ÊÇ·ñĞèÒªÌí¼ÓlistÖ®ÍâµÄ×îĞÂÂ¼Òô£¬Ò»ÆğºÏ²¢
-	 *  @return ½«ºÏ²¢µÄÁ÷ÓÃ×Ö·û±£´æ
+	 *  @param isAddLastRecord æ˜¯å¦éœ€è¦æ·»åŠ listä¹‹å¤–çš„æœ€æ–°å½•éŸ³ï¼Œä¸€èµ·åˆå¹¶
+	 *  @return å°†åˆå¹¶çš„æµç”¨å­—ç¬¦ä¿å­˜
 	 */
 	public  void getInputCollection(List list,boolean isAddLastRecord){
 		String	mMinute1=getTime();
-		//Toast.makeText(MainActivity.this, "µ±Ç°Ê±¼äÊÇ:"+mMinute1,Toast.LENGTH_LONG).show();
-		// ´´½¨ÒôÆµÎÄ¼ş,ºÏ²¢µÄÎÄ¼ş·ÅÕâÀï
+		//Toast.makeText(MainActivity.this, "å½“å‰æ—¶é—´æ˜¯:"+mMinute1,Toast.LENGTH_LONG).show();
+		// åˆ›å»ºéŸ³é¢‘æ–‡ä»¶,åˆå¹¶çš„æ–‡ä»¶æ”¾è¿™é‡Œ
 		File file1=new File(myRecAudioDir,mMinute1+SUFFIX);
 		FileOutputStream fileOutputStream = null;
 		if(!file1.exists()){
@@ -298,22 +299,22 @@ public class MainActivity extends Activity{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//listÀïÃæÎªÔİÍ£Â¼Òô Ëù²úÉúµÄ ¼¸¶ÎÂ¼ÒôÎÄ¼şµÄÃû×Ö£¬ÖĞ¼ä¼¸¶ÎÎÄ¼şµÄ¼õÈ¥Ç°ÃæµÄ6¸ö×Ö½ÚÍ·ÎÄ¼ş
+		//listé‡Œé¢ä¸ºæš‚åœå½•éŸ³ æ‰€äº§ç”Ÿçš„ å‡ æ®µå½•éŸ³æ–‡ä»¶çš„åå­—ï¼Œä¸­é—´å‡ æ®µæ–‡ä»¶çš„å‡å»å‰é¢çš„6ä¸ªå­—èŠ‚å¤´æ–‡ä»¶
 		
 		for(int i=0;i<list.size();i++){
 			File file=new File((String) list.get(i));
 			try {
 				FileInputStream fileInputStream=new FileInputStream(file);
 				byte  []myByte=new byte[fileInputStream.available()];
-				//ÎÄ¼ş³¤¶È
+				//æ–‡ä»¶é•¿åº¦
 				int length = myByte.length;
-				//Í·ÎÄ¼ş
+				//å¤´æ–‡ä»¶
 				if(i==0){
 						while(fileInputStream.read(myByte)!=-1){
 								fileOutputStream.write(myByte, 0,length);
 							}
 						}
-				//Ö®ºóµÄÎÄ¼ş£¬È¥µôÍ·ÎÄ¼ş¾Í¿ÉÒÔÁË
+				//ä¹‹åçš„æ–‡ä»¶ï¼Œå»æ‰å¤´æ–‡ä»¶å°±å¯ä»¥äº†
 				else{
 					while(fileInputStream.read(myByte)!=-1){
 						
@@ -322,7 +323,7 @@ public class MainActivity extends Activity{
 				}
 				fileOutputStream.flush();
 				fileInputStream.close();
-				System.out.println("ºÏ³ÉÎÄ¼ş³¤¶È£º"+file1.length());
+				System.out.println("åˆæˆæ–‡ä»¶é•¿åº¦ï¼š"+file1.length());
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -330,14 +331,14 @@ public class MainActivity extends Activity{
 			}
 			
 			}
-		//½áÊøºó¹Ø±ÕÁ÷
+		//ç»“æŸåå…³é—­æµ
 		try {
 			fileOutputStream.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			//ºÏ³ÉÒ»¸öÎÄ¼şºó£¬É¾³ıÖ®Ç°ÔİÍ£Â¼ÒôËù±£´æµÄÁãËéºÏ³ÉÎÄ¼ş
+			//åˆæˆä¸€ä¸ªæ–‡ä»¶åï¼Œåˆ é™¤ä¹‹å‰æš‚åœå½•éŸ³æ‰€ä¿å­˜çš„é›¶ç¢åˆæˆæ–‡ä»¶
 			deleteListRecord(isAddLastRecord);
 			//
 //			adapter.add(file1.getName());
@@ -350,13 +351,13 @@ public class MainActivity extends Activity{
 				file.delete();
 			}
 		}
-		//ÕıÔÚÔİÍ£ºó£¬¼ÌĞøÂ¼ÒôµÄÕâÒ»¶ÎÒôÆµÎÄ¼ş
+		//æ­£åœ¨æš‚åœåï¼Œç»§ç»­å½•éŸ³çš„è¿™ä¸€æ®µéŸ³é¢‘æ–‡ä»¶
 		if(isAddLastRecord){
 			myRecAudioFile.delete();
 		}
 	}
 	/**
-	 * »ñÈ¡Ä¿Â¼ÏÂµÄËùÓĞÒôÆµÎÄ¼ş
+	 * è·å–ç›®å½•ä¸‹çš„æ‰€æœ‰éŸ³é¢‘æ–‡ä»¶
 	 */
 	private void getRecordFiles() {
 		// TODO Auto-generated method stub
@@ -366,7 +367,7 @@ public class MainActivity extends Activity{
 			File files[] = myRecAudioDir.listFiles();
 			if (files != null) {
 				for (int i = 0; i < files.length; i++) {
-					if (files[i].getName().indexOf(".") >= 0) { // Ö»È¡.amr ÎÄ¼ş
+					if (files[i].getName().indexOf(".") >= 0) { // åªå–.amr æ–‡ä»¶
 						String fileS = files[i].getName().substring(
 								files[i].getName().indexOf("."));
 						if (fileS.toLowerCase().equals(".mp3")

@@ -43,6 +43,7 @@ public class HistoryListActivity extends Activity{
     TextView endtime;
     TextView timesitem;
     SeekBar seekBar1;
+    ImageView seekStart;
     private File myPlayFile;
     MediaPlayer mediaPlayer;
 	@Override
@@ -57,6 +58,7 @@ public class HistoryListActivity extends Activity{
 	    list = new ArrayList<Item>();  
 	    starttime=(TextView) this.findViewById(R.id.startime);
 	    endtime=(TextView) this.findViewById(R.id.endtime);
+	    seekStart=(ImageView) this.findViewById(R.id.seekStart);
 	    seekBar1=(SeekBar) this.findViewById(R.id.seekBar1);
 	    imageView=(ImageView) this.findViewById(R.id.imageView2);
 	    myPlayFile=null;
@@ -73,7 +75,7 @@ public class HistoryListActivity extends Activity{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				//Ã¿´Î¿ªÊ¼Ê±ÏÈÇå³ıĞÅÏ¢¡¢¡¢¡¢¡¢¡¢¡¢
+				//æ¯æ¬¡å¼€å§‹æ—¶å…ˆæ¸…é™¤ä¿¡æ¯ã€ã€ã€ã€ã€ã€
 				init();
 				TextView textView=(TextView) arg1.findViewById(R.id.name);
 				myPlayFile = new File(MainActivity.myRecAudioDir.getAbsolutePath()
@@ -96,10 +98,23 @@ public class HistoryListActivity extends Activity{
 			}
 		});
 	    
-	  //  seekBar1.setOnSeekBarChangeListener(onSeekBarChangeListener);
+	    seekBar1.setOnSeekBarChangeListener(onSeekBarChangeListener);
 	}
 	
 	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		if(mediaPlayer!=null){
+			mediaPlayer.release();
+			mediaPlayer = null;
+			stopTime();
+		}
+		
+	}
+
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -112,17 +127,17 @@ public class HistoryListActivity extends Activity{
 	}
     
 	OnSeekBarChangeListener onSeekBarChangeListener = new OnSeekBarChangeListener() {
-		// ÃşÍêÁË
+		// æ‘¸å®Œäº†
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
 
 			if (mediaPlayer == null) { return; }
-			// Ìøµ½¸ø¶¨¿Ì¶È
+			// è·³åˆ°ç»™å®šåˆ»åº¦
 			mediaPlayer.seekTo(seekBar.getProgress());
 			startTime();
 		}
 
-		// ¿ªÊ¼Ãş
+		// å¼€å§‹æ‘¸
 		@Override
 		public void onStartTrackingTouch(SeekBar seekBar) {
 			stopTime();
@@ -137,13 +152,17 @@ public class HistoryListActivity extends Activity{
 	OnCompletionListener onCompletionListener = new OnCompletionListener() {
 		@Override
 		public void onCompletion(MediaPlayer mp) {
-			// mediaPlayer²¥·Å½áÊøÊÂ¼ş[mediaPlayer¶ÔÏó×Ô¼º»áÏú»Ù]
+			// mediaPlayeræ’­æ”¾ç»“æŸäº‹ä»¶[mediaPlayerå¯¹è±¡è‡ªå·±ä¼šé”€æ¯]
 			init();
+			seekStart.setVisibility(View.INVISIBLE);
+			seekBar1.setVisibility(View.INVISIBLE);
+			starttime.setVisibility(View.INVISIBLE);
+			endtime.setVisibility(View.INVISIBLE);
 		}
 	};
-	// ËùÓĞ×é¼ş³õÊ¼»¯
+	// æ‰€æœ‰ç»„ä»¶åˆå§‹åŒ–
 		private void init() {
-			// ËùÓĞ³õÊ¼»¯
+			// æ‰€æœ‰åˆå§‹åŒ–
 			starttime.setText("00:00");
 			endtime.setText("00:00");
 			seekBar1.setMax(0);
@@ -156,62 +175,66 @@ public class HistoryListActivity extends Activity{
 		}
 	protected void play(File f) throws IllegalArgumentException, SecurityException, IOException {
 		try {
-			// ¿ªÊ¼²¥·Å
+			// å¼€å§‹æ’­æ”¾
 			 if (mediaPlayer != null) {
                   mediaPlayer.stop();
                }
 			if (mediaPlayer == null) {
-				// ³õÊ¼»¯£¬°üº¬×¼±¸ºÍ¼ÓÔØÊı¾İÔ´
+				// åˆå§‹åŒ–ï¼ŒåŒ…å«å‡†å¤‡å’ŒåŠ è½½æ•°æ®æº
 				//mediaPlayer=MediaPlayer.create(this, f.getAbsolutePath());
 				mediaPlayer = new MediaPlayer();
 				mediaPlayer.setDataSource(f.getAbsolutePath());
-				// ²¥·Å½áÊøºóµÄÊÂ¼ş
+				// æ’­æ”¾ç»“æŸåçš„äº‹ä»¶
 				mediaPlayer.setOnCompletionListener(onCompletionListener);
-//				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-//			     	"mm:ss");
-				
-				// mediaPlayer.getDuration()»ñÈ¡µ±Ç°¸èÇúµÄ×ÜÊ±¼ä¡¾ºÁÃë¡¿
-//				Date date = new Date(mediaPlayer.getDuration());
-//				starttime.setText(simpleDateFormat.format(date)+"s");
-//				Toast.makeText(HistoryListActivity.this, simpleDateFormat.format(date)+"", 3000).show();
-//				// ÉèÖÃ×Ü¿Ì¶È
-//				seekBar1.setMax(mediaPlayer.getDuration());
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+			     	"mm:ss");
+				mediaPlayer.prepare();
+				mediaPlayer.start();
+				// mediaPlayer.getDuration()è·å–å½“å‰æ­Œæ›²çš„æ€»æ—¶é—´ã€æ¯«ç§’ã€‘
+				seekStart.setVisibility(View.VISIBLE);
+				seekBar1.setVisibility(View.VISIBLE);
+				starttime.setVisibility(View.VISIBLE);
+				endtime.setVisibility(View.VISIBLE);
+				Date date = new Date(mediaPlayer.getDuration());
+				endtime.setText(simpleDateFormat.format(date)+"");
+				Toast.makeText(HistoryListActivity.this, simpleDateFormat.format(date)+"", 3000).show();
+				// è®¾ç½®æ€»åˆ»åº¦
+				seekBar1.setMax(mediaPlayer.getDuration());
+				startTime();
 			}
-			mediaPlayer.prepare();
-			mediaPlayer.start();
-			startTime();
+			
 		}
 		catch (IllegalStateException e) {
 			e.printStackTrace();
 		}
 	}
-	// ¼ÆÊıÆ÷
+	// è®¡æ•°å™¨
 		Timer timer;
-		// Ö´ĞĞÏß³ÌÈÎÎñ
+		// æ‰§è¡Œçº¿ç¨‹ä»»åŠ¡
 		class MyTimerTask extends TimerTask {
 			@Override
 			public void run() {
-				// ´ÎÏß³Ì
+				// æ¬¡çº¿ç¨‹
 				handler.obtainMessage().sendToTarget();
 			}
 		}
 		private void startTime() {
 			if (timer == null) {
 				timer = new Timer();
-				// 100000ºÁÃëºóÖ´ĞĞÒ»´Î
+				// 100000æ¯«ç§’åæ‰§è¡Œä¸€æ¬¡
 				// timer.schedule(new MyTimerTask(), 100000);
-				// Ã¿¹ı1ÃëÖÓÖ´ĞĞÒ»´ÎÈÎÎñ
+				// æ¯è¿‡1ç§’é’Ÿæ‰§è¡Œä¸€æ¬¡ä»»åŠ¡
 				timer.schedule(new MyTimerTask(), 1000, 1000);
 			}
 
 		}
 		Handler handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
-				// Ã¿¹ı1ÃëÖÓÕâÀïĞèÒª»ñµÃÏûÏ¢
+				// æ¯è¿‡1ç§’é’Ÿè¿™é‡Œéœ€è¦è·å¾—æ¶ˆæ¯
 		        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-				// mediaPlayer.getCurrentPosition()»ñÈ¡µ±Ç°¸èÇúµÄµ±Ç°Ê±¼ä¡¾ºÁÃë¡¿
-			//	Date date = new Date(mediaPlayer.getCurrentPosition());
-			//	starttime.setText(simpleDateFormat.format(date));
+				// mediaPlayer.getCurrentPosition()è·å–å½“å‰æ­Œæ›²çš„å½“å‰æ—¶é—´ã€æ¯«ç§’ã€‘
+				Date date = new Date(mediaPlayer.getCurrentPosition());
+				starttime.setText(simpleDateFormat.format(date));
 				seekBar1.setProgress(mediaPlayer.getCurrentPosition());
 			}
 		};
@@ -249,7 +272,7 @@ public class HistoryListActivity extends Activity{
 			name.setText(MainActivity.recordFiles.get(arg0));
 //			name.setText((ArrayList)MainActivity.map.get("recordFiles").);
 			timesitem=(TextView) view.findViewById(R.id.timesitem);
-			//ÉèÖÃÊ±¼ä
+			//è®¾ç½®æ—¶é—´
 //			Item item=(Item) getItem(arg0);
 //			timesitem.setText(item.times);
 			return view;
