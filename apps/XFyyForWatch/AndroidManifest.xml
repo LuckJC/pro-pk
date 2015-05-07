@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <application
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon_soundhelper"
         android:name="SpeechApp"
         android:label="时中语音" >
         
