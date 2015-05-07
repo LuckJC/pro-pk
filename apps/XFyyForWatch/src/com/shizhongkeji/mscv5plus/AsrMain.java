@@ -71,6 +71,10 @@ public class AsrMain extends Activity {
 	 * 是不是从别的地方返回来
 	 */
 	private boolean is_other_back = false;
+	/**
+	 * 是否有弹框
+	 */
+	private boolean is_have_dialog = false;
 	// 语音识别对象
 	private SpeechRecognizer mAsr;
 	private Toast mToast;
@@ -360,6 +364,8 @@ public class AsrMain extends Activity {
 												TextToSpeech.QUEUE_ADD, IDmap);
 									}
 								}).show();// 在按键响应事件中显示此对话框
+				
+					is_have_dialog = true;
 			}
 		}
 	};
@@ -709,7 +715,7 @@ public class AsrMain extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		if (is_other_back) {
+		if (is_other_back && (!is_have_dialog)) {
 
 			IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 			mSpeech.speak(getResources().getString(R.string.help_you_dothing),
