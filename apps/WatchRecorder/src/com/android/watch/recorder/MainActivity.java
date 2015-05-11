@@ -118,17 +118,17 @@ public class MainActivity extends Activity{
 			switch (arg0.getId()) {
 			case R.id.recorder:
 				if(isPause){
-					//录音状态要转为暂停状态
+					//当前正在录音的文件名，全程
 					imageView.setImageResource(R.drawable.startrecorder);
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
-					start();
+					//start();
 					//				buttonpause.setText("继续录音");
 					//计时停止
 //					timer.cancel();
 					isPause=false; 
 				}
-				//开始状态要录音
+				//正在录音，点击暂停,现在录音状态为暂停
 				else{
 					imageView.setImageResource(R.drawable.endre);
 					start();
@@ -152,13 +152,14 @@ public class MainActivity extends Activity{
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
 					getInputCollection(lists, true);
-					
 				}
 			//	Toast.makeText(MainActivity.this, "保存成功", 3000).show();
 				minute=0;
 				second=0;
 				times.setText("00:00");
 				getRecordFiles();
+				ArrayList<String> gg=new ArrayList<String>();
+			    gg=recordFiles;
 				isStopRecord = true;
 				imageView.setImageResource(R.drawable.startrecorder);
 				save.setVisibility(View.INVISIBLE);
@@ -225,8 +226,6 @@ public class MainActivity extends Activity{
 					.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
 			mMediaRecorder
 					.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//			mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);     
-//			mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 			//录音文件保存这里
 			mMediaRecorder.setOutputFile(myRecAudioFile
 					.getAbsolutePath());
@@ -268,10 +267,10 @@ public class MainActivity extends Activity{
 	protected void recorderStop() {
 		if (mMediaRecorder != null) {
 			// 停止录音
-			//mMediaRecorder.stop();
+			mMediaRecorder.stop();
+			mMediaRecorder.reset();
 			mMediaRecorder.release();
 			mMediaRecorder = null;
-			
 		}
 		timer.cancel();
 	}
