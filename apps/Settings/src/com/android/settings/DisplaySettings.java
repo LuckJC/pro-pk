@@ -163,7 +163,6 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
       mDisplaySettingsExt.removePreference(mAccelerometer);
 	  mDisplaySettingsExt.removePreference(mFontSizePref);
 	  
-	  mDisplaySettingsExt.removePreference(mScreenTimeoutPreference);
 	  mDisplaySettingsExt.removePreference(mScreenSaverPreference);
 	  //add by lixd-------------------if have clear wallpaper and Lock screen notifications  goto  "DisplaySettingsExt.java"  
 	  
