@@ -3,6 +3,7 @@ package com.watch.calendar;
 import java.util.Calendar;
 
 import com.android.watch.calendar.util.CompeterCalendar;
+import com.android.watch.calendar.util.DateFormatter;
 import com.example.calendar.R;
 
 import android.app.Activity;
@@ -45,7 +46,9 @@ OnDateSetListener, OnMenuItemClickListener, OnFocusChangeListener{
 //		txtTitleGregorian = (TextView) findViewById(R.id.gregorian);
 //		txtTitleAddition = (TextView) findViewById(R.id.txtTitleAddition);
 		showYear=(TextView) findViewById(R.id.showYear);
+		showYear.getPaint().setFakeBoldText(true);
 		showMouth=(TextView) findViewById(R.id.showMouth);
+		showMouth.getPaint().setFakeBoldText(true);
 		mPager = (ViewPager) findViewById(R.id.pager);
 
 		mPagerAdapter = new CalendarPagerAdapter(getSupportFragmentManager());

@@ -15,20 +15,21 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/init_name"
-            android:textSize="72dp"
-            android:textColor="#DDAAFF"
+            android:textSize="80dp"
+            android:textColor="#ccdacc"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 <!-- android:layout_alignBottom="@id/showYear" -->
         <TextView
             android:id="@+id/showMouth"
+            android:textStyle="bold|italic"
             android:layout_below="@id/showYear"
             android:layout_marginTop="25dp"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="64dp"
+            android:textSize="80dp"
             android:text="@string/init_name"
-            android:textColor="#FF8844"
+            android:textColor="#fed6d6"
             
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
