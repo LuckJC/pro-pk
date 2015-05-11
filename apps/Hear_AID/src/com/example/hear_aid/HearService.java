@@ -159,12 +159,12 @@ public class HearService extends Service {
 		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
 		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
-		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
-				AudioManager.AUDIOFOCUS_GAIN);
-		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
-			isFocusAudio = true;
-		}
+//		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
+//				AudioManager.AUDIOFOCUS_GAIN);
+//		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+//			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
+//			isFocusAudio = true;
+//		}
 		mSharedPreferences = getSharedPreferences("status", Activity.MODE_PRIVATE);
 
 		recBufSize = AudioRecord.getMinBufferSize(frequency, channelConfiguration, audioEncoding);
@@ -253,7 +253,7 @@ public class HearService extends Service {
 				audioRecord.startRecording();// ��ʼ¼��
 				audioTrack.play();// ��ʼ����
 				Xlog.v(TAG, "isRecording:" + isRecording);
-				while (isRecording && isFocusAudio) {
+				while (isRecording /*&& isFocusAudio*/) {
 					// ��ȡMic������
 					int bufferReadResult = audioRecord.read(buffer, 0, recBufSize);
 					byte[] tmpBuf = new byte[bufferReadResult];
@@ -276,7 +276,7 @@ public class HearService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		audioManager.abandonAudioFocus(afChangeListener);
+//		audioManager.abandonAudioFocus(afChangeListener);
 		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
 		initFirstVolume();
 		if (isSecond) {
