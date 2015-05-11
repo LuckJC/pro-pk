@@ -14,7 +14,6 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +38,8 @@ public abstract class ClockFragment extends Fragment {
 	public static final String BATTERY_CHARGING_ICON = "battery_charging_icon";
 	public static final String BATTERY_LEVEL_ICON = "battery_level_icon";
 	public static final String TIME_UPDATE_PERIOD = "time_update_period";
+	
+	private boolean mHasNewMissedCalls;
 	
 	/**
 	 * Time update period.
@@ -302,20 +303,21 @@ public abstract class ClockFragment extends Fragment {
 	 */
 	protected int updateMissedCall() {
 		int count = 0;
+		mHasNewMissedCalls = false;
 		//query unseen missed call count and display
 		Cursor cursor = getActivity().getContentResolver().query(
 				CallLog.Calls.CONTENT_URI, NEW_MISSED_CALL_PROJECTION, 
-				Calls.NEW+ "=1", null, null);
-		boolean hasNewMissedCall = false;
+				Calls.TYPE + "=? AND " + Calls.NEW + "=?", 
+				new String[] {String.valueOf(Calls.MISSED_TYPE), "1"}, null, null);
 		if (cursor != null && cursor.moveToFirst()) {
 			count = cursor.getCount();
 			if (count > 0) {
-				hasNewMissedCall = true;
+				mHasNewMissedCalls = true;
 				mMissedCallTV.setText(count <= 99 ? String.valueOf(count) : "99+");
 			}
 		}
 		if (cursor != null) cursor.close();
-		if (!hasNewMissedCall) {
+		if (!mHasNewMissedCalls) {
 			mMissedCallTV.setText("");
 		}
 		
@@ -380,8 +382,14 @@ public abstract class ClockFragment extends Fragment {
 	 * 获取电话Intent
 	 * @return 电话Intent
 	 */
-	protected final static Intent getCallIntent() {
-		Intent intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
+	protected Intent getCallIntent() {
+		Intent intent;
+		if (!mHasNewMissedCalls) {			
+			intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
+		} else {
+			intent = new Intent();
+			intent.setClassName("com.example.xuntongwatch", "com.example.xuntongwatch..main.Record_Activity");
+		}
 //		Intent intent = new Intent(Intent.ACTION_DIAL);
 //		intent.setData(Uri.parse("tel:*#3646633#"));
 		return intent;

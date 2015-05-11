@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -26,7 +27,8 @@ import com.example.utils.MediaUtil;
  */
 @SuppressLint("NewApi")
 public class PlayerService extends Service {
-	private MediaPlayer mediaPlayer; // ý�岥��������
+	private int mSongNum = 0; //
+	private MediaPlayer mediaPlayer = null; // ý�岥��������
 	private String path; // 播放的路径
 	private int msg; // ������Ϣ
 	private boolean isPause; // 暂停״
@@ -51,9 +53,9 @@ public class PlayerService extends Service {
 	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // ��ǰ���ֲ���ʱ����¶���
 	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// �����ֳ��ȸ��¶���
 	public static final String SHOW_LRC = "com.shizhong.action.SHOW_LRC"; // ֪ͨ��ʾ���
-	public static final String LAST_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; //��һ�׸�
-	public static final String NEXT_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT";   //��һ�׸�
-	public static final String PLAY_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC";   // ���Ż���ͣ
+	public static final String LAST_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; // ��һ�׸�
+	public static final String NEXT_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT"; // ��һ�׸�
+	public static final String PLAY_SONG = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // ���Ż���ͣ
 	/**
 	 * handle 更新播放进度条
 	 */
@@ -64,9 +66,9 @@ public class PlayerService extends Service {
 					currentTime = mediaPlayer.getCurrentPosition(); // ��ȡ��ǰ���ֲ��ŵ�λ��
 					Intent intent = new Intent();
 					intent.setAction(MUSIC_CURRENT);
-//					intent.setAction(LAST_SONG);
-//					intent.setAction(NEXT_SONG);
-//					intent.setAction(PLAY_SONG);
+					// intent.setAction(LAST_SONG);
+					// intent.setAction(NEXT_SONG);
+					// intent.setAction(PLAY_SONG);
 					intent.putExtra("currentTime", currentTime);
 					intent.putExtra("duration", duration);
 					intent.putExtra("song", mSongName);
@@ -83,6 +85,7 @@ public class PlayerService extends Service {
 		super.onCreate();
 		Log.d("service", "service created");
 		mediaPlayer = new MediaPlayer();
+
 		mp3Infos = MediaUtil.getMp3Infos(PlayerService.this);
 
 		/**
@@ -163,6 +166,91 @@ public class PlayerService extends Service {
 
 	@Override
 	public void onStart(Intent intent, int startId) {
+		String action = intent.getStringExtra("action");
+		if (action != null) {
+			if (action.equals(PLAY_SONG)) {
+				if (isPause) {
+					mediaPlayer.pause();
+					isPause = false;
+				} else {
+					path = mp3Infos.get(mSongNum).getUrl();
+					mediaPlayer.reset();
+					try {
+						mediaPlayer.setDataSource(path);
+						mediaPlayer.prepare();
+						mediaPlayer.start();
+						isPause=true;
+					} catch (IllegalArgumentException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}
+			if (action.equals(NEXT_SONG)) {
+				if (mSongNum == mp3Infos.size() - 1) {
+					mSongNum = 0;
+				} else {
+					mSongNum++;
+				}
+
+				path = mp3Infos.get(mSongNum).getUrl();
+				mediaPlayer.reset();
+				try {
+					mediaPlayer.setDataSource(path);
+					mediaPlayer.prepare();
+					mediaPlayer.start();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+			if (action.equals(LAST_SONG)) {
+				if (mSongNum >= 1) {
+					mSongNum--;
+				} else {
+					mSongNum = mp3Infos.size() - 1;
+				}
+				path = mp3Infos.get(mSongNum).getUrl();
+				mediaPlayer.reset();
+				try {
+					mediaPlayer.setDataSource(path);
+					mediaPlayer.prepare();
+					mediaPlayer.start();
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
 		path = intent.getStringExtra("url"); // ����·��
 		current = intent.getIntExtra("listPosition", -1); // ��ǰ���Ÿ�������mp3Infos��λ��
 		msg = intent.getIntExtra("MSG", 0); // ������Ϣ
@@ -263,14 +351,14 @@ public class PlayerService extends Service {
 	private void pause() {
 		if (mediaPlayer != null && mediaPlayer.isPlaying()) {
 			mediaPlayer.pause();
-			isPause = true;
+			isPause = false;
 		}
 	}
 
 	private void resume() {
 		if (isPause) {
 			mediaPlayer.start();
-			isPause = false;
+			isPause = true;
 		}
 	}
 
@@ -367,20 +455,20 @@ public class PlayerService extends Service {
 				break;
 			}
 
-			String action = intent.getAction();
-			if(action.equals(LAST_SONG)){
-				previous();
-			}else if(action.equals(NEXT_SONG)){
-				next();
-			}else if(action.equals(PLAY_SONG)){
-				if (isPause) {
-					isPause = false;
-					play(currentTime);
-				}else{
-					isPause = true;
-					pause();
-				}
-			}
+			// String action = intent.getAction();
+			// if (action.equals(LAST_SONG)) {
+			// previous();
+			// } else if (action.equals(NEXT_SONG)) {
+			// next();
+			// } else if (action.equals(PLAY_SONG)) {
+			// if (isPause) {
+			// isPause = false;
+			// play(currentTime);
+			// } else {
+			// isPause = true;
+			// pause();
+			// }
+			// }
 			// if(action.equals(SHOW_LRC)){
 			// current = intent.getIntExtra("listPosition", -1);
 			// initLrc();
