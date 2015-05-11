@@ -14,17 +14,19 @@ public class LauncherConfig implements BaseColumns {
 	static final String[] APPS_COMMON = {
 		"com.shizhongkeji.mscv5plus",  //语音
 		"com.example.hear_aid",  //助听器
-		//"com.android.gallery3d",  //相机,照片
+		"com.android.gallery3d",  //相机,照片
 		//"com.android.music",  //音乐
 		"com.example.musicplayer", //音乐
 		//"com.android.soundrecorder",  //录音机
-		//"com.mediatek.FMRadio",  //收音机
+		"com.android.watch.recorder",  //录音机
+		"com.mediatek.FMRadio",  //收音机
+		"com.android.calculator2",
 		"com.ss.android.article.news",  //头条新闻
 	};
 	
 	static final String[] APPS_SPORTS = {
 		"com.example.calendar",  //日历
-		//"com.android.deskclock",  //时钟
+		"com.android.deskclock",  //时钟
 		"com.codoon.gps",  //咕咚运动
 		"com.baidu.BaiduMap",  //百度地图
 		"com.nike.plusgpschina",  //Nike+计步器
