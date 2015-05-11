@@ -84,15 +84,15 @@ public class DeleteListActivity extends Activity{
 				holder.cb.setChecked(item.status);
 				boolean ff=item.status==true;
 				if(item.status==true){
-					positionList.add(arg2);
+					//positionList.add(arg2);
 					nodeletes.add(MainActivity.recordFiles.get(arg2));
 				}else{
-					positionList.remove(arg2);
+					//positionList.remove(arg2);
 					nodeletes.remove(MainActivity.recordFiles.get(arg2));
+					
 				}
 				
 				deleteBaseAdater.notifyDataSetChanged();
-				Toast.makeText(DeleteListActivity.this, ""+arg2, 3000).show();
 				
 			}
 		});
@@ -122,14 +122,13 @@ public class DeleteListActivity extends Activity{
 				break;
             case R.id.deleteCommit:
             	//MainActivity.recordFiles.remove(index);
-            	if(positionList.size()==0){
-            		Toast.makeText(DeleteListActivity.this, "请选择文件", 3000).show();
+            	if(nodeletes.size()==0){
+            		Toast.makeText(DeleteListActivity.this, "选择音频文件", Toast.LENGTH_LONG).show();
             	}else{
             		for(int i=0;i<nodeletes.size();i++){
 //                		File file=new File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
             			File file=new File(nodeletes.get(i));
             			File file2=new File(MainActivity.myRecAudioDir.getAbsolutePath()+file.getAbsolutePath());
-                		Toast.makeText(DeleteListActivity.this, file2+"", 3000).show();
                 		file2.delete();
 //                		MainActivity.recordFiles.remove((int)(positionList.get(i)));
                 		MainActivity.recordFiles.remove(nodeletes.get(i));

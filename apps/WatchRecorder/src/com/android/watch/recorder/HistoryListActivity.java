@@ -114,7 +114,6 @@ public class HistoryListActivity extends Activity{
 		
 	}
 
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -197,7 +196,6 @@ public class HistoryListActivity extends Activity{
 				endtime.setVisibility(View.VISIBLE);
 				Date date = new Date(mediaPlayer.getDuration());
 				endtime.setText(simpleDateFormat.format(date)+"");
-				Toast.makeText(HistoryListActivity.this, simpleDateFormat.format(date)+"", 3000).show();
 				// 设置总刻度
 				seekBar1.setMax(mediaPlayer.getDuration());
 				startTime();
