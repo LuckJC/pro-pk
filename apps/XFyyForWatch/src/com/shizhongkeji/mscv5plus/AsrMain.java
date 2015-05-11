@@ -480,8 +480,10 @@ public class AsrMain extends Activity {
 								mSpeech.speak(getResources().getString(R.string.music_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
 								AcquireWakeLock();
-								Intent intent = new Intent(Intent.ACTION_MAIN);
-								intent.addCategory(Intent.CATEGORY_APP_MUSIC);
+//								Intent intent = new Intent(Intent.ACTION_MAIN);
+								Intent intent = new Intent();
+								intent.setClassName("com.example.musicplayer", "com.example.musicplayer.MainActivity");
+							//	intent.addCategory(Intent.CATEGORY_APP_MUSIC);
 								startActivity(intent);
 								mAsr.stopListening();
 							} else if ((getResources().getString(R.string.settings)).equals(map
@@ -524,7 +526,9 @@ public class AsrMain extends Activity {
 										getResources().getString(R.string.call_dial_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
 								AcquireWakeLock();
-								Intent intent = new Intent(Intent.ACTION_DIAL);
+//								Intent intent = new Intent(Intent.ACTION_DIAL);
+								Intent intent = new Intent();
+								intent.setAction("com.example.xuntongwatch.main.Call_Activity");
 								startActivity(intent);
 								mAsr.stopListening();
 							} else if ((getResources().getString(R.string.recorder)).equals(map
