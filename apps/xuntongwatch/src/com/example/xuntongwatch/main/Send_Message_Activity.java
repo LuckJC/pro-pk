@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.Message_;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.MessageUtil;
+import com.example.xuntongwatch.util.PhoneRecordUtil;
 import com.example.xuntongwatch.util.Utils;
 
 public class Send_Message_Activity extends BaseActivity implements OnClickListener {
@@ -39,6 +41,7 @@ public class Send_Message_Activity extends BaseActivity implements OnClickListen
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.send_message);
+		PhoneRecordUtil.sTateReplaceSmS(this);
 		add_person = (RelativeLayout) this.findViewById(R.id.send_message_add_person);
 		send_message = (RelativeLayout) this.findViewById(R.id.send_message_send);
 		lv = (ListView) this.findViewById(R.id.send_message_lv);

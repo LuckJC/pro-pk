@@ -8,6 +8,7 @@
     <drawable name="clr_normal">#49c0fa</drawable>
     <drawable name="clr_pressed">#1444d6</drawable>
   <string name="edit_contact">编辑联系人</string>
+   <string name="add_contact_sim">从sim卡导入联系人</string>
     <string name="add_contact">添加联系人</string>
     <string name="name">姓名</string>
     <string name="phone_number">手机号码</string> 
