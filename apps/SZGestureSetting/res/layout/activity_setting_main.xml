@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/gesture_setting"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/add_gesture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/add_gesture"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+         />
+
+	<ListView
+	    android:id="@+id/list"
+	    android:layout_width="wrap_content"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/textView2" 
+	    android:layout_marginTop="5dp"
+	    android:cacheColorHint="@android:color/transparent">
+	    
+	</ListView>
+</RelativeLayout>
