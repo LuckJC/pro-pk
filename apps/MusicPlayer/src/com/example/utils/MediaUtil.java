@@ -25,11 +25,11 @@ import com.example.musicplayer.R;
 
 public class MediaUtil {
 
-	// »ñÈ¡×¨¼­·âÃæµÄUri
+	// è·å–ä¸“è¾‘å°é¢çš„Uri
 	private static final Uri albumArtUri = Uri.parse("content://media/external/audio/albumart");
 
 	/**
-	 * ÓÃÓÚ´ÓÊı¾İ¿âÖĞ²éÑ¯¸èÇúµÄĞÅÏ¢£¬±£´æÔÚListµ±ÖĞ
+	 * ç”¨äºä»æ•°æ®åº“ä¸­æŸ¥è¯¢æ­Œæ›²çš„ä¿¡æ¯ï¼Œä¿å­˜åœ¨Listå½“ä¸­
 	 * 
 	 * @return
 	 */
@@ -42,26 +42,26 @@ public class MediaUtil {
 		for (int i = 0; i < cursor.getCount(); i++) {
 			cursor.moveToNext();
 			Mp3Info mp3Info = new Mp3Info();
-			long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)); // ÒôÀÖid
-			String title = cursor.getString((cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))); // ÒôÀÖ±êÌâ
-			String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)); // ÒÕÊõ¼Ò
-			String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)); // ×¨¼­
+			long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID)); // éŸ³ä¹id
+			String title = cursor.getString((cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))); // éŸ³ä¹æ ‡é¢˜
+			String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)); // è‰ºæœ¯å®¶
+			String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)); // ä¸“è¾‘
 			String displayName = cursor.getString(cursor
 					.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
 			long albumId = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
-			long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); // Ê±³¤
-			long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE)); // ÎÄ¼ş´óĞ¡
-			String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)); // ÎÄ¼şÂ·¾¶
-			int isMusic = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.IS_MUSIC)); // ÊÇ·ñÎªÒôÀÖ
-			if (isMusic != 0) { // Ö»°ÑÒôÀÖÌí¼Óµ½¼¯ºÏµ±ÖĞ
+			long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)); // æ—¶é•¿
+			long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE)); // æ–‡ä»¶å¤§å°
+			String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)); // æ–‡ä»¶è·¯å¾„
+			int isMusic = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.IS_MUSIC)); // æ˜¯å¦ä¸ºéŸ³ä¹
+			if (isMusic != 0) { // åªæŠŠéŸ³ä¹æ·»åŠ åˆ°é›†åˆå½“ä¸­
 				mp3Info.setId(id);
 				mp3Info.setTitle(title);
 				mp3Info.setArtist(artist);
 				if ("<unknown>".equals(artist)) {
 					String[] s = title.split("-");
 					if (s != null && s.length == 2) {
-						mp3Info.setTitle(s[1]); // ÏÔÊ¾±êÌâ
-						mp3Info.setArtist(s[0]); // ÏÔÊ¾ÒÕÊõ¼Ò
+						mp3Info.setTitle(s[1]); // æ˜¾ç¤ºæ ‡é¢˜
+						mp3Info.setArtist(s[0]); // æ˜¾ç¤ºè‰ºæœ¯å®¶
 					}
 				} else {
 					mp3Info.setTitle(title);
@@ -80,7 +80,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * ÍùList¼¯ºÏÖĞÌí¼ÓMap¶ÔÏóÊı¾İ£¬Ã¿Ò»¸öMap¶ÔÏó´æ·ÅÒ»Ê×ÒôÀÖµÄËùÓĞÊôĞÔ
+	 * å¾€Listé›†åˆä¸­æ·»åŠ Mapå¯¹è±¡æ•°æ®ï¼Œæ¯ä¸€ä¸ªMapå¯¹è±¡å­˜æ”¾ä¸€é¦–éŸ³ä¹çš„æ‰€æœ‰å±æ€§
 	 * 
 	 * @param mp3Infos
 	 * @return
@@ -104,7 +104,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * ¸ñÊ½»¯Ê±¼ä£¬½«ºÁÃë×ª»»Îª·Ö:Ãë¸ñÊ½
+	 * æ ¼å¼åŒ–æ—¶é—´ï¼Œå°†æ¯«ç§’è½¬æ¢ä¸ºåˆ†:ç§’æ ¼å¼
 	 * 
 	 * @param time
 	 * @return
@@ -130,7 +130,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * »ñÈ¡Ä¬ÈÏ×¨¼­Í¼Æ¬
+	 * è·å–é»˜è®¤ä¸“è¾‘å›¾ç‰‡
 	 * 
 	 * @param context
 	 * @return
@@ -138,7 +138,7 @@ public class MediaUtil {
 	public static Bitmap getDefaultArtwork(Context context, boolean small) {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inPreferredConfig = Bitmap.Config.RGB_565;
-		if (small) { // ·µ»ØĞ¡Í¼Æ¬
+		if (small) { // è¿”å›å°å›¾ç‰‡
 			return BitmapFactory.decodeStream(
 					context.getResources().openRawResource(R.drawable.music5), null, opts);
 		}
@@ -147,7 +147,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * ´ÓÎÄ¼şµ±ÖĞ»ñÈ¡×¨¼­·âÃæÎ»Í¼
+	 * ä»æ–‡ä»¶å½“ä¸­è·å–ä¸“è¾‘å°é¢ä½å›¾
 	 * 
 	 * @param context
 	 * @param songid
@@ -178,19 +178,19 @@ public class MediaUtil {
 				}
 			}
 			options.inSampleSize = 1;
-			// Ö»½øĞĞ´óĞ¡ÅĞ¶Ï
+			// åªè¿›è¡Œå¤§å°åˆ¤æ–­
 			options.inJustDecodeBounds = true;
-			// µ÷ÓÃ´Ë·½·¨µÃµ½optionsµÃµ½Í¼Æ¬´óĞ¡
+			// è°ƒç”¨æ­¤æ–¹æ³•å¾—åˆ°optionså¾—åˆ°å›¾ç‰‡å¤§å°
 			BitmapFactory.decodeFileDescriptor(fd, null, options);
-			// ÎÒÃÇµÄÄ¿±êÊÇÔÚ800pixelµÄ»­ÃæÉÏÏÔÊ¾
-			// ËùÒÔĞèÒªµ÷ÓÃcomputeSampleSizeµÃµ½Í¼Æ¬Ëõ·ÅµÄ±ÈÀı
+			// æˆ‘ä»¬çš„ç›®æ ‡æ˜¯åœ¨800pixelçš„ç”»é¢ä¸Šæ˜¾ç¤º
+			// æ‰€ä»¥éœ€è¦è°ƒç”¨computeSampleSizeå¾—åˆ°å›¾ç‰‡ç¼©æ”¾çš„æ¯”ä¾‹
 			options.inSampleSize = 100;
-			// ÎÒÃÇµÃµ½ÁËËõ·ÅµÄ±ÈÀı£¬ÏÖÔÚ¿ªÊ¼ÕıÊ½¶ÁÈëBitmapÊı¾İ
+			// æˆ‘ä»¬å¾—åˆ°äº†ç¼©æ”¾çš„æ¯”ä¾‹ï¼Œç°åœ¨å¼€å§‹æ­£å¼è¯»å…¥Bitmapæ•°æ®
 			options.inJustDecodeBounds = false;
 			options.inDither = false;
 			options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-			// ¸ù¾İoptions²ÎÊı£¬¼õÉÙËùĞèÒªµÄÄÚ´æ
+			// æ ¹æ®optionså‚æ•°ï¼Œå‡å°‘æ‰€éœ€è¦çš„å†…å­˜
 			bm = BitmapFactory.decodeFileDescriptor(fd, null, options);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -199,7 +199,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * »ñÈ¡×¨¼­·âÃæÎ»Í¼¶ÔÏó
+	 * è·å–ä¸“è¾‘å°é¢ä½å›¾å¯¹è±¡
 	 * 
 	 * @param context
 	 * @param song_id
@@ -228,20 +228,20 @@ public class MediaUtil {
 			try {
 				in = res.openInputStream(uri);
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				// ÏÈÖÆ¶¨Ô­Ê¼´óĞ¡
+				// å…ˆåˆ¶å®šåŸå§‹å¤§å°
 				options.inSampleSize = 1;
-				// Ö»½øĞĞ´óĞ¡ÅĞ¶Ï
+				// åªè¿›è¡Œå¤§å°åˆ¤æ–­
 				options.inJustDecodeBounds = true;
-				// µ÷ÓÃ´Ë·½·¨µÃµ½optionsµÃµ½Í¼Æ¬µÄ´óĞ¡
+				// è°ƒç”¨æ­¤æ–¹æ³•å¾—åˆ°optionså¾—åˆ°å›¾ç‰‡çš„å¤§å°
 				BitmapFactory.decodeStream(in, null, options);
-				/** ÎÒÃÇµÄÄ¿±êÊÇÔÚÄãN pixelµÄ»­ÃæÉÏÏÔÊ¾¡£ ËùÒÔĞèÒªµ÷ÓÃcomputeSampleSizeµÃµ½Í¼Æ¬Ëõ·ÅµÄ±ÈÀı **/
-				/** ÕâÀïµÄtargetÎª800ÊÇ¸ù¾İÄ¬ÈÏ×¨¼­Í¼Æ¬´óĞ¡¾ö¶¨µÄ£¬800Ö»ÊÇ²âÊÔÊı×Öµ«ÊÇÊÔÑéºó·¢ÏÖÍêÃÀµÄ½áºÏ **/
+				/** æˆ‘ä»¬çš„ç›®æ ‡æ˜¯åœ¨ä½ N pixelçš„ç”»é¢ä¸Šæ˜¾ç¤ºã€‚ æ‰€ä»¥éœ€è¦è°ƒç”¨computeSampleSizeå¾—åˆ°å›¾ç‰‡ç¼©æ”¾çš„æ¯”ä¾‹ **/
+				/** è¿™é‡Œçš„targetä¸º800æ˜¯æ ¹æ®é»˜è®¤ä¸“è¾‘å›¾ç‰‡å¤§å°å†³å®šçš„ï¼Œ800åªæ˜¯æµ‹è¯•æ•°å­—ä½†æ˜¯è¯•éªŒåå‘ç°å®Œç¾çš„ç»“åˆ **/
 				if (small) {
 					options.inSampleSize = computeSampleSize(options, 40);
 				} else {
 					options.inSampleSize = computeSampleSize(options, 600);
 				}
-				// ÎÒÃÇµÃµ½ÁËËõ·Å±ÈÀı£¬ÏÖÔÚ¿ªÊ¼ÕıÊ½¶ÁÈëBitmapÊı¾İ
+				// æˆ‘ä»¬å¾—åˆ°äº†ç¼©æ”¾æ¯”ä¾‹ï¼Œç°åœ¨å¼€å§‹æ­£å¼è¯»å…¥Bitmapæ•°æ®
 				options.inJustDecodeBounds = false;
 				options.inDither = false;
 				options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -274,7 +274,7 @@ public class MediaUtil {
 	}
 
 	/**
-	 * ¶ÔÍ¼Æ¬½øĞĞºÏÊÊµÄËõ·Å
+	 * å¯¹å›¾ç‰‡è¿›è¡Œåˆé€‚çš„ç¼©æ”¾
 	 * 
 	 * @param options
 	 * @param target
