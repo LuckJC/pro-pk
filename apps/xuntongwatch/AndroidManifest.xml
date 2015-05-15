@@ -70,8 +70,13 @@
             android:name=".main.Message_Chat_Activity"
             android:label="@string/app_name" >
         </activity>
-         <activity
+  
+          <activity
             android:name=".main.Edit_Head_Activity"
+            android:label="@string/app_name" >
+        </activity>
+           <activity
+            android:name=".main.RE_Edit_Head_Activity"
             android:label="@string/app_name" >
         </activity>
             <activity
