@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -56,6 +57,7 @@ import com.iflytek.cloud.util.ResourceUtil;
 import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE;
 import com.shizhongkeji.speech.util.FucUtil;
 import com.shizhongkeji.speech.util.JsonParser;
+import com.shizhongkeji.speech.util.MyDialog;
 import com.shizhongkeji.speech.util.ProgressDialogUtils;
 
 public class AsrMain extends Activity {
@@ -253,7 +255,7 @@ public class AsrMain extends Activity {
 		// 设置语法名称
 		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
 
-		ret = mAsr.updateLexicon("contact", mLocalLexicon, lexiconListener);
+		ret = mAsr.updateLexicon("contact", sb.toString(), lexiconListener);
 		if (ret != ErrorCode.SUCCESS) {
 			if (ret == 20009) {
 				showTip("updataLexcion() error:" + ret + getResources().getString(R.string.no_person));
@@ -263,6 +265,18 @@ public class AsrMain extends Activity {
 		}
 	}
 
+	/**
+	 * <br>功能简述:
+	 * <br>功能详细描述:去掉特殊字符
+	 * <br>注意:
+	 * @param s
+	 * @return
+	 */
+		public static String format(String s){ 
+//			boolean b = Pattern.matches("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……& amp;*（）——+|{}【】‘；：”“’。，、？|-]", s);
+			String string = s.replace("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……& amp;*（）——+|{}【】‘；：”“’。，、？|-]", "");
+		   return string; 
+		 }
 	/**
 	 * 初始化监听器。
 	 */
@@ -334,6 +348,42 @@ public class AsrMain extends Activity {
 		}
 	};
 
+	
+	StringBuffer sb=new StringBuffer();
+	StringBuffer show_sb=new StringBuffer();
+	/**
+	 * <br>功能简述:
+	 * <br>功能详细描述:判断每个联系人名字中是否拥有非法字符
+	 * <br>注意:
+	 * @param lst
+	 */
+	void getdata(List<String> lst)
+	{
+	for(int i=0;i<lst.size();i++)
+	{
+		
+		char[] mm =	lst.get(i).toCharArray();
+		for(char c:mm)
+		{
+			boolean b = Pattern.matches("[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……& amp;*（）——+|{}【】‘；：”“’。，、？|-]", String.valueOf(c));
+			if(b && !lst.isEmpty())
+			{
+				show_sb.append(lst.get(i)+";");
+				lst.remove(i);
+				getdata(lst);
+				break;
+			}
+			else
+			{
+				
+			}
+
+		}
+		
+		
+	}
+	
+}
 	/**
 	 * 获取联系人监听器。
 	 */
@@ -343,39 +393,69 @@ public class AsrMain extends Activity {
 			// 获取联系人
 			mLocalLexicon = contactInfos;
 
-			if (!is_updata_lexcion_finish && !mLocalLexicon.equals("")) {
+			
+			String[] tmp_str=mLocalLexicon.split("\n");
+			List<String> lst_str=new ArrayList<String>(); 
+			
+			for(int i=0;i<tmp_str.length;i++)
+			{
+				lst_str.add(tmp_str[i]);
+			}
+		
+			getdata(lst_str);
+			
+			
+			
+			if(lst_str.isEmpty())
+			{
+//				showTip("没有联系人或者您的联系人全是非法字符，打电话跟发短信将无效");
+//				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+//				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+//						TextToSpeech.QUEUE_ADD, IDmap);
+			}
+			else{
+					for(int i=0;i<lst_str.size();i++)
+					{
+					sb.append(lst_str.get(i)+"\n");
+					}
+				}
+			
+			if (!is_updata_lexcion_finish && !sb.toString().equals("")) {
 				ProgressDialogUtils.showProgressDialog(AsrMain.this,
-						getResources().getString(R.string.going_updataLexcion));
+						getResources().getString(R.string.going_updataLexcion));  
 				updataLexcion();
 			}
 
-			if (mLocalLexicon.equals("")) {
-				new AlertDialog.Builder(AsrMain.this).setTitle(getResources().getString(R.string.dialog_system_prompt))// 设置对话框标题
-						.setMessage(getResources().getString(R.string.dialog_system_prompt_content))// 设置显示的内容
-						.setPositiveButton(getResources().getString(R.string.dialog_system_prompt_btn_ok), new DialogInterface.OnClickListener() {// 添加确定按钮
-									@Override
-									public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
+			if (sb.toString().equals("")) {
+				MyDialog dialog = new MyDialog(AsrMain.this);
+				dialog.setTitle(getResources().getString(R.string.dialog_system_prompt));
+				dialog.setMessage(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb);
+				dialog.setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.dialog_system_prompt_btn_ok), new DialogInterface.OnClickListener() {// 添加确定按钮
+					@Override
+					public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
 
-										// TODO Auto-generated method stub
-										Intent it = new Intent();
-										it.setAction("com.example.xuntongwatch.main.Contact_Activity");
-										startActivity(it);
-										AsrMain.this.finish();
-									}
-								})
-						.setNegativeButton(getResources().getString(R.string.dialog_system_prompt_btn_cancel), new DialogInterface.OnClickListener() {// 添加返回按钮
-									@Override
-									public void onClick(DialogInterface dialog, int which) {// 响应事件
+						// TODO Auto-generated method stub
+						Intent it = new Intent();
+						it.setAction("com.example.xuntongwatch.main.Contact_Activity");
+						startActivity(it);
+						AsrMain.this.finish();
+					}
+				});
+				dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.dialog_system_prompt_btn_cancel), new DialogInterface.OnClickListener() {// 添加确定按钮
+					@Override
+					public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
 
-										// TODO Auto-generated method stub
-										IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
-												"1001");
-										mSpeech.speak(
-												getResources().getString(R.string.help_you_dothing),
-												TextToSpeech.QUEUE_ADD, IDmap);
-									}
-								}).show();// 在按键响应事件中显示此对话框
-				
+						// TODO Auto-generated method stub
+						IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
+								"1001");
+						mSpeech.speak(
+								getResources().getString(R.string.help_you_dothing),
+								TextToSpeech.QUEUE_ADD, IDmap);
+					}
+				});
+				dialog.setCanceledOnTouchOutside(false);
+				dialog.show();// 在按键响应事件中显示此对话框
+					
 					is_have_dialog = true;
 			}
 		}
