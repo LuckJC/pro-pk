@@ -1,4 +1,4 @@
-package com.example.service;
+package com.shizhongkeji.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,5 +12,4 @@ public class MusicBroadCastReceiver extends BroadcastReceiver {
 		intent.putExtra("action", arg1.getAction());
 		arg0.startService(intent);
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.shizhongkeji.musicplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.adapter.MusicListAdapter;
-import com.example.info.AppConstant;
-import com.example.info.Mp3Info;
-import com.example.utils.MediaUtil;
+import com.shizhongkeji.adapter.MusicListAdapter;
+import com.shizhongkeji.info.AppConstant;
+import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.utils.MediaUtil;
 
 public class PlayListActivity extends Activity {
 	private ListView mListMusic;

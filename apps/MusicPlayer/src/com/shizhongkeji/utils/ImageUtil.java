@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.shizhongkeji.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
