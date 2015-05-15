@@ -11,7 +11,7 @@ public class DBHelper_GestureSetting extends ContentProvider {
 	//ContentProvider的uri  
     public static final String CONTENT_URI = "content://com.szkj.szgestureDBclass.DBHelper_GestureSetting";  
 	
-    static final String QUERY_DATA="select a.[gesture_style],b.[function_name] from gesture_function c ,gesture a,function b where c.[gesture_function_gid]=a.[gesture_id] and c.[gesture_function_fid]=b.[function_id]";
+    static final String QUERY_DATA="select a.[gesture_style],b.[function_name],c.[gesture_function_phonenumber] from gesture_function c ,gesture a,function b where c.[gesture_function_gid]=a.[gesture_id] and c.[gesture_function_fid]=b.[function_id]";
     
     private static SQLiteDatabase database;
     
@@ -28,7 +28,12 @@ public class DBHelper_GestureSetting extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
 			String sortOrder) {
 		// TODO Auto-generated method stub
-		Cursor cs = database.rawQuery(QUERY_DATA, null);
+		
+	String querySql = QUERY_DATA;
+		if (selectionArgs != null) {
+			querySql += " and a.[gesture_style]=?";
+		}
+		Cursor cs = database.rawQuery(querySql, selectionArgs);
 		return cs;
 	}
 

@@ -24,6 +24,11 @@ import android.util.Log;
  * @date  [2015-5-13]
  */
 public class Query_Defined_Util{
+	
+	private static String[] Ges = new String[]{"↑","↓","→","←","<",">","∨","∧","双击","O","2","3","6","7","8","9","a","b","c","d","e","g","h","k","l","m","n","p","q","r","s","u","w","y","z"};
+	private static String[] Fes = new String[]{"音量+","音量-","下一首","上一首","咕咚","助听器","音乐","语音助手","录音","清除后台程序","照相机","图库","直接拨号"};
+	private static String[] GFes = new String[]{"音量+","音量-","下一首","上一首","咕咚","助听器","音乐","语音助手","录音","清除后台程序"};
+	
 	//--------------------手势表字段--------------------------
 	static final String KEY_ROWID = "gesture_id";  
     static final String KEY_STYLE = "gesture_style";  
@@ -80,8 +85,8 @@ public class Query_Defined_Util{
    
     final Context context;  
      
-    DatabaseHelper DBHelper;  
-    SQLiteDatabase db;   
+    static DatabaseHelper DBHelper;  
+    static SQLiteDatabase db;   
       
     public Query_Defined_Util(Context cxt)  
     {  
@@ -104,6 +109,29 @@ public class Query_Defined_Util{
                 db.execSQL(DATABASE_CREATE_G); 
                 db.execSQL(DATABASE_CREATE_F);
                 db.execSQL(DATABASE_CREATE_GF);
+                for(int i=1;i<=Ges.length;i++)
+                {
+                	ContentValues values = new ContentValues();
+                	values.put(KEY_STYLE, Ges[i-1]);
+                	values.put(KEY_MODIFY, 0);
+                	db.insert(DATABASE_G_TABLE, null, values);
+                }
+                for(int i=1;i<=Fes.length;i++)
+                {
+                	ContentValues values = new ContentValues();
+                	values.put(KEY_FUNCTIONNAME, Fes[i-1]);
+                	db.insert(DATABASE_F_TABLE, null, values);
+                }
+                for(int i=1;i<=GFes.length;i++)
+                {
+                	ContentValues initialValues = new ContentValues();  
+                    initialValues.put(KEY_ROWGID, i);  
+                    initialValues.put(KEY_ROWFID, i);  
+                    initialValues.put(KEY_NAME, "");
+                    initialValues.put(KEY_NUMBER, "");
+                    db.insert(DATABASE_GF_TABLE, null, initialValues); 
+                }
+                
                 System.out.println(db.getVersion());
             	
             }  
@@ -251,7 +279,7 @@ public class Query_Defined_Util{
        /**
         * 更新手势 int值0代表可以修改  1代表不可以修改
         */
-       public boolean updateGesture(int rowId, String style, int modify)  
+       public static boolean updateGesture(int rowId, String style, int modify)  
        {  
            ContentValues args = new ContentValues();  
            args.put(KEY_STYLE, style);  
