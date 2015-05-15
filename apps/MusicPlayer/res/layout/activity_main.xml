@@ -39,22 +39,22 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/song"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:text="@string/song"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
             android:id="@+id/singer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/song"
             android:layout_alignParentRight="true"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/singer"
+            android:layout_alignParentLeft="true"
             android:layout_marginRight="25dp"
-            android:text="@string/singer"
+            android:layout_toLeftOf="@id/singer"
             android:textColor="@color/black"
             android:textSize="14sp" />
 

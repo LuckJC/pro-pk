@@ -30,9 +30,8 @@ public class PlayListActivity extends Activity {
 	private int listPosition = 0; // 在List中的位置
 
 	
-	private long musicDuration; // ����ʱ��
 	private int currentTime; // 当前播放位置
-	private int duration; // 歌曲时长
+//	private int duration; // 歌曲时长
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub

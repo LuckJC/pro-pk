@@ -1,5 +1,6 @@
 package com.example.adapter;
 
+
 import java.util.List;
 
 import android.content.Context;
@@ -15,25 +16,26 @@ import com.example.info.Mp3Info;
 import com.example.musicplayer.R;
 import com.example.utils.MediaUtil;
 
+
+
 /**
- * ×Ô¶¨ÒåµÄÒôÀÖÁĞ±íÊÊÅäÆ÷ ÎªÁË·½±ãÀ©Õ¹£¬ÒòÎªÖ®Ç°Ã»ÓĞ¿¼ÂÇµ½ÏÔÊ¾×¨¼­·âÃæ
- * 
- * @author zhouhaibo
+ * è‡ªå®šä¹‰çš„éŸ³ä¹åˆ—è¡¨é€‚é…å™¨
+ * ä¸ºäº†æ–¹ä¾¿æ‰©å±•ï¼Œå› ä¸ºä¹‹å‰æ²¡æœ‰è€ƒè™‘åˆ°æ˜¾ç¤ºä¸“è¾‘å°é¢
+ * @author wwj
  *
  */
-public class MusicListAdapter extends BaseAdapter {
-	private Context context; // ÉÏÏÂÎÄ¶ÔÏóÒıÓÃ
-	private List<Mp3Info> mp3Infos; // ´æ·ÅMp3InfoÒıÓÃµÄ¼¯ºÏ
-	private Mp3Info mp3Info; // Mp3Info¶ÔÏóÒıÓÃ
-	private int pos = -1; // ÁĞ±íÎ»ÖÃ
+public class MusicListAdapter extends BaseAdapter{
+	private Context context;		//ä¸Šä¸‹æ–‡å¯¹è±¡å¼•ç”¨
+	private List<Mp3Info> mp3Infos;	//å­˜æ”¾Mp3Infoå¼•ç”¨çš„é›†åˆ
+	private Mp3Info mp3Info;		//Mp3Infoå¯¹è±¡å¼•ç”¨
+	private int pos = -1;			//åˆ—è¡¨ä½ç½®
+	
 
+	
 	/**
-	 * ¹¹Ôìº¯Êı
-	 * 
-	 * @param context
-	 *            ÉÏÏÂÎÄ
-	 * @param mp3Infos
-	 *            ¼¯ºÏ¶ÔÏó
+	 * æ„é€ å‡½æ•°
+	 * @param context	ä¸Šä¸‹æ–‡
+	 * @param mp3Infos  é›†åˆå¯¹è±¡
 	 */
 	public MusicListAdapter(Context context, List<Mp3Info> mp3Infos) {
 		this.context = context;
@@ -58,50 +60,49 @@ public class MusicListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
-		if (convertView == null) {
+		if(convertView == null)
+		{
 			viewHolder = new ViewHolder();
-			convertView = LayoutInflater.from(context).inflate(R.layout.music_list_item_layout,
-					null);
+			convertView = LayoutInflater.from(context).inflate(R.layout.music_list_item_layout, null);
 			viewHolder.albumImage = (ImageView) convertView.findViewById(R.id.albumImage);
 			viewHolder.musicTitle = (TextView) convertView.findViewById(R.id.music_title);
-			viewHolder.musicArtist = (TextView) convertView.findViewById(R.id.singer);
+			viewHolder.musicArtist = (TextView) convertView.findViewById(R.id.music_artist);
 			viewHolder.musicDuration = (TextView) convertView.findViewById(R.id.music_duration);
-			convertView.setTag(viewHolder); // ±íÊ¾¸øViewÌí¼ÓÒ»¸ö¸ñÍâµÄÊı¾İ£¬
+			convertView.setTag(viewHolder);			//è¡¨ç¤ºç»™Viewæ·»åŠ ä¸€ä¸ªæ ¼å¤–çš„æ•°æ®ï¼Œ
 		} else {
-			viewHolder = (ViewHolder) convertView.getTag();// Í¨¹ıgetTagµÄ·½·¨½«Êı¾İÈ¡³öÀ´
+			viewHolder = (ViewHolder)convertView.getTag();//é€šè¿‡getTagçš„æ–¹æ³•å°†æ•°æ®å–å‡ºæ¥
 		}
 		mp3Info = mp3Infos.get(position);
-		if (position == pos) {
+		if(position == pos) {
 			viewHolder.albumImage.setImageResource(R.drawable.item);
 		} else {
-			Bitmap bitmap = MediaUtil.getArtwork(context, mp3Info.getId(), mp3Info.getAlbumId(),
-					true, true);
-			if (bitmap == null) {
+			Bitmap bitmap = MediaUtil.getArtwork(context, mp3Info.getId(),mp3Info.getAlbumId(), true, true);
+			if(bitmap == null) {
 				viewHolder.albumImage.setImageResource(R.drawable.music5);
 			} else {
 				viewHolder.albumImage.setImageBitmap(bitmap);
 			}
-
+			
 		}
-
-		viewHolder.musicTitle.setText(mp3Info.getTitle()); // ÏÔÊ¾±êÌâ
-		viewHolder.musicArtist.setText(mp3Info.getArtist()); // ÏÔÊ¾ÒÕÊõ¼Ò
-		viewHolder.musicDuration.setText(MediaUtil.formatTime(mp3Info.getDuration()));// ÏÔÊ¾Ê±³¤
-
+		viewHolder.musicTitle.setText(mp3Info.getTitle());			//æ˜¾ç¤ºæ ‡é¢˜
+		viewHolder.musicArtist.setText(mp3Info.getArtist());		//æ˜¾ç¤ºè‰ºæœ¯å®¶
+		viewHolder.musicDuration.setText(MediaUtil.formatTime(mp3Info.getDuration()));//æ˜¾ç¤ºæ—¶é•¿
+		
 		return convertView;
 	}
-
+	
+	
 	/**
-	 * ¶¨ÒåÒ»¸öÄÚ²¿Àà ÉùÃ÷ÏàÓ¦µÄ¿Ø¼şÒıÓÃ
-	 * 
-	 * @author
+	 * å®šä¹‰ä¸€ä¸ªå†…éƒ¨ç±»
+	 * å£°æ˜ç›¸åº”çš„æ§ä»¶å¼•ç”¨
+	 * @author wwj
 	 *
 	 */
 	public class ViewHolder {
-		// ËùÓĞ¿Ø¼ş¶ÔÏóÒıÓÃ
-		public ImageView albumImage; // ×¨¼­Í¼Æ¬
-		public TextView musicTitle; // ÒôÀÖ±êÌâ
-		public TextView musicDuration; // ÒôÀÖÊ±³¤
-		public TextView musicArtist; // ÒôÀÖÒÕÊõ¼Ò
+		//æ‰€æœ‰æ§ä»¶å¯¹è±¡å¼•ç”¨
+		public ImageView albumImage;	//ä¸“è¾‘å›¾ç‰‡
+		public TextView musicTitle;		//éŸ³ä¹æ ‡é¢˜
+		public TextView musicDuration;	//éŸ³ä¹æ—¶é•¿
+		public TextView musicArtist;	//éŸ³ä¹è‰ºæœ¯å®¶
 	}
 }

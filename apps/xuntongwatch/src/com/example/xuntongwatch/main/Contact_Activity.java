@@ -1,10 +1,14 @@
 package com.example.xuntongwatch.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -18,6 +22,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,14 +36,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
 import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.GridViewItemImageView;
 import com.example.xuntongwatch.view.DraggableGridView;
+import com.example.xuntongwatch.view.OnRearrangeListener;
 
 public class Contact_Activity extends Activity {
+	/** 联系人显示名称 **/
+	private static final int PHONES_DISPLAY_NAME_INDEX = 0;
+	/** 电话号码 **/
+	private static final int PHONES_NUMBER_INDEX = 1;
+	/** 获取库Phon表字段 **/
+	private static final String[] PHONES_PROJECTION = new String[] { Phone.DISPLAY_NAME,
+			Phone.NUMBER, Photo.PHOTO_ID, Phone.CONTACT_ID };
 	ScrollView horizontalScrollView;
 	GridView gridView;
 	public static int imageWidth, imageHeight;
@@ -50,9 +65,28 @@ public class Contact_Activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact);
+		SharedPreferences mySharedPreferences= getSharedPreferences("list", 
+				Activity.MODE_PRIVATE); 
+		SharedPreferences.Editor editor = mySharedPreferences.edit(); 
 		dgv = ((DraggableGridView) findViewById(R.id.vgv));
+		dgv.setOnRearrangeListener(new OnRearrangeListener() {
+
+			@Override
+			public void onRearrange(int oldIndex, int newIndex) {
+				Log.e("bb", oldIndex + ";" + newIndex);
+				swap(list, oldIndex, newIndex);
+				
+			}
+		});
 		initUI();
 		setListeners();
+	}
+
+	private ArrayList swap(ArrayList list, int a, int b) {
+		Object objA = list.get(a);
+		list.set(a, list.get(b));
+		list.set(b, objA);
+		return list;
 	}
 
 	private void setListeners() {
@@ -63,8 +97,8 @@ public class Contact_Activity extends Activity {
 				Contact contact = (Contact) list.get(arg2);
 				// dgv.removeViewAt(arg2);
 				Intent choose = getIntent();
-				if(choose.getStringExtra("tag")!=null)
-//				if (choose.getStringExtra("tag").equals("send")) 
+				if (choose.getStringExtra("tag") != null)
+				// if (choose.getStringExtra("tag").equals("send"))
 				{
 					Intent i = new Intent();
 					i.putExtra("contact_phone", contact.getContact_phone());
@@ -130,11 +164,16 @@ public class Contact_Activity extends Activity {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
+
 		switch (item.getItemId()) {
 		case R.id.contact_activity_menu_add:
 			Intent intent = new Intent(this, Add_Contact_Activity.class);
 			startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
+			break;
+		case R.id.contact_activity_menu_add_sim:
+			getSIMContacts();
+			dgv.removeAllViews();
+			initUI();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -204,5 +243,38 @@ public class Contact_Activity extends Activity {
 		paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 		canvas.drawBitmap(bitmap, rect, rect, paint);
 		return output;
+	}
+
+	/** 得到手机SIM卡联系人人信息 **/
+	private void getSIMContacts() {
+		ContentResolver resolver = getContentResolver();
+		// 获取Sims卡联系人
+		Uri uri = Uri.parse("content://icc/adn");
+		Cursor phoneCursor = resolver.query(uri, PHONES_PROJECTION, null, null, null);
+
+		if (phoneCursor != null) {
+			while (phoneCursor.moveToNext()) {
+				Contact contact = new Contact();
+				// 得到手机号码
+				String phoneNumber = phoneCursor.getString(PHONES_NUMBER_INDEX);
+				// 当手机号码为空的或者为空字段 跳过当前循环
+				if (TextUtils.isEmpty(phoneNumber))
+					continue;
+				// 得到联系人名称
+				String contactName = phoneCursor.getString(PHONES_DISPLAY_NAME_INDEX);
+				int ci_name = phoneCursor.getColumnIndex(Phone.DISPLAY_NAME);
+				String name = phoneCursor.getString(ci_name);
+
+				// Sim卡中没有联系人头像
+
+				contact.setContact_name(contactName);
+				contact.setContact_phone(phoneNumber);
+				PhoneDatabaseUtil.addContact(this, contact);
+			}
+
+			phoneCursor.close();
+		} else {
+			Toast.makeText(this, "sim卡无联系人", Toast.LENGTH_LONG).show();
+		}
 	}
 }

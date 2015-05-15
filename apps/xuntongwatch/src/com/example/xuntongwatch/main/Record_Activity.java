@@ -54,6 +54,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.record);
+		PhoneRecordUtil.sTateReplace(this);
 		handler = new Handler();
 		v = this.findViewById(R.id.call_record_view);
 		lv = (MyListView) this.findViewById(R.id.call_record_listview);
@@ -90,6 +91,11 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		if (list == null) {
 			// arrayList = PhoneDatabaseUtil.readAllCallRecord(this);
 			list = PhoneRecordUtil.findAllPhoneRecordByPhone(this);
+			// for (int i = 0; i < list.size(); i++) {
+			// if (list.get(i).getType() == 3 && list.get(i).getNew_() == 1) {
+			//
+			// }
+			// }
 			adapter = new Call_Record_Adapter();
 			lv.setAdapter(adapter);
 			TextView view = (TextView) findViewById(R.id.lv_empty);
@@ -495,6 +501,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 	public void update() {
 		adapter.notifyDataSetChanged();
 	}
+
 	@Override
 	protected void onRestart() {
 		list = PhoneRecordUtil.findAllPhoneRecordByPhone(this);

@@ -1,19 +1,19 @@
 package com.example.info;
 
 /**
- * Ó¦ÓÃ³£Á¿Àà
+ * åº”ç”¨å¸¸é‡ç±»
  * @author wwj
  *
  */
 public class AppConstant {
 	public class PlayerMsg {
-		public static final int PLAY_MSG = 1;		//²¥·Å
-		public static final int PAUSE_MSG = 2;		//ÔİÍ£
-		public static final int STOP_MSG = 3;		//Í£Ö¹
-		public static final int CONTINUE_MSG = 4;	//¼ÌĞø
-		public static final int PRIVIOUS_MSG = 5;	//ÉÏÒ»Ê×
-		public static final int NEXT_MSG = 6;		//ÏÂÒ»Ê×
-		public static final int PROGRESS_CHANGE = 7;//½ø¶È¸Ä±ä
-		public static final int PLAYING_MSG = 8;	//ÕıÔÚ²¥·Å
+		public static final int PLAY_MSG = 1;		//æ’­æ”¾
+		public static final int PAUSE_MSG = 2;		//æš‚åœ
+		public static final int STOP_MSG = 3;		//åœæ­¢
+		public static final int CONTINUE_MSG = 4;	//ç»§ç»­
+		public static final int PRIVIOUS_MSG = 5;	//ä¸Šä¸€é¦–
+		public static final int NEXT_MSG = 6;		//ä¸‹ä¸€é¦–
+		public static final int PROGRESS_CHANGE = 7;//è¿›åº¦æ”¹å˜
+		public static final int PLAYING_MSG = 8;	//æ­£åœ¨æ’­æ”¾
 	}
 }

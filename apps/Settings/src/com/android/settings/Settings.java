@@ -665,7 +665,7 @@ public class Settings extends PreferenceActivity
 				  else if(id == R.id.hotknot_settings)
 				  {headers.remove(i);continue;}
 				  else if(id == R.id.bluetooth_settings)
-				  {headers.remove(i);continue;}
+				  {/*headers.remove(i);continue;*/}
 				   //else if(id == R.id.data_usage_settings)
 				   //{headers.remove(i);continue;}
 				   else if(id == R.id.operator_settings)
@@ -693,7 +693,7 @@ public class Settings extends PreferenceActivity
 				  else if(id == R.id.personal_section)
 				  {headers.remove(i);continue;}
 				  else if(id == R.id.location_settings)
-				  {headers.remove(i);continue;}
+				  {/*headers.remove(i);continue;*/}
 				  else if(id == R.id.security_settings)
 				  {headers.remove(i);continue;}
 				  else if(id == R.id.language_settings)

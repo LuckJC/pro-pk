@@ -34,14 +34,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@+id/albumImage"
+        android:layout_toRightOf="@id/albumImage"
+        android:layout_toLeftOf="@id/music_duration"
         android:focusable="true"
         android:text="@string/song"
         android:textColor="@drawable/text_color_selector"
         android:textSize="22sp" />
 
     <TextView
-        android:id="@+id/singer"
+        android:id="@+id/music_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/music_title"

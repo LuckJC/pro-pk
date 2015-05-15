@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -29,7 +30,7 @@ import android.media.AudioManager.OnAudioFocusChangeListener;
 import com.mediatek.xlog.Xlog;
 
 public class HearService extends Service {
-	private static final String TAG = "EM/Audio_modesetting";
+	private static final String TAG = "HearService";
 
 	/** normal, headset, handfree. */
 	private static int sMaxVolMode = 3;
@@ -132,6 +133,7 @@ public class HearService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.d(TAG, "HearService onCreate");
 		sMaxVolMode = 4;
 		sMaxVolLevel = 15;
 		sMaxVolType = 9;
@@ -192,6 +194,7 @@ public class HearService extends Service {
 			secondVolume();
 		}
 		Xlog.v(TAG, "start");
+		saveOpenStatus(this, true);
 		new RecordPlayThread().start();// ������¼�߷��߳�
 	}
 
@@ -283,6 +286,7 @@ public class HearService extends Service {
 			initSecondVolume();
 		}
 		isRecording = false;
+		saveOpenStatus(this, false);
 	}
 
 	private void setValue(byte[] dataPara, int mode, int type, int level, byte val) {
@@ -409,5 +413,11 @@ public class HearService extends Service {
 		// Mic
 		setValue(mData, mCurrentMode, mTypeMic, mLevelIndex, (byte) VOL_70);
 		setAudioData();
+	}
+	
+	protected static void saveOpenStatus(Context context, boolean isOpen) {
+		Editor editor = context.getSharedPreferences("status", MODE_PRIVATE).edit();
+		editor.putBoolean("isOpen", isOpen);
+		editor.commit();
 	}
 }
