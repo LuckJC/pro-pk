@@ -15,12 +15,12 @@ public class DBHelper_GestureSetting extends ContentProvider {
     
     private static SQLiteDatabase database;
     
-	@Override
+    @Override
 	public boolean onCreate() {
 		// TODO Auto-generated method stub
 		if (database == null) { 
-            database = this.getContext().openOrCreateDatabase("MyDB", 
-                    Context.MODE_WORLD_READABLE, null); }
+			database = new Query_Defined_Util(getContext()).open();
+		}
 		return database != null; 
 	}
 

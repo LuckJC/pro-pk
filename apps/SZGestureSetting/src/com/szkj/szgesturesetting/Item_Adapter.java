@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,7 +77,7 @@ public class Item_Adapter extends BaseAdapter{
 		
 		if(position<=3)
 		{
-			view.setBackgroundColor(Color.GRAY);
+			view.setBackgroundColor(Color.argb(0, 100, 100, 100));
 		}
 		else
 		{

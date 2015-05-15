@@ -210,7 +210,7 @@ public class SettingMain_Activity extends Activity {
 				    	 //Toast.makeText(SettingMain_Activity.this, "s1_gid="+s1_gid+"  "+s1_style+" 更改为："+"s1_fid="+s1_fid+"?"+"which="+which, Toast.LENGTH_SHORT).show();
 				     }
 				    }).
-				    setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				    setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
@@ -236,7 +236,7 @@ public class SettingMain_Activity extends Activity {
 				    					    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s1_peoplename, Toast.LENGTH_SHORT).show();
 				    					     }
 				    					    })
-				    					    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				    					    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				    					     @Override
 				    					     public void onClick(DialogInterface dialog, int which) {
@@ -307,7 +307,7 @@ public class SettingMain_Activity extends Activity {
 				    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s2_style+"   "+s2_gid, Toast.LENGTH_SHORT).show();
 				     }
 				    })
-				    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
@@ -349,7 +349,7 @@ public class SettingMain_Activity extends Activity {
 				    	// Toast.makeText(SettingMain_Activity.this,"id="+id+ "您选择了： "+s3_fname+"   "+s3_fid, Toast.LENGTH_SHORT).show();
 				     }
 				    })
-				    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
@@ -411,7 +411,7 @@ public class SettingMain_Activity extends Activity {
 				    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s4_name, Toast.LENGTH_SHORT).show();
 				     }
 				    })
-				    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {

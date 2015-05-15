@@ -151,11 +151,11 @@ public class Query_Defined_Util{
     /**
      * 功能详细描述:打开数据库
      */
-    public Query_Defined_Util open() throws SQLException  
+    public SQLiteDatabase open() throws SQLException  
     {  
         db = DBHelper.getWritableDatabase();  
-        return this;  
-    }  
+        return db;  
+    }    
     /**
      * 关闭数据库 
      */
