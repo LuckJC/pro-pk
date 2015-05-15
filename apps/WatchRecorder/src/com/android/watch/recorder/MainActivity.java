@@ -41,9 +41,9 @@ public class MainActivity extends Activity{
 	private boolean sdcardExit;
 	public static File myRecAudioFile;
 	//**是否暂停标志位**/
-	private boolean isPause;
-	/**在暂停状态中**/
-	private boolean inThePause;
+	private boolean isPause; 
+	/**是否又重新再录一次**/
+	private boolean isReStart;
 	/**录音保存路径**/
 	public static File myRecAudioDir;
 	private  final String SUFFIX=".amr";
@@ -89,7 +89,7 @@ public class MainActivity extends Activity{
 		cancel.setOnClickListener(myClick);
 		save.setOnClickListener(myClick);
 		isPause=false;
-		inThePause=false;
+		isReStart=false;
 		// 判断sd Card是否插入
 		sdcardExit = Environment.getExternalStorageState().equals(
 						android.os.Environment.MEDIA_MOUNTED);
@@ -117,20 +117,26 @@ public class MainActivity extends Activity{
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.recorder:
+				if(isReStart){
+					lists.clear();
+				}
 				if(isPause){
-					//当前正在录音的文件名，全程
+					//录音状态要转为暂停状态
 					imageView.setImageResource(R.drawable.startrecorder);
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
-					//start();
-					//				buttonpause.setText("继续录音");
+				//	start();
+					//buttonpause.setText("继续录音");
 					//计时停止
-//					timer.cancel();
+					timer.cancel();
 					isPause=false; 
+					isReStart=false;
 				}
-				//正在录音，点击暂停,现在录音状态为暂停
+				//开始状态要录音
 				else{
 					imageView.setImageResource(R.drawable.endre);
+//					recorderStop();
+//					lists.clear();
 					start();
 					isPause=true;
 				}
@@ -145,22 +151,21 @@ public class MainActivity extends Activity{
 					//在暂停状态按下结束键,处理list就可以了
 					getInputCollection(lists, false);
 					isPause=true;
-					inThePause=false;
 				//	adapter.add(myRecAudioFile.getName());
 				}
 				else{
 					lists.add(myRecAudioFile.getPath());
 					recorderStop();
 					getInputCollection(lists, true);
+					
 				}
 			//	Toast.makeText(MainActivity.this, "保存成功", 3000).show();
 				minute=0;
 				second=0;
 				times.setText("00:00");
 				getRecordFiles();
-				ArrayList<String> gg=new ArrayList<String>();
-			    gg=recordFiles;
 				isStopRecord = true;
+				isReStart=true;
 				imageView.setImageResource(R.drawable.startrecorder);
 				save.setVisibility(View.INVISIBLE);
 				cancel.setVisibility(View.INVISIBLE);
@@ -178,6 +183,7 @@ public class MainActivity extends Activity{
 //				save.setEnabled(false);
 //				cancel.setEnabled(false);
 				isPause=false;
+				isReStart=true;
 				break;
 			case R.id.menu:
 				Intent intent=new Intent(MainActivity.this, HistoryListActivity.class);
@@ -226,6 +232,8 @@ public class MainActivity extends Activity{
 					.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
 			mMediaRecorder
 					.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//			mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);     
+//			mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 			//录音文件保存这里
 			mMediaRecorder.setOutputFile(myRecAudioFile
 					.getAbsolutePath());
@@ -267,10 +275,10 @@ public class MainActivity extends Activity{
 	protected void recorderStop() {
 		if (mMediaRecorder != null) {
 			// 停止录音
-			mMediaRecorder.stop();
-			mMediaRecorder.reset();
+			//mMediaRecorder.stop();
 			mMediaRecorder.release();
 			mMediaRecorder = null;
+			
 		}
 		timer.cancel();
 	}
