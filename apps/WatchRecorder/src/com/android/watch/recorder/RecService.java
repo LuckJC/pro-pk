@@ -103,7 +103,7 @@ public class RecService extends Service {
 			Log.d(TAG, "after start");
 			mRecStarted = true;
 			mVibrator.vibrate(REC_VIBRATE_PATTERN, 0);
-//			setNotification();
+			setNotification();
 		} catch (IOException e) {
 			e.printStackTrace();
 			mMediaRecorder.stop();
@@ -137,12 +137,11 @@ public class RecService extends Service {
 	
 	private void setNotification() {
 		Notification.Builder builder = new Notification.Builder(this);
-		builder.setContentTitle("录音");
+		builder.setContentTitle("录音中...");
 		builder.setSmallIcon(R.drawable.notification_ic_small);
-		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.notification_ic_big);
-		builder.setLargeIcon(bmp);
 		Notification notification = builder.build();
-		notification.flags |= ~Notification.FLAG_AUTO_CANCEL;
+		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+		notification.flags |= Notification.FLAG_NO_CLEAR;
 		startForeground(START_NOTIFICATION_ID, notification);
 	}
 }
