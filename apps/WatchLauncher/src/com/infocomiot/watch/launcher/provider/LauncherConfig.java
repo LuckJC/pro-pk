@@ -12,11 +12,12 @@ public class LauncherConfig implements BaseColumns {
 	public static final int TYPE_SETTINGS = 4;
 	
 	static final String[] APPS_COMMON = {
+		"com.szkj.szgesturesetting",  //盲操作手势设置
 		"com.shizhongkeji.mscv5plus",  //语音
 		"com.example.hear_aid",  //助听器
 		"com.android.gallery3d",  //相机,照片
 		//"com.android.music",  //音乐
-		"com.example.musicplayer", //音乐
+		"com.shizhongkeji.musicplayer", //音乐
 		//"com.android.soundrecorder",  //录音机
 		"com.android.watch.recorder",  //录音机
 		"com.mediatek.FMRadio",  //收音机
