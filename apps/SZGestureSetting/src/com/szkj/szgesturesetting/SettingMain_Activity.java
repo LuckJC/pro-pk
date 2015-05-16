@@ -58,6 +58,7 @@ public class SettingMain_Activity extends Activity {
 	String  tmp_phone_number;
 	
 	boolean IsfisrtAddData ;
+	boolean is_choies = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +106,7 @@ public class SettingMain_Activity extends Activity {
 					
 					Dialog alertDialog = new AlertDialog.Builder(SettingMain_Activity.this).
 						    setTitle("确定要不需要这种手势？" +":\n"+list_defined.get(position).getGesture_style()).
-						    setPositiveButton("确认", new DialogInterface.OnClickListener() {
+						    setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 						     @Override
 						     public void onClick(DialogInterface dialog, int which) {
@@ -195,7 +196,7 @@ public class SettingMain_Activity extends Activity {
 	String s1_number;
 	void alertDialog(final int position)
 	{
-		
+		 is_choies = false;
 		 
 		 Dialog alertDialog = new AlertDialog.Builder(this).
 				    setTitle("更改 功能名称")
@@ -207,68 +208,86 @@ public class SettingMain_Activity extends Activity {
 				    	 s1_fid = list_function.get(which).getFunction_id();//因为前四条为固定不可变而且不列出来的
 				    	 s1_style = list_defined.get(position).getGesture_style();
 				    	 s1_function_name = list_function.get(which).getFunction_name();
+				    	 is_choies = which >= 0? true:false;
 				    	 //Toast.makeText(SettingMain_Activity.this, "s1_gid="+s1_gid+"  "+s1_style+" 更改为："+"s1_fid="+s1_fid+"?"+"which="+which, Toast.LENGTH_SHORT).show();
 				     }
 				    }).
-				    setPositiveButton("完成", new DialogInterface.OnClickListener() {
+				    setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				    	 if(s1_function_name.equals("直接拨号"))
-				    	 {
-				    		 if(list_PeopleName.size()<1)
-				    		 {
-				    			 Toast.makeText(SettingMain_Activity.this, "没有联系人", Toast.LENGTH_SHORT).show();
-				    		 }
-				    		 else
-				    		 { 
-				    			 toArry(2);   //联系人
-				    			 Dialog alertDialog = new AlertDialog.Builder(SettingMain_Activity.this).
-				    					    setTitle("选择联系人!").
-				    					    setIcon(R.drawable.ic_launcher)
-				    					    .setSingleChoiceItems(str, -1, new DialogInterface.OnClickListener() {
-				    					 
-				    					     @Override
-				    					     public void onClick(DialogInterface dialog, int which) {
-//				    					    	 tempid = which+4;//加4是因为数据库头四条功能名称没有获取上来   也就是上下左右手势
-				    					    	 s1_peoplename = list_PeopleName.get(which);
-				    					    	
-				    					    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s1_peoplename, Toast.LENGTH_SHORT).show();
-				    					     }
-				    					    })
-				    					    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+						if (is_choies) {
+							if (s1_function_name != null && s1_function_name.equals("直接拨号")) {
+								if (list_PeopleName.size() < 1) {
+									Toast.makeText(SettingMain_Activity.this, "没有联系人",
+											Toast.LENGTH_SHORT).show();
+								} else {
+									is_choies = false;
+									toArry(2); // 联系人
+									Dialog alertDialog = new AlertDialog.Builder(
+											SettingMain_Activity.this)
+											.setTitle("选择联系人!")
+											.setIcon(R.drawable.ic_launcher)
+											.setSingleChoiceItems(str, -1,
+													new DialogInterface.OnClickListener() {
 
-				    					     @Override
-				    					     public void onClick(DialogInterface dialog, int which) {
-				    					    	 s1_number = FindPhoneNumber(s1_peoplename);
-				    				    		 //position+1是因为数据库id是从1开始   而在listview的position是从0开始
-				    					    	 util.updateGesture_Fucntion(s1_gid, s1_fid, s1_peoplename, s1_number);
-				    				    		 list_defined = util.getDefinedData();
-				    				    		 adapter.setData(list_defined);
-				    				    		 adapter.notifyDataSetChanged();
+														@Override
+														public void onClick(DialogInterface dialog,
+																int which) {
+															s1_peoplename = list_PeopleName
+																	.get(which);
+															is_choies = which >= 0 ? true : false;
+															// Toast.makeText(SettingMain_Activity.this,
+															// "您选择了： "+s1_peoplename,
+															// Toast.LENGTH_SHORT).show();
+														}
+													})
+											.setPositiveButton("确定",
+													new DialogInterface.OnClickListener() {
 
-				    					     }
-				    					    }).
-				    					    setNegativeButton("取消", new DialogInterface.OnClickListener() {
+														@Override
+														public void onClick(DialogInterface dialog,
+																int which) {
+															if (is_choies) {
+																s1_number = FindPhoneNumber(s1_peoplename);
+																// position+1是因为数据库id是从1开始
+																// 而在listview的position是从0开始
+																util.updateGesture_Fucntion(s1_gid,
+																		s1_fid, s1_peoplename,
+																		s1_number);
+																list_defined = util
+																		.getDefinedData();
+																adapter.setData(list_defined);
+																adapter.notifyDataSetChanged();
+															}
 
-				    					     @Override
-				    					     public void onClick(DialogInterface dialog, int which) {
-				    					      // TODO Auto-generated method stub
-				    					     }
-				    					    }).
-				    					    create();
-				    					  alertDialog.show();
-				    		 }
-				    	 }
-				    	 else
-				    	 {	 
-					    	 util.updateGesture_Fucntion(s1_gid, s1_fid, null, null);
-					   
-					    	 list_defined = util.getDefinedData();
-					    	 adapter.setData(list_defined);
-				    		 adapter.notifyDataSetChanged();
-				    	 }
-				    	}
+														}
+													})
+											.setNegativeButton("取消",
+													new DialogInterface.OnClickListener() {
+
+														@Override
+														public void onClick(DialogInterface dialog,
+																int which) {
+															// TODO
+															// Auto-generated
+															// method stub
+														}
+													}).create();
+									alertDialog.show();
+								}
+							} else {
+								util.updateGesture_Fucntion(s1_gid, s1_fid, null, null);
+
+								list_defined = util.getDefinedData();
+								adapter.setData(list_defined);
+								adapter.notifyDataSetChanged();
+							}
+						} else {
+							Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT)
+									.show();
+						}
+				      }
 				    }).
 				    setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -292,7 +311,7 @@ public class SettingMain_Activity extends Activity {
 	
 	void alertDialog()
 	{
-		
+		 is_choies = false;
 		
 		 Dialog alertDialog = new AlertDialog.Builder(this).
 				    setTitle("选择手势")
@@ -305,14 +324,23 @@ public class SettingMain_Activity extends Activity {
 				    	 s2_style = list_gesture_NOdefined.get(which).getGesture_style();
 				    	 s2_modify = list_gesture_NOdefined.get(which).getIsmodify();
 				    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s2_style+"   "+s2_gid, Toast.LENGTH_SHORT).show();
+				    	 is_choies = which >= 0? true:false;
 				     }
 				    })
-				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				    	 toArry(0); //功能
-				    	 alertDialog(s2_gid, s2_style, s2_modify);
+				    	 if(is_choies)
+				    	 {
+				    		 toArry(0); //功能
+				    		 alertDialog(s2_gid, s2_style, s2_modify);
+				    	 }
+				    	 else
+				    	 {
+				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    	 }	 
+				    	 
 				     }
 				    }).
 				    setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -336,7 +364,7 @@ public class SettingMain_Activity extends Activity {
 	
 	private void alertDialog(final int id,String style,int modify)
 	{
-		
+		is_choies = false;
 		
 		 Dialog alertDialog = new AlertDialog.Builder(this).
 				    setTitle("选择功能名称")
@@ -346,36 +374,47 @@ public class SettingMain_Activity extends Activity {
 				     public void onClick(DialogInterface dialog, int which) {
 				    	 s3_fid=list_function.get(which).getFunction_id();//加4是因为数据库头四条功能名称没有获取上来   也就是上下左右手势
 				    	 s3_fname = list_function.get(which).getFunction_name();
-				    	// Toast.makeText(SettingMain_Activity.this,"id="+id+ "您选择了： "+s3_fname+"   "+s3_fid, Toast.LENGTH_SHORT).show();
+				    	 is_choies = which >= 0? true:false;
+				    	 // Toast.makeText(SettingMain_Activity.this,"id="+id+ "您选择了： "+s3_fname+"   "+s3_fid, Toast.LENGTH_SHORT).show();
+				    	 
 				     }
 				    })
-				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				    	 if(s3_fname.equals("直接拨号"))
+				    	 if(is_choies)
 				    	 {
-				    		 if(list_PeopleName.isEmpty())
-				    		 {
-				    			 Toast.makeText(SettingMain_Activity.this, "没有联系人", Toast.LENGTH_SHORT).show();
-				    		 }
-				    		 else
-				    		 { 
-				    			 toArry(2);   //联系人
-					    		 alertDialog(s2_gid,s3_fid);
-				    		 }
-				    	}
-				    	 else{
-				    		 //tmp_gid+1是因为数据库id是从1开始   而在listview的position是从0开始
-				    		 util.insertGesture_Fucntion(s2_gid, s3_fid, null, null);
-				    		 list_defined = util.getDefinedData();
-				    		 list_gesture_NOdefined = util.getNotDefinedData();
+				    		 if(s3_fname != null && s3_fname.equals("直接拨号"))
+					    	 {
+					    		 if(list_PeopleName.isEmpty())
+					    		 {
+					    			 Toast.makeText(SettingMain_Activity.this, "没有联系人", Toast.LENGTH_SHORT).show();
+					    		 }
+					    		 else
+					    		 { 
+					    			 toArry(2);   //联系人
+						    		 alertDialog(s2_gid,s3_fid);
+					    		 }
+					    	}
+					    	 else{
+					    		 //tmp_gid+1是因为数据库id是从1开始   而在listview的position是从0开始
+					    		 util.insertGesture_Fucntion(s2_gid, s3_fid, null, null);
+					    		 list_defined = util.getDefinedData();
+					    		 list_gesture_NOdefined = util.getNotDefinedData();
+					    		 
+					    		 adapter.setData(list_defined);
+					    		 adapter.notifyDataSetChanged();
+					    		 
+					    	 	} 
+				    	 }
+				    	 else
+				    	 {
+				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    	 }
 				    		 
-				    		 adapter.setData(list_defined);
-				    		 adapter.notifyDataSetChanged();
-				    		 
-				    	 	}
-				     }
+				    	
+				    }
 				    }).
 				    setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -398,7 +437,7 @@ public class SettingMain_Activity extends Activity {
 	String s4_number;
 	private void alertDialog(final int gid,final int fid)
 	{
-		 
+		 is_choies = false;
 		
 		 Dialog alertDialog = new AlertDialog.Builder(this).
 				    setTitle("选择联系人")
@@ -408,20 +447,28 @@ public class SettingMain_Activity extends Activity {
 				     public void onClick(DialogInterface dialog, int which) {
 //				    	 tempid = which+4;//加4是因为数据库头四条功能名称没有获取上来   也就是上下左右手势
 				    	 s4_name = list_PeopleName.get(which);
-				    	 //Toast.makeText(SettingMain_Activity.this, "您选择了： "+s4_name, Toast.LENGTH_SHORT).show();
+				    	 is_choies = which >= 0? true:false;
+				    	 
 				     }
 				    })
-				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				    	 s4_number = FindPhoneNumber(s4_name);
-			    		 //position+1是因为数据库id是从1开始   而在listview的position是从0开始
-				    	 util.insertGesture_Fucntion(s2_gid, s3_fid, s4_name, s4_number);
-			    		 list_defined = util.getDefinedData();
-			    		 adapter.setData(list_defined);
-			    		 adapter.notifyDataSetChanged();
-
+				    	 if(is_choies)
+				    	 {
+				    		 s4_number = FindPhoneNumber(s4_name);
+				    		 //position+1是因为数据库id是从1开始   而在listview的position是从0开始
+					    	 util.insertGesture_Fucntion(s2_gid, s3_fid, s4_name, s4_number);
+				    		 list_defined = util.getDefinedData();
+				    		 adapter.setData(list_defined);
+				    		 adapter.notifyDataSetChanged(); 
+				    	 }
+				    	 else
+				    	 {
+				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    	 }
+				    	 
 				     }
 				    }).
 				    setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -116,6 +116,13 @@ public class Query_Defined_Util{
                 	values.put(KEY_MODIFY, 0);
                 	db.insert(DATABASE_G_TABLE, null, values);
                 }
+                for(int i=1;i<=4;i++)
+                {
+                	ContentValues args = new ContentValues();  
+                    args.put(KEY_STYLE, Ges[i-1]);  
+                    args.put(KEY_MODIFY, 1);  
+                    db.update(DATABASE_G_TABLE, args, KEY_ROWID + "=" +i, null);  
+                }
                 for(int i=1;i<=Fes.length;i++)
                 {
                 	ContentValues values = new ContentValues();
