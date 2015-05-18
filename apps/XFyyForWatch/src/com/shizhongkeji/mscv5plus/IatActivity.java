@@ -36,6 +36,8 @@ import com.shizhongkeji.speech.util.JsonParser;
 
 public class IatActivity extends Activity implements OnClickListener{
 	private static String TAG = "IatDemo";
+	
+	public static final String ACTION_IAT="com.fjsz.action.IatActivity";
 	// 语音听写对象
 	private SpeechRecognizer mIat;
 	// 语音听写UI
