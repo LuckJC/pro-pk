@@ -20,6 +20,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
+            
             android:paddingTop="18dp"
             android:clickable="true"
             android:layout_alignParentRight="true"
@@ -27,6 +28,17 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/delete" />
+
+        <CheckBox
+            android:visibility="invisible"
+            android:paddingTop="40dp"
+            android:clickable="true"
+            android:paddingRight="20dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/checkAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/init" />
 
     </RelativeLayout>
     
@@ -49,6 +61,7 @@
 
         <Button
             android:id="@+id/cancelDelete"
+            android:background="#BEBEBE"
             android:layout_weight="1"
             android:textSize="28dp"
             android:layout_width="match_parent"
@@ -58,6 +71,7 @@
         <Button
             android:id="@+id/deleteCommit"
             android:textColor="#EE113D"
+            android:background="#ADADAD"
             android:textSize="28dp"
             android:layout_weight="1"
             android:layout_width="match_parent"

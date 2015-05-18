@@ -11,10 +11,12 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.DateTimeKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -33,11 +36,14 @@ import android.widget.Toast;
 
 public class HistoryListActivity extends Activity{
     public static ListView listView;
+    long s=0;
+	long m=0;
     MyBaseAdater myBaseAdater=new MyBaseAdater();
     MainActivity me= new MainActivity();
     ArrayList<String> files=new ArrayList<String>();
     private List<Item> list; 
     ImageView imageView;
+    LinearLayout ll;
     TextView name;
     TextView starttime;
     TextView endtime;
@@ -53,6 +59,7 @@ public class HistoryListActivity extends Activity{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.historylist);
+		ll= (LinearLayout) this.findViewById(R.id.l123);
 		listView=(ListView) this.findViewById(R.id.listView1);
 	    listView.setAdapter(myBaseAdater);
 	    list = new ArrayList<Item>();  
@@ -83,6 +90,7 @@ public class HistoryListActivity extends Activity{
 						+ textView.getText().toString());
 				try {
 					play(myPlayFile);
+					ll.setBackgroundColor(Color.parseColor("#B7B7B7"));
 					
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
@@ -156,6 +164,7 @@ public class HistoryListActivity extends Activity{
 			seekBar1.setVisibility(View.INVISIBLE);
 			starttime.setVisibility(View.INVISIBLE);
 			endtime.setVisibility(View.INVISIBLE);
+			ll.setVisibility(View.INVISIBLE);
 		}
 	};
 	// 所有组件初始化
@@ -168,6 +177,7 @@ public class HistoryListActivity extends Activity{
 			if (mediaPlayer != null) {
 				mediaPlayer.release();
 				mediaPlayer = null;
+			    //ll.setVisibility(View.INVISIBLE);
 			}
 			stopTime();
 		}
@@ -189,12 +199,34 @@ public class HistoryListActivity extends Activity{
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 				// mediaPlayer.getDuration()获取当前歌曲的总时间【毫秒】
+				ll.setVisibility(View.VISIBLE);
 				seekStart.setVisibility(View.VISIBLE);
 				seekBar1.setVisibility(View.VISIBLE);
 				starttime.setVisibility(View.VISIBLE);
 				endtime.setVisibility(View.VISIBLE);
-				Date date = new Date(mediaPlayer.getDuration());
-				endtime.setText(simpleDateFormat.format(date)+"");
+//				Date date = new Date(mediaPlayer.getDuration());
+//				String ss=simpleDateFormat.format(date)+"";
+				long g=mediaPlayer.getDuration();
+				//long h=g/3600;
+				String mm=null,ss=null;
+				long m=g/(1000*60);
+				long s=(g%(1000*60))/1000;
+				if(m<10){
+					mm="0"+m;
+				}
+				else{
+					mm=m+"";
+				}
+				if(s<10){
+					ss="0"+s;
+				}
+				else{
+					ss=s+"";
+				}
+//				long a=mediaPlayer.getDuration()/(60*60);
+//				long l=(mediaPlayer.getDuration()%(60*60));
+//				long s=(mediaPlayer.getDuration()%(60*60))/(60);
+				endtime.setText(mm+":"+ss);     //simpleDateFormat.format(date)+""
 				// 设置总刻度
 				seekBar1.setMax(mediaPlayer.getDuration());
 				startTime();
@@ -225,13 +257,32 @@ public class HistoryListActivity extends Activity{
 			}
 
 		}
+		
+//		long m;
 		Handler handler = new Handler() {
 			public void handleMessage(android.os.Message msg) {
 				// 每过1秒钟这里需要获得消息
-		        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+//		        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
 				// mediaPlayer.getCurrentPosition()获取当前歌曲的当前时间【毫秒】
-				Date date = new Date(mediaPlayer.getCurrentPosition());
-				starttime.setText(simpleDateFormat.format(date));
+//				Date date = new Date(mediaPlayer.getCurrentPosition());
+				long gg=mediaPlayer.getCurrentPosition();
+				String mm=null;
+				String ss=null;
+				m=gg/(1000*60);
+				if(m<10){
+					mm="0"+m;
+				}
+				else{
+					mm=m+"";
+				}
+				s=(gg%(1000*60))/(1000);
+				if(s<10){
+					ss="0"+s;
+				}
+				else{
+					ss=s+"";
+				}
+				starttime.setText(mm+":"+ss);              //simpleDateFormat.format(date)
 				seekBar1.setProgress(mediaPlayer.getCurrentPosition());
 			}
 		};

@@ -12,7 +12,9 @@
         android:gravity="center|left">
 
         <ImageView
+            android:layout_marginLeft="30dp"
             android:id="@+id/menu"
+            android:clickable="true"
             android:layout_width="68dp"
             android:layout_height="68dp"
             android:src="@drawable/menu" />

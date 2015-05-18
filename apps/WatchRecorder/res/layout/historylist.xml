@@ -35,7 +35,7 @@
         android:layout_height="wrap_content" >
     </ListView>
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/l123"
         android:layout_marginTop="50dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

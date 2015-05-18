@@ -32,6 +32,7 @@ public class DeleteListActivity extends Activity{
 	boolean check;
 	boolean bb;
 	CheckBox checkBox1;
+	CheckBox checkAll;
 	ArrayList<Integer> positionList=new ArrayList<Integer>();
 	Button cancel;
 	private List<Item> list; 
@@ -63,6 +64,7 @@ public class DeleteListActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.delete);
 		DelteClick delteClick=new DelteClick();
+		checkAll=(CheckBox) this.findViewById(R.id.checkAll);
 		list = new ArrayList<Item>();  
 		listdelete=(ListView) this.findViewById(R.id.listdelete);
 		commit=(Button) this.findViewById(R.id.deleteCommit);
@@ -71,6 +73,7 @@ public class DeleteListActivity extends Activity{
 		deleImage.setOnClickListener(delteClick);
 		commit.setOnClickListener(delteClick);
 		cancel.setOnClickListener(delteClick);
+		checkAll.setOnClickListener(delteClick);
 		check=false;
 		
 		listdelete.setOnItemClickListener(new OnItemClickListener() {
@@ -80,7 +83,6 @@ public class DeleteListActivity extends Activity{
 				
 				Item item = list.get(arg2);   
 				item.status = !item.status;// 取反
-				
 				holder.cb.setChecked(item.status);
 				boolean ff=item.status==true;
 				if(item.status==true){
@@ -112,7 +114,7 @@ public class DeleteListActivity extends Activity{
 		@Override
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
-			case R.id.deleImage:
+			case R.id.checkAll:
 				//无操作
 				break;
             case R.id.cancelDelete:
@@ -181,6 +183,7 @@ public class DeleteListActivity extends Activity{
 			holder.tv.setText(item.name); 
 			holder.cb.setChecked(item.status);
 			DeleteBaseAdater.this.notifyDataSetChanged();
+			
 			return view;
 		}
 		
