@@ -280,16 +280,17 @@ public class MainActivity extends Activity implements OnClickListener,
 		switch (v.getId()) {
 		case R.id.menu:
 			intent.setClass(this, PlayListActivity.class);
+			intent.putExtra("index", listPosition);
 			startActivityForResult(intent, 1);
 			break;
 		case R.id.sound:
 			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 4000);
+			mHandler.sendEmptyMessageDelayed(0, 3000);
 			mLinearLayoutVol.setVisibility(View.VISIBLE);
 			break;
 		case R.id.sub_vol:
 			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 4000);
+			mHandler.sendEmptyMessageDelayed(0, 3000);
 			if (currentVolume > 0) {
 				currentVolume = currentVolume - 1;
 				mPlayVol.setProgress(currentVolume);
@@ -301,7 +302,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			break;
 		case R.id.add_vol:
 			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 4000);
+			mHandler.sendEmptyMessageDelayed(0, 3000);
 			if (currentVolume < maxVolume) {
 				currentVolume = currentVolume + 1;
 				mPlayVol.setProgress(currentVolume);
@@ -313,10 +314,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.last:
 			volumeStatusLayout();
 			previous_music();
+			isPlaying = true;
+			isPause = false;
 			break;
 		case R.id.next:
 			volumeStatusLayout();
 			next_music();
+			isPlaying = true;
+			isPause = false;
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
@@ -346,14 +351,14 @@ public class MainActivity extends Activity implements OnClickListener,
 				isFirstTime = false;
 			} else {
 				if (isPlaying) {
-					playBtn.setBackgroundResource(R.drawable.pause_selector);
+					playBtn.setBackgroundResource(R.drawable.play_selector);
 					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
 					intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
 					startService(intent);
 					isPlaying = false;
 					isPause = true;
 				} else if (isPause) {
-					playBtn.setBackgroundResource(R.drawable.play_selector);
+					playBtn.setBackgroundResource(R.drawable.pause_selector);
 					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
 					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
 					startService(intent);
@@ -600,7 +605,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 上一首
 	 */
 	public void previous_music() {
-		playBtn.setBackgroundResource(R.drawable.play_selector);
+		playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition - 1;
 		if (listPosition >= 0) {
 			if (mp3Infos != null && mp3Infos.size() > 0) {
@@ -628,7 +633,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 下一首
 	 */
 	public void next_music() {
-		playBtn.setBackgroundResource(R.drawable.play_selector);
+		playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition + 1;
 		if (mp3Infos != null && mp3Infos.size() > 2) {
 			if (listPosition <= mp3Infos.size() - 1) {

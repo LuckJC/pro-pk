@@ -83,8 +83,8 @@
             android:layout_below="@id/song"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_toEndOf="@id/last"
-            android:layout_toStartOf="@id/next"
+            android:layout_toRightOf="@id/last"
+            android:layout_toLeftOf="@id/next"
             android:background="@drawable/bg_progress"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" >
@@ -124,25 +124,23 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/play_selector" />
 
-    <TextView
+    <ImageView
         android:id="@+id/sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/vol_selector" />
+        android:padding="15dp"
+        android:src="@drawable/vol_selector" />
 
-    <TextView
+    <ImageView
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/menu_selector" />
+        android:padding="15dp"
+        android:src="@drawable/menu_selector" />
 
     <RelativeLayout
         android:id="@+id/volume"

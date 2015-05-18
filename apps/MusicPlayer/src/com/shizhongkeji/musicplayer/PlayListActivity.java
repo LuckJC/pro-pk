@@ -28,7 +28,7 @@ public class PlayListActivity extends Activity {
 	private MusicListAdapter mMisicListAdapter;
 	private List<Mp3Info> mp3Infos;
 	private int listPosition = 0; // 在List中的位置
-
+	private int index = 0;
 	
 	private int currentTime; // 当前播放位置
 //	private int duration; // 歌曲时长
@@ -37,6 +37,10 @@ public class PlayListActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_playlist);
+		Intent intent = getIntent();
+		if(intent != null){
+			 index = intent.getIntExtra("index", 0);
+		}
 		initView();
 	}
 
@@ -53,6 +57,7 @@ public class PlayListActivity extends Activity {
 		}
 		mMisicListAdapter = new MusicListAdapter(this, mp3Infos);
 		mListMusic.setAdapter(mMisicListAdapter);
+		mListMusic.setSelection(index);
 	}
 
 
