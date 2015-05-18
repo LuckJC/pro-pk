@@ -30,10 +30,19 @@
             android:name="com.shizhongkeji.mscv5plus.IatActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
             android:screenOrientation="portrait" >
+
         </activity>
         <activity android:name="com.shizhongkeji.mscv5plus.IatSettings" >
         </activity>
         
+        <service android:name="com.shizhongkeji.mscv5plus.Asr_service" >
+        </service>
+         <receiver android:name="com.shizhongkeji.mscv5plus.GestureBroadcastReceiver">
+             <intent-filter >
+                 <action android:name="com.shizhongkeji.action.GESTURE.START_VOICE_ASSIST"></action>
+                 <action android:name="com.shizhongkeji.action.GESTURE.STOP_VOICE_ASSIST"></action>
+             </intent-filter>
+         </receiver>
     </application>
 
     <uses-sdk android:minSdkVersion="15" />
@@ -56,5 +65,6 @@
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
     
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
 
 </manifest>

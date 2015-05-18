@@ -8,9 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -24,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -38,8 +37,7 @@ import android.speech.tts.UtteranceProgressListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
+
 import android.widget.Toast;
 
 import com.iflytek.cloud.ErrorCode;
@@ -55,12 +53,13 @@ import com.iflytek.cloud.util.ContactManager;
 import com.iflytek.cloud.util.ContactManager.ContactListener;
 import com.iflytek.cloud.util.ResourceUtil;
 import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE;
+
 import com.shizhongkeji.speech.util.FucUtil;
 import com.shizhongkeji.speech.util.JsonParser;
 import com.shizhongkeji.speech.util.MyDialog;
 import com.shizhongkeji.speech.util.ProgressDialogUtils;
 
-public class AsrMain extends Activity {
+public class Asr_service extends Service {
 
 	private static int TAG = 555;
 	/**
@@ -72,16 +71,19 @@ public class AsrMain extends Activity {
 	/**
 	 * 是不是从别的地方返回来标志
 	 */
-	private boolean is_other_back = false;
+//	private boolean is_other_back = false;
 	/**
 	 * 是否有弹框标志
 	 */
-	private boolean is_have_dialog = false;
+//	private boolean is_have_dialog = false;
 	/**
+	 * 控制打电话过程中的标志
+	 */
+//	private boolean is_contrl_call = false;
 	/**
 	 * 发现暂停标志
 	 */
-	private boolean is_found_pause = false; 
+//	private boolean is_found_pause = false; 
 	// 语音识别对象
 	private SpeechRecognizer mAsr;
 	private Toast mToast;
@@ -121,7 +123,7 @@ public class AsrMain extends Activity {
 				mSpeech.speak(getResources().getString(R.string.no_person),
 						TextToSpeech.QUEUE_FLUSH, null);
 			}
-			if(msg.what == AsrMain.TAG)
+			if(msg.what == Asr_service.TAG)
 			{
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
@@ -142,7 +144,7 @@ public class AsrMain extends Activity {
 				// 如果打印为-2，说明不支持这种语言
 				if (result == -2) {
 					Log.d("lixianda", "" + result);
-					AsrMain.this.finish();
+					stopSelf();
 				}
 				if (result == TextToSpeech.LANG_MISSING_DATA
 						|| result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -152,26 +154,25 @@ public class AsrMain extends Activity {
 				}
 			} else {
 				Log.e("lixianda", "TTS init error");
-				AsrMain.this.finish();
+				stopSelf();
 			}
 		}
 	}
 
-	@SuppressLint("ShowToast")
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		// getActionBar().setDisplayHomeAsUpEnabled(true);
+	/** {@inheritDoc} */
+	 
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
 		
-		setContentView(R.layout.asr_main);
 		mToast = Toast.makeText(this, "", 500);
 		// 初始化识别对象
 		mAsr = SpeechRecognizer.createRecognizer(this, mInitListener);
 		// 初始化合成引擎  讯飞引擎
-		mSpeech = new TextToSpeech(AsrMain.this, new TTSListener(), "com.iflytek.speechcloud");
-		mSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+		mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.speechcloud");
+			
+			mSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
 			@Override
 			public void onStart(String utteranceId) {
@@ -195,32 +196,44 @@ public class AsrMain extends Activity {
 				{
 					// 拨号
 					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 					mAsr.stopListening();
+					stopSelf();
 				}
 				else if(utteranceId.equals("1003"))
 				{
 					// 语音编辑发短息
-					Intent intent = new Intent(IatActivity.ACTION_IAT);
+					Intent intent = new Intent(Asr_service.this, IatActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.putExtra("Name", name);
 					intent.putExtra("PhoneNumber", number);
 					startActivity(intent);
-					
+					stopSelf();
+				}
+				else
+				{
+					stopSelf();
 				}
 				
 			}
 		});
-
+	
 		mLocalLexicon = "";
 
-		mLocalGrammar = FucUtil.readFile(AsrMain.this, "xtml.bnf", "utf-8");
+		mLocalGrammar = FucUtil.readFile(Asr_service.this, "xtml.bnf", "utf-8");
 
+		grammar();
+		
 		IntentFilter phonefilter = new IntentFilter();
 		phonefilter.addAction("android.intent.action.PHONE_STATE");
 		phonefilter.addAction("android.intent.action.NEW_OUTGOING_CALL");
 		registerReceiver(ps, phonefilter);
+		
+		
 	}
 
+	
 	String mContent;// 语法、词典临时变量
 	int ret = 0;// 函数调用返回值
 
@@ -256,6 +269,9 @@ public class AsrMain extends Activity {
 		// 设置语法名称
 		mAsr.setParameter(SpeechConstant.GRAMMAR_LIST, "xtml");
 
+		
+		
+		Log.i("lixianda", sb.toString());
 		ret = mAsr.updateLexicon("contact", sb.toString(), lexiconListener);
 		if (ret != ErrorCode.SUCCESS) {
 			if (ret == 20009) {
@@ -289,9 +305,9 @@ public class AsrMain extends Activity {
 			if (code != ErrorCode.SUCCESS) {
 				// TODO 提示初始化引擎失败，退出应用
 				showTip("mInitListener error:" + code);
-				AsrMain.this.finish();
+				stopSelf();
 			} else {
-				grammar();
+				
 			}
 		}
 	};
@@ -310,7 +326,7 @@ public class AsrMain extends Activity {
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
 						TextToSpeech.QUEUE_ADD, IDmap);
-				ProgressDialogUtils.dismissProgressDialog();
+//				ProgressDialogUtils.dismissProgressDialog();
 			} else {
 				if (error.getErrorCode() == 23108) {
 					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
@@ -329,7 +345,7 @@ public class AsrMain extends Activity {
 							TextToSpeech.QUEUE_ADD, IDmap);
 				}
 				Log.i("lixianda","lexiconListener error:" + error.getErrorCode());
-				ProgressDialogUtils.dismissProgressDialog();
+//				ProgressDialogUtils.dismissProgressDialog();
 //				AsrMain.this.finish();
 
 			}
@@ -345,14 +361,14 @@ public class AsrMain extends Activity {
 			if (error == null) {
 				showTip(getResources().getString(R.string.gramar_ok) + ":" + grammarId);
 
-				ContactManager mgr = ContactManager.createManager(AsrMain.this, mContactListener);
+				ContactManager mgr = ContactManager.createManager(Asr_service.this, mContactListener);
 				mgr.asyncQueryAllContactsName();
 				mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
 
 			}
 			if (error != null) {
 				showTip("grammarListener：" + error.getErrorCode());
-				AsrMain.this.finish();
+				stopSelf();
 			}
 		}
 	};
@@ -430,51 +446,25 @@ public class AsrMain extends Activity {
 				}
 			
 			if (!is_updata_lexcion_finish && !sb.toString().equals("")) {
-				ProgressDialogUtils.showProgressDialog(AsrMain.this,
-						getResources().getString(R.string.going_updataLexcion));  
+//				ProgressDialogUtils.showProgressDialog(Asr_service.this,
+//						getResources().getString(R.string.going_updataLexcion));  
 				updataLexcion();
 			}
 
 			if (sb.toString().equals("")) {
 				
 				//_____________add by lixd__________
+				AcquireWakeLock();
+				showTip(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb);
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
 						"1001");
 				mSpeech.speak(
 						getResources().getString(R.string.help_you_dothing),
 						TextToSpeech.QUEUE_ADD, IDmap);
+				
 				//__________________________
 				
-				MyDialog dialog = new MyDialog(AsrMain.this);
-				dialog.setTitle(getResources().getString(R.string.dialog_system_prompt));
-				dialog.setMessage(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb);
-				dialog.setButton(DialogInterface.BUTTON_POSITIVE, getResources().getString(R.string.dialog_system_prompt_btn_ok), new DialogInterface.OnClickListener() {// 添加确定按钮
-					@Override
-					public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
 
-						// TODO Auto-generated method stub
-						Intent it = new Intent();
-						it.setAction("com.example.xuntongwatch.main.Contact_Activity");
-						startActivity(it);
-						AsrMain.this.finish();
-					}
-				});
-				dialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.dialog_system_prompt_btn_cancel), new DialogInterface.OnClickListener() {// 添加确定按钮
-					@Override
-					public void onClick(DialogInterface dialog, int which) {// 确定按钮的响应事件
-
-						// TODO Auto-generated method stub
-						IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
-								"1001");
-						mSpeech.speak(
-								getResources().getString(R.string.help_you_dothing),
-								TextToSpeech.QUEUE_ADD, IDmap);
-					}
-				});
-				dialog.setCanceledOnTouchOutside(false);
-				dialog.show();// 在按键响应事件中显示此对话框
-					
-					is_have_dialog = true;
 			}
 		}
 	};
@@ -492,8 +482,9 @@ public class AsrMain extends Activity {
 		@Override
 		public void onResult(final RecognizerResult result, boolean isLast) {
 			//add by lixd
-		if(!is_found_pause)	
-		{	if (null != result && !TextUtils.isEmpty(result.getResultString())) {
+//		if(!is_found_pause)	
+//		{	
+			if (null != result && !TextUtils.isEmpty(result.getResultString())) {
 				Log.d("lixianda", "recognizer result:" + result.getResultString());
 
 				Map<String, List<String>> map = null;
@@ -532,15 +523,7 @@ public class AsrMain extends Activity {
 					Set<String> set = map.keySet();
 
 					for (String keyset : set) {
-						/*
-						 * if(keyset.equals("nothing")) {
-						 * if(map.get("nothing").size()>=1) {
-						 * IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
-						 * "1002");
-						 * mSpeech.speak("你要找"+map.get("nothing").get(0)+"做什么",
-						 * TextToSpeech.QUEUE_ADD, IDmap); return;} }
-						 */
-						// else
+						
 						if (keyset.equals("callPhone")) {
 							if (map.get("callPhone").size() >= 1) {
 								name = map.get("callPhone").get(0);
@@ -561,7 +544,6 @@ public class AsrMain extends Activity {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1003");
 								mSpeech.speak(getResources().getString(R.string.sen_msg) + name,
 										TextToSpeech.QUEUE_ADD, IDmap);
-								handler.removeMessages(TAG);
 								// Intent intent = new Intent();
 								// // 系统默认的action，用来打开默认的短信界面
 								// intent.setAction(Intent.ACTION_SENDTO);
@@ -583,10 +565,10 @@ public class AsrMain extends Activity {
 								Intent intent = new Intent();
 								intent.setClassName("com.shizhongkeji.musicplayer", "com.shizhongkeji.musicplayer.MainActivity");
 							//	intent.addCategory(Intent.CATEGORY_APP_MUSIC);
-								AcquireWakeLock();
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(intent);
 								mAsr.stopListening();
-								destoryListen();
+								//stopSelf();
 							} else if ((getResources().getString(R.string.settings)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1005");
@@ -596,10 +578,10 @@ public class AsrMain extends Activity {
 								AcquireWakeLock();
 								Intent mIntent = new Intent();
 								mIntent.setAction(Settings.ACTION_SETTINGS);
+								mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(mIntent);
 								mAsr.stopListening();
-								destoryListen();
-
+								//stopSelf();
 							} else if ((getResources().getString(R.string.camera)).equals(map.get(
 									"openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1006");
@@ -608,9 +590,10 @@ public class AsrMain extends Activity {
 										TextToSpeech.QUEUE_ADD, IDmap);
 								AcquireWakeLock();
 								Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+								camera.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(camera);
 								mAsr.stopListening();
-								destoryListen();
+							//	stopSelf();
 							} else if ((getResources().getString(R.string.picture)).equals(map.get(
 									"openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1007");
@@ -620,9 +603,10 @@ public class AsrMain extends Activity {
 								AcquireWakeLock();
 								Uri uri = Images.Media.INTERNAL_CONTENT_URI;
 								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(intent);
 								mAsr.stopListening();
-								destoryListen();
+							//	stopSelf();
 							} else if ((getResources().getString(R.string.call_dial)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1008");
@@ -633,9 +617,10 @@ public class AsrMain extends Activity {
 //								Intent intent = new Intent(Intent.ACTION_DIAL);
 								Intent intent = new Intent();
 								intent.setAction("com.example.xuntongwatch.main.Call_Activity");
+								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(intent);
 								mAsr.stopListening();
-								destoryListen();
+							//	stopSelf();
 							} else if ((getResources().getString(R.string.recorder)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1009");
@@ -644,9 +629,10 @@ public class AsrMain extends Activity {
 										TextToSpeech.QUEUE_ADD, IDmap);
 								AcquireWakeLock();
 								Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
+								mi.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(mi);
 								mAsr.stopListening();
-								destoryListen();
+								//stopSelf();
 							}
 						}
 					}
@@ -660,18 +646,18 @@ public class AsrMain extends Activity {
 						TextToSpeech.QUEUE_FLUSH, null);
 				Log.d("lixianda", "recognizer result : null");
 			}
-		}
-		//add by lixd
-		else
-		{
-			
-		}
+//		}
+//		//add by lixd
+//		else
+//		{
+//			
+//		}
 			
 		}
 
 		// 根据名字查找手机号码 add by lixd
 		private String FindPhoneNumber(String name) {
-			ContentResolver contentResolver = AsrMain.this.getContentResolver();
+			ContentResolver contentResolver = Asr_service.this.getContentResolver();
 			Cursor cursor = contentResolver.query(
 					ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
 					new String[] { ContactsContract.CommonDataKinds.Phone.NUMBER },
@@ -698,8 +684,8 @@ public class AsrMain extends Activity {
 
 		@Override
 		public void onError(SpeechError error) {
-		if(!is_found_pause)	
-		{	
+//		if(!is_found_pause)	
+//		{	
 			if (error.getErrorCode() == 20005) {
 				showTip(getResources().getString(R.string.no_result_show));
 			} else if (error.getErrorCode() == 23300) {
@@ -708,37 +694,37 @@ public class AsrMain extends Activity {
 				showTip(getResources().getString(R.string.again_updataLexcion));
 			} else {
 				Log.e("lixianda", "onError()");
-				Toast.makeText(AsrMain.this, "" + error.getErrorCode(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(Asr_service.this, "" + error.getErrorCode(), Toast.LENGTH_SHORT).show();
 			}
-			mAsr.stopListening();
-			mAsr.cancel();
+				mAsr.stopListening();
+				mAsr.cancel();
 
-			mAsr.setParameter(SpeechConstant.PARAMS, null);
-			// 设置识别引擎
-			mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
+				mAsr.setParameter(SpeechConstant.PARAMS, null);
+				// 设置识别引擎
+				mAsr.setParameter(SpeechConstant.ENGINE_TYPE, mEngineType);
 
-			mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
-			// 设置语法构建路径
-			mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
-			// 设置返回结果格式
-			mAsr.setParameter(SpeechConstant.RESULT_TYPE, mResultType);
-			// 设置本地识别使用语法id
-			mAsr.setParameter(SpeechConstant.LOCAL_GRAMMAR, "xtml");
-			// 设置识别的门限值
-			mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
-			// 使用8k音频的时候请解开注释
-			// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
-			// mAsr.setParameter(SpeechConstant.VAD_BOS, "1000");
-			ret = mAsr.startListening(mRecognizerListener);
+				mAsr.setParameter(ResourceUtil.ASR_RES_PATH, getResourcePath());
+				// 设置语法构建路径
+				mAsr.setParameter(ResourceUtil.GRM_BUILD_PATH, grmPath);
+				// 设置返回结果格式
+				mAsr.setParameter(SpeechConstant.RESULT_TYPE, mResultType);
+				// 设置本地识别使用语法id
+				mAsr.setParameter(SpeechConstant.LOCAL_GRAMMAR, "xtml");
+				// 设置识别的门限值
+				mAsr.setParameter(SpeechConstant.MIXED_THRESHOLD, "30");
+				// 使用8k音频的时候请解开注释
+				// mAsr.setParameter(SpeechConstant.SAMPLE_RATE, "8000");
+				// mAsr.setParameter(SpeechConstant.VAD_BOS, "1000");
+				ret = mAsr.startListening(mRecognizerListener);
 
 				if (ret != ErrorCode.SUCCESS) {
 					showTip("error code:" + ret);
 				}
-			}
-		else
-		{
-			
-		}
+//			}
+//		else
+//		{
+//			
+//		}
 		
 		}
 
@@ -826,48 +812,11 @@ public class AsrMain extends Activity {
 	       
 	}
 	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// 退出时释放连接
-		if (mAsr != null) {
-			mAsr.cancel();
-			mAsr.destroy();
-			mAsr.stopListening();
-		}
-		/* mSpeech.stop(); */
-		if (mSpeech != null) {
-			mSpeech.shutdown();
-		}
-
-		unregisterReceiver(ps);
-
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
- 		if(is_other_back && (!is_have_dialog))
- 		{
-		handler.sendEmptyMessageDelayed(AsrMain.TAG, 1000);
-		is_found_pause = false;
-		}
-
-	}
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		
-		is_other_back = true;
-		
-//		is_found_pause = true;
-		handler.removeMessages(TAG);
-	}
-
+	
+	
+	
+	
+	
 	public class PhoneStateReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -890,13 +839,16 @@ public class AsrMain extends Activity {
 					break;
 				case TelephonyManager.CALL_STATE_IDLE:
 //					is_other_back = false;
-
+//					is_contrl_call = false;
+					
 					mAsr.stopListening();
 					mAsr.cancel();
 					mAsr.destroy();
 					mSpeech.stop();
 					break;
 				case TelephonyManager.CALL_STATE_OFFHOOK:
+//					is_contrl_call = true;
+					
 					mAsr.stopListening();
 					mAsr.cancel();
 					mAsr.destroy();
@@ -908,6 +860,61 @@ public class AsrMain extends Activity {
 		}
 
 	}
+	
+	
+	
+	
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/** {@inheritDoc} */
+	 
+	@Override
+	@Deprecated
+	public void onStart(Intent intent, int startId) {
+		// TODO Auto-generated method stub
+		super.onStart(intent, startId);
+	}
+
+	/** {@inheritDoc} */
+	 
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		showTip("服务的onstartCommand()");
+		
+	
+		
+		if(is_updata_lexcion_finish)
+		{
+			showTip("联系人更新完成");
+		}
+	//	IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
+	//			"1001");
+	//	mSpeech.speak(
+	//			getResources().getString(R.string.help_you_dothing),
+	//			TextToSpeech.QUEUE_ADD, IDmap);
+		
+		return START_NOT_STICKY;
+	}
+
+	/** {@inheritDoc} */
+	 
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		//showTip("服务已经停止");
+		destoryListen();
+		super.onDestroy();
+	}
+	
+	/**
+	 * <br>功能简述:
+	 * <br>功能详细描述:停止录音
+	 * <br>注意:
+	 */
 	void destoryListen()
 	{
 		if (mAsr != null) {
@@ -916,4 +923,6 @@ public class AsrMain extends Activity {
 			mAsr.stopListening();
 		}
 	}
+	
+	
 }
