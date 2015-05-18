@@ -318,10 +318,18 @@ public class AsrMain extends Activity {
 				}
 				if (error.getErrorCode() == 20009) {
 					showTip("lexiconListener error:" + error.getErrorCode() + getResources().getString(R.string.no_person));
+					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+					mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+							TextToSpeech.QUEUE_ADD, IDmap);
 				}
-
-				showTip("lexiconListener error:" + error.getErrorCode());
-				AsrMain.this.finish();
+				if (error.getErrorCode() == 23110) {
+					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+					mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+							TextToSpeech.QUEUE_ADD, IDmap);
+				}
+				Log.i("lixianda","lexiconListener error:" + error.getErrorCode());
+				ProgressDialogUtils.dismissProgressDialog();
+//				AsrMain.this.finish();
 
 			}
 		}
@@ -427,6 +435,15 @@ public class AsrMain extends Activity {
 			}
 
 			if (sb.toString().equals("")) {
+				
+				//_____________add by lixd__________
+				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
+						"1001");
+				mSpeech.speak(
+						getResources().getString(R.string.help_you_dothing),
+						TextToSpeech.QUEUE_ADD, IDmap);
+				//__________________________
+				
 				MyDialog dialog = new MyDialog(AsrMain.this);
 				dialog.setTitle(getResources().getString(R.string.dialog_system_prompt));
 				dialog.setMessage(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb);
@@ -562,10 +579,12 @@ public class AsrMain extends Activity {
 								AcquireWakeLock();
 //								Intent intent = new Intent(Intent.ACTION_MAIN);
 								Intent intent = new Intent();
-								intent.setClassName("com.example.musicplayer", "com.example.musicplayer.MainActivity");
+								intent.setClassName("com.shizhongkeji.musicplayer", "com.shizhongkeji.musicplayer.MainActivity");
 							//	intent.addCategory(Intent.CATEGORY_APP_MUSIC);
+								AcquireWakeLock();
 								startActivity(intent);
 								mAsr.stopListening();
+								destoryListen();
 							} else if ((getResources().getString(R.string.settings)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1005");
@@ -577,6 +596,7 @@ public class AsrMain extends Activity {
 								mIntent.setAction(Settings.ACTION_SETTINGS);
 								startActivity(mIntent);
 								mAsr.stopListening();
+								destoryListen();
 
 							} else if ((getResources().getString(R.string.camera)).equals(map.get(
 									"openApp").get(0))) {
@@ -588,6 +608,7 @@ public class AsrMain extends Activity {
 								Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 								startActivity(camera);
 								mAsr.stopListening();
+								destoryListen();
 							} else if ((getResources().getString(R.string.picture)).equals(map.get(
 									"openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1007");
@@ -599,6 +620,7 @@ public class AsrMain extends Activity {
 								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 								startActivity(intent);
 								mAsr.stopListening();
+								destoryListen();
 							} else if ((getResources().getString(R.string.call_dial)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1008");
@@ -611,6 +633,7 @@ public class AsrMain extends Activity {
 								intent.setAction("com.example.xuntongwatch.main.Call_Activity");
 								startActivity(intent);
 								mAsr.stopListening();
+								destoryListen();
 							} else if ((getResources().getString(R.string.recorder)).equals(map
 									.get("openApp").get(0))) {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1009");
@@ -621,6 +644,7 @@ public class AsrMain extends Activity {
 								Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
 								startActivity(mi);
 								mAsr.stopListening();
+								destoryListen();
 							}
 						}
 					}
@@ -835,14 +859,10 @@ public class AsrMain extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		if (mAsr != null) {
-			mAsr.cancel();
-			mAsr.destroy();
-			mAsr.stopListening();
-		}
+		
 		is_other_back = true;
 		
-		is_found_pause = true;
+//		is_found_pause = true;
 		handler.removeMessages(TAG);
 	}
 
@@ -885,5 +905,13 @@ public class AsrMain extends Activity {
 			}
 		}
 
+	}
+	void destoryListen()
+	{
+		if (mAsr != null) {
+			mAsr.cancel();
+			mAsr.destroy();
+			mAsr.stopListening();
+		}
 	}
 }

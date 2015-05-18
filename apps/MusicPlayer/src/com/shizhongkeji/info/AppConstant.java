@@ -1,4 +1,4 @@
-package com.example.info;
+package com.shizhongkeji.info;
 
 /**
  * 应用常量类

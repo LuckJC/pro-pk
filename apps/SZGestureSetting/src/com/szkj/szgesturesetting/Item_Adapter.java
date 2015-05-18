@@ -4,6 +4,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +75,27 @@ public class Item_Adapter extends BaseAdapter{
 		holder.gesture.setText(list.get(position).getGesture_style());
 		holder.function.setText(list.get(position).getFunction_name());
 		
+		SpannableStringBuilder ssb = new SpannableStringBuilder(list.get(position).getFunction_name());
+		String s = "("+list.get(position).getPeople_name()+")";
+		SpannableStringBuilder style = new SpannableStringBuilder(s);
+		style.setSpan(new ForegroundColorSpan(Color.GRAY), 0, s.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		ssb.append(style);
+		
+		 StringBuilder sb = new StringBuilder();
+		 sb.append(list.get(position).getFunction_name());
+
+		
+		if(("").equals(list.get(position).getPeople_name()) || null == list.get(position).getPeople_name())
+		{
+			holder.function.setText(list.get(position).getFunction_name());
+			}
+		else
+		{holder.function.setText(ssb);}
+		
+		
 		if(position<=3)
 		{
-			view.setBackgroundColor(Color.GRAY);
+			view.setBackgroundColor(Color.argb(0, 100, 100, 100));
 		}
 		else
 		{

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.musicplayer"
+    package="com.shizhongkeji.musicplayer"
     android:versionCode="1"
-    android:versionName="4.0" >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -32,18 +32,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.musicplayer.PlayListActivity" >
+        <activity android:name="com.shizhongkeji.musicplayer.PlayListActivity" >
         </activity>
-        <activity android:name="com.example.musicplayer.EditSongActivity" >
+        <activity android:name="com.shizhongkeji.musicplayer.EditSongActivity" >
         </activity>
 
-        <service android:name="com.example.service.PlayerService" >
+        <service android:name="com.shizhongkeji.service.PlayerService" >
             <intent-filter>
                 <action android:name="com.shizhong.media.MUSIC_SERVICE" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.example.service.MusicBroadCastReceiver" >
+        <receiver android:name="com.shizhongkeji.service.MusicBroadCastReceiver" >
             <intent-filter>
                 <action android:name="com.shizhongkeji.action.GESTURE.PLAY_MUSIC" />
                 <action android:name="com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT" />

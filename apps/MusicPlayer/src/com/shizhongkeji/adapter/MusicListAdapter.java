@@ -1,4 +1,4 @@
-package com.example.adapter;
+package com.shizhongkeji.adapter;
 
 
 import java.util.List;
@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.info.Mp3Info;
-import com.example.musicplayer.R;
-import com.example.utils.MediaUtil;
+import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.musicplayer.R;
+import com.shizhongkeji.utils.MediaUtil;
 
 
 

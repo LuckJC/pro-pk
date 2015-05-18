@@ -1,4 +1,4 @@
-package com.example.service;
+package com.shizhongkeji.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,23 +9,27 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View.OnFocusChangeListener;
 
-import com.example.info.AppConstant;
-import com.example.info.Mp3Info;
-import com.example.utils.MediaUtil;
+import com.shizhongkeji.info.AppConstant;
+import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.utils.MediaUtil;
 
 /***
  * 
  * 音乐播放服务
  */
 @SuppressLint("NewApi")
-public class PlayerService extends Service {
+public class PlayerService extends Service implements
+		OnAudioFocusChangeListener {
 	private int mSongNum = 0; //
 	private MediaPlayer mediaPlayer; // 媒体播放器对象
 	private String path; // 音乐文件路径
@@ -41,7 +45,7 @@ public class PlayerService extends Service {
 	// private List<LrcContent> lrcList = new ArrayList<LrcContent>();
 	// //存放歌词列表对象
 	private int index = 0; // 歌词检索值
-
+	private AudioManager mAudioManager;
 	// 服务要发送的一些Action
 	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // 更新动作
 	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // 控制动作
@@ -73,6 +77,13 @@ public class PlayerService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		Log.d("service", "service created");
+		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+		int result = mAudioManager.requestAudioFocus(this,
+				AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+		if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+			// could not get audio focus.
+			play(currentTime);
+		}
 		mediaPlayer = new MediaPlayer();
 		mp3Infos = MediaUtil.getMp3Infos(PlayerService.this);
 
@@ -341,6 +352,7 @@ public class PlayerService extends Service {
 			mediaPlayer.release();
 			mediaPlayer = null;
 		}
+		mAudioManager.abandonAudioFocus(this);
 	}
 
 	/**
@@ -394,6 +406,49 @@ public class PlayerService extends Service {
 				current = intent.getIntExtra("listPosition", -1);
 
 			}
+		}
+	}
+
+	public void onAudioFocusChange(int focusChange) {
+		switch (focusChange) {
+		case AudioManager.AUDIOFOCUS_GAIN:
+			// resume playback
+			if (mediaPlayer == null) {
+				// initMediaPlayer();
+
+			} else if (!mediaPlayer.isPlaying()) {
+				play(currentTime);
+			}
+			mediaPlayer.setVolume(1.0f, 1.0f);
+			break;
+
+		case AudioManager.AUDIOFOCUS_LOSS:
+			// Lost focus for an unbounded amount of time: stop playback and
+			// release media player
+			if (mediaPlayer.isPlaying()){
+				mediaPlayer.stop();
+				mediaPlayer.release();
+				mediaPlayer = null;	
+			}
+			break;
+
+		case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+			// Lost focus for a short time, but we have to stop
+			// playback. We don't release the media player because playback
+			// is likely to resume
+			if (mediaPlayer.isPlaying())
+			{
+				pause();
+			}
+//				mediaPlayer.pause();
+			break;
+
+		case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+			// Lost focus for a short time, but it's ok to keep playing
+			// at an attenuated level
+			if (mediaPlayer.isPlaying())
+				mediaPlayer.setVolume(0.1f, 0.1f);
+			break;
 		}
 	}
 

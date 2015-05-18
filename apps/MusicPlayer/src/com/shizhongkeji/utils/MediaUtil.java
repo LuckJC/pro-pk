@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.shizhongkeji.utils;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -20,8 +20,8 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
-import com.example.info.Mp3Info;
-import com.example.musicplayer.R;
+import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.musicplayer.R;
 
 public class MediaUtil {
 

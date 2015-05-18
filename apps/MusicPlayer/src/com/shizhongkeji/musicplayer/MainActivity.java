@@ -1,4 +1,4 @@
-package com.example.musicplayer;
+package com.shizhongkeji.musicplayer;
 
 import java.util.List;
 
@@ -32,10 +32,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.info.AppConstant;
-import com.example.info.Mp3Info;
-import com.example.service.PlayerService;
-import com.example.utils.MediaUtil;
+import com.shizhongkeji.info.AppConstant;
+import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.service.PlayerService;
+import com.shizhongkeji.utils.MediaUtil;
 
 @SuppressLint("NewApi")
 public class MainActivity extends Activity implements OnClickListener,
