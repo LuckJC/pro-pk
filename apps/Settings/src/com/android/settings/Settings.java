@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.OnAccountsUpdateListener;
@@ -31,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -80,7 +78,6 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.deviceinfo.Memory;
 import com.android.settings.deviceinfo.UsbSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
-import com.android.settings.hear.HearEnabler;
 import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
 import com.android.settings.inputmethod.KeyboardLayoutPickerFragment;
 import com.android.settings.inputmethod.SpellCheckersSettings;
@@ -128,7 +125,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import com.android.settings.hear.HearNullFragment;
 /**
  * Top-level settings activity to handle single pane and double pane UI layout.
  */
@@ -162,7 +158,6 @@ public class Settings extends PreferenceActivity
     private Header mParentHeader;
     private boolean mInLocalHeaderSwitch;
 
-    
     // Show only these settings for restricted users
     private int[] SETTINGS_FOR_RESTRICTED = {
             R.id.wireless_section,
@@ -628,13 +623,7 @@ public class Settings extends PreferenceActivity
 		Log.d(LOG_TAG, "Watch_UI_Fragment.class.getName()=" +Watch_UI_Fragment.class.getName() + ", fragmentName=" + fragmentName );
 		if(Watch_UI_Fragment.class.getName().equals(fragmentName))
 		{
-			
 			intent.setClass(this,Watch_UI_Activity.class);
-		}
-		if(HearNullFragment.class.getName().equals(fragmentName))
-		{
-			intent.setClass(this,HearNullFragment.class);
-
 		}
 		//------------------- end --------------------
 		
@@ -671,8 +660,6 @@ public class Settings extends PreferenceActivity
 				   else if(id == R.id.operator_settings)
 				  {headers.remove(i);continue;}
 				   else if(id == R.id.wireless_settings)
-				  {headers.remove(i);continue;}
-				   else if(id == R.id.hear_aid)
 				  {headers.remove(i);continue;}
 				  
 				  //  DEVICE
@@ -1038,7 +1025,6 @@ public class Settings extends PreferenceActivity
         private final WifiEnabler mWifiEnabler;
         private final BluetoothEnabler mBluetoothEnabler;
         private final HotKnotEnabler mHotKnotEnabler;
-        private final HearEnabler mHearEnabler;
         ///M: add for tablet feature check whether sim exist
         private boolean mIsSimEnable = false;
         private AuthenticatorHelper mAuthHelper;
@@ -1059,7 +1045,7 @@ public class Settings extends PreferenceActivity
             if (header.fragment == null && header.intent == null) {
                 return HEADER_TYPE_CATEGORY;
             } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings
-                     || header.id == R.id.hotknot_settings || header.id ==R.id.hear_aid) {
+                     || header.id == R.id.hotknot_settings) {
                 return HEADER_TYPE_SWITCH;
             } else if (header.id == R.id.security_settings) {
                 return HEADER_TYPE_BUTTON;
@@ -1106,7 +1092,6 @@ public class Settings extends PreferenceActivity
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
             mHotKnotEnabler = new HotKnotEnabler(context, new Switch(context));
-            mHearEnabler = new HearEnabler(context,new Switch(context));
             mDevicePolicyManager = dpm;
         }
 
@@ -1180,8 +1165,6 @@ public class Settings extends PreferenceActivity
                         mBluetoothEnabler.setSwitch(holder.switch_);
                     } else if (header.id == R.id.hotknot_settings){
                         mHotKnotEnabler.setSwitch(holder.switch_);
-                    } else if (header.id == R.id.hear_aid){
-                    	mHearEnabler.setSwitch(holder.switch_);
                     }
                     updateCommonHeaderView(header, holder);
                     break;
@@ -1312,7 +1295,6 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.resume();
             mBluetoothEnabler.resume();
             mHotKnotEnabler.resume();
-            mHearEnabler.resume();
             PDebug.End("HeaderAdapter.resume");
         }
 
@@ -1320,7 +1302,6 @@ public class Settings extends PreferenceActivity
             mWifiEnabler.pause();
             mBluetoothEnabler.pause();
             mHotKnotEnabler.pause();
-            mHearEnabler.pause();
         }
     }
 
