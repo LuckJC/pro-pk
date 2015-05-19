@@ -115,7 +115,9 @@ public class DeleteListActivity extends Activity{
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.checkAll:
-				//无操作
+//				if(checkAll.isChecked()){
+//					for(int i=0;i<)
+//				}
 				break;
             case R.id.cancelDelete:
             	intent=new Intent();

@@ -10,8 +10,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import android.widget.Toast;
 
 public class HistoryListActivity extends Activity{
     public static ListView listView;
+    AudioManager audiomanage;
     long s=0;
 	long m=0;
     MyBaseAdater myBaseAdater=new MyBaseAdater();
@@ -52,6 +55,7 @@ public class HistoryListActivity extends Activity{
     ImageView seekStart;
     private File myPlayFile;
     MediaPlayer mediaPlayer;
+    boolean isPause=false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -69,12 +73,31 @@ public class HistoryListActivity extends Activity{
 	    seekBar1=(SeekBar) this.findViewById(R.id.seekBar1);
 	    imageView=(ImageView) this.findViewById(R.id.imageView2);
 	    myPlayFile=null;
+	    audiomanage = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 	    imageView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent deleteinIntent=new Intent(HistoryListActivity.this,DeleteListActivity.class);
 				startActivityForResult(deleteinIntent, 1);
+			}
+		});
+	    seekStart.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(mediaPlayer!=null){
+					if(isPause){
+						seekStart.setImageResource(R.drawable.seekstart);
+						mediaPlayer.start();
+						startTime();
+						isPause=false;
+					}else{
+						seekStart.setImageResource(R.drawable.start);
+						mediaPlayer.pause();
+						stopTime();
+						isPause=true;
+					}
+				}
 			}
 		});
 	    myBaseAdater.notifyDataSetChanged();
@@ -89,7 +112,15 @@ public class HistoryListActivity extends Activity{
 						+ File.separator
 						+ textView.getText().toString());
 				try {
+					if (mediaPlayer != null) {
+		                  mediaPlayer.stop();
+		               }
 					play(myPlayFile);
+					ll.setVisibility(View.VISIBLE);
+					seekStart.setVisibility(View.VISIBLE);
+					seekBar1.setVisibility(View.VISIBLE);
+					starttime.setVisibility(View.VISIBLE);
+					endtime.setVisibility(View.VISIBLE);
 					ll.setBackgroundColor(Color.parseColor("#B7B7B7"));
 					
 				} catch (IllegalArgumentException e) {
@@ -184,9 +215,7 @@ public class HistoryListActivity extends Activity{
 	protected void play(File f) throws IllegalArgumentException, SecurityException, IOException {
 		try {
 			// 开始播放
-			 if (mediaPlayer != null) {
-                  mediaPlayer.stop();
-               }
+			seekStart.setImageResource(R.drawable.seekstart);
 			if (mediaPlayer == null) {
 				// 初始化，包含准备和加载数据源
 				//mediaPlayer=MediaPlayer.create(this, f.getAbsolutePath());
@@ -199,11 +228,7 @@ public class HistoryListActivity extends Activity{
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 				// mediaPlayer.getDuration()获取当前歌曲的总时间【毫秒】
-				ll.setVisibility(View.VISIBLE);
-				seekStart.setVisibility(View.VISIBLE);
-				seekBar1.setVisibility(View.VISIBLE);
-				starttime.setVisibility(View.VISIBLE);
-				endtime.setVisibility(View.VISIBLE);
+				
 //				Date date = new Date(mediaPlayer.getDuration());
 //				String ss=simpleDateFormat.format(date)+"";
 				long g=mediaPlayer.getDuration();
@@ -314,7 +339,6 @@ public class HistoryListActivity extends Activity{
 		@Override
 		public View getView(int arg0, View view, ViewGroup arg2) {
 			// TODO Auto-generated method stub
-			
 			view=LayoutInflater.from(getApplicationContext()).inflate(R.layout.historylist_item, null);
 			name=(TextView) view.findViewById(R.id.name);
 			name.setText(MainActivity.recordFiles.get(arg0));

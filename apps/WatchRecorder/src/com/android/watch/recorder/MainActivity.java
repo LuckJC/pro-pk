@@ -15,13 +15,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -36,6 +45,8 @@ public class MainActivity extends Activity{
 	int startCount=1;
     int second=0;
 	int minute=0;
+	//通知栏用
+	NotificationManager notificationManager;
 	
 	/**文件存在**/
 	private boolean sdcardExit;
@@ -63,6 +74,7 @@ public class MainActivity extends Activity{
     ImageView imageView;
     ImageView menu;
     TextView times;
+    NotificationCompat.Builder builder;
     ImageView cancel;
     ImageView save;
 //    Button cancel;
@@ -78,6 +90,8 @@ public class MainActivity extends Activity{
 		mediaPlayer = new MediaPlayer();
 		lists=new ArrayList<String>();
 		map=new HashMap();
+		notificationManager = (NotificationManager) this
+				.getSystemService(Context.NOTIFICATION_SERVICE);
 		listTimes=new ArrayList<String>();
 		imageView=(ImageView) this.findViewById(R.id.recorder);
 		imageView.setOnClickListener(myClick);
@@ -117,6 +131,8 @@ public class MainActivity extends Activity{
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.recorder:
+				
+				panding();
 				if(isReStart){
 					lists.clear();
 				}
@@ -170,6 +186,7 @@ public class MainActivity extends Activity{
 				save.setVisibility(View.INVISIBLE);
 				cancel.setVisibility(View.INVISIBLE);
 				isPause=false;
+				notificationManager.cancel(1);
 				break;
 			case R.id.cancel:
 				recorderStop();
@@ -184,6 +201,7 @@ public class MainActivity extends Activity{
 //				cancel.setEnabled(false);
 				isPause=false;
 				isReStart=true;
+				notificationManager.cancel(1);
 				break;
 			case R.id.menu:
 				Intent intent=new Intent(MainActivity.this, HistoryListActivity.class);
@@ -246,6 +264,42 @@ public class MainActivity extends Activity{
 			e.printStackTrace();
 
 		}
+	}
+	public void panding() {
+		builder = new NotificationCompat.Builder(this);
+		// builder对象在构造通知对象之前，做一些通知对象的设置
+		// 小图标设置
+		builder.setSmallIcon(R.drawable.recordermain);
+		// 把资源转换成Bitmap对象
+		Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),R.drawable.recordermain);
+		// 设置大图标
+		builder.setLargeIcon(bitmap);
+		// 设置通知子描述
+		//builder.setSubText("SubText");
+		// 通知消息
+		//builder.setNumber(9);
+		// 通知标题
+		builder.setContentTitle("录音机");
+		// 设置通知子描述
+		builder.setContentText(times.getText());
+		// 设置进行中通知
+		builder.setOngoing(true);
+		//构造一个PendingIntent
+//		Intent intent=new Intent(this, MainActivity.class);
+		Intent intent=new Intent(Intent.ACTION_MAIN);
+		intent.addCategory(Intent.CATEGORY_LAUNCHER);
+		intent.setComponent(new ComponentName(this.getPackageName(), this.getPackageName() + "." + this.getLocalClassName())); 
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);//关键的一步，设置启动模式
+		//这里需要使用PendingIntent.FLAG_UPDATE_CURRENT来覆盖以前已经存储在的PendingIntent
+		PendingIntent pendingIntent=PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		//设置setContentIntent
+		builder.setContentIntent(pendingIntent);
+		//点击执行了PendingIntent之后，通知自动销毁
+//		builder.setAutoCancel(true);
+		// 构造通知对象
+		Notification notification = builder.build();
+		// 发布通知，通知ID为1
+		notificationManager.notify(1, notification);
 	}
 	Handler handler=new Handler(){
 		@Override

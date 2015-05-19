@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
@@ -19,7 +20,6 @@ import android.util.Log;
 
 public class RecService extends Service {
 	private static final String TAG = "RecService";
-	
 	private static final String SUFFIX=".amr";             //录音文件后缀
 	private static final long VIBRATE_DURATION_SHORT = 500; //短震动时间
 	private static final long VIBRATE_DURATION_LONG = 2000; //长震动时间
@@ -85,7 +85,6 @@ public class RecService extends Service {
 		}
 		
 		mVibrator.vibrate(VIBRATE_DURATION_SHORT);
-		
 		String mMinute1 = getTimeString();
 		mFile=new File(mDir, mMinute1+SUFFIX);
 		mMediaRecorder = new MediaRecorder();
@@ -95,6 +94,7 @@ public class RecService extends Service {
 		mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 		//录音文件保存这里
 		mMediaRecorder.setOutputFile(mFile.getAbsolutePath());
+		Log.d(TAG, mFile.getAbsolutePath()+"");
 		Log.d(TAG, "before prepare");
 		try {
 			mMediaRecorder.prepare();
@@ -135,6 +135,7 @@ public class RecService extends Service {
 		return time;
 	}
 	
+	@SuppressLint("NewApi")
 	private void setNotification() {
 		Notification.Builder builder = new Notification.Builder(this);
 		builder.setContentTitle("录音中...");
