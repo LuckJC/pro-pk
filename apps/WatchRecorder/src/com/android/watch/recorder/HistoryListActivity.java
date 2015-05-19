@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
@@ -63,6 +64,7 @@ public class HistoryListActivity extends Activity{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.historylist);
+		setVolumeControlStream(AudioManager.STREAM_MUSIC); 
 		ll= (LinearLayout) this.findViewById(R.id.l123);
 		listView=(ListView) this.findViewById(R.id.listView1);
 	    listView.setAdapter(myBaseAdater);
@@ -115,14 +117,21 @@ public class HistoryListActivity extends Activity{
 					if (mediaPlayer != null) {
 		                  mediaPlayer.stop();
 		               }
-					play(myPlayFile);
+					//获取焦点
+					int result = audiomanage.requestAudioFocus(afChangeListener,AudioManager.STREAM_MUSIC,AudioManager.AUDIOFOCUS_GAIN);
+					if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
+						//audiomanage.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
+						play(myPlayFile);   
+					} 
+					
+					//play(myPlayFile);
 					ll.setVisibility(View.VISIBLE);
 					seekStart.setVisibility(View.VISIBLE);
 					seekBar1.setVisibility(View.VISIBLE);
 					starttime.setVisibility(View.VISIBLE);
 					endtime.setVisibility(View.VISIBLE);
 					ll.setBackgroundColor(Color.parseColor("#B7B7B7"));
-					
+					audiomanage.abandonAudioFocus(afChangeListener); 
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -162,7 +171,32 @@ public class HistoryListActivity extends Activity{
 		}
 			
 	}
-    
+	OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+
+		@Override
+		public void onAudioFocusChange(int focusChange) {
+			if (focusChange ==AudioManager.AUDIOFOCUS_LOSS_TRANSIENT){
+				seekStart.setImageResource(R.drawable.start);
+				mediaPlayer.pause();
+				stopTime();
+				isPause=true;
+			}else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+				seekStart.setImageResource(R.drawable.seekstart);
+				mediaPlayer.start();
+				startTime();
+				isPause=false;
+			}else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+				//audiomanage.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
+				audiomanage.abandonAudioFocus(afChangeListener);
+				if(mediaPlayer!=null){
+					mediaPlayer.release();
+					mediaPlayer = null;
+					stopTime();
+				}
+			}
+			
+		}
+	};
 	OnSeekBarChangeListener onSeekBarChangeListener = new OnSeekBarChangeListener() {
 		// 摸完了
 		@Override
