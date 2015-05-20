@@ -243,8 +243,8 @@ public class MainActivity extends Activity implements OnClickListener,
 				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
 				intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ������������
 				startService(intent);
-				isPlaying = false;
-				isPause = true;
+				isPlaying = true;
+				isPause = false;
 
 				break;
 			case TelephonyManager.CALL_STATE_OFFHOOK: // ͨ��״̬
@@ -255,9 +255,8 @@ public class MainActivity extends Activity implements OnClickListener,
 				intent2.setAction("com.shizhong.media.MUSIC_SERVICE");
 				intent2.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
 				startService(intent2);
-				isPlaying = true;
-				isPause = false;
-
+				isPlaying = false;
+				isPause = true;
 				break;
 			default:
 				break;

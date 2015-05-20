@@ -19,6 +19,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View.OnFocusChangeListener;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.utils.MediaUtil;
@@ -55,6 +56,7 @@ public class PlayerService extends Service implements
 	public static final String GESTURE_PLAY = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势播放
 	public static final String GESTURE_NEXT = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT"; // 手势下一首
 	public static final String GESTURE_PREVIOUS = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; // 手势上一首
+	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
 	/**
 	 * handler用来接收消息，来发送广播更新播放时间
 	 */
@@ -134,6 +136,11 @@ public class PlayerService extends Service implements
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				}
+//				GlobalApplication.index_Music = current;
+				Intent intent = new Intent();
+				intent.setAction(FCR_MUSIC);
+				intent.putExtra("index", current);
+				sendBroadcast(intent);
 			}
 		});
 
@@ -169,30 +176,9 @@ public class PlayerService extends Service implements
 		if (action != null) {
 			if (action.equals(GESTURE_PLAY)) {
 				if (isPause) {
-					mediaPlayer.pause();
-					isPause = false;
-				} else {
-					path = mp3Infos.get(mSongNum).getUrl();
-					mediaPlayer.reset();
-					try {
-						mediaPlayer.setDataSource(path);
-						mediaPlayer.prepare();
-						mediaPlayer.start();
-						isPause = true;
-					} catch (IllegalArgumentException e) {
-
-						e.printStackTrace();
-					} catch (SecurityException e) {
-
-						e.printStackTrace();
-					} catch (IllegalStateException e) {
-
-						e.printStackTrace();
-					} catch (IOException e) {
-
-						e.printStackTrace();
-					}
-
+					resume();
+				} else  {
+					pause();
 				}
 			}
 			if (action.equals(GESTURE_NEXT)) {
@@ -401,11 +387,10 @@ public class PlayerService extends Service implements
 				break;
 			}
 
-			String action = intent.getAction();
-			if (action.equals(SHOW_LRC)) {
-				current = intent.getIntExtra("listPosition", -1);
-
-			}
+//			String action = intent.getAction();
+//			if (action.equals(SHOW_LRC)) {
+//				current = intent.getIntExtra("listPosition", -1);
+//			}
 		}
 	}
 

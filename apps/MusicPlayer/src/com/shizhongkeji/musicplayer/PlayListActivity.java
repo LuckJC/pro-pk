@@ -5,7 +5,10 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.ContextMenu;
@@ -17,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.adapter.MusicListAdapter;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
@@ -31,11 +35,20 @@ public class PlayListActivity extends Activity {
 	private int index = 0;
 	
 	private int currentTime; // 当前播放位置
+	
+	private MusicCompleteReceiver mMusicCompleteReceiver;
 //	private int duration; // 歌曲时长
+	
+	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		mMusicCompleteReceiver = new MusicCompleteReceiver();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(FCR_MUSIC);
+		registerReceiver(mMusicCompleteReceiver, intentFilter);
 		setContentView(R.layout.activity_playlist);
 		Intent intent = getIntent();
 		if(intent != null){
@@ -55,7 +68,7 @@ public class PlayListActivity extends Activity {
 		if(mp3Infos != null && mp3Infos.size() >= 0 ){
 			mNumberMusic.setText(mp3Infos.size()+"");
 		}
-		mMisicListAdapter = new MusicListAdapter(this, mp3Infos);
+		mMisicListAdapter = new MusicListAdapter(this, mp3Infos,index);
 		mListMusic.setAdapter(mMisicListAdapter);
 		mListMusic.setSelection(index);
 	}
@@ -124,5 +137,24 @@ public class PlayListActivity extends Activity {
 			listPosition = menuInfo2.position; // ����б��λ��
 		}
 
+	}
+	private class MusicCompleteReceiver extends BroadcastReceiver{
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if(intent != null){
+				index = intent.getIntExtra("index", 0);
+				mListMusic.setSelection(index);
+				mMisicListAdapter.notifyDataSetChanged();
+				
+			}
+			
+		}
+		
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(mMusicCompleteReceiver);
 	}
 }

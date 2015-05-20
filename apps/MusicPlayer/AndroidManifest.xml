@@ -50,6 +50,7 @@
                 <action android:name="com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS" />
             </intent-filter>
         </receiver>
+        <receiver android:name="com.shizhongkeji.service.MusicCompleteBroadCastReceiver"></receiver>
     </application>
 
 </manifest>
