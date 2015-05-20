@@ -147,11 +147,15 @@
     <string name="again_grammar">再次构建语法</string>
     
     <string name="dialog_system_prompt">系统提示</string>
-    <string name="dialog_system_prompt_content">您还没有联系人，不能语音控制打电话和发短信，现在去添加联系人？</string>
+    <string name="dialog_system_prompt_content">您还没有联系人或者名字都是非法字符，不能语音控制打电话和发短信，现在去添加联系人？</string>
     <string name="dialog_system_prompt_btn_ok">确定</string>
     <string name="dialog_system_prompt_btn_cancel">返回</string>
     
     <string name="iat_start_talk">开始</string>
     <string name="iat_send_sms">发送</string>
-    
+    <string name="title_activity_test">Test</string>
+    <string name="action_settings">Settings</string>
+    <string name="startservice">启动service!</string>
+    <string name="stopservice">停止service!</string>
+
 </resources>
