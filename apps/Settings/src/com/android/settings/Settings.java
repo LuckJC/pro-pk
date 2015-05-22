@@ -34,6 +34,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -211,6 +213,8 @@ public class Settings extends PreferenceActivity
     private static final int SLOT_ALL = -1;
     ///M: change backup reset title
     private static ISettingsMiscExt mExt;
+    
+    private boolean mIsSmallLCM;
 
     private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
 
@@ -245,6 +249,15 @@ public class Settings extends PreferenceActivity
         if (getIntent().hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(getIntent().getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
+        
+        Point outSize = new Point();
+    	getWindowManager().getDefaultDisplay().getRealSize(outSize);
+    	if (outSize.x == 320 && outSize.y == 320) {
+    		mIsSmallLCM = true;
+    	} else {
+    		mIsSmallLCM = false;
+    	}
+        
         ///M: get settings misc plugin
         PDebug.Start("getMiscPlugin");
         mExt = Utils.getMiscPlugin(this);
@@ -620,7 +633,6 @@ public class Settings extends PreferenceActivity
 			intent.setClass(this, SubSettings.class);
 		
 		//add by lixd----------  start ----------------'
-		Log.d(LOG_TAG, "Watch_UI_Fragment.class.getName()=" +Watch_UI_Fragment.class.getName() + ", fragmentName=" + fragmentName );
 		if(Watch_UI_Fragment.class.getName().equals(fragmentName))
 		{
 			intent.setClass(this,Watch_UI_Activity.class);
@@ -629,7 +641,7 @@ public class Settings extends PreferenceActivity
 		
         return intent;
     }
-
+    
     /**
      * Populate the activity with the top-level headers.
      */
@@ -640,84 +652,87 @@ public class Settings extends PreferenceActivity
             loadHeadersFromResource(R.xml.settings_headers, headers);
             PDebug.End("loadHeadersFromResource");
 			
-		//--------------- start   remove don't need	--------------------add by lixd	
-			int i=0;
-			while(i<headers.size())
-			{
-				 Header header = headers.get(i);
-				//Ids are intergers,so downcasting;
-				int id = (int) header.id;
-				
-				//  WIRELESS and NETWORKS
-				 if( id == R.id.sim_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.hotknot_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.bluetooth_settings)
-				  {/*headers.remove(i);continue;*/}
-				   //else if(id == R.id.data_usage_settings)
-				   //{headers.remove(i);continue;}
-				   else if(id == R.id.operator_settings)
-				  {headers.remove(i);continue;}
-				   else if(id == R.id.wireless_settings)
-				  {headers.remove(i);continue;}
-				  
-				  //  DEVICE
-				  else if(id == R.id.home_settings) //�龰ģʽ
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.audioprofle_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.application_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.user_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.nfc_payment_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.manufacturer_settings)
-				  {headers.remove(i);continue;}
-				  
-				  //   PERSONAL
-				  else if(id == R.id.personal_section)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.location_settings)
-				  {/*headers.remove(i);continue;*/}
-				  else if(id == R.id.security_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.language_settings)
-				  {/* headers.remove(i);continue;*/}
-				  else if(id == R.id.privacy_settings)
-				  {headers.remove(i);continue;}
-				  
-				  //  ACCOUNT
-				  else if(id == R.id.account_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.account_add)
-				  {headers.remove(i);continue;}
-				  
-				  //   SYSTEM
-				  else if(id == R.id.power_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.accessibility_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.print_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.development_settings)
-				  {headers.remove(i);continue;}
-				  else if(id == R.id.about_settings)
-				  {headers.remove(i);continue;}
-				  
-				  
-				i++;
-			}
-            updateHeaderList(headers);
-			//-----------------------remove  end ------------------add by lixd
+            //--------------- start   remove don't need	--------------------add by lixd
+            if (mIsSmallLCM) {
+                int i=0;
+                while(i<headers.size())
+                {
+                	Header header = headers.get(i);
+                	//Ids are intergers,so downcasting;
+                	int id = (int) header.id;
+
+                	//  WIRELESS and NETWORKS
+                	if( id == R.id.sim_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.hotknot_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.bluetooth_settings)
+                	{/*headers.remove(i);continue;*/}
+                	//else if(id == R.id.data_usage_settings)
+                	//{headers.remove(i);continue;}
+                	else if(id == R.id.operator_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.wireless_settings)
+                	{headers.remove(i);continue;}
+
+                	//  DEVICE
+                	else if(id == R.id.home_settings) //�龰ģʽ
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.audioprofle_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.application_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.user_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.nfc_payment_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.manufacturer_settings)
+                	{headers.remove(i);continue;}
+
+                	//   PERSONAL
+                	else if(id == R.id.personal_section)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.location_settings)
+                	{/*headers.remove(i);continue;*/}
+                	else if(id == R.id.security_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.language_settings)
+                	{/* headers.remove(i);continue;*/}
+                	else if(id == R.id.privacy_settings)
+                	{headers.remove(i);continue;}
+
+                	//  ACCOUNT
+                	else if(id == R.id.account_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.account_add)
+                	{headers.remove(i);continue;}
+
+                	//   SYSTEM
+                	else if(id == R.id.power_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.accessibility_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.print_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.development_settings)
+                	{headers.remove(i);continue;}
+                	else if(id == R.id.about_settings)
+                	{headers.remove(i);continue;}
+
+                	i++;
+                }          	
+            }
+
+            //-----------------------remove  end ------------------add by lixd
+			
+			updateHeaderList(headers);
         }
     }
 
     private void updateHeaderList(List<Header> target) {
         PDebug.Start("updateHeaderList");
 
-		// modify by puyong@20140915 for ������ʾ��������ѡ�
+		// modify by puyong@20140915 for 总是显示“开发者选项”
         final boolean showDev = true;
      //final boolean showDev = mDevelopmentPreferences.getBoolean(DevelopmentSettings.PREF_SHOW, android.os.Build.TYPE.equals("eng"));
          int i = 0;
@@ -753,8 +768,8 @@ public class Settings extends PreferenceActivity
                 final INetworkManagementService netManager = INetworkManagementService.Stub
                         .asInterface(ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
                 try {
-                    if (netManager.isBandwidthControlEnabled()) {
-                        //target.remove(i);
+                    if (!netManager.isBandwidthControlEnabled()) {
+                        target.remove(i);
                     }
                 } catch (RemoteException e) {
                     // ignored
@@ -766,9 +781,9 @@ public class Settings extends PreferenceActivity
                     target.remove(i);
                 }
             } else if (id == R.id.watch_ui) {
-					//if(true)
-					//{target.remove(i);}
-						
+            	if (!mIsSmallLCM) {
+            		target.remove(i);
+            	}
             }else if (id == R.id.account_settings) {
                 int headerIndex = i + 1;
                 i = insertAccountsHeaders(target, headerIndex);
@@ -812,8 +827,7 @@ public class Settings extends PreferenceActivity
                 }
             } else if (id == R.id.sound_settings) {
                 if (FeatureOption.MTK_AUDIO_PROFILES) {
-				   
-                   // target.remove(header);
+                    target.remove(header);
               }
             } else if (id == R.id.power_settings) {
                 Intent intent = new Intent("com.android.settings.SCHEDULE_POWER_ON_OFF_SETTING");
