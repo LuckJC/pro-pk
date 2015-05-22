@@ -6,7 +6,6 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.musicplayer.R;
+import com.shizhongkeji.sqlutils.DBManager;
 import com.shizhongkeji.utils.MediaUtil;
 
 
@@ -32,17 +32,18 @@ public class MusicListAdapter extends BaseAdapter{
 	private Mp3Info mp3Info;		//Mp3Info对象引用
 	private int pos = -1;			//列表位置
 	private int index;              // 当前播放歌曲在ListView中的位置
-
+	private DBManager mDBManager;
 	
 	/**
 	 * 构造函数
 	 * @param context	上下文
 	 * @param mp3Infos  集合对象
 	 */
-	public MusicListAdapter(Context context, List<Mp3Info> mp3Infos,int index) {
+	public MusicListAdapter(Context context,int index) {
 		this.context = context;
-		this.mp3Infos = mp3Infos;
 		this.index = index;
+		mDBManager = DBManager.getInstance(context);
+		setData();
 	}
 
 	@Override
@@ -99,7 +100,9 @@ public class MusicListAdapter extends BaseAdapter{
 		return convertView;
 	}
 	
-	
+	public void setData(){
+		mp3Infos = mDBManager.queryMusic();
+	}
 	/**
 	 * 定义一个内部类
 	 * 声明相应的控件引用

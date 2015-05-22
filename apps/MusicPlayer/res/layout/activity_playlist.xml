@@ -9,8 +9,7 @@
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#C6C6C6"
-         >
+        android:background="#C6C6C6" >
 
         <TextView
             android:id="@+id/title"
@@ -48,20 +47,21 @@
                 android:text="@string/right_bracket" />
         </LinearLayout>
 
-        <!-- <Button
+        <Button
             android:id="@+id/add_song"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:text="@string/add" /> -->
+            android:layout_centerVertical="true"
+            android:background="@drawable/add_vol_selector"
+            />
     </RelativeLayout>
 
-    <ListView
+    <com.shizhongkeji.swipemenulistview.SwipeMenuListView
         android:id="@+id/song_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </ListView>
+    </com.shizhongkeji.swipemenulistview.SwipeMenuListView>
 
 </LinearLayout>

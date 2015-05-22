@@ -28,7 +28,7 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
-        <TextView
+        <Button
             android:id="@+id/cancel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -38,7 +38,7 @@
             android:textColor="@color/black"
             android:textSize="22sp" />
 
-        <TextView
+        <Button
             android:id="@+id/confirm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,8 +51,8 @@
 
     <ListView
         android:id="@+id/song_list"
-        android:layout_above="@id/titlebar"
-        android:layout_below="@id/linear"
+        android:layout_above="@id/linear"
+        android:layout_below="@id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
     </ListView>
