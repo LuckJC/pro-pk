@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.service.PlayerService;
+import com.shizhongkeji.sqlutils.DBManager;
 import com.shizhongkeji.utils.MediaUtil;
 
 @SuppressLint("NewApi")
@@ -109,7 +110,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		share = getSharedPreferences("playInfo", Context.MODE_PRIVATE);
 		edit = share.edit();
 		initView();
-		mp3Infos = MediaUtil.getMp3Infos(MainActivity.this); // ��ȡ�������ֵļ��϶���
+		mp3Infos = DBManager.getInstance(this).queryMusic();
 		if (mp3Infos != null && mp3Infos.size() > 0) {
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);

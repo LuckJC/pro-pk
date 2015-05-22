@@ -22,6 +22,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
+        android:name="com.shizhongkeji.GlobalApplication"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
             android:name=".MainActivity"
@@ -34,8 +35,9 @@
         </activity>
         <activity android:name="com.shizhongkeji.musicplayer.PlayListActivity" >
         </activity>
-        <activity android:name="com.shizhongkeji.musicplayer.EditSongActivity" >
+        <activity android:name="com.shizhongkeji.musicplayer.SystemSongActivity" >
         </activity>
+        
 
         <service android:name="com.shizhongkeji.service.PlayerService" >
             <intent-filter>
