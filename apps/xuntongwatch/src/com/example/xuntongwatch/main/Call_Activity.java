@@ -93,9 +93,7 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 
 	@Override
 	public void onClick(View v) {
-		if (Utils.isFastClick()) {
-			return;
-		}
+
 		switch(v.getId())
 		{
 		case R.id.keyboad_bt_one:

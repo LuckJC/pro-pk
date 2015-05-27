@@ -1,5 +1,6 @@
 package com.szkj.szgesturesetting;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,12 +111,13 @@ public class SettingMain_Activity extends Activity {
 
 						     @Override
 						     public void onClick(DialogInterface dialog, int which) {
-						    	 util.deleteGesture_Fucntion(list_defined.get(i).getGesture_id());//前四项不可改变
-						    	 list_defined = util.getDefinedData();
-						    	 adapter.setData(list_defined);
-					    		 adapter.notifyDataSetChanged();
-					    		 list_gesture_NOdefined = util.getNotDefinedData();
-//					    		 toArry(1);
+						    	  util.deleteGesture_Fucntion(list_defined.get(i).getGesture_id());//前四项不可改变
+							    	 list_defined = util.getDefinedData();
+							    	 adapter.setData(list_defined);
+						    		 adapter.notifyDataSetChanged();
+						    		 list_gesture_NOdefined = util.getNotDefinedData();
+					    		 
+//						    		 toArry(1);
 						     }
 						    }).
 						    setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -194,6 +196,8 @@ public class SettingMain_Activity extends Activity {
 	String s1_function_name;
 	String s1_peoplename;
 	String s1_number;
+//	boolean s1_is_choies = false;
+//	boolean s1_is_choies_p = false;
 	void alertDialog(final int position)
 	{
 		 is_choies = false;
@@ -217,6 +221,9 @@ public class SettingMain_Activity extends Activity {
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
 						if (is_choies) {
+							//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, true);
+								
 							if (s1_function_name != null && s1_function_name.equals("直接拨号")) {
 								if (list_PeopleName.size() < 1) {
 									Toast.makeText(SettingMain_Activity.this, "没有联系人",
@@ -242,13 +249,15 @@ public class SettingMain_Activity extends Activity {
 															// Toast.LENGTH_SHORT).show();
 														}
 													})
-											.setPositiveButton("确定",
+											.setPositiveButton("完成",
 													new DialogInterface.OnClickListener() {
 
 														@Override
 														public void onClick(DialogInterface dialog,
 																int which) {
 															if (is_choies) {
+																//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+																NoChoiceNoExit(dialog, true);
 																s1_number = FindPhoneNumber(s1_peoplename);
 																// position+1是因为数据库id是从1开始
 																// 而在listview的position是从0开始
@@ -260,7 +269,11 @@ public class SettingMain_Activity extends Activity {
 																adapter.setData(list_defined);
 																adapter.notifyDataSetChanged();
 															}
-
+															else
+															{
+																//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+																NoChoiceNoExit(dialog, false);
+															}
 														}
 													})
 											.setNegativeButton("取消",
@@ -269,9 +282,8 @@ public class SettingMain_Activity extends Activity {
 														@Override
 														public void onClick(DialogInterface dialog,
 																int which) {
-															// TODO
-															// Auto-generated
-															// method stub
+															//没选择不可以退出弹框
+															NoChoiceNoExit(dialog, true);
 														}
 													}).create();
 									alertDialog.show();
@@ -284,8 +296,11 @@ public class SettingMain_Activity extends Activity {
 								adapter.notifyDataSetChanged();
 							}
 						} else {
-							Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT)
+							Toast.makeText(SettingMain_Activity.this, "请选择功能", Toast.LENGTH_SHORT)
 									.show();
+							//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, false);
+							
 						}
 				      }
 				    }).
@@ -294,6 +309,8 @@ public class SettingMain_Activity extends Activity {
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
 				      // TODO Auto-generated method stub
+				    	//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, true);
 				     }
 				    }).
 				    create();
@@ -308,6 +325,8 @@ public class SettingMain_Activity extends Activity {
 	 int s2_gid;
 	 String s2_style;
 	 int s2_modify;
+	 
+	
 	
 	void alertDialog()
 	{
@@ -333,12 +352,16 @@ public class SettingMain_Activity extends Activity {
 				     public void onClick(DialogInterface dialog, int which) {
 				    	 if(is_choies)
 				    	 {
+				    		//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+								NoChoiceNoExit(dialog, true);
 				    		 toArry(0); //功能
 				    		 alertDialog(s2_gid, s2_style, s2_modify);
 				    	 }
 				    	 else
 				    	 {
-				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    		Toast.makeText(SettingMain_Activity.this, "请选择手势", Toast.LENGTH_SHORT).show(); 
+				    		//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, false);
 				    	 }	 
 				    	 
 				     }
@@ -347,7 +370,8 @@ public class SettingMain_Activity extends Activity {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				      // TODO Auto-generated method stub
+				    	//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, true);
 				     }
 				    }).
 				    create();
@@ -384,7 +408,8 @@ public class SettingMain_Activity extends Activity {
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
 				    	 if(is_choies)
-				    	 {
+				    	 {//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+								NoChoiceNoExit(dialog, true);
 				    		 if(s3_fname != null && s3_fname.equals("直接拨号"))
 					    	 {
 					    		 if(list_PeopleName.isEmpty())
@@ -410,7 +435,9 @@ public class SettingMain_Activity extends Activity {
 				    	 }
 				    	 else
 				    	 {
-				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    		Toast.makeText(SettingMain_Activity.this, "请选择功能名称", Toast.LENGTH_SHORT).show(); 
+				    		//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, false);
 				    	 }
 				    		 
 				    	
@@ -420,7 +447,8 @@ public class SettingMain_Activity extends Activity {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				      // TODO Auto-generated method stub
+				    	//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, true);
 				     }
 				    }).
 				    create();
@@ -451,12 +479,14 @@ public class SettingMain_Activity extends Activity {
 				    	 
 				     }
 				    })
-				    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+				    .setPositiveButton("完成", new DialogInterface.OnClickListener() {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
 				    	 if(is_choies)
-				    	 {
+				    	 {	
+				    		//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+								NoChoiceNoExit(dialog, true);
 				    		 s4_number = FindPhoneNumber(s4_name);
 				    		 //position+1是因为数据库id是从1开始   而在listview的position是从0开始
 					    	 util.insertGesture_Fucntion(s2_gid, s3_fid, s4_name, s4_number);
@@ -466,7 +496,9 @@ public class SettingMain_Activity extends Activity {
 				    	 }
 				    	 else
 				    	 {
-				    		Toast.makeText(SettingMain_Activity.this, "请选中某一项", Toast.LENGTH_SHORT).show(); 
+				    		Toast.makeText(SettingMain_Activity.this, "请选择联系人", Toast.LENGTH_SHORT).show(); 
+				    		//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, false);
 				    	 }
 				    	 
 				     }
@@ -475,7 +507,8 @@ public class SettingMain_Activity extends Activity {
 
 				     @Override
 				     public void onClick(DialogInterface dialog, int which) {
-				      // TODO Auto-generated method stub
+				    	//确定按钮没选择不可以退出弹框   取消按钮没选择可以退出弹框    有选择点击确定可以退出弹框
+							NoChoiceNoExit(dialog, true);
 				     }
 				    }).
 				    create();
@@ -530,5 +563,18 @@ public class SettingMain_Activity extends Activity {
 		return "";
 	}
 	
+	Field field;
+	void NoChoiceNoExit(DialogInterface di,boolean b)
+	{
+		
+		try {
+			field = di.getClass().getSuperclass().getDeclaredField("mShowing");
+			field.setAccessible(true);
+			field.set(di, b);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

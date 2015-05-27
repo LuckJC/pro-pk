@@ -20,6 +20,7 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
+LOCAL_STATIC_JAVA_LIBRARIES := android-support-v4
 
 #LOCAL_JAVA_LIBRARIES += mediatek-framework
 #LOCAL_JAVA_LIBRARIES += telephony-common mms-common
