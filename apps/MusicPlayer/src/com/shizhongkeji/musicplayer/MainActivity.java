@@ -32,6 +32,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.service.PlayerService;
@@ -56,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	private String title; // 歌名
 	private String artist; // 歌手名
 	private String url; // 歌曲路径
-	private int listPosition; // 当前歌曲位置
+	private int listPosition = 0; // 当前歌曲位置
 	private int currentTime; // 当前播放时间
 	private int duration; // 音乐时长
 	private int flag; // ���ű�ʶ
@@ -79,8 +80,8 @@ public class MainActivity extends Activity implements OnClickListener,
 
 	private AudioManager am; 
 
-	int currentVolume; // 当前音量
-	int maxVolume; // 最大音量
+	private int currentVolume; // 当前音量
+	private int maxVolume; // 最大音量
 	
 
 	private ImageView musicAlbum; // 专辑的封面
@@ -139,7 +140,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			repeatBtn.setClickable(true);
 		}
 		if (flag == AppConstant.PlayerMsg.PLAYING_MSG) { // ���������Ϣ�����ڲ���
-			Toast.makeText(MainActivity.this, "���ڲ���--" + title, 1).show();
+//			Toast.makeText(MainActivity.this, "���ڲ���--" + title, 1).show();
 			Intent intent = new Intent();
 			// intent.setAction(SHOW_LRC);
 			intent.putExtra("listPosition", listPosition);
@@ -341,6 +342,7 @@ public class MainActivity extends Activity implements OnClickListener,
 						startService(intent);
 						isPlaying = true;
 						isPause = false;
+					GlobalApplication.isPlaying = true;
 					}
 
 				} else {
@@ -357,6 +359,7 @@ public class MainActivity extends Activity implements OnClickListener,
 					startService(intent);
 					isPlaying = false;
 					isPause = true;
+					GlobalApplication.isPlaying = false;
 				} else if (isPause) {
 					playBtn.setBackgroundResource(R.drawable.pause_selector);
 					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
@@ -364,6 +367,7 @@ public class MainActivity extends Activity implements OnClickListener,
 					startService(intent);
 					isPlaying = true;
 					isPause = false;
+					GlobalApplication.isPlaying = true;
 				}
 			}
 			break;
@@ -480,6 +484,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			url = data.getStringExtra("url");
 			artist = data.getStringExtra("artist");
 			listPosition = data.getIntExtra("listPosition", 0);
+			mp3Infos =  DBManager.getInstance(this).queryMusic();
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
 			Long musicDuration = Long.parseLong(data

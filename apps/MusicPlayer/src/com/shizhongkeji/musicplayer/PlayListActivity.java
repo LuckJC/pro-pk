@@ -53,7 +53,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	// private int duration; // 歌曲时长
 
 	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -157,6 +157,11 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 											String.valueOf(mp3info.getId()));
 									mp3Infos.remove(position);
 									mMisicListAdapter.notifyDataSetChanged();
+									Intent intent = new Intent();
+									intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+									intent.putExtra("position", position);
+									intent.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_DELETE);
+									startService(intent);
 								}
 							}).setNegativeButton("取消", new OnClickListener() {
 

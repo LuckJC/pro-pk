@@ -13,6 +13,8 @@ public class GlobalApplication extends Application {
 	public static HashMap<Integer, Boolean> isSelecte;
 	public static List<Mp3Info> mp3InfosSystem;
 	public static List<Mp3Info> mp3Infos;
+	public static boolean isPlaying = false;
+	public static int current = 0;
 	@Override
 	public void onCreate() {
 		super.onCreate();

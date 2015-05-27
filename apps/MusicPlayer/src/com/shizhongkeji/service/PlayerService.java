@@ -18,10 +18,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.sqlutils.DBManager;
-import com.shizhongkeji.utils.MediaUtil;
 
 /***
  * 
@@ -85,7 +85,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			play(currentTime);
 		}
 		mediaPlayer = new MediaPlayer();
-		mp3Infos = DBManager.getInstance(this).queryMusic();
+		setData();
 
 		/**
 		 * 设置音乐播放完成时的监听器
@@ -173,8 +173,10 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			if (action != null) {
 				if (action.equals(GESTURE_PLAY)) {
 					if (isPause) {
+						GlobalApplication.isPlaying = true;
 						resume();
 					} else {
+						GlobalApplication.isPlaying = false;
 						pause();
 					}
 				}
@@ -241,6 +243,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			path = intent.getStringExtra("url"); // 歌曲路径
 			current = intent.getIntExtra("listPosition", -1); // 当前播放歌曲的在mp3Infos的位置
 			msg = intent.getIntExtra("MSG", 0); // 播放信息
+			int position = intent.getIntExtra("position", -1);
 			if (msg == AppConstant.PlayerMsg.PLAY_MSG) { // 直接播放音乐
 				play(0);
 			} else if (msg == AppConstant.PlayerMsg.PAUSE_MSG) { // 暂停
@@ -254,7 +257,18 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			} else if (msg == AppConstant.PlayerMsg.NEXT_MSG) { // 下一首
 				next();
 			} else if (msg == AppConstant.PlayerMsg.PLAYING_DELETE) {
-				play(0);
+				if(GlobalApplication.isPlaying){
+					if(position != -1){
+						if(position==current){
+							next();					
+						}else{
+							play(position);
+						}
+					}	
+				}else{
+					next();
+					pause();
+				}
 			} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // 进度更新
 				currentTime = intent.getIntExtra("progress", -1);
 				play(currentTime);
@@ -398,11 +412,6 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 				status = 4; // 将播放状态置为4表示：随机播放
 				break;
 			}
-
-			// String action = intent.getAction();
-			// if (action.equals(SHOW_LRC)) {
-			// current = intent.getIntExtra("listPosition", -1);
-			// }
 		}
 	}
 
@@ -447,5 +456,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			break;
 		}
 	}
-
+	private void setData(){
+		mp3Infos = DBManager.getInstance(this).queryMusic();
+	}
 }
