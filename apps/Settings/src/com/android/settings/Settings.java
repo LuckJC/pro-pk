@@ -678,8 +678,6 @@ public class Settings extends PreferenceActivity
                 	//  DEVICE
                 	else if(id == R.id.home_settings) //�龰ģʽ
                 	{headers.remove(i);continue;}
-                	else if(id == R.id.audioprofle_settings)
-                	{headers.remove(i);continue;}
                 	else if(id == R.id.application_settings)
                 	{headers.remove(i);continue;}
                 	else if(id == R.id.user_settings)
@@ -822,13 +820,29 @@ public class Settings extends PreferenceActivity
             }
               // M: add by ourself {@
               else if (id == R.id.audioprofle_settings) {
-                if (!FeatureOption.MTK_AUDIO_PROFILES) {
-                    target.remove(header);
-                }
+//            	  if (!FeatureOption.MTK_AUDIO_PROFILES) {
+//            		  target.remove(header);
+//            	  }
+            	  //modify for watch begin
+            	  if (mIsSmallLCM) {
+            		  target.remove(header);
+            	  } else {
+            		  if (!FeatureOption.MTK_AUDIO_PROFILES) {
+                		  target.remove(header);
+                	  }
+            	  }
+            	  //modify for watch end
             } else if (id == R.id.sound_settings) {
-                if (FeatureOption.MTK_AUDIO_PROFILES) {
-                    target.remove(header);
-              }
+//            	if (FeatureOption.MTK_AUDIO_PROFILES) {
+//        			target.remove(header);
+//        		}
+            	//modify for watch begin
+            	if (!mIsSmallLCM) {            		
+            		if (FeatureOption.MTK_AUDIO_PROFILES) {
+            			target.remove(header);
+            		}
+            	}
+            	//modify for watch end
             } else if (id == R.id.power_settings) {
                 Intent intent = new Intent("com.android.settings.SCHEDULE_POWER_ON_OFF_SETTING");
                 List<ResolveInfo> apps = getPackageManager()
