@@ -25,7 +25,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 #LOCAL_JAVA_LIBRARIES += telephony-common mms-common
 #LOCAL_JAVA_LIBRARIES += mediatek-telephony-common
 
-LOCAL_PACKAGE_NAME := MusicPlayer
+LOCAL_PACKAGE_NAME := VideoPlayer
 LOCAL_CERTIFICATE := platform
 
 include $(BUILD_PACKAGE)
