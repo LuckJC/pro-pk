@@ -14,7 +14,8 @@ public class Contact extends GridViewItemImageView implements Serializable {
 	private byte[] contact_head;
 	private int rawContact_id;
 	private String photo_uri;
-
+	 
+ 
 	public Contact() {
 		super();
 	}
@@ -27,8 +28,8 @@ public class Contact extends GridViewItemImageView implements Serializable {
 		this.photo_uri = photo_uri;
 	}
 
-	public Contact(int contact_id, String contact_phone, String contact_name,
-			byte[] contact_head, int rawContact_id, String photo_uri) {
+	public Contact(int contact_id, String contact_phone, String contact_name, byte[] contact_head,
+			int rawContact_id, String photo_uri) {
 		super();
 		this.contact_id = contact_id;
 		this.contact_phone = contact_phone;
@@ -38,8 +39,8 @@ public class Contact extends GridViewItemImageView implements Serializable {
 		this.photo_uri = photo_uri;
 	}
 
-	public Contact(int contact_id, String contact_phone, String contact_name,
-			byte[] contact_head,int rawContact_id) {
+	public Contact(int contact_id, String contact_phone, String contact_name, byte[] contact_head,
+			int rawContact_id) {
 		super();
 		this.contact_id = contact_id;
 		this.contact_phone = contact_phone;
@@ -87,6 +88,5 @@ public class Contact extends GridViewItemImageView implements Serializable {
 	public void setContact_head(byte[] contact_head) {
 		this.contact_head = contact_head;
 	}
-
 
 }

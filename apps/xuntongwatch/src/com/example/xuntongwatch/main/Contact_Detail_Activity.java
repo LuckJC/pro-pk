@@ -6,17 +6,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Bitmap.Config;
-import android.graphics.PorterDuff.Mode;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,11 +23,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.xuntongwatch.MyApplication;
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.data.ContactDbUtil;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
@@ -45,12 +46,13 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 	private String contact_name, contact_phone, photo_uri;
 	private byte[] contact_head;
 	private int raw_contact_id;
-
+	private boolean mIsCollect;
 	public static final int RESULT_CODE = 1113;
 	private boolean isUpdate = false;// 判断是否修改了
 	private boolean isDelete = false;// 判断是否删除了
 	private ContactDbUtil contactUtil;
 	private ArrayList<Message_Thread> arrayList;
+	private ImageView mCollect;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -62,6 +64,8 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		message = (ImageView) this.findViewById(R.id.contact_detail_message);
 		delete_contact = (ImageView) this.findViewById(R.id.delete_contact);
 		mEditContact = (ImageView) this.findViewById(R.id.edit_contact);
+		mCollect = (ImageView) findViewById(R.id.collect);
+		mCollect.setOnClickListener(this);
 		delete_contact.setOnClickListener(this);
 		message.setOnClickListener(this);
 		mEditContact.setOnClickListener(this);
@@ -77,9 +81,16 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 				contact_phone = contact.getContact_phone();
 				raw_contact_id = contact.getRawContact_id();
 				photo_uri = contact.getPhoto_uri();
-				TextView Tv1 =(TextView) findViewById(R.id.contact_name);
+				mIsCollect = MyApplication.sp.getBoolean(contact_name, false);
+				if (mIsCollect) {
+					mCollect.setBackgroundResource(R.drawable.collect_y);
+				} else {
+					mCollect.setBackgroundResource(R.drawable.collect_n);
+				}
+
+				TextView Tv1 = (TextView) findViewById(R.id.contact_name);
 				Tv1.setText(contact_name);
-				TextView Tv2 =(TextView) findViewById(R.id.contact_phone);
+				TextView Tv2 = (TextView) findViewById(R.id.contact_phone);
 				Tv2.setText(contact_phone);
 				if (!TextUtils.isEmpty(photo_uri)) {
 					Uri uri = Uri.parse(photo_uri);
@@ -97,11 +108,9 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 
 					// view.setb
 				}
-				
-			 
-			 
+
 				ImageView iv = (ImageView) findViewById(R.id.contact_head);
-				iv.setImageBitmap(toRoundCorner(bmp,100));
+				iv.setImageBitmap(toRoundCorner(bmp, 100));
 			}
 			// contact_head = intent.getStringExtra("contact_head");
 			// if (!TextUtils.isEmpty(contact_head)) {
@@ -114,6 +123,7 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		}
 
 	}
+
 	public static Bitmap toRoundCorner(Bitmap bitmap, int pixels) {
 		Bitmap output = Bitmap
 				.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Config.ARGB_8888);
@@ -131,6 +141,7 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		canvas.drawBitmap(bitmap, rect, rect, paint);
 		return output;
 	}
+
 	@Override
 	public void onClick(View v) {
 		if (Utils.isFastClick()) {
@@ -139,6 +150,19 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		switch (v.getId()) {
 		case R.id.contact_detail_call:
 			PhoneUtil.callPhone(this, contact_phone);
+			break;
+
+		case R.id.collect:
+			Editor editor = MyApplication.sp.edit();
+			mIsCollect = MyApplication.sp.getBoolean(contact_name, false);
+			if (mIsCollect) {
+				mCollect.setBackgroundResource(R.drawable.collect_n);
+				editor.putBoolean(contact_name, false);
+			} else {
+				mCollect.setBackgroundResource(R.drawable.collect_y);
+				editor.putBoolean(contact_name, true);
+			}
+			editor.commit();
 			break;
 		case R.id.contact_detail_message:
 			arrayList = SmsUtil.allMessage_Thread(this);
