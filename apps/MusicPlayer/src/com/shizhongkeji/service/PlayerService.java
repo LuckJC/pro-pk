@@ -17,19 +17,18 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View.OnFocusChangeListener;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
-import com.shizhongkeji.utils.MediaUtil;
+import com.shizhongkeji.sqlutils.DBManager;
 
 /***
  * 
  * 音乐播放服务
  */
 @SuppressLint("NewApi")
-public class PlayerService extends Service implements
-		OnAudioFocusChangeListener {
+public class PlayerService extends Service implements OnAudioFocusChangeListener {
 	private int mSongNum = 0; //
 	private MediaPlayer mediaPlayer; // 媒体播放器对象
 	private String path; // 音乐文件路径
@@ -55,6 +54,7 @@ public class PlayerService extends Service implements
 	public static final String GESTURE_PLAY = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势播放
 	public static final String GESTURE_NEXT = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT"; // 手势下一首
 	public static final String GESTURE_PREVIOUS = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; // 手势上一首
+	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
 	/**
 	 * handler用来接收消息，来发送广播更新播放时间
 	 */
@@ -78,14 +78,14 @@ public class PlayerService extends Service implements
 		super.onCreate();
 		Log.d("service", "service created");
 		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		int result = mAudioManager.requestAudioFocus(this,
-				AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+		int result = mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN);
 		if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 			// could not get audio focus.
 			play(currentTime);
 		}
 		mediaPlayer = new MediaPlayer();
-		mp3Infos = MediaUtil.getMp3Infos(PlayerService.this);
+		setData();
 
 		/**
 		 * 设置音乐播放完成时的监听器
@@ -134,6 +134,11 @@ public class PlayerService extends Service implements
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				}
+				// GlobalApplication.index_Music = current;
+				Intent intent = new Intent();
+				intent.setAction(FCR_MUSIC);
+				intent.putExtra("index", current);
+				sendBroadcast(intent);
 			}
 		});
 
@@ -165,111 +170,112 @@ public class PlayerService extends Service implements
 		String action = "";
 		if (intent != null) {
 			action = intent.getStringExtra("action");
-		}
-		if (action != null) {
-			if (action.equals(GESTURE_PLAY)) {
-				if (isPause) {
-					mediaPlayer.pause();
-					isPause = false;
-				} else {
-					path = mp3Infos.get(mSongNum).getUrl();
-					mediaPlayer.reset();
-					try {
-						mediaPlayer.setDataSource(path);
-						mediaPlayer.prepare();
-						mediaPlayer.start();
-						isPause = true;
-					} catch (IllegalArgumentException e) {
+			if (action != null) {
+				if (action.equals(GESTURE_PLAY)) {
+					if (isPause) {
+						GlobalApplication.isPlaying = true;
+						resume();
+					} else {
+						GlobalApplication.isPlaying = false;
+						pause();
+					}
+				}
+				if (action.equals(GESTURE_NEXT)) {
+					if (!isPause) {
 
-						e.printStackTrace();
-					} catch (SecurityException e) {
+						if (mSongNum == mp3Infos.size() - 1) {
+							mSongNum = 0;
+						} else {
+							mSongNum++;
+						}
 
-						e.printStackTrace();
-					} catch (IllegalStateException e) {
+						path = mp3Infos.get(mSongNum).getUrl();
+						mediaPlayer.reset();
+						try {
+							mediaPlayer.setDataSource(path);
+							mediaPlayer.prepare();
+							mediaPlayer.start();
+						} catch (IllegalArgumentException e) {
 
-						e.printStackTrace();
-					} catch (IOException e) {
+							e.printStackTrace();
+						} catch (SecurityException e) {
 
-						e.printStackTrace();
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+
+				}
+				if (action.equals(GESTURE_PREVIOUS)) {
+					if (!isPause) {
+						if (mSongNum >= 1) {
+							mSongNum--;
+						} else {
+							mSongNum = mp3Infos.size() - 1;
+						}
+						path = mp3Infos.get(mSongNum).getUrl();
+						mediaPlayer.reset();
+						try {
+							mediaPlayer.setDataSource(path);
+							mediaPlayer.prepare();
+							mediaPlayer.start();
+						} catch (IllegalArgumentException e) {
+
+							e.printStackTrace();
+						} catch (SecurityException e) {
+
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+
+							e.printStackTrace();
+						} catch (IOException e) {
+
+							e.printStackTrace();
+						}
 					}
 
 				}
 			}
-			if (action.equals(GESTURE_NEXT)) {
-				if (mSongNum == mp3Infos.size() - 1) {
-					mSongNum = 0;
-				} else {
-					mSongNum++;
+			path = intent.getStringExtra("url"); // 歌曲路径
+			current = intent.getIntExtra("listPosition", -1); // 当前播放歌曲的在mp3Infos的位置
+			msg = intent.getIntExtra("MSG", 0); // 播放信息
+			int position = intent.getIntExtra("position", -1);
+			if (msg == AppConstant.PlayerMsg.PLAY_MSG) { // 直接播放音乐
+				play(0);
+			} else if (msg == AppConstant.PlayerMsg.PAUSE_MSG) { // 暂停
+				pause();
+			} else if (msg == AppConstant.PlayerMsg.STOP_MSG) { // 停止
+				stop();
+			} else if (msg == AppConstant.PlayerMsg.CONTINUE_MSG) { // 继续播放
+				resume();
+			} else if (msg == AppConstant.PlayerMsg.PRIVIOUS_MSG) { // 上一首
+				previous();
+			} else if (msg == AppConstant.PlayerMsg.NEXT_MSG) { // 下一首
+				next();
+			} else if (msg == AppConstant.PlayerMsg.PLAYING_DELETE) {
+				if(GlobalApplication.isPlaying){
+					if(position != -1){
+						if(position==current){
+							next();					
+						}else{
+							play(position);
+						}
+					}	
+				}else{
+					next();
+					pause();
 				}
-
-				path = mp3Infos.get(mSongNum).getUrl();
-				mediaPlayer.reset();
-				try {
-					mediaPlayer.setDataSource(path);
-					mediaPlayer.prepare();
-					mediaPlayer.start();
-				} catch (IllegalArgumentException e) {
-
-					e.printStackTrace();
-				} catch (SecurityException e) {
-
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
+			} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // 进度更新
+				currentTime = intent.getIntExtra("progress", -1);
+				play(currentTime);
+			} else if (msg == AppConstant.PlayerMsg.PLAYING_MSG) {
+				handler.sendEmptyMessage(1);
 			}
-			if (action.equals(GESTURE_PREVIOUS)) {
-				if (mSongNum >= 1) {
-					mSongNum--;
-				} else {
-					mSongNum = mp3Infos.size() - 1;
-				}
-				path = mp3Infos.get(mSongNum).getUrl();
-				mediaPlayer.reset();
-				try {
-					mediaPlayer.setDataSource(path);
-					mediaPlayer.prepare();
-					mediaPlayer.start();
-				} catch (IllegalArgumentException e) {
 
-					e.printStackTrace();
-				} catch (SecurityException e) {
-
-					e.printStackTrace();
-				} catch (IllegalStateException e) {
-
-					e.printStackTrace();
-				} catch (IOException e) {
-
-					e.printStackTrace();
-				}
-
-			}
-		}
-		path = intent.getStringExtra("url"); // 歌曲路径
-		current = intent.getIntExtra("listPosition", -1); // 当前播放歌曲的在mp3Infos的位置
-		msg = intent.getIntExtra("MSG", 0); // 播放信息
-		if (msg == AppConstant.PlayerMsg.PLAY_MSG) { // 直接播放音乐
-			play(0);
-		} else if (msg == AppConstant.PlayerMsg.PAUSE_MSG) { // 暂停
-			pause();
-		} else if (msg == AppConstant.PlayerMsg.STOP_MSG) { // 停止
-			stop();
-		} else if (msg == AppConstant.PlayerMsg.CONTINUE_MSG) { // 继续播放
-			resume();
-		} else if (msg == AppConstant.PlayerMsg.PRIVIOUS_MSG) { // 上一首
-			previous();
-		} else if (msg == AppConstant.PlayerMsg.NEXT_MSG) { // 下一首
-			next();
-		} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // 进度更新
-			currentTime = intent.getIntExtra("progress", -1);
-			play(currentTime);
-		} else if (msg == AppConstant.PlayerMsg.PLAYING_MSG) {
-			handler.sendEmptyMessage(1);
 		}
 		super.onStart(intent, startId);
 	}
@@ -284,8 +290,7 @@ public class PlayerService extends Service implements
 			mediaPlayer.reset();// 把各项参数恢复到初始状态
 			mediaPlayer.setDataSource(path);
 			mediaPlayer.prepare(); // 进行缓冲
-			mediaPlayer
-					.setOnPreparedListener(new PreparedListener(currentTime));// 注册一个监听器
+			mediaPlayer.setOnPreparedListener(new PreparedListener(currentTime));// 注册一个监听器
 			handler.sendEmptyMessage(1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -345,6 +350,13 @@ public class PlayerService extends Service implements
 		}
 	}
 
+	/**
+	 *
+	 */
+	private void removeMusic() {
+
+	}
+
 	@Override
 	public void onDestroy() {
 		if (mediaPlayer != null) {
@@ -400,12 +412,6 @@ public class PlayerService extends Service implements
 				status = 4; // 将播放状态置为4表示：随机播放
 				break;
 			}
-
-			String action = intent.getAction();
-			if (action.equals(SHOW_LRC)) {
-				current = intent.getIntExtra("listPosition", -1);
-
-			}
 		}
 	}
 
@@ -425,10 +431,10 @@ public class PlayerService extends Service implements
 		case AudioManager.AUDIOFOCUS_LOSS:
 			// Lost focus for an unbounded amount of time: stop playback and
 			// release media player
-			if (mediaPlayer.isPlaying()){
+			if (mediaPlayer.isPlaying()) {
 				mediaPlayer.stop();
 				mediaPlayer.release();
-				mediaPlayer = null;	
+				mediaPlayer = null;
 			}
 			break;
 
@@ -436,11 +442,10 @@ public class PlayerService extends Service implements
 			// Lost focus for a short time, but we have to stop
 			// playback. We don't release the media player because playback
 			// is likely to resume
-			if (mediaPlayer.isPlaying())
-			{
+			if (mediaPlayer.isPlaying()) {
 				pause();
 			}
-//				mediaPlayer.pause();
+			// mediaPlayer.pause();
 			break;
 
 		case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
@@ -451,5 +456,7 @@ public class PlayerService extends Service implements
 			break;
 		}
 	}
-
+	private void setData(){
+		mp3Infos = DBManager.getInstance(this).queryMusic();
+	}
 }

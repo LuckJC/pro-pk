@@ -18,25 +18,39 @@
             <intent-filter>
                 <action android:name="com.fjsz.action.MAIN" />
 				<category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-			<intent-filter>
+            </intent-filter> 
+              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-				
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>  
         </activity>
         
         <activity
             android:name="com.shizhongkeji.mscv5plus.IatActivity"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|fontScale"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.fjsz.action.IatActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name="com.shizhongkeji.mscv5plus.IatSettings" >
         </activity>
         
         <service android:name="com.shizhongkeji.mscv5plus.Asr_service" >
         </service>
+
+         <activity
+            android:name="com.shizhongkeji.mscv5plus.Test"
+            android:label="@string/title_activity_test" >
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity> 
+        
          <receiver android:name="com.shizhongkeji.mscv5plus.GestureBroadcastReceiver">
              <intent-filter >
                  <action android:name="com.shizhongkeji.action.GESTURE.START_VOICE_ASSIST"></action>

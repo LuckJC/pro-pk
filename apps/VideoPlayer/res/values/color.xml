@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="background">#FF000000</color>
+<color name="control_back">#AA000000</color>
+<color name="dialog_back">#330000FF</color>
+<color name="title_bg">#B6B6B6</color>
+</resources>

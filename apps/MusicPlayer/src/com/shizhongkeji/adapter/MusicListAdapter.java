@@ -3,6 +3,7 @@ package com.shizhongkeji.adapter;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.musicplayer.R;
+import com.shizhongkeji.sqlutils.DBManager;
 import com.shizhongkeji.utils.MediaUtil;
 
 
@@ -29,17 +31,19 @@ public class MusicListAdapter extends BaseAdapter{
 	private List<Mp3Info> mp3Infos;	//存放Mp3Info引用的集合
 	private Mp3Info mp3Info;		//Mp3Info对象引用
 	private int pos = -1;			//列表位置
-	
-
+	private int index;              // 当前播放歌曲在ListView中的位置
+	private DBManager mDBManager;
 	
 	/**
 	 * 构造函数
 	 * @param context	上下文
 	 * @param mp3Infos  集合对象
 	 */
-	public MusicListAdapter(Context context, List<Mp3Info> mp3Infos) {
+	public MusicListAdapter(Context context,int index) {
 		this.context = context;
-		this.mp3Infos = mp3Infos;
+		this.index = index;
+		mDBManager = DBManager.getInstance(context);
+		setData();
 	}
 
 	@Override
@@ -57,6 +61,7 @@ public class MusicListAdapter extends BaseAdapter{
 		return position;
 	}
 
+	@SuppressLint("ResourceAsColor")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
@@ -87,11 +92,17 @@ public class MusicListAdapter extends BaseAdapter{
 		viewHolder.musicTitle.setText(mp3Info.getTitle());			//显示标题
 		viewHolder.musicArtist.setText(mp3Info.getArtist());		//显示艺术家
 		viewHolder.musicDuration.setText(MediaUtil.formatTime(mp3Info.getDuration()));//显示时长
-		
+//		if(index == position){
+//			viewHolder.musicTitle.setTextColor(Color.rgb(0x00, 0x49, 0xE5));
+//			viewHolder.musicArtist.setTextColor(Color.rgb(0x00, 0x49, 0xE5));
+//			viewHolder.musicDuration.setTextColor(Color.rgb(0x00, 0x49, 0xE5));
+//		}
 		return convertView;
 	}
 	
-	
+	public void setData(){
+		mp3Infos = mDBManager.queryMusic();
+	}
 	/**
 	 * 定义一个内部类
 	 * 声明相应的控件引用

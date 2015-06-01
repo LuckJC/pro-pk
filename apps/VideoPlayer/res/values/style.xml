@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<style	name = "transDialog" parent = "android:Theme.Dialog">
+		<item name = "android:windowBackground">
+			@color/dialog_back 
+		</item>
+	</style>
+	
+	<style	name = "transActivity" parent = "android:Theme.Translucent.NoTitleBar">
+		<item name = "android:windowBackground">
+		    @color/dialog_back 
+		</item>
+	</style>
+
+
+   <style name="Widget.SeekBar.Normal" parent="@android:style/Widget.SeekBar">
+        <item name="android:maxHeight">4dip</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/seekbar_horizontal</item>
+        <item name="android:minHeight">4dip</item>
+        <item name="android:thumb">@drawable/seek_thumb</item>
+        <item name="android:thumbOffset">10.0dip</item>
+    </style>
+    
+    
+
+</resources>

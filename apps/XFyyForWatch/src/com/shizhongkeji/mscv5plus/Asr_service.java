@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 
+
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -19,6 +20,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -54,12 +56,12 @@ import com.iflytek.cloud.util.ContactManager.ContactListener;
 import com.iflytek.cloud.util.ResourceUtil;
 import com.iflytek.cloud.util.ResourceUtil.RESOURCE_TYPE;
 
+
 import com.shizhongkeji.speech.util.FucUtil;
 import com.shizhongkeji.speech.util.JsonParser;
-import com.shizhongkeji.speech.util.MyDialog;
-import com.shizhongkeji.speech.util.ProgressDialogUtils;
 
 public class Asr_service extends Service {
+
 
 	private static int TAG = 555;
 	/**
@@ -129,6 +131,12 @@ public class Asr_service extends Service {
 				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
 						TextToSpeech.QUEUE_ADD, IDmap);
 			}
+//			if(msg.what == 100)
+//			{
+//				//showTip(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb.toString());
+//				mToast.setDuration(2000);
+//				mToast.setText(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb.toString());
+//			}
 		}
 
 	};
@@ -143,7 +151,7 @@ public class Asr_service extends Service {
 				int result = mSpeech.setLanguage(Locale.CHINA);
 				// 如果打印为-2，说明不支持这种语言
 				if (result == -2) {
-					Log.d("lixianda", "" + result);
+					Log.d("lixianda", "" + result + status);
 					stopSelf();
 				}
 				if (result == TextToSpeech.LANG_MISSING_DATA
@@ -151,6 +159,9 @@ public class Asr_service extends Service {
 					System.out.println("-------------not use");
 				} else {
 					// 初始化陈功而且支持当前语音后做什么
+//					mSpeech.speak("初始化成功", TextToSpeech.QUEUE_FLUSH, null);
+					grammar();
+					
 				}
 			} else {
 				Log.e("lixianda", "TTS init error");
@@ -165,14 +176,16 @@ public class Asr_service extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		mLocalLexicon = "";
+		mToast = Toast.makeText(Asr_service.this, "", Toast.LENGTH_SHORT);
+		mLocalGrammar = FucUtil.readFile(Asr_service.this, "xtml.bnf", "utf-8");
 		
-		mToast = Toast.makeText(this, "", 500);
+		
 		// 初始化识别对象
 		mAsr = SpeechRecognizer.createRecognizer(this, mInitListener);
-		// 初始化合成引擎  讯飞引擎
-		mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.speechcloud");
-			
-			mSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.speechcloud");
+		
+		mSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
 			@Override
 			public void onStart(String utteranceId) {
@@ -182,9 +195,9 @@ public class Asr_service extends Service {
 			public void onError(String utteranceId) {
 			}
 
-			@Override
+			@Override 
 			public void onDone(String utteranceId) {
-				//提示音 “我能帮你做什么”
+			//提示音 “我能帮你做什么”
 				if (utteranceId.equals("1001")) {
 					ret = mAsr.startListening(mRecognizerListener);
 					if (ret != ErrorCode.SUCCESS) {
@@ -204,32 +217,84 @@ public class Asr_service extends Service {
 				else if(utteranceId.equals("1003"))
 				{
 					// 语音编辑发短息
-					Intent intent = new Intent(Asr_service.this, IatActivity.class);
+					Intent intent = new Intent(IatActivity.ACTION_IAT);
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.putExtra("Name", name);
 					intent.putExtra("PhoneNumber", number);
 					startActivity(intent);
 					stopSelf();
 				}
-				else
+				else if(utteranceId.equals("1004"))
 				{
+					AcquireWakeLock();
+//					Intent intent = new Intent(Intent.ACTION_MAIN);
+					Intent intent = new Intent();
+					intent.setClassName("com.shizhongkeji.musicplayer", "com.shizhongkeji.musicplayer.MainActivity");
+				//	intent.addCategory(Intent.CATEGORY_APP_MUSIC);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					mAsr.stopListening();
+					stopSelf();
+				}
+				else if(utteranceId.equals("1005"))
+				{
+					AcquireWakeLock();
+					Intent mIntent = new Intent();
+					mIntent.setAction(Settings.ACTION_SETTINGS);
+					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(mIntent);
+					mAsr.stopListening();
+					stopSelf();
+				}
+				else if(utteranceId.equals("1006"))
+				{
+					AcquireWakeLock();
+					Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					camera.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(camera);
+					mAsr.stopListening();
+					stopSelf();
+				}
+				else if(utteranceId.equals("1007"))
+				{
+					AcquireWakeLock();
+					Uri uri = Images.Media.INTERNAL_CONTENT_URI;
+					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					mAsr.stopListening();
+					stopSelf();
+				}
+				else if(utteranceId.equals("1008"))
+				{
+					AcquireWakeLock();
+//					Intent intent = new Intent(Intent.ACTION_DIAL);
+					Intent intent = new Intent();
+					intent.setAction("com.example.xuntongwatch.main.Call_Activity");
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					mAsr.stopListening();
+					stopSelf();
+				}
+				else if(utteranceId.equals("1009"))
+				{
+					AcquireWakeLock();
+					Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
+					mi.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(mi);
+					mAsr.stopListening();
 					stopSelf();
 				}
 				
 			}
-		});
-	
-		mLocalLexicon = "";
-
-		mLocalGrammar = FucUtil.readFile(Asr_service.this, "xtml.bnf", "utf-8");
-
-		grammar();
+			
+		});	
+			
 		
 		IntentFilter phonefilter = new IntentFilter();
 		phonefilter.addAction("android.intent.action.PHONE_STATE");
 		phonefilter.addAction("android.intent.action.NEW_OUTGOING_CALL");
 		registerReceiver(ps, phonefilter);
-		
 		
 	}
 
@@ -237,7 +302,7 @@ public class Asr_service extends Service {
 	String mContent;// 语法、词典临时变量
 	int ret = 0;// 函数调用返回值
 
-	private void grammar() {
+	public void grammar() {
 		mContent = new String(mLocalGrammar);
 		// 清空参数
 		mAsr.setParameter(SpeechConstant.PARAMS, null);
@@ -256,6 +321,7 @@ public class Asr_service extends Service {
 		ret = mAsr.buildGrammar(GRAMMAR_TYPE_BNF, mContent, grammarListener);
 		if (ret != ErrorCode.SUCCESS) {
 			showTip("grammar() error:" + ret);
+			
 		}
 	}
 
@@ -323,9 +389,7 @@ public class Asr_service extends Service {
 				showTip(getResources().getString(R.string.updatalexcion_ok));
 				is_updata_lexcion_finish = true;
 
-				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
-				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
-						TextToSpeech.QUEUE_ADD, IDmap);
+				
 //				ProgressDialogUtils.dismissProgressDialog();
 			} else {
 				if (error.getErrorCode() == 23108) {
@@ -340,15 +404,20 @@ public class Asr_service extends Service {
 							TextToSpeech.QUEUE_ADD, IDmap);
 				}
 				if (error.getErrorCode() == 23110) {
-					IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
-					mSpeech.speak(getResources().getString(R.string.help_you_dothing),
-							TextToSpeech.QUEUE_ADD, IDmap);
+				//非法字符 或者为空
+					//IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+					//mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+							//TextToSpeech.QUEUE_ADD, IDmap);
 				}
 				Log.i("lixianda","lexiconListener error:" + error.getErrorCode());
 //				ProgressDialogUtils.dismissProgressDialog();
 //				AsrMain.this.finish();
-
+				
+				
 			}
+			IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+			mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+					TextToSpeech.QUEUE_ADD, IDmap);
 		}
 	};
 
@@ -376,6 +445,7 @@ public class Asr_service extends Service {
 	
 	StringBuffer sb=new StringBuffer();
 	StringBuffer show_sb=new StringBuffer();
+	static String ttt = new String();
 	/**
 	 * <br>功能简述:
 	 * <br>功能详细描述:判断每个联系人名字中是否拥有非法字符
@@ -444,18 +514,14 @@ public class Asr_service extends Service {
 					sb.append(lst_str.get(i)+"\n");
 					}
 				}
-			
-			if (!is_updata_lexcion_finish && !sb.toString().equals("")) {
-//				ProgressDialogUtils.showProgressDialog(Asr_service.this,
-//						getResources().getString(R.string.going_updataLexcion));  
-				updataLexcion();
-			}
-
-			if (sb.toString().equals("")) {
+			 ttt = sb.toString();
+//			ttt = "";
+			if (ttt.equals("")) {
 				
 				//_____________add by lixd__________
-				AcquireWakeLock();
-				showTip(getResources().getString(R.string.dialog_system_prompt_content)+"\n存在非法字符："+show_sb);
+//				AcquireWakeLock();
+//				showTip("\n存在非法字符：");
+//				handler.sendEmptyMessage(100);
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
 						"1001");
 				mSpeech.speak(
@@ -466,6 +532,14 @@ public class Asr_service extends Service {
 				
 
 			}
+			
+			if (!is_updata_lexcion_finish && !ttt.equals("")) {
+//				ProgressDialogUtils.showProgressDialog(Asr_service.this,
+//						getResources().getString(R.string.going_updataLexcion));  
+				updataLexcion();
+			}
+
+			
 		}
 	};
 
@@ -560,14 +634,7 @@ public class Asr_service extends Service {
 								IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1004");
 								mSpeech.speak(getResources().getString(R.string.music_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-//								Intent intent = new Intent(Intent.ACTION_MAIN);
-								Intent intent = new Intent();
-								intent.setClassName("com.shizhongkeji.musicplayer", "com.shizhongkeji.musicplayer.MainActivity");
-							//	intent.addCategory(Intent.CATEGORY_APP_MUSIC);
-								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(intent);
-								mAsr.stopListening();
+								
 								//stopSelf();
 							} else if ((getResources().getString(R.string.settings)).equals(map
 									.get("openApp").get(0))) {
@@ -575,12 +642,7 @@ public class Asr_service extends Service {
 								mSpeech.speak(
 										getResources().getString(R.string.settings_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-								Intent mIntent = new Intent();
-								mIntent.setAction(Settings.ACTION_SETTINGS);
-								mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(mIntent);
-								mAsr.stopListening();
+								
 								//stopSelf();
 							} else if ((getResources().getString(R.string.camera)).equals(map.get(
 									"openApp").get(0))) {
@@ -588,11 +650,7 @@ public class Asr_service extends Service {
 								mSpeech.speak(
 										getResources().getString(R.string.camera_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-								Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-								camera.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(camera);
-								mAsr.stopListening();
+								
 							//	stopSelf();
 							} else if ((getResources().getString(R.string.picture)).equals(map.get(
 									"openApp").get(0))) {
@@ -600,12 +658,7 @@ public class Asr_service extends Service {
 								mSpeech.speak(getResources()
 										.getString(R.string.picture_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-								Uri uri = Images.Media.INTERNAL_CONTENT_URI;
-								Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(intent);
-								mAsr.stopListening();
+								
 							//	stopSelf();
 							} else if ((getResources().getString(R.string.call_dial)).equals(map
 									.get("openApp").get(0))) {
@@ -613,13 +666,7 @@ public class Asr_service extends Service {
 								mSpeech.speak(
 										getResources().getString(R.string.call_dial_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-//								Intent intent = new Intent(Intent.ACTION_DIAL);
-								Intent intent = new Intent();
-								intent.setAction("com.example.xuntongwatch.main.Call_Activity");
-								intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(intent);
-								mAsr.stopListening();
+								
 							//	stopSelf();
 							} else if ((getResources().getString(R.string.recorder)).equals(map
 									.get("openApp").get(0))) {
@@ -627,11 +674,7 @@ public class Asr_service extends Service {
 								mSpeech.speak(
 										getResources().getString(R.string.recorder_alert_sound),
 										TextToSpeech.QUEUE_ADD, IDmap);
-								AcquireWakeLock();
-								Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
-								mi.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(mi);
-								mAsr.stopListening();
+								
 								//stopSelf();
 							}
 						}
@@ -864,11 +907,7 @@ public class Asr_service extends Service {
 	
 	
 	
-	@Override
-	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	/** {@inheritDoc} */
 	 
 	@Override
@@ -885,17 +924,26 @@ public class Asr_service extends Service {
 		// TODO Auto-generated method stub
 		showTip("服务的onstartCommand()");
 		
-	
+		// 初始化合成引擎  讯飞引擎
 		
-		if(is_updata_lexcion_finish)
-		{
-			showTip("联系人更新完成");
-		}
-	//	IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,
-	//			"1001");
-	//	mSpeech.speak(
-	//			getResources().getString(R.string.help_you_dothing),
-	//			TextToSpeech.QUEUE_ADD, IDmap);
+		
+		
+		
+		
+		
+//		if(is_updata_lexcion_finish)
+//		{
+//			showTip("联系人更新完成");
+//		}
+		
+//		if(ttt.equals(""))
+//		{
+//			IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
+//			mSpeech.speak(getResources().getString(R.string.help_you_dothing),
+//					TextToSpeech.QUEUE_ADD, IDmap);
+//		}
+		
+		
 		
 		return START_NOT_STICKY;
 	}
@@ -905,11 +953,33 @@ public class Asr_service extends Service {
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		//showTip("服务已经停止");
+//		showTip("服务已经停止");
 		destoryListen();
+		
+		if(mSpeech != null)
+		{
+			mSpeech.shutdown();
+		}
+		unregisterReceiver(ps);
+		
+		is_updata_lexcion_finish = false;
 		super.onDestroy();
 	}
 	
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return mybind;
+	}
+	private MyBinder mybind=new MyBinder();
+	
+	public class MyBinder extends Binder {
+		public Asr_service getservice()
+		{
+			return Asr_service.this;
+			
+		}
+	}
 	/**
 	 * <br>功能简述:
 	 * <br>功能详细描述:停止录音

@@ -1,9 +1,11 @@
 package com.example.xuntongwatch.main;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import android.R.color;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -38,14 +40,29 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.example.xuntongwatch.MyApplication;
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
 import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.GridViewItemImageView;
+import com.example.xuntongwatch.view.CharacterParser;
 import com.example.xuntongwatch.view.DraggableGridView;
 import com.example.xuntongwatch.view.OnRearrangeListener;
+import com.example.xuntongwatch.view.PinyinComparator;
+import com.example.xuntongwatch.view.SortModel;
 
 public class Contact_Activity extends Activity {
+
+	/**
+	 * 汉字转换成拼音的类
+	 */
+	private CharacterParser characterParser;
+	private List<SortModel> SourceDateList;
+
+	/**
+	 * 根据拼音来排列ListView里面的数据类
+	 */
+	private PinyinComparator pinyinComparator;
 	/** 联系人显示名称 **/
 	private static final int PHONES_DISPLAY_NAME_INDEX = 0;
 	/** 电话号码 **/
@@ -65,28 +82,20 @@ public class Contact_Activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact);
-		SharedPreferences mySharedPreferences= getSharedPreferences("list", 
-				Activity.MODE_PRIVATE); 
-		SharedPreferences.Editor editor = mySharedPreferences.edit(); 
+		// 实例化汉字转拼音类
+		characterParser = CharacterParser.getInstance();
+		pinyinComparator = new PinyinComparator();
+
 		dgv = ((DraggableGridView) findViewById(R.id.vgv));
 		dgv.setOnRearrangeListener(new OnRearrangeListener() {
 
 			@Override
 			public void onRearrange(int oldIndex, int newIndex) {
-				Log.e("bb", oldIndex + ";" + newIndex);
-				swap(list, oldIndex, newIndex);
-				
+
 			}
 		});
 		initUI();
 		setListeners();
-	}
-
-	private ArrayList swap(ArrayList list, int a, int b) {
-		Object objA = list.get(a);
-		list.set(a, list.get(b));
-		list.set(b, objA);
-		return list;
 	}
 
 	private void setListeners() {
@@ -139,7 +148,11 @@ public class Contact_Activity extends Activity {
 		paint.setColor(Color.WHITE);
 		paint.setTextAlign(Paint.Align.CENTER);
 		canvas.drawText(s, 75, 140, paint);
-
+		if (MyApplication.sp.getBoolean(s, false)) {
+			paint.setTextSize(50);
+			paint.setColor(0xffE88F1D);
+			canvas.drawText("★", 125, 38, paint);
+		}
 		return toRoundCorner(bmp, 15);
 	}
 
@@ -195,6 +208,7 @@ public class Contact_Activity extends Activity {
 			layout.setVisibility(View.VISIBLE);
 			return;
 		} else {
+			sortContact(list);
 			layout.setVisibility(View.GONE);
 			Bitmap bmp = null;
 			for (int i = 0; i < list.size(); i++) {
@@ -276,5 +290,82 @@ public class Contact_Activity extends Activity {
 		} else {
 			Toast.makeText(this, "sim卡无联系人", Toast.LENGTH_LONG).show();
 		}
+	}
+
+	/**
+	 * 为ListView填充数据
+	 * 
+	 * @param date
+	 * @return
+	 */
+	private List<SortModel> filledData(String[] date) {
+		List<SortModel> mSortList = new ArrayList<SortModel>();
+
+		for (int i = 0; i < date.length; i++) {
+			SortModel sortModel = new SortModel();
+			sortModel.setName(date[i]);
+			// 汉字转换成拼音
+			String pinyin = characterParser.getSelling(date[i]);
+			String sortString = pinyin.substring(0, 1).toUpperCase();
+
+			// 正则表达式，判断首字母是否是英文字母
+			if (sortString.matches("[A-Z]")) {
+				sortModel.setSortLetters(sortString.toUpperCase());
+			} else {
+				sortModel.setSortLetters("#");
+			}
+
+			mSortList.add(sortModel);
+		}
+		return mSortList;
+
+	}
+
+	private void sortContact(ArrayList<GridViewItemImageView> old) {
+		ArrayList<GridViewItemImageView> collect_c = new ArrayList<GridViewItemImageView>();
+		ArrayList<GridViewItemImageView> collect_no_c = new ArrayList<GridViewItemImageView>();
+		for (int i = 0; i < old.size(); i++) {
+			Contact old_c = (Contact) old.get(i);
+			if (MyApplication.sp.getBoolean(old_c.getContact_name(), false)) {
+				collect_c.add(old_c);
+			} else {
+				collect_no_c.add(old_c);
+			}
+		}
+		list.clear();
+		ArrayList<GridViewItemImageView> cantacts = sortContactOther(collect_c);
+		for (int i = 0; i < cantacts.size(); i++) {
+			list.add(cantacts.get(i));
+		}
+		cantacts = sortContactOther(collect_no_c);
+		for (int i = 0; i < cantacts.size(); i++) {
+			list.add(cantacts.get(i));
+		}
+
+	}
+
+	/*
+	 * 排序收藏与不收藏联系人
+	 */
+	private ArrayList<GridViewItemImageView> sortContactOther(ArrayList<GridViewItemImageView> old) {
+		String[] names = new String[old.size()];
+		ArrayList<GridViewItemImageView> collect_c_new_c = new ArrayList<GridViewItemImageView>();
+		for (int i = 0; i < old.size(); i++) {
+			Contact contact = (Contact) old.get(i);
+			names[i] = contact.getContact_name();
+		}
+		SourceDateList = filledData(names);
+		Collections.sort(SourceDateList, pinyinComparator);
+		for (int i = 0; i < SourceDateList.size(); i++) {
+			for (int j = 0; j < SourceDateList.size(); j++) {
+				Contact contact = (Contact) old.get(j);
+				if (SourceDateList.get(i).getName().equals(contact.getContact_name())) {
+					collect_c_new_c.add(contact);
+					break;
+				}
+			}
+
+		}
+		return collect_c_new_c;
 	}
 }

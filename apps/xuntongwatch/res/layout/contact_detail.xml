@@ -2,55 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
-        
-        >
+        android:layout_weight="1.5" >
 
         <ImageView
-            android:layout_margin="10dp" 
             android:id="@+id/contact_head"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:layout_weight="1" />
 
         <LinearLayout
-        
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-             android:orientation="horizontal" >
+            android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/contact_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"
-                android:gravity="center_vertical" />
+                android:textSize="32sp" />
 
-            <ImageView
-                android:id="@+id/delete_contact"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/contact_delete_press" />
-        </LinearLayout>
+                android:orientation="vertical" >
 
+                <ImageView
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/collect"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="center"
+               />
+                
+                <ImageView
+                    android:id="@+id/delete_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/contact_delete_press" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="@drawable/background_contact" 
-       
+        android:background="@drawable/background_contact"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -59,16 +70,17 @@
             android:layout_weight="1"
             android:orientation="horizontal" >
 
-  <TextView
-      android:layout_marginLeft="10dp"      android:id="@+id/contact_phone"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="2.1"
-      android:textColor="#000000"
-      android:textSize="28sp" 
-     android:gravity="center_vertical" />
-         
-                <ImageView
+            <TextView
+                android:id="@+id/contact_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2.1"
+                android:gravity="center_vertical"
+                android:textColor="#000000"
+                android:textSize="28sp" />
+
+            <ImageView
                 android:id="@+id/edit_contact"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -77,9 +89,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:orientation="horizontal" >
 
