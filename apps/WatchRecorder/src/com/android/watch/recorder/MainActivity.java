@@ -86,7 +86,7 @@ public class MainActivity extends Activity{
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.recorder_main);
-		MyClick myClick=new MyClick();
+		MyClick myClick=new MyClick(); 
 		mediaPlayer = new MediaPlayer();
 		lists=new ArrayList<String>();
 		map=new HashMap();
@@ -131,8 +131,9 @@ public class MainActivity extends Activity{
 		public void onClick(View arg0) {
 			switch (arg0.getId()) {
 			case R.id.recorder:
+//				Intent id=new Intent();
+//				if(id.getFlags()==(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED));
 				
-				panding();
 				if(isReStart){
 					lists.clear();
 				}
@@ -186,6 +187,9 @@ public class MainActivity extends Activity{
 				save.setVisibility(View.INVISIBLE);
 				cancel.setVisibility(View.INVISIBLE);
 				isPause=false;
+				if(timer!=null){
+					timer.cancel();
+				}
 				notificationManager.cancel(1);
 				break;
 			case R.id.cancel:
@@ -316,6 +320,7 @@ public class MainActivity extends Activity{
 			}else{
 				seconds=second+"";
 			}
+			panding();
 			times.setText(minutes+":"+seconds);
 		}
 	};
@@ -332,9 +337,9 @@ public class MainActivity extends Activity{
 			//mMediaRecorder.stop();
 			mMediaRecorder.release();
 			mMediaRecorder = null;
-			
+			timer.cancel();
 		}
-		timer.cancel();
+		
 	}
 	/**
 	 *  @param isAddLastRecord 是否需要添加list之外的最新录音，一起合并
@@ -417,6 +422,17 @@ public class MainActivity extends Activity{
 		if(isAddLastRecord){
 			myRecAudioFile.delete();
 		}
+	}
+	
+	
+	@Override
+	protected void onDestroy() {
+		if(timer!=null){
+			timer.cancel();
+		}
+		notificationManager.cancel(1);
+		super.onDestroy();
+		
 	}
 	/**
 	 * 获取目录下的所有音频文件
