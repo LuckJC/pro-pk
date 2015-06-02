@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -127,25 +129,41 @@ public class DeleteListActivity extends Activity {
 					Toast.makeText(DeleteListActivity.this, "选择音频文件",
 							Toast.LENGTH_LONG).show();
 				} else {
-					for (int i = 0; i < nodeletes.size(); i++) {
-						// File file=new
-						// File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
-						File file = new File(nodeletes.get(i));
-						File file2 = new File(
-								MainActivity.myRecAudioDir.getAbsolutePath()
-										+ file.getAbsolutePath());
-						file2.delete();
-						// MainActivity.recordFiles.remove((int)(positionList.get(i)));
-						MainActivity.recordFiles.remove(nodeletes.get(i));
-						// nodeletes.remove();
-						// list.remove(positionList.get(i));
-					}
-					intent = new Intent();
-					Toast.makeText(DeleteListActivity.this, "删除成功", 500).show();
-					deleteBaseAdater.notifyDataSetChanged();
-					// intent.putStringArrayListExtra("nodeletes", nodeletes);
-					DeleteListActivity.this.setResult(RESULT_OK, intent);
-					DeleteListActivity.this.finish();
+					new AlertDialog.Builder(DeleteListActivity.this).setTitle("确认删除吗？") 
+				     .setIcon(android.R.drawable.ic_dialog_info) 
+				     .setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) { 
+				         // 点击“确认”后的操作 
+				        	 for (int i = 0; i < nodeletes.size(); i++) {
+									// File file=new
+									// File(MainActivity.recordFiles.get((Integer)positionList.get(i)));
+									File file = new File(nodeletes.get(i));
+									File file2 = new File(
+											MainActivity.myRecAudioDir.getAbsolutePath()
+													+ file.getAbsolutePath());
+									file2.delete();
+									// MainActivity.recordFiles.remove((int)(positionList.get(i)));
+									MainActivity.recordFiles.remove(nodeletes.get(i));
+									// nodeletes.remove();
+									// list.remove(positionList.get(i));
+								}
+								intent = new Intent();
+								Toast.makeText(DeleteListActivity.this, "删除成功", 500).show();
+								deleteBaseAdater.notifyDataSetChanged();
+								// intent.putStringArrayListExtra("nodeletes", nodeletes);
+								DeleteListActivity.this.setResult(RESULT_OK, intent);
+								DeleteListActivity.this.finish(); 
+				         } 
+				     }) 
+				     .setNegativeButton("返回", new DialogInterface.OnClickListener() { 
+				  
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) { 
+				         // 点击“返回”后的操作,这里不设置没有任何操作 
+				         } 
+				     }).show(); 
+					
 				}
 				break;
 			default:
