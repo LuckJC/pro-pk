@@ -141,6 +141,7 @@ public class DeleteListActivity extends Activity {
 						// list.remove(positionList.get(i));
 					}
 					intent = new Intent();
+					Toast.makeText(DeleteListActivity.this, "删除成功", 500).show();
 					deleteBaseAdater.notifyDataSetChanged();
 					// intent.putStringArrayListExtra("nodeletes", nodeletes);
 					DeleteListActivity.this.setResult(RESULT_OK, intent);
