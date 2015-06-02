@@ -57,7 +57,7 @@ public class RecService extends Service {
 			//停止录音
 			stopRec();
 			//退出服务
-			stopSelf();
+			stopSelf() ;
 		}
 		
 		return START_NOT_STICKY;

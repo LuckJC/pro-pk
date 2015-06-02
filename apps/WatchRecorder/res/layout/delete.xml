@@ -30,7 +30,7 @@
             android:src="@drawable/delete" />
 
         <CheckBox
-             android:visibility="invisible"
+            android:visibility="invisible"
             android:paddingTop="40dp"
             android:clickable="true"
             android:paddingRight="20dp"
