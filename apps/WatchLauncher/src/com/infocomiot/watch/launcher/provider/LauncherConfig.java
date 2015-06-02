@@ -22,17 +22,17 @@ public class LauncherConfig implements BaseColumns {
 		"com.android.watch.recorder",  //录音机
 		"com.mediatek.FMRadio",  //收音机
 		"com.android.calculator2",
+		"com.shizhongkeji.videoplayer", //视频播放器
 		"com.ss.android.article.news",  //头条新闻
 	};
 	
 	static final String[] APPS_SPORTS = {
 		"com.example.calendar",  //日历
-		"com.android.deskclock",  //时钟
+		//"com.android.deskclock",  //时钟
+		"com.cn.daming.deskclock", //闹钟
 		"com.codoon.gps",  //咕咚运动
 		"com.baidu.BaiduMap",  //百度地图
-		"com.nike.plusgpschina",  //Nike+计步器
 		"com.tencent.mm",  //微信
-		"com.tencent.mobileqq",  //QQ
 	};
 	
 	static final String[] APPS_COMMUNICATIONS = {
