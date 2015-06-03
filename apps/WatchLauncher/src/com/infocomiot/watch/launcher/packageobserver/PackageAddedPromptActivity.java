@@ -25,6 +25,7 @@ import com.infocomiot.watch.launcher.provider.LauncherConfig;
  */
 public class PackageAddedPromptActivity extends Activity implements OnClickListener {
 	private String mPackageName;
+	private boolean mAddToSportsGroup = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +66,13 @@ public class PackageAddedPromptActivity extends Activity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
-		ContentValues values = new ContentValues();
-		values.put(LauncherConfig.PACKAGE_NAME, mPackageName);
-		
 		switch (v.getId()) {
 		case R.id.ok:
-			values.put(LauncherConfig.PACKAGE_TYPE, LauncherConfig.TYPE_SPORTS);
-			getContentResolver().insert(LauncherConfig.WORKSPACE_CONTENT_URI, values);
+			mAddToSportsGroup = true;
 			break;
 			
 		case R.id.cancel:
-			values.put(LauncherConfig.PACKAGE_TYPE, LauncherConfig.TYPE_COMMON);
-			getContentResolver().insert(LauncherConfig.WORKSPACE_CONTENT_URI, values);
+			mAddToSportsGroup = false;
 			break;
 
 		default:
@@ -84,5 +80,19 @@ public class PackageAddedPromptActivity extends Activity implements OnClickListe
 		}
 		
 		finish();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		ContentValues values = new ContentValues();
+		values.put(LauncherConfig.PACKAGE_NAME, mPackageName);
+		if (mAddToSportsGroup) {
+			values.put(LauncherConfig.PACKAGE_TYPE, LauncherConfig.TYPE_SPORTS);
+			getContentResolver().insert(LauncherConfig.WORKSPACE_CONTENT_URI, values);
+		} else {
+			values.put(LauncherConfig.PACKAGE_TYPE, LauncherConfig.TYPE_COMMON);
+			getContentResolver().insert(LauncherConfig.WORKSPACE_CONTENT_URI, values);
+		}
 	}
 }
