@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

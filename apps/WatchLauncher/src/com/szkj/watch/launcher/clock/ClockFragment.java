@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
 
 import java.util.Calendar;
 import java.util.Timer;
@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
 
 public abstract class ClockFragment extends Fragment {
 	private static final int MSG_INBOX_CHANGED = 1;

@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.packageobserver;
+package com.szkj.watch.launcher.packageobserver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import com.infocomiot.watch.launcher.provider.LauncherConfig;
+import com.szkj.watch.launcher.provider.LauncherConfig;
 
 public class PackageChangedReceiver extends BroadcastReceiver {
 	@Override

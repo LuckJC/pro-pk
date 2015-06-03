@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.launcher;
+package com.szkj.watch.launcher.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
+
 
 public class WorkspaceAdapter  extends PagerAdapter{
 	// 4 items in one page

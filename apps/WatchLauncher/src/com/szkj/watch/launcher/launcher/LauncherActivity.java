@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.launcher;
+package com.szkj.watch.launcher.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-import com.infocomiot.watch.launcher.R;
-import com.infocomiot.watch.launcher.launcher.MyApplication.PackageChangedCallback;
-import com.infocomiot.watch.launcher.provider.LauncherConfig;
+import com.szkj.watch.launcher.R;
+import com.szkj.watch.launcher.launcher.MyApplication.PackageChangedCallback;
+import com.szkj.watch.launcher.provider.LauncherConfig;
 
 public class LauncherActivity extends Activity {
 	private static final String TAG = "LauncherActivity";

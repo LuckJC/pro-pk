@@ -1,4 +1,5 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
+
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -11,10 +12,10 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
-import com.infocomiot.watch.launcher.R;
-import com.infocomiot.watch.launcher.launcher.LauncherActivity;
-import com.infocomiot.watch.launcher.provider.LauncherConfig;
-import com.infocomiot.watch.launcher.provider.WatchConfig;
+import com.szkj.watch.launcher.R;
+import com.szkj.watch.launcher.launcher.LauncherActivity;
+import com.szkj.watch.launcher.provider.LauncherConfig;
+import com.szkj.watch.launcher.provider.WatchConfig;
 
 public class ClockActivity extends Activity {
 	private static final Class<? extends ClockFragment>[] CLOCKS;

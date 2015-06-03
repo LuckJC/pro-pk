@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.provider;
+package com.szkj.watch.launcher.provider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

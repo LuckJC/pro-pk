@@ -1,4 +1,5 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
+
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,17 +9,17 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
 
-public class AnalogClockFragment2 extends AnalogClockFragment {
+public class AnalogClockFragment6 extends AnalogClockFragment {
 	private static final Bundle sBundle = new Bundle();
 	static {
-		sBundle.putInt(BATTERY_CHARGING_ICON, R.drawable.battery02_charging);
-		sBundle.putInt(BATTERY_LEVEL_ICON, R.drawable.battery02);
+		sBundle.putInt(BATTERY_CHARGING_ICON, R.drawable.battery06_charging);
+		sBundle.putInt(BATTERY_LEVEL_ICON, R.drawable.battery06);
 		sBundle.putInt(TIME_UPDATE_PERIOD, MILLIS_PERIOD_SECOND);
 	}
 	
-	public AnalogClockFragment2() {
+	public AnalogClockFragment6() {
 		super();
 		setArguments(sBundle);
 	}
@@ -26,7 +27,7 @@ public class AnalogClockFragment2 extends AnalogClockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.clock02, null);
+		View view = inflater.inflate(R.layout.clock06, null);
 		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		view.setLayoutParams(lp);
 		mAnalogClock = (AnalogClock)view.findViewById(R.id.clock);
@@ -36,10 +37,5 @@ public class AnalogClockFragment2 extends AnalogClockFragment {
 		ImageView batteryView = (ImageView)view.findViewById(R.id.battery);
 		setCommonView(batteryView, smsView, smsView, callView, callView);
 		return view ;
-	}
-
-	@Override
-	protected void updateDate(int year, int month, int date) {
-		mDateTV.setText(String.valueOf(date));
 	}
 }

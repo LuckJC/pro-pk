@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.provider;
+package com.szkj.watch.launcher.provider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -45,7 +45,7 @@ public class LauncherConfig implements BaseColumns {
 		"com.android.settings",  //日历
 	};
 	
-	static final String AUTORITY = "com.infocomiot.watch.launcher";
+	static final String AUTORITY = "com.szkj.watch.launcher";
 	/**
 	 * Launcher provider uri.
 	 */

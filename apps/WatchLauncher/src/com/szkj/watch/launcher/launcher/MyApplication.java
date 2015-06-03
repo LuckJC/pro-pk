@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.launcher;
+package com.szkj.watch.launcher.launcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 
-import com.infocomiot.watch.launcher.provider.LauncherConfig;
+import com.szkj.watch.launcher.provider.LauncherConfig;
 
 public class MyApplication extends Application {
 	private static final int MSG_DB_CHANGED = 1;

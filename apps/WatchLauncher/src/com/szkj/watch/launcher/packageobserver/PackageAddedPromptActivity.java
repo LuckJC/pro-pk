@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.packageobserver;
+package com.szkj.watch.launcher.packageobserver;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -15,8 +15,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.infocomiot.watch.launcher.R;
-import com.infocomiot.watch.launcher.provider.LauncherConfig;
+import com.szkj.watch.launcher.R;
+import com.szkj.watch.launcher.provider.LauncherConfig;
 
 /**
  * An activity let user choose the new installed app if add to sports page. 
