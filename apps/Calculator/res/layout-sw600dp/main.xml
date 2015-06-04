@@ -61,6 +61,7 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="5dip"
                 android:paddingRight="5dip"
+                android:paddingBottom="5dip"
                 android:contentDescription="@string/clearDesc" />
             <ImageButton
                 android:id="@+id/del"

@@ -64,7 +64,10 @@
             <com.android.calculator2.ColorButton
                  android:id="@+id/clear"
                  android:text="@string/mtk_clear"
-                 android:textSize="30dp"
+                 android:textSize="25dp"
+                 android:textColor="#F70909"
+                 android:paddingBottom="3dp"
+                 android:layout_gravity="center_vertical"
                  style="@style/button_style"
                  />
             <!-- marginRight has to be 0 to catch border-touch -->
