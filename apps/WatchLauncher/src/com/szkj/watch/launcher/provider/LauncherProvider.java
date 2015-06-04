@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.provider;
+package com.szkj.watch.launcher.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

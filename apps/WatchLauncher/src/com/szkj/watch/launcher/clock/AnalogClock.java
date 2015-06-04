@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
 
 public class AnalogClock extends View {
 	private Drawable mDial, mHourHand, mMinuteHand, mSecondHand, mPin;

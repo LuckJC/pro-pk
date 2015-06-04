@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.infocomiot.watch.launcher"
+    package="com.szkj.watch.launcher"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -27,12 +27,12 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
-        android:name="com.infocomiot.watch.launcher.launcher.MyApplication"
+        android:name="com.szkj.watch.launcher.launcher.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.infocomiot.watch.launcher.clock.ClockActivity" >
+        <activity android:name="com.szkj.watch.launcher.clock.ClockActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -45,17 +45,17 @@
         </activity>
         
         <activity
-            android:name="com.infocomiot.watch.launcher.launcher.LauncherActivity"
+            android:name="com.szkj.watch.launcher.launcher.LauncherActivity"
             android:label="@string/app_name" >
         </activity>
         
         <activity
-            android:name="com.infocomiot.watch.launcher.packageobserver.PackageAddedPromptActivity"
+            android:name="com.szkj.watch.launcher.packageobserver.PackageAddedPromptActivity"
             android:label="@string/title_activity_package_added_prompt"
             android:theme="@style/PackageAddedActivityTheme" >
         </activity>
 
-        <receiver android:name="com.infocomiot.watch.launcher.packageobserver.PackageChangedReceiver" >
+        <receiver android:name="com.szkj.watch.launcher.packageobserver.PackageChangedReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -64,8 +64,8 @@
         </receiver>
 
         <provider
-            android:name="com.infocomiot.watch.launcher.provider.LauncherProvider"
-            android:authorities="com.infocomiot.watch.launcher"
+            android:name="com.szkj.watch.launcher.provider.LauncherProvider"
+            android:authorities="com.szkj.watch.launcher"
             android:exported="true" >
         </provider>
         

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:analogclock="http://schemas.android.com/apk/res/com.infocomiot.watch.launcher"
+    xmlns:analogclock="http://schemas.android.com/apk/res/com.szkj.watch.launcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dial02">
@@ -39,7 +39,7 @@
         android:layout_marginRight="82px"
         android:layout_marginBottom="86px"/>
     
-    <com.infocomiot.watch.launcher.clock.AnalogClock
+    <com.szkj.watch.launcher.clock.AnalogClock
         android:id="@+id/clock"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

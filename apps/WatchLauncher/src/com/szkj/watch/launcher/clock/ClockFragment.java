@@ -1,4 +1,4 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
 
 import java.util.Calendar;
 import java.util.Timer;
@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
 
 public abstract class ClockFragment extends Fragment {
 	private static final int MSG_INBOX_CHANGED = 1;
@@ -388,7 +388,7 @@ public abstract class ClockFragment extends Fragment {
 			intent = new Intent("com.example.xuntongwatch.main.Call_Activity");
 		} else {
 			intent = new Intent();
-			intent.setClassName("com.example.xuntongwatch", "com.example.xuntongwatch..main.Record_Activity");
+			intent.setClassName("com.example.xuntongwatch", "com.example.xuntongwatch.main.Record_Activity");
 		}
 //		Intent intent = new Intent(Intent.ACTION_DIAL);
 //		intent.setData(Uri.parse("tel:*#3646633#"));

@@ -1,4 +1,5 @@
-package com.infocomiot.watch.launcher.clock;
+package com.szkj.watch.launcher.clock;
+
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +9,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.infocomiot.watch.launcher.R;
+import com.szkj.watch.launcher.R;
 
 public class AnalogClockFragment4 extends AnalogClockFragment {
 	private static final Bundle sBundle = new Bundle();
