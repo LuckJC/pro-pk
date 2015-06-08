@@ -2,15 +2,21 @@ package com.shizhongkeji.videoplayer;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.shizhongkeji.videoplayer.MovieAdapter.MovieInfo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class VideoChooseActivity extends Activity {
 
@@ -32,7 +38,8 @@ public class VideoChooseActivity extends Activity {
 	private LinkedList<MovieInfo> mLinkedList = new LinkedList<MovieInfo>();;
 	private MovieAdapter mAdapter;
 	private Uri videoListUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-
+	
+	private TextView none;
 	private ImageButton mDelete;
 	public class MovieInfo {
 		String displayName;
@@ -46,6 +53,7 @@ public class VideoChooseActivity extends Activity {
 		setContentView(R.layout.dialog);
 		mDelete = (ImageButton) findViewById(R.id.delete);
 		mDelete.setVisibility(View.GONE);
+		none = (TextView) findViewById(R.id.none);
 		getVideoFile(mLinkedList, Environment.getExternalStorageDirectory());
 		if (android.os.Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
@@ -67,8 +75,11 @@ public class VideoChooseActivity extends Activity {
 				mLinkedList = playList2;
 			}
 		}
+		if(mLinkedList.size() > 0){
+			none.setVisibility(View.GONE);
+		}
 		GridView myListView = (GridView) findViewById(R.id.list);
-		mAdapter = new MovieAdapter(this,mLinkedList);
+		mAdapter = new MovieAdapter(VideoChooseActivity.this);
 		myListView.setAdapter(mAdapter);
 		myListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -84,7 +95,7 @@ public class VideoChooseActivity extends Activity {
 						Dialog dialog = new AlertDialog.Builder(VideoChooseActivity.this).setTitle("删除文件")
 								.setMessage("你确定要删除选中的文件")
 								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
+									List<Integer> list = new ArrayList<Integer>();
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										Iterator<Entry<Integer, Boolean>> iterator = MovieAdapter.mMap.entrySet().iterator();
@@ -96,11 +107,15 @@ public class VideoChooseActivity extends Activity {
 												MovieInfo movieInfo = mLinkedList.get(index);
 												String path = movieInfo.path;
 												deleteVideo(path);
-												mLinkedList.remove(index);
-												mAdapter.notifyDataSetChanged();
+												ContentResolver resolver = getContentResolver();
+												resolver.delete(videoListUri, "_data = ?", new String[]{path});
+												list.add(index);
 											}
 										}	
-
+										mAdapter.initData();
+										VideoApplication.isdelete = false;
+										mDelete.setVisibility(View.GONE);
+										mAdapter.notifyDataSetChanged();
 									}
 								}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
@@ -119,8 +134,14 @@ public class VideoChooseActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-				Toast.makeText(VideoChooseActivity.this, "点击了" + position, 0).show();
+				Intent intent = new Intent();
+				intent.setClass(VideoChooseActivity.this, VideoPlayerActivity.class);
+				MovieInfo movieInfo = mLinkedList.get(position);
+				String displayName = movieInfo.displayName;
+				String path = movieInfo.path;
+				intent.putExtra("displayName", displayName);
+				intent.putExtra("path", path);
+				startActivity(intent);
 			}
 		});
 		myListView.requestFocus();
@@ -153,7 +174,9 @@ public class VideoChooseActivity extends Activity {
 	}
 	private void deleteVideo(String path){
 		File file = new File(path);
-		file.deleteOnExit();
+		if (file.exists()) {
+			file.delete();
+		}
 	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
