@@ -172,7 +172,6 @@ public class HistoryListActivity extends Activity{
 			
 	}
 	OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
-
 		@Override
 		public void onAudioFocusChange(int focusChange) {
 			if (focusChange ==AudioManager.AUDIOFOCUS_LOSS_TRANSIENT){

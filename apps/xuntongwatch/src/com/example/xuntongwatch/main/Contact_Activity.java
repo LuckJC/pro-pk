@@ -1,15 +1,19 @@
 package com.example.xuntongwatch.main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import android.R.color;
+import android.R.integer;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -23,7 +27,9 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.MediaStore;
@@ -45,6 +51,8 @@ import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.databaseutil.PhoneDatabaseUtil;
 import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.GridViewItemImageView;
+import com.example.xuntongwatch.util.CommonDialog;
+import com.example.xuntongwatch.util.ContactInfo;
 import com.example.xuntongwatch.view.CharacterParser;
 import com.example.xuntongwatch.view.DraggableGridView;
 import com.example.xuntongwatch.view.OnRearrangeListener;
@@ -74,9 +82,12 @@ public class Contact_Activity extends Activity {
 	GridView gridView;
 	public static int imageWidth, imageHeight;
 	private ArrayList<GridViewItemImageView> list;
-
+	private List<String> listvCard;
 	static Random random = new Random();
 	DraggableGridView dgv;
+	private List<String> listvCardPath;
+	private ArrayList<HashMap<String, String>> listItem;
+	ContactInfo.ContactHandler handler = ContactInfo.ContactHandler.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -170,26 +181,192 @@ public class Contact_Activity extends Activity {
 		return newBitmap;
 	}
 
-	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.contact_activity_menu, menu);
+		super.onCreateOptionsMenu(menu);
+		menu.add(Menu.NONE, Menu.FIRST + 3, 3, "从SD卡导入联系人");
+		menu.add(Menu.NONE, Menu.FIRST + 4, 4, "将联系人导出到SD卡");
+		menu.add(Menu.NONE, Menu.FIRST + 1, 1, "添加联系人");
+		menu.add(Menu.NONE, Menu.FIRST + 2, 2, "从sim卡导入联系人");
+
 		return true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		switch (item.getItemId()) {
-		case R.id.contact_activity_menu_add:
+		case Menu.FIRST + 1:
 			Intent intent = new Intent(this, Add_Contact_Activity.class);
 			startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
 			break;
-		case R.id.contact_activity_menu_add_sim:
+		case Menu.FIRST + 2:
 			getSIMContacts();
 			dgv.removeAllViews();
 			initUI();
 			break;
+		case Menu.FIRST + 4:
+			UpdateTextTaskContact task = new UpdateTextTaskContact();
+			task.execute();
+			break;
+		case Menu.FIRST + 3: // 恢复
+			File path = new File("/storage/sdcard0/bluetooth");
+			searchFileOther(".vcf", path);
+			searchFile(".vcf", Environment.getExternalStorageDirectory());
+
+			if (listvCard.size() <= 0) {
+				Toast.makeText(this, "SDCard中不存在vCard文件", Toast.LENGTH_SHORT).show();
+			} else {
+				String[] vCard = new String[listvCard.size()];
+				for (int i = 0; i < vCard.length; i++) {
+					vCard[i] = listvCard.get(i);
+				}
+				listItem = new ArrayList<HashMap<String, String>>();
+				for (int i = 0; i < listvCard.size(); i++) {
+					HashMap<String, String> map = new HashMap<String, String>();
+					map.put(listvCard.get(i), "false");
+					listItem.add(map);
+				}
+				new AlertDialog.Builder(this).setTitle("选择要导入的文件")
+						.setMultiChoiceItems(vCard, null, new OnMultiChoiceClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+
+								if (isChecked) {
+									listItem.get(which).put(listvCard.get(which), "true");
+								} else {
+									listItem.get(which).put(listvCard.get(which), "false");
+								}
+							}
+						}).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								boolean isEmpty = false;
+								for (int i = 0; i < listItem.size(); i++) {
+									if (Boolean.parseBoolean(listItem.get(i).get(listvCard.get(i)))) {
+										isEmpty = true;
+									}
+								}
+
+								if (isEmpty) {
+									UpdateTextTask task = new UpdateTextTask();
+									task.execute();
+								}else{
+									Toast.makeText(Contact_Activity.this, "请选择要导入的文件", 0).show();
+								}
+							}
+						}).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.cancel();
+
+							}
+						}).show();
+
+			}
+
+			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void toLead(ContactInfo.ContactHandler handler, String path) {
+		try {
+			// 获取要恢复的联系人信息
+			List<ContactInfo> infoList = handler.restoreContacts(path);
+			// for (ContactInfo contactInfo : infoList) {
+			// // 恢复联系人
+			// handler.addContacts(MainActivity.this, contactInfo);
+			//
+			// }
+			for (int i = 0; i < infoList.size(); i++) {
+				ContactInfo contactInfo = infoList.get(i);
+				handler.addContacts(Contact_Activity.this, contactInfo);
+				Log.i("===============================", i + "");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * searchFile 查找文件并加入到ArrayList 当中去
+	 * 
+	 * @String keyword 查找的关键词
+	 * 
+	 * @File filepath 查找的目录
+	 */
+	private void searchFile(String keyword, File filepath) {
+		// 判断SD卡是否存在
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			File[] files = filepath.listFiles();
+			if (files == null) {
+				return;
+			}
+			if (files.length > 0) {
+				for (File file : files) {
+					if (file.isDirectory()) {
+						// 如果目录可读就执行（一定要加，不然会挂掉）
+						// if (file.canRead()) {
+						// searchFile(keyword, file); // 如果是目录，递归查找
+						// }
+					} else {
+						// 判断是文件，则进行文件名判断
+						try {
+							if (file.getName().indexOf(keyword) > -1
+									|| file.getName().indexOf(keyword.toUpperCase()) > -1) {
+								listvCard.add(file.getName());
+								listvCardPath.add(file.getPath());
+							}
+						} catch (Exception e) {
+							Toast.makeText(this, "查找发生错误", Toast.LENGTH_SHORT).show();
+						}
+					}
+				}
+
+			}
+		}
+	}
+
+	/*
+	 * searchFile 查找文件并加入到ArrayList 当中去
+	 * 
+	 * @String keyword 查找的关键词
+	 * 
+	 * @File filepath 查找的目录
+	 */
+	private void searchFileOther(String keyword, File filepath) {
+		listvCard = new ArrayList<String>();
+		listvCardPath = new ArrayList<String>();
+		// 判断SD卡是否存在
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			File[] files = filepath.listFiles();
+			if (files == null) {
+				return;
+			}
+			if (files.length > 0) {
+				for (File file : files) {
+					if (file.isDirectory()) {
+						// 如果目录可读就执行（一定要加，不然会挂掉）
+						// if (file.canRead()) {
+						// searchFile(keyword, file); // 如果是目录，递归查找
+						// }
+					} else {
+						// 判断是文件，则进行文件名判断
+						try {
+							if (file.getName().indexOf(keyword) > -1
+									|| file.getName().indexOf(keyword.toUpperCase()) > -1) {
+								listvCard.add(file.getName());
+								listvCardPath.add(file.getPath());
+							}
+						} catch (Exception e) {
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -367,5 +544,55 @@ public class Contact_Activity extends Activity {
 
 		}
 		return collect_c_new_c;
+	}
+
+	class UpdateTextTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected void onPreExecute() {
+			CommonDialog.showDialog(Contact_Activity.this);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (Boolean.parseBoolean(listItem.get(i).get(listvCard.get(i)))) {
+					toLead(handler, listvCardPath.get(i));
+				}
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			dgv.removeAllViews();
+			initUI();
+			CommonDialog.closeDialog();
+			Toast.makeText(Contact_Activity.this, "导入联系人信息成功!", Toast.LENGTH_LONG).show();
+			super.onPostExecute(result);
+		}
+	}
+
+	class UpdateTextTaskContact extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected void onPreExecute() {
+			CommonDialog.showDialog(Contact_Activity.this);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// 获取要备份的信息
+			List<ContactInfo> _infoList = handler.getContactInfo(Contact_Activity.this);
+			handler.backupContacts(Contact_Activity.this, _infoList); // 备份联系人信息
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			CommonDialog.closeDialog();
+			Toast.makeText(Contact_Activity.this, "备份成功！", Toast.LENGTH_SHORT).show();
+			super.onPostExecute(result);
+		}
 	}
 }

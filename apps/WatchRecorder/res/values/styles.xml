@@ -16,5 +16,14 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
 
+    <item name="android:button">@drawable/checkstype</item>
+
+   <!--  <item name="android:paddingLeft">5.0dip</item>
+
+    <item name="android:maxHeight">5.0dip</item> -->
+
+   </style>
+    
 </resources>
