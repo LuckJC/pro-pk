@@ -104,7 +104,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 					e.printStackTrace();
 				}
 			}
-
+			
 			super.handleMessage(msg);
 		}
 
@@ -134,61 +134,59 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				if (is_open_settting) {
-					return false;
-				} else if (!is_focus_manual) {
-					return false;
-				} else {
-					// mCamera.stopPreview();
-					mDraw = new DrawCaptureRect(MainActivity.this, new Rect(
-							(int) event.getX() - 30, (int) event.getY() - 30,
-							(int) event.getX() + 30, (int) event.getY() + 30), Color.GREEN);
 
+				if(event.getAction() == MotionEvent.ACTION_DOWN)
+				{
+					mDraw = new DrawCaptureRect(MainActivity.this, new Rect((int) event.getX() - 30, (int) event.getY() - 30, (int) event.getX() + 30, (int) event.getY() + 30), Color.GREEN);
 					if (faceView.getChildCount() >= 1) {
 						faceView.removeAllViews();
 						faceView.invalidate();
 					}
-
 					faceView.addView(mDraw);
-
-					if (mCamera != null) {
-
-						if (parameters.getMaxNumFocusAreas() > 0) {
-
-							List<Camera.Area> meteringAreas = new ArrayList<Camera.Area>();
-
-							int x_left = Float.valueOf((event.getX() / viewWidth) * 2000 - 1000)
-									.intValue();
-							int x_top = Float.valueOf((event.getY() / viewWidth) * 2000 - 1000)
-									.intValue();
-
-							Rect areaRect1 = new Rect(x_left, x_top, x_left + 100, x_top + 100);
-							meteringAreas.add(new Camera.Area(areaRect1, 900));
-							parameters.setMeteringAreas(meteringAreas);
-
-							mCamera.setParameters(parameters);
-							try {
-								mCamera.setPreviewDisplay(holder);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							mCamera.startPreview();
-
-						}
-
-					}
-					mCamera.autoFocus(new AutoFocusCallback() {
-						@Override
-						public void onAutoFocus(boolean success, Camera camera) {
-							// TODO Auto-generated method stub
-							faceView.removeAllViews();
-
-						}
-					});
-
 					return true;
-				}
+					}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (is_open_settting) {
+						return false;
+					} else if (!is_focus_manual) {
+						return false;
+					} else {
+						if (mCamera != null) {
+
+							if (parameters.getMaxNumFocusAreas() > 0) {
+
+								List<Camera.Area> meteringAreas = new ArrayList<Camera.Area>();
+
+								int x_left = Float.valueOf((event.getX() / viewWidth) * 2000 - 1000).intValue();
+								int x_top = Float.valueOf((event.getY() / viewWidth) * 2000 - 1000).intValue();
+
+								Rect areaRect1 = new Rect(x_left - 30, x_top - 30, x_left + 30,x_top + 30);
+								meteringAreas.add(new Camera.Area(areaRect1, 700));
+								parameters.setMeteringAreas(meteringAreas);
+								try {
+									mCamera.setParameters(parameters);
+
+									mCamera.setPreviewDisplay(holder);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								mCamera.startPreview();
+
+							}
+
+						}
+						mCamera.autoFocus(new AutoFocusCallback() {
+							@Override
+							public void onAutoFocus(boolean success, Camera camera) {
+								faceView.removeAllViews();
+							}
+						});
+					}
+					return true;
+				}else
+				{return false;}
+				
 			}
 		});
 
@@ -228,6 +226,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 					mCamera.cancelAutoFocus();
 					is_focus_manual = false;
 				} else if (str_focusmode.equals(str_spinner_focus[3])) {
+					parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 					is_focus_manual = true;
 				} else {
 					parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
@@ -371,13 +370,13 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			}
 			break;
 		case R.id.to_picture:
-			// Toast.makeText(MainActivity.this, "等待图库入口",
-			// Toast.LENGTH_SHORT).show();
-
+			
 			Intent intent_one = new Intent();
-			intent_one.setClassName("com.android.watch.watchgallery","com.android.watch.watchgallery.MainActivity");
+			intent_one.setClassName("com.android.watchgallery","com.android.watchgallery.MainActivity");
 			intent_one.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent_one);
+			try{startActivity(intent_one);}
+			catch(Exception e)
+			{Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();}
 			
 			mCamera.setFaceDetectionListener(null);
 			mCamera.stopPreview();
@@ -385,10 +384,13 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			mCamera = null;
 			break;
 		case R.id.change_mode:
+			
 			Intent intent_two = new Intent();
 			intent_two.setClassName("com.shizhongkeji.videoplayer","com.shizhongkeji.videoplayer.VideoChooseActivity");
 			intent_two.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent_two);
+			try{startActivity(intent_two);}
+			catch(Exception e)
+			{Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();}
 			
 			mCamera.setFaceDetectionListener(null);
 			mCamera.stopPreview();
@@ -530,6 +532,11 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 				}
 			});
+			if(is_findface)
+			{
+				mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
+				mCamera.startFaceDetection();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -620,7 +627,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 		@Override
 		public void onFaceDetection(Face[] faces, Camera camera) {
-			parameters = mCamera.getParameters();
+//			parameters = mCamera.getParameters();
 			if (faces.length > 0) {
 				Matrix mMatrix = new Matrix();
 				mMatrix.setScale(1, 1); // 只有后置摄像头如果有前置摄像头
@@ -648,21 +655,21 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 						faceView.addView(mDraw);
 
-						List<Camera.Area> focusArea = new ArrayList<Camera.Area>();
-						Rect focus_rect = new Rect(Math.round(re.left), Math.round(re.top),
-								Math.round(re.right), Math.round(re.bottom));
-						focusArea.add(new Camera.Area(focus_rect, 800));
-						parameters.setFocusAreas(focusArea);
-
-						mCamera.setParameters(parameters);
-
-						try {
-							mCamera.setPreviewDisplay(holder);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						mCamera.startPreview();
+//						List<Camera.Area> focusArea = new ArrayList<Camera.Area>();
+//						Rect focus_rect = new Rect(Math.round(re.left), Math.round(re.top),
+//								Math.round(re.right), Math.round(re.bottom));
+//						focusArea.add(new Camera.Area(focus_rect, 800));
+//						parameters.setFocusAreas(focusArea);
+//
+//						mCamera.setParameters(parameters);
+//
+//						try {
+//							mCamera.setPreviewDisplay(holder);
+//						} catch (IOException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						mCamera.startPreview();
 						
 						 Log.d("lixianda", faces[i].score+";");
 					}
