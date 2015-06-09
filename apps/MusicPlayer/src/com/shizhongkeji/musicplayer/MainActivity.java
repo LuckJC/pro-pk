@@ -6,17 +6,20 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
+import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,20 +39,20 @@ import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
 import com.shizhongkeji.service.PlayerService;
+import com.shizhongkeji.service.PlayerService.MyBinder;
 import com.shizhongkeji.sqlutils.DBManager;
 import com.shizhongkeji.utils.MediaUtil;
 
 @SuppressLint("NewApi")
-public class MainActivity extends Activity implements OnClickListener,
-		OnSeekBarChangeListener {
+public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 
 	private int repeatState; // 重复状态
 	private final int isCurrentRepeat = 1; // ����ѭ��
 	private final int isAllRepeat = 2; // ȫ��ѭ��
 	private final int isNoneRepeat = 3; // ���ظ�����
 	private boolean isFirstTime = true;
-	private boolean isPlaying; //
-	private boolean isPause; // ��ͣ
+//	private boolean isPlaying; //
+//	private boolean isPause; // ��ͣ
 	private boolean isNoneShuffle = true; // ˳�򲥷�
 	private boolean isShuffle = false; // 随机
 	private RelativeLayout mLinearLayoutVol;
@@ -60,7 +63,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	private int listPosition = 0; // 当前歌曲位置
 	private int currentTime; // 当前播放时间
 	private int duration; // 音乐时长
-	private int flag; // ���ű�ʶ
 
 	private TextView mPlayCurrentTime;
 	private TextView mPlayFinalTime;
@@ -78,30 +80,31 @@ public class MainActivity extends Activity implements OnClickListener,
 	private Button shuffleBtn;
 	private List<Mp3Info> mp3Infos;
 
-	private AudioManager am; 
+	private AudioManager am;
 
 	private int currentVolume; // 当前音量
 	private int maxVolume; // 最大音量
-	
 
 	private ImageView musicAlbum; // 专辑的封面
-
 
 	private SharedPreferences share;
 	private Editor edit;
 
 	private Dialog mDialog;
-
+	
+	private int mPlayCount = 0;
+	
 	private PlayerReceiver playerReceiver;
+	private PlayerService playerService;
 	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // 更新动作
 	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // 控制动作
-	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // 当前音乐改变动作
-	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// 音乐时长改变动作
+//	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // 当前音乐改变动作
+//	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// 音乐时长改变动作
 	public static final String MUSIC_PLAYING = "com.shizhong.action.MUSIC_PLAYING"; // 播放音乐动作
 	public static final String REPEAT_ACTION = "com.shizhong.action.REPEAT_ACTION"; // 音乐重复改变动作
 	public static final String SHUFFLE_ACTION = "com.shizhong.action.SHUFFLE_ACTION";// 音乐随机播放动作
 	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势播放音乐动作
-
+	public static final String MUSIC_SERVICE = "com.shizhong.media.MUSIC_SERVICE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -112,20 +115,21 @@ public class MainActivity extends Activity implements OnClickListener,
 		edit = share.edit();
 		initView();
 		mp3Infos = DBManager.getInstance(this).queryMusic();
-		if (mp3Infos != null && mp3Infos.size() > 0) {
+		if (mp3Infos != null && mp3Infos.size() > 0 && mp3Infos.size() > listPosition 
+				&& listPosition >= 0) {
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
 		}
 		switch (repeatState) {
-		case isCurrentRepeat: // ����ѭ��
+		case isCurrentRepeat: // 
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 			break;
-		case isAllRepeat: // ȫ��ѭ��
+		case isAllRepeat: // 
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 			break;
-		case isNoneRepeat: // ���ظ�
+		case isNoneRepeat: // 
 			shuffleBtn.setClickable(true);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 			break;
@@ -139,23 +143,16 @@ public class MainActivity extends Activity implements OnClickListener,
 			shuffleBtn.setBackgroundResource(R.drawable.shuffle_none_selector);
 			repeatBtn.setClickable(true);
 		}
-		if (flag == AppConstant.PlayerMsg.PLAYING_MSG) { // ���������Ϣ�����ڲ���
-//			Toast.makeText(MainActivity.this, "���ڲ���--" + title, 1).show();
-			Intent intent = new Intent();
-			// intent.setAction(SHOW_LRC);
-			intent.putExtra("listPosition", listPosition);
-			sendBroadcast(intent);
-		} else if (flag == AppConstant.PlayerMsg.PLAY_MSG) { // ����ǵ���б��Ÿ����Ļ�
-			playBtn.setBackgroundResource(R.drawable.play_selector);
-			play();
-		} else if (flag == AppConstant.PlayerMsg.CONTINUE_MSG) {
-			Intent intent = new Intent(MainActivity.this, PlayerService.class);
-			playBtn.setBackgroundResource(R.drawable.play_selector);
-			intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-			intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ������������
-			startService(intent);
-		}
+		Intent intentService = new Intent(MUSIC_SERVICE);
+		bindService(intentService, sc, Context.BIND_AUTO_CREATE);
 		registerReceiver();
+	}
+
+	@Override
+	protected void onResume() {
+		mp3Infos.clear();
+		mp3Infos = DBManager.getInstance(this).queryMusic();
+		super.onResume();
 	}
 
 	private void initView() {
@@ -185,8 +182,8 @@ public class MainActivity extends Activity implements OnClickListener,
 		playBtn.setOnClickListener(this);
 		repeatBtn.setOnClickListener(this);
 		shuffleBtn.setOnClickListener(this);
-		repeatState = isNoneRepeat; // ��ʼ״̬Ϊ���ظ�����״̬
 		boolean isRead = share.getBoolean("isPlaying", false);
+		repeatState = isNoneRepeat;
 		if (isRead) {
 			url = share.getString("url", "");
 			currentTime = share.getInt("duration", 0);
@@ -195,21 +192,17 @@ public class MainActivity extends Activity implements OnClickListener,
 			repeatState = share.getInt("repeatstate", 3);
 			mPlayProgress.setMax(duration);
 			mPlayProgress.setProgress(currentTime);
-			mPlayFinalTime.setText(MediaUtil.formatTime(currentTime));
 			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
+			mPlayFinalTime.setText(MediaUtil.formatTime(currentTime));
 			mMusicName.setText(share.getString("title", ""));
 			mMusicSiger.setText(share.getString("singer", ""));
 		} else {
 			if (mp3Infos != null && mp3Infos.size() > 0) {
 				Mp3Info mp3Info = mp3Infos.get(listPosition);
 				url = mp3Info.getUrl();
-				listPosition = 0;
 			}
 		}
-	
-		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); // ��ȡϵͳ����
-		telManager.listen(new MobliePhoneStateListener(),
-				PhoneStateListener.LISTEN_CALL_STATE);
+
 		am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
 		maxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -218,7 +211,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		am.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 		System.out.println("currentVolume--->" + currentVolume);
 		System.out.println("maxVolume-->" + maxVolume);
-
+		setPlayButtonStatus();
 	}
 
 	private void registerReceiver() {
@@ -226,49 +219,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		playerReceiver = new PlayerReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(UPDATE_ACTION);
-		filter.addAction(MUSIC_CURRENT);
-		filter.addAction(MUSIC_DURATION);
 		filter.addAction(REPEAT_ACTION);
 		filter.addAction(SHUFFLE_ACTION);
 		filter.addAction(GESTRUE_PLAYING);
 		registerReceiver(playerReceiver, filter);
 	}
 
-	private class MobliePhoneStateListener extends PhoneStateListener {
-		@Override
-		public void onCallStateChanged(int state, String incomingNumber) {
-			switch (state) {
-			case TelephonyManager.CALL_STATE_IDLE: // �һ�״̬
-				Intent intent = new Intent(MainActivity.this,
-						PlayerService.class);
-				playBtn.setBackgroundResource(R.drawable.play_selector);
-				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-				intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG); // ������������
-				startService(intent);
-				isPlaying = true;
-				isPause = false;
-
-				break;
-			case TelephonyManager.CALL_STATE_OFFHOOK: // ͨ��״̬
-			case TelephonyManager.CALL_STATE_RINGING: // ����״̬
-				Intent intent2 = new Intent(MainActivity.this,
-						PlayerService.class);
-				playBtn.setBackgroundResource(R.drawable.pause_selector);
-				intent2.setAction("com.shizhong.media.MUSIC_SERVICE");
-				intent2.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
-				startService(intent2);
-				isPlaying = false;
-				isPause = true;
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
 	private void showExitDialog() {
-		View view = LayoutInflater.from(this).inflate(R.layout.dialog_exit,
-				null);
+		View view = LayoutInflater.from(this).inflate(R.layout.dialog_exit, null);
 		view.findViewById(R.id.exit).setOnClickListener(this);
 		view.findViewById(R.id.moveback).setOnClickListener(this);
 		mDialog.setContentView(view);
@@ -315,61 +273,53 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.last:
 			volumeStatusLayout();
 			previous_music();
-			isPlaying = true;
-			isPause = false;
+			GlobalApplication.isPlaying = true;
+			setPlayButtonStatus();
 			break;
 		case R.id.next:
 			volumeStatusLayout();
 			next_music();
-			isPlaying = true;
-			isPause = false;
+			GlobalApplication.isPlaying = true;
+			setPlayButtonStatus();
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
-			if (isFirstTime) {
-				playBtn.setBackgroundResource(R.drawable.play_selector);
-				if (mp3Infos != null && mp3Infos.size() > 1) {
-					if (listPosition <= mp3Infos.size() - 1) {
+			if (mPlayCount == 0) {
+//				playBtn.setBackgroundResource(R.drawable.play_selector);
+				if (mp3Infos != null && mp3Infos.size() > 0) {
+					if (listPosition < mp3Infos.size()) {
 						Mp3Info mp3Info = mp3Infos.get(listPosition);
-						showArtwork(mp3Info); //
-						url = mp3Info.getUrl();
-						mMusicName.setText(mp3Info.getTitle());
-						mMusicSiger.setText(mp3Info.getArtist());
-						intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+						showArtwork(mp3Info); 
+						intent.setAction(MUSIC_SERVICE);
 						intent.putExtra("url", mp3Info.getUrl());
 						intent.putExtra("listPosition", listPosition);
-						intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
 						startService(intent);
-						isPlaying = true;
-						isPause = false;
-					GlobalApplication.isPlaying = true;
+						GlobalApplication.isPlaying = true;
+						setPlayButtonStatus();
 					}
-
 				} else {
-					listPosition = mp3Infos.size() - 1;
-					Toast.makeText(MainActivity.this, "没有音乐文件",
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainActivity.this, "音乐列表无歌曲文件", Toast.LENGTH_SHORT).show();
 				}
-				isFirstTime = false;
 			} else {
-				if (isPlaying) {
-					playBtn.setBackgroundResource(R.drawable.play_selector);
-					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+				if (GlobalApplication.isPlaying) {
+//					playBtn.setBackgroundResource(R.drawable.play_selector);
+					intent.setAction(MUSIC_SERVICE);
 					intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
 					startService(intent);
-					isPlaying = false;
-					isPause = true;
 					GlobalApplication.isPlaying = false;
-				} else if (isPause) {
-					playBtn.setBackgroundResource(R.drawable.pause_selector);
-					intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+					setPlayButtonStatus();
+				} else {
+//					playBtn.setBackgroundResource(R.drawable.pause_selector);
+					intent.setAction(MUSIC_SERVICE);
 					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
 					startService(intent);
-					isPlaying = true;
-					isPause = false;
 					GlobalApplication.isPlaying = true;
+					setPlayButtonStatus();
 				}
 			}
+			
+			mPlayCount ++;
 			break;
 		case R.id.repeat_music: // �ظ�����
 			if (repeatState == isNoneRepeat) {
@@ -387,21 +337,17 @@ public class MainActivity extends Activity implements OnClickListener,
 			}
 			switch (repeatState) {
 			case isCurrentRepeat: // ����ѭ��
-				repeatBtn
-						.setBackgroundResource(R.drawable.repeat_current_selector);
-				Toast.makeText(MainActivity.this, R.string.repeat_current,
-						Toast.LENGTH_SHORT).show();
+				repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
+				Toast.makeText(MainActivity.this, R.string.repeat_current, Toast.LENGTH_SHORT)
+						.show();
 				break;
 			case isAllRepeat: // ȫ��ѭ��
 				repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
-				Toast.makeText(MainActivity.this, R.string.repeat_all,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, R.string.repeat_all, Toast.LENGTH_SHORT).show();
 				break;
 			case isNoneRepeat: // ���ظ�
-				repeatBtn
-						.setBackgroundResource(R.drawable.repeat_none_selector);
-				Toast.makeText(MainActivity.this, R.string.repeat_none,
-						Toast.LENGTH_SHORT).show();
+				repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
+				Toast.makeText(MainActivity.this, R.string.repeat_none, Toast.LENGTH_SHORT).show();
 				break;
 			}
 
@@ -409,17 +355,14 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.shuffle_music: // �������
 			if (isNoneShuffle) {
 				shuffleBtn.setBackgroundResource(R.drawable.shuffle_selector);
-				Toast.makeText(MainActivity.this, R.string.shuffle,
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, R.string.shuffle, Toast.LENGTH_SHORT).show();
 				isNoneShuffle = false;
 				isShuffle = true;
 				shuffleMusic();
 				repeatBtn.setClickable(false);
 			} else if (isShuffle) {
-				shuffleBtn
-						.setBackgroundResource(R.drawable.shuffle_none_selector);
-				Toast.makeText(MainActivity.this, R.string.shuffle_none,
-						Toast.LENGTH_SHORT).show();
+				shuffleBtn.setBackgroundResource(R.drawable.shuffle_none_selector);
+				Toast.makeText(MainActivity.this, R.string.shuffle_none, Toast.LENGTH_SHORT).show();
 				isShuffle = false;
 				isNoneShuffle = true;
 				repeatBtn.setClickable(true);
@@ -429,9 +372,10 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.exit:
 			mDialog.dismiss();
 			unregisterReceiver(playerReceiver);
-			intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+			intent.setAction(MUSIC_SERVICE);
+			unbindService(sc);
 			stopService(intent);
-			finish();
+			this.finish();
 			break;
 		case R.id.moveback:
 			mDialog.dismiss();
@@ -456,11 +400,12 @@ public class MainActivity extends Activity implements OnClickListener,
 		// 默认不循环
 		repeat_none();
 		Intent intent = new Intent();
-		intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+		intent.setAction(MUSIC_SERVICE);
 		intent.putExtra("url", url);
 		intent.putExtra("listPosition", listPosition);
 		intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
 		startService(intent);
+		// bindService(intent, sc, Context.BIND_AUTO_CREATE);
 	}
 
 	/**
@@ -484,11 +429,10 @@ public class MainActivity extends Activity implements OnClickListener,
 			url = data.getStringExtra("url");
 			artist = data.getStringExtra("artist");
 			listPosition = data.getIntExtra("listPosition", 0);
-			mp3Infos =  DBManager.getInstance(this).queryMusic();
+			mp3Infos = DBManager.getInstance(this).queryMusic();
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
-			Long musicDuration = Long.parseLong(data
-					.getStringExtra("musicDuration"));
+			Long musicDuration = Long.parseLong(data.getStringExtra("musicDuration"));
 			int msg = data.getIntExtra("MSG", 0);
 			mPlayFinalTime.setText(MediaUtil.formatTime(musicDuration));
 			mMusicName.setText(title);
@@ -498,14 +442,13 @@ public class MainActivity extends Activity implements OnClickListener,
 			intentService.putExtra("MSG", msg);
 			intentService.putExtra("listPosition", listPosition);
 			startService(intentService);
-			isPlaying = true;
-			isPause = false;
+			GlobalApplication.isPlaying = true;
+			setPlayButtonStatus();
 		}
 	}
 
 	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress,
-			boolean fromUser) {
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 		switch (seekBar.getId()) {
 		case R.id.audioTrack:
 			if (fromUser) {
@@ -513,7 +456,6 @@ public class MainActivity extends Activity implements OnClickListener,
 			}
 			break;
 		case R.id.seekbar_vol:
-			// ��������
 			am.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
 			System.out.println("am--->" + progress);
 			break;
@@ -535,39 +477,34 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 显示专辑封面
 	 */
 	private void showArtwork(Mp3Info mp3Info) {
-		Bitmap bm = MediaUtil.getArtwork(this, mp3Info.getId(),
-				mp3Info.getAlbumId(), true, false);
-		// �л�����ʱ��ר��ͼƬ����͸��Ч��
-		Animation albumanim = AnimationUtils.loadAnimation(MainActivity.this,
-				R.anim.album_replace);
-		// ��ʼ���Ŷ���Ч��
+		Bitmap bm = MediaUtil.getArtwork(this, mp3Info.getId(), mp3Info.getAlbumId(), true, false);
+		Animation albumanim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.album_replace);
 		musicAlbum.startAnimation(albumanim);
 		if (bm != null) {
-			musicAlbum.setImageBitmap(bm); // ��ʾר������ͼƬ
+			musicAlbum.setImageBitmap(bm);
 			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
-			// // ��ʾ��Ӱ
 		} else {
 			bm = MediaUtil.getDefaultArtwork(this, false);
-			musicAlbum.setImageBitmap(bm); // ��ʾר������ͼƬ
+			musicAlbum.setImageBitmap(bm);
 			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
-			// // ��ʾ��Ӱ
 		}
 
 	}
 
 	/**
-	 * ���Ž��ȸı�
+	 *
 	 * 
 	 * @param progress
 	 */
 	public void audioTrackChange(int progress) {
 		Intent intent = new Intent();
-		intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+		intent.setAction(MUSIC_SERVICE);
 		intent.putExtra("url", url);
 		intent.putExtra("listPosition", listPosition);
 		intent.putExtra("MSG", AppConstant.PlayerMsg.PROGRESS_CHANGE);
 		intent.putExtra("progress", progress);
 		startService(intent);
+		// bindService(intent, sc, Context.BIND_AUTO_CREATE);
 	}
 
 	/**
@@ -610,27 +547,27 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 上一首
 	 */
 	public void previous_music() {
-		playBtn.setBackgroundResource(R.drawable.pause_selector);
+//		playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition - 1;
 		if (listPosition >= 0) {
 			if (mp3Infos != null && mp3Infos.size() > 0) {
-				Mp3Info mp3Info = mp3Infos.get(listPosition); // ��һ��MP3
-				showArtwork(mp3Info); // ��ʾר������
+				Mp3Info mp3Info = mp3Infos.get(listPosition); // 
+				showArtwork(mp3Info); // 
 				mMusicName.setText(mp3Info.getTitle());
 				mMusicSiger.setText(mp3Info.getArtist());
 				url = mp3Info.getUrl();
 				Intent intent = new Intent();
-				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+				intent.setAction(MUSIC_SERVICE);
 				intent.putExtra("url", mp3Info.getUrl());
 				intent.putExtra("listPosition", listPosition);
 				intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
 				startService(intent);
+				
 			}
 
 		} else {
 			listPosition = 0;
-			Toast.makeText(MainActivity.this, "没有上一首了", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(MainActivity.this, "没有上一首了", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -638,7 +575,7 @@ public class MainActivity extends Activity implements OnClickListener,
 	 * 下一首
 	 */
 	public void next_music() {
-		playBtn.setBackgroundResource(R.drawable.pause_selector);
+//		playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition + 1;
 		if (mp3Infos != null && mp3Infos.size() > 2) {
 			if (listPosition <= mp3Infos.size() - 1) {
@@ -648,17 +585,17 @@ public class MainActivity extends Activity implements OnClickListener,
 				mMusicName.setText(mp3Info.getTitle());
 				mMusicSiger.setText(mp3Info.getArtist());
 				Intent intent = new Intent();
-				intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+				intent.setAction(MUSIC_SERVICE);
 				intent.putExtra("url", mp3Info.getUrl());
 				intent.putExtra("listPosition", listPosition);
 				intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
 				startService(intent);
+				// bindService(intent, sc, Context.BIND_AUTO_CREATE);
 			}
 
 		} else {
 			listPosition = mp3Infos.size() - 1;
-			Toast.makeText(MainActivity.this, "已经是最后一首歌了", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(MainActivity.this, "已经是最后一首歌了", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -673,44 +610,21 @@ public class MainActivity extends Activity implements OnClickListener,
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals(MUSIC_CURRENT)) {
-				currentTime = intent.getIntExtra("currentTime", -1);
-				mPlayCurrentTime.setText(MediaUtil.formatTime(currentTime));
-				mPlayProgress.setProgress(currentTime);
-			} else if (action.equals(MUSIC_DURATION)) {
-				duration = intent.getIntExtra("duration", -1);
-				mPlayProgress.setMax(duration);
-				mPlayFinalTime.setText(MediaUtil.formatTime(duration));
-			} else if (action.equals(UPDATE_ACTION)) {
-				// ��ȡIntent�е�current��Ϣ��current����ǰ���ڲ��ŵĸ���
-				listPosition = intent.getIntExtra("current", -1);
-				url = mp3Infos.get(listPosition).getUrl();
-				if (listPosition >= 0) {
-					mMusicName.setText(mp3Infos.get(listPosition).getTitle());
-					mMusicSiger.setText(mp3Infos.get(listPosition).getArtist());
-				}
-				if (listPosition == 0) {
-					mPlayFinalTime.setText(MediaUtil.formatTime(mp3Infos.get(
-							listPosition).getDuration()));
-					playBtn.setBackgroundResource(R.drawable.pause_selector);
-					isPause = true;
-				}
+			 if (action.equals(UPDATE_ACTION)) {
+				setPlayButtonStatus();
 			} else if (action.equals(REPEAT_ACTION)) {
 				repeatState = intent.getIntExtra("repeatState", -1);
 				switch (repeatState) {
 				case isCurrentRepeat: // ����ѭ��
-					repeatBtn
-							.setBackgroundResource(R.drawable.repeat_current_selector);
+					repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 					shuffleBtn.setClickable(false);
 					break;
 				case isAllRepeat: // ȫ��ѭ��
-					repeatBtn
-							.setBackgroundResource(R.drawable.repeat_all_selector);
+					repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 					shuffleBtn.setClickable(false);
 					break;
 				case isNoneRepeat: // ���ظ�
-					repeatBtn
-							.setBackgroundResource(R.drawable.repeat_none_selector);
+					repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 					shuffleBtn.setClickable(true);
 					break;
 				}
@@ -718,13 +632,11 @@ public class MainActivity extends Activity implements OnClickListener,
 				isShuffle = intent.getBooleanExtra("shuffleState", false);
 				if (isShuffle) {
 					isNoneShuffle = false;
-					shuffleBtn
-							.setBackgroundResource(R.drawable.shuffle_selector);
+					shuffleBtn.setBackgroundResource(R.drawable.shuffle_selector);
 					repeatBtn.setClickable(false);
 				} else {
 					isNoneShuffle = true;
-					shuffleBtn
-							.setBackgroundResource(R.drawable.shuffle_none_selector);
+					shuffleBtn.setBackgroundResource(R.drawable.shuffle_none_selector);
 					repeatBtn.setClickable(true);
 				}
 			} else if (action.equals(GESTRUE_PLAYING)) {
@@ -737,13 +649,12 @@ public class MainActivity extends Activity implements OnClickListener,
 						Mp3Info mp3Info = mp3Infos.get(listPosition);
 						url = mp3Info.getUrl();
 					}
-					Intent intentService = new Intent(context,
-							PlayerService.class);
+					Intent intentService = new Intent(context, PlayerService.class);
 					intentService.putExtra("url", url);
-					intentService.putExtra("MSG",
-							AppConstant.PlayerMsg.PLAYING_MSG);
+					intentService.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_MSG);
 					intentService.putExtra("listPosition", listPosition);
 					startService(intentService);
+					// bindService(intentService, sc, Context.BIND_AUTO_CREATE);
 				}
 			}
 
@@ -753,16 +664,20 @@ public class MainActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		edit.putBoolean("isPlaying", isPlaying);
+		edit.putBoolean("isPlaying", isFirstTime);
 		edit.putString("title", mMusicName.getText().toString());
 		edit.putString("singer", mMusicSiger.getText().toString());
 		edit.putInt("duration", duration);
 		edit.putInt("currentTime", currentTime);
-		edit.putInt("position", listPosition);
+		if (listPosition < 0) {
+			edit.putInt("position", 0);
+		} else {
+			edit.putInt("position", listPosition);
+		}
 		edit.putInt("repeatstate", repeatState);
 		edit.putString("url", url);
 		edit.commit();
-
+		mhandler.removeMessages(0);
 	}
 
 	/**
@@ -770,11 +685,63 @@ public class MainActivity extends Activity implements OnClickListener,
 	 */
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 			showExitDialog();
 			return false;
 		}
 		return false;
+	}
+
+	private ServiceConnection sc = new ServiceConnection() {
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+
+		}
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			MyBinder myBinder = (MyBinder) service;
+			playerService = myBinder.getPlayerService();
+			mhandler.sendEmptyMessage(0);
+		}
+	};
+	private Handler mhandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 0:
+				listPosition = playerService.current;
+				Log.e("Main--listPosition", listPosition + "");
+				if(mp3Infos.size() >0){
+					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);
+					// showArtwork(m);
+					if (playerService.mediaPlayer != null && GlobalApplication.isPlaying) {
+						currentTime = playerService.mediaPlayer.getCurrentPosition(); // 获取当前音乐播放的位置
+						mPlayProgress.setMax(playerService.duration);
+						mPlayProgress.setProgress(currentTime);
+						mPlayCurrentTime.setText(MediaUtil.formatTime(currentTime));
+						Log.e("Main--currentTime", MediaUtil.formatTime(currentTime));
+						mPlayFinalTime.setText(MediaUtil.formatTime(m.getDuration()));
+						mMusicName.setText(m.getTitle());
+						Log.e("Main--Title", m.getTitle());
+						mMusicSiger.setText(m.getArtist());
+					}
+					mhandler.sendEmptyMessageDelayed(0, 1000);
+				}
+				break;
+
+			default:
+				break;
+			}
+			super.handleMessage(msg);
+		}
+	};
+	private void setPlayButtonStatus(){
+		if(GlobalApplication.isPlaying){
+			playBtn.setBackgroundResource(R.drawable.pause);
+		}else{
+			playBtn.setBackgroundResource(R.drawable.play);
+		}
 	}
 }

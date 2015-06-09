@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.utils.MediaUtil;
 
 public class DBManager {
 
@@ -36,7 +37,11 @@ public class DBManager {
 				values.put(AppConstant.MusicSQL.ALBUM, mp3Info.getAlbum());
 				values.put(AppConstant.MusicSQL.ALBUMID, mp3Info.getAlbumId());
 				values.put(AppConstant.MusicSQL.DISPLAYNAME, mp3Info.getDisplayName());
-				values.put(AppConstant.MusicSQL.ARTIST, mp3Info.getArtist());
+				if(mp3Info.getArtist().equals(MediaUtil.UNKNOWN)){
+					values.put(AppConstant.MusicSQL.ARTIST,MediaUtil.UNKNOWN_CHINA);
+				}else{
+					values.put(AppConstant.MusicSQL.ARTIST, mp3Info.getArtist());	
+				}
 				values.put(AppConstant.MusicSQL.DURATION, mp3Info.getDuration());
 				values.put(AppConstant.MusicSQL.SIZE, mp3Info.getSize());
 				values.put(AppConstant.MusicSQL.URL, mp3Info.getUrl());
@@ -68,7 +73,7 @@ public class DBManager {
 		return mp3Infos;
 		
 	}
-	private boolean isExitMusicForID(String id){
+	public boolean isExitMusicForID(String id){
 		boolean b = false;
 		Cursor cursor  = dataBase.query(AppConstant.MusicSQL.TABLE_NAME,null,  AppConstant.MusicSQL.ID +"= ?", new String[]{id}, null, null, null);
 		b = cursor.moveToFirst();
