@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/layout1"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/photo"
+            android:background="#07D5E2"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/photo" />
+
+        <Button
+            android:id="@+id/picture"
+            android:layout_weight="1"
+            android:background="#ADADAD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/picture" />
+
+    </LinearLayout>
+            <GridView
+                android:id="@+id/gridView1"
+                android:layout_below="@id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2" >
+            </GridView>
+    
+    <LinearLayout
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/layout11" 
+       >
+
+        <Button
+            android:id="@+id/deleteAll"
+            android:layout_weight="1"
+            android:background="#BEBEBE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_all" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_weight="1"
+            android:background="#ADADAD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete" />
+
+    </LinearLayout>
+</RelativeLayout>
