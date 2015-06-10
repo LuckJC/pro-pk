@@ -223,7 +223,6 @@ public class AlarmAlertFullScreen extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        Log.v("wangxianming", "AlarmAlert.OnNewIntent()");
 
         mAlarm = intent.getParcelableExtra(Alarms.ALARM_INTENT_EXTRA);
 
@@ -243,7 +242,7 @@ public class AlarmAlertFullScreen extends Activity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.v("wangxianming", "AlarmAlert.onDestroy()");
+   
         // No longer care about the alarm being killed.
         unregisterReceiver(mReceiver);
     }
@@ -279,10 +278,18 @@ public class AlarmAlertFullScreen extends Activity {
         return super.dispatchKeyEvent(event);
     }
 
-    @Override
-    public void onBackPressed() {
-        // Don't allow back to dismiss. This method is overriden by AlarmAlert
-        // so that the dialog is dismissed.
-        return;
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // Don't allow back to dismiss. This method is overriden by AlarmAlert
+//        // so that the dialog is dismissed.
+//        return;
+//    }
+    @Override    
+    public boolean onKeyDown(int keyCode, KeyEvent event) {  
+    if(keyCode == KeyEvent.KEYCODE_BACK){      
+    return  true;
+    }  
+    return  super.onKeyDown(keyCode, event);     
+
+    } 
 }
