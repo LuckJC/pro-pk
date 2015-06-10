@@ -41,7 +41,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	private MyReceiver myReceiver; // 自定义广播接收器
 	public int currentTime; // 当前播放进度
 	public int duration; // 播放长度
-	private int playCount = 0;
+	
 
 	// private SharedPreferences share;
 	// private Editor edit;
@@ -222,7 +222,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					if (action.equals(GESTURE_PLAY)) {
 						if (!GlobalApplication.isPlaying) {
 							GlobalApplication.isPlaying = true;
-							if (playCount == 0) {
+							if (!GlobalApplication.isPlay) {
 								path = mp3Infos.get(current).getUrl();
 								play(0);
 								sendBroadcast(sendIntent);
@@ -306,7 +306,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 				} else if (msg == AppConstant.PlayerMsg.PLAYING_DELETE) {
 					path = intent.getStringExtra("url"); // 歌曲路径
 					current = intent.getIntExtra("listPosition", 0); // 当前播放歌曲的在mp3Infos的位置
-					next();
+					play(0);
 				} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // 进度更新
 					currentTime = intent.getIntExtra("progress", -1);
 					play(currentTime);
@@ -326,7 +326,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	 */
 	private void play(int currentTime) {
 		try {
-			playCount++;
+			GlobalApplication.isPlay = true;
 			GlobalApplication.isPlaying = true;
 			GlobalApplication.current = current;
 			mediaPlayer.reset();// 把各项参数恢复到初始状态

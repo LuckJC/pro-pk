@@ -166,7 +166,6 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
 										Intent intent = new Intent();
 										intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-										intent.putExtra("url", mp3info.getUrl());
 										intent.putExtra("listPosition", position);
 										intent.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_DELETE);
 										startService(intent);	

@@ -15,6 +15,7 @@ public class GlobalApplication extends Application {
 	public static List<Mp3Info> mp3Infos;
 	public static boolean isPlaying = false;
 	public static int current = 0;
+	public static boolean isPlay = false;
 	@Override
 	public void onCreate() {
 		super.onCreate();

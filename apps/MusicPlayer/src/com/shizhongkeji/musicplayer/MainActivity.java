@@ -92,7 +92,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 	private Dialog mDialog;
 	
-	private int mPlayCount = 0;
 	
 	private PlayerReceiver playerReceiver;
 	private PlayerService playerService;
@@ -284,33 +283,30 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
-			if (mPlayCount == 0) {
-//				playBtn.setBackgroundResource(R.drawable.play_selector);
-				if (mp3Infos != null && mp3Infos.size() > 0) {
-					if (listPosition < mp3Infos.size()) {
-						Mp3Info mp3Info = mp3Infos.get(listPosition);
-						showArtwork(mp3Info); 
-						intent.setAction(MUSIC_SERVICE);
-						intent.putExtra("url", mp3Info.getUrl());
-						intent.putExtra("listPosition", listPosition);
-						intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
-						startService(intent);
-						GlobalApplication.isPlaying = true;
-						setPlayButtonStatus();
+			if (GlobalApplication.isPlaying) {
+				intent.setAction(MUSIC_SERVICE);
+				intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
+				startService(intent);
+				GlobalApplication.isPlaying = false;
+				setPlayButtonStatus();
+			} else {
+				if (!GlobalApplication.isPlay) {
+					if (mp3Infos != null && mp3Infos.size() > 0) {
+						if (listPosition < mp3Infos.size()) {
+							Mp3Info mp3Info = mp3Infos.get(listPosition);
+							showArtwork(mp3Info); 
+							intent.setAction(MUSIC_SERVICE);
+							intent.putExtra("url", mp3Info.getUrl());
+							intent.putExtra("listPosition", listPosition);
+							intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
+							startService(intent);
+							GlobalApplication.isPlaying = true;
+							setPlayButtonStatus();
+						}
+					} else {
+						Toast.makeText(MainActivity.this, "音乐列表无歌曲文件", Toast.LENGTH_SHORT).show();
 					}
 				} else {
-					Toast.makeText(MainActivity.this, "音乐列表无歌曲文件", Toast.LENGTH_SHORT).show();
-				}
-			} else {
-				if (GlobalApplication.isPlaying) {
-//					playBtn.setBackgroundResource(R.drawable.play_selector);
-					intent.setAction(MUSIC_SERVICE);
-					intent.putExtra("MSG", AppConstant.PlayerMsg.PAUSE_MSG);
-					startService(intent);
-					GlobalApplication.isPlaying = false;
-					setPlayButtonStatus();
-				} else {
-//					playBtn.setBackgroundResource(R.drawable.pause_selector);
 					intent.setAction(MUSIC_SERVICE);
 					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
 					startService(intent);
@@ -318,10 +314,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					setPlayButtonStatus();
 				}
 			}
-			
-			mPlayCount ++;
+		
 			break;
-		case R.id.repeat_music: // �ظ�����
+		case R.id.repeat_music: // 
 			if (repeatState == isNoneRepeat) {
 				repeat_one();
 				shuffleBtn.setClickable(false);
