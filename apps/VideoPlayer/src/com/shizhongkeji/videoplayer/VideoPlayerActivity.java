@@ -128,7 +128,7 @@ public class VideoPlayerActivity extends Activity {
 
 		mSoundWindow = new PopupWindow(mSoundView);
 		
-		titleView = LayoutInflater.from(this).inflate(R.layout.extral, null);
+		titleView = getLayoutInflater().inflate(R.layout.extral, null);
 		titleWindow = new PopupWindow(this);
 		
 		title = (TextView) titleView.findViewById(R.id.title);
@@ -591,8 +591,6 @@ public class VideoPlayerActivity extends Activity {
 	}
 	private void deleteVideo(String path) {
 		File file = new File(path);
-		if (file.exists()) {
-			file.delete();
-		}
+		file.deleteOnExit();
 	}
 }

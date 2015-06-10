@@ -150,6 +150,7 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_volume"
+        android:clickable="true"
         android:visibility="gone" >
 
         <Button

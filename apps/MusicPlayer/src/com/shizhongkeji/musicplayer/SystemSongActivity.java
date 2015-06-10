@@ -40,7 +40,7 @@ public class SystemSongActivity extends Activity implements OnClickListener {
 		mp3Infos_db = new ArrayList<Mp3Info>();
 		mp3Infos_application = GlobalApplication.mp3InfosSystem;
 		mListMusic = (ListView) findViewById(R.id.song_list);
-		mAdapter = new SystemMusicAdapter(mp3Infos_application, this, R.layout.item_systemmusic);
+		mAdapter = new SystemMusicAdapter(mp3Infos_application, this);
 		mListMusic.setAdapter(mAdapter);
 	}
 

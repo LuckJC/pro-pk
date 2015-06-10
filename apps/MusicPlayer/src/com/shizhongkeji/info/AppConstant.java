@@ -2,10 +2,12 @@ package com.shizhongkeji.info;
 
 /**
  * 应用常量类
- * @author wwj
+ * 
  *
  */
 public class AppConstant {
+	public static final int TYPE_GESTURE = 1;
+	public static final int TYPE_OTHER = 0;
 	public class PlayerMsg {
 		public static final int PLAY_MSG = 1;		//播放
 		public static final int PAUSE_MSG = 2;		//暂停

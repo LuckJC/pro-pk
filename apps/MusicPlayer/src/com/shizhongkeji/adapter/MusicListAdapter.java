@@ -23,7 +23,7 @@ import com.shizhongkeji.utils.MediaUtil;
 /**
  * 自定义的音乐列表适配器
  * 为了方便扩展，因为之前没有考虑到显示专辑封面
- * @author wwj
+ * 
  *
  */
 public class MusicListAdapter extends BaseAdapter{
@@ -106,7 +106,7 @@ public class MusicListAdapter extends BaseAdapter{
 	/**
 	 * 定义一个内部类
 	 * 声明相应的控件引用
-	 * @author wwj
+	 * 
 	 *
 	 */
 	public class ViewHolder {

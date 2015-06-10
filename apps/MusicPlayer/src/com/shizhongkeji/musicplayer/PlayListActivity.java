@@ -18,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -28,6 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.adapter.MusicListAdapter;
 import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
@@ -156,12 +158,21 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 									DBManager.getInstance(PlayListActivity.this).deleteMusic(
 											String.valueOf(mp3info.getId()));
 									mp3Infos.remove(position);
+									mMisicListAdapter.setData();
 									mMisicListAdapter.notifyDataSetChanged();
-									Intent intent = new Intent();
-									intent.setAction("com.shizhong.media.MUSIC_SERVICE");
-									intent.putExtra("position", position);
-									intent.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_DELETE);
-									startService(intent);
+									if(GlobalApplication.current < position){
+										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
+									}else if(GlobalApplication.current == position){
+										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
+										Intent intent = new Intent();
+										intent.setAction("com.shizhong.media.MUSIC_SERVICE");
+										intent.putExtra("listPosition", position);
+										intent.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_DELETE);
+										startService(intent);	
+									}else if(GlobalApplication.current > position){
+										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
+									}
+									
 								}
 							}).setNegativeButton("取消", new OnClickListener() {
 

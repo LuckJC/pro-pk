@@ -33,9 +33,8 @@
     <EditText
         android:id="@+id/dtmfDialerField"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="30dp"
+		        android:layout_marginTop="3dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:paddingEnd="16dp"
@@ -59,64 +58,76 @@
         android:layout_marginTop="@dimen/dialpad_vertical_margin"
         android:paddingStart="5dip"
         android:paddingEnd="5dip"
-        android:paddingBottom="10dip"
+        android:paddingBottom="5dip"
         android:background="@color/dialpad_background"
         android:layoutDirection="ltr">
 
         <TableRow
              android:layout_height="0px"
-             android:layout_weight="1">
+             android:layout_weight="0.9">
             <ImageButton android:id="@+id/one" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_1_no_vm_wht"
-                android:contentDescription="@string/description_image_button_one" />
+                android:contentDescription="@string/description_image_button_one" 
+                android:textSize="18sp"/>
             <ImageButton android:id="@+id/two" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_2_wht"
-                android:contentDescription="@string/description_image_button_two" />
+                android:contentDescription="@string/description_image_button_two" 
+                android:textSize="18sp"/>
             <ImageButton android:id="@+id/three" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_3_wht"
-                android:contentDescription="@string/description_image_button_three" />
+                android:contentDescription="@string/description_image_button_three"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
              android:layout_height="0px"
-             android:layout_weight="1">
+             android:layout_weight="0.9">
             <ImageButton android:id="@+id/four" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_4_wht"
-                android:contentDescription="@string/description_image_button_four" />
+                android:contentDescription="@string/description_image_button_four"
+                android:textSize="18sp" />
             <ImageButton android:id="@+id/five" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_5_wht"
-                android:contentDescription="@string/description_image_button_five" />
+                android:contentDescription="@string/description_image_button_five" 
+                android:textSize="18sp"/>
             <ImageButton android:id="@+id/six" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_6_wht"
-                android:contentDescription="@string/description_image_button_six" />
+                android:contentDescription="@string/description_image_button_six" 
+                android:textSize="18sp"/>
         </TableRow>
 
         <TableRow
              android:layout_height="0px"
-             android:layout_weight="1">
+             android:layout_weight="0.9">
             <ImageButton android:id="@+id/seven" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_7_wht"
-                android:contentDescription="@string/description_image_button_seven" />
+                android:contentDescription="@string/description_image_button_seven"
+                android:textSize="18sp" />
             <ImageButton android:id="@+id/eight" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_8_wht"
-                android:contentDescription="@string/description_image_button_eight" />
+                android:contentDescription="@string/description_image_button_eight" 
+                android:textSize="18sp"/>
             <ImageButton android:id="@+id/nine" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_9_wht"
-                android:contentDescription="@string/description_image_button_nine" />
+                android:contentDescription="@string/description_image_button_nine" 
+                android:textSize="18sp"/>
         </TableRow>
 
         <TableRow
              android:layout_height="0px"
-             android:layout_weight="1">
+             android:layout_weight="0.9">
             <ImageButton android:id="@+id/star" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_star_wht"
-                android:contentDescription="@string/description_image_button_star" />
+                android:contentDescription="@string/description_image_button_star" 
+                android:textSize="18sp"/>
             <ImageButton android:id="@+id/zero" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_0_no_plus_wht"
-                android:contentDescription="@string/description_image_button_zero" />
+                android:contentDescription="@string/description_image_button_zero"
+                android:textSize="18sp" />
             <ImageButton android:id="@+id/pound" style="@style/DialpadButtonStyle"
                 android:src="@drawable/dial_num_pound_wht"
-                android:contentDescription="@string/description_image_button_pound" />
+                android:contentDescription="@string/description_image_button_pound" 
+                android:textSize="18sp"/>
         </TableRow>
     </TableLayout>
 </LinearLayout>

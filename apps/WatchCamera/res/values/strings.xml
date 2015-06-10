@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WatchCamera</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="takepic">拍照</string>
+	<string name="str_focus_mode">对焦方式</string>
+	<string name="str_picture_definition">照片质量</string>
+	<string name="str_findface">人脸检测</string>
+	<string name="str_continue_take">连拍</string>
+	
+</resources>

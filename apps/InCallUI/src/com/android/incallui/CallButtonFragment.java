@@ -16,12 +16,19 @@
 
 package com.android.incallui;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Context;
 import android.graphics.drawable.LayerDrawable;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -35,6 +42,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -67,7 +75,6 @@ public class CallButtonFragment
 
     private ImageButton mMuteButton;
     private ImageButton mAudioButton;
-    private ImageButton mHoldButton;
     private ToggleButton mShowDialpadButton;
     private ImageButton mMergeButton;
     private ImageButton mAddCallButton;
@@ -79,7 +86,16 @@ public class CallButtonFragment
     private View mExtraRowButton;
     private View mManageConferenceButton;
     private View mGenericMergeButton;
-
+    
+	Button button;
+	private File mDir;
+	private File mFile;
+	public File myRecAudioFile;
+	/** 录音保存路径 **/
+	public File myRecAudioDir;
+	private MediaRecorder mMediaRecorder;
+	private final String SUFFIX = ".amr";
+	int flag = 0; // 开始状态
     @Override
     public CallButtonPresenter createPresenter() {
         // TODO: find a cleaner way to include audio mode provider than
@@ -123,6 +139,7 @@ public class CallButtonFragment
         mEndCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+			stopRec();
                 getPresenter().endCallClicked();
             }
         });
@@ -148,14 +165,8 @@ public class CallButtonFragment
             }
         });
 
-        mHoldButton = (ImageButton) parent.findViewById(R.id.holdButton);
-        mHoldButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ImageButton button = (ImageButton) v;
-                getPresenter().holdClicked(!button.isSelected());
-            }
-        });
+     
+      
 
         mShowDialpadButton = (ToggleButton) parent.findViewById(R.id.dialpadButton);
         mShowDialpadButton.setOnClickListener(this);
@@ -227,7 +238,16 @@ public class CallButtonFragment
 
         switch(id) {
             case R.id.addButton:
-                getPresenter().addCallClicked();
+           	if (flag == 0) {
+					startRec();
+					flag = 1;
+					mAddCallButton.setImageResource(R.drawable.start_record);
+				} else {
+					stopRec();
+					flag = 0;
+					mAddCallButton.setImageResource(R.drawable.stop_record);
+				}
+                //getPresenter().addCallClicked();
                 break;
             case R.id.mergeButton:
                 getPresenter().mergeClicked();
@@ -237,6 +257,11 @@ public class CallButtonFragment
                 break;
             case R.id.dialpadButton:
                 getPresenter().showDialpadClicked(mShowDialpadButton.isChecked());
+                if(mShowDialpadButton.isChecked()){
+                	mEndCallButton.setVisibility(View.GONE);
+                }else{
+                	mEndCallButton.setVisibility(View.VISIBLE);
+                }
                 break;
             default:
                 Log.wtf(this, "onClick: unexpected");
@@ -262,7 +287,7 @@ public class CallButtonFragment
         // The smaller buttons laid out horizontally just below the end-call button.
         mMuteButton.setEnabled(isEnabled);
         mAudioButton.setEnabled(isEnabled);
-        mHoldButton.setEnabled(isEnabled);
+       
         mShowDialpadButton.setEnabled(isEnabled);
         /// M: unuse google code. @{
         /*
@@ -293,17 +318,17 @@ public class CallButtonFragment
 
     @Override
     public void setHold(boolean value) {
-        mHoldButton.setSelected(value);
+      
     }
 
     @Override
     public void showHold(boolean show) {
-      //  mHoldButton.setVisibility(show ? View.VISIBLE : View.GONE);
+     
     }
 
     @Override
     public void enableHold(boolean enabled) {
-        mHoldButton.setEnabled(enabled);
+    
     }
 
     @Override
@@ -318,12 +343,15 @@ public class CallButtonFragment
 
     @Override
     public void showAddCall(boolean show) {
-        mAddCallButton.setVisibility(View.GONE);
+        mAddCallButton.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void enableAddCall(boolean enabled) {
         mAddCallButton.setEnabled(enabled);
+		  if(enabled){
+        	mAddCallButton.setImageResource(R.drawable.stop_record);
+        }
     }
 
     @Override
@@ -657,7 +685,6 @@ public class CallButtonFragment
         mMenuButton = (ImageButton) parent.findViewById(R.id.overflowMenu);
         if (InCallUtils.hasPermanentMenuKey(getActivity())) {
             mAddCallButton = (ImageButton) parent.findViewById(R.id.addButton);
-            
             if (mAddCallButton != null) {
                 mAddCallButton.setOnClickListener(this);
             }
@@ -897,7 +924,7 @@ public class CallButtonFragment
             updateAudioButtons(0);
             mIsVTButtonVisible = true;
         } else {
-            mEndCallButton.setVisibility(View.VISIBLE);
+//            mEndCallButton.setVisibility(View.VISIBLE);
             mVoiceButtonContainer.setVisibility(View.VISIBLE);
             mVTButtonContainer.setVisibility(View.GONE);
             if (mParentView != null) {
@@ -1163,4 +1190,56 @@ public class CallButtonFragment
     public void enableSwap(boolean enabled) {
         mSwapButton.setEnabled(enabled);
     }
+    protected void startRec() {
+		Toast.makeText(mContext, "start record", 0).show();
+		boolean sdcardExist = Environment.getExternalStorageState().equals(
+				Environment.MEDIA_MOUNTED);
+		if (!sdcardExist)
+			return;
+		String pathStr = Environment.getExternalStorageDirectory().getAbsolutePath() + "/YYT";
+		// String pathStr = "/storage/sdcard1/MIUI/"+"/YY";
+		mDir = new File(pathStr);
+		if (mDir.exists()) {
+			if (!mDir.isDirectory()) {
+				return;
+			}
+		} else if (!(mDir.mkdirs())) {
+			return;
+		}
+
+		String mMinute1 = getTimeString();
+		mFile = new File(mDir, mMinute1 + SUFFIX);
+		mMediaRecorder = new MediaRecorder();
+		// 设置录音为麦克风
+		mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+		mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
+		mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		// 录音文件保存这里
+		mMediaRecorder.setOutputFile(mFile.getAbsolutePath());
+		try {
+			mMediaRecorder.prepare();
+			mMediaRecorder.start();
+		} catch (IOException e) {
+			e.printStackTrace();
+			mMediaRecorder.stop();
+			mMediaRecorder.release();
+			mMediaRecorder = null;
+		}
+	}
+
+	private String getTimeString() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date curDate = new Date(System.currentTimeMillis());// 获取当前时间
+		String time = formatter.format(curDate);
+		return time;
+	}
+
+	protected void stopRec() {
+		if (mMediaRecorder != null) {
+			// 停止录音
+			mMediaRecorder.stop();
+			mMediaRecorder.release();
+			mMediaRecorder = null;
+		}
+	}
 }
