@@ -51,7 +51,8 @@
     <ImageButton android:id="@+id/endButton"
                  style="@style/InCallEndButton"
                  android:layout_width="match_parent"
-                 android:layout_marginTop="2dp"
+                
+				      android:layout_marginBottom="15dp"
                  android:src="@drawable/ic_in_call_phone_hangup"
                  android:background="@drawable/end_call_background"
                  android:contentDescription="@string/onscreenEndCallText"/>
@@ -91,7 +92,7 @@
                       style="@style/InCallCompoundButton"
                       android:background="@drawable/btn_compound_dialpad"
                       android:contentDescription="@string/onscreenShowDialpadText"
-                      android:visibility="gone"
+                     
                 />
 
         <!-- Separator between 1st and 2nd button -->
@@ -154,9 +155,10 @@
         <!-- "Add Call" -->
         <ImageButton android:id="@+id/addButton"
                      style="@style/InCallButton"
-                     android:src="@drawable/ic_add_contact_holo_dark"
+                     android:src="@drawable/default_record"
                      android:contentDescription="@string/onscreenAddCallText"
                      android:visibility="gone"
+android:layout_marginBottom="5dip"
                 />
         <!-- "Merge calls" -->
         <!-- This button is used only on GSM devices, where we know

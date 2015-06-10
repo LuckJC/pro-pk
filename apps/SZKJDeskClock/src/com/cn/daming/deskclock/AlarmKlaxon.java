@@ -272,6 +272,8 @@ public class AlarmKlaxon extends Service {
             player.setAudioStreamType(AudioManager.STREAM_ALARM);
             player.setLooping(true);
             player.prepare();
+            audioManager.requestAudioFocus(null,
+                    AudioManager.STREAM_ALARM, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
             player.start();
         }
     }

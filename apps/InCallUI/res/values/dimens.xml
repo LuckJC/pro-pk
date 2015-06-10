@@ -42,7 +42,7 @@
     <dimen name="call_banner_name_number_right_padding">10dip</dimen>
 
     <!-- Height of the main row of in-call buttons. -->
-    <dimen name="in_call_button_height">76dp</dimen>
+    <dimen name="in_call_button_height">40dp</dimen>
 
     <!-- Height of the in-call "End" button. Match with Contact's dimens/call_button_height -->
     <dimen name="in_call_end_button_height">74dp</dimen>
