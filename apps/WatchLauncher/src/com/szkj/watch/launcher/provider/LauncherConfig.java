@@ -15,7 +15,9 @@ public class LauncherConfig implements BaseColumns {
 		"com.szkj.szgesturesetting",  //盲操作手势设置
 		"com.shizhongkeji.mscv5plus",  //语音
 		"com.example.hear_aid",  //助听器
-		"com.android.gallery3d",  //相机,照片
+		//"com.android.gallery3d",  //相机,照片
+		"com.szkj.watchcamera",   //相机
+		"com.android.watchgallery", //图库
 		//"com.android.music",  //音乐
 		"com.shizhongkeji.musicplayer", //音乐
 		//"com.android.soundrecorder",  //录音机
