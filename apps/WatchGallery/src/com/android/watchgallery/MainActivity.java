@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				 Intent intent=new Intent(MainActivity.this, DeleteActivity.class);
+				 Intent intent=new Intent(MainActivity.this, DeleteView.class);
 				 intent.putExtra("flag", flag);
 				 startActivityForResult(intent, 8);
 //				if (flag == 0) {
@@ -257,7 +257,9 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.picture:
 				flag = 1;
-				pictureList.clear();
+				if(pictureList!=null){
+					pictureList.clear();
+				}
 				init();
 				picture.setBackgroundColor(Color.parseColor("#07D5E2"));
 				photo.setBackgroundColor(Color.parseColor("#8A9AA8"));
@@ -347,7 +349,7 @@ public class MainActivity extends Activity {
 	/* 获取的是MyCamera文件夹下面的所有图片路径 */
 	private ArrayList<String> getListPic() {
 		String path = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/DCIM/MyCamera/";
+				.getAbsolutePath() + "/DCIM/Camera/";
 		Toast.makeText(MainActivity.this, path, 5000).show();
 		File file = new File(path);
 		if (file.exists()) {
@@ -387,6 +389,7 @@ public class MainActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
+				holder = new ViewHolder();
 				convertView = LayoutInflater.from(MainActivity.this).inflate(
 						R.layout.item, parent, false);
 				convertView.setTag(holder);
