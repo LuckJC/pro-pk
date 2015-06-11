@@ -1,6 +1,5 @@
 package com.shizhongkeji.sqlutils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -69,6 +68,7 @@ public class DBManager {
 					duration, size, url, lrcTitle, lrcSize);
 			mp3Infos.add(mp3Info);
 		}
+		cursor.close();
 		return mp3Infos;
 		
 	}
