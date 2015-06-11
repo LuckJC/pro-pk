@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.android.watchgallery.DeleteActivity"></activity>
+        <activity android:name="com.android.watchgallery.DeleteView"></activity>
         <activity android:name="com.android.watchgallery.SingleImage"></activity>
     </application>
 

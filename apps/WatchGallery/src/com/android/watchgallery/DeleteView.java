@@ -6,7 +6,11 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-
+import com.android.watchgallery.DeleteActivity.ImageAdapter;
+import com.android.watchgallery.DeleteActivity.Item;
+import com.android.watchgallery.DeleteActivity.MyClick;
+import com.android.watchgallery.DeleteActivity.PictureAdater;
+import com.android.watchgallery.DeleteActivity.ViewHolder;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -29,7 +33,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,16 +40,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-public class DeleteActivity extends Activity {
+import android.widget.AdapterView.OnItemClickListener;
+public class DeleteView extends Activity{
 	Button photo;
 	Button picture;
 	Button delete;
 	Button deleteAll;
 	GridView gridView;
 	LinearLayout layout3;
-	public ImageAdapter imageAdapter;
-	public PictureAdater pictureAdater;
 	DisplayMetrics dm;
 	ViewHolder holder;
 	public static List<String> lsmap;
@@ -88,8 +89,6 @@ public class DeleteActivity extends Activity {
 		pictureList2 = pictureList;
 		deleteImgDir = new ArrayList<String>();
 		lsmap = new ArrayList<String>();
-		imageAdapter = new ImageAdapter(DeleteActivity.this);// 照片适配
-		pictureAdater = new PictureAdater(); // 图片适配
 		photo = (Button) this.findViewById(R.id.delphoto);
 		picture = (Button) this.findViewById(R.id.delpicture);
 		delete = (Button) this.findViewById(R.id.deldelete);
@@ -157,8 +156,8 @@ public class DeleteActivity extends Activity {
 		}
 		flag = 0;
 		init();
-		gridView.setAdapter(imageAdapter);
-		imageAdapter.notifyDataSetChanged();
+		gridView.setAdapter(MainActivity.myPhotoAdapter);
+		MainActivity.myPhotoAdapter.notifyDataSetChanged();
 		gridView.setOnItemClickListener(new OnItemClickListener() {
 			Item item;
 			@Override
@@ -213,8 +212,8 @@ public class DeleteActivity extends Activity {
 				init();
 				photo.setBackgroundColor(Color.parseColor("#07D5E2"));
 				picture.setBackgroundColor(Color.parseColor("#8A9AA8"));
-				gridView.setAdapter(imageAdapter);
-				imageAdapter.notifyDataSetChanged();
+				gridView.setAdapter(MainActivity.myPhotoAdapter);
+				MainActivity.myPhotoAdapter.notifyDataSetChanged();
 				break;
 			case R.id.delpicture:
 				flag = 1;
@@ -222,8 +221,8 @@ public class DeleteActivity extends Activity {
 				init();
 				picture.setBackgroundColor(Color.parseColor("#07D5E2"));
 				photo.setBackgroundColor(Color.parseColor("#8A9AA8"));
-				gridView.setAdapter(pictureAdater);
-				pictureAdater.notifyDataSetChanged();
+				gridView.setAdapter(MainActivity.pictureAdater);
+				MainActivity.pictureAdater.notifyDataSetChanged();
 				break;
 			case R.id.deldelete:
 				if (flag == 0) {
@@ -234,7 +233,7 @@ public class DeleteActivity extends Activity {
 						}
 					}
 					MainActivity.imgList.removeAll(deleteImg);
-					imageAdapter.notifyDataSetChanged();
+					MainActivity.myPhotoAdapter.notifyDataSetChanged();
 				}
 				if (flag == 1) {
 					for (int i = 0; i < deleteImgDir.size(); i++) {
@@ -244,9 +243,9 @@ public class DeleteActivity extends Activity {
 						}
 					}
 					pictureList.removeAll(deletePicture);
-					pictureAdater.notifyDataSetChanged();
+					MainActivity.pictureAdater.notifyDataSetChanged();
 				}
-				DeleteActivity.this.finish();
+				DeleteView.this.finish();
 				break;
 			case R.id.deldeleteAll:
 				if (flag == 0) {
@@ -266,7 +265,7 @@ public class DeleteActivity extends Activity {
 						deleteImgDir.addAll(getListPic());
 						isCheck = true;
 					}
-					imageAdapter.notifyDataSetChanged();
+					MainActivity.myPhotoAdapter.notifyDataSetChanged();
 				}
 				if (flag == 1) {
 					if (isCheck) {
@@ -283,7 +282,7 @@ public class DeleteActivity extends Activity {
 						}
 						isCheck = true;
 					}
-					pictureAdater.notifyDataSetChanged();
+					MainActivity.pictureAdater.notifyDataSetChanged();
 				}
 				break;
 			default:
@@ -295,7 +294,7 @@ public class DeleteActivity extends Activity {
 	private ArrayList<String> getListPic() {
 		String path = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/DCIM/Camera/";
-		Toast.makeText(DeleteActivity.this, path, 5000).show();
+		Toast.makeText(DeleteView.this, path, 5000).show();
 		File file = new File(path);
 		if (file.exists()) {
 			File[] f = file.listFiles();
@@ -311,111 +310,7 @@ public class DeleteActivity extends Activity {
 	}
 
 	// 图片适配
-	public class PictureAdater extends BaseAdapter {
-		ImageView img;
-		protected ImageLoader imageLoader = ImageLoader.getInstance();
-		private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-		@Override
-		public int getCount() {
-			return pictureList.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return pictureList.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				convertView = LayoutInflater.from(DeleteActivity.this).inflate(
-						R.layout.deleteitem, parent, false);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView
-						.getTag();
-			}
-			holder.cb = (CheckBox) convertView.findViewById(R.id.cb1);
-			holder.img = (ImageView) convertView.findViewById(R.id.img1);
-			Item item = (Item) getItem(position);
-			holder.cb.setChecked(item.status);
-			try {
-				imageLoader.init(ImageLoaderConfiguration
-						.createDefault(DeleteActivity.this));
-				imageLoader.displayImage(pictures[position], holder.img,
-						options, animateFirstListener);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return convertView;
-		}
-
-	}
-
-	// 照片适配
-	public class ImageAdapter extends BaseAdapter {
-		private LayoutInflater mInflater;
-		ArrayList<ImageView> images = new ArrayList<ImageView>();
-		File photos = null;
-		protected ImageLoader imageLoader = ImageLoader.getInstance();
-		private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
-
-		public ImageAdapter(Context context) {
-			mInflater = LayoutInflater.from(context);
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return imgList.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return imgList.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				holder = new ViewHolder();
-				convertView = mInflater.inflate(R.layout.deleteitem, parent,
-						false);
-				// holder.img = (ImageView) convertView.findViewById(R.id.img);
-				holder.cb = (CheckBox) convertView.findViewById(R.id.cb1);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			holder.img = (ImageView) convertView.findViewById(R.id.img1);
-			// holder.img.setBackgroundResource((Integer)images.get(position));
-			// holder.cBox.setChecked(isSelected.get(position));
-			Item item = (Item) getItem(position);
-			holder.cb.setChecked(item.status);
-			try {
-				imageLoader.init(ImageLoaderConfiguration
-						.createDefault(DeleteActivity.this));
-				imageLoader.displayImage(imageUrls[position], holder.img,
-						options, animateFirstListener);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return convertView;
-		}
-		}
 	public class ViewHolder {
 		public ImageView img;
 		public CheckBox cb;
@@ -468,7 +363,7 @@ public class DeleteActivity extends Activity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		DeleteActivity.this.finish();
+		DeleteView.this.finish();
 	}
 
 }
