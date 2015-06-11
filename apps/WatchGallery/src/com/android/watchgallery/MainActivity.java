@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				 Intent intent=new Intent(MainActivity.this, DeleteView.class);
+				 Intent intent=new Intent(MainActivity.this, DeleteActivity.class);
 				 intent.putExtra("flag", flag);
 				 startActivityForResult(intent, 8);
 //				if (flag == 0) {
