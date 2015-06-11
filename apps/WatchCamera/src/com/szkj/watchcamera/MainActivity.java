@@ -404,9 +404,11 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	}
 
 	// 获取相机Camera
-	public static Camera getCameraInstance() {
+	public Camera getCameraInstance() {
 		Camera c = null;
-		c = Camera.open();
+		try{c = Camera.open();}
+		catch(Exception e)
+		{Toast.makeText(MainActivity.this, "未连接到相机", Toast.LENGTH_SHORT).show();}
 		return c;
 	}
 
