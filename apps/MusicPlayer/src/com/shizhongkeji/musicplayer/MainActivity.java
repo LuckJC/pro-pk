@@ -1,5 +1,6 @@
 package com.shizhongkeji.musicplayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -51,8 +52,8 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private final int isAllRepeat = 2; // ȫ��ѭ��
 	private final int isNoneRepeat = 3; // ���ظ�����
 	private boolean isFirstTime = true;
-//	private boolean isPlaying; //
-//	private boolean isPause; // ��ͣ
+	// private boolean isPlaying; //
+	// private boolean isPause; // ��ͣ
 	private boolean isNoneShuffle = true; // ˳�򲥷�
 	private boolean isShuffle = false; // 随机
 	private RelativeLayout mLinearLayoutVol;
@@ -78,7 +79,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private Button playBtn; // 播放按钮
 	private Button repeatBtn;
 	private Button shuffleBtn;
-	private List<Mp3Info> mp3Infos;
+	private List<Mp3Info> mp3Infos = new ArrayList<Mp3Info>();
 
 	private AudioManager am;
 
@@ -91,19 +92,21 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private Editor edit;
 
 	private Dialog mDialog;
-	
-	
+
 	private PlayerReceiver playerReceiver;
 	private PlayerService playerService;
 	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // 更新动作
 	public static final String CTL_ACTION = "com.shizhong.action.CTL_ACTION"; // 控制动作
-//	public static final String MUSIC_CURRENT = "com.shizhong.action.MUSIC_CURRENT"; // 当前音乐改变动作
-//	public static final String MUSIC_DURATION = "com.shizhong.action.MUSIC_DURATION";// 音乐时长改变动作
+	// public static final String MUSIC_CURRENT =
+	// "com.shizhong.action.MUSIC_CURRENT"; // 当前音乐改变动作
+	// public static final String MUSIC_DURATION =
+	// "com.shizhong.action.MUSIC_DURATION";// 音乐时长改变动作
 	public static final String MUSIC_PLAYING = "com.shizhong.action.MUSIC_PLAYING"; // 播放音乐动作
 	public static final String REPEAT_ACTION = "com.shizhong.action.REPEAT_ACTION"; // 音乐重复改变动作
 	public static final String SHUFFLE_ACTION = "com.shizhong.action.SHUFFLE_ACTION";// 音乐随机播放动作
 	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势播放音乐动作
 	public static final String MUSIC_SERVICE = "com.shizhong.media.MUSIC_SERVICE";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -113,22 +116,21 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		share = getSharedPreferences("playInfo", Context.MODE_PRIVATE);
 		edit = share.edit();
 		initView();
-		mp3Infos = DBManager.getInstance(this).queryMusic();
-		if (mp3Infos != null && mp3Infos.size() > 0 && mp3Infos.size() > listPosition 
+		if (mp3Infos != null && mp3Infos.size() > 0 && mp3Infos.size() > listPosition
 				&& listPosition >= 0) {
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
 		}
 		switch (repeatState) {
-		case isCurrentRepeat: // 
+		case isCurrentRepeat: //
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_current_selector);
 			break;
-		case isAllRepeat: // 
+		case isAllRepeat: //
 			shuffleBtn.setClickable(false);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_all_selector);
 			break;
-		case isNoneRepeat: // 
+		case isNoneRepeat: //
 			shuffleBtn.setClickable(true);
 			repeatBtn.setBackgroundResource(R.drawable.repeat_none_selector);
 			break;
@@ -149,8 +151,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 	@Override
 	protected void onResume() {
-		mp3Infos.clear();
-		mp3Infos = DBManager.getInstance(this).queryMusic();
+		setData();
 		super.onResume();
 	}
 
@@ -211,6 +212,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		System.out.println("currentVolume--->" + currentVolume);
 		System.out.println("maxVolume-->" + maxVolume);
 		setPlayButtonStatus();
+		setData();
 	}
 
 	private void registerReceiver() {
@@ -294,7 +296,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					if (mp3Infos != null && mp3Infos.size() > 0) {
 						if (listPosition < mp3Infos.size()) {
 							Mp3Info mp3Info = mp3Infos.get(listPosition);
-							showArtwork(mp3Info); 
+							showArtwork(mp3Info);
 							intent.setAction(MUSIC_SERVICE);
 							intent.putExtra("url", mp3Info.getUrl());
 							intent.putExtra("listPosition", listPosition);
@@ -314,9 +316,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					setPlayButtonStatus();
 				}
 			}
-		
+
 			break;
-		case R.id.repeat_music: // 
+		case R.id.repeat_music: //
 			if (repeatState == isNoneRepeat) {
 				repeat_one();
 				shuffleBtn.setClickable(false);
@@ -420,11 +422,11 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (data != null) {
+			setData();
 			title = data.getStringExtra("title");
 			url = data.getStringExtra("url");
 			artist = data.getStringExtra("artist");
 			listPosition = data.getIntExtra("listPosition", 0);
-			mp3Infos = DBManager.getInstance(this).queryMusic();
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
 			Long musicDuration = Long.parseLong(data.getStringExtra("musicDuration"));
@@ -542,12 +544,12 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	 * 上一首
 	 */
 	public void previous_music() {
-//		playBtn.setBackgroundResource(R.drawable.pause_selector);
+		// playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition - 1;
 		if (listPosition >= 0) {
 			if (mp3Infos != null && mp3Infos.size() > 0) {
-				Mp3Info mp3Info = mp3Infos.get(listPosition); // 
-				showArtwork(mp3Info); // 
+				Mp3Info mp3Info = mp3Infos.get(listPosition); //
+				showArtwork(mp3Info); //
 				mMusicName.setText(mp3Info.getTitle());
 				mMusicSiger.setText(mp3Info.getArtist());
 				url = mp3Info.getUrl();
@@ -557,7 +559,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 				intent.putExtra("listPosition", listPosition);
 				intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
 				startService(intent);
-				
+
 			}
 
 		} else {
@@ -570,7 +572,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	 * 下一首
 	 */
 	public void next_music() {
-//		playBtn.setBackgroundResource(R.drawable.pause_selector);
+		// playBtn.setBackgroundResource(R.drawable.pause_selector);
 		listPosition = listPosition + 1;
 		if (mp3Infos != null && mp3Infos.size() > 2) {
 			if (listPosition <= mp3Infos.size() - 1) {
@@ -605,7 +607,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			 if (action.equals(UPDATE_ACTION)) {
+			if (action.equals(UPDATE_ACTION)) {
 				setPlayButtonStatus();
 			} else if (action.equals(REPEAT_ACTION)) {
 				repeatState = intent.getIntExtra("repeatState", -1);
@@ -708,16 +710,17 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			case 0:
 				listPosition = playerService.current;
 				Log.e("Main--listPosition", listPosition + "");
-				if(mp3Infos.size() >0){
+				if (mp3Infos.size() > 0) {
 					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);
 					// showArtwork(m);
 					if (playerService.mediaPlayer != null && GlobalApplication.isPlaying) {
 						currentTime = playerService.mediaPlayer.getCurrentPosition(); // 获取当前音乐播放的位置
-						mPlayProgress.setMax(playerService.duration);
+						mPlayProgress.setMax((int) m.getDuration());
 						mPlayProgress.setProgress(currentTime);
 						mPlayCurrentTime.setText(MediaUtil.formatTime(currentTime));
 						Log.e("Main--currentTime", MediaUtil.formatTime(currentTime));
 						mPlayFinalTime.setText(MediaUtil.formatTime(m.getDuration()));
+						Log.e("Main--duration", MediaUtil.formatTime(m.getDuration()));
 						mMusicName.setText(m.getTitle());
 						Log.e("Main--Title", m.getTitle());
 						mMusicSiger.setText(m.getArtist());
@@ -732,11 +735,17 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			super.handleMessage(msg);
 		}
 	};
-	private void setPlayButtonStatus(){
-		if(GlobalApplication.isPlaying){
+
+	private void setPlayButtonStatus() {
+		if (GlobalApplication.isPlaying) {
 			playBtn.setBackgroundResource(R.drawable.pause);
-		}else{
+		} else {
 			playBtn.setBackgroundResource(R.drawable.play);
 		}
+	}
+
+	private void setData() {
+		mp3Infos.clear();
+		DBManager.getInstance(this).queryMusic(mp3Infos);
 	}
 }

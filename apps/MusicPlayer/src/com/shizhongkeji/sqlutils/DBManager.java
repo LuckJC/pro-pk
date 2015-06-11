@@ -51,8 +51,7 @@ public class DBManager {
 			}
 		}
 	}
-	public List<Mp3Info> queryMusic(){
-		List<Mp3Info> mp3Infos = new ArrayList<Mp3Info>(); 
+	public List<Mp3Info> queryMusic(List<Mp3Info> mp3Infos){ 
 		Cursor cursor =  dataBase.query(AppConstant.MusicSQL.TABLE_NAME, null, null, null, null, null, null);
 		while (cursor.moveToNext()) {
 			Long id = Long.parseLong(cursor.getString(0)); 

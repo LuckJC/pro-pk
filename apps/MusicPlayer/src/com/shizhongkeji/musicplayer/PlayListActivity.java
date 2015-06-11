@@ -28,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.adapter.MusicListAdapter;
@@ -45,7 +46,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	private TextView mNumberMusic;
 	private Button addMusic;
 	private MusicListAdapter mMisicListAdapter;
-	private List<Mp3Info> mp3Infos;
+	private List<Mp3Info> mp3Infos = new ArrayList<Mp3Info>();
 	private int listPosition = 0; // 在List中的位置
 	private int index = 0;
 
@@ -55,11 +56,10 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	// private int duration; // 歌曲时长
 
 	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		
+
 		super.onCreate(savedInstanceState);
 		mMusicCompleteReceiver = new MusicCompleteReceiver();
 		IntentFilter intentFilter = new IntentFilter();
@@ -76,8 +76,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		mp3Infos.clear();
-		mp3Infos = DBManager.getInstance(this).queryMusic();
+		setData();
 		mNumberMusic.setText(mp3Infos.size() + "");
 		mMisicListAdapter.setData();
 		mMisicListAdapter.notifyDataSetChanged();
@@ -91,7 +90,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 		addMusic.setOnClickListener(this);
 		mListMusic.setOnItemClickListener(new MusicListItemClickListener());
 		mListMusic.setOnCreateContextMenuListener(new MusicListItemContextMenuListener());
-		mp3Infos = DBManager.getInstance(this).queryMusic();
+		setData();
 		mNumberMusic = (TextView) findViewById(R.id.number);
 		if (mp3Infos != null) {
 			mNumberMusic.setText(mp3Infos.size() + "");
@@ -152,27 +151,31 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									String path = mp3info.getUrl();
-									deleteMusic(path);
-									Mp3Info mp3info = mp3Infos.get(position);
-									DBManager.getInstance(PlayListActivity.this).deleteMusic(
-											String.valueOf(mp3info.getId()));
-									mp3Infos.remove(position);
-									mMisicListAdapter.setData();
-									mMisicListAdapter.notifyDataSetChanged();
-									if(GlobalApplication.current < position){
-										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
-									}else if(GlobalApplication.current == position){
-										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
+
+									
+									if (GlobalApplication.current == position) {
+										Toast.makeText(getApplicationContext(), "不能删除正在播放歌曲",
+												Toast.LENGTH_SHORT).show();
+
+									} else {
+										String path = mp3info.getUrl();
+										deleteMusic(path);
+										Mp3Info mp3info = mp3Infos.get(position);
+										DBManager.getInstance(PlayListActivity.this).deleteMusic(
+												String.valueOf(mp3info.getId()));
+										mp3Infos.remove(position);
+										mMisicListAdapter.setData();
+										mMisicListAdapter.notifyDataSetChanged();
+										Log.d("PlayListActivity", "GlobalApplication.current"
+												+ GlobalApplication.current + "position" + position);
 										Intent intent = new Intent();
 										intent.setAction("com.shizhong.media.MUSIC_SERVICE");
 										intent.putExtra("listPosition", position);
 										intent.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_DELETE);
-										startService(intent);	
-									}else if(GlobalApplication.current > position){
-										Log.d("PlayListActivity", "GlobalApplication.current"+ GlobalApplication.current +"position"+position);
+										startService(intent);
 									}
-									
+								
+
 								}
 							}).setNegativeButton("取消", new OnClickListener() {
 
@@ -198,19 +201,13 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	public void playMusic(int listPosition) {
 		if (mp3Infos != null) {
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
-			// Bitmap bitmap = MediaUtil.getArtwork(this, mp3Info.getId(),
-			// mp3Info.getAlbumId(), true,
-			// true);// ��ȡר��λͼ����ΪСͼ
-			Intent intent = new Intent(); // ����Intent������ת��PlayerActivity
-			// ���һϵ��Ҫ���ݵ�����
+			Intent intent = new Intent();
 			intent.putExtra("title", mp3Info.getTitle());
 			intent.putExtra("url", mp3Info.getUrl());
 			intent.putExtra("artist", mp3Info.getArtist());
 			intent.putExtra("musicDuration", mp3Info.getDuration() + "");
 			intent.putExtra("listPosition", listPosition);
 			intent.putExtra("currentTime", currentTime);
-			// intent.putExtra("repeatState", repeatState);
-			// intent.putExtra("shuffleState", isShuffle);
 			intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
 			setResult(1, intent);
 			finish();
@@ -229,8 +226,8 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 		 */
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			listPosition = position; // ��ȡ�б�����λ��
-			playMusic(listPosition); // ��������
+			listPosition = position; 
+			playMusic(listPosition); 
 		}
 
 	}
@@ -249,10 +246,9 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 		@Override
 		public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 			Vibrator vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
-			vibrator.vibrate(50); // ������
-			// musicListItemDialog(); // �����󵯳��ĶԻ���
+			vibrator.vibrate(50); 
 			final AdapterView.AdapterContextMenuInfo menuInfo2 = (AdapterView.AdapterContextMenuInfo) menuInfo;
-			listPosition = menuInfo2.position; // ����б��λ��
+			listPosition = menuInfo2.position; 
 		}
 
 	}
@@ -301,5 +297,10 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 		default:
 			break;
 		}
+	}
+
+	private void setData() {
+		mp3Infos.clear();
+		DBManager.getInstance(this).queryMusic(mp3Infos);
 	}
 }
