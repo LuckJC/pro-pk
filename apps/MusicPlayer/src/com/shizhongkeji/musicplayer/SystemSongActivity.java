@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,7 +17,9 @@ import android.widget.ListView;
 
 import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.adapter.SystemMusicAdapter;
+import com.shizhongkeji.info.AppConstant;
 import com.shizhongkeji.info.Mp3Info;
+import com.shizhongkeji.service.PlayerService;
 import com.shizhongkeji.sqlutils.DBManager;
 import com.shizhongkeji.utils.MediaUtil;
 
@@ -61,6 +64,9 @@ public class SystemSongActivity extends Activity implements OnClickListener {
 					Mp3Info mp3info = mp3Infos_application.get(index);
 					mp3Infos_db.add(mp3info);
 					DBManager.getInstance(this).insertMusic(mp3Infos_db);
+					Intent intent = new Intent(getApplicationContext(), PlayerService.class);
+					intent.putExtra("MSG", AppConstant.PlayerMsg.ADD_MUSIC);
+					startService(intent);
 				}
 			}
 			finish();

@@ -18,6 +18,7 @@ public class AppConstant {
 		public static final int PROGRESS_CHANGE = 7;//进度改变
 		public static final int PLAYING_MSG = 8;	//正在播放
 		public static final int PLAYING_DELETE = 9;	//正在播放删除列表歌曲
+		public static final int ADD_MUSIC = 10;	//增加播放列表中的歌曲
 	}
 	public class MusicSQL{
 		public static final String ID = "_id"; // 歌曲ID 3

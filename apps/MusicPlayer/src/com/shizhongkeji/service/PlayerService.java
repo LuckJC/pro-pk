@@ -1,5 +1,6 @@
 package com.shizhongkeji.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -19,6 +20,7 @@ import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
@@ -36,12 +38,11 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	private int msg; // 播放信息
 	private boolean isPause; // 暂停状态
 	public int current = 0; // 记录当前正在播放的音乐
-	public List<Mp3Info> mp3Infos; // 存放Mp3Info对象的集合
+	public List<Mp3Info> mp3Infos = new ArrayList<Mp3Info>(); // 存放Mp3Info对象的集合
 	private int status = 3; // 播放状态，默认为顺序播放
 	private MyReceiver myReceiver; // 自定义广播接收器
 	public int currentTime; // 当前播放进度
 	public int duration; // 播放长度
-	
 
 	// private SharedPreferences share;
 	// private Editor edit;
@@ -222,7 +223,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					if (action.equals(GESTURE_PLAY)) {
 						if (!GlobalApplication.isPlaying) {
 							GlobalApplication.isPlaying = true;
-							if (!GlobalApplication.isPlay) {
+							if (!GlobalApplication.isPlay && mp3Infos.size() >0) {
 								path = mp3Infos.get(current).getUrl();
 								play(0);
 								sendBroadcast(sendIntent);
@@ -304,14 +305,20 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					current = intent.getIntExtra("listPosition", 0); // 当前播放歌曲的在mp3Infos的位置
 					next();
 				} else if (msg == AppConstant.PlayerMsg.PLAYING_DELETE) {
-					path = intent.getStringExtra("url"); // 歌曲路径
-					current = intent.getIntExtra("listPosition", 0); // 当前播放歌曲的在mp3Infos的位置
-					play(0);
+					int delete_position = intent.getIntExtra("listPosition", 0); // 当前播放歌曲的在mp3Infos的位置
+					setData();
+					if (GlobalApplication.current < delete_position) {
+					} else if (GlobalApplication.current > delete_position) {
+						current--;
+						GlobalApplication.current = current;
+					}
 				} else if (msg == AppConstant.PlayerMsg.PROGRESS_CHANGE) { // 进度更新
 					currentTime = intent.getIntExtra("progress", -1);
 					play(currentTime);
 				} else if (msg == AppConstant.PlayerMsg.PLAYING_MSG) {
 					// handler.sendEmptyMessage(1);
+				} else if (msg == AppConstant.PlayerMsg.ADD_MUSIC) {
+					setData();
 				}
 			}
 
@@ -492,7 +499,8 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	}
 
 	private void setData() {
-		mp3Infos = DBManager.getInstance(this).queryMusic();
+		mp3Infos.clear();
+		DBManager.getInstance(this).queryMusic(mp3Infos);
 	}
 
 	private class MobliePhoneStateListener extends PhoneStateListener {

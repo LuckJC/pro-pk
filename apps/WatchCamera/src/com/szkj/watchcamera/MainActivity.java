@@ -124,6 +124,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		viewHeight = this.getWindowManager().getDefaultDisplay().getHeight();
 
 		mCamera = getCameraInstance();
+		if(mCamera == null)
+		{
+			Toast.makeText(MainActivity.this, "没有相机", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 		parameters = mCamera.getParameters();
 
 		faceView = (FrameLayout) findViewById(R.id.face_rect);
@@ -406,9 +412,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	// 获取相机Camera
 	public Camera getCameraInstance() {
 		Camera c = null;
-		try{c = Camera.open();}
-		catch(Exception e)
-		{Toast.makeText(MainActivity.this, "未连接到相机", Toast.LENGTH_SHORT).show();}
+		c = Camera.open();
+		if(c == null)
+		{
+			Toast.makeText(MainActivity.this, "没有相机", Toast.LENGTH_SHORT).show();
+			finish();
+		}
 		return c;
 	}
 
