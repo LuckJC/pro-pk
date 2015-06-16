@@ -134,15 +134,6 @@ public class Contact_Activity extends Activity {
 				}
 			}
 		});
-		// button1.setOnClickListener(new OnClickListener() {
-		// public void onClick(View arg0) {
-		// // String word = words[random.nextInt(words.length)];
-		// // ImageView view = new ImageView(Contact_Activity.this);
-		// // view.setImageBitmap(getThumb(word));
-		// // dgv.addView(view);
-		// // poem.add(word);
-		// }
-		// });
 
 	}
 
@@ -183,10 +174,15 @@ public class Contact_Activity extends Activity {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		menu.add(Menu.NONE, Menu.FIRST + 3, 3, "从SD卡导入联系人");
-		menu.add(Menu.NONE, Menu.FIRST + 4, 4, "将联系人导出到SD卡");
-		menu.add(Menu.NONE, Menu.FIRST + 1, 1, "添加联系人");
-		menu.add(Menu.NONE, Menu.FIRST + 2, 2, "从sim卡导入联系人");
+		Intent intent = getIntent();
+
+		if (intent.getStringExtra("tag") != null) {
+		} else {
+			menu.add(Menu.NONE, Menu.FIRST + 3, 3, "从SD卡导入联系人");
+			menu.add(Menu.NONE, Menu.FIRST + 4, 4, "将联系人导出到SD卡");
+			menu.add(Menu.NONE, Menu.FIRST + 1, 1, "添加联系人");
+			menu.add(Menu.NONE, Menu.FIRST + 2, 2, "从sim卡导入联系人");
+		}
 
 		return true;
 	}
@@ -251,7 +247,7 @@ public class Contact_Activity extends Activity {
 								if (isEmpty) {
 									UpdateTextTask task = new UpdateTextTask();
 									task.execute();
-								}else{
+								} else {
 									Toast.makeText(Contact_Activity.this, "请选择要导入的文件", 0).show();
 								}
 							}

@@ -5,7 +5,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,10 +17,11 @@ import android.provider.Telephony.Sms;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -29,7 +34,6 @@ import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.abstract_.DatabaseUpdataActivity;
 import com.example.xuntongwatch.adapter.Message_Chat_Adapter;
 import com.example.xuntongwatch.databaseutil.SmsUtil;
-import com.example.xuntongwatch.entity.Contact;
 import com.example.xuntongwatch.entity.Message_;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.MessageUtil;
@@ -45,7 +49,7 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 	private String contact_name, message_phone;
 	private Message_Chat_Adapter adapter;
 	private RelativeLayout send, mChooseContact;
-	private String addname=null;
+	private String addname = null;
 	private EditText et, et_phone;
 	private final int SEND_MSG = 111;
 	private int thread_id = -1;
@@ -56,6 +60,9 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 	private ArrayList<Message_Thread> arrayList;
 	private boolean isClear = true;
 	private TextView viewadd;
+	private TextView tv = null;
+	private boolean delete = true;
+
 	@SuppressLint({ "HandlerLeak", "NewApi" })
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,32 +74,93 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		et_phone = (EditText) this.findViewById(R.id.message_chat_person_et);
 		et = (EditText) this.findViewById(R.id.message_chat_et);
 		et_phone.addTextChangedListener(new TextWatcher() {
-			
+
 			@Override
 			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-		 
+
 			}
-			
+
 			@Override
 			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-				 if(arg3==0){
-					 viewadd.setText(""); 
-				 }
+				if (arg3 == 0) {
+					viewadd.setText("");
+				}
 			}
-			
+
 			@Override
 			public void afterTextChanged(Editable arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		lv = (ListView) this.findViewById(R.id.message_chat_lv);
+		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(final AdapterView<?> parent, final View view,
+					final int position, long id) {
+
+				if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
+					tv = (TextView) view.findViewById(R.id.message_chat_item_other_content);
+				} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
+					tv = (TextView) view.findViewById(R.id.message_chat_item_me_content);
+				}
+
+				tv.setBackgroundColor(Color.RED);
+				final String[] mItems = { "复制", "转发", "删除" };
+				AlertDialog.Builder builder = new AlertDialog.Builder(Message_Chat_Activity.this);
+				builder.setOnDismissListener(new OnDismissListener() {
+
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						if (delete) {
+							if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
+								tv.setBackgroundResource(R.drawable.message_chat_other);
+							} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
+								tv.setBackgroundResource(R.drawable.message_chat_me);
+							}
+
+						}
+					}
+				});
+				builder.setItems(mItems, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case 0:
+							SmsUtil.copy(tv.getText().toString(), Message_Chat_Activity.this);
+							break;
+						case 1:
+							Intent intent = new Intent(Message_Chat_Activity.this,
+									Message_Chat_Activity.class);
+							intent.putExtra("state", Message_Chat_Activity.TWO);
+							intent.putExtra("content", tv.getText().toString());
+							Message_Chat_Activity.this.startActivity(intent);
+
+							break;
+						case 2:
+							// SmsUtil.deleteMessage(Message_Chat_Activity.this,
+							// list.get(position));
+							delete = false;
+							list.remove(position);
+							lv.setAdapter(adapter);
+							break;
+						default:
+							break;
+						}
+
+					}
+				});
+				builder.create().show();
+
+				return false;
+			}
+		});
 		send = (RelativeLayout) this.findViewById(R.id.message_chat_send_rl);
 		mChooseContact = (RelativeLayout) this.findViewById(R.id.message_chat_add_person);
 		mChooseContact.setOnClickListener(this);
 		title_one = (LinearLayout) this.findViewById(R.id.message_chat_title);
 		title_two = (LinearLayout) this.findViewById(R.id.message_chat_top_ll);
-		
+
 		MyApplication.handler = handler;
 
 		send.setOnClickListener(this);
@@ -110,6 +178,7 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 					name.setText(message_phone);
 				}
 			} else if (state == TWO) {
+				et.setText(intent.getStringExtra("content"));
 				title_one.setVisibility(View.GONE);
 				title_two.setVisibility(View.VISIBLE);
 				// et_phone.setOnClickListener(new OnClickListener() {
@@ -165,7 +234,7 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		if (requestCode == 10086) {
 			if (resultCode == 9527) {
 				String phone = data.getStringExtra("contact_phone");
-				 addname = data.getStringExtra("contact_name");
+				addname = data.getStringExtra("contact_name");
 				et_phone.setText(phone);
 				et.setFocusable(true);
 				et.setFocusableInTouchMode(true);
@@ -337,7 +406,8 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		}
 
 	};
-	private void updataUI(){
+
+	private void updataUI() {
 
 		// 此处为失去焦点时的处理内容
 		arrayList = SmsUtil.allMessage_Thread(Message_Chat_Activity.this);
@@ -358,14 +428,11 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 				thread_id = arrayList.get(i).getThread_id();
 				name = arrayList.get(i).getName();
 				if (thread_id == -1) {
-					list = SmsUtil.findMessageByPhone(
-							Message_Chat_Activity.this, phone);
+					list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, phone);
 				} else {
-					list = SmsUtil.findMessageByThread_id(
-							Message_Chat_Activity.this, thread_id);
+					list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this, thread_id);
 				}
-				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
-						list);
+				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
 				lv.setAdapter(adapter);
 				lv.setSelection(list.size() - 1);
 				isClear = false;
@@ -384,4 +451,5 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		}
 		isClear = true;
 	}
+
 }

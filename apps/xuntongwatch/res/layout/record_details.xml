@@ -54,21 +54,20 @@
         >
         <RelativeLayout 
             android:id="@+id/record_details_call_rl"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+        android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+	        android:padding="5dp"
             >
             <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+          
+                     android:layout_width="50dp"
+            android:layout_height="50dp"
                 android:src="@drawable/record_details_call"
                 />
         </RelativeLayout>
         
         <TextView 
+            android:gravity="center"
             android:id="@+id/record_details_phone"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -82,14 +81,11 @@
              android:id="@+id/record_details_message_rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
+	         android:padding="5dp"
             >
             <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+           android:layout_width="50dp"
+            android:layout_height="50dp"
                 android:src="@drawable/record_details_message"
                 />
         </RelativeLayout>

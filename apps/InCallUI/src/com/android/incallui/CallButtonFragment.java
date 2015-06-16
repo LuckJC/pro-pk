@@ -243,6 +243,9 @@ public class CallButtonFragment
 					flag = 1;
 					mAddCallButton.setImageResource(R.drawable.start_record);
 				} else {
+				Toast.makeText(mContext,
+						 "录音完成",
+						Toast.LENGTH_LONG).show();
 					stopRec();
 					flag = 0;
 					mAddCallButton.setImageResource(R.drawable.stop_record);
@@ -1191,7 +1194,7 @@ public class CallButtonFragment
         mSwapButton.setEnabled(enabled);
     }
     protected void startRec() {
-		Toast.makeText(mContext, "start record", 0).show();
+		Toast.makeText(mContext, "开始录音", 0).show();
 		boolean sdcardExist = Environment.getExternalStorageState().equals(
 				Environment.MEDIA_MOUNTED);
 		if (!sdcardExist)
