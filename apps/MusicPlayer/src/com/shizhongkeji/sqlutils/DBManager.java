@@ -74,7 +74,8 @@ public class DBManager {
 	}
 	public boolean isExitMusicForID(String id){
 		boolean b = false;
-		Cursor cursor  = dataBase.query(AppConstant.MusicSQL.TABLE_NAME,null,  AppConstant.MusicSQL.ID +"= ?", new String[]{id}, null, null, null);
+		Cursor cursor  = dataBase.query(AppConstant.MusicSQL.TABLE_NAME,null,  AppConstant.MusicSQL.ID +"= ?",
+				new String[]{id}, null, null, null);
 		b = cursor.moveToFirst();
 		cursor.close();
 		return b;
