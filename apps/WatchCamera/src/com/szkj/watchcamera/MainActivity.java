@@ -21,10 +21,12 @@ import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Face;
 import android.hardware.Camera.PictureCallback;
+import android.media.MediaRecorder;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +40,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -47,22 +51,38 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements SurfaceHolder.Callback, OnClickListener {
-	private static final String TAG = "CameraDemo";
+	private static final String TAG = "MainActivity";
+	private static final int TIME = 555;
 	private Camera mCamera;
 	private Camera.Parameters parameters;
+	
+	MediaRecorder media;
+	
 	private Button btn;
 	private SurfaceView surface;
 	SurfaceHolder holder;
 	Spinner spinner_focus;
 	Spinner spinner_size;
 
+	boolean is_stop_addTime = false;//是否停止计时
+	
+	boolean is_video = false;//录制视频模式
+	
 	boolean is_open_settting = false;// 打开相机设置 默认为 关
+	boolean is_vedio_start = false;//录像开关   默认为结束状态
 
+	Animation take_anim;
+	
 	View ve;
 	View bottomView;
+	TextView vedio_time;
+	
+	int time_count = 0;
+	
 	String[] str_spinner_focus = { "自动", "无限远", "连续", "手动", "微距" };
 	String[] str_spinner_definition = { "高质量", "中质量", "低质量" };
 	private ArrayAdapter<String> focusAdapter;
@@ -104,6 +124,32 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 					e.printStackTrace();
 				}
 			}
+			if(msg.what == 113)
+			{
+				if(mCamera!=null)
+				{mCamera.setPreviewCallback(null);}
+			}
+			if(msg.what == TIME)
+			{
+				time_count++;
+				int minute = time_count/60;
+				int second = time_count%60;
+				if(minute <= 9)
+				{
+					if(second<=9){vedio_time.setText("0"+minute+":"+"0"+second);}
+					else{vedio_time.setText("0"+minute+":"+second);}
+				}
+				else{
+					if(second<=9){vedio_time.setText(minute+":"+"0"+second);}
+					else{vedio_time.setText(minute+":"+second);}
+				}
+				
+				hand.sendEmptyMessageDelayed(TIME, 1000);
+			}
+			if(msg.what == 556)
+			{
+				mCamera.setPreviewCallback(null);
+			}
 			
 			super.handleMessage(msg);
 		}
@@ -120,6 +166,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 		setContentView(R.layout.activity_main);
 
+//		CountDownTimer down_time = new MyCountDownTimer(10000, 10000);
+//		down_time.start();
+		
 		viewWidth = this.getWindowManager().getDefaultDisplay().getWidth();
 		viewHeight = this.getWindowManager().getDefaultDisplay().getHeight();
 
@@ -133,7 +182,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		parameters = mCamera.getParameters();
 
 		faceView = (FrameLayout) findViewById(R.id.face_rect);
-
+		vedio_time = (TextView)findViewById(R.id.vedio_time);
+		
 		surface = (SurfaceView) findViewById(R.id.surface);
 		surface.setOnTouchListener(new OnTouchListener() {
 
@@ -143,14 +193,22 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 				if(event.getAction() == MotionEvent.ACTION_DOWN)
 				{
-					mDraw = new DrawCaptureRect(MainActivity.this, new Rect((int) event.getX() - 30, (int) event.getY() - 30, (int) event.getX() + 30, (int) event.getY() + 30), Color.GREEN);
-					if (faceView.getChildCount() >= 1) {
-						faceView.removeAllViews();
-						faceView.invalidate();
+					if (is_open_settting) {
+						return false;
+					} else if (!is_focus_manual) {
+						return false;
+					} else {
+						mDraw = new DrawCaptureRect(MainActivity.this, new Rect(
+								(int) event.getX() - 30, (int) event.getY() - 30, (int) event
+										.getX() + 30, (int) event.getY() + 30), Color.GREEN);
+						if (faceView.getChildCount() >= 1) {
+							faceView.removeAllViews();
+							faceView.invalidate();
+						}
+						faceView.addView(mDraw);
+						return true;
 					}
-					faceView.addView(mDraw);
-					return true;
-					}
+				}
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					if (is_open_settting) {
 						return false;
@@ -203,6 +261,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		ve = (View) MainActivity.this.findViewById(R.id.setting_view);
 		bottomView = (View) MainActivity.this.findViewById(R.id.bottom_layout);
 
+		take_anim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.take_anim);
+		
 		spinner_focus = (Spinner) ve.findViewById(R.id.focus_spinner);
 		spinner_size = (Spinner) ve.findViewById(R.id.photosize_spinner);
 
@@ -356,12 +416,132 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn:
-
-			if (is_continue_take) {
-				hand.sendEmptyMessage(101);
-			} else {
-				mCamera.takePicture(null, null, mPicture);
+			//图片模式   拍照
+			if (!is_video) {
+				if (is_continue_take) {
+					hand.sendEmptyMessage(101);//方式1  下面是方式2
+					
+					/*mCamera.setPreviewCallback(new PreviewCallback() {
+						
+						@Override
+						public void onPreviewFrame(byte[] data, Camera camera) {
+							// TODO Auto-generated method stub
+							SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+							
+							String s = date.format(System.currentTimeMillis());
+							File pictureFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+									+ "/DCIM/MyCamera/img_" + s + ".jpg");
+							Log.d("TIMES", s);
+							FileOutputStream os = null;
+							try {
+								os = new FileOutputStream(pictureFile);
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							YuvImage image = new YuvImage(data, ImageFormat.NV21, parameters.getPreviewSize().width, parameters.getPreviewSize().height, null);
+							image.compressToJpeg(new Rect(0, 0,  parameters.getPreviewSize().width, parameters.getPreviewSize().height), 100, os);
+							try {
+								Thread.sleep(200);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});*/
+					
+					hand.sendEmptyMessageDelayed(556, 1000);
+//					findViewById(R.id.desktop).startAnimation(take_anim);
+				} else {
+					mCamera.takePicture(null, null, mPicture);
+				}
+				findViewById(R.id.btn).setClickable(false);
+//				findViewById(R.id.btn).setAnimation(take_anim);
+//				surface.startAnimation(take_anim);
 			}
+			//视频模式
+			else{
+				if(!is_vedio_start)
+				{
+					is_vedio_start = true;//开始录制状态
+					
+					hand.sendEmptyMessage(TIME);
+
+					//停止之后才可以点击切换模式跟进入视频界面
+					findViewById(R.id.change_mode).setVisibility(View.GONE);
+					findViewById(R.id.to_picture).setVisibility(View.GONE);
+					
+//					mCamera.setPreviewCallback(null) ;
+//					mCamera.setFaceDetectionListener(null);
+//					mCamera.stopPreview();
+//					mCamera.release();
+//					mCamera = null;
+					
+					SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd_HHmmss");
+					String s = date.format(System.currentTimeMillis());
+					File videoFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+							+ "/DCIM/MyVideo/" + s + ".mp4");
+					if (!videoFile.getParentFile().exists()) {
+						videoFile.getParentFile().mkdir();
+					}
+					
+					media = new MediaRecorder();
+					if(mCamera != null){
+						mCamera.unlock();
+						media.setCamera(mCamera);
+					}
+					
+					media.setAudioSource(MediaRecorder.AudioSource.MIC);
+					media.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+					media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+					media.setVideoSize(parameters.getPreviewSize().width, parameters.getPreviewSize().height);
+					media.setVideoFrameRate(30);
+					media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+					media.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
+					media.setOutputFile(videoFile.getAbsolutePath());
+					media.setPreviewDisplay(surface.getHolder().getSurface());
+//					media.setMaxDuration(20000);
+					try {
+						media.prepare();
+						Thread.sleep(500);
+						media.start();
+						
+						Uri uri = Uri.parse("file://" + videoFile.getAbsolutePath());
+						sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));//通知系统来扫描文件
+						
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
+				else{
+					is_vedio_start = false;//停止录制状态
+					
+					if(media != null)
+					{
+						media.stop();
+						media.release();
+						media = null;
+					}
+					time_count = 0;
+					vedio_time.setText("00:00");
+					
+					hand.removeMessages(TIME);
+					
+					//停止之后才可以点击切换模式跟进入视频界面
+					findViewById(R.id.change_mode).setVisibility(View.VISIBLE);
+					findViewById(R.id.to_picture).setVisibility(View.VISIBLE);
+				}
+				
+				
+			}
+			
 
 			break;
 		case R.id.common_setting:
@@ -376,14 +556,32 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			}
 			break;
 		case R.id.to_picture:
-			
-			Intent intent_one = new Intent();
-			intent_one.setClassName("com.android.watchgallery","com.android.watchgallery.MainActivity");
-			intent_one.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			try{startActivity(intent_one);}
-			catch(Exception e)
-			{Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();}
-			
+			if(!is_video)
+			{
+				Intent intent_one = new Intent();
+				intent_one.setClassName("com.android.watchgallery",
+						"com.android.watchgallery.MainActivity");
+				intent_one.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				try {
+					startActivity(intent_one);
+				} catch (Exception e) {
+					Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();
+				}
+			}
+			else
+			{
+				Intent intent_two = new Intent();
+				intent_two.setClassName("com.shizhongkeji.videoplayer",
+						"com.shizhongkeji.videoplayer.VideoChooseActivity");
+				intent_two.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				try {
+					startActivity(intent_two);
+				} catch (Exception e) {
+					Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();
+				}
+
+			}
+				
 			mCamera.setFaceDetectionListener(null);
 			mCamera.stopPreview();
 			mCamera.release();
@@ -391,17 +589,29 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			break;
 		case R.id.change_mode:
 			
-			Intent intent_two = new Intent();
-			intent_two.setClassName("com.shizhongkeji.videoplayer","com.shizhongkeji.videoplayer.VideoChooseActivity");
-			intent_two.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			try{startActivity(intent_two);}
-			catch(Exception e)
-			{Toast.makeText(MainActivity.this, "没找到应用", Toast.LENGTH_SHORT).show();}
+			if(!is_video)
+			{
+				is_video = true;
+				mCamera.setFaceDetectionListener(null);
+//				mCamera.stopPreview();
+				vedio_time.setVisibility(View.VISIBLE);
+				findViewById(R.id.common_setting).setVisibility(View.GONE);
 			
-			mCamera.setFaceDetectionListener(null);
-			mCamera.stopPreview();
-			mCamera.release();
-			mCamera = null;
+				//切换到 视频模式  跟  进入视频界面  的图标不可见
+				findViewById(R.id.change_mode).setVisibility(View.GONE);
+				findViewById(R.id.to_picture).setVisibility(View.GONE);
+			}
+			else
+			{
+				is_video = false;
+				vedio_time.setVisibility(View.GONE);
+				findViewById(R.id.common_setting).setVisibility(View.VISIBLE);
+			
+			}
+			
+			
+			
+			
 			break;
 
 		default:
@@ -413,11 +623,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	public Camera getCameraInstance() {
 		Camera c = null;
 		c = Camera.open();
-		if(c == null)
-		{
-			Toast.makeText(MainActivity.this, "没有相机", Toast.LENGTH_SHORT).show();
-			finish();
-		}
+		
 		return c;
 	}
 
@@ -428,7 +634,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			// TODO Auto-generated method stub
 			new SavePictureTask().execute(data);
 			mCamera.startPreview();
-
+//			findViewById(R.id.desktop).startAnimation(take_anim);
+			
+			
 			if (is_continue_take) {
 				hand.sendEmptyMessage(101);
 				count++;
@@ -441,6 +649,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 				mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
 				mCamera.startFaceDetection();
 			}
+			
+			findViewById(R.id.btn).setClickable(true);
 		}
 
 	};
@@ -479,12 +689,20 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	@Override
 	protected void onDestroy() {
 
-		if (mCamera != null) {
+		if(is_video)
+		{
+			if(media!=null)
+			{media.stop();media.release();media=null;}
+			if(mCamera!=null)
+			{mCamera.release();mCamera=null;}
+		}
+		else{if (mCamera != null) {
 			mCamera.setFaceDetectionListener(null);
 			mCamera.stopPreview();
 			mCamera.release();
 			mCamera = null;
-		}
+		}}
+		
 
 		super.onDestroy();
 	}
@@ -520,17 +738,21 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	@Override
 	public void surfaceCreated(SurfaceHolder arg0) {
 		// TODO Auto-generated method stub
+		if(is_video)
+		{media.setPreviewDisplay(surface.getHolder().getSurface());}
+		else{
 		try {
 			
 			if (mCamera == null) {
 				mCamera = getCameraInstance();
 			}
 			parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-			setDisplayOrientation(mCamera, 90);
+			parameters.setPreviewFrameRate(30);
+			setDisplayOrientation(mCamera, 180);
 			mCamera.setParameters(parameters);
 			mCamera.setPreviewDisplay(holder);
 			mCamera.startPreview();
-
+			
 			mDraw = new DrawCaptureRect(MainActivity.this, new Rect(viewWidth / 2 - 30,
 					viewHeight / 2 - 30, viewWidth / 2 + 30, viewHeight / 2 + 30), Color.GREEN);
 
@@ -543,6 +765,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 				}
 			});
+			hand.sendEmptyMessageDelayed(113, 1000);
 			if(is_findface)
 			{
 				mCamera.setFaceDetectionListener(new MyFaceDetectionListener());
@@ -553,12 +776,42 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			e.printStackTrace();
 		}
 
+		}
 	}
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		// TODO Auto-generated method stub
 
+		if(is_video)
+		{
+			if(media != null)
+			{media.stop();media.release();media=null;}
+			if(mCamera!=null)
+			{mCamera.release();mCamera=null;}
+			
+			is_video = false;//如果是在录制视频的时候   屏幕消失   那么将保存文件之后  回到屏幕将进入到拍照模式
+			is_vedio_start = false;//停止录制状态
+			
+			time_count = 0;
+			vedio_time.setText("00:00");
+			
+			hand.removeMessages(TIME);
+			
+			//停止之后才可以点击切换模式跟进入视频界面
+			findViewById(R.id.change_mode).setVisibility(View.VISIBLE);
+			findViewById(R.id.to_picture).setVisibility(View.VISIBLE);
+			findViewById(R.id.common_setting).setVisibility(View.VISIBLE);
+			findViewById(R.id.vedio_time).setVisibility(View.GONE);
+			
+		}
+		else{if (mCamera != null) {
+			mCamera.setFaceDetectionListener(null);
+			mCamera.stopPreview();
+			mCamera.release();
+			mCamera = null;
+		}}
+		
 		return;
 	}
 
@@ -646,7 +899,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 										// isMirror判断是前置还是后置摄像头
 				// This is the value for
 				// android.hardware.Camera.setDisplayOrientation.
-				mMatrix.postRotate(90);
+				mMatrix.postRotate(180);
 				// Camera driver coordinates range from (-1000, -1000) to (1000,
 				// 1000).
 				// UI coordinates range from (0, 0) to (width, height).
@@ -698,6 +951,26 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 	}
 
-	
-	
+	/**
+	 * 
+	 * <br>类描述:
+	 * <br>功能详细描述:倒计时类
+	 * 
+	 * @author  lixd
+	 * @date  [2015-6-15]
+	 */
+	class MyCountDownTimer extends CountDownTimer {     
+        public MyCountDownTimer(long millisInFuture, long countDownInterval) {     
+            super(millisInFuture, countDownInterval);     
+        }     
+        @Override     
+        public void onFinish() {     
+           MainActivity.this.finish();  
+        }     
+        @Override     
+        public void onTick(long millisUntilFinished) {     
+          
+        }    
+    }
+
 }
