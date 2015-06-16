@@ -20,7 +20,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
-           
+            android:visibility="invisible"
             android:paddingTop="18dp"
             android:clickable="true"
             android:layout_alignParentRight="true"

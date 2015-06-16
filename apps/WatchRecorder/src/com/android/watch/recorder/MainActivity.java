@@ -162,7 +162,6 @@ public class MainActivity extends Activity{
 				break;
 			case R.id.save:
 				//timer.cancel();
-				// TODO Auto-generated method stub
 				//这里写暂停处理的 文件！加上list里面 语音合成起来
 				if(!isPause){
 					//在暂停状态按下结束键,处理list就可以了

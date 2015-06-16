@@ -54,24 +54,25 @@ public class MainActivity extends Activity {
 	ViewHolder holder;
 	public static List<String> lsmap;
 	private String[] pictures;
-	public static  String[] imageUrls;
+	public static String[] imageUrls;
 	DisplayImageOptions options;
 	public static ArrayList<String> listImgPath;
 	String path = null;
 	ContentResolver resolver;
-	int all=0;
+	int all = 0;
 	public static int flag = 0; // 照片跟图片的标志
 	public ArrayList<String> list;
-	boolean isCheck=false;
+	boolean isCheck = false;
 	public static List<Item> imgList;
 	public static List<Item> imgList2;
-	public static List<Item> deleteImg;     //一个一个地选择的删除的照片数组
-	public static List<Item> deletePicture;  //一个一个地选择的删除的图片数组
-	public static List<Item> deleteImgAll;     //全选的删除的照片数组
-	public static List<Item> deletePictureAll;  //全选的删除的图片数组
+	public static List<Item> deleteImg; // 一个一个地选择的删除的照片数组
+	public static List<Item> deletePicture; // 一个一个地选择的删除的图片数组
+	public static List<Item> deleteImgAll; // 全选的删除的照片数组
+	public static List<Item> deletePictureAll; // 全选的删除的图片数组
 	public static List<Item> pictureList;
 	public static List<Item> pictureList2;
-	ArrayList<String> deleteImgDir;            //删除照片跟相片的路径
+	ArrayList<String> deleteImgDir; // 删除照片跟相片的路径
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,14 +81,14 @@ public class MainActivity extends Activity {
 		MyClick myClick = new MyClick();
 		setContentView(R.layout.main);
 		imgList = new ArrayList<Item>();
-		imgList2=imgList;
+		imgList2 = imgList;
 		deleteImg = new ArrayList<Item>();
 		deletePicture = new ArrayList<Item>();
 		deleteImgAll = new ArrayList<Item>();
 		deletePictureAll = new ArrayList<Item>();
 		list = new ArrayList<String>();
 		pictureList = new ArrayList<Item>();
-		pictureList2=pictureList;
+		pictureList2 = pictureList;
 		deleteImgDir = new ArrayList<String>();
 		lsmap = new ArrayList<String>();
 		myPhotoAdapter = new MyPhotoAdapter(MainActivity.this);// 照片适配
@@ -130,7 +131,7 @@ public class MainActivity extends Activity {
 			deletePictureAll.clear();
 		}
 		listImgPath = getListPic();
-		if(FileList.lsmap!=null){
+		if (FileList.lsmap != null) {
 			FileList.lsmap.clear();
 		}
 
@@ -157,54 +158,56 @@ public class MainActivity extends Activity {
 					.cacheOnDisc(true).displayer(new RoundedBitmapDisplayer(0))
 					.build();
 		}
-		flag =0;
+		flag = 0;
 		init();
 		gridView.setAdapter(myPhotoAdapter);
 		myPhotoAdapter.notifyDataSetChanged();
 		gridView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			Item item;
+
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				 Intent intent=new Intent(MainActivity.this, DeleteActivity.class);
-				 intent.putExtra("flag", flag);
-				 startActivityForResult(intent, 8);
-//				if (flag == 0) {
-//					item = imgList.get(position);
-//				}
-//				if (flag == 1) {
-//					item = pictureList.get(position);
-//				}
-//				// holder.cb.setVisibility(View.VISIBLE);
-//				item.status = !item.status;// 取反
-//				holder.cb.setChecked(item.status);
-//				layout3.setVisibility(View.VISIBLE);// 删除按钮出现
-//				if (flag == 0) {
-//					if (item.status == true) {
-//						// positionList.add(arg2);
-//						all=1;
-//						deleteImg.add(imgList.get(position));
-//						deleteImgDir.add(getListPic().get(position));
-//					} else {
-//						// positionList.remove(arg2);
-//						deleteImg.remove(imgList.get(position));
-//						deleteImgDir.remove(getListPic().get(position));
-//					}
-//				}
-//				if (flag == 1) {
-//					if (item.status == true) {
-//						// positionList.add(arg2);
-//						all=1;
-//						deletePicture.add(pictureList.get(position));
-//						deleteImgDir.add(lsmap.get(position));
-//					} else {
-//						// positionList.remove(arg2);
-//						deletePicture.remove(pictureList.get(position));
-//						deleteImgDir.remove(lsmap.get(position));
-//					}
-//				}
-//				imageAdapter.notifyDataSetChanged();
-//				pictureAdater.notifyDataSetChanged();
+				Intent intent = new Intent(MainActivity.this,
+						DeleteActivity.class);
+				intent.putExtra("flag", flag);
+				startActivityForResult(intent, 8);
+				// if (flag == 0) {
+				// item = imgList.get(position);
+				// }
+				// if (flag == 1) {
+				// item = pictureList.get(position);
+				// }
+				// // holder.cb.setVisibility(View.VISIBLE);
+				// item.status = !item.status;// 取反
+				// holder.cb.setChecked(item.status);
+				// layout3.setVisibility(View.VISIBLE);// 删除按钮出现
+				// if (flag == 0) {
+				// if (item.status == true) {
+				// // positionList.add(arg2);
+				// all=1;
+				// deleteImg.add(imgList.get(position));
+				// deleteImgDir.add(getListPic().get(position));
+				// } else {
+				// // positionList.remove(arg2);
+				// deleteImg.remove(imgList.get(position));
+				// deleteImgDir.remove(getListPic().get(position));
+				// }
+				// }
+				// if (flag == 1) {
+				// if (item.status == true) {
+				// // positionList.add(arg2);
+				// all=1;
+				// deletePicture.add(pictureList.get(position));
+				// deleteImgDir.add(lsmap.get(position));
+				// } else {
+				// // positionList.remove(arg2);
+				// deletePicture.remove(pictureList.get(position));
+				// deleteImgDir.remove(lsmap.get(position));
+				// }
+				// }
+				// imageAdapter.notifyDataSetChanged();
+				// pictureAdater.notifyDataSetChanged();
 				return true;
 			}
 		});
@@ -231,18 +234,22 @@ public class MainActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 2) {
+			imgList.size();
+			listImgPath.size();
 			myPhotoAdapter.notifyDataSetChanged();
 		}
 		if (requestCode == 8) {
 			myPhotoAdapter.notifyDataSetChanged();
-	}
+		}
 		if (requestCode == 3) {
-			
+
 			pictureAdater.notifyDataSetChanged();
-	}
-	}
-	class MyClick implements View.OnClickListener {
+		}
 		
+	}
+
+	class MyClick implements View.OnClickListener {
+
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -257,7 +264,7 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.picture:
 				flag = 1;
-				if(pictureList!=null){
+				if (pictureList != null) {
 					pictureList.clear();
 				}
 				init();
@@ -268,22 +275,22 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.delete:
 				if (flag == 0) {
-//						for(int i=0;i<imgList.size();i++){
-//							if(imgList.get(i).status){
-//							 File file=new File(uri);  
-//							}
-//						}
-						for(int i=0;i<deleteImgDir.size();i++){
-							 File file=new File(deleteImgDir.get(i));
-							 if(file!=null){
-								 file.delete();
-							 }
+					// for(int i=0;i<imgList.size();i++){
+					// if(imgList.get(i).status){
+					// File file=new File(uri);
+					// }
+					// }
+					for (int i = 0; i < deleteImgDir.size(); i++) {
+						File file = new File(deleteImgDir.get(i));
+						if (file != null) {
+							file.delete();
 						}
-						imgList.removeAll(deleteImg);
-						myPhotoAdapter.notifyDataSetChanged();
+					}
+					imgList.removeAll(deleteImg);
+					myPhotoAdapter.notifyDataSetChanged();
 				}
 				if (flag == 1) {
-					if(all==1){
+					if (all == 1) {
 						for (int i = 0; i < deleteImgDir.size(); i++) {
 							File file = new File(deleteImgDir.get(i));
 							file.delete();
@@ -292,10 +299,10 @@ public class MainActivity extends Activity {
 						for (int i = 0; i < pictures.length; i++) {
 							pictures[i] = "file://" + pictures[i];
 						}
-						pictureList.removeAll(deletePicture);	
+						pictureList.removeAll(deletePicture);
 					}
-					if(all==2){
-						pictureList.removeAll(deletePictureAll);	
+					if (all == 2) {
+						pictureList.removeAll(deletePictureAll);
 					}
 					pictureAdater.notifyDataSetChanged();
 				}
@@ -305,23 +312,23 @@ public class MainActivity extends Activity {
 			case R.id.deleteAll:
 				if (flag == 0) {
 					if (isCheck) {
-						for (int i = 0; i <imgList.size(); i++) {
+						for (int i = 0; i < imgList.size(); i++) {
 							imgList.get(i).status = false;
 							deleteImg.remove(imgList.get(i));
 							deleteImgDir.remove(getListPic());
 						}
 						isCheck = false;
-					}else{
-						all=2;
+					} else {
+						all = 2;
 						for (int i = 0; i < imgList.size(); i++) {
 							imgList.get(i).status = true;
 						}
 						deleteImg.addAll(imgList);
 						deleteImgDir.addAll(getListPic());
-						isCheck = true; 
+						isCheck = true;
 					}
 					myPhotoAdapter.notifyDataSetChanged();
-				} 
+				}
 				if (flag == 1) {
 					if (isCheck) {
 						for (int i = 0; i < MainActivity.pictureList2.size(); i++) {
@@ -329,13 +336,13 @@ public class MainActivity extends Activity {
 							deletePictureAll.remove(pictureList.get(i));
 						}
 						isCheck = false;
-					}else{
-						all=2;
+					} else {
+						all = 2;
 						for (int i = 0; i < MainActivity.pictureList2.size(); i++) {
 							MainActivity.pictureList2.get(i).status = true;
 							deletePictureAll.add(pictureList.get(i));
 						}
-						isCheck = true; 
+						isCheck = true;
 					}
 					pictureAdater.notifyDataSetChanged();
 				}
@@ -349,7 +356,7 @@ public class MainActivity extends Activity {
 	/* 获取的是MyCamera文件夹下面的所有图片路径 */
 	private ArrayList<String> getListPic() {
 		String path = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/DCIM/Camera/";
+				.getAbsolutePath() + "/DCIM/MyCamera/";
 		Toast.makeText(MainActivity.this, path, 5000).show();
 		File file = new File(path);
 		if (file.exists()) {
@@ -398,8 +405,8 @@ public class MainActivity extends Activity {
 			}
 			holder.cb = (CheckBox) convertView.findViewById(R.id.cb);
 			holder.img = (ImageView) convertView.findViewById(R.id.img);
-//			Item item = (Item) getItem(position);
-//			holder.cb.setChecked(item.status);
+			// Item item = (Item) getItem(position);
+			// holder.cb.setChecked(item.status);
 			try {
 				imageLoader.init(ImageLoaderConfiguration
 						.createDefault(MainActivity.this));
@@ -420,6 +427,7 @@ public class MainActivity extends Activity {
 		File photos = null;
 		protected ImageLoader imageLoader = ImageLoader.getInstance();
 		private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+
 		public MyPhotoAdapter(Context context) {
 			mInflater = LayoutInflater.from(context);
 		}
@@ -453,8 +461,8 @@ public class MainActivity extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			holder.img = (ImageView) convertView.findViewById(R.id.img);
-//			Item item = (Item) getItem(position);
-//			holder.cb.setChecked(item.status);
+			// Item item = (Item) getItem(position);
+			// holder.cb.setChecked(item.status);
 			try {
 				imageLoader.init(ImageLoaderConfiguration
 						.createDefault(MainActivity.this));
@@ -466,12 +474,13 @@ public class MainActivity extends Activity {
 			return convertView;
 		}
 
-		
 	}
+
 	public class ViewHolder {
 		public ImageView img;
 		public CheckBox cb;
 	}
+
 	class Item implements Serializable {
 		/**
 		 * 
@@ -525,5 +534,5 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		MainActivity.this.finish();
 	}
-	
+
 }

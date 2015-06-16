@@ -41,6 +41,7 @@ public class SingleImage extends Activity{
 					MainActivity.imgList.remove(position);
 					File f=new File(MainActivity.listImgPath.get(position));
 					f.delete();
+					boolean h=f.delete();
 					Intent intent = new Intent();
 					SingleImage.this.setResult(RESULT_OK, intent);
 					SingleImage.this.finish();
