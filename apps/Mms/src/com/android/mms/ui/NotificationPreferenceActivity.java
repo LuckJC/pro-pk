@@ -219,7 +219,7 @@ public class NotificationPreferenceActivity extends PreferenceActivity implement
         editor.putString(NOTIFICATION_MUTE,"0");
         editor.putString(NOTIFICATION_RINGTONE, getRealPath().toString());
         editor.putBoolean(NOTIFICATION_VIBRATE, true);
-        editor.putBoolean(POPUP_NOTIFICATION, true);
+        editor.putBoolean(POPUP_NOTIFICATION, false);
         editor.apply();
         setPreferenceScreen(null);
         setMessagePreferences();
@@ -284,7 +284,7 @@ public class NotificationPreferenceActivity extends PreferenceActivity implement
             return false;
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MmsApp.getApplication());
-        boolean enable = prefs.getBoolean(NotificationPreferenceActivity.POPUP_NOTIFICATION, true);
+        boolean enable = prefs.getBoolean(NotificationPreferenceActivity.POPUP_NOTIFICATION, false);
         return enable;
     }
 

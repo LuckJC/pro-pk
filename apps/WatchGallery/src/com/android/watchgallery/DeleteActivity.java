@@ -294,7 +294,7 @@ public class DeleteActivity extends Activity {
 	/* 获取的是MyCamera文件夹下面的所有图片路径 */
 	private ArrayList<String> getListPic() {
 		String path = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/DCIM/Camera/";
+				.getAbsolutePath() + "/DCIM/MyCamera/";
 		Toast.makeText(DeleteActivity.this, path, 5000).show();
 		File file = new File(path);
 		if (file.exists()) {

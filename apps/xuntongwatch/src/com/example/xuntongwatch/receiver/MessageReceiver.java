@@ -51,7 +51,8 @@ public class MessageReceiver extends BroadcastReceiver {
 			// }).start();
 			Message receiver = Message.obtain();
 			receiver.what = 110;
-			MyApplication.handler.sendMessage(receiver);
+			if(MyApplication.handler!=null){
+			MyApplication.handler.sendMessage(receiver);}
 		}
 
 	}

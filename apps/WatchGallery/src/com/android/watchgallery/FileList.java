@@ -9,7 +9,7 @@ public class FileList {
 		File fl=new File(fpath);
 		File[] fls=fl.listFiles();
 		if(fls!=null){
-			for (int i = 0; i < fls.length; i++) {
+			for (int i = fls.length-1; i >=0; i--) {
 				if(fls[i].isDirectory()){
 					findFile(fls[i].getAbsolutePath());
 				}else{

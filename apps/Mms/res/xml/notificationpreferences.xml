@@ -32,7 +32,7 @@
             android:dependency="pref_key_enable_notifications" android:title="@string/pref_vibrate"
             android:summary="@string/pref_summary_vibrate" />
         <CheckBoxPreference android:layout="?android:attr/preferenceLayoutChild"
-            android:defaultValue="true" android:key="pref_key_popup_notification"
+            android:defaultValue="false" android:key="pref_key_popup_notification"
             android:dependency="pref_key_enable_notifications" android:title="@string/pref_popup_notification"
             android:summary="@string/pref_summary_popup_notification" />
     </PreferenceCategory>

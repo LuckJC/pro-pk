@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -176,6 +177,10 @@ public class Asr_service extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
+		
+		MyCountDownTimer down_time = new MyCountDownTimer(30000, 30000);
+		down_time.start();
+		
 		mLocalLexicon = "";
 		mToast = Toast.makeText(Asr_service.this, "", Toast.LENGTH_SHORT);
 		mLocalGrammar = FucUtil.readFile(Asr_service.this, "xtml.bnf", "utf-8");
@@ -183,7 +188,7 @@ public class Asr_service extends Service {
 		
 		// 初始化识别对象
 		mAsr = SpeechRecognizer.createRecognizer(this, mInitListener);
-mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.speechcloud");
+		mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.speechcloud");
 		
 		mSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
 
@@ -994,5 +999,26 @@ mSpeech = new TextToSpeech(Asr_service.this, new TTSListener(), "com.iflytek.spe
 		}
 	}
 	
+	/**
+	 * 
+	 * <br>类描述:
+	 * <br>功能详细描述:倒计时类
+	 * 
+	 * @author  lixd
+	 * @date  [2015-6-15]
+	 */
+	class MyCountDownTimer extends CountDownTimer {     
+        public MyCountDownTimer(long millisInFuture, long countDownInterval) {     
+            super(millisInFuture, countDownInterval);     
+        }     
+        @Override     
+        public void onFinish() {     
+          stopSelf();
+        }     
+        @Override     
+        public void onTick(long millisUntilFinished) {     
+          
+        }    
+    }
 	
 }
