@@ -43,7 +43,7 @@ public class Watch_UI_Fragment extends Fragment {
 	public class myAdapter extends PagerAdapter{
 
 		public  final Uri WATCH_CONTENT_URI = 
-				Uri.parse("content://" + "com.infocomiot.watch.launcher" + "/watch");
+				Uri.parse("content://" + "com.szkj.watch.launcher" + "/watch");
 		public  final String COLUMN_CURRENT_STYLE = "current_style";
 		
 		private void updateWatchStyle(int style) {
