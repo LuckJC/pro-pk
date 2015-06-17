@@ -14,6 +14,21 @@
         android:layout_height="fill_parent" >
     </FrameLayout>
 
+        <TextView
+            android:id="@+id/vedio_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:text="@string/str_down_time"
+            android:textSize="20sp"
+            />
+
+    
+
     <ImageView
         android:id="@+id/common_setting"
         android:layout_width="52px"

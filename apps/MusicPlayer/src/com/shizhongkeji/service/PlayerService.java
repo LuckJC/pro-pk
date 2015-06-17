@@ -61,7 +61,8 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	public static final String GESTURE_NEXT = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT"; // 手势下一首
 	public static final String GESTURE_PREVIOUS = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; // 手势上一首
 	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
-
+	// public static final String MUSIC_PLAY_OVER =
+	// "com.shizhong.media.MUSIC_OVER";
 	private IBinder iBinder = new MyBinder();
 
 	public class MyBinder extends Binder {
@@ -133,11 +134,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				}
-				// GlobalApplication.index_Music = current;
-				// Intent intent = new Intent();
-				// intent.setAction(FCR_MUSIC);
-				// intent.putExtra("index", current);
-				// sendBroadcast(intent);
+
 			}
 		});
 		mediaPlayer.setOnErrorListener(new OnErrorListener() {
@@ -214,7 +211,6 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-		Intent sendIntent = new Intent(UPDATE_ACTION);
 		String action = "";
 		if (intent != null) {
 			action = intent.getStringExtra("action");
@@ -222,19 +218,19 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 				if (action != null) {
 					if (action.equals(GESTURE_PLAY)) {
 						if (!GlobalApplication.isPlaying) {
-							GlobalApplication.isPlaying = true;
-							if (!GlobalApplication.isPlay && mp3Infos.size() >0) {
+
+							if (!GlobalApplication.isPlay && mp3Infos.size() > 0) {
 								path = mp3Infos.get(current).getUrl();
 								play(0);
-								sendBroadcast(sendIntent);
+
 							} else {
 								resume();
-								sendBroadcast(sendIntent);
+
 							}
 						} else {
-							GlobalApplication.isPlaying = false;
+
 							pause();
-							sendBroadcast(sendIntent);
+
 						}
 					}
 					if (action.equals(GESTURE_NEXT)) {
@@ -243,19 +239,19 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 								current = getRandomIndex(mp3Infos.size() - 1);
 								System.out.println("currentIndex ->" + current);
 								play(0);
-								sendBroadcast(sendIntent);
+
 							} else if (status == 3) {
 								current = current + 1;
 								if (mp3Infos != null && current <= mp3Infos.size() - 1) {
 									path = mp3Infos.get(current).getUrl();
 									play(0);
-									sendBroadcast(sendIntent);
+
 								} else {
 									current = 0;
 								}
 								path = mp3Infos.get(current).getUrl();
 								play(0);
-								sendBroadcast(sendIntent);
+
 							}
 						}
 
@@ -266,17 +262,18 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 								current = getRandomIndex(mp3Infos.size() - 1);
 								System.out.println("currentIndex ->" + current);
 								play(0);
+
 							} else if (status == 3) {
 								current--;
 								if (current >= 0) {
-
-									path = mp3Infos.get(current).getUrl(); // ��һ��MP3
+									path = mp3Infos.get(current).getUrl(); //
 									play(0);
 
 								} else {
 									current = mp3Infos.size() - 1;
-									path = mp3Infos.get(current).getUrl(); // ��һ��MP3
+									path = mp3Infos.get(current).getUrl(); //
 									play(0);
+
 								}
 							}
 						}
@@ -380,6 +377,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	 * 下一首
 	 */
 	private void next() {
+		
 		Intent sendIntent = new Intent(UPDATE_ACTION);
 		sendIntent.putExtra("current", current);
 		// 发送广播，将被Activity组件中的BroadcastReceiver接收到
@@ -461,8 +459,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 		case AudioManager.AUDIOFOCUS_GAIN:
 			// resume playback
 			if (mediaPlayer == null) {
-				// initMediaPlayer();
-
+				 
 			} else if (!mediaPlayer.isPlaying()) {
 				play(currentTime);
 			}
@@ -512,9 +509,9 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 				break;
 			case TelephonyManager.CALL_STATE_OFFHOOK: // ̬
 			case TelephonyManager.CALL_STATE_RINGING: // ̬
-				// if (GlobalApplication.isPlaying) {
-				// pause();
-				// }
+				if (GlobalApplication.isPlaying) {
+					pause();
+				}
 				break;
 			default:
 				break;
