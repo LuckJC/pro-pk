@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:analogclock="http://schemas.android.com/apk/res/com.szkj.watch.launcher"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dial13">
+
+    <TextView android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ClockDateText.Clock13"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="58px"/>
+    
+    <TextView android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="22px"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="85px"/>
+    
+    <ImageView android:id="@+id/battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:visibility="invisible"/>
+
+    <TextView android:id="@+id/call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/call05"
+        style="@style/ClockCallText"
+        android:gravity="center"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="0px"
+        android:layout_marginBottom="0px"
+        android:visibility="invisible"/>
+        
+    <TextView android:id="@+id/sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sms05"
+        style="@style/ClockSmsText"
+        android:gravity="center"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="0px"
+        android:visibility="invisible"/>
+    
+    <com.szkj.watch.launcher.clock.AnalogClock
+        android:id="@+id/clock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        analogclock:hour="@drawable/hour13"
+        analogclock:minute="@drawable/minute13"
+        analogclock:second="@drawable/second13"/>
+</FrameLayout>

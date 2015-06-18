@@ -222,8 +222,10 @@ public abstract class ClockFragment extends Fragment {
 				calendar.get(Calendar.DATE),
 				calendar.get(Calendar.HOUR),
 				calendar.get(Calendar.MINUTE), 
-				calendar.get(Calendar.SECOND));
+				calendar.get(Calendar.SECOND),
+				calendar.get(Calendar.DAY_OF_WEEK));
 	}
+	
 	
 	/**
 	 * Subclass implement this method to update time display.
@@ -233,8 +235,9 @@ public abstract class ClockFragment extends Fragment {
 	 * @param hour
 	 * @param minute
 	 * @param second
+	 * @param day day of week,1~7. 1:Sunday, 2:Monday...6:Friday,7:Saturday
 	 */
-	protected abstract void doUpdateTime(int year, int month, int date, int hour, int minute, int second);
+	protected abstract void doUpdateTime(int year, int month, int date, int hour, int minute, int second, int day);
 	
 	/**
 	 * update battery

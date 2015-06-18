@@ -15,7 +15,7 @@ public class DigitClockFragment extends ClockFragment {
 	
 	@Override
 	protected void doUpdateTime(int year, int month, int date, int hour,
-			int minute, int second) {
+			int minute, int second, int day) {
 		String hourStr = hour > 9 ? String.valueOf(hour) : ("0" + hour);
 		String minuteStr = minute > 9 ? String.valueOf(minute) : ("0" + minute);
 		mTimeTV.setText(hourStr + ":" + minuteStr);
