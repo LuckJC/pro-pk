@@ -41,8 +41,8 @@ import android.widget.Toast;
 public class DeleteActivity extends Activity {
 	Button photo;
 	Button picture;
-	Button delete;
-	Button deleteAll;
+	Button deldelete;
+	Button deldeleteAll;
 	GridView gridView;
 	LinearLayout layout3;
 	public ImageAdapter imageAdapter;
@@ -92,11 +92,11 @@ public class DeleteActivity extends Activity {
 		pictureAdater = new PictureAdater(); // 图片适配
 		photo = (Button) this.findViewById(R.id.delphoto);
 		picture = (Button) this.findViewById(R.id.delpicture);
-		delete = (Button) this.findViewById(R.id.deldelete);
-		deleteAll = (Button) this.findViewById(R.id.deldeleteAll);
+		deldelete = (Button) this.findViewById(R.id.deldelete);
+		deldeleteAll = (Button) this.findViewById(R.id.deldeleteAll);
 		photo.setOnClickListener(myClick);
-		delete.setOnClickListener(myClick);
-		deleteAll.setOnClickListener(myClick);
+		deldelete.setOnClickListener(myClick);
+		deldeleteAll.setOnClickListener(myClick);
 		picture.setOnClickListener(myClick);
 		layout3 = (LinearLayout) this.findViewById(R.id.dellayout3);
 		gridView = (GridView) this.findViewById(R.id.delgridView);
@@ -149,8 +149,8 @@ public class DeleteActivity extends Activity {
 				pictures[i] = "file://" + pictures[i];
 			}
 			options = new DisplayImageOptions.Builder()
-					.showStubImage(R.drawable.ic_stub)
-					.showImageForEmptyUri(R.drawable.ic_empty)
+					.showStubImage(R.drawable.ic_empty)          //图片缓冲的时候
+					.showImageForEmptyUri(R.drawable.ic_stub)   //图片为空的时候
 					.showImageOnFail(R.drawable.ic_error).cacheInMemory(true)
 					.cacheOnDisc(true).displayer(new RoundedBitmapDisplayer(0))
 					.build();
@@ -243,7 +243,7 @@ public class DeleteActivity extends Activity {
 							file.delete();
 						}
 					}
-					pictureList.removeAll(deletePicture);
+					MainActivity.pictureList.removeAll(deletePicture);
 					pictureAdater.notifyDataSetChanged();
 				}
 				DeleteActivity.this.finish();
@@ -261,6 +261,7 @@ public class DeleteActivity extends Activity {
 						all = 2;
 						for (int i = 0; i < imgList.size(); i++) {
 							imgList.get(i).status = true;
+							
 						}
 						deleteImg.addAll(imgList);
 						deleteImgDir.addAll(getListPic());
@@ -272,6 +273,7 @@ public class DeleteActivity extends Activity {
 					if (isCheck) {
 						for (int i = 0; i < pictureList.size(); i++) {
 							pictureList.get(i).status = false;
+							deleteImgDir.remove(deletePicture);
 							deletePicture.remove(pictureList.get(i));
 						}
 						isCheck = false;
@@ -281,6 +283,8 @@ public class DeleteActivity extends Activity {
 							pictureList.get(i).status = true;
 							deletePicture.add(pictureList.get(i));
 						}
+						deletePicture.addAll(pictureList);
+						deleteImgDir.addAll(lsmap);
 						isCheck = true;
 					}
 					pictureAdater.notifyDataSetChanged();
@@ -334,6 +338,7 @@ public class DeleteActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
+				holder = new ViewHolder();
 				convertView = LayoutInflater.from(DeleteActivity.this).inflate(
 						R.layout.deleteitem, parent, false);
 				convertView.setTag(holder);
