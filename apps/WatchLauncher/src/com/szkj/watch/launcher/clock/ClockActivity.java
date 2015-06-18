@@ -20,15 +20,11 @@ import com.szkj.watch.launcher.provider.WatchConfig;
 public class ClockActivity extends Activity {
 	private static final Class<? extends ClockFragment>[] CLOCKS;
 	static {
-		CLOCKS = new Class[8];
-		CLOCKS[0] = AnalogClockFragment1.class;
-		CLOCKS[1] = AnalogClockFragment2.class;
-		CLOCKS[2] = AnalogClockFragment3.class;
-		CLOCKS[3] = AnalogClockFragment4.class;
-		CLOCKS[4] = AnalogClockFragment5.class;
-		CLOCKS[5] = AnalogClockFragment6.class;
-		CLOCKS[6] = DigitClockFragment21.class;
-		CLOCKS[7] = DigitClockFragment22.class;
+		CLOCKS = new Class[4];
+		CLOCKS[0] = AnalogClockFragment11.class;
+		CLOCKS[1] = AnalogClockFragment12.class;
+		CLOCKS[2] = AnalogClockFragment13.class;
+		CLOCKS[3] = AnalogClockFragment14.class;
 	}
 	
 	
@@ -107,7 +103,7 @@ public class ClockActivity extends Activity {
 	
 	private SimpleOnGestureListener mSwipeGestureListener = new SimpleOnGestureListener() {
 		private static final int SWIPE_MIN_DISTANCE = 120;
-		private static final int SWIPE_THRESHOLD_VELOCITY = 100;	
+		private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 		
 		
 		 

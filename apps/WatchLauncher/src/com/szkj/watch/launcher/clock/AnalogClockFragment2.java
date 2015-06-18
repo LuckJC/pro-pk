@@ -40,7 +40,7 @@ public class AnalogClockFragment2 extends AnalogClockFragment {
 	}
 
 	@Override
-	protected void updateDate(int year, int month, int date) {
+	protected void updateDate(int year, int month, int date, int day) {
 		mDateTV.setText(String.valueOf(date));
 	}
 }
