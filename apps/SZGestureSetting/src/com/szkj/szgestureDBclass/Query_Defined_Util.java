@@ -24,8 +24,8 @@ import android.util.Log;
  * @date  [2015-5-13]
  */
 public class Query_Defined_Util{
-	
-	private static String[] Ges = new String[]{"↑","↓","→","←","<",">","∨","∧","双击","O","2","3","6","7","8","9","a","b","c","d","e","g","h","k","l","m","n","p","q","r","s","u","w","y","z"};
+//	private static String[] Ges = new String[]{"↑","↓","→","←","<",">","∨","∧","双击","O","2","3","6","7","8","9","a","b","c","d","e","g","h","k","l","m","n","p","q","r","s","u","w","y","z"};
+	private static String[] Ges = new String[]{"↑","↓","→","←","<",">","∨","∧","双击","O","2","3","6","7","9","a","b","d","e","m","n","s","u","w"};
 	private static String[] Fes = new String[]{"音量+","音量-","下一首","上一首","咕咚","助听器","音乐","语音助手","录音","清除后台程序","照相机","图库","直接拨号"};
 	private static String[] GFes = new String[]{"音量+","音量-","下一首","上一首","咕咚","助听器","音乐","语音助手","录音","清除后台程序"};
 	

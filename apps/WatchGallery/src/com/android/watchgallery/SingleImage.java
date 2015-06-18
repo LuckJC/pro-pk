@@ -38,11 +38,12 @@ public class SingleImage extends Activity{
 			@Override
 			public void onClick(View v) {
 				if(MainActivity.flag==0){
-					MainActivity.imgList.remove(position);
+					MainActivity.imgList.remove(MainActivity.imgList.get(position));
 					File f=new File(MainActivity.listImgPath.get(position));
-					f.delete();
+//					MainActivity.listImgPath.remove(position);
 					boolean h=f.delete();
 					Intent intent = new Intent();
+					intent.putExtra("position", position);
 					SingleImage.this.setResult(RESULT_OK, intent);
 					SingleImage.this.finish();
 				}

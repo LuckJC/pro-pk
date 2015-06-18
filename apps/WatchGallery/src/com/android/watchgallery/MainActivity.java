@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.android.watchgallery.R;
+import com.android.watchgallery.single.SingleListActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -21,6 +22,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -53,7 +55,7 @@ public class MainActivity extends Activity {
 	DisplayMetrics dm;
 	ViewHolder holder;
 	public static List<String> lsmap;
-	private String[] pictures;
+	public static String[] pictures;
 	public static String[] imageUrls;
 	DisplayImageOptions options;
 	public static ArrayList<String> listImgPath;
@@ -61,34 +63,27 @@ public class MainActivity extends Activity {
 	ContentResolver resolver;
 	int all = 0;
 	public static int flag = 0; // 照片跟图片的标志
-	public ArrayList<String> list;
+	public static ArrayList<String> list;
 	boolean isCheck = false;
 	public static List<Item> imgList;
-	public static List<Item> imgList2;
 	public static List<Item> deleteImg; // 一个一个地选择的删除的照片数组
 	public static List<Item> deletePicture; // 一个一个地选择的删除的图片数组
 	public static List<Item> deleteImgAll; // 全选的删除的照片数组
 	public static List<Item> deletePictureAll; // 全选的删除的图片数组
 	public static List<Item> pictureList;
-	public static List<Item> pictureList2;
 	ArrayList<String> deleteImgDir; // 删除照片跟相片的路径
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		MyClick myClick = new MyClick();
 		setContentView(R.layout.main);
 		imgList = new ArrayList<Item>();
-		imgList2 = imgList;
 		deleteImg = new ArrayList<Item>();
 		deletePicture = new ArrayList<Item>();
 		deleteImgAll = new ArrayList<Item>();
 		deletePictureAll = new ArrayList<Item>();
 		list = new ArrayList<String>();
 		pictureList = new ArrayList<Item>();
-		pictureList2 = pictureList;
 		deleteImgDir = new ArrayList<String>();
 		lsmap = new ArrayList<String>();
 		myPhotoAdapter = new MyPhotoAdapter(MainActivity.this);// 照片适配
@@ -103,7 +98,7 @@ public class MainActivity extends Activity {
 		picture.setOnClickListener(myClick);
 		layout3 = (LinearLayout) this.findViewById(R.id.layout11);
 		gridView = (GridView) this.findViewById(R.id.gridView1);
-		if (list != null) {
+		if (list != null) { 
 			list.clear();
 		}
 		if (listImgPath != null) {
@@ -134,7 +129,6 @@ public class MainActivity extends Activity {
 		if (FileList.lsmap != null) {
 			FileList.lsmap.clear();
 		}
-
 		lsmap = FileList.findFile(Environment.getExternalStorageDirectory()
 				.getAbsolutePath());
 		/* 判断sd卡是否存在 */
@@ -142,18 +136,27 @@ public class MainActivity extends Activity {
 				android.os.Environment.MEDIA_MOUNTED);
 		/* 获取存放的路径 */
 		if (sdCardExist) {
-			imageUrls = (String[]) listImgPath.toArray(new String[listImgPath
-					.size()]);
-			for (int i = 0; i < imageUrls.length; i++) {
+			imageUrls = (String[]) listImgPath.toArray(new String[listImgPath.size()]);
+			for (int i = imageUrls.length - 1; i >= 0; i--) {
 				imageUrls[i] = "file://" + imageUrls[i];
 			}
+			lsmap.removeAll(listImgPath);
 			pictures = lsmap.toArray(new String[lsmap.size()]);
 			for (int i = 0; i < pictures.length; i++) {
 				pictures[i] = "file://" + pictures[i];
 			}
+			
+//			for(int a=0;a<imageUrls.length;a++){
+//				for (int y=0;y<pictures.length;y++){
+//					if(imageUrls[a].equals(pictures[y])){
+//						pictures[y]=null;
+//					}
+//				}
+//			}
+			
 			options = new DisplayImageOptions.Builder()
-					.showStubImage(R.drawable.ic_stub)
-					.showImageForEmptyUri(R.drawable.ic_empty)
+					.showStubImage(R.drawable.ic_empty)
+					.showImageForEmptyUri(R.drawable.ic_stub)
 					.showImageOnFail(R.drawable.ic_error).cacheInMemory(true)
 					.cacheOnDisc(true).displayer(new RoundedBitmapDisplayer(0))
 					.build();
@@ -172,42 +175,7 @@ public class MainActivity extends Activity {
 						DeleteActivity.class);
 				intent.putExtra("flag", flag);
 				startActivityForResult(intent, 8);
-				// if (flag == 0) {
-				// item = imgList.get(position);
-				// }
-				// if (flag == 1) {
-				// item = pictureList.get(position);
-				// }
-				// // holder.cb.setVisibility(View.VISIBLE);
-				// item.status = !item.status;// 取反
-				// holder.cb.setChecked(item.status);
-				// layout3.setVisibility(View.VISIBLE);// 删除按钮出现
-				// if (flag == 0) {
-				// if (item.status == true) {
-				// // positionList.add(arg2);
-				// all=1;
-				// deleteImg.add(imgList.get(position));
-				// deleteImgDir.add(getListPic().get(position));
-				// } else {
-				// // positionList.remove(arg2);
-				// deleteImg.remove(imgList.get(position));
-				// deleteImgDir.remove(getListPic().get(position));
-				// }
-				// }
-				// if (flag == 1) {
-				// if (item.status == true) {
-				// // positionList.add(arg2);
-				// all=1;
-				// deletePicture.add(pictureList.get(position));
-				// deleteImgDir.add(lsmap.get(position));
-				// } else {
-				// // positionList.remove(arg2);
-				// deletePicture.remove(pictureList.get(position));
-				// deleteImgDir.remove(lsmap.get(position));
-				// }
-				// }
-				// imageAdapter.notifyDataSetChanged();
-				// pictureAdater.notifyDataSetChanged();
+				
 				return true;
 			}
 		});
@@ -215,16 +183,16 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent intent = new Intent(MainActivity.this, SingleImage.class);
+				Intent intent = new Intent(MainActivity.this,SingleListActivity.class);
 				if (flag == 0) {
 					intent.putExtra("singleImage", imageUrls[position]);
 					intent.putExtra("position", position);
-					startActivityForResult(intent, 2);
+					startActivity(intent);
 				}
 				if (flag == 1) {
 					intent.putExtra("singleImage", pictures[position]);
 					intent.putExtra("position", position);
-					startActivityForResult(intent, 3);
+					startActivity(intent);
 				}
 			}
 		});
@@ -233,23 +201,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == 2) {
-			imgList.size();
-			listImgPath.size();
-			myPhotoAdapter.notifyDataSetChanged();
-		}
 		if (requestCode == 8) {
 			myPhotoAdapter.notifyDataSetChanged();
 		}
-		if (requestCode == 3) {
 
-			pictureAdater.notifyDataSetChanged();
-		}
-		
 	}
-
 	class MyClick implements View.OnClickListener {
-
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -275,11 +232,6 @@ public class MainActivity extends Activity {
 				break;
 			case R.id.delete:
 				if (flag == 0) {
-					// for(int i=0;i<imgList.size();i++){
-					// if(imgList.get(i).status){
-					// File file=new File(uri);
-					// }
-					// }
 					for (int i = 0; i < deleteImgDir.size(); i++) {
 						File file = new File(deleteImgDir.get(i));
 						if (file != null) {
@@ -331,15 +283,15 @@ public class MainActivity extends Activity {
 				}
 				if (flag == 1) {
 					if (isCheck) {
-						for (int i = 0; i < MainActivity.pictureList2.size(); i++) {
-							MainActivity.pictureList2.get(i).status = false;
+						for (int i = 0; i < MainActivity.pictureList.size(); i++) {
+							MainActivity.pictureList.get(i).status = false;
 							deletePictureAll.remove(pictureList.get(i));
 						}
 						isCheck = false;
 					} else {
 						all = 2;
-						for (int i = 0; i < MainActivity.pictureList2.size(); i++) {
-							MainActivity.pictureList2.get(i).status = true;
+						for (int i = 0; i < MainActivity.pictureList.size(); i++) {
+							MainActivity.pictureList.get(i).status = true;
 							deletePictureAll.add(pictureList.get(i));
 						}
 						isCheck = true;
@@ -354,15 +306,18 @@ public class MainActivity extends Activity {
 	}
 
 	/* 获取的是MyCamera文件夹下面的所有图片路径 */
-	private ArrayList<String> getListPic() {
+	public ArrayList<String> getListPic() {
+		if(list!=null){
+			list.clear();
+		}
 		String path = Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + "/DCIM/MyCamera/";
-		Toast.makeText(MainActivity.this, path, 5000).show();
 		File file = new File(path);
 		if (file.exists()) {
 			File[] f = file.listFiles();
 			for (int i = f.length - 1; i >= 0; i--) {
 				if (f[i].getName().endsWith(".jpg")) {
+					f[i].getAbsolutePath();
 					list.add(f[i].getAbsolutePath());
 				}
 			}
@@ -527,7 +482,7 @@ public class MainActivity extends Activity {
 			}
 		}
 	}
-
+    
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
