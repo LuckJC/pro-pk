@@ -11,15 +11,16 @@ import android.app.Application;
 
 public class GlobalApplication extends Application {
 	public static HashMap<Integer, Boolean> isSelecte;
-	public static List<Mp3Info> mp3InfosSystem;
 	public static List<Mp3Info> mp3Infos;
 	public static boolean isPlaying = false;
 	public static int current = 0;
 	public static boolean isPlay = false;
+	public static boolean isAutoPause = false;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		mp3InfosSystem = MediaUtil.getMp3Infos(this); // 获取手机中所得mp3文件集合
+
 		mp3Infos = new ArrayList<Mp3Info>();
 	}
 }
