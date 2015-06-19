@@ -326,6 +326,8 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	}
 
 	private void resume() {
+		mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN);
 		if (isPause) {
 			mediaPlayer.start();
 			GlobalApplication.isPlaying = true;

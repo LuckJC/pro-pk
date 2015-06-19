@@ -18,6 +18,7 @@ public class HearBroadCastReceiver extends BroadcastReceiver {
 			if (action.equals("android.intent.action.BOOT_COMPLETED")) {
 				if (isOpen) {
 					Intent intent1 = new Intent(context, HearService.class);
+					intent.putExtra("MSG", MainActivity.MSG_START);
 					context.startService(intent1);
 				}
 			} else if (action.equals("com.shizhongkeji.action.GESTURE.HEAR_AID_ENABLE_SWITCH")) {
@@ -25,8 +26,8 @@ public class HearBroadCastReceiver extends BroadcastReceiver {
 				Intent intent1 = new Intent(context, HearService.class);
 				if (isOpen) {
 					context.stopService(intent1);
-					HearService.saveOpenStatus(context, false);
 				} else {
+					intent.putExtra("MSG", MainActivity.MSG_START);
 					context.startService(intent1);
 				}
 			}

@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,8 +24,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private Button mStartButton;
 	private LinearLayout mLinearVol;
 
-	private boolean isFirst = false;
-	private boolean isOpen = false;
 	private SharedPreferences mSharedPreferences;
 	private Editor edit = null;
 
@@ -34,7 +31,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private int mVolume;
 
 	private int intVol;
-
+	
+	public static final String MSG_START = "start";
+	public static final String MSG_FIRST = "first";
+	public static final String MSG_SECOND = "second";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,21 +58,23 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		mSeekBar = (SeekBar) findViewById(R.id.progress_main_vol);
 		mSeekBar.setOnSeekBarChangeListener(this);
 		mSharedPreferences = getSharedPreferences("status", Activity.MODE_PRIVATE);
-		isFirst = mSharedPreferences.getBoolean("isFirst", true);
+		boolean isNoneOpened = mSharedPreferences.getBoolean("isOpened", true);
 		edit = mSharedPreferences.edit();
-		if (isFirst) {
-			edit.putBoolean("isFirst", false);
-			edit.putBoolean("isOpen", false);
-			edit.putBoolean("isSecond", false);
+		if (isNoneOpened) {
+			edit.putBoolean("isOpened", false);
+			edit.putBoolean("First", false);
+			edit.putBoolean("Second", false);
 			edit.commit();
+			
 		}
-		isOpen = mSharedPreferences.getBoolean("isOpen", false);
-		if (isOpen) {
+		boolean isFirst = mSharedPreferences.getBoolean("First", false);
+		if(isFirst){
 			mStartButton.setBackgroundResource(R.drawable.button_background_on);
-		} else {
+			setEnable(true);
+		}else{
 			mStartButton.setBackgroundResource(R.drawable.button_background);
+			setEnable(false);
 		}
-		setEnable(isOpen);
 	}
 
 	private void setEnable(boolean b) {
@@ -85,10 +87,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	public void onClick(View v) {
 		Intent intent = null;
 
-		isOpen = mSharedPreferences.getBoolean("isOpen", false);
 		switch (v.getId()) {
 		case R.id.setting:
-			if (isOpen) {
+			if (GlobalApplication.isOpenFirst) {
 				intent = new Intent(this, Settings.class);
 				startActivity(intent);
 			} else {
@@ -97,15 +98,18 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			break;
 		case R.id.start:
 			intent = new Intent(this, HearService.class);
-			if (isOpen) {
+			if (GlobalApplication.isOpenFirst) {
+				GlobalApplication.isOpenFirst = false;
 				mLinearVol.setFocusable(false);
-				edit.putBoolean("isOpen", false);
+				edit.putBoolean("First", false);
 				stopService(intent);
 				mStartButton.setBackgroundResource(R.drawable.button_background);
 				setEnable(false);
 			} else {
+				GlobalApplication.isOpenFirst = true;
 				mLinearVol.setFocusable(true);
-				edit.putBoolean("isOpen", true);
+				edit.putBoolean("First", true);
+				intent.putExtra("MSG", MSG_START);
 				startService(intent);
 				mStartButton.setBackgroundResource(R.drawable.button_background_on);
 				setEnable(true);
@@ -158,9 +162,5 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		isOpen = mSharedPreferences.getBoolean("isOpen", false);
-		if(!isOpen){
-			mAudioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, intVol, 0);			
-		}
 	}
 }

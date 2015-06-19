@@ -161,8 +161,6 @@ public class HearService extends Service {
 		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
 		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
-//		int result = audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
-//				AudioManager.AUDIOFOCUS_GAIN);
 //		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 //			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
 //			isFocusAudio = true;
@@ -187,31 +185,50 @@ public class HearService extends Service {
 		// mCurSphV = getValue(mData, mCurrentMode, mTypeSph, mLevelIndex);
 		// mCurMicV = getValue(mData, mCurrentMode, mTypeMic, mLevelIndex);
 
-		showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
-		firstVolume();
-		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
-		if (isSecond) {
-			secondVolume();
-		}
 		Xlog.v(TAG, "start");
-		saveOpenStatus(this, true);
-		new RecordPlayThread().start();// ������¼�߷��߳�
+//		saveOpenStatus(this, true);
+		new RecordPlayThread().start();
 	}
-
+	@Override
+	public void onStart(Intent intent, int startId) {
+		audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN);
+		String msg = intent.getStringExtra("MSG");
+		if(msg.equals(MainActivity.MSG_START)){
+			showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
+			GlobalApplication.isOpenFirst = true;
+			firstVolume();
+			boolean isSecond = mSharedPreferences.getBoolean("Second", false);
+			if (isSecond) {
+				secondVolume();
+				GlobalApplication.isOpenSecond = true;
+			}
+		}else if(msg.equals(MainActivity.MSG_FIRST)){
+			if(GlobalApplication.isOpenSecond){
+				GlobalApplication.isOpenSecond = false;
+				initSecondVolume();
+			}
+		}else if(msg.equals(MainActivity.MSG_SECOND)){
+			secondVolume();
+			GlobalApplication.isOpenSecond = true;
+		}
+		super.onStart(intent, startId);
+	}
 	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
 		public void onAudioFocusChange(int focusChange) {
-			if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS_TRANSIENT");
-				isFocusAudio = true;
-			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-				// Stop playback
-				Log.e(TAG, "失去焦点，AUDIOFOCUS_LOSS");
-				isFocusAudio = true;
-			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-				Log.e(TAG, "获得焦点，AUDIOFOCUS_GAIN");
-				isFocusAudio = true;
-			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-				Log.e(TAG, "focus的值：" + focusChange);
+			switch (focusChange) {
+			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+				isFocusAudio  = false;
+				break;
+			case AudioManager.AUDIOFOCUS_LOSS:
+				isFocusAudio  = false;
+				break;
+			case AudioManager.AUDIOFOCUS_GAIN:
+				isFocusAudio  = true;
+				break;
+			default:
+				break;
 			}
 		}
 	};
@@ -279,14 +296,14 @@ public class HearService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-//		audioManager.abandonAudioFocus(afChangeListener);
-		boolean isSecond = mSharedPreferences.getBoolean("isSecond", false);
+		saveOpenStatus(this);
 		initFirstVolume();
-		if (isSecond) {
+		if (GlobalApplication.isOpenSecond) {
 			initSecondVolume();
 		}
 		isRecording = false;
-		saveOpenStatus(this, false);
+		GlobalApplication.isOpenFirst = false;
+		GlobalApplication.isOpenSecond = false;
 	}
 
 	private void setValue(byte[] dataPara, int mode, int type, int level, byte val) {
@@ -361,6 +378,7 @@ public class HearService extends Service {
 	 * 注意:
 	 */
 	public void firstVolume() {
+		GlobalApplication.isOpenFirst = true;
 		setMaxVolEdit();
 		byte editByte = (byte) VALUE_RANGE_160;
 		setMaxVolData(editByte, false);
@@ -374,6 +392,7 @@ public class HearService extends Service {
 	 * 注意:
 	 */
 	public void initFirstVolume() {
+		GlobalApplication.isOpenFirst = false;
 		byte editByt = (byte) (VALUE_RANGE_160 - 60);
 		setMaxVolData(editByt, false);
 		setAudioData();
@@ -386,6 +405,7 @@ public class HearService extends Service {
 	 * 注意:
 	 */
 	public void secondVolume() {
+		GlobalApplication.isOpenSecond = true;
 		// 媒体
 		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) (VALUE_RANGE_255 - 80));
 		setAudioData();
@@ -404,6 +424,7 @@ public class HearService extends Service {
 	 * 注意:
 	 */
 	public void initSecondVolume() {
+		GlobalApplication.isOpenSecond = false;
 		// 媒体
 		setValue(mData, mCurrentMode, mTypeMedia, mLevelIndex, (byte) VOL_70);
 		setAudioData();
@@ -415,9 +436,10 @@ public class HearService extends Service {
 		setAudioData();
 	}
 	
-	protected static void saveOpenStatus(Context context, boolean isOpen) {
+	private  void saveOpenStatus(Context context) {
 		Editor editor = context.getSharedPreferences("status", MODE_PRIVATE).edit();
-		editor.putBoolean("isOpen", isOpen);
+		editor.putBoolean("First", GlobalApplication.isOpenFirst);
+		editor.putBoolean("Second", GlobalApplication.isOpenSecond);
 		editor.commit();
 	}
 }

@@ -191,11 +191,13 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		boolean isRead = share.getBoolean("isPlaying", false);
 		repeatState = isNoneRepeat;
 		if (isRead) {
-			url = share.getString("url", "");
-			currentTime = share.getInt("duration", 0);
-			duration = share.getInt("currentTime", 0);
-			listPosition = share.getInt("position", 0);
-			repeatState = share.getInt("repeatstate", 3);
+			if(GlobalApplication.isPlay){
+				url = share.getString("url", "");
+				currentTime = share.getInt("duration", 0);
+				duration = share.getInt("currentTime", 0);
+				listPosition = share.getInt("position", 0);
+				repeatState = share.getInt("repeatstate", 3);
+			}
 			mPlayProgress.setMax(duration);
 			mPlayProgress.setProgress(currentTime);
 			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
