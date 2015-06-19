@@ -140,7 +140,7 @@ public class SingleListActivity extends Activity {
 					Toast.makeText(SingleListActivity.this, index + "", 3000)
 							.show();
 					if (MainActivity.flag == 0) {
-					    MainActivity.imgList.remove(MainActivity.imgList.get(index));
+					    //MainActivity.imgList.remove(MainActivity.imgList.get(index));
 						MainActivity.imageUrls[index] = null;
 						 File f=new File(MainActivity.listImgPath.get(index));
 						 boolean h=f.delete();
@@ -154,7 +154,7 @@ public class SingleListActivity extends Activity {
 						}
 					}
 					if (MainActivity.flag == 1) {
-						MainActivity.pictureList.remove(MainActivity.pictureList.get(index));
+						//MainActivity.pictureList.remove(MainActivity.pictureList.get(index));
 						MainActivity.pictures[index] = null;
 						File f = new File(MainActivity.lsmap.get(index));
 						f.delete();
@@ -162,6 +162,7 @@ public class SingleListActivity extends Activity {
 							 MainActivity.lsmap.clear();
 						 }
 						MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
+						MainActivity.lsmap.removeAll(MainActivity.listImgPath);
 						MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
 						for (int i = 0; i < MainActivity.pictures.length; i++) {
 							MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
