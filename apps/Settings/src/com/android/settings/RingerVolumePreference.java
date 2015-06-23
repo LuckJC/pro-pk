@@ -38,6 +38,7 @@ import android.preference.VolumePreference;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -232,9 +233,29 @@ public class RingerVolumePreference extends VolumePreference {
             View hideSection = view.findViewById(id);
             hideSection.setVisibility(View.GONE);
         }
+        
+        //####added for judged if ccurrent device has a small screen size that means alarmSection will hide
+        if(isSmallScreen()){
+        	View alarmSection = view.findViewById(R.id.alarm_section);
+        	alarmSection.setVisibility(View.GONE);
+        }
     }
 
-    private Uri getMediaVolumeUri(Context context) {
+    private static final int SMALL_SCREEN_SIZE_HEIGHT = 320;
+    private static final int SMALL_SCREEN_SIZE_WIDTH = 320;
+    //#### added for measured screen size if true means that current device has a small screen size
+    private boolean isSmallScreen() {
+    	
+    	DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
+		int heightPixels = displayMetrics.heightPixels;
+		int widthPixels = displayMetrics.widthPixels;
+		if(heightPixels == SMALL_SCREEN_SIZE_HEIGHT && widthPixels == SMALL_SCREEN_SIZE_WIDTH){
+			return true;
+		}
+    	return false;
+	}
+
+	private Uri getMediaVolumeUri(Context context) {
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
                 + context.getPackageName()
                 + "/" + R.raw.media_volume);
