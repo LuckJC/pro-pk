@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
@@ -69,7 +70,7 @@ public class VideoPlayerActivity extends Activity {
 
 	private View titleView = null;
 	private PopupWindow titleWindow = null;
-	
+
 	private static int screenWidth = 0;
 	private static int screenHeight = 0;
 	private static int controlHeight = 0;
@@ -82,7 +83,9 @@ public class VideoPlayerActivity extends Activity {
 	private boolean isSilent = false;
 	private boolean isSoundShow = false;
 
-	private String path  = "";
+	private String path = "";
+	private boolean mPausedByTransientLossOfFocus = false;
+
 	/** Called when the activity is first created. */
 	@SuppressWarnings("deprecation")
 	@Override
@@ -101,8 +104,8 @@ public class VideoPlayerActivity extends Activity {
 					controler.showAtLocation(vv, Gravity.BOTTOM, 0, 0);
 					controler.update(0, 0, screenWidth, controlHeight);
 				}
-				if(titleWindow != null && vv.isShown()){
-					titleWindow.showAtLocation(vv,Gravity.TOP,0, 0);
+				if (titleWindow != null && vv.isShown()) {
+					titleWindow.showAtLocation(vv, Gravity.TOP, 0, 0);
 					titleWindow.update(0, 25, screenWidth, 60);
 				}
 				return false;
@@ -127,12 +130,12 @@ public class VideoPlayerActivity extends Activity {
 		});
 
 		mSoundWindow = new PopupWindow(mSoundView);
-		
+
 		titleView = getLayoutInflater().inflate(R.layout.extral, null);
 		titleWindow = new PopupWindow(this);
-		
+
 		title = (TextView) titleView.findViewById(R.id.title);
-		delete = (ImageButton) titleView.findViewById(R.id.delete); 
+		delete = (ImageButton) titleView.findViewById(R.id.delete);
 		play_Btn = (ImageButton) controlView.findViewById(R.id.play);
 		sound_Btn = (ImageButton) controlView.findViewById(R.id.sound);
 
@@ -365,9 +368,11 @@ public class VideoPlayerActivity extends Activity {
 			path = intent.getStringExtra("path");
 			vv.setVideoPath(path);
 			isChangedVideo = true;
+			mAudioManager.requestAudioFocus(focusListener, AudioManager.STREAM_MUSIC,
+					AudioManager.AUDIOFOCUS_GAIN);
 		}
 		delete.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				deleteVideo(path);
@@ -409,6 +414,49 @@ public class VideoPlayerActivity extends Activity {
 			super.handleMessage(msg);
 		}
 	};
+	private OnAudioFocusChangeListener focusListener = new OnAudioFocusChangeListener() {
+
+		@Override
+		public void onAudioFocusChange(int focusChange) {
+			switch (focusChange) {
+			case AudioManager.AUDIOFOCUS_LOSS:
+				if (!isPaused) {
+					// we do not need get focus back in this situation
+
+					// 会长时间失去，所以告知下面的判断，获得焦点后不要自动播放
+					mPausedByTransientLossOfFocus = false;
+
+					vv.pause();
+					play_Btn.setImageResource(R.drawable.play);// 因为会长时间失去，所以直接暂停
+				}
+
+				break;
+			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+				if (!isPaused) {
+					vv.pause();
+					play_Btn.setImageResource(R.drawable.play);
+					mPausedByTransientLossOfFocus = true;
+					cancelDelayHide();
+					hideControllerDelay();
+				}
+				break;
+			case AudioManager.AUDIOFOCUS_GAIN:
+				if (isPaused && mPausedByTransientLossOfFocus) {
+					vv.start();
+					play_Btn.setImageResource(R.drawable.pause);
+					cancelDelayHide();
+					hideControllerDelay();
+				}
+				break;
+
+			default:
+				break;
+			}
+
+		}
+
+	};
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -417,12 +465,8 @@ public class VideoPlayerActivity extends Activity {
 
 		if (!result) {
 			if (event.getAction() == MotionEvent.ACTION_UP) {
-
-				/*
-				 * if(!isControllerShow){ showController();
-				 * hideControllerDelay(); }else { cancelDelayHide();
-				 * hideController(); }
-				 */
+					cancelDelayHide();
+					hideControllerDelay();
 			}
 			result = super.onTouchEvent(event);
 		}
@@ -483,7 +527,7 @@ public class VideoPlayerActivity extends Activity {
 		if (vv.isPlaying()) {
 			vv.stopPlayback();
 		}
-
+		mAudioManager.abandonAudioFocus(focusListener);
 		super.onDestroy();
 	}
 
@@ -498,7 +542,7 @@ public class VideoPlayerActivity extends Activity {
 	private void hideController() {
 		if (controler.isShowing()) {
 			controler.update(0, 0, 0, 0);
-			titleWindow.update(0,0,screenWidth,0);
+			titleWindow.update(0, 0, screenWidth, 0);
 		}
 		if (mSoundWindow.isShowing()) {
 			mSoundWindow.dismiss();
@@ -512,10 +556,10 @@ public class VideoPlayerActivity extends Activity {
 
 	private void showController() {
 		controler.update(0, 0, screenWidth, controlHeight);
-		if(isFullScreen){
-			titleWindow.update(0,0,screenWidth, 60);
-		}else{
-			titleWindow.update(0,25,screenWidth, 60);
+		if (isFullScreen) {
+			titleWindow.update(0, 0, screenWidth, 60);
+		} else {
+			titleWindow.update(0, 25, screenWidth, 60);
 		}
 		isControllerShow = true;
 	}
@@ -589,8 +633,10 @@ public class VideoPlayerActivity extends Activity {
 			sound_Btn.setAlpha(findAlphaFromSound());
 		}
 	}
+
 	private void deleteVideo(String path) {
 		File file = new File(path);
 		file.deleteOnExit();
 	}
+
 }

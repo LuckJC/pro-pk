@@ -191,11 +191,13 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		boolean isRead = share.getBoolean("isPlaying", false);
 		repeatState = isNoneRepeat;
 		if (isRead) {
-			url = share.getString("url", "");
-			currentTime = share.getInt("duration", 0);
-			duration = share.getInt("currentTime", 0);
-			listPosition = share.getInt("position", 0);
-			repeatState = share.getInt("repeatstate", 3);
+			if(GlobalApplication.isPlay){
+				url = share.getString("url", "");
+				currentTime = share.getInt("duration", 0);
+				duration = share.getInt("currentTime", 0);
+				listPosition = share.getInt("position", 0);
+				repeatState = share.getInt("repeatstate", 3);
+			}
 			mPlayProgress.setMax(duration);
 			mPlayProgress.setProgress(currentTime);
 			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
@@ -280,14 +282,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		case R.id.last:
 			volumeStatusLayout();
 			previous_music();
-			GlobalApplication.isPlaying = true;
-			setPlayButtonStatus();
 			break;
 		case R.id.next:
 			volumeStatusLayout();
 			next_music();
-			GlobalApplication.isPlaying = true;
-			setPlayButtonStatus();
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
@@ -315,11 +313,24 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 						Toast.makeText(MainActivity.this, "音乐列表无歌曲文件", Toast.LENGTH_SHORT).show();
 					}
 				} else {
-					intent.setAction(MUSIC_SERVICE);
-					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
-					startService(intent);
-					GlobalApplication.isPlaying = true;
-					setPlayButtonStatus();
+					if(GlobalApplication.isAutoPause){
+						GlobalApplication.isAutoPause = false;
+						Mp3Info mp3Info = mp3Infos.get(listPosition);
+						showArtwork(mp3Info);
+						intent.setAction(MUSIC_SERVICE);
+						intent.putExtra("url", mp3Info.getUrl());
+						intent.putExtra("listPosition", listPosition);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
+						startService(intent);
+						GlobalApplication.isPlaying = true;
+						setPlayButtonStatus();
+					}else{
+						intent.setAction(MUSIC_SERVICE);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
+						startService(intent);
+						GlobalApplication.isPlaying = true;
+						setPlayButtonStatus();	
+					}
 				}
 			}
 
@@ -646,8 +657,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals(UPDATE_ACTION)) {
-				GlobalApplication.isPlaying = playerService.mediaPlayer.isPlaying();
+			if (action.equals(UPDATE_ACTION)) { 
 				setPlayButtonStatus();
 			} else if (action.equals(REPEAT_ACTION)) {
 				repeatState = intent.getIntExtra("repeatState", -1);
@@ -749,17 +759,18 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			case 0:
 				listPosition = playerService.current;
 				Log.e("Main--listPosition", listPosition + "");
-				if (mp3Infos.size() > 0) {
-					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);
+				if (mp3Infos.size() > 0 && listPosition <= mp3Infos.size()) {
+					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);	
 					// showArtwork(m);
 					if (playerService.mediaPlayer != null && playerService.mediaPlayer.isPlaying()) {
 						currentTime = playerService.mediaPlayer.getCurrentPosition(); // 获取当前音乐播放的位置
-						mPlayProgress.setMax((int) m.getDuration());
+						duration = (int) m.getDuration();
+						mPlayProgress.setMax(duration);
 						mPlayProgress.setProgress(currentTime);
 						mPlayCurrentTime.setText(MediaUtil.formatTime(currentTime));
 						Log.e("Main--currentTime", MediaUtil.formatTime(currentTime));
-						mPlayFinalTime.setText(MediaUtil.formatTime(m.getDuration()));
-						Log.e("Main--duration", MediaUtil.formatTime(m.getDuration()));
+						mPlayFinalTime.setText(MediaUtil.formatTime(duration));
+						Log.e("Main--duration", MediaUtil.formatTime(duration));
 						mMusicName.setText(m.getTitle());
 						Log.e("Main--Title", m.getTitle());
 						mMusicSiger.setText(m.getArtist());
