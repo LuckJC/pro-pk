@@ -16,8 +16,11 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -213,55 +216,68 @@ public class DeleteActivity extends Activity {
 				pictureAdater.notifyDataSetChanged();
 				break;
 			case R.id.deldelete:
-				if (MainActivity.flag == 0) {
-					for (int i = 0; i < deleteImgDir.size(); i++) {
-						File file = new File(deleteImgDir.get(i));
-						if (file != null) {
-							file.delete();
-						}
-					}
-					if(MainActivity.list!=null){
-						 MainActivity.list.clear();
-					 }
-					MainActivity.listImgPath = me.getListPic();
-					MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
-					for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
-						MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
-					}
-//					imgList.removeAll(deleteImg);
-					MainActivity.myPhotoAdapter.notifyDataSetChanged();
-				}
-				if (MainActivity.flag == 1) {
-					for (int i = 0; i < deleteImgDir.size(); i++) {
-						File file = new File(deleteImgDir.get(i));
-						if (file != null) {
-							file.delete();
-						}
-					}
-					if(MainActivity.lsmap!=null){
-						 MainActivity.lsmap.clear();
-					 }
-					MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
-					MainActivity.lsmap.removeAll(MainActivity.listImgPath);
-					MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
-					for (int i = 0; i < MainActivity.pictures.length; i++) {
-						MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
-					}
-//					pictureList.removeAll(deletePicture);
-					MainActivity.pictureAdater.notifyDataSetChanged();
-				}
-				DeleteActivity.this.finish();
+				new AlertDialog.Builder(DeleteActivity.this).setTitle("确认删除吗？") 
+			     .setIcon(android.R.drawable.ic_dialog_info) 
+			     .setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+			         @Override 
+			         public void onClick(DialogInterface dialog, int which) {
+			        	 if (MainActivity.flag == 0) {
+								for (int i = 0; i < deleteImgDir.size(); i++) {
+									File file = new File(deleteImgDir.get(i));
+									if (file != null) {
+										file.delete();
+									}
+								}
+								if(MainActivity.list!=null){
+									 MainActivity.list.clear();
+								 }
+								MainActivity.listImgPath = me.getListPic();
+								MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
+								for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
+									MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
+								}
+//								imgList.removeAll(deleteImg);
+								MainActivity.myPhotoAdapter.notifyDataSetChanged();
+							}
+							if (MainActivity.flag == 1) {
+								for (int i = 0; i < deleteImgDir.size(); i++) {
+									File file = new File(deleteImgDir.get(i));
+									if (file != null) {
+										file.delete();
+									}
+								}
+								if(MainActivity.lsmap!=null){
+									 MainActivity.lsmap.clear();
+								 }
+								MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
+								MainActivity.lsmap.removeAll(MainActivity.listImgPath);
+								MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
+								for (int i = 0; i < MainActivity.pictures.length; i++) {
+									MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
+								}
+//								pictureList.removeAll(deletePicture);
+								MainActivity.pictureAdater.notifyDataSetChanged();
+							}
+							DeleteActivity.this.finish(); 
+			         } 
+			     }) 
+			     .setNegativeButton("返回", new DialogInterface.OnClickListener() { 
+			  
+			         @Override 
+			         public void onClick(DialogInterface dialog, int which) { 
+			         // 点击“返回”后的操作,这里不设置没有任何操作 
+			         } 
+			     }).show();
+				
 				break;
 			case R.id.deldeleteAll:
 				if (MainActivity.flag == 0) {
 					if (isCheck) {
 						for (int i = 0; i < imgList.size(); i++) {
 							imgList.get(i).status = false;
-//							deleteImg.remove(imgList.get(i));
-							
-//							deleteImg.remove(imgList.get(i));
-//							deleteImgDir.remove(me.getListPic());
 						}
+						deleteImgDir.removeAll(me.getListPic());
+						deleteImgDir.size();
 						isCheck = false;
 					} else {
 						all = 2;
@@ -271,6 +287,7 @@ public class DeleteActivity extends Activity {
 						}
 //						deleteImg.addAll(MainActivity.imageUrls);
 						deleteImgDir.addAll(me.getListPic());
+						deleteImgDir.size();
 						isCheck = true;
 					}
 					imageAdapter.notifyDataSetChanged();
@@ -279,17 +296,14 @@ public class DeleteActivity extends Activity {
 					if (isCheck) {
 						for (int i = 0; i < pictureList.size(); i++) {
 							pictureList.get(i).status = false;
-							deleteImgDir.remove(deletePicture);
-							deletePicture.remove(pictureList.get(i));
 						}
+						deleteImgDir.removeAll(lsmap); 
 						isCheck = false;
 					} else {
 						all = 2;
 						for (int i = 0; i < pictureList.size(); i++) {
 							pictureList.get(i).status = true;
-							deletePicture.add(pictureList.get(i));
 						}
-						deletePicture.addAll(pictureList);
 						deleteImgDir.addAll(lsmap);
 						isCheck = true;
 					}
@@ -299,9 +313,9 @@ public class DeleteActivity extends Activity {
 			default:
 				break;
 			}
-		}
+		} 
 	}
-
+ 
 	// 图片适配
 	public class PictureAdater extends BaseAdapter {
 		ImageView img;
