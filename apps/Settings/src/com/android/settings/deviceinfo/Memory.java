@@ -42,6 +42,7 @@ import android.os.storage.StorageVolume;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -114,19 +115,32 @@ public class Memory extends SettingsPreferenceFragment {
                 addCategory(StorageVolumePreferenceCategory.buildForPhysical(context, volume));
             }
         }
-
+       
+       
         mMemoryExts.registerSdSwapReceiver(mCategories);
 
         setHasOptionsMenu(true);
     }
 
-    private void addCategory(StorageVolumePreferenceCategory category) {
+	private void addCategory(StorageVolumePreferenceCategory category) {
+		
+		//####added for hide SDCardCategory UI
+		if(isSDCardCategory(category)){
+			return;
+		}
+		
         mCategories.add(category);
         getPreferenceScreen().addPreference(category);
         category.init();
     }
 
-    private boolean isMassStorageEnabled() {
+	//#### check if sd card categroy ,if true is SDCardCategory
+    private boolean isSDCardCategory(StorageVolumePreferenceCategory category) {
+    	String categoryTitle = category.getTitle().toString();
+    	return categoryTitle.contains("SD") || categoryTitle.contains("sd");
+	}
+
+	private boolean isMassStorageEnabled() {
         // Mass storage is enabled if primary volume supports it
         final StorageVolume[] volumes = mStorageManager.getVolumeList();
         final StorageVolume primary = StorageManager.getPrimaryVolume(volumes);

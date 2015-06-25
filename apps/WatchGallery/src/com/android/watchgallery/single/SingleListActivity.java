@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.android.watchgallery.DeleteActivity;
 import com.android.watchgallery.FileList;
 import com.android.watchgallery.MainActivity;
 import com.android.watchgallery.R;
@@ -16,6 +17,8 @@ import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -136,39 +139,53 @@ public class SingleListActivity extends Activity {
 			holder.del.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					int index = (Integer) v.getTag();
-					Toast.makeText(SingleListActivity.this, index + "", 3000)
-							.show();
-					if (MainActivity.flag == 0) {
-					    //MainActivity.imgList.remove(MainActivity.imgList.get(index));
-						MainActivity.imageUrls[index] = null;
-						 File f=new File(MainActivity.listImgPath.get(index));
-						 boolean h=f.delete();
-						 if(MainActivity.list!=null){
-							 MainActivity.list.clear();
-						 }
-						MainActivity.listImgPath = me.getListPic();
-						MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
-						for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
-							MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
-						}
-					}
-					if (MainActivity.flag == 1) {
-						//MainActivity.pictureList.remove(MainActivity.pictureList.get(index));
-						MainActivity.pictures[index] = null;
-						File f = new File(MainActivity.lsmap.get(index));
-						f.delete();
-						if(MainActivity.lsmap!=null){
-							 MainActivity.lsmap.clear();
-						 }
-						MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
-						MainActivity.lsmap.removeAll(MainActivity.listImgPath);
-						MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
-						for (int i = 0; i < MainActivity.pictures.length; i++) {
-							MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
-						}
-					}
-					myAdater.notifyDataSetChanged();
+					 final int index = (Integer) v.getTag();
+					new AlertDialog.Builder(SingleListActivity.this).setTitle("确认删除吗？") 
+				     .setIcon(android.R.drawable.ic_dialog_info) 
+				     .setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) {
+				        	
+								if (MainActivity.flag == 0) {
+								    //MainActivity.imgList.remove(MainActivity.imgList.get(index));
+									MainActivity.imageUrls[index] = null;
+									 File f=new File(MainActivity.listImgPath.get(index));
+									 boolean h=f.delete();
+									 if(MainActivity.list!=null){
+										 MainActivity.list.clear();
+									 }
+									MainActivity.listImgPath = me.getListPic();
+									MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
+									for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
+										MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
+									}
+								}
+								if (MainActivity.flag == 1) {
+									//MainActivity.pictureList.remove(MainActivity.pictureList.get(index));
+									MainActivity.pictures[index] = null;
+									File f = new File(MainActivity.lsmap.get(index));
+									f.delete();
+									if(MainActivity.lsmap!=null){
+										 MainActivity.lsmap.clear();
+									 }
+									MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
+									MainActivity.lsmap.removeAll(MainActivity.listImgPath);
+									MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
+									for (int i = 0; i < MainActivity.pictures.length; i++) {
+										MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
+									}
+								}
+								myAdater.notifyDataSetChanged();
+				         } 
+				     }) 
+				     .setNegativeButton("返回", new DialogInterface.OnClickListener() { 
+				  
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) { 
+				         // 点击“返回”后的操作,这里不设置没有任何操作 
+				         } 
+				     }).show();
+					
 				}
 			});
 			try {
