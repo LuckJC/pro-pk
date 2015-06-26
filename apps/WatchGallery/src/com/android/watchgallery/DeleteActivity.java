@@ -216,58 +216,63 @@ public class DeleteActivity extends Activity {
 				pictureAdater.notifyDataSetChanged();
 				break;
 			case R.id.deldelete:
-				new AlertDialog.Builder(DeleteActivity.this).setTitle("确认删除吗？") 
-			     .setIcon(android.R.drawable.ic_dialog_info) 
-			     .setPositiveButton("确定", new DialogInterface.OnClickListener() { 
-			         @Override 
-			         public void onClick(DialogInterface dialog, int which) {
-			        	 if (MainActivity.flag == 0) {
-								for (int i = 0; i < deleteImgDir.size(); i++) {
-									File file = new File(deleteImgDir.get(i));
-									if (file != null) {
-										file.delete();
+				if(deleteImgDir.size()==0){
+					//无删除选项内容时不进行操作
+				}else{
+					new AlertDialog.Builder(DeleteActivity.this).setTitle("确认删除吗？") 
+				     .setIcon(android.R.drawable.ic_dialog_info) 
+				     .setPositiveButton("确定", new DialogInterface.OnClickListener() { 
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) {
+				        	 if (MainActivity.flag == 0) {
+									for (int i = 0; i < deleteImgDir.size(); i++) {
+										File file = new File(deleteImgDir.get(i));
+										if (file != null) {
+											file.delete();
+										}
 									}
-								}
-								if(MainActivity.list!=null){
-									 MainActivity.list.clear();
-								 }
-								MainActivity.listImgPath = me.getListPic();
-								MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
-								for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
-									MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
-								}
-//								imgList.removeAll(deleteImg);
-								MainActivity.myPhotoAdapter.notifyDataSetChanged();
-							}
-							if (MainActivity.flag == 1) {
-								for (int i = 0; i < deleteImgDir.size(); i++) {
-									File file = new File(deleteImgDir.get(i));
-									if (file != null) {
-										file.delete();
+									if(MainActivity.list!=null){
+										 MainActivity.list.clear();
+									 }
+									MainActivity.listImgPath = me.getListPic();
+									MainActivity.imageUrls = (String[]) MainActivity.listImgPath.toArray(new String[MainActivity.listImgPath.size()]);
+									for (int i = MainActivity.imageUrls.length - 1; i >= 0; i--) {
+										MainActivity.imageUrls[i] = "file://" + MainActivity.imageUrls[i];
 									}
+//									imgList.removeAll(deleteImg);
+									MainActivity.myPhotoAdapter.notifyDataSetChanged();
 								}
-								if(MainActivity.lsmap!=null){
-									 MainActivity.lsmap.clear();
-								 }
-								MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
-								MainActivity.lsmap.removeAll(MainActivity.listImgPath);
-								MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
-								for (int i = 0; i < MainActivity.pictures.length; i++) {
-									MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
+								if (MainActivity.flag == 1) {
+									for (int i = 0; i < deleteImgDir.size(); i++) {
+										File file = new File(deleteImgDir.get(i));
+										if (file != null) {
+											file.delete();
+										}
+									}
+									if(MainActivity.lsmap!=null){
+										 MainActivity.lsmap.clear();
+									 }
+									MainActivity.lsmap = FileList.findFile(Environment.getExternalStorageDirectory().getAbsolutePath());
+									MainActivity.lsmap.removeAll(MainActivity.listImgPath);
+									MainActivity.pictures = MainActivity.lsmap.toArray(new String[MainActivity.lsmap.size()]);
+									for (int i = 0; i < MainActivity.pictures.length; i++) {
+										MainActivity.pictures[i] = "file://" + MainActivity.pictures[i];
+									}
+//									pictureList.removeAll(deletePicture);
+									MainActivity.pictureAdater.notifyDataSetChanged();
 								}
-//								pictureList.removeAll(deletePicture);
-								MainActivity.pictureAdater.notifyDataSetChanged();
-							}
-							DeleteActivity.this.finish(); 
-			         } 
-			     }) 
-			     .setNegativeButton("返回", new DialogInterface.OnClickListener() { 
-			  
-			         @Override 
-			         public void onClick(DialogInterface dialog, int which) { 
-			         // 点击“返回”后的操作,这里不设置没有任何操作 
-			         } 
-			     }).show();
+								DeleteActivity.this.finish(); 
+				         } 
+				     }) 
+				     .setNegativeButton("返回", new DialogInterface.OnClickListener() { 
+				  
+				         @Override 
+				         public void onClick(DialogInterface dialog, int which) { 
+				         // 点击“返回”后的操作,这里不设置没有任何操作 
+				         } 
+				     }).show();
+				}
+				
 				
 				break;
 			case R.id.deldeleteAll:
