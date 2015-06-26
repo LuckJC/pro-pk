@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
@@ -15,7 +14,6 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -26,7 +24,6 @@ import android.view.Display;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -281,6 +278,8 @@ public class VideoPlayerActivity extends Activity {
 
 				if (isControllerShow) {
 					showController();
+					cancelDelayHide();
+					hideControllerDelay();
 				}
 
 				return true;
@@ -294,7 +293,7 @@ public class VideoPlayerActivity extends Activity {
 					hideControllerDelay();
 				} else {
 					cancelDelayHide();
-					hideController();
+					hideControllerDelay();
 				}
 
 				return true;
@@ -408,6 +407,7 @@ public class VideoPlayerActivity extends Activity {
 
 			case HIDE_CONTROLER:
 				hideController();
+				
 				break;
 			}
 
@@ -466,6 +466,7 @@ public class VideoPlayerActivity extends Activity {
 		if (!result) {
 			if (event.getAction() == MotionEvent.ACTION_UP) {
 					cancelDelayHide();
+					showController();
 					hideControllerDelay();
 			}
 			result = super.onTouchEvent(event);
@@ -548,6 +549,7 @@ public class VideoPlayerActivity extends Activity {
 			mSoundWindow.dismiss();
 			isSoundShow = false;
 		}
+		isControllerShow = false;
 	}
 
 	private void hideControllerDelay() {

@@ -105,7 +105,8 @@ public class HearService extends Service {
 	private AudioTrack audioTrack;
 	private TelephonyManager telephonyManager;
 	private AudioManager audioManager;
-
+	private int initVol;
+	
 	private SharedPreferences mSharedPreferences;
 	private boolean isFocusAudio = true;
 	private int mTypeMedia = 7;
@@ -125,15 +126,10 @@ public class HearService extends Service {
 	}
 
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		// TODO Auto-generated method stub
-		return super.onStartCommand(intent, flags, startId);
-	}
-
-	@Override
 	public void onCreate() {
 		super.onCreate();
 		Log.d(TAG, "HearService onCreate");
+		
 		sMaxVolMode = 4;
 		sMaxVolLevel = 15;
 		sMaxVolType = 9;
@@ -161,6 +157,7 @@ public class HearService extends Service {
 		telephonyManager.listen(new MyPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 
 		audioManager = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
+		initVol = audioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
 //		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 //			Log.e(TAG, "获得焦点，AUDIOFOCUS_REQUEST_GRANTED");
 //			isFocusAudio = true;
@@ -190,12 +187,10 @@ public class HearService extends Service {
 		new RecordPlayThread().start();
 	}
 	@Override
-	public void onStart(Intent intent, int startId) {
-		audioManager.requestAudioFocus(afChangeListener, AudioManager.STREAM_MUSIC,
-				AudioManager.AUDIOFOCUS_GAIN);
+	public void onStart(Intent intent, int startId) {	
 		String msg = intent.getStringExtra("MSG");
 		if(msg.equals(MainActivity.MSG_START)){
-			showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
+//			showToast("value:" + mCurrentValue + "max" + mCurrentMaxV);
 			GlobalApplication.isOpenFirst = true;
 			firstVolume();
 			boolean isSecond = mSharedPreferences.getBoolean("Second", false);
@@ -214,24 +209,24 @@ public class HearService extends Service {
 		}
 		super.onStart(intent, startId);
 	}
-	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
-		public void onAudioFocusChange(int focusChange) {
-			switch (focusChange) {
-			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-				isFocusAudio  = false;
-				break;
-			case AudioManager.AUDIOFOCUS_LOSS:
-				isFocusAudio  = false;
-				break;
-			case AudioManager.AUDIOFOCUS_GAIN:
-				isFocusAudio  = true;
-				break;
-			default:
-				break;
-			}
-		}
-	};
+//	private OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+//		public void onAudioFocusChange(int focusChange) {
+//			switch (focusChange) {
+//			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+//			case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+//				isFocusAudio  = false;
+//				break;
+//			case AudioManager.AUDIOFOCUS_LOSS:
+//				isFocusAudio  = false;
+//				break;
+//			case AudioManager.AUDIOFOCUS_GAIN:
+//				isFocusAudio  = true;
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//	};
 
 	private class MyPhoneStateListener extends PhoneStateListener {
 		@Override
@@ -245,17 +240,10 @@ public class HearService extends Service {
 
 				break;
 			case TelephonyManager.CALL_STATE_RINGING:
-				// stuate = "��������";
-				// Log.e("MyPhoneStateListener", stuate);
-				isRecording = false;
-				// audioManager.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL,
-				// audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL),
-				// 0);
-				break;
 			case TelephonyManager.CALL_STATE_OFFHOOK:
 				// stuate = "ͨ����";
 				// Log.e("MyPhoneStateListener", stuate);
-				isRecording = true;
+				isRecording = false;
 				break;
 
 			default:
@@ -302,8 +290,13 @@ public class HearService extends Service {
 			initSecondVolume();
 		}
 		isRecording = false;
+//		Editor edit = mSharedPreferences.edit();
+//		edit.putBoolean("First",GlobalApplication.isOpenFirst);
+//		edit.putBoolean("Second",GlobalApplication.isOpenSecond);
+//		edit.commit();
 		GlobalApplication.isOpenFirst = false;
 		GlobalApplication.isOpenSecond = false;
+		audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, initVol, 0);
 	}
 
 	private void setValue(byte[] dataPara, int mode, int type, int level, byte val) {
@@ -367,9 +360,9 @@ public class HearService extends Service {
 		}
 	}
 
-	private void showToast(String msg) {
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-	}
+//	private void showToast(String msg) {
+//		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+//	}
 
 	/**
 	 * <br>
