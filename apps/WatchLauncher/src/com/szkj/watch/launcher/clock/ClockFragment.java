@@ -220,7 +220,7 @@ public abstract class ClockFragment extends Fragment {
 		doUpdateTime(calendar.get(Calendar.YEAR),
 				calendar.get(Calendar.MONTH) + 1,
 				calendar.get(Calendar.DATE),
-				calendar.get(Calendar.HOUR),
+				calendar.get(Calendar.HOUR_OF_DAY),
 				calendar.get(Calendar.MINUTE), 
 				calendar.get(Calendar.SECOND),
 				calendar.get(Calendar.DAY_OF_WEEK));
@@ -232,7 +232,7 @@ public abstract class ClockFragment extends Fragment {
 	 * @param year
 	 * @param month
 	 * @param date
-	 * @param hour
+	 * @param hour 24-hour clock.
 	 * @param minute
 	 * @param second
 	 * @param day day of week,1~7. 1:Sunday, 2:Monday...6:Friday,7:Saturday

@@ -14,7 +14,7 @@ public abstract class AnalogClockFragment extends ClockFragment {
 	@Override
 	protected void doUpdateTime(int year, int month, int date, int hour,
 			int minute, int second, int day) {
-		mAnalogClock.updateTime(hour, minute, second);
+		mAnalogClock.updateTime(hour%12, minute, second);
 		updateDate(year, month, date, day);
 	}
 	
