@@ -491,6 +491,7 @@ public class SettingMain_Activity extends Activity {
 				    		 //position+1是因为数据库id是从1开始   而在listview的position是从0开始
 					    	 util.insertGesture_Fucntion(s2_gid, s3_fid, s4_name, s4_number);
 				    		 list_defined = util.getDefinedData();
+				    		 list_gesture_NOdefined = util.getNotDefinedData();
 				    		 adapter.setData(list_defined);
 				    		 adapter.notifyDataSetChanged(); 
 				    	 }

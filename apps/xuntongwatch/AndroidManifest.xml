@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.xuntongwatch"
+    android:sharedUserId="android.uid.mms"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -42,7 +43,8 @@
         </activity>
         <activity
             android:name=".main.Record_Activity"
-            android:label="@string/app_name" android:exported="true">
+            android:exported="true"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".main.Contact_Activity"
@@ -79,6 +81,18 @@
         <activity
             android:name=".main.Message_Chat_Activity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SENDTO" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".main.Edit_Head_Activity"
@@ -112,6 +126,7 @@
         </receiver>
         <receiver android:name=".receiver.MessageSend" >
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="SMS_SEND_ACTIOIN" />
             </intent-filter>
         </receiver>
@@ -121,14 +136,38 @@
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name="com.example.xuntongwatch.receiver.PrivilegedSmsReceiver"
+            android:permission="android.permission.BROADCAST_SMS" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.example.xuntongwatch.receiver.PushReceiver"
+            android:permission="android.permission.BROADCAST_WAP_PUSH" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
 
-        <!--
-         <receiver android:name=".receiver.PhoneCall"> 
-			<intent-filter> 
-				<action android:name="android.intent.action.NEW_OUTGOING_CALL" /> 
-			</intent-filter> 
-         </receiver>
-        -->
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".HeadlessSmsSendService"
+            android:exported="true"
+            android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE" >
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="sms" />
+                <data android:scheme="smsto" />
+                <data android:scheme="mms" />
+                <data android:scheme="mmsto" />
+            </intent-filter>
+        </service>
 
     </application>
 

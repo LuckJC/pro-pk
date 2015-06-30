@@ -17,9 +17,11 @@ import android.provider.Telephony.Sms;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
@@ -102,28 +104,36 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 				if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
 					tv = (TextView) view.findViewById(R.id.message_chat_item_other_content);
-				} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
+				} else if (list.get(position).getMessage_state().equals(Message_.SEND)
+						|| list.get(position).getMessage_state().equals("5")) {
 					tv = (TextView) view.findViewById(R.id.message_chat_item_me_content);
 				}
+				String[] sb = null;
+				String[] mItemsFail = { "复制", "转发", "删除", "重发" };
+				String[] mItemsOthers = { "复制", "转发", "删除" };
+				if ("5".equals(list.get(position).getMessage_state())) {
+					sb = mItemsFail;
+				} else {
+					sb = mItemsOthers;
+				}
+			 
 
-				tv.setBackgroundColor(Color.RED);
-				final String[] mItems = { "复制", "转发", "删除" };
 				AlertDialog.Builder builder = new AlertDialog.Builder(Message_Chat_Activity.this);
 				builder.setOnDismissListener(new OnDismissListener() {
 
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						if (delete) {
-							if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
-								tv.setBackgroundResource(R.drawable.message_chat_other);
-							} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
-								tv.setBackgroundResource(R.drawable.message_chat_me);
-							}
+//							if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
+//								tv.setBackgroundResource(R.drawable.message_chat_other);
+//							} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
+//								tv.setBackgroundResource(R.drawable.message_chat_me);
+//							}
 
 						}
 					}
 				});
-				builder.setItems(mItems, new DialogInterface.OnClickListener() {
+				builder.setItems(sb, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case 0:
@@ -138,11 +148,37 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 							break;
 						case 2:
-							// SmsUtil.deleteMessage(Message_Chat_Activity.this,
-							// list.get(position));
+							SmsUtil.deleteMessageByMessage_id(Message_Chat_Activity.this,
+									list.get(position).getMessage_id());
 							delete = false;
 							list.remove(position);
 							lv.setAdapter(adapter);
+							break;
+						case 3:
+							SmsUtil.deleteMessageByMessage_id(Message_Chat_Activity.this,
+									list.get(position).getMessage_id());
+							Message_ message = new Message_();
+							message.setMessage_content(list.get(position).getMessage_content());
+							message.setMessage_phone(list.get(position).getMessage_phone());
+							message.setMessage_see("1");
+							message.setMessage_state("2");
+							long time = System.currentTimeMillis();
+							message.setMessage_time(time);
+							delete = false;
+							list.remove(position);
+							lv.setAdapter(adapter);
+							list.add(message);
+							adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list,
+									true);
+							lv.setAdapter(adapter);
+							lv.setSelection(list.size() - 1);
+							// SmsUtil.insertMessageIntoSent(this, message);
+							SmsUtil.insertMessageIntoOutbox(Message_Chat_Activity.this, message);
+							message.setMessage_id(SmsUtil.findMessageIdByPhone(
+									Message_Chat_Activity.this, message.getMessage_time(),
+									message.getMessage_phone()));
+							Log.i("bb", message.getMessage_id() + "");
+							MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
 							break;
 						default:
 							break;
@@ -258,18 +294,19 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 			startActivityForResult(intent, 10086);
 			break;
 		case R.id.message_chat_send_rl:
+			final Message_ message;
 			if (state == ONE) {
 				String msg = et.getText().toString();
 				if (!TextUtils.isEmpty(msg)) {
-					final Message_ message = new Message_();
+					message = new Message_();
 					message.setMessage_content(msg);
 					message.setMessage_phone(message_phone);
 					message.setMessage_see("1");
-					message.setMessage_state("-1");
+					message.setMessage_state("2");
 					long time = System.currentTimeMillis();
 					message.setMessage_time(time);
-					SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
-					MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
+					// SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
+
 				} else {
 					Toast.makeText(this, "请填写短信内容", Toast.LENGTH_SHORT).show();
 					return;
@@ -285,23 +322,34 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 				}
 
 				if (!TextUtils.isEmpty(msg)) {
-					final Message_ message = new Message_();
+					message = new Message_();
 					message.setMessage_content(msg);
 					message.setMessage_phone(et_phone.getText().toString());
 					message.setMessage_see("1");
-					message.setMessage_state("-1");
+					message.setMessage_state("2");
 					long time = System.currentTimeMillis();
 					message.setMessage_time(time);
-					SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
-					MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
+
+					// SmsUtil.insertMessageIntoSent(this, message);// 插入发件箱
+
 				} else {
 					Toast.makeText(this, "请填写短信内容", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				mFailSend = et.getText().toString();
 				et.setText(null);
-			}
 
+			}
+			list.add(message);
+			adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list, true);
+			lv.setAdapter(adapter);
+			lv.setSelection(list.size() - 1);
+			// SmsUtil.insertMessageIntoSent(this, message);
+			SmsUtil.insertMessageIntoOutbox(this, message);
+			message.setMessage_id(SmsUtil.findMessageIdByPhone(this, message.getMessage_time(),
+					message.getMessage_phone()));
+			Log.i("bb", message.getMessage_id() + "");
+			MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
 			break;
 
 		}
@@ -397,9 +445,25 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 				mListSize = list.size();
 			}
 			if (msg.what == 112) {
-				Toast.makeText(Message_Chat_Activity.this, "Failed,try again.", Toast.LENGTH_LONG)
-						.show();
-				et.setText(mFailSend);
+
+				if (thread_id == -1) {
+					if (state == ONE) {
+						list = SmsUtil.findMessageByPhone01(Message_Chat_Activity.this,
+								message_phone);
+					} else {
+						list = SmsUtil.findMessageByPhone01(Message_Chat_Activity.this, et_phone
+								.getText().toString());
+					}
+
+				} else {
+					list = SmsUtil.findMessageByThread_id01(Message_Chat_Activity.this, thread_id);
+				}
+				adapter = new Message_Chat_Adapter(true, Message_Chat_Activity.this, list);
+				lv.setAdapter(adapter);
+
+				lv.setSelection(list.size() - 1);
+				mListSize = list.size();
+				// et.setText(mFailSend);
 			}
 
 			super.handleMessage(msg);

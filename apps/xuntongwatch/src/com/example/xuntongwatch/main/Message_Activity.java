@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.Telephony.Sms;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +29,14 @@ import android.widget.TextView;
 
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.abstract_.DatabaseUpdataActivity;
-import com.example.xuntongwatch.contentobserver.ObserverUtil;
-import com.example.xuntongwatch.contentobserver.ObserverUtil.ObserverUtilInterface;
 import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.Utils;
 
 public class Message_Activity extends DatabaseUpdataActivity implements OnClickListener {
 
+	public static final boolean DEBUG = false;
+	public static final String TAG = "Message_Activity";
 	private ListView lv;
 	private ArrayList<Message_Thread> arrayList;
 	private MessageAdapter adapter;
@@ -83,6 +84,7 @@ public class Message_Activity extends DatabaseUpdataActivity implements OnClickL
 				selectList.clear();
 				Message_Thread msg = arrayList.get(position);
 				selectList.add(msg.getThread_id());
+				if(DEBUG)Log.d(TAG, "当前是进入了长按模式，当前选中了第"+position+"个,当前选中List中的数据为："+selectList.size()+"当前thread_id为："+msg.getThread_id());
 				enterDeleteMode();// 进入删除模式
 				delete_number.setText("已选择" + selectList.size() + "项");
 				return false;
@@ -98,13 +100,15 @@ public class Message_Activity extends DatabaseUpdataActivity implements OnClickL
 				{
 					Message_Thread msg = arrayList.get(position);
 					int thread_id = msg.getThread_id();
-					if (selectList.contains(msg))// 表示已选中了。
+					if (selectList.contains(thread_id))// 表示已选中了。
 					{
-						selectList.remove(thread_id);
+						selectList.remove(Integer.valueOf(thread_id));
+						if(DEBUG)Log.d(TAG, "当前是删除模式，当前移除了第"+position+"个,当前List中的数据为："+selectList.size()+"当前thread_id为："+thread_id);
 						selectOff(view);
 						delete_number.setText("已选择" + selectList.size() + "项");
 					} else {
-						selectList.add(thread_id);
+						selectList.add(Integer.valueOf(thread_id));
+						if(DEBUG)Log.d(TAG, "当前是删除模式，当前添加了第"+position+"个,当前List中的数据为："+selectList.size()+"当前thread_id为："+thread_id);
 						selectOn(view);
 						delete_number.setText("已选择" + selectList.size() + "项");
 					}

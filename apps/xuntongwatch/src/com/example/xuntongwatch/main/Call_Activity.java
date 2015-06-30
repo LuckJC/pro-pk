@@ -16,36 +16,36 @@ import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.util.SpecialCharSequenceMgr;
 import com.example.xuntongwatch.util.Utils;
 
-public class Call_Activity extends BaseActivity implements OnClickListener, TextWatcher{
+public class Call_Activity extends BaseActivity implements OnClickListener, TextWatcher {
 
-	private Button one,two,three,four,five,six,seven,eight,nine,xin,jin,zero;
+	private Button one, two, three, four, five, six, seven, eight, nine, xin, jin, zero;
 	private TextView tv;
-	private RelativeLayout back,delete,call;
-//	private ImageView back_iv,delete_iv;
- 
+	private RelativeLayout back, delete, call;
+	// private ImageView back_iv,delete_iv;
+
 	private StringBuffer sb = new StringBuffer("");
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.call);
-		initButton(one,R.id.keyboad_bt_one);
-		initButton(two,R.id.keyboad_bt_two);
-		initButton(three,R.id.keyboad_bt_three);
-		initButton(four,R.id.keyboad_bt_four);
-		initButton(five,R.id.keyboad_bt_five);
-		initButton(six,R.id.keyboad_bt_six);
-		initButton(seven,R.id.keyboad_bt_seven);
-		initButton(eight,R.id.keyboad_bt_eight);
-		initButton(nine,R.id.keyboad_bt_nine);
-		initButton(xin,R.id.keyboad_bt_xin);
-		initButton(jin,R.id.keyboad_bt_jin);
-		initButton(zero,R.id.keyboad_bt_zero);
-//		initButton(call, R.id.keyboad_bt_call);
-		
-//		back_iv = (ImageView) this.findViewById(R.id.keyboad_iv_back);
-//		delete_iv = (ImageView) this.findViewById(R.id.keyboad_iv_delete);
-		call= (RelativeLayout) this.findViewById(R.id.keyboad_bt_call);
+		initButton(one, R.id.keyboad_bt_one);
+		initButton(two, R.id.keyboad_bt_two);
+		initButton(three, R.id.keyboad_bt_three);
+		initButton(four, R.id.keyboad_bt_four);
+		initButton(five, R.id.keyboad_bt_five);
+		initButton(six, R.id.keyboad_bt_six);
+		initButton(seven, R.id.keyboad_bt_seven);
+		initButton(eight, R.id.keyboad_bt_eight);
+		initButton(nine, R.id.keyboad_bt_nine);
+		initButton(xin, R.id.keyboad_bt_xin);
+		initButton(jin, R.id.keyboad_bt_jin);
+		initButton(zero, R.id.keyboad_bt_zero);
+		// initButton(call, R.id.keyboad_bt_call);
+
+		// back_iv = (ImageView) this.findViewById(R.id.keyboad_iv_back);
+		// delete_iv = (ImageView) this.findViewById(R.id.keyboad_iv_delete);
+		call = (RelativeLayout) this.findViewById(R.id.keyboad_bt_call);
 		back = (RelativeLayout) this.findViewById(R.id.keyboad_rl_back);
 		delete = (RelativeLayout) this.findViewById(R.id.keyboad_rl_delete);
 		tv = (TextView) this.findViewById(R.id.keyboad_tv);
@@ -57,8 +57,7 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		delete.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				if(sb.length() > 0)
-				{
+				if (sb.length() > 0) {
 					sb.delete(0, sb.length());
 					tv.setText("");
 				}
@@ -66,36 +65,32 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 			}
 		});
 	}
-	
-	private void initButton(Button b,int id)
-	{
+
+	private void initButton(Button b, int id) {
 		b = (Button) this.findViewById(id);
 		b.setOnClickListener(this);
 	}
-	
-	public void back()
-	{
+
+	public void back() {
 		finish();
 	}
-	
-	private void addNumber(String str)
-	{
+
+	private void addNumber(String str) {
 		sb.append(str);
 		tv.setText(sb.toString().trim());
 	}
-	private void deleteNumber()
-	{
-		if(sb.length() <= 0)
+
+	private void deleteNumber() {
+		if (sb.length() <= 0)
 			return;
-		sb.delete(sb.length()-1, sb.length());
+		sb.delete(sb.length() - 1, sb.length());
 		tv.setText(sb.toString().trim());
 	}
 
 	@Override
 	public void onClick(View v) {
 
-		switch(v.getId())
-		{
+		switch (v.getId()) {
 		case R.id.keyboad_bt_one:
 			addNumber("1");
 			break;
@@ -132,16 +127,17 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		case R.id.keyboad_bt_zero:
 			addNumber("0");
 			break;
-		case R.id.keyboad_bt_call://拨打电话 
+		case R.id.keyboad_bt_call:// 拨打电话
+			tv.setText("");
 			String phone = sb.toString().trim();
-			Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:"+ phone)); 
+			Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phone));
 			this.startActivity(phoneIntent);
 			break;
 		case R.id.keyboad_rl_delete:
 			deleteNumber();
 			break;
 		case R.id.keyboad_rl_back:
-			startActivity(new Intent(this,Record_Activity.class));
+			startActivity(new Intent(this, Record_Activity.class));
 			break;
 		}
 	}
