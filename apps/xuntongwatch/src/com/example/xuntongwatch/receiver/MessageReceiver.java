@@ -38,7 +38,7 @@ public class MessageReceiver extends BroadcastReceiver {
 			msg.setMessage_time(time);
 			msg.setMessage_state(Message_.RECEIVE);
 			msg.setMessage_see(Message_.SEE_NONE);
-			SmsUtil.insertMessageIntoOutbox(context, msg);
+			SmsUtil.insertMessageIntoInbox(context, msg);
 			// final MessageDbUtil util = new MessageDbUtil(context);
 			Log.e("", "接收的message_conten == " + content);
 			Log.e("", "接收的message_phone == " + mobile);

@@ -8,7 +8,7 @@ LOCAL_JAVA_LIBRARIES += mediatek-framework
 LOCAL_JAVA_LIBRARIES += telephony-common mms-common
 
 LOCAL_PACKAGE_NAME := xuntongwatch
-
+LOCAL_PRIVILEGED_MODULE := true
 include $(BUILD_PACKAGE)
 ##################################################
 include $(CLEAR_VARS)
