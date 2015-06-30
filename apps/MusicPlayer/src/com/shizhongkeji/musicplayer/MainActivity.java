@@ -58,8 +58,8 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	private boolean isShuffle = false; // 随机
 	private RelativeLayout mLinearLayoutVol;
 
-	private String title; // 歌名
-	private String artist; // 歌手名
+//	private String title; // 歌名
+//	private String artist; // 歌手名
 	private String url; // 歌曲路径
 	private int listPosition = 0; // 当前歌曲位置
 	private int currentTime; // 当前播放时间
@@ -193,15 +193,15 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		if (isRead) {
 			if(GlobalApplication.isPlay){
 				url = share.getString("url", "");
-				currentTime = share.getInt("duration", 0);
-				duration = share.getInt("currentTime", 0);
+//				currentTime = share.getInt("duration", 0);
+//				duration = share.getInt("currentTime", 0);
 				listPosition = share.getInt("position", 0);
 				repeatState = share.getInt("repeatstate", 3);
 			}
 			mPlayProgress.setMax(duration);
 			mPlayProgress.setProgress(currentTime);
-			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
-			mPlayFinalTime.setText(MediaUtil.formatTime(currentTime));
+//			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
+//			mPlayFinalTime.setText(MediaUtil.formatTime(currentTime));
 			mMusicName.setText(share.getString("title", ""));
 			mMusicSiger.setText(share.getString("singer", ""));
 		} else {
@@ -433,9 +433,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		super.onActivityResult(requestCode, resultCode, data);
 		if (data != null) {
 			setData();
-			title = data.getStringExtra("title");
+//			title = data.getStringExtra("title");
 			url = data.getStringExtra("url");
-			artist = data.getStringExtra("artist");
+//			artist = data.getStringExtra("artist");
 			listPosition = data.getIntExtra("listPosition", 0);
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
@@ -713,8 +713,8 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		edit.putBoolean("isPlaying", isFirstTime);
 		edit.putString("title", mMusicName.getText().toString());
 		edit.putString("singer", mMusicSiger.getText().toString());
-		edit.putInt("duration", duration);
-		edit.putInt("currentTime", currentTime);
+//		edit.putInt("duration", duration);
+//		edit.putInt("currentTime", currentTime);
 		if (listPosition < 0) {
 			edit.putInt("position", 0);
 		} else {
