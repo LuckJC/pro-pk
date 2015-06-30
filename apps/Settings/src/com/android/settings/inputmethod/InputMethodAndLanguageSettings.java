@@ -187,7 +187,10 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         mHandler = new Handler();
         mSettingsObserver = new SettingsObserver(mHandler, getActivity());
         // {@ M: Input method extends features 
-        PreferenceCategory voiceCategory = (PreferenceCategory)findPreference("voice_category");
+        
+        //####modified voiceCategory will be removed
+        //PreferenceCategory voiceCategory = (PreferenceCategory)findPreference("voice_category");
+        PreferenceCategory voiceCategory = null;
         PreferenceCategory pointerSettingsCategory = (PreferenceCategory)findPreference("pointer_settings_category");
         mInputMethodExts = new InputMethodExts(getActivity(), mIsOnlyImeSettings, voiceCategory, pointerSettingsCategory);
         mInputMethodExts.initExtendsItems();

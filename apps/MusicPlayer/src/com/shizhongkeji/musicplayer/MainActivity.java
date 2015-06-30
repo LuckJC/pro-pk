@@ -107,6 +107,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	public static final String GESTRUE_PLAYING = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC"; // 手势播放音乐动作
 	public static final String MUSIC_SERVICE = "com.shizhong.media.MUSIC_SERVICE";
 
+	// public static final String MUSIC_PLAY_OVER =
+	// "com.shizhong.media.MUSIC_OVER";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -152,6 +155,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	@Override
 	protected void onResume() {
 		setData();
+		if (mhandler != null && playerService != null) {
+			mhandler.sendEmptyMessage(0);
+		}
 		super.onResume();
 	}
 
@@ -185,11 +191,13 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		boolean isRead = share.getBoolean("isPlaying", false);
 		repeatState = isNoneRepeat;
 		if (isRead) {
-			url = share.getString("url", "");
-			currentTime = share.getInt("duration", 0);
-			duration = share.getInt("currentTime", 0);
-			listPosition = share.getInt("position", 0);
-			repeatState = share.getInt("repeatstate", 3);
+			if(GlobalApplication.isPlay){
+				url = share.getString("url", "");
+				currentTime = share.getInt("duration", 0);
+				duration = share.getInt("currentTime", 0);
+				listPosition = share.getInt("position", 0);
+				repeatState = share.getInt("repeatstate", 3);
+			}
 			mPlayProgress.setMax(duration);
 			mPlayProgress.setProgress(currentTime);
 			mPlayCurrentTime.setText(MediaUtil.formatTime(duration));
@@ -244,13 +252,13 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			startActivityForResult(intent, 1);
 			break;
 		case R.id.sound:
-			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 3000);
+			mhandler.removeMessages(1);
+			mhandler.sendEmptyMessageDelayed(1, 3000);
 			mLinearLayoutVol.setVisibility(View.VISIBLE);
 			break;
 		case R.id.sub_vol:
-			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 3000);
+			mhandler.removeMessages(1);
+			mhandler.sendEmptyMessageDelayed(1, 3000);
 			if (currentVolume > 0) {
 				currentVolume = currentVolume - 1;
 				mPlayVol.setProgress(currentVolume);
@@ -261,8 +269,8 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 			break;
 		case R.id.add_vol:
-			mHandler.removeMessages(0);
-			mHandler.sendEmptyMessageDelayed(0, 3000);
+			mhandler.removeMessages(1);
+			mhandler.sendEmptyMessageDelayed(1, 3000);
 			if (currentVolume < maxVolume) {
 				currentVolume = currentVolume + 1;
 				mPlayVol.setProgress(currentVolume);
@@ -274,14 +282,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		case R.id.last:
 			volumeStatusLayout();
 			previous_music();
-			GlobalApplication.isPlaying = true;
-			setPlayButtonStatus();
 			break;
 		case R.id.next:
 			volumeStatusLayout();
 			next_music();
-			GlobalApplication.isPlaying = true;
-			setPlayButtonStatus();
 			break;
 		case R.id.paly:
 			volumeStatusLayout();
@@ -309,11 +313,24 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 						Toast.makeText(MainActivity.this, "音乐列表无歌曲文件", Toast.LENGTH_SHORT).show();
 					}
 				} else {
-					intent.setAction(MUSIC_SERVICE);
-					intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
-					startService(intent);
-					GlobalApplication.isPlaying = true;
-					setPlayButtonStatus();
+					if(GlobalApplication.isAutoPause){
+						GlobalApplication.isAutoPause = false;
+						Mp3Info mp3Info = mp3Infos.get(listPosition);
+						showArtwork(mp3Info);
+						intent.setAction(MUSIC_SERVICE);
+						intent.putExtra("url", mp3Info.getUrl());
+						intent.putExtra("listPosition", listPosition);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
+						startService(intent);
+						GlobalApplication.isPlaying = true;
+						setPlayButtonStatus();
+					}else{
+						intent.setAction(MUSIC_SERVICE);
+						intent.putExtra("MSG", AppConstant.PlayerMsg.CONTINUE_MSG);
+						startService(intent);
+						GlobalApplication.isPlaying = true;
+						setPlayButtonStatus();	
+					}
 				}
 			}
 
@@ -384,12 +401,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 	}
 
-	private Handler mHandler = new Handler() {
-		public void handleMessage(android.os.Message msg) {
-			mLinearLayoutVol.setVisibility(View.GONE);
-		};
-	};
-
 	/**
 	 * 播放
 	 */
@@ -402,7 +413,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		intent.putExtra("listPosition", listPosition);
 		intent.putExtra("MSG", AppConstant.PlayerMsg.PLAY_MSG);
 		startService(intent);
-		// bindService(intent, sc, Context.BIND_AUTO_CREATE);
 	}
 
 	/**
@@ -429,11 +439,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			listPosition = data.getIntExtra("listPosition", 0);
 			Mp3Info mp3Info = mp3Infos.get(listPosition);
 			showArtwork(mp3Info);
-			Long musicDuration = Long.parseLong(data.getStringExtra("musicDuration"));
 			int msg = data.getIntExtra("MSG", 0);
-			mPlayFinalTime.setText(MediaUtil.formatTime(musicDuration));
-			mMusicName.setText(title);
-			mMusicSiger.setText(artist);
 			Intent intentService = new Intent(this, PlayerService.class);
 			intentService.putExtra("url", url);
 			intentService.putExtra("MSG", msg);
@@ -449,7 +455,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		switch (seekBar.getId()) {
 		case R.id.audioTrack:
 			if (fromUser) {
-				audioTrackChange(progress); //
+				audioTrackChange(progress);
 			}
 			break;
 		case R.id.seekbar_vol:
@@ -477,14 +483,10 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		Bitmap bm = MediaUtil.getArtwork(this, mp3Info.getId(), mp3Info.getAlbumId(), true, false);
 		Animation albumanim = AnimationUtils.loadAnimation(MainActivity.this, R.anim.album_replace);
 		musicAlbum.startAnimation(albumanim);
-		if (bm != null) {
-			musicAlbum.setImageBitmap(bm);
-			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
-		} else {
+		if (bm == null) {
 			bm = MediaUtil.getDefaultArtwork(this, false);
-			musicAlbum.setImageBitmap(bm);
-			// musicAblumReflection.setImageBitmap(ImageUtil.createReflectionBitmapForSingle(bm));
 		}
+		musicAlbum.setImageBitmap(bm);
 
 	}
 
@@ -501,7 +503,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		intent.putExtra("MSG", AppConstant.PlayerMsg.PROGRESS_CHANGE);
 		intent.putExtra("progress", progress);
 		startService(intent);
-		// bindService(intent, sc, Context.BIND_AUTO_CREATE);
 	}
 
 	/**
@@ -544,56 +545,105 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 	 * 上一首
 	 */
 	public void previous_music() {
-		// playBtn.setBackgroundResource(R.drawable.pause_selector);
-		listPosition = listPosition - 1;
-		if (listPosition >= 0) {
+		switch (repeatState) {
+		case isCurrentRepeat:
+			play_previous();
+			break;
+		case isAllRepeat:
+			listPosition = listPosition - 1;
 			if (mp3Infos != null && mp3Infos.size() > 0) {
-				Mp3Info mp3Info = mp3Infos.get(listPosition); //
-				showArtwork(mp3Info); //
-				mMusicName.setText(mp3Info.getTitle());
-				mMusicSiger.setText(mp3Info.getArtist());
-				url = mp3Info.getUrl();
-				Intent intent = new Intent();
-				intent.setAction(MUSIC_SERVICE);
-				intent.putExtra("url", mp3Info.getUrl());
-				intent.putExtra("listPosition", listPosition);
-				intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
-				startService(intent);
-
+				if (listPosition >= 0) {
+					play_previous();
+				} else {
+					listPosition = mp3Infos.size() - 1;
+					play_previous();
+				}
 			}
+			break;
+		case isNoneRepeat:
+			listPosition = listPosition - 1;
+			if (listPosition >= 0) {
+				if (mp3Infos != null && mp3Infos.size() > 0) {
+					play_previous();
+				}
 
-		} else {
-			listPosition = 0;
-			Toast.makeText(MainActivity.this, "没有上一首了", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(MainActivity.this, "没有上一首了", Toast.LENGTH_SHORT).show();
+			}
+			break;
+		default:
+			break;
 		}
+
+	}
+
+	private void play_previous() {
+		Mp3Info mp3Info = mp3Infos.get(listPosition);
+		showArtwork(mp3Info);
+		mMusicName.setText(mp3Info.getTitle());
+		mMusicSiger.setText(mp3Info.getArtist());
+		url = mp3Info.getUrl();
+		Intent intent = new Intent();
+		intent.setAction(MUSIC_SERVICE);
+		intent.putExtra("url", mp3Info.getUrl());
+		intent.putExtra("listPosition", listPosition);
+		intent.putExtra("MSG", AppConstant.PlayerMsg.PRIVIOUS_MSG);
+		startService(intent);
 	}
 
 	/**
 	 * 下一首
 	 */
 	public void next_music() {
-		// playBtn.setBackgroundResource(R.drawable.pause_selector);
-		listPosition = listPosition + 1;
-		if (mp3Infos != null && mp3Infos.size() > 2) {
-			if (listPosition <= mp3Infos.size() - 1) {
-				Mp3Info mp3Info = mp3Infos.get(listPosition);
-				showArtwork(mp3Info); //
-				url = mp3Info.getUrl();
-				mMusicName.setText(mp3Info.getTitle());
-				mMusicSiger.setText(mp3Info.getArtist());
-				Intent intent = new Intent();
-				intent.setAction(MUSIC_SERVICE);
-				intent.putExtra("url", mp3Info.getUrl());
-				intent.putExtra("listPosition", listPosition);
-				intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
-				startService(intent);
-				// bindService(intent, sc, Context.BIND_AUTO_CREATE);
+		switch (repeatState) {
+		case isCurrentRepeat:
+			play_next();
+			break;
+		case isAllRepeat:
+			listPosition = listPosition + 1;
+			if (mp3Infos != null && mp3Infos.size() > 1) {
+				if (listPosition <= mp3Infos.size() - 1) {
+					play_next();
+				} else {
+					listPosition = 0;
+					play_next();
+					Toast.makeText(MainActivity.this, "已经是最后一首歌了", Toast.LENGTH_SHORT).show();
+				}
 			}
+			break;
+		case isNoneRepeat:
+			listPosition = listPosition + 1;
+			if (mp3Infos != null && mp3Infos.size() > 1) {
+				if (listPosition <= mp3Infos.size() - 1) {
+					play_next();
+				} else {
+					Toast.makeText(MainActivity.this, "已经是最后一首歌了", Toast.LENGTH_SHORT).show();
+				}
+			}
+			break;
 
-		} else {
-			listPosition = mp3Infos.size() - 1;
-			Toast.makeText(MainActivity.this, "已经是最后一首歌了", Toast.LENGTH_SHORT).show();
+		default:
+			break;
 		}
+
+	}
+
+	private void play_next() {
+		Mp3Info mp3Info = mp3Infos.get(listPosition);
+		showArtwork(mp3Info);
+		url = mp3Info.getUrl();
+		Intent intent = new Intent();
+		intent.setAction(MUSIC_SERVICE);
+		intent.putExtra("url", mp3Info.getUrl());
+		intent.putExtra("listPosition", listPosition);
+		intent.putExtra("MSG", AppConstant.PlayerMsg.NEXT_MSG);
+		startService(intent);
+	}
+
+	@Override
+	protected void onPause() {
+		mhandler.removeMessages(0);
+		super.onPause();
 	}
 
 	/**
@@ -607,7 +657,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals(UPDATE_ACTION)) {
+			if (action.equals(UPDATE_ACTION)) { 
 				setPlayButtonStatus();
 			} else if (action.equals(REPEAT_ACTION)) {
 				repeatState = intent.getIntExtra("repeatState", -1);
@@ -651,7 +701,6 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					intentService.putExtra("MSG", AppConstant.PlayerMsg.PLAYING_MSG);
 					intentService.putExtra("listPosition", listPosition);
 					startService(intentService);
-					// bindService(intentService, sc, Context.BIND_AUTO_CREATE);
 				}
 			}
 
@@ -710,17 +759,18 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			case 0:
 				listPosition = playerService.current;
 				Log.e("Main--listPosition", listPosition + "");
-				if (mp3Infos.size() > 0) {
-					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);
+				if (mp3Infos.size() > 0 && listPosition <= mp3Infos.size()) {
+					Mp3Info m = mp3Infos.get(listPosition < 0 ? 0 : listPosition);	
 					// showArtwork(m);
-					if (playerService.mediaPlayer != null && GlobalApplication.isPlaying) {
+					if (playerService.mediaPlayer != null && playerService.mediaPlayer.isPlaying()) {
 						currentTime = playerService.mediaPlayer.getCurrentPosition(); // 获取当前音乐播放的位置
-						mPlayProgress.setMax((int) m.getDuration());
+						duration = (int) m.getDuration();
+						mPlayProgress.setMax(duration);
 						mPlayProgress.setProgress(currentTime);
 						mPlayCurrentTime.setText(MediaUtil.formatTime(currentTime));
 						Log.e("Main--currentTime", MediaUtil.formatTime(currentTime));
-						mPlayFinalTime.setText(MediaUtil.formatTime(m.getDuration()));
-						Log.e("Main--duration", MediaUtil.formatTime(m.getDuration()));
+						mPlayFinalTime.setText(MediaUtil.formatTime(duration));
+						Log.e("Main--duration", MediaUtil.formatTime(duration));
 						mMusicName.setText(m.getTitle());
 						Log.e("Main--Title", m.getTitle());
 						mMusicSiger.setText(m.getArtist());
@@ -728,7 +778,9 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 					mhandler.sendEmptyMessageDelayed(0, 1000);
 				}
 				break;
-
+			case 1:
+				mLinearLayoutVol.setVisibility(View.GONE);
+				break;
 			default:
 				break;
 			}

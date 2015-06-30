@@ -9,6 +9,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
@@ -20,7 +22,6 @@ import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.shizhongkeji.GlobalApplication;
 import com.shizhongkeji.info.AppConstant;
@@ -47,6 +48,9 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	// private SharedPreferences share;
 	// private Editor edit;
 
+	private boolean mPausedByTransientLossOfFocus = false;
+	private boolean mPausedByCall = false;
+
 	private AudioManager mAudioManager;
 	// 服务要发送的一些Action
 	public static final String UPDATE_ACTION = "com.shizhong.action.UPDATE_ACTION"; // 更新动作
@@ -61,9 +65,10 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	public static final String GESTURE_NEXT = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_NEXT"; // 手势下一首
 	public static final String GESTURE_PREVIOUS = "com.shizhongkeji.action.GESTURE.PLAY_MUSIC_PREVIOUS"; // 手势上一首
 	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
-
+	// public static final String MUSIC_PLAY_OVER =
+	// "com.shizhong.media.MUSIC_OVER";
 	private IBinder iBinder = new MyBinder();
-
+	private SharedPreferences shared = null;
 	public class MyBinder extends Binder {
 		public PlayerService getPlayerService() {
 			return PlayerService.this;
@@ -74,15 +79,11 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	public void onCreate() {
 		super.onCreate();
 		Log.d("service", "service created");
+		shared =  getSharedPreferences("playInfo", Context.MODE_PRIVATE);
+		current = shared.getInt("position", 0);
 		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); // ��ȡϵͳ����
 		telManager.listen(new MobliePhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 		mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		int result = mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
-				AudioManager.AUDIOFOCUS_GAIN);
-		// if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-		// // could not get audio focus.
-		// play(currentTime);
-		// }
 		mediaPlayer = new MediaPlayer();
 		setData();
 
@@ -100,44 +101,27 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					if (current > mp3Infos.size() - 1) { // 变为第一首的位置继续播放
 						current = 0;
 					}
-					Intent sendIntent = new Intent(UPDATE_ACTION);
-					sendIntent.putExtra("current", current);
-					// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				} else if (status == 3) { // 顺序播放
-					current++; // 下一首位置
-					if (current <= mp3Infos.size() - 1) {
-						Intent sendIntent = new Intent(UPDATE_ACTION);
-						sendIntent.putExtra("current", current);
-						// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-						sendBroadcast(sendIntent);
-						path = mp3Infos.get(current).getUrl();
-						play(0);
+					if (current == mp3Infos.size() - 1) {
+//						current = 0;
+						GlobalApplication.isAutoPause = true;
+						stop();
 					} else {
-						mediaPlayer.seekTo(0);
-						current = 0;
-						Intent sendIntent = new Intent(UPDATE_ACTION);
-						sendIntent.putExtra("current", current);
-						// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-						sendBroadcast(sendIntent);
+						current++; // 下一首位置
+						if (current < mp3Infos.size() - 1) {
+							path = mp3Infos.get(current).getUrl();
+							play(0);
+						}
 					}
 				} else if (status == 4) { // 随机播放
 					current = getRandomIndex(mp3Infos.size() - 1);
 					System.out.println("currentIndex ->" + current);
-					Intent sendIntent = new Intent(UPDATE_ACTION);
-					sendIntent.putExtra("current", current);
-					// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				}
-				// GlobalApplication.index_Music = current;
-				// Intent intent = new Intent();
-				// intent.setAction(FCR_MUSIC);
-				// intent.putExtra("index", current);
-				// sendBroadcast(intent);
+
 			}
 		});
 		mediaPlayer.setOnErrorListener(new OnErrorListener() {
@@ -153,36 +137,19 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 					if (current > mp3Infos.size() - 1) { // 变为第一首的位置继续播放
 						current = 0;
 					}
-					Intent sendIntent = new Intent(UPDATE_ACTION);
-					sendIntent.putExtra("current", current);
-					// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
+
 				} else if (status == 3) { // 顺序播放
 					current++; // 下一首位置
 					if (current <= mp3Infos.size() - 1) {
-						Intent sendIntent = new Intent(UPDATE_ACTION);
-						sendIntent.putExtra("current", current);
-						// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-						sendBroadcast(sendIntent);
 						path = mp3Infos.get(current).getUrl();
 						play(0);
 					} else {
-						mediaPlayer.seekTo(0);
-						current = 0;
-						Intent sendIntent = new Intent(UPDATE_ACTION);
-						sendIntent.putExtra("current", current);
-						// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-						sendBroadcast(sendIntent);
+						stop();
 					}
 				} else if (status == 4) { // 随机播放
 					current = getRandomIndex(mp3Infos.size() - 1);
-					System.out.println("currentIndex ->" + current);
-					Intent sendIntent = new Intent(UPDATE_ACTION);
-					sendIntent.putExtra("current", current);
-					// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-					sendBroadcast(sendIntent);
 					path = mp3Infos.get(current).getUrl();
 					play(0);
 				}
@@ -214,7 +181,6 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 
 	@Override
 	public void onStart(Intent intent, int startId) {
-		Intent sendIntent = new Intent(UPDATE_ACTION);
 		String action = "";
 		if (intent != null) {
 			action = intent.getStringExtra("action");
@@ -222,19 +188,16 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 				if (action != null) {
 					if (action.equals(GESTURE_PLAY)) {
 						if (!GlobalApplication.isPlaying) {
-							GlobalApplication.isPlaying = true;
-							if (!GlobalApplication.isPlay && mp3Infos.size() >0) {
+							if (!GlobalApplication.isPlay && mp3Infos.size() > 0) {
+								GlobalApplication.isPlay = true;
 								path = mp3Infos.get(current).getUrl();
 								play(0);
-								sendBroadcast(sendIntent);
+								// updateActionReceiver();
 							} else {
 								resume();
-								sendBroadcast(sendIntent);
 							}
 						} else {
-							GlobalApplication.isPlaying = false;
 							pause();
-							sendBroadcast(sendIntent);
 						}
 					}
 					if (action.equals(GESTURE_NEXT)) {
@@ -243,19 +206,19 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 								current = getRandomIndex(mp3Infos.size() - 1);
 								System.out.println("currentIndex ->" + current);
 								play(0);
-								sendBroadcast(sendIntent);
+
 							} else if (status == 3) {
 								current = current + 1;
 								if (mp3Infos != null && current <= mp3Infos.size() - 1) {
 									path = mp3Infos.get(current).getUrl();
 									play(0);
-									sendBroadcast(sendIntent);
+
 								} else {
 									current = 0;
 								}
 								path = mp3Infos.get(current).getUrl();
 								play(0);
-								sendBroadcast(sendIntent);
+
 							}
 						}
 
@@ -266,17 +229,18 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 								current = getRandomIndex(mp3Infos.size() - 1);
 								System.out.println("currentIndex ->" + current);
 								play(0);
+
 							} else if (status == 3) {
 								current--;
 								if (current >= 0) {
-
-									path = mp3Infos.get(current).getUrl(); // ��һ��MP3
+									path = mp3Infos.get(current).getUrl(); //
 									play(0);
 
 								} else {
 									current = mp3Infos.size() - 1;
-									path = mp3Infos.get(current).getUrl(); // ��һ��MP3
+									path = mp3Infos.get(current).getUrl(); //
 									play(0);
+
 								}
 							}
 						}
@@ -333,6 +297,8 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	 */
 	private void play(int currentTime) {
 		try {
+			mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
+					AudioManager.AUDIOFOCUS_GAIN);
 			GlobalApplication.isPlay = true;
 			GlobalApplication.isPlaying = true;
 			GlobalApplication.current = current;
@@ -340,6 +306,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			mediaPlayer.setDataSource(path);
 			mediaPlayer.prepare(); // 进行缓冲
 			mediaPlayer.setOnPreparedListener(new PreparedListener(currentTime));// 注册一个监听器
+			updateActionReceiver();
 			// handler.sendEmptyMessage(1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -354,14 +321,18 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			mediaPlayer.pause();
 			GlobalApplication.isPlaying = false;
 			isPause = true;
+			updateActionReceiver();
 		}
 	}
 
 	private void resume() {
+		mAudioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC,
+				AudioManager.AUDIOFOCUS_GAIN);
 		if (isPause) {
 			mediaPlayer.start();
 			GlobalApplication.isPlaying = true;
 			isPause = false;
+			updateActionReceiver();
 		}
 	}
 
@@ -369,10 +340,6 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	 * 上一首
 	 */
 	private void previous() {
-		Intent sendIntent = new Intent(UPDATE_ACTION);
-		sendIntent.putExtra("current", current);
-		// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-		sendBroadcast(sendIntent);
 		play(0);
 	}
 
@@ -380,10 +347,6 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 	 * 下一首
 	 */
 	private void next() {
-		Intent sendIntent = new Intent(UPDATE_ACTION);
-		sendIntent.putExtra("current", current);
-		// 发送广播，将被Activity组件中的BroadcastReceiver接收到
-		sendBroadcast(sendIntent);
 		play(0);
 	}
 
@@ -399,6 +362,7 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			updateActionReceiver();
 		}
 	}
 
@@ -409,6 +373,11 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 			mediaPlayer.release();
 			mediaPlayer = null;
 		}
+		Editor edit = shared.edit();
+		edit.putInt("position", current);
+		edit.commit();
+		GlobalApplication.isPlaying = false;
+		GlobalApplication.isPlay = false;
 		mAudioManager.abandonAudioFocus(this);
 		unregisterReceiver(myReceiver);
 	}
@@ -427,9 +396,11 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 
 		@Override
 		public void onPrepared(MediaPlayer mp) {
-			mediaPlayer.start(); // 开始播放
-			if (currentTime > 0) { // 如果音乐不是从头播放
-				mediaPlayer.seekTo(currentTime);
+			if(!GlobalApplication.isAutoPause){
+				mediaPlayer.start(); // 开始播放
+				if (currentTime > 0) { // 如果音乐不是从头播放
+					mediaPlayer.seekTo(currentTime);
+				}	
 			}
 		}
 	}
@@ -460,40 +431,33 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 		switch (focusChange) {
 		case AudioManager.AUDIOFOCUS_GAIN:
 			// resume playback
-			if (mediaPlayer == null) {
-				// initMediaPlayer();
-
-			} else if (!mediaPlayer.isPlaying()) {
-				play(currentTime);
+			if (!mediaPlayer.isPlaying() && mPausedByTransientLossOfFocus) {
+				mPausedByTransientLossOfFocus = false;
+				resume();
+				updateActionReceiver();
 			}
-			mediaPlayer.setVolume(1.0f, 1.0f);
 			break;
 
 		case AudioManager.AUDIOFOCUS_LOSS:
 			// Lost focus for an unbounded amount of time: stop playback and
 			// release media player
 			if (mediaPlayer.isPlaying()) {
-				mediaPlayer.stop();
-				mediaPlayer.release();
-				mediaPlayer = null;
+				mPausedByTransientLossOfFocus = false;
+				pause();
+				updateActionReceiver();
 			}
 			break;
 
 		case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-			// Lost focus for a short time, but we have to stop
-			// playback. We don't release the media player because playback
-			// is likely to resume
-			if (mediaPlayer.isPlaying()) {
-				pause();
-			}
-			// mediaPlayer.pause();
-			break;
-
 		case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
 			// Lost focus for a short time, but it's ok to keep playing
 			// at an attenuated level
-			if (mediaPlayer.isPlaying())
-				mediaPlayer.setVolume(0.1f, 0.1f);
+			if (mediaPlayer.isPlaying()) {
+				mPausedByTransientLossOfFocus = true;
+				pause();
+				updateActionReceiver();
+			}
+
 			break;
 		}
 	}
@@ -508,13 +472,19 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 		public void onCallStateChanged(int state, String incomingNumber) {
 			switch (state) {
 			case TelephonyManager.CALL_STATE_IDLE: // ̬
-				// resume();
+				if (!mediaPlayer.isPlaying() && mPausedByCall) {
+					resume();
+					mPausedByCall = false;
+					updateActionReceiver();
+				}
 				break;
 			case TelephonyManager.CALL_STATE_OFFHOOK: // ̬
 			case TelephonyManager.CALL_STATE_RINGING: // ̬
-				// if (GlobalApplication.isPlaying) {
-				// pause();
-				// }
+				if (mediaPlayer.isPlaying()) {
+					pause();
+					mPausedByCall = true;
+					updateActionReceiver();
+				}
 				break;
 			default:
 				break;
@@ -522,4 +492,9 @@ public class PlayerService extends Service implements OnAudioFocusChangeListener
 		}
 	}
 
+	private void updateActionReceiver() {
+		Intent sendIntent = new Intent(UPDATE_ACTION);
+		// 发送广播，将被Activity组件中的BroadcastReceiver接收到
+		sendBroadcast(sendIntent);
+	}
 }

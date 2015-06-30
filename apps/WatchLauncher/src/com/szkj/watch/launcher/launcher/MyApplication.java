@@ -9,10 +9,13 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 
+import com.szkj.watch.launcher.R;
 import com.szkj.watch.launcher.provider.LauncherConfig;
 
 public class MyApplication extends Application {
 	private static final int MSG_DB_CHANGED = 1;
+	public static String[] DAYS_ZH;
+	public static String[] DAYS_EN;
 	
 	private static MyApplication sApp;
 	private boolean mDbChanged = false;
@@ -26,7 +29,9 @@ public class MyApplication extends Application {
 		getContentResolver().registerContentObserver(
 				LauncherConfig.WORKSPACE_CONTENT_URI, 
 				true, 
-				new WorkspaceTableObserver(mHandler));		
+				new WorkspaceTableObserver(mHandler));
+		DAYS_ZH = getResources().getStringArray(R.array.days_zh);
+		DAYS_EN = getResources().getStringArray(R.array.days_en);
 	}
 	
 	private Handler mHandler = new Handler(new Handler.Callback() {

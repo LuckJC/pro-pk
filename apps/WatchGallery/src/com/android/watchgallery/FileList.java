@@ -18,11 +18,9 @@ public class FileList {
 					Log.v("fpath-->",fname);
 					//String ext=fname.substring(fname.lastIndexOf("."),fname.length());
 					//Log.v("ext===>", ext);
-					
 					if (fls[i].getName().endsWith(".jpg")||fls[i].getName().endsWith(".png")||fls[i].getName().endsWith(".icon")){
 						lsmap.add(fls[i].getAbsolutePath());
 					}
-					
 //					if(ext.equalsIgnoreCase(".jpg")||ext.equalsIgnoreCase(".png")||ext.equalsIgnoreCase(".icon")){
 //						map.put("fname",fname);
 //						lsmap.add(fname);

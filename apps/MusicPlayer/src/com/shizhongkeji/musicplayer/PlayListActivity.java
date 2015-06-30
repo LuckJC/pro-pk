@@ -52,7 +52,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 
 	private int currentTime; // 当前播放位置
 
-	private MusicCompleteReceiver mMusicCompleteReceiver;
+//	private MusicCompleteReceiver mMusicCompleteReceiver;
 	// private int duration; // 歌曲时长
 
 	public static final String FCR_MUSIC = "com.shizhongkeji.action.CURRENTMUSIC";
@@ -61,10 +61,10 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		mMusicCompleteReceiver = new MusicCompleteReceiver();
-		IntentFilter intentFilter = new IntentFilter();
-		intentFilter.addAction(FCR_MUSIC);
-		registerReceiver(mMusicCompleteReceiver, intentFilter);
+//		mMusicCompleteReceiver = new MusicCompleteReceiver();
+//		IntentFilter intentFilter = new IntentFilter();
+//		intentFilter.addAction(FCR_MUSIC);
+//		registerReceiver(mMusicCompleteReceiver, intentFilter);
 		setContentView(R.layout.activity_playlist);
 		Intent intent = getIntent();
 		if (intent != null) {
@@ -158,8 +158,8 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 												Toast.LENGTH_SHORT).show();
 
 									} else {
-										String path = mp3info.getUrl();
-										deleteMusic(path);
+//										String path = mp3info.getUrl();
+//										deleteMusic(path);
 										Mp3Info mp3info = mp3Infos.get(position);
 										DBManager.getInstance(PlayListActivity.this).deleteMusic(
 												String.valueOf(mp3info.getId()));
@@ -271,7 +271,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		unregisterReceiver(mMusicCompleteReceiver);
+//		unregisterReceiver(mMusicCompleteReceiver);
 	}
 
 	private int dp2px(int dp) {
@@ -279,12 +279,6 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 				.getDisplayMetrics());
 	}
 
-	private void deleteMusic(String path) {
-		File file = new File(path);
-		if (file.exists()) {
-			file.delete();
-		}
-	}
 
 	@Override
 	public void onClick(View v) {

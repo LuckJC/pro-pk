@@ -5,6 +5,26 @@
     <string name="app_name">启动器</string>
     <string name="activity_not_found">没有找到应用</string>
     <string name="title_activity_package_added_prompt">添加到“运动”板块？</string>
-
-    <string name="show_grammar_false">语法构建失败</string>
+    
+    <string-array name="days_zh">
+        <item></item>
+        <item>星期天</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+    
+    <string-array name="days_en">
+        <item></item>
+        <item>SUNDAY</item>
+        <item>MONDAY</item>
+        <item>TUESDAY</item>
+        <item>WEDNESDAY</item>
+        <item>THURSDAY</item>
+        <item>FRIDAY</item>
+        <item>SATURDAY</item>
+    </string-array>
 </resources>

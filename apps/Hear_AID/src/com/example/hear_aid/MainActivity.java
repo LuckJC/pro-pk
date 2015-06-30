@@ -1,7 +1,5 @@
 package com.example.hear_aid;
 
-
-
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
@@ -9,7 +7,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,23 +17,24 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 	public static String TAG = "ZhuTingQi";
-	
+
 	private Button mSubBtn;
 	private Button mAddBtn;
 	private SeekBar mSeekBar;
 	private Button mStartButton;
 	private LinearLayout mLinearVol;
-	
-	private boolean isFirst = false;
-	private boolean isOpen = false;
+
 	private SharedPreferences mSharedPreferences;
 	private Editor edit = null;
 
 	private AudioManager mAudioManager;
 	private int mVolume;
-	private int startVol;
-	private int endVol;
 
+	
+	
+	public static final String MSG_START = "start";
+	public static final String MSG_FIRST = "first";
+	public static final String MSG_SECOND = "second";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +49,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		findViewById(R.id.setting).setOnClickListener(this);
 		mSubBtn = (Button) findViewById(R.id.main_sub);
 		mSubBtn.setOnClickListener(this);
-		mAddBtn =(Button) findViewById(R.id.main_add);
+		mAddBtn = (Button) findViewById(R.id.main_add);
 		mAddBtn.setOnClickListener(this);
 		mLinearVol = (LinearLayout) findViewById(R.id.volume);
 		mStartButton = (Button) findViewById(R.id.start);
@@ -59,53 +57,69 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 		mSeekBar = (SeekBar) findViewById(R.id.progress_main_vol);
 		mSeekBar.setOnSeekBarChangeListener(this);
 		mSharedPreferences = getSharedPreferences("status", Activity.MODE_PRIVATE);
-		isFirst = mSharedPreferences.getBoolean("isFirst", true);
+		boolean isNoneOpened = mSharedPreferences.getBoolean("isOpened", true);
 		edit = mSharedPreferences.edit();
-		if (isFirst) {
-			edit.putBoolean("isFirst", false);
+		if (isNoneOpened) {
+			edit.putBoolean("isOpened", false);
 			edit.putBoolean("isOpen", false);
-			edit.putBoolean("isSecond", false);
+			edit.putBoolean("First", false);
+			edit.putBoolean("Second", false);
 			edit.commit();
+			
 		}
-		isOpen = mSharedPreferences.getBoolean("isOpen", false);
-		if (isOpen) {
-			mStartButton.setBackgroundResource(R.drawable.button_background_on);
-		} else {
-			mStartButton.setBackgroundResource(R.drawable.button_background);
-		}
-		setEnable(isOpen);
+//		boolean isFirst = mSharedPreferences.getBoolean("First", false);
+		
+		
 	}
-	private void setEnable(boolean b){
+	@Override
+	protected void onStart() {
+		if(GlobalApplication.isOpen){
+			mStartButton.setBackgroundResource(R.drawable.button_background_on);
+			setEnable(true);
+		}else{
+			mStartButton.setBackgroundResource(R.drawable.button_background);
+			setEnable(false);
+		}
+		super.onResume();
+	}
+	
+	private void setEnable(boolean b) {
 		mSubBtn.setEnabled(b);
 		mAddBtn.setEnabled(b);
 		mSeekBar.setEnabled(b);
 	}
+
 	@Override
 	public void onClick(View v) {
 		Intent intent = null;
-		int curSeeBar = mSeekBar.getProgress();
-		mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
-		isOpen = mSharedPreferences.getBoolean("isOpen", false);
+
 		switch (v.getId()) {
 		case R.id.setting:
-			if(isOpen){
+			if (GlobalApplication.isOpen) {
 				intent = new Intent(this, Settings.class);
-				startActivity(intent);	
-			}else{
+				startActivity(intent);
+			} else {
 				Toast.makeText(MainActivity.this, "请先开启助听器", Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.start:
 			intent = new Intent(this, HearService.class);
-			if (isOpen) {
+			if (GlobalApplication.isOpen) {
+				GlobalApplication.isOpen = false;
+				GlobalApplication.isOpenFirst = false;
 				mLinearVol.setFocusable(false);
+				edit.putBoolean("First", false);
 				edit.putBoolean("isOpen", false);
 				stopService(intent);
 				mStartButton.setBackgroundResource(R.drawable.button_background);
 				setEnable(false);
 			} else {
+				GlobalApplication.isOpen = true;
+				GlobalApplication.isOpenFirst = true;
 				mLinearVol.setFocusable(true);
+				edit.putBoolean("First", true);
 				edit.putBoolean("isOpen", true);
+				intent.putExtra("MSG", MSG_START);
 				startService(intent);
 				mStartButton.setBackgroundResource(R.drawable.button_background_on);
 				setEnable(true);
@@ -113,19 +127,18 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 			edit.commit();
 			break;
 		case R.id.main_sub:
-			Toast.makeText(this, mVolume + "", 0).show();
-			if (curSeeBar > 0) {
-				mSeekBar.setProgress(curSeeBar - 1);
-				mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, 0);
+			if (mVolume > 0) {
+				mAudioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, mVolume - 1, 0);
 				mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+				mSeekBar.setProgress(mVolume);
 			}
+			
 			break;
 		case R.id.main_add:
-			Toast.makeText(this, mVolume + "", 0).show();
-			if (curSeeBar < 15) {
-				mSeekBar.setProgress(curSeeBar + 1);
-				mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, 0);
+			if (mVolume < 15) {
+				mAudioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, mVolume + 1, 0);
 				mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+				mSeekBar.setProgress(mVolume);
 			}
 			break;
 		default:
@@ -136,29 +149,24 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+		if(fromUser){
+			mAudioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, seekBar.getProgress(), 0);
+			mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM);
+		}
 	}
 
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		startVol = seekBar.getProgress();
+
 	}
 
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
-		endVol = seekBar.getProgress();
-		if (startVol > endVol) {
-			int count = startVol - endVol;
-			for (int i = 0; i < count; i++) {
-				mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, 0);
-				Log.e(TAG, "onStopTrackingTouch ADJUST_LOWER  :"+mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
-			}
-		} else if (startVol < endVol) {
-			int count = endVol - startVol;
-			for (int i = 0; i < count; i++) {
-				mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, 0);
-				Log.e(TAG, "onStopTrackingTouch  ADJUST_RAISE :"+mAudioManager.getStreamVolume(AudioManager.STREAM_SYSTEM));
-			}
-		}
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 }

@@ -1,6 +1,8 @@
 package com.shizhongkeji.mscv5plus;
 
 
+import java.text.SimpleDateFormat;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +17,8 @@ public class GestureBroadcastReceiver extends BroadcastReceiver {
 	public static final String GESTURE_START_VOICE ="com.shizhongkeji.action.GESTURE.START_VOICE_ASSIST";
 	public static final String GESTURE_STOP_VOICE ="com.shizhongkeji.action.GESTURE.STOP_VOICE_ASSIST";
 	
+	SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+	String s = date.format(System.currentTimeMillis());
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
@@ -22,9 +26,11 @@ public class GestureBroadcastReceiver extends BroadcastReceiver {
 		
 		if(intent.getAction().equals(GestureBroadcastReceiver.GESTURE_START_VOICE))
 		{
+			Log.d("lxd","收到广播 "+s);
 			Intent it = new Intent(context,Asr_service.class);
 			it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startService(it);
+			Log.d("lxd","已经启动 "+s);
 //			Intent it = new Intent(context,Asr_service.class);
 //			context.bindService(it, connection, context.BIND_AUTO_CREATE);
 		}
@@ -35,6 +41,7 @@ public class GestureBroadcastReceiver extends BroadcastReceiver {
 //			Intent it = new Intent(context,Asr_service.class);
 //			context.unbindService(connection);
 		}
+		
 	}
 	 
 	final ServiceConnection connection = new ServiceConnection() { 
