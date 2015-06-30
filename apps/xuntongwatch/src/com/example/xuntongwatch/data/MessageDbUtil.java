@@ -168,22 +168,6 @@ public class MessageDbUtil {
 //		return list;
 //	}
 
-	public void updateMessage_send_okByMessage_id(int message_id) {
-		open();
-		String sql = "update message set message_send_ok = ? where message_id = ?";
-		Object[] str = new Object[] { "1", message_id + "" };
-		db.execSQL(sql, str);
-		close(null);
-		// ContentValues values = new ContentValues();
-		// values.put("message_send_ok", "1");
-		// String where = "message_id = ?";
-		// String[] strs = new String[] { message_id + "" };
-		// int i = db.update("message", values, where, strs);
-		// close(null);
-		// boolean b = true;
-		// if (i == -1) {
-		// b = false;
-		// }
-	}
+ 
 	
 }

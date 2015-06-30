@@ -24,35 +24,12 @@ import com.example.xuntongwatch.entity.Message_Thread;
 import com.example.xuntongwatch.util.Utils;
 
 public class SmsUtil {
-
+	public static final int SMS_SEND_TYPE_OUTBOX = 4;// 短信在发件箱的type值
 	@SuppressLint("NewApi")
 	private static final Uri sms_uri = Sms.CONTENT_URI;// 短信 Uri
 
 	@SuppressLint("NewApi")
 	private static final Uri thread_uri = Threads.CONTENT_URI;// 短信会话Uri
-
-	private static final Uri data_uri = Data.CONTENT_URI;// 通讯录数据库表Uri
-
-	private static final Uri phonelookup_uri = PhoneLookup.CONTENT_FILTER_URI;
-
-	private static final String sms_address = Sms.ADDRESS; // 电话号码　　（+8613827476390）
-
-	private static final String sms_date = Sms.DATE; // 接收的时间
-
-	private static final String sms_thread_id = Sms.THREAD_ID; // 会话的thread_id
-																// 同一个电话号码的所有短信此id都相同
-
-	private static final String sms__id = Sms._ID; // 每一条短信的主键id
-
-	private static final String sms_data_sent = Sms.DATE_SENT; // 发送的时间
-
-	private static final String sms_read = Sms.READ; // 是否已读 (0 未读，1 已读)
-
-	private static final String sms_status = Sms.STATUS;
-
-	private static final String sms_type = Sms.TYPE; // 状态 （ 1 接收的 2 发送的）
-
-	private static final String sms_body = Sms.BODY; // 短信内容
 
 	@SuppressLint("InlinedApi")
 	public static ArrayList<Message_Thread> allMessage_Thread(Context context) {
@@ -77,8 +54,9 @@ public class SmsUtil {
 			String phone = cursor.getString(cursor.getColumnIndex(Sms.ADDRESS));
 			String name = "";
 			byte[] photo = null;
-			if(phone!=null){			phone = phone.replace("+86", "");}
-
+			if (phone != null) {
+				phone = phone.replace("+86", "");
+			}
 
 			// <------------ 通过phone查找头像、姓名 --------------->
 			Uri uriNumber2Contacts = Uri.parse("content://com.android.contacts/data/phones/filter/"
@@ -138,6 +116,47 @@ public class SmsUtil {
 		return list;
 	}
 
+	public static int findMessageIdByPhone(Context context, long time, String number) {
+		String[] projection = new String[] { Sms._ID };
+		String selection = Sms.ADDRESS + "=? and " + Sms.DATE + "=?";
+		String sortOrder = Sms.DATE + " asc";
+		String[] selectionArgs = new String[] { number, String.valueOf(time) };
+		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
+				selectionArgs, sortOrder);
+		int message_id = -1;
+		while (cursor.moveToNext()) {
+			message_id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+		}
+		return message_id;
+	}
+
+	@SuppressLint("InlinedApi")
+	public static ArrayList<Message_> findMessageByThread_id01(Context context, int thread_id) {
+		ArrayList<Message_> list = new ArrayList<Message_>();
+		String[] projection = new String[] { Sms._ID, Sms.ADDRESS, Sms.BODY, Sms.READ, Sms.TYPE,
+				Sms.DATE };
+		String selection = Sms.THREAD_ID + "=?";
+		String[] selectionArgs = new String[] { thread_id + "" };
+		String sortOrder = Sms.DATE + " asc";
+		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
+				selectionArgs, sortOrder);
+		while (cursor.moveToNext()) {
+			int message_id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+			String message_phone = cursor.getString(cursor.getColumnIndex(Sms.ADDRESS));
+			String message_content = cursor.getString(cursor.getColumnIndex(Sms.BODY));
+			String message_see = cursor.getString(cursor.getColumnIndex(Sms.READ));
+			String message_state = cursor.getString(cursor.getColumnIndex(Sms.TYPE));
+			long message_time = cursor.getLong(cursor.getColumnIndex(Sms.DATE));
+			// String message_send_ok =
+			// cursor.getString(cursor.getColumnIndex("message_send_ok"));/
+			Message_ msg = new Message_(message_id, message_phone, message_content, message_see,
+					message_state, message_time, "", "", "");
+			list.add(msg);
+		}
+
+		return list;
+	}
+
 	@SuppressLint("InlinedApi")
 	public static ArrayList<Message_> findMessageByPhone(Context context, String phone) {
 		// if(!phone.contains("+86"))
@@ -149,6 +168,34 @@ public class SmsUtil {
 				Sms.DATE };
 		String selection = Sms.ADDRESS + "=?";
 		String[] selectionArgs = new String[] { phone };
+		String sortOrder = Sms.DATE + " asc";
+		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
+				selectionArgs, sortOrder);
+		while (cursor.moveToNext()) {
+			int message_id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+			String message_phone = cursor.getString(cursor.getColumnIndex(Sms.ADDRESS));
+			String message_content = cursor.getString(cursor.getColumnIndex(Sms.BODY));
+			String message_see = cursor.getString(cursor.getColumnIndex(Sms.READ));
+			String message_state = cursor.getString(cursor.getColumnIndex(Sms.TYPE));
+			long message_time = cursor.getLong(cursor.getColumnIndex(Sms.DATE));
+			// String message_send_ok =
+			// cursor.getString(cursor.getColumnIndex("message_send_ok"));/
+			Message_ msg = new Message_(message_id, message_phone, message_content, message_see,
+					message_state, message_time, "", "", "");
+			list.add(msg);
+		}
+
+		return list;
+	}
+
+	@SuppressLint("InlinedApi")
+	public static ArrayList<Message_> findMessageByPhone01(Context context, String phone) {
+		ArrayList<Message_> list = new ArrayList<Message_>();
+		String[] projection = new String[] { Sms._ID, Sms.ADDRESS, Sms.BODY, Sms.READ, Sms.TYPE,
+				Sms.DATE };
+		String selection = Sms.ADDRESS + "=? and " + Sms.TYPE + "=?";
+
+		String[] selectionArgs = new String[] { phone, "5" };
 		String sortOrder = Sms.DATE + " asc";
 		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
 				selectionArgs, sortOrder);
@@ -250,11 +297,11 @@ public class SmsUtil {
 		values.put("address", msg.getMessage_phone());
 		// values.put("person", msg.get);
 		// values.put("protocol", "0");
+		values.put("date", msg.getMessage_time());
 		values.put("read", "1");
 		values.put("status", "-1");
 		values.put("body", msg.getMessage_content());
-		context.getContentResolver().insert(Uri.parse("content://sms/outbox"), values);
-		Log.e("tl3shi", "插入 已发短信 成功 ");
+		Uri u = context.getContentResolver().insert(Uri.parse("content://sms/outbox"), values);
 	}
 
 	public static void deleteMessageOther(Context context, Message_ msg) {
@@ -320,14 +367,105 @@ public class SmsUtil {
 				.getSystemService(Context.CLIPBOARD_SERVICE);
 		return cmb.getText().toString().trim();
 	}
-	/** 
-	* 实现文本复制功能 
-	* @param content 
-	*/ 
-	public static void copy(String content, Context context) { 
-	// 得到剪贴板管理器 
-	ClipboardManager cmb = (ClipboardManager) context 
-	.getSystemService(Context.CLIPBOARD_SERVICE); 
-	cmb.setText(content.trim()); 
-	} 
+
+	/**
+	 * 实现文本复制功能
+	 * 
+	 * @param content
+	 */
+	public static void copy(String content, Context context) {
+		// 得到剪贴板管理器
+		ClipboardManager cmb = (ClipboardManager) context
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+		cmb.setText(content.trim());
+	}
+
+	public static final int SMS_SEND_TYPE_FAILED = 5;// 短信发送失败时的type值
+	public static final int SMS_SEND_TYPE_SEND = 2;// 短信发送成功即已发送的type值
+
+	/**
+	 * 将短信从发件箱的状态更改为已发送
+	 * <p>
+	 * 发件箱的type值为4，已发送的type值为2
+	 * </p>
+	 * 
+	 * @param context
+	 * @param msg
+	 *            直接根据Message_对象的_id字段进行更新
+	 */
+	public static void updateSmsTypeToSent(Context context, int messageId) {
+		String where = "_id=?";
+		String[] selectionArgs = new String[] { String.valueOf(messageId) };
+		ContentValues values = new ContentValues();
+		values.put("type", SMS_SEND_TYPE_SEND);
+		context.getContentResolver().update(Uri.parse("content://sms/outbox"), values, where,
+				selectionArgs);
+	}
+
+	/**
+	 * 将短信从发件箱的状态更改为已发送
+	 * <p>
+	 * 发件箱的type值为4，已发送的type值为2
+	 * </p>
+	 * 
+	 * @param context
+	 * @param msg
+	 *            Message_对象，使用其_id字段进行更新
+	 */
+	public static void updateSmsTypeToSent(Context context, Message_ msg) {
+		updateSmsTypeToSent(context, msg.getMessage_id());
+	}
+
+	/**
+	 * 将发送中的短信的状态更改为失败
+	 * <p>
+	 * 发件箱的type值为4，已发送的type值为5
+	 * </p>
+	 * 
+	 * @param context
+	 * @param msg
+	 *            Message_对象，使用其_id字段进行更新
+	 */
+	public static void updateSmsTypeToFailed(Context context, Message_ msg) {
+		updateSmsTypeToFailed(context, msg.getMessage_id());
+	}
+
+	/**
+	 * 将发送中的短信的状态更改为失败
+	 * <p>
+	 * 发件箱的type值为4，已发送的type值为5
+	 * </p>
+	 * 
+	 * @param context
+	 * @param messageId
+	 *            直接根据Message_对象的_id字段进行更新
+	 */
+	public static void updateSmsTypeToFailed(Context context, int messageId) {
+		String where = "_id=?";
+		String[] selectionArgs = new String[] { String.valueOf(messageId) };
+		ContentValues values = new ContentValues();
+		values.put("type", SMS_SEND_TYPE_FAILED);
+		context.getContentResolver().update(Uri.parse("content://sms/outbox"), values, where,
+				selectionArgs);
+	}
+
+	/**
+	 * 将已发送的所有短信的状态更改为失败
+	 * <p>
+	 * 发件箱的type值为4，发送失败的type值为5
+	 * </p>
+	 * 
+	 * @param context
+	 * @param messageId
+	 *            直接根据Message_对象的_id字段进行更新
+	 */
+	public static void updateAllOutboxToFailed(Context context) {
+		String where = "type=?";
+		String[] selectionArgs = new String[] { String.valueOf(SMS_SEND_TYPE_OUTBOX) };
+		ContentValues values = new ContentValues();
+		values.put("type", SMS_SEND_TYPE_FAILED);
+		context.getContentResolver().update(Uri.parse("content://sms/outbox"), values, where,
+				selectionArgs);
+	}
+
 }

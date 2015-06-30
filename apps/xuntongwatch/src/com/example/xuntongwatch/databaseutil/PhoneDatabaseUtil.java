@@ -28,6 +28,7 @@ import android.provider.ContactsContract.CommonDataKinds.StructuredPostal;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.ContactsContract.RawContacts.Data;
+import android.provider.Telephony.Sms;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -386,6 +387,27 @@ public class PhoneDatabaseUtil {
 		}
 
 		return list;
+	}
+
+	public static String[] ByRawContactId(Context context) {
+
+		String[] projection = new String[] {"name_raw_contact_id", "indicate_phone_or_sim_contact" };
+		String selection = "indicate_phone_or_sim_contact" + "=?";
+		String[] selectionArgs = new String[] { "2" };
+		Cursor cursor = context.getContentResolver().query(Contacts.CONTENT_URI, projection,
+				selection, selectionArgs, null);
+		int i = cursor.getCount();
+		String[] s = new String[i];
+		int count = 0;
+		while (cursor.moveToNext()) {
+
+			int rawContact_id = cursor.getInt(cursor.getColumnIndex("name_raw_contact_id"));
+			s[count] = rawContact_id + "";
+			count++;
+		}
+		cursor.close();
+		return s;
+
 	}
 
 	public static ArrayList<GridViewItemImageView> allContact_(Context context) {

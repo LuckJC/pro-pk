@@ -88,6 +88,7 @@ public class Contact_Activity extends Activity {
 	private List<String> listvCardPath;
 	private ArrayList<HashMap<String, String>> listItem;
 	ContactInfo.ContactHandler handler = ContactInfo.ContactHandler.getInstance();
+	private boolean IsRawId = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +99,13 @@ public class Contact_Activity extends Activity {
 		pinyinComparator = new PinyinComparator();
 
 		dgv = ((DraggableGridView) findViewById(R.id.vgv));
-		dgv.setOnRearrangeListener(new OnRearrangeListener() {
-
-			@Override
-			public void onRearrange(int oldIndex, int newIndex) {
-
-			}
-		});
+//		dgv.setOnRearrangeListener(new OnRearrangeListener() {
+//
+//			@Override
+//			public void onRearrange(int oldIndex, int newIndex) {
+//
+//			}
+//		});
 		initUI();
 		setListeners();
 	}
@@ -142,7 +143,11 @@ public class Contact_Activity extends Activity {
 		Bitmap bmp = Bitmap.createBitmap(bb);
 		Canvas canvas = new Canvas(bmp);
 		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
+		if (IsRawId) {
+			paint.setColor(Color.BLACK);
+		} else {
+			paint.setColor(Color.BLUE);
+		}
 		paint.setAlpha(50);
 		paint.setTextSize(36);
 		paint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -181,7 +186,7 @@ public class Contact_Activity extends Activity {
 			menu.add(Menu.NONE, Menu.FIRST + 3, 3, "从SD卡导入联系人");
 			menu.add(Menu.NONE, Menu.FIRST + 4, 4, "将联系人导出到SD卡");
 			menu.add(Menu.NONE, Menu.FIRST + 1, 1, "添加联系人");
-			menu.add(Menu.NONE, Menu.FIRST + 2, 2, "从sim卡导入联系人");
+			// menu.add(Menu.NONE, Menu.FIRST + 2, 2, "从sim卡导入联系人");
 		}
 
 		return true;
@@ -194,11 +199,11 @@ public class Contact_Activity extends Activity {
 			Intent intent = new Intent(this, Add_Contact_Activity.class);
 			startActivityForResult(intent, Add_Contact_Activity.RESULT_CODE);
 			break;
-		case Menu.FIRST + 2:
-			getSIMContacts();
-			dgv.removeAllViews();
-			initUI();
-			break;
+		// case Menu.FIRST + 2:
+		// getSIMContacts();
+		// dgv.removeAllViews();
+		// initUI();
+		// break;
 		case Menu.FIRST + 4:
 			UpdateTextTaskContact task = new UpdateTextTaskContact();
 			task.execute();
@@ -377,7 +382,6 @@ public class Contact_Activity extends Activity {
 		list = PhoneDatabaseUtil.allContact_(this);
 
 		if (list.size() <= 0) {
-
 			layout.setVisibility(View.VISIBLE);
 			return;
 		} else {
@@ -388,8 +392,9 @@ public class Contact_Activity extends Activity {
 				Contact contact = (Contact) list.get(i);
 				String photo_uri = contact.getPhoto_uri();
 
+				int raw_contact_id = contact.getRawContact_id();
+
 				ImageView view = new ImageView(Contact_Activity.this);
-				// view.setImageBitmap(image.getBitmap());
 				if (!TextUtils.isEmpty(photo_uri)) {
 					Uri uri = Uri.parse(photo_uri);
 					try {
@@ -403,13 +408,26 @@ public class Contact_Activity extends Activity {
 				} else {
 					bmp = BitmapFactory.decodeResource(getResources(), R.drawable.image_men).copy(
 							Bitmap.Config.RGB_565, true);
-
-					// view.setb
 				}
-				Bitmap newbp = compressPhoto(bmp);
-				view.setImageBitmap(getThumb(newbp, contact.getContact_name()));
-				dgv.addView(view);
 
+				Bitmap newbp = compressPhoto(bmp);
+				IsRawId = true;
+				String[] s = PhoneDatabaseUtil.ByRawContactId(this);
+				for (int j = 0; j < s.length; j++) {
+					if (Integer.parseInt(s[j]) == raw_contact_id) {
+						IsRawId = false;
+					
+						Log.i("bb", IsRawId+"");
+						
+						view.setImageBitmap(getThumb(newbp, contact.getContact_name()));
+						dgv.addView(view);
+						break;
+					}
+				}
+				if (IsRawId) {
+					view.setImageBitmap(getThumb(newbp, contact.getContact_name()));
+					dgv.addView(view);
+				}
 			}
 		}
 	}
@@ -449,14 +467,11 @@ public class Contact_Activity extends Activity {
 					continue;
 				// 得到联系人名称
 				String contactName = phoneCursor.getString(PHONES_DISPLAY_NAME_INDEX);
-				int ci_name = phoneCursor.getColumnIndex(Phone.DISPLAY_NAME);
-				String name = phoneCursor.getString(ci_name);
-
 				// Sim卡中没有联系人头像
 
 				contact.setContact_name(contactName);
 				contact.setContact_phone(phoneNumber);
-				PhoneDatabaseUtil.addContact(this, contact);
+				// PhoneDatabaseUtil.addContact(this, contact);
 			}
 
 			phoneCursor.close();
@@ -570,6 +585,8 @@ public class Contact_Activity extends Activity {
 	}
 
 	class UpdateTextTaskContact extends AsyncTask<Void, Void, Void> {
+		private List<ContactInfo> _infoList;
+
 		@Override
 		protected void onPreExecute() {
 			CommonDialog.showDialog(Contact_Activity.this);
@@ -579,15 +596,22 @@ public class Contact_Activity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// 获取要备份的信息
-			List<ContactInfo> _infoList = handler.getContactInfo(Contact_Activity.this);
-			handler.backupContacts(Contact_Activity.this, _infoList); // 备份联系人信息
+			_infoList = handler.getContactInfo(Contact_Activity.this);
+			if (_infoList != null) {
+
+				handler.backupContacts(Contact_Activity.this, _infoList); // 备份联系人信息
+			}
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			CommonDialog.closeDialog();
-			Toast.makeText(Contact_Activity.this, "备份成功！", Toast.LENGTH_SHORT).show();
+			if (_infoList != null) {
+				Toast.makeText(Contact_Activity.this, "备份成功！", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(Contact_Activity.this, "请添加联系人！", Toast.LENGTH_SHORT).show();
+			}
 			super.onPostExecute(result);
 		}
 	}

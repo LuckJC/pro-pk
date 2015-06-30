@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
-@SuppressLint("WrongCall") public class DraggableGridView extends ViewGroup implements View.OnTouchListener, View.OnClickListener, View.OnLongClickListener {
+@SuppressLint("WrongCall") public class DraggableGridView extends ViewGroup implements View.OnTouchListener, View.OnClickListener {
 	//layout vars
 	public static float childRatio = .96f;
     protected int colCount, childSize, padding, dpi, scroll = 0;
@@ -43,7 +43,7 @@ import android.widget.ImageView;
     public static int animT = 150;
     protected ArrayList<Integer> newPositions = new ArrayList<Integer>();
     //listeners
-    protected OnRearrangeListener onRearrangeListener;
+//    protected OnRearrangeListener onRearrangeListener;
     protected OnClickListener secondaryOnClickListener;
     private OnItemClickListener onItemClickListener;
     
@@ -63,7 +63,7 @@ import android.widget.ImageView;
     {
     	setOnTouchListener(this);
     	super.setOnClickListener(this);
-        setOnLongClickListener(this);
+//        setOnLongClickListener(this);
     }
     @Override
     public void setOnClickListener(OnClickListener l) {
@@ -218,19 +218,19 @@ import android.widget.ImageView;
     			onItemClickListener.onItemClick(null, getChildAt(getLastIndex()), getLastIndex(), getLastIndex() / colCount);
     	}
     }
-    public boolean onLongClick(View view)
-    {
-    	if (!enabled)
-    		return false;
-        int index = getLastIndex();
-        if (index != -1)
-        {
-            dragged = index;
-            animateDragged();
-            return true;
-        }
-        return false;
-    }
+//    public boolean onLongClick(View view)
+//    {
+//    	if (!enabled)
+//    		return false;
+//        int index = getLastIndex();
+//        if (index != -1)
+//        {
+//            dragged = index;
+//            animateDragged();
+//            return true;
+//        }
+//        return false;
+//    }
     public boolean onTouch(View view, MotionEvent event)
     {
         int action = event.getAction();
@@ -360,8 +360,8 @@ import android.widget.ImageView;
     protected void reorderChildren()
     {
         //FIGURE OUT HOW TO REORDER CHILDREN WITHOUT REMOVING THEM ALL AND RECONSTRUCTING THE LIST!!!
-    	if (onRearrangeListener != null)
-    		onRearrangeListener.onRearrange(dragged, lastTarget);
+//    	if (onRearrangeListener != null)
+//    		onRearrangeListener.onRearrange(dragged, lastTarget);
         ArrayList<View> children = new ArrayList<View>();
         for (int i = 0; i < getChildCount(); i++)
         {
@@ -443,10 +443,10 @@ import android.widget.ImageView;
     }
     
     //OTHER METHODS
-    public void setOnRearrangeListener(OnRearrangeListener l)
-    {
-    	this.onRearrangeListener = l;
-    }
+//    public void setOnRearrangeListener(OnRearrangeListener l)
+//    {
+//    	this.onRearrangeListener = l;
+//    }
     public void setOnItemClickListener(OnItemClickListener l)
     {
     	this.onItemClickListener = l;

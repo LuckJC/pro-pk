@@ -9,8 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -30,6 +35,8 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -462,14 +469,16 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			//视频模式
 			else{
 				if(!is_vedio_start)
-				{
+				{	
+					v.setBackgroundResource(R.drawable.ico_vedio_start);
+					vedio_time.setVisibility(View.VISIBLE);
 					is_vedio_start = true;//开始录制状态
 					
 					hand.sendEmptyMessage(TIME);
 
 					//停止之后才可以点击切换模式跟进入视频界面
-					findViewById(R.id.change_mode).setVisibility(View.GONE);
-					findViewById(R.id.to_picture).setVisibility(View.GONE);
+					findViewById(R.id.change_mode).setClickable(false);
+					findViewById(R.id.to_picture).setClickable(false);
 					
 //					mCamera.setPreviewCallback(null) ;
 //					mCamera.setFaceDetectionListener(null);
@@ -503,24 +512,36 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 //					media.setMaxDuration(20000);
 					try {
 						media.prepare();
-						Thread.sleep(500);
+//						Thread.sleep(500);
 						media.start();
 						
-						Uri uri = Uri.parse("file://" + videoFile.getAbsolutePath());
-						sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));//通知系统来扫描文件
+//						Uri uri = Uri.parse("file://" + videoFile.getAbsolutePath());
+//						sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));//通知系统来扫描文件
 						
+//						MediaStore.Video.Media.EXTERNAL_CONTENT_URI  
+						ContentResolver cp = getContentResolver();
+						ContentValues cv =new ContentValues();
+						cv.put(MediaStore.Video.Media.DATA, videoFile.getAbsolutePath());
+						cv.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
+						cv.put(MediaStore.Video.Media.TITLE, s+".mp4");
+						cv.put(MediaStore.Video.Media.DISPLAY_NAME, s+".mp4");
+						Uri uuu = cp.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, cv);
+						Log.d("lxd", "uuu= "+uuu.toString());
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					} 
+//					catch (InterruptedException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
 					}
 				else{
+					v.setBackgroundResource(R.drawable.ico_vedio_end);
+					vedio_time.setVisibility(View.GONE);
 					is_vedio_start = false;//停止录制状态
 					
 					if(media != null)
@@ -535,8 +556,8 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 					hand.removeMessages(TIME);
 					
 					//停止之后才可以点击切换模式跟进入视频界面
-					findViewById(R.id.change_mode).setVisibility(View.VISIBLE);
-					findViewById(R.id.to_picture).setVisibility(View.VISIBLE);
+					findViewById(R.id.change_mode).setClickable(true);
+					findViewById(R.id.to_picture).setClickable(true);
 				}
 				
 				
@@ -590,21 +611,23 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		case R.id.change_mode:
 			
 			if(!is_video)
-			{
+			{	
+				v.setBackgroundResource(R.drawable.ico_camera);
 				is_video = true;
 				mCamera.setFaceDetectionListener(null);
 //				mCamera.stopPreview();
-				vedio_time.setVisibility(View.VISIBLE);
+//				vedio_time.setVisibility(View.VISIBLE);
 				findViewById(R.id.common_setting).setVisibility(View.GONE);
 			
 				//切换到 视频模式  跟  进入视频界面  的图标不可见
-				findViewById(R.id.change_mode).setVisibility(View.GONE);
-				findViewById(R.id.to_picture).setVisibility(View.GONE);
+//				findViewById(R.id.change_mode).setVisibility(View.GONE);
+//				findViewById(R.id.to_picture).setVisibility(View.GONE);
 			}
 			else
 			{
+				v.setBackgroundResource(R.drawable.ico_vedio);
 				is_video = false;
-				vedio_time.setVisibility(View.GONE);
+//				vedio_time.setVisibility(View.GONE);
 				findViewById(R.id.common_setting).setVisibility(View.VISIBLE);
 			
 			}
@@ -633,6 +656,14 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 		public void onPictureTaken(byte[] data, Camera camera) {
 			// TODO Auto-generated method stub
 			new SavePictureTask().execute(data);
+			Vibrator vibrator = (Vibrator) MainActivity.this.getSystemService(Service.VIBRATOR_SERVICE);
+		    vibrator.vibrate(300);
+		    try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			mCamera.startPreview();
 //			findViewById(R.id.desktop).startAnimation(take_anim);
 			
@@ -657,7 +688,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 
 	// 异步保存拍照的图片
 	public class SavePictureTask extends AsyncTask<byte[], String, String> {
-		MediaScannerConnection msc;
+		
 		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd_HHmmss");
 		String s = date.format(System.currentTimeMillis());
 
@@ -670,7 +701,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			}
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
-				fos.write(params[0]);
+				//下面三行是将图片旋转后保存
+				Bitmap bm = BitmapFactory.decodeByteArray(params[0], 0, params[0].length);
+				Bitmap bm_result = adjustPhotoRotation(bm, 90);
+				bm_result.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+				
+//				fos.write(params[0]);
 				fos.flush();
 				fos.close();
 
@@ -718,20 +754,20 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	@Override
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
 
-		try {
-			
-			if (mCamera == null) {
-				mCamera = getCameraInstance();
-			}
-			mCamera.stopFaceDetection();
-			mCamera.setPreviewDisplay(holder);
-			mCamera.startPreview();
-			mCamera.startFaceDetection();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			
+//			if (mCamera == null) {
+//				mCamera = getCameraInstance();
+//			}
+//			mCamera.stopFaceDetection();
+//			mCamera.setPreviewDisplay(holder);
+//			mCamera.startPreview();
+//			mCamera.startFaceDetection();
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return;
 	}
 
@@ -972,5 +1008,42 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
           
         }    
     }
+	
+	/**
+	 * <br>功能简述:
+	 * <br>功能详细描述:将bitmap旋转  多少 角度后保存
+	 * <br>注意:
+	 * @param bm 
+	 * @param orientationDegree 角度
+	 * @return
+	 */
+	Bitmap adjustPhotoRotation(Bitmap bm, final int orientationDegree)
+	{
 
+	        Matrix m = new Matrix();
+	        m.setRotate(orientationDegree, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
+	        float targetX, targetY;
+	        if (orientationDegree == 90) {
+	        targetX = bm.getHeight();
+	        targetY = 0;
+	        } else {
+	        targetX = bm.getHeight();
+	        targetY = bm.getWidth();
+	  }
+
+	    final float[] values = new float[9];
+	    m.getValues(values);
+
+	    float x1 = values[Matrix.MTRANS_X];
+	    float y1 = values[Matrix.MTRANS_Y];
+
+	    m.postTranslate(targetX - x1, targetY - y1);
+
+	    Bitmap bm1 = Bitmap.createBitmap(bm.getHeight(), bm.getWidth(), Bitmap.Config.ARGB_8888);
+	    Paint paint = new Paint();
+	    Canvas canvas = new Canvas(bm1);
+	    canvas.drawBitmap(bm, m, paint);
+
+	    return bm1;
+	  }
 }

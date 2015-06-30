@@ -19,6 +19,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
@@ -62,8 +66,12 @@ import com.shizhongkeji.speech.util.FucUtil;
 import com.shizhongkeji.speech.util.JsonParser;
 
 public class Asr_service extends Service {
-
-
+	static boolean is_service_have_exit = false; 
+	static int speak_state = -1;//-1表示结束说话状态  0表示开始说话状态  1表示说话音量大小的时候  正在匹配结果
+	static int VOLUME;
+	static boolean TTS_load_success = false;
+	AudioManager mAudioManager;//音频焦点
+	int request_audio_count = 0;
 	private static int TAG = 555;
 	/**
 	 * 是不是更新完联系人标志
@@ -115,6 +123,7 @@ public class Asr_service extends Service {
 	String number = null;//电话号码
 
 	PhoneStateReceiver ps = new PhoneStateReceiver();
+	BroadcastReceiver scrren_broadcast;
 	private Handler handler = new Handler() {
 
 		/** {@inheritDoc} */
@@ -131,6 +140,21 @@ public class Asr_service extends Service {
 				IDmap.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "1001");
 				mSpeech.speak(getResources().getString(R.string.help_you_dothing),
 						TextToSpeech.QUEUE_ADD, IDmap);
+			}
+			if(msg.what == 777)
+			{
+				int i = mAudioManager.requestAudioFocus(mAudioFocusListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+				//如果请求三次都不成功那么就不允许进入语音控制
+				if(i!=1)
+				{
+					request_audio_count++;
+					handler.sendEmptyMessageDelayed(777, 1000);
+					if(request_audio_count>3)
+					{
+						stopSelf();
+					}
+				}
+				
 			}
 //			if(msg.what == 100)
 //			{
@@ -161,7 +185,9 @@ public class Asr_service extends Service {
 				} else {
 					// 初始化陈功而且支持当前语音后做什么
 //					mSpeech.speak("初始化成功", TextToSpeech.QUEUE_FLUSH, null);
+					
 					grammar();
+					Log.d("lxd", "开始构建语法:"+System.currentTimeMillis());
 					
 				}
 			} else {
@@ -177,9 +203,28 @@ public class Asr_service extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		
+		//倒计时   停止语音程序
 		MyCountDownTimer down_time = new MyCountDownTimer(30000, 30000);
 		down_time.start();
+		
+		mAudioManager = (AudioManager)getSystemService(AUDIO_SERVICE);
+		handler.sendEmptyMessage(777);//请求音频焦点 如果不成功就继续请求  三次后退出
+		
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+		
+		scrren_broadcast = new BroadcastReceiver() {
+			
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				// TODO Auto-generated method stub
+				if(intent.ACTION_SCREEN_ON.equals(intent.getAction()))
+				{
+					stopSelf();
+				}
+			}
+		};
+		registerReceiver(scrren_broadcast, intentFilter);
 		
 		mLocalLexicon = "";
 		mToast = Toast.makeText(Asr_service.this, "", Toast.LENGTH_SHORT);
@@ -209,7 +254,7 @@ public class Asr_service extends Service {
 						showTip("startListening error: " + ret);
 					}
 				}
-				//提示完拨号  就打电话
+				//提示完拨号  就打电话 
 				else if(utteranceId.equals("1002"))
 				{
 					// 拨号
@@ -218,6 +263,7 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1003"))
 				{
@@ -228,6 +274,7 @@ public class Asr_service extends Service {
 					intent.putExtra("PhoneNumber", number);
 					startActivity(intent);
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1004"))
 				{
@@ -240,6 +287,7 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1005"))
 				{
@@ -250,6 +298,7 @@ public class Asr_service extends Service {
 					startActivity(mIntent);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1006"))
 				{
@@ -259,6 +308,7 @@ public class Asr_service extends Service {
 					startActivity(camera);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1007"))
 				{
@@ -269,6 +319,7 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1008"))
 				{
@@ -280,6 +331,7 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1009"))
 				{
@@ -289,6 +341,7 @@ public class Asr_service extends Service {
 					startActivity(mi);
 					mAsr.stopListening();
 					stopSelf();
+					is_service_have_exit = true;
 				}
 				
 			}
@@ -333,7 +386,7 @@ public class Asr_service extends Service {
 	private void updataLexcion() {
 		// mContent = new String(mLocalLexicon);
 		if (mLocalLexicon == null) {
-			showTip(getResources().getString(R.string.no_person));
+//			showTip(getResources().getString(R.string.no_person));
 			handler.sendEmptyMessage(1);
 		}
 
@@ -389,9 +442,9 @@ public class Asr_service extends Service {
 	private LexiconListener lexiconListener = new LexiconListener() {
 		@Override
 		public void onLexiconUpdated(String lexiconId, SpeechError error) {
-
+			Log.d("lxd", "更新联系人完毕   提示音开始:"+System.currentTimeMillis());
 			if (error == null) {
-				showTip(getResources().getString(R.string.updatalexcion_ok));
+//				showTip(getResources().getString(R.string.updatalexcion_ok));
 				is_updata_lexcion_finish = true;
 
 				
@@ -433,8 +486,8 @@ public class Asr_service extends Service {
 		@Override
 		public void onBuildFinish(String grammarId, SpeechError error) {
 			if (error == null) {
-				showTip(getResources().getString(R.string.gramar_ok) + ":" + grammarId);
-
+//				showTip(getResources().getString(R.string.gramar_ok) + ":" + grammarId);
+				Log.d("lxd", "构建语法完成    查询联系人开始:"+System.currentTimeMillis());
 				ContactManager mgr = ContactManager.createManager(Asr_service.this, mContactListener);
 				mgr.asyncQueryAllContactsName();
 				mSharedPreferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
@@ -520,6 +573,7 @@ public class Asr_service extends Service {
 					}
 				}
 			 ttt = sb.toString();
+			 TTS_load_success = true;
 //			ttt = "";
 			if (ttt.equals("")) {
 				
@@ -537,7 +591,7 @@ public class Asr_service extends Service {
 				
 
 			}
-			
+			Log.d("lxd", "查询联系人完毕  更新联系人开始:"+System.currentTimeMillis());
 			if (!is_updata_lexcion_finish && !ttt.equals("")) {
 //				ProgressDialogUtils.showProgressDialog(Asr_service.this,
 //						getResources().getString(R.string.going_updataLexcion));  
@@ -555,7 +609,9 @@ public class Asr_service extends Service {
 
 		@Override
 		public void onVolumeChanged(int volume) {
-			showTip(getResources().getString(R.string.volume_changed) + volume);
+			speak_state = 1;
+			VOLUME = volume;//volume值的范围是0——30  40ms每次
+//			showTip(getResources().getString(R.string.volume_changed) + volume);
 		}
 
 		@Override
@@ -719,14 +775,17 @@ public class Asr_service extends Service {
 
 		@Override
 		public void onEndOfSpeech() {
-
-			showTip(getResources().getString(R.string.end_talk));
+			speak_state = -1;
+			VOLUME = 0;
+//			showTip(getResources().getString(R.string.end_talk));
 			Log.d("lixianda", "onEndOfSpeech()");
 		}
 
 		@Override
 		public void onBeginOfSpeech() {
-			showTip(getResources().getString(R.string.start_talk));
+			speak_state = 0;
+			VOLUME = 0;
+//			showTip(getResources().getString(R.string.start_talk));
 			Log.d("lixianda", "onBeginOfSpeech()");
 		}
 
@@ -739,7 +798,7 @@ public class Asr_service extends Service {
 			} else if (error.getErrorCode() == 23300) {
 				showTip(getResources().getString(R.string.again_grammar));
 			} else if (error.getErrorCode() == 23108) {
-				showTip(getResources().getString(R.string.again_updataLexcion));
+//				showTip(getResources().getString(R.string.again_updataLexcion));
 			} else {
 				Log.e("lixianda", "onError()");
 				Toast.makeText(Asr_service.this, "" + error.getErrorCode(), Toast.LENGTH_SHORT).show();
@@ -916,7 +975,6 @@ public class Asr_service extends Service {
 	/** {@inheritDoc} */
 	 
 	@Override
-	@Deprecated
 	public void onStart(Intent intent, int startId) {
 		// TODO Auto-generated method stub
 		super.onStart(intent, startId);
@@ -927,7 +985,7 @@ public class Asr_service extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		showTip("服务的onstartCommand()");
+//		showTip("服务的onstartCommand()");
 		
 		// 初始化合成引擎  讯飞引擎
 		
@@ -966,8 +1024,12 @@ public class Asr_service extends Service {
 			mSpeech.shutdown();
 		}
 		unregisterReceiver(ps);
+		unregisterReceiver(scrren_broadcast);
 		
 		is_updata_lexcion_finish = false;
+		
+		
+		mAudioManager.abandonAudioFocus(mAudioFocusListener);
 		super.onDestroy();
 	}
 	
@@ -1020,5 +1082,29 @@ public class Asr_service extends Service {
           
         }    
     }
+	
+	/**
+	 * 音频焦点回调
+	 */
+	private OnAudioFocusChangeListener mAudioFocusListener = new OnAudioFocusChangeListener(){
+        public void onAudioFocusChange(int focusChange) {
+            switch(focusChange){
+            //你会长时间的失去焦点，所以不要指望在短时间内能获得。请结束自己的相关音频工作并做好收尾工作。
+            //比如另外一个音乐播放器开始播放音乐了（前提是这个另外的音乐播放器他也实现了音频焦点的控制，
+            //baidu音乐，天天静听很遗憾的就没有实现，所以他们两个是可以跟别的播放器同时播放的）
+                case AudioManager.AUDIOFOCUS_LOSS:
+                	stopSelf();
+                	break;
+                    //你会短暂的失去音频焦点，你可以暂停音乐，但不要释放资源，因为你一会就可以夺回焦点并继续使用
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                	break;
+                	//你的焦点会短暂失去，但是你可以与新的使用者共同使用音频焦点
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    break;
+                    //你已经完全获得了音频焦点
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    break;
+            }
+        }};
 	
 }

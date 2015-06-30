@@ -11,12 +11,14 @@ import android.util.Log;
 
 import com.example.xuntongwatch.MyApplication;
 import com.example.xuntongwatch.data.MessageDbUtil;
+import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.util.MessageUtil;
 
 public class MessageSend extends BroadcastReceiver {
 
 	private MessageSendInterface face;
 	private final int SUCCESS = 113;
+	private Context context;
 
 	public MessageSend(MessageSendInterface face) {
 		this.face = face;
@@ -26,28 +28,18 @@ public class MessageSend extends BroadcastReceiver {
 
 	}
 
-//	private Handler handler = new Handler() {
-//
-//		@Override
-//		public void handleMessage(Message msg) {
-//			if (msg.what == SUCCESS) {
-//				if (face != null) {
-//					face.success();
-//				
-//				}
-//			}
-//			super.handleMessage(msg);
-//		}
-//
-//	};
-
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		String action = intent.getAction();
+		this.context = context;
+
+		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+			SmsUtil.updateAllOutboxToFailed(context);
+		}
 
 		if (action.equals(MessageUtil.SMS_SEND_ACTIOIN)
 				|| action.equals(MessageUtil.SMS_DELIVERED_ACTION)) {
-			 
+
 			String message_phone = intent.getStringExtra("message_phone");
 			String message_content = intent.getStringExtra("message_content");
 			long message_time = intent.getLongExtra("message_time", -1l);
@@ -65,53 +57,30 @@ public class MessageSend extends BroadcastReceiver {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						// Log.e("", "发送的短信插入数据库成功");
-						// util.insertInto(msg);
-						util.updateMessage_send_okByMessage_id(message_id);
+						SmsUtil.updateSmsTypeToSent(MessageSend.this.context, message_id);
 						Message msg = Message.obtain();
 						msg.what = 113;
 						MyApplication.handler.sendMessage(msg);
-//						handler.sendMessage(msg);
 					}
 				}).start();
-				Log.e("",
-						"短信发送成功~~~~~~~~~~~~~~IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-				break;
-			case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//				final MessageDbUtil util = new MessageDbUtil(context);
 
+				break;
+
+			default:
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						// Log.e("", "发送的短信插入数据库成功");
-						// util.insertInto(msg);
-//						util.updateMessage_send_okByMessage_id(message_id);
+
+						SmsUtil.updateSmsTypeToFailed(MessageSend.this.context, message_id);
 						Message msg = Message.obtain();
 						msg.what = 112;
 						MyApplication.handler.sendMessage(msg);
-//						handler.sendMessage(msg);
 					}
 				}).start();
-				
-				Log.e("",
-						"短信发送失败~~~~~~~~~~~~~~IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+
 				break;
-			default:
-				break;
+
 			}
-
-		
-			// final Message_ msg = new Message_();
-			// msg.setMessage_phone(message_phone);
-			// msg.setMessage_content(message_content);
-			// msg.setMessage_time(message_time);
-			// msg.setMessage_see(message_see);
-			// msg.setMessage_state(message_state);
-			// msg.setMessage_send_ok(message_send_ok);
-			// Log.e("", "发送的成功返回的message_conten == " + message_content);
-			// Log.e("", "发送的成功返回的message_phone == " + message_phone);
-
-
 
 		}
 	}
