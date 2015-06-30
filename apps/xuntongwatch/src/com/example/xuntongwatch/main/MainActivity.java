@@ -1,8 +1,12 @@
 package com.example.xuntongwatch.main;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.provider.Telephony.Sms;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,6 +21,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private Button call, message, contact, record;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +39,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 		MessageDbUtil util = new MessageDbUtil(this);
 		util.deleteMsg("13827477105");
-
+		 String defaultSmsApp =Telephony.Sms.getDefaultSmsPackage(this);
+		Log.i("bb", defaultSmsApp+"==============================");
+		 Intent intent = new Intent(Sms.Intents.ACTION_CHANGE_DEFAULT);
+		intent.putExtra(Sms.Intents.EXTRA_PACKAGE_NAME, this.getPackageName());
+		startActivity(intent);
 	}
 
 	@Override

@@ -1,12 +1,17 @@
 package com.example.xuntongwatch.main;
 
 import java.io.ByteArrayOutputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +27,7 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 
 	private TextView custom_head, sure, add_or_update;
 	private EditText phone, name;
-//	private ContactDbUtil contactUtil;
+	// private ContactDbUtil contactUtil;
 	private Bitmap bitmap;
 	private Contact contact;
 
@@ -33,17 +38,47 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_contact);
-		add_or_update = (TextView) this
-				.findViewById(R.id.add_contact_add_or_update);
-		custom_head = (TextView) this
-				.findViewById(R.id.add_contact_custom_head);
+		add_or_update = (TextView) this.findViewById(R.id.add_contact_add_or_update);
+		custom_head = (TextView) this.findViewById(R.id.add_contact_custom_head);
 		sure = (TextView) this.findViewById(R.id.add_contact_sure);
 		phone = (EditText) this.findViewById(R.id.add_contact_phone);
 		name = (EditText) this.findViewById(R.id.add_contact_name);
-	
+		name.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				String editable = name.getText().toString();
+				String str = stringFilter(editable.toString());
+				if (!editable.equals(str)) {
+					name.setText(str);
+					// 设置新的光标所在位置
+					name.setSelection(str.length());
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		custom_head.setOnClickListener(this);
 		sure.setOnClickListener(this);
 		ajustUpdate();
+	}
+
+	public static String stringFilter(String str) throws PatternSyntaxException {
+		// 只允许字母、数字和汉字
+		String regEx = "[^a-zA-Z0-9\u4E00-\u9FA5]";
+		Pattern p = Pattern.compile(regEx);
+		Matcher m = p.matcher(str);
+		return m.replaceAll("").trim();
 	}
 
 	/**
@@ -59,10 +94,10 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 			}
 			add_or_update.setText("修改联系人");
 			String contact_phone = intent.getStringExtra("contact_phone");
-//			String contact_head = intent.getStringExtra("contact_head");
+			// String contact_head = intent.getStringExtra("contact_head");
 			int contact_id = intent.getIntExtra("contact_id", -1);
 			contact = new Contact();
-//			contact.setContact_head(contact_head);
+			// contact.setContact_head(contact_head);
 			contact.setContact_name(contact_name);
 			contact.setContact_id(contact_id);
 			contact.setContact_phone(contact_phone);
@@ -115,8 +150,8 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 
 	private Contact addContact(String name, String phone, Bitmap bitmap) {
 		Contact contact = genarationContact(name, phone, bitmap);
-//		initContactDbUtil();
-//		contactUtil.insertInto(contact);
+		// initContactDbUtil();
+		// contactUtil.insertInto(contact);
 		PhoneDatabaseUtil.addContact(this, contact);
 		return contact;
 	}
@@ -124,8 +159,8 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 	private Contact updateContact(String name, String phone, Bitmap bitmap) {
 		Contact contact = genarationContact(name, phone, bitmap);
 		contact.setContact_id(this.contact.getContact_id());
-//		initContactDbUtil();
-//		contactUtil.updateByContact_id(contact);
+		// initContactDbUtil();
+		// contactUtil.updateByContact_id(contact);
 		PhoneDatabaseUtil.updateContact(this, contact);
 		return contact;
 	}
@@ -133,13 +168,14 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 	private Contact genarationContact(String name, String phone, Bitmap bitmap) {
 		Contact contact = new Contact();
 		if (bitmap != null) {
-//			String photo_name = Utils.getPhotoFileName();
-//			String photo_path = Utils.saveBitmapToFile(Constant.headUri, this,
-//					photo_name, bitmap);
-//			contact.setContact_head(photo_path);
-//			Log.e("", "photo_path  === " + photo_path);
+			// String photo_name = Utils.getPhotoFileName();
+			// String photo_path = Utils.saveBitmapToFile(Constant.headUri,
+			// this,
+			// photo_name, bitmap);
+			// contact.setContact_head(photo_path);
+			// Log.e("", "photo_path  === " + photo_path);
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
-//			 将Bitmap压缩成PNG编码，质量为100%存储
+			// 将Bitmap压缩成PNG编码，质量为100%存储
 			bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
 			byte[] photo = os.toByteArray();
 			contact.setContact_head(photo);
@@ -161,10 +197,10 @@ public class Add_Contact_Activity extends Activity implements OnClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-//	private void initContactDbUtil() {
-//		if (contactUtil == null)
-//			contactUtil = new ContactDbUtil(this);
-//	}
+	// private void initContactDbUtil() {
+	// if (contactUtil == null)
+	// contactUtil = new ContactDbUtil(this);
+	// }
 
 	@Override
 	public void finish() {

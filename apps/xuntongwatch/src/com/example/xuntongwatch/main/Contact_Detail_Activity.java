@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts.People;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -194,8 +196,9 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		case R.id.delete_contact:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			final AlertDialog dialog = builder.create();
+			
 			dialog.setTitle("确认删除" + contact_name + "?");
-			dialog.setIcon(R.drawable.ic_launcher);
+			dialog.setIcon(R.drawable.remove);
 			dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定",
 					new DialogInterface.OnClickListener() {
 						@Override
@@ -206,6 +209,7 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 							contactUtil.deleteByContact_id(raw_contact_id);
 							PhoneDatabaseUtil.deleteContactByRawContact_id(
 									Contact_Detail_Activity.this, raw_contact_id);
+							SimDelete(contact_name, contact_phone);
 							dialog.cancel();
 							finish();
 						}
@@ -247,4 +251,11 @@ public class Contact_Detail_Activity extends Activity implements OnClickListener
 		super.finish();
 	}
 
+	public void SimDelete(String name, String phoneNumber) {
+		Uri uri = Uri.parse("content://icc/adn");
+		String where = "tag='" + name + "'";
+		where += " AND number='" + phoneNumber + "'";
+		this.getContentResolver().delete(uri, where, null);
+
+	}
 }
