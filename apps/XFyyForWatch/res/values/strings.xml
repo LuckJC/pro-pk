@@ -4,7 +4,7 @@
     <string name="app_name_sms">时钟语音短信</string>
     <!-- 请替换成在语音云官网申请的appid -->
        <!-- <string name="app_id">54c9d515</string> --> 
-        <string name="app_id">54d1dbd6</string>  
+    <string name="app_id">54d1dbd6</string>
    <!--  <string name="example_explain">本示例为讯飞语音Android平台开发者提供语音听写，语音识别（包括命令词和语法文件识别）和语音合成等代码样例，旨在让用户能够依据该示例快速开发出基于语音接口的应用程序。</string>
     <string name="text_tts_source">科大讯飞作为中国最大的智能语音技术提供商，在智能语音技术领域有着长期的研究积累，并在中文语音合成、语音识别、口语评测等多项技术上拥有国际领先的成果。科大讯飞是我国唯一以语音技术为产业化方向的“国家863计划成果产业化基地”&#8230;</string>
     <string name="text_tts_source_en">iFLYTEK is a national key software enterprise dedicated to the research of intelligent speech and language technologies, development of software and chip products, provision of speech information services, and integration of E-government systems. The intelligent speech technology of iFLYTEK, the core technology of the company, represents the top level in the world.</string>
