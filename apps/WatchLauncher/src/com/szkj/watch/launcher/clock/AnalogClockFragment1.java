@@ -37,9 +37,4 @@ public class AnalogClockFragment1 extends AnalogClockFragment {
 		setCommonView(batteryView, smsView, smsView, callView, callView);
 		return view ;
 	}
-
-	@Override
-	protected void doUpdateTime(int year, int month, int date, int hour,
-			int minute, int second, int day) {
-	}
 }
