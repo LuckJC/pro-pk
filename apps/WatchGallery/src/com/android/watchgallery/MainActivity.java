@@ -70,8 +70,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MyClick myClick = new MyClick();
 		setContentView(R.layout.main);
+		MyClick myClick = new MyClick();
 		list = new ArrayList<String>();
 		deleteImgDir = new ArrayList<String>();
 		lsmap = new ArrayList<String>();
@@ -196,7 +196,7 @@ public class MainActivity extends Activity {
 			list.clear();
 		}
 		String path = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/DCIM/MyCamera/";
+				.getAbsolutePath() + "/DCIM/Camera/";
 		File file = new File(path);
 		if (file.exists()) {
 			File[] f = file.listFiles();

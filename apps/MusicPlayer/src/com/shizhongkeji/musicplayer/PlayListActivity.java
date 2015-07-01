@@ -153,7 +153,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 								public void onClick(DialogInterface dialog, int which) {
 
 									
-									if (GlobalApplication.current == position) {
+									if (GlobalApplication.current == position && GlobalApplication.isPlaying) {
 										Toast.makeText(getApplicationContext(), "不能删除正在播放歌曲",
 												Toast.LENGTH_SHORT).show();
 
@@ -164,6 +164,7 @@ public class PlayListActivity extends Activity implements android.view.View.OnCl
 										DBManager.getInstance(PlayListActivity.this).deleteMusic(
 												String.valueOf(mp3info.getId()));
 										mp3Infos.remove(position);
+										mNumberMusic.setText(mp3Infos.size() + "");
 										mMisicListAdapter.setData();
 										mMisicListAdapter.notifyDataSetChanged();
 										Log.d("PlayListActivity", "GlobalApplication.current"
