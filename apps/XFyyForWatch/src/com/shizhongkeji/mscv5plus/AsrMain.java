@@ -71,6 +71,7 @@ public class AsrMain extends Activity {
 					if(shs.is_service_have_exit)
 					{
 						AsrMain.this.finish();
+						hand.removeMessages(112);
 					}
 					hand.sendEmptyMessageDelayed(112,200);
 				
