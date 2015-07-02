@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/music_layout"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:clickable="true"
+    android:descendantFocusability="blocksDescendants" >
+
+    <TextView
+        android:id="@+id/line_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:text="@string/song"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/choose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:focusable="false"
+        android:enabled="false"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/music_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toLeftOf="@id/choose"
+        android:layout_toRightOf="@id/line_number"
+        android:text="@string/singer"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+</RelativeLayout>
