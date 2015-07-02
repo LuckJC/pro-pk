@@ -12,17 +12,19 @@
         <Button
             android:id="@+id/photo"
             android:background="#07D5E2"
+            android:textSize="30dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:text="@string/photo" />
 
         <Button
             android:id="@+id/picture"
             android:layout_weight="1"
+             android:textSize="30dp"
             android:background="#ADADAD"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="53dp"
             android:text="@string/picture" />
 
     </LinearLayout>

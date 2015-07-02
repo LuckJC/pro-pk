@@ -20,11 +20,20 @@ import com.szkj.watch.launcher.provider.WatchConfig;
 public class ClockActivity extends Activity {
 	private static final Class<? extends ClockFragment>[] CLOCKS;
 	static {
-		CLOCKS = new Class[4];
-		CLOCKS[0] = AnalogClockFragment11.class;
-		CLOCKS[1] = AnalogClockFragment12.class;
-		CLOCKS[2] = AnalogClockFragment13.class;
-		CLOCKS[3] = AnalogClockFragment14.class;
+		CLOCKS = new Class[12];
+		CLOCKS[0] = AnalogClockFragment1.class;
+		CLOCKS[1] = AnalogClockFragment2.class;
+		CLOCKS[2] = AnalogClockFragment3.class;
+		CLOCKS[3] = AnalogClockFragment4.class;
+		CLOCKS[4] = AnalogClockFragment5.class;
+		CLOCKS[5] = AnalogClockFragment6.class;
+		CLOCKS[6] = DigitClockFragment21.class;
+		CLOCKS[7] = DigitClockFragment22.class;
+		
+		CLOCKS[8] = AnalogClockFragment11.class;
+		CLOCKS[9] = AnalogClockFragment12.class;
+		CLOCKS[10] = AnalogClockFragment13.class;
+		CLOCKS[11] = AnalogClockFragment14.class;
 	}
 	
 	
