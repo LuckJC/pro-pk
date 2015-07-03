@@ -257,16 +257,17 @@ public class Asr_service extends Service {
 				//提示完拨号  就打电话 
 				else if(utteranceId.equals("1002"))
 				{
+					is_service_have_exit = true;
 					// 拨号
 					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1003"))
 				{
+					is_service_have_exit = true;
 					// 语音编辑发短息
 					Intent intent = new Intent(IatActivity.ACTION_IAT);
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -274,10 +275,10 @@ public class Asr_service extends Service {
 					intent.putExtra("PhoneNumber", number);
 					startActivity(intent);
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1004"))
 				{
+					is_service_have_exit = true;
 					AcquireWakeLock();
 //					Intent intent = new Intent(Intent.ACTION_MAIN);
 					Intent intent = new Intent();
@@ -287,42 +288,46 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1005"))
 				{
+					Log.d("lxd","设结束activity标志:"+System.currentTimeMillis());
+					is_service_have_exit = true;
 					AcquireWakeLock();
 					Intent mIntent = new Intent();
 					mIntent.setAction(Settings.ACTION_SETTINGS);
 					mIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(mIntent);
+					Log.d("lxd","已经执行跳转:"+System.currentTimeMillis());
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1006"))
 				{
+					is_service_have_exit = true;
 					AcquireWakeLock();
-					Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					Intent camera = new Intent();
+					camera.setClassName("com.szkj.watchcamera", "com.szkj.watchcamera.MainActivity");
 					camera.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(camera);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1007"))
 				{
+					is_service_have_exit = true;
 					AcquireWakeLock();
 					Uri uri = Images.Media.INTERNAL_CONTENT_URI;
-					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					Intent intent = new Intent();
+					intent.setClassName("com.android.watchgallery","com.android.watchgallery.MainActivity");
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1008"))
 				{
+					is_service_have_exit = true;
 					AcquireWakeLock();
 //					Intent intent = new Intent(Intent.ACTION_DIAL);
 					Intent intent = new Intent();
@@ -331,17 +336,16 @@ public class Asr_service extends Service {
 					startActivity(intent);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				else if(utteranceId.equals("1009"))
 				{
+					is_service_have_exit = true;
 					AcquireWakeLock();
 					Intent mi = new Intent(Media.RECORD_SOUND_ACTION);
 					mi.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(mi);
 					mAsr.stopListening();
 					stopSelf();
-					is_service_have_exit = true;
 				}
 				
 			}
@@ -1023,6 +1027,7 @@ public class Asr_service extends Service {
 		{
 			mSpeech.shutdown();
 		}
+		is_service_have_exit = false;
 		unregisterReceiver(ps);
 		unregisterReceiver(scrren_broadcast);
 		
