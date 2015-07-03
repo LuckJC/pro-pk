@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncResult;
@@ -811,14 +812,39 @@ public class PhoneGlobals extends ContextWrapper implements WiredHeadsetListener
      * handle this intent.  (In particular there may be no "Call log" at
      * all on on non-voice-capable devices.)
      */
-    /* package */ static Intent createCallLogIntent() {
-        Intent intent = new Intent(Intent.ACTION_VIEW, null);
-        intent.setType("vnd.android.cursor.dir/calls");
-        return intent;
+    /* package */ static Intent createCallLogIntent(Context context) {
+    	Intent intent;
+    	if (!isSmallLcm(context)) {
+    		intent = new Intent(Intent.ACTION_VIEW, null);
+    		intent.setType("vnd.android.cursor.dir/calls");
+    	} else {    		
+    		intent = new Intent();
+    		intent.setClassName("com.example.xuntongwatch", "com.example.xuntongwatch.main.Record_Activity");
+    	}
+        
+    	return intent;
+    }
+    
+    private static boolean mIsSmallLcm;
+    private static boolean mInit;
+    private static boolean isSmallLcm(Context context) {
+    	if (!mInit) {
+    		WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        	Point outSize = new Point();
+        	wm.getDefaultDisplay().getRealSize(outSize);
+        	if (outSize.x == 320 && outSize.y ==320) {
+        		mIsSmallLcm = true;
+        	} else {
+        		mIsSmallLcm = false;
+        	}
+        	mInit = true;
+    	}
+    	
+    	return mIsSmallLcm;
     }
 
     /* package */static PendingIntent createPendingCallLogIntent(Context context) {
-        final Intent callLogIntent = PhoneGlobals.createCallLogIntent();
+        final Intent callLogIntent = PhoneGlobals.createCallLogIntent(context);
         final TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
         taskStackBuilder.addNextIntent(callLogIntent);
         return taskStackBuilder.getPendingIntent(0, 0);
