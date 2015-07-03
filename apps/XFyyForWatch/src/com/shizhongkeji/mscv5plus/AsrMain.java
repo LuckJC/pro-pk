@@ -72,9 +72,11 @@ public class AsrMain extends Activity {
 					{
 						AsrMain.this.finish();
 						hand.removeMessages(112);
+						System.gc();
 					}
-					hand.sendEmptyMessageDelayed(112,200);
-				
+					else{
+					hand.sendEmptyMessageDelayed(112,50);
+					}
 			}
 		}
 		
@@ -115,7 +117,7 @@ public class AsrMain extends Activity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-
+		Log.d("lxd","已经执行跳转:"+System.currentTimeMillis());
 		Intent it = new Intent(this, Asr_service.class);
 //		stopService(it);
 		unbindService(connection);
