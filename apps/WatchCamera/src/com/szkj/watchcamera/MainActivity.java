@@ -577,6 +577,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			}
 			break;
 		case R.id.to_picture:
+			v.setClickable(false);
 			if(!is_video)
 			{
 				Intent intent_one = new Intent();
@@ -604,9 +605,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			}
 				
 			mCamera.setFaceDetectionListener(null);
-			mCamera.stopPreview();
-			mCamera.release();
-			mCamera = null;
+//			mCamera.stopPreview();
+//			mCamera.release();
+//			mCamera = null;
 			break;
 		case R.id.change_mode:
 			
@@ -703,7 +704,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				//下面三行是将图片旋转后保存
 				Bitmap bm = BitmapFactory.decodeByteArray(params[0], 0, params[0].length);
-				Bitmap bm_result = adjustPhotoRotation(bm, 90);
+				Bitmap bm_result = adjustPhotoRotation(bm, 180);
 				bm_result.compress(Bitmap.CompressFormat.JPEG, 100, fos);
 				
 //				fos.write(params[0]);
@@ -818,7 +819,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
 		// TODO Auto-generated method stub
-
+		findViewById(R.id.to_picture).setClickable(true);
 		if(is_video)
 		{
 			if(media != null)
