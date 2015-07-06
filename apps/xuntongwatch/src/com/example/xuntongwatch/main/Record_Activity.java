@@ -9,14 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CallLog;
-import android.provider.Telephony.Sms;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,16 +26,14 @@ import android.widget.TextView;
 
 import com.example.xuntongwatch.R;
 import com.example.xuntongwatch.abstract_.DatabaseUpdataActivity;
-import com.example.xuntongwatch.contentobserver.ObserverUtil;
-import com.example.xuntongwatch.contentobserver.ObserverUtil.ObserverUtilInterface;
-import com.example.xuntongwatch.databaseutil.SmsUtil;
 import com.example.xuntongwatch.entity.PhoneRecord;
 import com.example.xuntongwatch.util.Constant;
 import com.example.xuntongwatch.util.PhoneRecordUtil;
 import com.example.xuntongwatch.util.Utils;
 import com.example.xuntongwatch.view.MyListView;
 
-public class Record_Activity extends DatabaseUpdataActivity implements OnClickListener {
+public class Record_Activity extends DatabaseUpdataActivity implements
+		OnClickListener {
 
 	private MyListView lv;
 	private ArrayList<PhoneRecord> list;
@@ -81,7 +76,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 	private void initCurrentTime() {
 		Calendar c = Calendar.getInstance();
 		currentTime = c.getTimeInMillis();
-		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+				c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
 		todayZeroTime = c.getTimeInMillis();
 		c.set(Calendar.DAY_OF_MONTH, -1);
 		yesterdayZeroTime = c.getTimeInMillis();
@@ -140,24 +136,32 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Record_Activity_Holder holder = null;
 			if (convertView == null) {
-				convertView = LayoutInflater.from(Record_Activity.this).inflate(
-						R.layout.record_item, null);
+				convertView = LayoutInflater.from(Record_Activity.this)
+						.inflate(R.layout.record_item, null);
 				holder = new Record_Activity_Holder();
-				holder.main = (LinearLayout) convertView.findViewById(R.id.call_record_item_main);
-				holder.other = (LinearLayout) convertView.findViewById(R.id.call_record_item_other);
+				holder.main = (LinearLayout) convertView
+						.findViewById(R.id.call_record_item_main);
+				holder.other = (LinearLayout) convertView
+						.findViewById(R.id.call_record_item_other);
 
-				LinearLayout.LayoutParams params_ll = (LayoutParams) holder.other.getLayoutParams();
+				LinearLayout.LayoutParams params_ll = (LayoutParams) holder.other
+						.getLayoutParams();
 				params_ll.height = Constant.screenWidth / 4;
 				holder.other.setLayoutParams(params_ll);
 
-				holder.name = (TextView) convertView.findViewById(R.id.call_record_item_name);
-				holder.msg = (TextView) convertView.findViewById(R.id.call_record_item_msg);
-				holder.time = (TextView) convertView.findViewById(R.id.call_record_item_time);
+				holder.name = (TextView) convertView
+						.findViewById(R.id.call_record_item_name);
+				holder.msg = (TextView) convertView
+						.findViewById(R.id.call_record_item_msg);
+				holder.time = (TextView) convertView
+						.findViewById(R.id.call_record_item_time);
 				holder.img_style = (ImageView) convertView
 						.findViewById(R.id.call_record_item_style);
-				holder.img_tou = (ImageView) convertView.findViewById(R.id.call_record_item_iv);
+				holder.img_tou = (ImageView) convertView
+						.findViewById(R.id.call_record_item_iv);
 
-				LinearLayout.LayoutParams params = (LayoutParams) holder.img_tou.getLayoutParams();
+				LinearLayout.LayoutParams params = (LayoutParams) holder.img_tou
+						.getLayoutParams();
 				params.width = Constant.screenWidth / 4;
 				params.height = Constant.screenWidth / 4;
 				holder.img_tou.setLayoutParams(params);
@@ -205,35 +209,7 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 				holder.img_tou.setImageURI(uri);
 			}
 			if (date != 0) {
-				Calendar c = Calendar.getInstance();
-				c.setTimeInMillis(date);
-				int month = c.get(Calendar.MONDAY) + 1;
-				int day = c.get(Calendar.DAY_OF_MONTH);
-				int hour = c.get(Calendar.HOUR_OF_DAY);
-				int minute = c.get(Calendar.MINUTE);
-				if (date > todayZeroTime || date == todayZeroTime) {// 今天
-					// Log.e("", "record_time == " + date);
-					// Log.e("", "currentTime == " + currentTime);
-					long t1 = currentTime - date;
-					if (t1 < (long) 1000 * (long) 60 * (long) 24) {// 一小时内
-						// Log.e("", "t1  ==  " + t1);
-						long time = t1 / (long) (1000 * 60);
-						if (time == 0) {
-							holder.time.setText("刚刚");
-						} else {
-							holder.time.setText(time + "分钟前");
-						}
-					} else {
-						holder.time.setText(Utils.getDoubleInt(hour) + ":"
-								+ Utils.getDoubleInt(minute));
-					}
-				} else if (date < todayZeroTime || date > yesterdayZeroTime) {// 昨天
-					holder.time.setText("昨天" + Utils.getDoubleInt(hour) + ":"
-							+ Utils.getDoubleInt(minute));
-				} else {
-					holder.time.setText(Utils.getDoubleInt(month) + "." + Utils.getDoubleInt(day));
-				}
-
+				holder.time.setText(getDetailTime(date));
 			}
 
 			initConvertView(convertView, record);
@@ -249,7 +225,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * 
 		 * @param call
 		 */
-		private void initHolderCall(RelativeLayout call, final PhoneRecord record) {
+		private void initHolderCall(RelativeLayout call,
+				final PhoneRecord record) {
 			call.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -278,7 +255,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * 
 		 * @param call
 		 */
-		private void initHolderDelete(RelativeLayout delete, final PhoneRecord record) {
+		private void initHolderDelete(RelativeLayout delete,
+				final PhoneRecord record) {
 			delete.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -301,7 +279,8 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		 * 
 		 * @param call
 		 */
-		private void initHolderMessage(RelativeLayout message, final PhoneRecord record) {
+		private void initHolderMessage(RelativeLayout message,
+				final PhoneRecord record) {
 			message.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -432,16 +411,20 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 			showView.setVisibility(View.GONE);
 			hiddenView.setVisibility(View.VISIBLE);
 			if (state == LEFT_IN) {
-				Animation leftOut = AnimationUtils.loadAnimation(Record_Activity.this,
+				Animation leftOut = AnimationUtils.loadAnimation(
+						Record_Activity.this,
 						R.anim.activity_back_left_to_right);
-				Animation rightIn = AnimationUtils.loadAnimation(Record_Activity.this,
+				Animation rightIn = AnimationUtils.loadAnimation(
+						Record_Activity.this,
 						R.anim.activity_into_right_to_left);
 				showView.setAnimation(leftOut);
 				hiddenView.setAnimation(rightIn);
 			} else if (state == RIGHT_IN) {
-				Animation rightOut = AnimationUtils.loadAnimation(Record_Activity.this,
+				Animation rightOut = AnimationUtils.loadAnimation(
+						Record_Activity.this,
 						R.anim.activity_back_right_to_left);
-				Animation leftIn = AnimationUtils.loadAnimation(Record_Activity.this,
+				Animation leftIn = AnimationUtils.loadAnimation(
+						Record_Activity.this,
 						R.anim.activity_into_left_to_right);
 				showView.setAnimation(rightOut);
 				hiddenView.setAnimation(leftIn);
@@ -509,4 +492,71 @@ public class Record_Activity extends DatabaseUpdataActivity implements OnClickLi
 		lv.setAdapter(adapter);
 		super.onRestart();
 	}
+
+	/**
+	 * 将获得的date值进行判断获取想要的文本值
+	 * 
+	 * @return 转换为目标文本，规则如下：
+	 *         <p>
+	 *         1.若在今天范围内的时间，就返回：xx分钟前，超过60分钟的，返回xx小时xx分钟前
+	 *         </p>
+	 *         <p>
+	 *         2.若在昨天范围内的事件，就返回：昨天xx:xx，即时间点
+	 *         </p>
+	 *         <p>
+	 *         3.在其他范围内的时间，就返回：xxxx年xx月xx日xx:xx，即时间点
+	 *         </p>
+	 */
+	public static String getDetailTime(long date) {
+		StringBuilder strBuilder = new StringBuilder("");
+		Calendar canlendar = Calendar.getInstance();
+		long currentTime = canlendar.getTimeInMillis();
+		canlendar.set(canlendar.get(Calendar.YEAR),
+				canlendar.get(Calendar.MONTH),
+				canlendar.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+		long todayZeroLongTime = canlendar.getTimeInMillis();
+		long yesterdayZeroLongTime = todayZeroLongTime - 24 * 60 * 60 * 1000;
+		if (date != 0) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(date);
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH) + 1;
+			int day = c.get(Calendar.DAY_OF_MONTH);
+			int hour = c.get(Calendar.HOUR_OF_DAY);
+			int minute = c.get(Calendar.MINUTE);
+			Log.i("bb", year + "年" + month + "月" + day + "天" + hour + "小时"
+					+ minute + "分钟");
+			if (date > todayZeroLongTime || date == todayZeroLongTime) {// 今天
+				long timeDiff = currentTime - date;// 当前时间与参数时间 的差值
+				long time = timeDiff / (long) (1000 * 60);// 换算为分钟值
+
+				if (time == 0) {// 若在一分钟之内
+					strBuilder.append("刚刚");
+				} else if (time < 60) {
+					strBuilder.append(time).append("分钟前");
+				} else {// 一小时之外
+					strBuilder.append(time / 60).append("小时").append(time % 60)
+							.append("分钟前");
+				}
+			} else if (date > yesterdayZeroLongTime
+					|| date == yesterdayZeroLongTime) {// 昨天
+				strBuilder.append("昨天").append(getDoubleInt(hour)).append(":")
+						.append(getDoubleInt(minute));
+			} else {// 其他时间
+				strBuilder.append(getDoubleInt(month)).append("月")
+						.append(getDoubleInt(day)).append("日");
+			}
+		}
+		return strBuilder.toString();
+	}
+
+	public static String getDoubleInt(int i) {
+		StringBuffer sb = new StringBuffer("");
+		if (i < 10) {
+			sb.append("0");
+		}
+		sb.append(i);
+		return sb.toString();
+	}
+
 }

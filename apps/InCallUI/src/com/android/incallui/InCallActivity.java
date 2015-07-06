@@ -337,7 +337,7 @@ public class InCallActivity extends Activity {
         // in-call UI:
 
         if (mDialpadFragment.isVisible()) {
-            mCallButtonFragment.displayDialpad(false);  // do the "closing" animation
+            mCallButtonFragment.displayDialpad(true);  // do the "closing" animation
             ///M: if the conference call is visible, 
             // when the dialpad canceled we need to show manage conference button @{
             if (mCallButtonFragment.getPresenter().getCall().isConferenceCall()) {

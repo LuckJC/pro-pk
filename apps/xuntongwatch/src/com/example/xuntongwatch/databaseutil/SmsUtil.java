@@ -84,8 +84,10 @@ public class SmsUtil {
 			Message_Thread thread = new Message_Thread(thread_id, thread_date, 0, thread_snippet,
 					thread_read, name, phone, photo);
 			list.add(thread);
-
+			cursorCantacts.close();
 		}
+		
+		cursor.close();
 		return list;
 	}
 
@@ -112,7 +114,7 @@ public class SmsUtil {
 					message_state, message_time, "", "", "");
 			list.add(msg);
 		}
-
+		cursor.close();
 		return list;
 	}
 
@@ -127,6 +129,7 @@ public class SmsUtil {
 		while (cursor.moveToNext()) {
 			message_id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
 		}
+		cursor.close();
 		return message_id;
 	}
 
@@ -135,7 +138,7 @@ public class SmsUtil {
 		ArrayList<Message_> list = new ArrayList<Message_>();
 		String[] projection = new String[] { Sms._ID, Sms.ADDRESS, Sms.BODY, Sms.READ, Sms.TYPE,
 				Sms.DATE };
-		String selection = Sms.THREAD_ID + "=?";
+		String selection = Sms.THREAD_ID + " =?";
 		String[] selectionArgs = new String[] { thread_id + "" };
 		String sortOrder = Sms.DATE + " asc";
 		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
@@ -153,7 +156,7 @@ public class SmsUtil {
 					message_state, message_time, "", "", "");
 			list.add(msg);
 		}
-
+		cursor.close();
 		return list;
 	}
 
@@ -184,10 +187,36 @@ public class SmsUtil {
 					message_state, message_time, "", "", "");
 			list.add(msg);
 		}
-
+		cursor.close();
 		return list;
 	}
+	@SuppressLint("InlinedApi")
+	public static ArrayList<Message_> findMessage(Context context, String phone) {
+		ArrayList<Message_> list = new ArrayList<Message_>();
+		String[] projection = new String[] { Sms._ID, Sms.ADDRESS, Sms.BODY, Sms.READ, Sms.TYPE,
+				Sms.DATE };
+		String selection = Sms.ADDRESS + " =?" ;
 
+		String[] selectionArgs = new String[] { phone };
+		String sortOrder = Sms.DATE + " asc";
+		Cursor cursor = context.getContentResolver().query(sms_uri, projection, selection,
+				selectionArgs, sortOrder);
+		while (cursor.moveToNext()) {
+			int message_id = cursor.getInt(cursor.getColumnIndex(Sms._ID));
+			String message_phone = cursor.getString(cursor.getColumnIndex(Sms.ADDRESS));
+			String message_content = cursor.getString(cursor.getColumnIndex(Sms.BODY));
+			String message_see = cursor.getString(cursor.getColumnIndex(Sms.READ));
+			String message_state = cursor.getString(cursor.getColumnIndex(Sms.TYPE));
+			long message_time = cursor.getLong(cursor.getColumnIndex(Sms.DATE));
+			// String message_send_ok =
+			// cursor.getString(cursor.getColumnIndex("message_send_ok"));/
+			Message_ msg = new Message_(message_id, message_phone, message_content, message_see,
+					message_state, message_time, "", "", "");
+			list.add(msg);
+		}
+		cursor.close();
+		return list;
+	}
 	@SuppressLint("InlinedApi")
 	public static ArrayList<Message_> findMessageByPhone01(Context context, String phone) {
 		ArrayList<Message_> list = new ArrayList<Message_>();
@@ -212,7 +241,7 @@ public class SmsUtil {
 					message_state, message_time, "", "", "");
 			list.add(msg);
 		}
-
+		cursor.close();
 		return list;
 	}
 

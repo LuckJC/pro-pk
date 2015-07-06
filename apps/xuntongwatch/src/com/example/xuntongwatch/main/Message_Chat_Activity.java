@@ -42,7 +42,8 @@ import com.example.xuntongwatch.util.MessageUtil;
 import com.example.xuntongwatch.util.PreferenceOperation;
 import com.example.xuntongwatch.util.Utils;
 
-public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnClickListener {
+public class Message_Chat_Activity extends DatabaseUpdataActivity implements
+		OnClickListener {
 	private String mFailSend;
 	private LinearLayout title_one, title_two;
 	private TextView name;
@@ -78,12 +79,14 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		et_phone.addTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
 
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+			public void beforeTextChanged(CharSequence arg0, int arg1,
+					int arg2, int arg3) {
 				if (arg3 == 0) {
 					viewadd.setText("");
 				}
@@ -99,14 +102,18 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public boolean onItemLongClick(final AdapterView<?> parent, final View view,
-					final int position, long id) {
+			public boolean onItemLongClick(final AdapterView<?> parent,
+					final View view, final int position, long id) {
 
-				if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
-					tv = (TextView) view.findViewById(R.id.message_chat_item_other_content);
-				} else if (list.get(position).getMessage_state().equals(Message_.SEND)
+				if (list.get(position).getMessage_state()
+						.equals(Message_.RECEIVE)) {
+					tv = (TextView) view
+							.findViewById(R.id.message_chat_item_other_content);
+				} else if (list.get(position).getMessage_state()
+						.equals(Message_.SEND)
 						|| list.get(position).getMessage_state().equals("5")) {
-					tv = (TextView) view.findViewById(R.id.message_chat_item_me_content);
+					tv = (TextView) view
+							.findViewById(R.id.message_chat_item_me_content);
 				}
 				String[] sb = null;
 				String[] mItemsFail = { "复制", "转发", "删除", "重发" };
@@ -116,19 +123,23 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 				} else {
 					sb = mItemsOthers;
 				}
-			 
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(Message_Chat_Activity.this);
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						Message_Chat_Activity.this);
 				builder.setOnDismissListener(new OnDismissListener() {
 
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						if (delete) {
-//							if (list.get(position).getMessage_state().equals(Message_.RECEIVE)) {
-//								tv.setBackgroundResource(R.drawable.message_chat_other);
-//							} else if (list.get(position).getMessage_state().equals(Message_.SEND)) {
-//								tv.setBackgroundResource(R.drawable.message_chat_me);
-//							}
+							// if
+							// (list.get(position).getMessage_state().equals(Message_.RECEIVE))
+							// {
+							// tv.setBackgroundResource(R.drawable.message_chat_other);
+							// } else if
+							// (list.get(position).getMessage_state().equals(Message_.SEND))
+							// {
+							// tv.setBackgroundResource(R.drawable.message_chat_me);
+							// }
 
 						}
 					}
@@ -137,10 +148,12 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 					public void onClick(DialogInterface dialog, int which) {
 						switch (which) {
 						case 0:
-							SmsUtil.copy(tv.getText().toString(), Message_Chat_Activity.this);
+							SmsUtil.copy(tv.getText().toString(),
+									Message_Chat_Activity.this);
 							break;
 						case 1:
-							Intent intent = new Intent(Message_Chat_Activity.this,
+							Intent intent = new Intent(
+									Message_Chat_Activity.this,
 									Message_Chat_Activity.class);
 							intent.putExtra("state", Message_Chat_Activity.TWO);
 							intent.putExtra("content", tv.getText().toString());
@@ -148,18 +161,25 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 							break;
 						case 2:
-							SmsUtil.deleteMessageByMessage_id(Message_Chat_Activity.this,
+							SmsUtil.deleteMessageByMessage_id(
+									Message_Chat_Activity.this,
 									list.get(position).getMessage_id());
 							delete = false;
 							list.remove(position);
+							adapter = new Message_Chat_Adapter(
+									Message_Chat_Activity.this, list);
 							lv.setAdapter(adapter);
+							lv.setSelection(list.size() - 1);
 							break;
 						case 3:
-							SmsUtil.deleteMessageByMessage_id(Message_Chat_Activity.this,
+							SmsUtil.deleteMessageByMessage_id(
+									Message_Chat_Activity.this,
 									list.get(position).getMessage_id());
 							Message_ message = new Message_();
-							message.setMessage_content(list.get(position).getMessage_content());
-							message.setMessage_phone(list.get(position).getMessage_phone());
+							message.setMessage_content(list.get(position)
+									.getMessage_content());
+							message.setMessage_phone(list.get(position)
+									.getMessage_phone());
 							message.setMessage_see("1");
 							message.setMessage_state("2");
 							long time = System.currentTimeMillis();
@@ -168,17 +188,20 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 							list.remove(position);
 							lv.setAdapter(adapter);
 							list.add(message);
-							adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list,
-									true);
+							adapter = new Message_Chat_Adapter(
+									Message_Chat_Activity.this, list, true);
 							lv.setAdapter(adapter);
 							lv.setSelection(list.size() - 1);
 							// SmsUtil.insertMessageIntoSent(this, message);
-							SmsUtil.insertMessageIntoOutbox(Message_Chat_Activity.this, message);
+							SmsUtil.insertMessageIntoOutbox(
+									Message_Chat_Activity.this, message);
 							message.setMessage_id(SmsUtil.findMessageIdByPhone(
-									Message_Chat_Activity.this, message.getMessage_time(),
+									Message_Chat_Activity.this,
+									message.getMessage_time(),
 									message.getMessage_phone()));
 							Log.i("bb", message.getMessage_id() + "");
-							MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
+							MessageUtil.sendMessage(Message_Chat_Activity.this,
+									message);// 发送短信
 							break;
 						default:
 							break;
@@ -192,7 +215,8 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 			}
 		});
 		send = (RelativeLayout) this.findViewById(R.id.message_chat_send_rl);
-		mChooseContact = (RelativeLayout) this.findViewById(R.id.message_chat_add_person);
+		mChooseContact = (RelativeLayout) this
+				.findViewById(R.id.message_chat_add_person);
 		mChooseContact.setOnClickListener(this);
 		title_one = (LinearLayout) this.findViewById(R.id.message_chat_title);
 		title_two = (LinearLayout) this.findViewById(R.id.message_chat_top_ll);
@@ -341,13 +365,14 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 			}
 			list.add(message);
-			adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list, true);
+			adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
+					list, true);
 			lv.setAdapter(adapter);
 			lv.setSelection(list.size() - 1);
 			// SmsUtil.insertMessageIntoSent(this, message);
 			SmsUtil.insertMessageIntoOutbox(this, message);
-			message.setMessage_id(SmsUtil.findMessageIdByPhone(this, message.getMessage_time(),
-					message.getMessage_phone()));
+			message.setMessage_id(SmsUtil.findMessageIdByPhone(this,
+					message.getMessage_time(), message.getMessage_phone()));
 			Log.i("bb", message.getMessage_id() + "");
 			MessageUtil.sendMessage(Message_Chat_Activity.this, message);// 发送短信
 			break;
@@ -372,13 +397,16 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		if (state == ONE) {
 			if (thread_id == -1) {
 				if (state == ONE) {
-					list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, message_phone);
+					list = SmsUtil.findMessageByPhone(
+							Message_Chat_Activity.this, message_phone);
 				} else {
-					list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, et_phone
-							.getText().toString());
+					list = SmsUtil.findMessageByPhone(
+							Message_Chat_Activity.this, et_phone.getText()
+									.toString());
 				}
 			} else {
-				list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this, thread_id);
+				list = SmsUtil.findMessageByThread_id(
+						Message_Chat_Activity.this, thread_id);
 			}
 			mListSize = list.size();
 		}
@@ -396,50 +424,57 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == 110) {
-
-				final Timer mQRTimer = new Timer();
-				mQRTimer.schedule(new TimerTask() {
-
-					@Override
-					public void run() {
-						if (state == ONE) {
-							list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this,
-									thread_id);
-						} else {
-							list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, et_phone
-									.getText().toString());
-						}
-						if (mListSize < list.size()) {
-							Message receiver = Message.obtain();
-							receiver.what = 119;
-							MyApplication.handler.sendMessage(receiver);
-							mQRTimer.cancel();
-							mListSize = list.size();
-						}
-
-					}
-				}, 0, 100);
-			}
-			if (msg.what == 119) {
-				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
+				Bundle bundle = msg.getData();
+				Message_ msgs = (Message_) bundle.getSerializable("msg");
+				list.add(msgs);
+				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
+						list);
 				lv.setAdapter(adapter);
 				lv.setSelection(list.size() - 1);
+				//
+				// final Timer mQRTimer = new Timer();
+				// mQRTimer.schedule(new TimerTask() {
+				//
+				// @Override
+				// public void run() {
+				// if (state == ONE) {
+				// list = SmsUtil.findMessageByThread_id(
+				// Message_Chat_Activity.this, thread_id);
+				// } else {
+				// list = SmsUtil.findMessageByPhone(
+				// Message_Chat_Activity.this, et_phone
+				// .getText().toString());
+				// }
+				// if (mListSize < list.size()) {
+				// Message receiver = Message.obtain();
+				// receiver.what = 119;
+				// MyApplication.handler.sendMessage(receiver);
+				// mQRTimer.cancel();
+				// mListSize = list.size();
+				// }
+				//
+				// }
+				// }, 0, 100);
 			}
+
 			if (msg.what == 113) {
 
 				if (thread_id == -1) {
 					if (state == ONE) {
-						list = SmsUtil
-								.findMessageByPhone(Message_Chat_Activity.this, message_phone);
+						list = SmsUtil.findMessageByPhone(
+								Message_Chat_Activity.this, message_phone);
 					} else {
-						list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, et_phone
-								.getText().toString());
+						list = SmsUtil.findMessageByPhone(
+								Message_Chat_Activity.this, et_phone.getText()
+										.toString());
 					}
 
 				} else {
-					list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this, thread_id);
+					list = SmsUtil.findMessageByThread_id(
+							Message_Chat_Activity.this, thread_id);
 				}
-				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
+				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
+						list);
 				lv.setAdapter(adapter);
 				lv.setSelection(list.size() - 1);
 				mListSize = list.size();
@@ -448,17 +483,23 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 
 				if (thread_id == -1) {
 					if (state == ONE) {
-						list = SmsUtil.findMessageByPhone01(Message_Chat_Activity.this,
-								message_phone);
+						list = SmsUtil.findMessageByPhone01(
+								Message_Chat_Activity.this, message_phone);
 					} else {
-						list = SmsUtil.findMessageByPhone01(Message_Chat_Activity.this, et_phone
-								.getText().toString());
+						list = SmsUtil.findMessage(Message_Chat_Activity.this,
+								et_phone.getText().toString());
 					}
 
 				} else {
-					list = SmsUtil.findMessageByThread_id01(Message_Chat_Activity.this, thread_id);
+					list = SmsUtil.findMessageByThread_id01(
+							Message_Chat_Activity.this, thread_id);
+					if (list.size() == 0) {
+						list = SmsUtil.findMessageByPhone01(
+								Message_Chat_Activity.this, message_phone);
+					}
 				}
-				adapter = new Message_Chat_Adapter(true, Message_Chat_Activity.this, list);
+				adapter = new Message_Chat_Adapter(true,
+						Message_Chat_Activity.this, list);
 				lv.setAdapter(adapter);
 
 				lv.setSelection(list.size() - 1);
@@ -488,15 +529,18 @@ public class Message_Chat_Activity extends DatabaseUpdataActivity implements OnC
 		// }
 		String phone = et_phone.getText().toString();
 		for (int i = 0; i < arrayList.size(); i++) {
-			if (arrayList.get(i).getPhone().equals(phone)) {
+			if (phone.equals(arrayList.get(i).getPhone())) {
 				thread_id = arrayList.get(i).getThread_id();
 				name = arrayList.get(i).getName();
 				if (thread_id == -1) {
-					list = SmsUtil.findMessageByPhone(Message_Chat_Activity.this, phone);
+					list = SmsUtil.findMessageByPhone(
+							Message_Chat_Activity.this, phone);
 				} else {
-					list = SmsUtil.findMessageByThread_id(Message_Chat_Activity.this, thread_id);
+					list = SmsUtil.findMessageByThread_id(
+							Message_Chat_Activity.this, thread_id);
 				}
-				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this, list);
+				adapter = new Message_Chat_Adapter(Message_Chat_Activity.this,
+						list);
 				lv.setAdapter(adapter);
 				lv.setSelection(list.size() - 1);
 				isClear = false;

@@ -96,7 +96,8 @@ public class Message_Chat_Adapter extends BaseAdapter {
 		} else if (type.equals(Message_.SEND)) {
 			convertView.findViewById(R.id.hint).setVisibility(View.GONE);
 			convertView.findViewById(R.id.sending).setVisibility(View.GONE);
-			if (isSucceed) {
+			if (isSucceed&&position==list.size()-1) {
+				
 				convertView.findViewById(R.id.sending).setVisibility(View.VISIBLE);
 			}
 			holder.other_ll.setVisibility(View.GONE);

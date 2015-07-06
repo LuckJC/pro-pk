@@ -11,9 +11,7 @@ public class MySQLiteDataBase extends SQLiteOpenHelper {
 
 	}
 
-	/**
-	 * 数据库第�?��创建�?��行的方法
-	 */
+	 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 

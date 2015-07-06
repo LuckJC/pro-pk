@@ -1,6 +1,8 @@
 package com.example.xuntongwatch.util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -71,23 +73,27 @@ public class PhoneRecordUtil {
 		Uri uri = Uri.parse("content://sms/inbox");
 		ContentValues updateValues = new ContentValues();
 		updateValues.put(Sms.SEEN, 1);
-		context.getContentResolver().update(uri, updateValues, Calls.NEW + "=0", null);
+		context.getContentResolver().update(uri, updateValues,
+				Calls.NEW + "=0", null);
 	}
 
 	@SuppressLint("InlinedApi")
-	public static ArrayList<PhoneRecord> findAllPhoneRecordByPhone(Context context) {
+	public static ArrayList<PhoneRecord> findAllPhoneRecordByPhone(
+			Context context) {
 		ArrayList<String> ss = new ArrayList<String>();
 		ArrayList<PhoneRecord> list = new ArrayList<PhoneRecord>();
 		Uri phone_uri = Phone.CONTENT_URI;
-		String[] projections = new String[] { _id, number, date, new_, type, name, duration };
+		String[] projections = new String[] { _id, number, date, new_, type,
+				name, duration };
 		String selection = null;
 		String[] selectionArgs = null;
 		String sortOrder = date + " desc";
-		Cursor cursor = context.getContentResolver().query(uri, projections, selection,
-				selectionArgs, sortOrder);
+		Cursor cursor = context.getContentResolver().query(uri, projections,
+				selection, selectionArgs, sortOrder);
 		int i = 0;
 		while (cursor.moveToNext()) {
-			String number = cursor.getString(cursor.getColumnIndex(PhoneRecordUtil.number));
+			String number = cursor.getString(cursor
+					.getColumnIndex(PhoneRecordUtil.number));
 			number = number.replace(" ", "");
 			if (ss.contains(number)) {
 				continue;
@@ -95,40 +101,127 @@ public class PhoneRecordUtil {
 			i++;
 			ss.add(number);
 			int _id = cursor.getInt(cursor.getColumnIndex(PhoneRecordUtil._id));
-			long date = cursor.getLong(cursor.getColumnIndex(PhoneRecordUtil.date));
-			long duration = cursor.getLong(cursor.getColumnIndex(PhoneRecordUtil.duration));
-			int new_ = cursor.getInt(cursor.getColumnIndex(PhoneRecordUtil.new_));
-			int type = cursor.getInt(cursor.getColumnIndex(PhoneRecordUtil.type));
-			String name = cursor.getString(cursor.getColumnIndex(PhoneRecordUtil.name));
+			long date = cursor.getLong(cursor
+					.getColumnIndex(PhoneRecordUtil.date));
+			long duration = cursor.getLong(cursor
+					.getColumnIndex(PhoneRecordUtil.duration));
+			int new_ = cursor.getInt(cursor
+					.getColumnIndex(PhoneRecordUtil.new_));
+			int type = cursor.getInt(cursor
+					.getColumnIndex(PhoneRecordUtil.type));
+			String name = cursor.getString(cursor
+					.getColumnIndex(PhoneRecordUtil.name));
 			String photo = null;
 			String where = Phone.NUMBER + "=?";
 			String[] args = new String[] { number };
 			Cursor cursor_ = context.getContentResolver().query(phone_uri,
-					new String[] { Phone.DISPLAY_NAME, Phone.PHOTO_URI }, where, args, null);
+					new String[] { Phone.DISPLAY_NAME, Phone.PHOTO_URI },
+					where, args, null);
 			if (cursor_.moveToFirst()) {
 				name = cursor_.getString(0);
 				photo = cursor_.getString(1);
 			}
-			PhoneRecord phoneRecord = new PhoneRecord(_id, number, date, duration, type, new_,
-					name, photo);
+			PhoneRecord phoneRecord = new PhoneRecord(_id, number, date,
+					duration, type, new_, name, photo);
 			list.add(phoneRecord);
+			cursor_.close();
 		}
+		cursor.close();
 		return list;
+	}
+
+	public static int maxID(Context context) {
+		int id = -1;
+		String[] projections = new String[] { _id };
+		String sortOrder = _id + " desc";
+		Cursor cursor = context.getContentResolver().query(uri, projections,
+				null, null, null);
+		if (cursor.moveToLast()) {
+			id = cursor.getInt(cursor.getColumnIndex(PhoneRecordUtil._id));
+
+		}
+		cursor.close();
+		return id;
+	}
+
+	public static void insertDate(Context context, int id) {
+		Calendar c = Calendar.getInstance();
+		String where = PhoneRecordUtil._id + "=?";
+		ContentValues values = new ContentValues();
+		values.put(date, c.getTimeInMillis());
+		context.getContentResolver().update(uri, values, where,
+				new String[] { String.valueOf(id) });
 	}
 
 	public static void deleteRecordByNumber(Context context, String number) {
 		String where = PhoneRecordUtil.number + "=?";
 		String[] selectionArgs = new String[] { number };
 		if (Utils.isMobilePhone(number)) {
-			String number1 = number.substring(0, 3) + " " + number.substring(3, 7) + " "
-					+ number.substring(7, 11);
+			String number1 = number.substring(0, 3) + " "
+					+ number.substring(3, 7) + " " + number.substring(7, 11);
 			where = PhoneRecordUtil.number + " in (?,?)";
 			selectionArgs = new String[] { number, number1 };
 		}
 		context.getContentResolver().delete(uri, where, selectionArgs);
 	}
 
-	public static void deleteRecordByNumbers(Context context, ArrayList<String> numbers) {
+	public static ArrayList<PhoneRecord> queryRecordByNumber(Context context,
+			String number) {
+		ArrayList<String> ss = new ArrayList<String>();
+		ArrayList<PhoneRecord> list = new ArrayList<PhoneRecord>();
+		Uri phone_uri = Phone.CONTENT_URI;
+		String where = PhoneRecordUtil.number + " =?";
+		String[] selection = new String[] { _id, PhoneRecordUtil.number, date,
+				new_, type, name, duration };
+		String[] selectionArgs = new String[] { number };
+		String sortOrder = _id + " desc";
+		if (Utils.isMobilePhone(number)) {
+			String number1 = number.substring(0, 3) + " "
+					+ number.substring(3, 7) + " " + number.substring(7, 11);
+			where = PhoneRecordUtil.number + " in (?,?)";
+			selectionArgs = new String[] { number, number1 };
+		}
+		Cursor cursor = context.getContentResolver().query(uri, selection,
+				where, selectionArgs, sortOrder);
+		while (cursor.moveToNext()) {
+			String number1 = cursor.getString(cursor
+					.getColumnIndex(PhoneRecordUtil.number));
+			number1 = number1.replace(" ", "");
+		 
+
+			ss.add(number1);
+			int _id = cursor.getInt(cursor.getColumnIndex(PhoneRecordUtil._id));
+			long date = cursor.getLong(cursor
+					.getColumnIndex(PhoneRecordUtil.date));
+			long duration = cursor.getLong(cursor
+					.getColumnIndex(PhoneRecordUtil.duration));
+			int new_ = cursor.getInt(cursor
+					.getColumnIndex(PhoneRecordUtil.new_));
+			int type = cursor.getInt(cursor
+					.getColumnIndex(PhoneRecordUtil.type));
+			String name = cursor.getString(cursor
+					.getColumnIndex(PhoneRecordUtil.name));
+			String photo = null;
+			String where1 = Phone.NUMBER + "=?";
+			String[] args = new String[] { number1 };
+			Cursor cursor_ = context.getContentResolver().query(phone_uri,
+					new String[] { Phone.DISPLAY_NAME, Phone.PHOTO_URI },
+					where1, args, null);
+			if (cursor_.moveToFirst()) {
+				name = cursor_.getString(0);
+				photo = cursor_.getString(1);
+			}
+			PhoneRecord phoneRecord = new PhoneRecord(_id, number1, date,
+					duration, type, new_, name, photo);
+			list.add(phoneRecord);
+			cursor_.close();
+		}
+		cursor.close();
+		return list;
+	}
+
+	public static void deleteRecordByNumbers(Context context,
+			ArrayList<String> numbers) {
 		int size = numbers.size();
 		if (size <= 0) {
 			return;
@@ -143,7 +236,8 @@ public class PhoneRecordUtil {
 				where.append("?,");
 			}
 		}
-		context.getContentResolver().delete(uri, where.toString(), selectionArgs);
+		context.getContentResolver().delete(uri, where.toString(),
+				selectionArgs);
 	}
 
 	public static void deleteRecordBy_id(Context context, int _id) {
@@ -152,7 +246,8 @@ public class PhoneRecordUtil {
 		context.getContentResolver().delete(uri, where, selectionArgs);
 	}
 
-	public static void deleteRecordBy_id(Context context, ArrayList<Integer> _ids) {
+	public static void deleteRecordBy_id(Context context,
+			ArrayList<Integer> _ids) {
 		int size = _ids.size();
 		if (size <= 0) {
 			return;
@@ -167,7 +262,8 @@ public class PhoneRecordUtil {
 				where.append("?,");
 			}
 		}
-		context.getContentResolver().delete(uri, where.toString(), selectionArgs);
+		context.getContentResolver().delete(uri, where.toString(),
+				selectionArgs);
 	}
 
 }

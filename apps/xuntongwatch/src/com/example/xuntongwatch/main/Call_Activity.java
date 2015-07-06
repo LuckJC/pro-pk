@@ -13,12 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.xuntongwatch.R;
+import com.example.xuntongwatch.util.PhoneRecordUtil;
 import com.example.xuntongwatch.util.SpecialCharSequenceMgr;
 import com.example.xuntongwatch.util.Utils;
 
-public class Call_Activity extends BaseActivity implements OnClickListener, TextWatcher {
+public class Call_Activity extends BaseActivity implements OnClickListener,
+		TextWatcher {
 
-	private Button one, two, three, four, five, six, seven, eight, nine, xin, jin, zero;
+	private Button one, two, three, four, five, six, seven, eight, nine, xin,
+			jin, zero;
 	private TextView tv;
 	private RelativeLayout back, delete, call;
 	// private ImageView back_iv,delete_iv;
@@ -130,7 +133,8 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 		case R.id.keyboad_bt_call:// 拨打电话
 			tv.setText("");
 			String phone = sb.toString().trim();
-			Intent phoneIntent = new Intent("android.intent.action.CALL", Uri.parse("tel:" + phone));
+			Intent phoneIntent = new Intent("android.intent.action.CALL",
+					Uri.parse("tel:" + phone));
 			this.startActivity(phoneIntent);
 			break;
 		case R.id.keyboad_rl_delete:
@@ -143,7 +147,8 @@ public class Call_Activity extends BaseActivity implements OnClickListener, Text
 	}
 
 	@Override
-	public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
 	}
 
 	@Override
