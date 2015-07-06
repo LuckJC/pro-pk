@@ -426,6 +426,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 			//图片模式   拍照
 			if (!is_video) {
 				if (is_continue_take) {
+					v.setClickable(false);
 					hand.sendEmptyMessage(101);//方式1  下面是方式2
 					
 					/*mCamera.setPreviewCallback(new PreviewCallback() {
@@ -674,6 +675,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, On
 				count++;
 				if (count >= 3) {
 					hand.removeMessages(101);
+					findViewById(R.id.btn).setClickable(true);
 				}
 			}
 
